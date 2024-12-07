@@ -541,6 +541,7 @@ public class NameGenerator
             "Marsupia",
             "Ayer",
             "Guardia",
+            "Uluroo",
         };
         taurusTownNames = new List<string>
         {

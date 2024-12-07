@@ -1798,7 +1798,7 @@ internal class EventList
                     UI.ThirdChoice.interactable = true;
                 }
                 break;
-            //Event Idea from discord
+            //Event Idea by Dr.Fetish from discord
             case 30:
                 {
                     if ((empire.Leader == null) || (empire.Leader.Race >= Race.Vagrants))
@@ -1870,7 +1870,7 @@ internal class EventList
                     });
                     UI.ThirdChoice.interactable = false;
                 break;
-            //Event from discord
+            //Event from Ryan The Sergal on discord
             case 32:
                 {
                     Village village = GetRandomVillage(empire.Side);
@@ -1924,7 +1924,7 @@ internal class EventList
                 }
                     UI.ThirdChoice.interactable = true;
                 break;
-            case 33://Prey event|Event from discord
+            case 33://Prey event|Event from Ryan The Sergal on discord
                 {
                     var occupiedVillages = State.World.Villages.Where(s => s.Side == empire.Side && s.Race != empire.ReplacedRace);
                     var selfVillages = State.World.Villages.Where(s => s.Side == empire.Side && s.Race == empire.ReplacedRace);
@@ -2022,7 +2022,7 @@ internal class EventList
                     UI.ThirdChoice.interactable = true;
                 }
                 break;*/
-                //Event from discord
+                //Event from Ryan The Sergal on discord
             case 34:
                 {
                     var village = GetRandomVillage(empire.Side);
@@ -2062,7 +2062,7 @@ internal class EventList
                     UI.ThirdChoice.interactable = empire.CanVore;
                 }
                 break;
-                //Event Idea from discord
+                //Event Idea from Alex discord
             case 35:
                 {
                     Village village = GetRandomVillage(empire.Side);

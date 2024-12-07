@@ -161,6 +161,13 @@ static class LogUtilities
     //        return "NULL";
     //    return friendlies[State.Rand.Next(friendlies.Length)].Unit.Name;  
     //}
+    internal static Unit RandomAlliedWarrior(Unit unit)//Implementing modified code, but kept original because I'm not sure if someone else was planning on using it.
+    {
+        var friendlies = TacticalUtilities.Units.Where(s => s.Unit.Side == unit.Side && s.Unit != unit && s.Visible && s.Targetable && s.Unit.IsDead == false).ToArray();
+        if (friendlies.Length == 0)
+            return null;
+        return friendlies[State.Rand.Next(friendlies.Length)].Unit;
+    }
 
     internal static Unit CompetitionWarrior(Unit unit)
     {
@@ -339,6 +346,8 @@ static class LogUtilities
                 return GetRandomStringFrom("striped", "roaring", "mewling");
             case Race.Goblins:
                 return GetRandomStringFrom("diminutive", "cursing", "short");
+            case Race.Hamsters:
+                return GetRandomStringFrom("stout", "shortstack", "chubby");
             case Race.Alligators:
                 return GetRandomStringFrom("crocodilian", "lumbering", "swampy");
             case Race.Vagrants:
@@ -423,6 +432,8 @@ static class LogUtilities
                 return GetRandomStringFrom("striped", "roaring", "sharp toothed");
             case Race.Goblins:
                 return GetRandomStringFrom("stronger than looks", "knee kicking", "smart");
+            case Race.Hamsters:
+                return GetRandomStringFrom("knee breaking", "deceptively strong", "hammer-loving");
             case Race.Alligators:
                 return GetRandomStringFrom("armoured", "large jawed", "swampy");
             case Race.Vagrants:
@@ -508,7 +519,7 @@ static class LogUtilities
             case Race.Puca:
                 return GetRandomStringFrom("puca", "bunny", "lagomorph", "digger");
             case Race.Hamsters:
-                return GetRandomStringFrom("hamster", "rodent", "shortstack");
+                return GetRandomStringFrom("hamster", GetGenderString(unit, "sow", "boar", "hamster"), "rodent");
             case Race.RwuMercenaries:
                 return GetRandomStringFrom("mercenary", "trooper", "merc");
             case Race.Vagrants:
@@ -555,6 +566,8 @@ static class LogUtilities
                 return GetRandomStringFrom("cockatrice", GetGenderString(unit, "scary hen", "monster cock", "danger chicken"), "terror chicken"); ////new, blame Flame_Valxsarion for encouraging me. Actually don't, I came up with "monster cock" 
             case Race.Bees:
                 return GetRandomStringFrom("apid", GetGenderString(unit, "worker bee", "drone", "bee"), "bee"); ////new 
+            case Race.Ants:
+                return GetRandomStringFrom("formica", GetGenderString(unit, "worker ant", "drone", "ant"), "ant"); ////new 
             case Race.Alraune:
                 return GetRandomStringFrom("plant", "demi-plant", "flowery being"); ////new   
             case Race.Bats:

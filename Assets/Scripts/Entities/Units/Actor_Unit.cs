@@ -500,8 +500,11 @@ public class Actor_Unit
 
     public void SetAbsorbtionMode()
     {
-        Mode = DisplayMode.Absorbing;
-        animationUpdateTime = 2f;
+        if (Config.BurpOnDigest || Config.BurpFraction < .1f)
+        {
+            Mode = DisplayMode.Absorbing;
+            animationUpdateTime = 2f;
+        }
     }
 
     public void SetDigestionMode()

@@ -1343,7 +1343,45 @@ static class TacticalUtilities
         }
         else
         {
-            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> couldn't force feed {LogUtilities.GPPHimself(actor.Unit)} to <b>{targetPred.Unit.Name}</b>.");
+            switch (State.Rand.Next(6))//Credits to Cartography for additional logs
+            {
+                case 0:
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> couldn't force feed {LogUtilities.GPPHimself(actor.Unit)} to <b>{targetPred.Unit.Name}</b>.");
+                    break;
+                case 1:
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{actor.Unit.Name}</b> attempts to pry open <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> mouth, {LogUtilities.GPPHeIs(actor.Unit)} rather surprised to find that the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(targetPred.Unit))} mouth seems incapable of stretching far enough.");
+                    break;
+                case 2:
+                    if (targetPred.Unit.HasDick)
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> strokes <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> {PreyLocStrings.ToCockSyn()}, getting it nice and {LogUtilities.GetRandomStringFrom("hard", "erect")}, before attempting to pry open the tip to get inside, only to find that the tip barely opens wide enough to fit a blade of grass, let alone a whole {LogUtilities.GetRaceDescSingl(actor.Unit)}.");
+                    else if (targetPred.Unit.HasVagina)
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> sticks {LogUtilities.GPPHis(actor.Unit)} hand up <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}, getting it nice and wet, before attempting to push further in, only to find that {LogUtilities.GPPHeIsAbbr(actor.Unit)} already about as far in as {LogUtilities.GPPHe(actor.Unit)} can go, and that <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)} isn't budging any further.");
+                    else
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> couldn't force feed {LogUtilities.GPPHimself(actor.Unit)} to <b>{targetPred.Unit.Name}</b>.");
+                    break;
+                case 3:
+                    if (targetPred.Unit.HasVagina)
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> sticks {LogUtilities.GPPHis(actor.Unit)} hand up <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}, getting it nice and wet, before attempting to push further in, only to find that {LogUtilities.GPPHeIsAbbr(actor.Unit)} already about as far in as {LogUtilities.GPPHe(actor.Unit)} can go.");
+                    else if (targetPred.Unit.HasDick)
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> strokes <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> {PreyLocStrings.ToCockSyn()}, getting it nice and {LogUtilities.GetRandomStringFrom("hard", "erect")}, before attempting to pry open the tip to get inside, only to find that the tip barely opens wide enough to fit a blade of grass, let alone a whole {LogUtilities.GetRaceDescSingl(actor.Unit)}.");
+                    else
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{actor.Unit.Name}</b> attempts to pry open <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> mouth, {LogUtilities.GPPHeIs(actor.Unit)} rather surprised to find that <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> mouth seems incapable of stretching far enough.");
+                    break;
+                case 4:
+                    if (Config.AnalVore && LogUtilities.ActorHumanoid(targetPred.Unit))
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> attempts to stick {LogUtilities.GPPHis(actor.Unit)} head up <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)}, only to find that it refuses to open anywhere near large enough for that. <b>{targetPred.Unit.Name}</b> kindly asks the {LogUtilities.GetRaceDescSingl(actor.Unit)} to stop.");
+                    else if (Config.AnalVore)
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> attempts to stick {LogUtilities.GPPHis(actor.Unit)} head up <b>{LogUtilities.ApostrophizeWithOrWithoutS(targetPred.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)}, only to find that it refuses to open anywhere near large enough for that.");
+                    else
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{LogUtilities.ApostrophizeWithOrWithoutS(actor.Unit.Name)}</b> attempt to force-feed {LogUtilities.GPPHimself(actor.Unit)} into <b>{targetPred.Unit.Name}</b> has been thwarted by the refusal of any holes on the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(targetPred.Unit))} body to open anywhere near wide enough.");
+                    break;
+                case 5:
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{LogUtilities.ApostrophizeWithOrWithoutS(actor.Unit.Name)}</b> attempt to force-feed {LogUtilities.GPPHimself(actor.Unit)} into <b>{targetPred.Unit.Name}</b> has been thwarted by the refusal of any holes on the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(targetPred.Unit))} body to open anywhere near wide enough.");
+                    break;
+                default:
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> couldn't force feed {LogUtilities.GPPHimself(actor.Unit)} to <b>{targetPred.Unit.Name}</b>.");
+                    break;
+            }
             actor.Movement = 0;
         }
     }
