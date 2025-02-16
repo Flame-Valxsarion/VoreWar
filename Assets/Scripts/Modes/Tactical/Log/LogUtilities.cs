@@ -522,6 +522,8 @@ static class LogUtilities
                 return GetRandomStringFrom("hamster", GetGenderString(unit, "sow", "boar", "hamster"), "rodent");
             case Race.RwuMercenaries:
                 return GetRandomStringFrom("mercenary", "trooper", "merc");
+            case Race.Xelhilde:
+                return GetRandomStringFrom("canine knight", "doberman", "bitch");
             case Race.Vagrants:
                 return GetRandomStringFrom("vagrant", "jellyfish", "medusa");
             case Race.Serpents:
@@ -598,6 +600,8 @@ static class LogUtilities
                 return GetRandomStringFrom("bird", "fowl", "bird of prey", "avian", "hawk", "eagle");
             case Race.Taraluxia:
                 return GetRandomStringFrom("ice dragon", "dragon", "ice dragoness", "dragoness");
+            case Race.BoomBunnies:
+                return GetRandomStringFrom("bunny", GetGenderString(unit, "doe", "buck", "danger lagomorph"), "living-explosive", "fused rabbit");
             default:
                 return "creature";
         }
@@ -622,6 +626,7 @@ static class LogUtilities
         else if (unit.Race == Race.Collectors) return "Maw";
         else if (unit.Race == Race.Ki) return "Jaws";
         else if (unit.Race == Race.Selicia) return "Claws";
+        else if (unit.Race == Race.Xelhilde) return "Zweihänder";
 
         else if (unit.Race == Race.Kangaroos)
         {

@@ -332,6 +332,8 @@ public class InfoPanel
                 return "Terminid";
             case Race.FeralOrcas:
                 return "Feral Orca";
+            case Race.BoomBunnies:
+                return "Boom Bunny";
             case Race.none:
                 return "None";
         }
@@ -524,6 +526,8 @@ public class InfoPanel
                 return "Terminid";
             case Race.FeralOrcas:
                 return "Feral Orca";
+            case Race.BoomBunnies:
+                return "Boom Bunny";
         }
         return empire.ReplacedRace.ToString();
     }
@@ -571,11 +575,20 @@ public class InfoPanel
             }
             UnityEngine.Transform EquipRow = UnitInfoPanel.StatBlock.transform.GetChild(5);
 
-            EquipRow.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = unit.GetItem(0)?.Name;
-            EquipRow.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = unit.GetItem(1)?.Name;
+            if (unit.GetItem(0)?.Name == null)
+                EquipRow.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+            else
+                EquipRow.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = unit.GetItem(0)?.Name;
+            if (unit.GetItem(1)?.Name == null)
+                EquipRow.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+            else
+                EquipRow.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = unit.GetItem(1)?.Name;
             if (unit.HasTrait(Traits.Resourceful))
             {
                 EquipRow.transform.GetChild(2).gameObject.SetActive(true);
+            if (unit.GetItem(2)?.Name == null)
+                EquipRow.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+            else
                 EquipRow.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = unit.GetItem(2)?.Name;
             }
             else

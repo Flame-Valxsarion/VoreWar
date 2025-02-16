@@ -500,6 +500,12 @@ public enum Traits
     IceVulnerable = 302,
     /// <summary>Unit takes extra damage from all sources of electricity. (150%)</summary>
     ElecVulnerable = 303,
+    /// <summary>Unit can move past (but not stop on) allied units.</summary>
+    PassThrough = 304,
+    /// <summary>Unit can move past (but not stop on) enemy units.</summary>
+    Blitz = 305,
+    /// <summary>Unit can move past (but not stop on) any unit.</summary>
+    SpectralStep  = 306,
 
 
     // Growth-related section

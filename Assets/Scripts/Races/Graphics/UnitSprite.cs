@@ -277,6 +277,16 @@ public class UnitSprite : MonoBehaviour
             if (actor.DamagedColors)
                 tint = .8f;
             CompleteSprite.RedifySprite(tint);
+            if (actor.Surrendered)
+            {
+            var obj = Object.Instantiate(State.GameManager.TacticalEffectPrefabList.FadeInFadeOut).GetComponent<FadeInFadeOut>();
+            obj.transform.SetPositionAndRotation(new Vector3(actor.Position.x + .15f, actor.Position.y + .15f, 0), new Quaternion());
+            obj.transform.localScale = new Vector3(2, 2, 1);
+            obj.SpriteRenderer.sprite = State.GameManager.SpriteDictionary.SpellIcons[7];
+            obj.HoldTime = 0;
+            obj.FadeInTime = 0;
+            obj.FadeOutTime = 0;
+            }
         }
         else if (actor.Unit.GetStatusEffect(StatusEffectType.Petrify) != null)
         {

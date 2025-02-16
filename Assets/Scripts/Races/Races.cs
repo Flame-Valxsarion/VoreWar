@@ -90,6 +90,7 @@
     static internal Terrorbird Terrorbird = new Terrorbird();
     static internal Dratopyr Dratopyr = new Dratopyr();
     static internal FeralLions FeralLions = new FeralLions();
+    static internal BoomBunnies BoomBunnies = new BoomBunnies();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();
@@ -115,6 +116,7 @@
     static internal BlankSlate BlankSlate = new BlankSlate();
     static internal Taraluxia Taraluxia = new Taraluxia();
     static internal Otachi Otachi = new Otachi();
+    static internal Xelhilde Xelhilde = new Xelhilde();
 
     static internal DefaultRaceData GetRace(Unit unit)
     {
@@ -355,6 +357,10 @@
                 return Taraluxia;
             case Race.Otachi:
                 return Otachi;
+            case Race.Xelhilde:
+                return Xelhilde;
+            case Race.BoomBunnies:
+                return BoomBunnies;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

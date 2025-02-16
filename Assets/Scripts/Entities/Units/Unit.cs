@@ -862,6 +862,11 @@ public class Unit
             }
             catch {}
         }
+        else if (race == Race.Xelhilde)
+        {
+            FixedGear = true;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.XelhildeWeapon);
+        }
         else
         {
             FixedGear = false;

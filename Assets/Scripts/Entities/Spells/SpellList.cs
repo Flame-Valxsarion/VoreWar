@@ -58,6 +58,8 @@ static class SpellList
     static internal readonly DamageSpell IceBlast;
     static internal readonly DamageSpell Pyre;
     static internal readonly DamageSpell CrossShock;
+    static internal readonly DamageSpell ExplosiveHug;
+    static internal readonly DamageSpell Explode;
     static internal readonly DamageSpell Flamberge;
     //static internal readonly Spell Warp;
     //static internal readonly DamageSpell MagicWall;
@@ -477,6 +479,52 @@ static class SpellList
         };
         SpellDict[SpellTypes.CrossShock] = CrossShock;
 
+        ExplosiveHug = new DamageSpell()
+        {
+            Name = "Explosive Hug",
+            Id = "explosivehug",
+            SpellType = SpellTypes.ExplosiveHug,
+            Description = "Unit detonates, killing itself and dealing 2/3 of it's current HP in damage to targeted unit",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy },
+            Range = new Range(1),
+            Tier = -1,
+            Resistable = true,
+            ResistanceMult = .50f,
+            Damage = (a, t) => (a.Unit.Health / 3) * 2,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(ExplosiveHug, t);
+                if(a.Unit.HasTrait(Traits.Fearless))//Auto-surrender prevention
+                    a.CastOffensiveSpell(Explode, a);
+                else
+                {
+                    a.Unit.AddPermanentTrait(Traits.Fearless);
+                    a.CastOffensiveSpell(Explode, a);
+                    a.Unit.RemoveTrait(Traits.Fearless);
+                }
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
+            },
+        };
+        SpellDict[SpellTypes.ExplosiveHug] = ExplosiveHug;
+
+        Explode = new DamageSpell()
+        {
+            Name = "Explosive Hug",
+            Id = "explode",
+            SpellType = SpellTypes.Explode,
+            Description = "Used to kill the exploding unit.",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Self },
+            Range = new Range(1),
+            Tier = -1,
+            Resistable = false,
+            Damage = (a, t) => a.Unit.Health + 5,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(Explode, a);
+            },
+        };
+        SpellDict[SpellTypes.Explode] = Explode;
+
         //Warp = new Spell() //Implemented this and forgot it was supposed to be target and then location, only the caster makes it highly situational
         //{
         //    Name = "Warp",
@@ -646,6 +694,7 @@ static class SpellList
                         State.GameManager.TacticalMode.SwitchAlignment(t);
                         t.Surrendered = true;
                         t.Movement = 0;
+                        t.AIAvoidEat = 2;
                         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{a.Unit.Name} captured {t.Unit.Name}!");
                     }
                 }

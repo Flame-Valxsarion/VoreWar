@@ -1520,6 +1520,13 @@ public class Actor_Unit
                     State.GameManager.SoundManager.PlaySwing(this);
                     if (Unit.HasTrait(Traits.Tenacious))
                         Unit.AddTenacious();
+                    if (Unit.Race == Race.Xelhilde)
+                    {
+                        if (Unit.BodyAccentType2 >= 2)
+                            Unit.BodyAccentType2 = 0;
+                        else
+                            Unit.BodyAccentType2++;
+                    }
                 }
             }
 
@@ -1532,6 +1539,13 @@ public class Actor_Unit
         State.GameManager.TacticalMode.CreateBloodHitEffect(target.Position);
         if (Unit.Race == Race.Asura)
             State.GameManager.TacticalMode.CreateSwipeHitEffect(target.Position);
+        if (Unit.Race == Race.Xelhilde)
+        {
+            if (Unit.BodyAccentType2 >= 2)
+                Unit.BodyAccentType2 = 0;
+            else
+                Unit.BodyAccentType2++;
+        }
     }
 
     private void KillUnit(Actor_Unit target, Weapon weapon)
@@ -2151,7 +2165,7 @@ public class Actor_Unit
             cost = 1;
         if (Movement < cost)
             return false;
-        if ((Unit.HasTrait(Traits.Flight) && Movement > 1) || TacticalUtilities.OpenTile(destination, this))
+        if ((TacticalUtilities.PassableOpenTile(destination, this) && ((Unit.HasTrait(Traits.PassThrough) && Movement > 1) || (Unit.HasTrait(Traits.Blitz) && Movement > 1) || (Unit.HasTrait(Traits.SpectralStep) && Movement > 1))) || (Unit.HasTrait(Traits.Flight) && Movement > 1) || TacticalUtilities.OpenTile(destination, this))
         {
             State.GameManager.TacticalMode.Translator.SetTranslator(UnitSprite.transform, Position, destination, delay, State.GameManager.TacticalMode.IsPlayerTurn);
             State.GameManager.TacticalMode.AITimer = delay;

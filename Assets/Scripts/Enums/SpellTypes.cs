@@ -60,6 +60,7 @@
     Bind = 76,
     Whispers = 77,
     //Corrupt = 78,
+    ExplosiveHug = 79,
 
     ViperDamage = 110,
     ForceFeed = 111,
@@ -68,5 +69,6 @@
     ManaExpolsion = 114,
     Conduit = 115,
     Flamberge = 116,
+    Explode = 117,
 }
 

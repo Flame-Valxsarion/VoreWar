@@ -543,6 +543,67 @@ static class TacticalUtilities
         return false;
     }
 
+    static public bool PassableOpenTile(Vec2i vec, Actor_Unit actor) => PassableOpenTile(vec.x, vec.y, actor);
+
+    static public bool PassableFreeSpaceAroundTarget(Vec2i targetLocation, Actor_Unit actor)
+    {
+        for (int x = targetLocation.x - 1; x < targetLocation.x + 2; x++)
+        {
+            for (int y = targetLocation.y - 1; y < targetLocation.y + 2; y++)
+            {
+                if (x == targetLocation.x && y == targetLocation.y)
+                    continue;
+                if (OpenTile(x, y, actor))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    static public bool PassableOpenTile(int x, int y, Actor_Unit actor)
+    {
+        if (x < 0 || y < 0 || x > tiles.GetUpperBound(0) || y > tiles.GetUpperBound(1))
+            return false;
+        if (blockedTiles != null)
+        {
+            if (actor?.Unit.HasTrait(Traits.NimbleClimber) ?? false)
+            {
+                if (x <= blockedClimberTiles.GetUpperBound(0) || y <= blockedClimberTiles.GetUpperBound(1))
+                {
+                    if (blockedClimberTiles[x, y])
+                        return false;
+                }
+            }
+            else
+            {
+                if (x <= blockedTiles.GetUpperBound(0) || y <= blockedTiles.GetUpperBound(1))
+                {
+                    if (blockedTiles[x, y])
+                        return false;
+                }
+            }
+
+        }
+
+        if (TacticalTileInfo.CanWalkInto(tiles[x, y], actor))
+        {
+            for (int i = 0; i < Units.Count; i++)
+            {
+                if ((Units[i].Targetable == true && !Units[i].Hidden && Units[i].Unit.Side != actor.Unit.Side && actor.Unit.HasTrait(Traits.PassThrough)) || (Units[i].Targetable == true && !Units[i].Hidden && Units[i].Unit.Side == actor.Unit.Side && actor.Unit.HasTrait(Traits.Blitz)))
+                {
+                    if (Units[i].Position.x == x && Units[i].Position.y == y)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     static public bool TileContainsMoreThanOneUnit(int x, int y)
     {
         if (x < 0 || y < 0 || x > tiles.GetUpperBound(0) || y > tiles.GetUpperBound(1))
