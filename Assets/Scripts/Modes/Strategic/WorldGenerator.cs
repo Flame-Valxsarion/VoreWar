@@ -510,6 +510,36 @@ public class WorldGenerator
         }
 
     }
+    public void PlaceAncientTeleporters(int tele)
+    {
+
+        if (tele < 0)
+        {
+            State.World.AncientTeleporters = new AncientTeleporter[0];
+            return;
+        }
+
+        State.World.AncientTeleporters = new AncientTeleporter[tele];
+        int currPorter = 0;
+        /*
+        if (tele == 1 || tele > 5)
+        {
+            Vec2i center = GrabGoodMercLocation(Config.StrategicWorldSizeX / 2, Config.StrategicWorldSizeY / 2);
+            usedLocations.Add(center);
+            State.World.Tiles[center.x, center.y] = StrategicTileType.grass;
+            State.World.AncientTeleporters[0] = new AncientTeleporter(center);
+            currPorter++;
+        }
+        */
+        for (int i = currPorter; i < tele; i++)
+        {
+            Vec2i point = GrabGoodMercLocation(State.Rand.Next(Config.StrategicWorldSizeX), State.Rand.Next(Config.StrategicWorldSizeY));
+            usedLocations.Add(point);
+            State.World.Tiles[point.x, point.y] = StrategicTileType.grass;
+            State.World.AncientTeleporters[i] = new AncientTeleporter(point);
+        }
+
+    }
 
     public void PlaceGoldMines(int mines)
     {

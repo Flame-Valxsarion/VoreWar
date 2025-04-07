@@ -153,8 +153,8 @@ static class StoredLogTexts
         bool FirstTimeAbsorption(EventLog s) => s.Unit.DigestedUnits == 1 && s.Unit.Level < 10 && s.Unit.Type != UnitType.Mercenary && s.Unit.Type != UnitType.SpecialMercenary && State.GameManager.PureTactical == false;
         bool TargetFirstTime(EventLog s) => s.Target.DigestedUnits == 0 && s.Target.Level < 10 && s.Target.Type != UnitType.Mercenary && s.Target.Type != UnitType.SpecialMercenary && State.GameManager.PureTactical == false;
         bool Friendly(EventLog s) => s.Unit.Side == s.Target.Side;
-        bool Endo(EventLog s) => s.Unit.HasTrait(Traits.Endosoma);
-        bool HealingEndo(EventLog s) => s.Unit.HasTrait(Traits.Endosoma) && s.Unit.HasTrait(Traits.HealingBelly);
+        bool Endo(EventLog s) =>( s.Unit.HasTrait(Traits.FriendlyStomach) || s.Unit.HasTrait(Traits.Endosoma));
+        bool HealingEndo(EventLog s) => (s.Unit.HasTrait(Traits.FriendlyStomach) || s.Unit.HasTrait(Traits.Endosoma)) && s.Unit.HasTrait(Traits.HealingBelly);
         bool FriendlyPrey(EventLog s) => s.Unit.Side == s.Prey.Side;
         bool ActorHumanoid(EventLog s) => s.Unit.Race < Race.Vagrants || s.Unit.Race >= Race.Selicia;
         bool HasGreatEscape(EventLog s) => s.Target.HasTrait(Traits.TheGreatEscape);

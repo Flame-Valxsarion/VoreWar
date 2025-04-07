@@ -13,6 +13,9 @@ public class WorldConfig
     internal Dictionary<Race, SpawnerInfo> SpawnerInfo = new Dictionary<Race, SpawnerInfo>();
 
     [OdinSerialize]
+    internal List<ConstructibleBuilding> BuildingInfo = new List<ConstructibleBuilding>();
+
+    [OdinSerialize]
     internal int[] VillagesPerEmpire = new int[Config.NumberOfRaces];
 
 
@@ -244,10 +247,10 @@ public class WorldConfig
     internal int BellyRubsPerTurn = 1;
     [OdinSerialize]
     internal float DigestionRamp = .1f;
-    [OdinSerialize, AllowEditing, ProperName("Digestion Ramp Turn"), Description("Digestin damage change by the above  every X turns")]
+    [OdinSerialize]
     internal int DigestionRampTurn = 1;
-    [OdinSerialize, AllowEditing, ProperName("Digestion Ramp Cap"), Description("The above will only stack up to X times, negative numbers mean disabled")]
-    internal int DigestionRampCap = 1;
+    [OdinSerialize]
+    internal int DigestionRampCap = -1;
     [OdinSerialize]
     internal float DigestionRampLoss = 1;
     [OdinSerialize]
@@ -266,6 +269,24 @@ public class WorldConfig
     internal float SurrenderedPredEscapeMult = 1;
     [OdinSerialize]
     internal float SurrenderedPredAutoRegur = 0;
+
+    [OdinSerialize]
+    internal int TacticalMovementSoftCap = -1;
+    [OdinSerialize]
+    internal int TacticalMovementHardCap = -1;
+    [OdinSerialize]
+    internal float SizeAccuracyMod = 0;
+    [OdinSerialize]
+    internal float SizeAccuracyLowerBound = 10;
+    [OdinSerialize]
+    internal int SizeAccuracyInterval = 5;
+    [OdinSerialize]
+    internal float SizeDamageMod = 0f;
+    [OdinSerialize]
+    internal float SizeDamageLowerBound = 10;
+    [OdinSerialize]
+    internal int SizeDamageInterval = 5;
+
     internal bool GetValue(string name)
     {
         if (Toggles == null)
@@ -325,6 +346,42 @@ public class WorldConfig
                 SpawnerInfo[race] = new SpawnerInfo(false, 4, .15f, 40, 900 + (int)race, 1, true, 6f, 8, 12, 40, false);
             }
         }
+    }
+
+
+    internal List<ConstructibleBuilding> GetBuildingInfo()
+    {
+        if(BuildingInfo == null)
+            ReloadBuildingInfo();
+        if(BuildingInfo.Count() <= 0)
+            ReloadBuildingInfo();
+        return BuildingInfo;
+    }
+
+    internal int GetBuildingInfoCount()
+    {
+        if(BuildingInfo == null)
+            ReloadBuildingInfo();
+        return BuildingInfo.Count();
+    }
+
+    internal void ReloadBuildingInfo()
+    {
+        BuildingInfo = new List<ConstructibleBuilding>
+        { 
+            new WorkCamp(null),
+            new LumberSite(null),
+            new Quarry(null),
+            new CasterTower(null),
+            new BarrierTower(null),
+            new DefenseEncampment(null),
+            new Academy(null),
+            new BlackMagicTower(null),
+            new TemporalTower(null),
+            new Laboratory(null),
+            new Teleporter(null),
+            new TownHall(null),
+        };
     }
 
     internal void ResetDictionary()

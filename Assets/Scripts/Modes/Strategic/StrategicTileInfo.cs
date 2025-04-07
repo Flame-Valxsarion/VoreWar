@@ -24,6 +24,16 @@ public enum StrategicTileType
     snowTrees = 18,
     snowMountain = 19,
     brokenCliffs = 20,
+    ashen = 21,
+    fieldAshen = 22,
+    ashenHills = 23,
+    shallowWater = 24,
+    smallIslands = 25,
+    fieldSmallIslands = 26,
+    savannah = 27,
+    fieldsavannah = 28,
+    drySwamp = 29,
+    rainforest = 30,
 }
 
 public enum StrategicDoodadType
@@ -35,6 +45,9 @@ public enum StrategicDoodadType
     virtualBridgeVertical = 4,
     virtualBridgeHorizontal = 5,
     virtualBridgeIntersection = 6,
+    road = 7,
+    stoneRoad = 8,
+    wall = 9,
     SpawnerVagrant = 1001,
     SpawnerSerpents = 1002,
     SpawnerWyvern = 1003,
@@ -91,11 +104,25 @@ static class StrategicTileInfo
     static int[] swamps = new int[] { 30, 31, 32 };
     static int[] snowFields = new int[] { 33, 34, 35, 36 };
     static int[] desertFields = new int[] { 37, 38, 39, 40 };
+    static int[] ashes = new int[] {41, 48};
+    static int[] ashFields = new int[] {42, 43, 44, 45};
+    static int[] ashHills = new int[] {46, 47};
+    static int[] shallowWaters = new int[] {49, 50};
+    static int[] smallIslands = new int[] {51, 52, 53};
+    static int[] smallIslandFields = new int[] {54, 55, 56, 57};
+    static int[] savannahs = new int[] {58, 59, 60, 61};
+    static int[] savannahFields = new int[] {62, 63, 64, 65};
+    static int[] drySwamps = new int[] {66, 67, 68};
+    static int[] rainforests = new int[] {69, 70, 71};
 
-    static internal List<StrategicTileType> SandFamily = new List<StrategicTileType>() { StrategicTileType.desert, StrategicTileType.fieldDesert, StrategicTileType.sandHills, StrategicTileType.brokenCliffs };
-    static internal List<StrategicTileType> GrassFamily = new List<StrategicTileType>() { StrategicTileType.grass, StrategicTileType.forest, StrategicTileType.mountain, StrategicTileType.field, StrategicTileType.hills };
-    static internal List<StrategicTileType> SnowFamily = new List<StrategicTileType>() { StrategicTileType.snow, StrategicTileType.snowHills, StrategicTileType.fieldSnow, StrategicTileType.ice, StrategicTileType.snowTrees, StrategicTileType.snowMountain };
-    static internal List<StrategicTileType> WaterFamily = new List<StrategicTileType>() { StrategicTileType.water, StrategicTileType.ocean };
+    static internal List<StrategicTileType> SandFamily = new List<StrategicTileType>() { StrategicTileType.desert, StrategicTileType.fieldDesert, StrategicTileType.sandHills, StrategicTileType.brokenCliffs};
+    static internal List<StrategicTileType> GrassFamily = new List<StrategicTileType>() { StrategicTileType.grass, StrategicTileType.forest, StrategicTileType.mountain, StrategicTileType.field, StrategicTileType.hills};
+    static internal List<StrategicTileType> SnowFamily = new List<StrategicTileType>() { StrategicTileType.snow, StrategicTileType.snowHills, StrategicTileType.fieldSnow, StrategicTileType.snowTrees, StrategicTileType.snowMountain };
+    static internal List<StrategicTileType> WaterFamily = new List<StrategicTileType>() { StrategicTileType.water, StrategicTileType.ocean};
+    static internal List<StrategicTileType> AshenFamily = new List<StrategicTileType>() {StrategicTileType.ashen, StrategicTileType.fieldAshen, StrategicTileType.ashenHills};
+    static internal List<StrategicTileType> ShallowWaterFamily = new List<StrategicTileType>() {StrategicTileType.smallIslands, StrategicTileType.fieldSmallIslands};
+    static internal List<StrategicTileType> SavannahFamily = new List<StrategicTileType>() { StrategicTileType.savannah, StrategicTileType.fieldsavannah};
+    static internal List<StrategicTileType> ConsideredLiquid = new List<StrategicTileType>() { StrategicTileType.water, StrategicTileType.ocean, StrategicTileType.ice,StrategicTileType.shallowWater, StrategicTileType.lava};
 
 
     static Noise.OpenSimplexNoise OpenSimplexNoise = new Noise.OpenSimplexNoise(155);
@@ -142,6 +169,32 @@ static class StrategicTileInfo
                 return (int)StrategicTileType.snow;
             case StrategicTileType.brokenCliffs:
                 return (int)StrategicTileType.desert;
+            case StrategicTileType.ashen:
+                return ashes[rand.Next(ashes.Length)];
+            case StrategicTileType.fieldAshen:
+                if (Config.SimpleFarms)
+                    return ashFields[0];
+                return ashFields[rand.Next(ashFields.Length)];
+            case StrategicTileType.ashenHills:
+                return ashHills[rand.Next(ashHills.Length)];
+            case StrategicTileType.shallowWater:
+                return shallowWaters[rand.Next(shallowWaters.Length)];
+            case StrategicTileType.smallIslands:               
+                return smallIslands[rand.Next(smallIslands.Length)];            
+            case StrategicTileType.fieldSmallIslands:
+                if (Config.SimpleFarms)
+                    return 57;
+                return smallIslandFields[rand.Next(smallIslandFields.Length)];
+            case StrategicTileType.savannah:
+                return savannahs[rand.Next(savannahs.Length)];
+            case StrategicTileType.fieldsavannah:
+                if (Config.SimpleFarms)
+                    return 65;
+                return savannahFields[rand.Next(savannahFields.Length)];
+            case StrategicTileType.drySwamp:
+                return drySwamps[rand.Next(drySwamps.Length)];
+            case StrategicTileType.rainforest:
+                return rainforests[rand.Next(rainforests.Length)];
             default:
                 return (int)type;
         }
@@ -231,6 +284,16 @@ static class StrategicTileInfo
             case StrategicTileType.sandHills:
             case StrategicTileType.snowHills:
             case StrategicTileType.snowTrees:
+            case StrategicTileType.ashen:
+            case StrategicTileType.fieldAshen:
+            case StrategicTileType.ashenHills:
+            case StrategicTileType.shallowWater:
+            case StrategicTileType.smallIslands:
+            case StrategicTileType.fieldSmallIslands:
+            case StrategicTileType.savannah:
+            case StrategicTileType.fieldsavannah:
+            case StrategicTileType.drySwamp:
+            case StrategicTileType.rainforest:
                 return true;
 
             //case StrategicTileType.mountain:
@@ -265,6 +328,13 @@ static class StrategicTileInfo
             case StrategicTileType.volcanic:
             case StrategicTileType.fieldSnow:
             case StrategicTileType.fieldDesert:
+            case StrategicTileType.ashen:
+            case StrategicTileType.fieldAshen:
+            case StrategicTileType.savannah:
+            case StrategicTileType.fieldsavannah:
+            case StrategicTileType.smallIslands:
+            case StrategicTileType.fieldSmallIslands:
+            case StrategicTileType.drySwamp:
 
                 return 1;
 
@@ -276,6 +346,9 @@ static class StrategicTileInfo
             case StrategicTileType.sandHills:
             case StrategicTileType.snowHills:
             case StrategicTileType.snowTrees:
+            case StrategicTileType.ashenHills:
+            case StrategicTileType.shallowWater:
+            case StrategicTileType.rainforest:
                 return 2;
             default:
                 return 1;

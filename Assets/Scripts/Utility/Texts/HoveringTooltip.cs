@@ -67,6 +67,14 @@ public class HoveringTooltip : MonoBehaviour
         {
             return GetTraitData(trait);
         }
+        if (State.CustomTraitList.Where(t=>t.name == words[2]).Any())
+        {
+            return GetTraitData((Traits)State.CustomTraitList.Where(t => t.name == words[2]).First().id);
+        }
+        if (State.ConditionalTraitList.Where(t=>t.name == words[2]).Any())
+        {
+            return GetTraitData((Traits)State.ConditionalTraitList.Where(t => t.name == words[2]).First().id);
+        }
         return "";
     }
 
@@ -144,7 +152,7 @@ public class HoveringTooltip : MonoBehaviour
             var bodySize = State.RaceSettings.GetBodySize(race);
             var stomachSize = State.RaceSettings.GetStomachSize(race);
             //return $"{race}\n{racePar.RaceDescription}\nBody Size: {State.RaceSettings.GetBodySize(race)}\nBase Stomach Size: {State.RaceSettings.GetStomachSize(race)}\nFavored Stat: {racePar.FavoredStat}\nDefault Traits:\n{State.RaceSettings.ListTraits(race)}";
-            return $"{race}\n{racePar.RaceDescription}\nRace Body Size: {bodySize}\nCurrent Bulk: {actor?.Bulk()}\nBase Stomach Size: {stomachSize}\nFavored Stat: {State.RaceSettings.GetFavoredStat(race)}";
+            return $"{race}\n{racePar.RaceDescription}\nRace Body Size: {bodySize}\nCurrent Bulk: {actor?.Bulk()}\nBase Stomach Size: {stomachSize}\nFavored Stat: {State.RaceSettings.GetFavoredStat(race)}\nDeployment Cost: {State.RaceSettings.GetDeployCost(race) * unit.TraitBoosts.DeployCostMult}\nUpkeep: {State.RaceSettings.GetUpkeep(race) * unit.TraitBoosts.UpkeepMult}";
         }
 
         if (unit != null && words[2] == InfoPanel.RaceSingular(unit))
@@ -154,7 +162,7 @@ public class HoveringTooltip : MonoBehaviour
             var bodySize = State.RaceSettings.GetBodySize(race);
             var stomachSize = State.RaceSettings.GetStomachSize(race);
             //return $"{race}\n{racePar.RaceDescription}\nBody Size: {State.RaceSettings.GetBodySize(race)}\nBase Stomach Size: {State.RaceSettings.GetStomachSize(race)}\nFavored Stat: {racePar.FavoredStat}\nDefault Traits:\n{State.RaceSettings.ListTraits(race)}";
-            return $"{race}\n{racePar.RaceDescription}\nRace Body Size: {bodySize}\nCurrent Bulk: {actor?.Bulk()}\nBase Stomach Size: {stomachSize}\nFavored Stat: {State.RaceSettings.GetFavoredStat(race)}";
+            return $"{race}\n{racePar.RaceDescription}\nRace Body Size: {bodySize}\nCurrent Bulk: {actor?.Bulk()}\nBase Stomach Size: {stomachSize}\nFavored Stat: {State.RaceSettings.GetFavoredStat(race)}\nDeployment Cost: {State.RaceSettings.GetDeployCost(race) * unit.TraitBoosts.DeployCostMult}\nUpkeep: {State.RaceSettings.GetUpkeep(race) * unit.TraitBoosts.UpkeepMult}";
         }
 
         if (Enum.TryParse(words[2], out Traits trait))
@@ -243,10 +251,30 @@ public class HoveringTooltip : MonoBehaviour
                         return $"(Spell) Unit is taking damage over time\nTurns Remaining: {effect.Duration}";
                     case StatusEffectType.DivineShield:
                         return $"(Spell) Unit was embraced by a divine being, providing damage mitigation\nTurns Remaining: {effect.Duration}";
+                    case StatusEffectType.Weakness:
+                        return $"Unit's stats are lowered by {effect.Duration}% for the rest of the battle.";
+                    case StatusEffectType.Bolstered:
+                        return $"Unit's stats are boosted by {effect.Duration}% for the rest of the battle.";
+                    case StatusEffectType.Necrosis:
+                        return $"Unit's healing is reduced by {effect.Strength * 25}% \nTurns Remaining: {effect.Duration}";
+                    case StatusEffectType.Errosion:
+                        return $"Unit's weapo nand digstion damage taken is increased by {effect.Strength * 20}% \nTurns Remaining: {effect.Duration}";
+                    case StatusEffectType.Lethargy:
+                        return $"Unit's Str,Dex, and Agi are reduced by {(effect.Strength * effect.Duration / 50)*100}% \nTurns Remaining: {effect.Duration}";
+                    case StatusEffectType.Agony:
+                        return $"Unit takes an additional 35% weapon damage, which is dealt over the duration of the effect.\n Stored damage: {(int)Math.Round(effect.Strength)}\nIncoming damage: {(int)Math.Round(effect.Strength / effect.Duration)}\n Turns Remaining: {effect.Duration}";
                 }
             }
         }
 
+        if (State.CustomTraitList.Where(t => t.name == words[2]).Any())
+        {
+            return GetTraitData((Traits)State.CustomTraitList.Where(t => t.name == words[2]).First().id);
+        }
+        if (State.ConditionalTraitList.Where(t => t.name == words[2]).Any())
+        {
+            return GetTraitData((Traits)State.ConditionalTraitList.Where(t => t.name == words[2]).First().id);
+        }
 
         if (State.World?.ItemRepository != null)
         {
@@ -342,9 +370,85 @@ public class HoveringTooltip : MonoBehaviour
 
     public static string GetTraitData(Traits trait)
     {
+        if (trait >= (Traits)6000)
+        {
+            var cond = State.ConditionalTraitList.Where(ct => trait == (Traits)ct.id).FirstOrDefault();
+
+            string constructed = "";
+            switch (cond.classification)
+            {
+                case TraitConditionalClassification.Conditional:
+                    constructed = $"This trait provides the trait <b>{GetTraitName(cond.associatedTrait)}</b> while the following condition is fulfilled:\n";
+                    break;
+                case TraitConditionalClassification.Permanent:
+                    constructed = $"This trait becomes <b>{GetTraitName(cond.associatedTrait)}</b> if the following condition is fulfilled:\n";
+                    break;
+                case TraitConditionalClassification.Temporary:
+                    constructed = $"This trait provides the trait <b>{GetTraitName(cond.associatedTrait)}</b>. Both this trait and <b>{GetTraitName(cond.associatedTrait)}</b> will be removed if the following condition is unfulfilled:\n";
+                    break;
+                default:
+                    break;
+            }
+            foreach (var item in cond.OperationBlocks)
+            {
+                TraitCondition leadCondition = item.Key.conditionVariable.First();
+                constructed += item.Key.summary;
+                if (TraitCondition.Male > leadCondition)
+                {
+                    switch (item.Key.compareOp)
+                    {
+                        case TraitConditionCompareOperator.eq:
+                            constructed += " = ";
+                            break;
+                        case TraitConditionCompareOperator.geq:
+                            constructed += " >= ";
+                            break;
+                        case TraitConditionCompareOperator.leq:
+                            constructed += " <= ";
+                            break;
+                        case TraitConditionCompareOperator.none:
+                            break;
+                        default:
+                            break;
+                    }
+                    constructed += item.Key.compareValue;
+                }
+                constructed += "\n";
+                if (item.Value != TraitConditionLogicalOperator.none)
+                {
+                    switch (item.Value)
+                    {
+                        case TraitConditionLogicalOperator.and:
+                            constructed += "AND\n";
+                            break;
+                        case TraitConditionLogicalOperator.or:
+                            constructed += "OR\n";
+                            break;
+                        case TraitConditionLogicalOperator.not:
+                            constructed += "AND NOT\n";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            return constructed;
+        }
+
+        if (trait >= (Traits)3000)
+        {
+            return State.CustomTraitList.Where(ct => trait == (Traits)ct.id).FirstOrDefault().description;
+        }
+        
+        if (trait >= (Traits)1000)
+        {
+            return "A Random Trait";
+        }
+
         Trait traitClass = TraitList.GetTrait(trait);
         if (traitClass != null)
             return traitClass.Description;
+
         switch (trait)
         {
             case Traits.Resilient:
@@ -417,7 +521,7 @@ public class HoveringTooltip : MonoBehaviour
                 return "Prey is afflicted with the Prey's Curse effect";
             case Traits.FearsomeAppetite:
                 return "Consuming a victim frightens nearby allies of the prey, temporarily reducing their stats";
-            case Traits.Endosoma:
+            case Traits.FriendlyStomach:
                 return "Can vore friendly units, friendly units that are vored take no digestion damage \nThey do not try to escape, but can be regurgitated or are freed at the end of battle\nHas 100% chance to eat allies, and only costs 2 AP, like eating surrendered units.  May cause battles to not automatically end if used with TheGreatEscape";
             case Traits.TailStrike:
                 return "An attack that does less damage, but attacks the tile and the 2 tiles adjacent to it that are within reach";
@@ -588,7 +692,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.SpellBlade:
                 return "Unit's weapon damage also scales with mind. (Half as effectively as weapons main stat)";
             case Traits.ArcaneMagistrate:
-                return "Unit gains 1 focus when it hits a spell, unit gains 4 more if the spell kills the target.";
+                return "Unit gains 1 focus when it hits a spell, unit gains 4 more if the spell kills the target. Focus: Unit has its mind increased.";
             case Traits.SwiftStrike:
                 return "Unit deals up 1% more weapon damage per agility it has over it's target, up to 25%, tripled when using light weapons.";
             case Traits.Timid:
@@ -613,18 +717,104 @@ public class HoveringTooltip : MonoBehaviour
                 return "Upon getting killed, this unit will be brought back to life within a 6 tile radius of where they were killed 3 times per battle!";
             case Traits.DeathCheater:
                 return "Unit has set chance to return to army after dying in battle regardless of outcome. Chance starts at 100% then decreases 10% with each death, bottoms out at 10%";
+            case Traits.Endosoma:
+                return "Units that are vored take no digestion damage \n Enemies lose stamina instead of health, enemies with no stamina no longer try to escape and are considered defeated at the end of battle, but not if freed. \n Has 100% chance to eat allies.Can vore friendly units, they do not try to escape. \n May cause battles to not automatically end if used with TheGreatEscape";
+            case Traits.Friendosoma:
+                return "Enemies defeated by defeated by the Endosoma trait will now be recruited instead at the end of battle."; 
+            case Traits.Duelist:
+                return "Melee damage is increased by 100%, but Melee damage is divided by the number of adjacent enemy units.";
+            case Traits.Fervor:
+                return "Melee damage is reduced to 25%, but Melee damage is multiplied by the number of adjacent enemy units.";
+            case Traits.Farsighted:
+                return "Accuracy is reduced against targets within 5 tiles. Closer targets are even harder to hit";
+            case Traits.EasilySatisfied:
+                return "Unit has 50% reduced vore chance when it has prey.";
+            case Traits.AwfulAim:
+                return "Unit's ranged attacks have an even chance to target any unit within 2 spaces of the target.";
+            case Traits.Slacker:
+                return "Unit's MP regeneration is delayed by one turn after it regenerates MP.";
+            case Traits.Juggernaut:
+                return "Unit's stats are increased by 100%, but MP regeneration is delayed by one turn after it regenerates MP.";
+            case Traits.PoorConstitution:
+                return "When attacked in melee, unit has a 10% chance to be afflicted with sleep for 2 turns";
+            case Traits.IntrusiveAppetite:
+                return "At the start of each turn, this unit has a 10% chance to spend MP and attempt to eat a random adjacent unit.";
+            case Traits.ExtraNutritious:
+                return "When digested, unit will permanently increase one of predator's stats by one for each of this unit's levels.";
+            case Traits.FoodComaProne:
+                return "While full, at the start of turn, unit has a chance based on current fullness to fall asleep.";
+            case Traits.SleepItOff:
+                return "While asleep, unit's digestion damage and absorption rate is doubled. Unit has a chance based on fullness to extend it's own sleep status by a turn.";
+            case Traits.HaplessPrey:
+                return "Unit has a 10% chance of force-feeding themselves to their melee attack target instead of attacking, if possible. Chance is increased by 5% per difference in level.";
+            case Traits.PleasantDigestion:
+                return "While being digested, unit will heal it's predator each turn.";
+            case Traits.AllIn:
+                return "Unit gains the ability to make a vore attempt at increased odds, if it fails their target vores them instead, if possible.";
+            case Traits.SiphoningAura:
+                return "At the start of turn, Unit applies 1 stack of Weakened to all adjacent allies and Unit gainst 1 stack of Bolstered for every ally afflicted.";
+            case Traits.EnviousPrey:
+                return "Unit has a 10% chance to gain Temptation each time an ally within 3 spaces is eaten.";
+            case Traits.RoughMassage:
+                return "When this unit rubs a unit's belly, the effect is doubled and 1 stack of Weakness is applied to the target.";
+            case Traits.SlowStart:
+                return "For the first 5 turns of battle, unit's MP is reduced by 50%.";
+            case Traits.CurseOfImmolation:
+                return "At start of turn, Unit deals it's level in fire damage to itself and all units around it or it's predator, if this unit has been consumed. This damage can not kill. Effect does not activate if unit has surrendered.";
+            case Traits.CurseOfSacrifice:
+                return "When a unit within 3 spaces is consumed, this unit has a 10% chance to trade places with them and be consumed instead.";          
+            case Traits.CurseOfEquivalency:
+                return "At the start of each turn, this unit's highest stat is reduced by 1 and this unit's lowest stat is increased by 1.";
+            case Traits.CurseOfPhasing:
+                return "When hit by an attack, unit has a 50% chance to teleport to a random space within 3 spaces. If a unit occupies that space, this unit is consumed by the occupier.";
+            case Traits.CurseOfCraving:
+                return "At the start of battle, this unit has a 50% chance to have eaten one of it's allies.";
+            case Traits.CurseOfPreyportaion:
+                return "At the start of battle, this unit has a 25% chance to teleported into a random predator.";       
             case Traits.Competitive:
-                return "Unit deals bonus ranged and melee damage to members of the same race.";
+                return "Unit deals bonus ranged and melee damage to members of the same race.";      
+            case Traits.CompetetivePredator:
+                return "When an another nearby unit is eaten, this unit has a 10% chance to eat a random adjacent unit.";
             case Traits.PassThrough:
                 return "Unit can move past (but not stop on) allied units. Not recommended to use with Blitz or SpectralStep.";
             case Traits.Blitz:
                 return "Unit can move past (but not stop on) enemy units. Not recommended to use with PassThrough or SpectralStep.";
             case Traits.SpectralStep:
                 return "Unit can move past (but not stop on) any units. Not recommended to use with Blitz or PassThrough.";
+            case Traits.VoreObsession:
+                return "Prevents the AI from using weapons. AI will still buy weapons.";
         }  
         return "<b>This trait needs a tooltip!</b>";
     }
 
+    private static string GetTraitName(Traits trait)
+    {
+        if (trait >= (Traits)6000)
+        {
+            var lis = State.ConditionalTraitList.Where(t => t.id == (int)trait);
+            if (lis.Any())
+            {
+                return lis.First().name;
+            }
+        }
+        if (trait >= (Traits)3000)
+        {
+            var lis = State.CustomTraitList.Where(t => t.id == (int)trait);
+            if (lis.Any())
+            {
+                return lis.First().name;
+            }
+        }
+        if (trait >= (Traits)1000)
+        {
+            var lis = State.RandomizeLists.Where(t => t.id == (int)trait);
+            if (lis.Any())
+            {
+                return lis.First().name;
+            }
+        }
+        return trait.ToString();
+    }
     public static string GetAIData(RaceAI ai)
     {
         switch (ai)

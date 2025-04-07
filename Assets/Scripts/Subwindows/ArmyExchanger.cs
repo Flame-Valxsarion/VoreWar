@@ -52,7 +52,7 @@ public class ArmyExchanger : MonoBehaviour
         }
         else
             Select(0);
-        fullArmies = left.Units.Count == left.MaxSize && right.Units.Count == right.MaxSize;
+        fullArmies = left.RemainnigSize <= 0 && right.RemainnigSize <= 0;
         if (fullArmies)
         {
             MoveToLeft.GetComponentInChildren<Text>().text = "Exchange Selected Units";
@@ -224,7 +224,10 @@ public class ArmyExchanger : MonoBehaviour
             return;
         }
 
-        if (rightSelected >= RightArmy.Units.Count || LeftArmy.Units.Count == LeftArmy.MaxSize)
+        if (rightSelected >= RightArmy.Units.Count)
+            return;
+
+        if(!StrategicUtilities.ArmyCanFitUnit(LeftArmy, RightArmy.Units[rightSelected]))
             return;
 
         if (RightArmy.Units[rightSelected] == RightArmy.Empire.Leader && LeftArmy.Side != RightArmy.Side)
@@ -251,7 +254,10 @@ public class ArmyExchanger : MonoBehaviour
         }
 
 
-        if (leftSelected >= LeftArmy.Units.Count || RightArmy.Units.Count == RightArmy.MaxSize)
+        if (leftSelected >= LeftArmy.Units.Count)
+            return;
+
+        if (!StrategicUtilities.ArmyCanFitUnit(RightArmy, LeftArmy.Units[rightSelected]))
             return;
 
         if (LeftArmy.Units[leftSelected] == LeftArmy.Empire.Leader && LeftArmy.Side != RightArmy.Side)

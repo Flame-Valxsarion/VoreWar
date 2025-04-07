@@ -19,6 +19,7 @@ public class RecruitPanel : MonoBehaviour
     public Text DefenderCount;
 
     public Button ImprintUnit;
+    public Button ApplyPotion;
 
     public void OpenRenameTown()
     {

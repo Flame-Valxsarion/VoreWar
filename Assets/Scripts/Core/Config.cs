@@ -384,8 +384,20 @@ static class Config
     internal static int AbsorbResourceModBoost => World.AbsorbResourceModBoost;
     public static float SurrenderedPredEscapeMult => World.SurrenderedPredEscapeMult;
     public static float SurrenderedPredAutoRegur => World.SurrenderedPredAutoRegur;
+    public static int NumberOfBuildings => World.GetBuildingInfoCount();
+    public static int TacticalMovementSoftCap => World.TacticalMovementSoftCap;
+    public static int TacticalMovementHardCap => World.TacticalMovementHardCap;
+    public static float SizeAccuracyMod => World.SizeAccuracyMod;
+    public static float SizeAccuracyLowerBound => World.SizeAccuracyLowerBound;
+    public static int SizeAccuracyInterval => World.SizeAccuracyInterval;
+    public static float SizeDamageMod => World.SizeDamageMod;
+    public static float SizeDamageLowerBound => World.SizeDamageLowerBound;
+    public static int SizeDamageInterval => World.SizeDamageInterval;
+    public static List<ConstructibleBuilding> Buildings=> World.GetBuildingInfo();
 
+    //Everything below this line should be mirrored in BuildingConfig to ensure proper saving
 
+    internal static BuildingConfig BuildConfig = new BuildingConfig();
 
 
     internal static bool WinterActive()

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ContentSettings : MonoBehaviour
 {
+    public GameObject[] SettingsPanels;
     public Slider FemaleFraction;
     public Slider HermFraction;
     public Slider HermNameFraction;
@@ -197,21 +198,7 @@ public class ContentSettings : MonoBehaviour
 
     public Text TooltipText;
 
-    public GameObject GameplayPanel;
-    public GameObject RacesPanel;
-    public GameObject GenderPanel;
-    public GameObject AppearancePanel;
-    public GameObject VoreMiscPanel;
-    public GameObject VoreMisc2Panel;
-    public GameObject VoreMisc3Panel;
-
-    public Button GameplayButton;
-    public Button RacesButton;
-    public Button GenderButton;
-    public Button AppearanceButton;
-    public Button VoreMiscButton;
-    public Button VoreMisc2Button;
-    public Button VoreMisc3Button;
+    public TMP_Dropdown PageSelector;
 
     List<ToggleObject> Toggles;
 
@@ -278,10 +265,22 @@ public class ContentSettings : MonoBehaviour
     public Slider SurrenderedPredEscapeMult;
     public Slider SurrenderedPredAutoRegur;
 
+    public InputField TacticalMovementSoftCap;
+    public InputField TacticalMovementHardCap;
+    public InputField SizeAccuracyMod;
+    public InputField SizeAccuracyLowerBound;
+    public InputField SizeAccuracyInterval;
+    public InputField SizeDamageMod;
+    public InputField SizeDamageLowerBound;
+    public InputField SizeDamageInterval;
+
+
 
     List<ToggleObject> MercToggles;
 
     List<MonsterSpawnerPanel> MonsterSpawners;
+
+    public BuildingSettings buildingSettings;
 
     public void AllMercsCheckedChanged()
     {
@@ -578,127 +577,13 @@ public class ContentSettings : MonoBehaviour
     }
 
 
-    public void ActivateGameplay()
+    public void ActivatePage()
     {
-        GameplayPanel.SetActive(true);
-        RacesPanel.SetActive(false);
-        GenderPanel.SetActive(false);
-        AppearancePanel.SetActive(false);
-        VoreMiscPanel.SetActive(false);
-        VoreMisc2Panel.SetActive(false);
-        VoreMisc3Panel.SetActive(false);
-        GameplayButton.interactable = false;
-        RacesButton.interactable = true;
-        GenderButton.interactable = true;
-        AppearanceButton.interactable = true;
-        VoreMiscButton.interactable = true;
-        VoreMisc2Button.interactable = true;
-        VoreMisc3Button.interactable = true;
-    }
-
-    public void ActivateRaces()
-    {
-        GameplayPanel.SetActive(false);
-        RacesPanel.SetActive(true);
-        GenderPanel.SetActive(false);
-        AppearancePanel.SetActive(false);
-        VoreMiscPanel.SetActive(false);
-        VoreMisc2Panel.SetActive(false);
-        VoreMisc3Panel.SetActive(false);
-        GameplayButton.interactable = true;
-        RacesButton.interactable = false;
-        GenderButton.interactable = true;
-        AppearanceButton.interactable = true;
-        VoreMiscButton.interactable = true;
-        VoreMisc2Button.interactable = true;
-        VoreMisc3Button.interactable = true;
-        MonsterSpawnerFolder.position = new Vector3();
-    }
-    public void ActivateGender()
-    {
-        GameplayPanel.SetActive(false);
-        RacesPanel.SetActive(false);
-        GenderPanel.SetActive(true);
-        AppearancePanel.SetActive(false);
-        VoreMiscPanel.SetActive(false);
-        VoreMisc2Panel.SetActive(false);
-        VoreMisc3Panel.SetActive(false);
-        GameplayButton.interactable = true;
-        RacesButton.interactable = true;
-        GenderButton.interactable = false;
-        AppearanceButton.interactable = true;
-        VoreMiscButton.interactable = true;
-        VoreMisc2Button.interactable = true;
-    }
-    public void ActivateAppearance()
-    {
-        GameplayPanel.SetActive(false);
-        RacesPanel.SetActive(false);
-        GenderPanel.SetActive(false);
-        AppearancePanel.SetActive(true);
-        VoreMiscPanel.SetActive(false);
-        VoreMisc2Panel.SetActive(false);
-        VoreMisc3Panel.SetActive(false);
-        GameplayButton.interactable = true;
-        RacesButton.interactable = true;
-        GenderButton.interactable = true;
-        AppearanceButton.interactable = false;
-        VoreMiscButton.interactable = true;
-        VoreMisc2Button.interactable = true;
-        VoreMisc3Button.interactable = true;
-    }
-
-    public void ActivateVoreMisc()
-    {
-        GameplayPanel.SetActive(false);
-        RacesPanel.SetActive(false);
-        GenderPanel.SetActive(false);
-        AppearancePanel.SetActive(false);
-        VoreMiscPanel.SetActive(true);
-        VoreMisc2Panel.SetActive(false);
-        VoreMisc3Panel.SetActive(false);
-        GameplayButton.interactable = true;
-        RacesButton.interactable = true;
-        GenderButton.interactable = true;
-        AppearanceButton.interactable = true;
-        VoreMiscButton.interactable = false;
-        VoreMisc2Button.interactable = true;
-        VoreMisc3Button.interactable = true;
-    }
-
-    public void ActivateVoreMisc2()
-    {
-        GameplayPanel.SetActive(false);
-        RacesPanel.SetActive(false);
-        GenderPanel.SetActive(false);
-        AppearancePanel.SetActive(false);
-        VoreMiscPanel.SetActive(false);
-        VoreMisc2Panel.SetActive(true);
-        VoreMisc3Panel.SetActive(false);
-        GameplayButton.interactable = true;
-        RacesButton.interactable = true;
-        GenderButton.interactable = true;
-        AppearanceButton.interactable = true;
-        VoreMiscButton.interactable = true;
-        VoreMisc2Button.interactable = false;
-        VoreMisc3Button.interactable = true;
-    }
-    public void ActivateVoreMisc3()
-    {
-        GameplayPanel.SetActive(false);
-        RacesPanel.SetActive(false);
-        GenderPanel.SetActive(false);
-        AppearancePanel.SetActive(false);
-        VoreMiscPanel.SetActive(false);
-        VoreMisc2Panel.SetActive(false);
-        VoreMisc3Panel.SetActive(true);
-        GameplayButton.interactable = true;
-        RacesButton.interactable = true;
-        GenderButton.interactable = true;
-        AppearanceButton.interactable = true;
-        VoreMiscButton.interactable = true;
-        VoreMisc2Button.interactable = true;
-        VoreMisc3Button.interactable = false;
+        for (int i = 0; i < SettingsPanels.Length; i++)
+        {
+            SettingsPanels[i].SetActive(false);
+        }
+        SettingsPanels[PageSelector.value].SetActive(true);
     }
 
     public void ConfirmRefresh()
@@ -715,6 +600,7 @@ public class ContentSettings : MonoBehaviour
 
     public void Refresh()
     {
+        buildingSettings.HardLoad();
         if (Toggles == null)
             CreateList();
         foreach (ToggleObject toggle in Toggles)
@@ -798,6 +684,14 @@ public class ContentSettings : MonoBehaviour
         Config.World.OverallMonsterCapModifier = PlayerPrefs.GetFloat("OverallMonsterCapModifier", 1);
         Config.World.OverallMonsterSpawnRateModifier = PlayerPrefs.GetFloat("OverallMonsterSpawnRateModifier", 1);
         Config.World.RevealTurn = PlayerPrefs.GetInt("RevealTurn", 50);
+        Config.World.TacticalMovementSoftCap = PlayerPrefs.GetInt("TacticalMovementSoftCap", -1);
+        Config.World.TacticalMovementHardCap = PlayerPrefs.GetInt("TacticalMovementHardCap", -1);
+        Config.World.SizeAccuracyMod = PlayerPrefs.GetFloat("SizeAccuracyMod", 0);
+        Config.World.SizeAccuracyLowerBound = PlayerPrefs.GetFloat("SizeAccuracyLowerBound", 10);
+        Config.World.SizeAccuracyInterval = PlayerPrefs.GetInt("SizeAccuracyInterval", 5);
+        Config.World.SizeDamageMod = PlayerPrefs.GetFloat("SizeDamageMod", 0);
+        Config.World.SizeDamageLowerBound = PlayerPrefs.GetFloat("SizeDamageLowerBound", 10);
+        Config.World.SizeDamageInterval = PlayerPrefs.GetInt("SizeDamageInterval", 5);
         MonsterDropdownChanged();
         if (Config.World.SpawnerInfo == null)
             Config.World.ResetSpawnerDictionary();
@@ -835,6 +729,10 @@ public class ContentSettings : MonoBehaviour
     internal void ChangeToolTip(int value)
     {
         TooltipText.text = DefaultTooltips.Tooltip(value);
+    }
+    internal void ChangeBuildingToolTip(int value)
+    {
+        TooltipText.text = BuildingTooltips. Tooltip(value);
     }
 
     public void CorpsesChanged()
@@ -901,10 +799,10 @@ public class ContentSettings : MonoBehaviour
         WeightLossFractionBreasts.value = Config.WeightLossFractionBreasts;
         WeightLossFractionBody.value = Config.WeightLossFractionBody;
         WeightLossFractionDick.value = Config.WeightLossFractionDick;
-        GrowthMod.text = (Config.GrowthMod*100).ToString();
-        GrowthCap.text = (Config.GrowthCap*100).ToString();
+        GrowthMod.text = (Config.GrowthMod * 100).ToString();
+        GrowthCap.text = (Config.GrowthCap * 100).ToString();
         GrowthDecayOffset.text = (Config.GrowthDecayOffset * 100).ToString();
-        GrowthDecayIncreaseRate.text = (Config.GrowthDecayIncreaseRate*1000).ToString();
+        GrowthDecayIncreaseRate.text = (Config.GrowthDecayIncreaseRate * 1000).ToString();
         FurryFraction.value = Config.FurryFraction;
         TacticalWaterValue.value = Config.TacticalWaterValue;
         TacticalTerrainFrequency.value = Config.TacticalTerrainFrequency;
@@ -996,6 +894,14 @@ public class ContentSettings : MonoBehaviour
         FemaleTraits.text = RaceEditorPanel.TraitListToText(Config.FemaleTraits);
         HermTraits.text = RaceEditorPanel.TraitListToText(Config.HermTraits);
         SpawnTraits.text = RaceEditorPanel.TraitListToText(Config.SpawnTraits);
+        TacticalMovementSoftCap.text = Config.TacticalMovementSoftCap.ToString();
+        TacticalMovementHardCap.text = Config.TacticalMovementHardCap.ToString();
+        SizeAccuracyMod.text = Config.SizeAccuracyMod.ToString();
+        SizeAccuracyLowerBound.text = Config.SizeAccuracyLowerBound.ToString();
+        SizeAccuracyInterval.text = Config.SizeAccuracyInterval.ToString();
+        SizeDamageMod.text = Config.SizeDamageMod.ToString();
+        SizeDamageLowerBound.text = Config.SizeDamageLowerBound.ToString();
+        SizeDamageInterval.text = Config.SizeDamageInterval.ToString();
         RefreshSliderText();
 
         foreach (MonsterSpawnerPanel spawner in MonsterSpawners)
@@ -1133,19 +1039,19 @@ public class ContentSettings : MonoBehaviour
         Config.World.WeightLossFractionBody = WeightLossFractionBody.value;
         Config.World.WeightLossFractionDick = WeightLossFractionDick.value;
         if (int.TryParse(GrowthMod.text, out int gm))
-            Config.World.GrowthMod = gm/100f;
+            Config.World.GrowthMod = gm / 100f;
         else
             Config.World.GrowthMod = 1;
         if (int.TryParse(GrowthCap.text, out int gc))
-            Config.World.GrowthCap = gc/100f;
+            Config.World.GrowthCap = gc / 100f;
         else
             Config.World.GrowthCap = 5f;
         if (int.TryParse(GrowthDecayIncreaseRate.text, out int gir))
-            Config.World.GrowthDecayIncreaseRate = gir/1000f;
+            Config.World.GrowthDecayIncreaseRate = gir / 1000f;
         else
             Config.World.GrowthDecayIncreaseRate = 0.04f;
         if (int.TryParse(GrowthDecayOffset.text, out int gos))
-            Config.World.GrowthDecayOffset = gos/100f;
+            Config.World.GrowthDecayOffset = gos / 100f;
         else
             Config.World.GrowthDecayOffset = 0f;
         Config.World.TacticalTerrainFrequency = TacticalTerrainFrequency.value;
@@ -1227,6 +1133,45 @@ public class ContentSettings : MonoBehaviour
         Config.World.OverallMonsterCapModifier = OverallMonsterCapModifier.value;
         Config.World.OverallMonsterSpawnRateModifier = OverallMonsterSpawnRateModifier.value;
 
+        if (int.TryParse(TacticalMovementSoftCap.text, out int tmsc))
+            Config.World.TacticalMovementSoftCap = tmsc;
+        else
+            Config.World.TacticalMovementSoftCap = -1;
+
+        if (int.TryParse(TacticalMovementHardCap.text, out int tmhc))
+            Config.World.TacticalMovementHardCap = tmhc;
+        else
+            Config.World.TacticalMovementHardCap = -1;
+
+        if (float.TryParse(SizeAccuracyMod.text, out float sam))
+            Config.World.SizeAccuracyMod = sam;
+        else
+            Config.World.SizeAccuracyMod = 0;
+
+        if (float.TryParse(SizeAccuracyLowerBound.text, out float salb))
+            Config.World.SizeAccuracyLowerBound = salb;
+        else
+            Config.World.SizeAccuracyLowerBound = 10;
+
+        if (int.TryParse(SizeAccuracyInterval.text, out int sai))
+            Config.World.SizeAccuracyInterval = sai;
+        else
+            Config.World.SizeAccuracyInterval = 5;
+
+        if (float.TryParse(SizeDamageMod.text, out float sdm))
+            Config.World.SizeDamageMod = sdm;
+        else
+            Config.World.SizeDamageMod = 0;
+
+        if (float.TryParse(SizeDamageLowerBound.text, out float sdlb))
+            Config.World.SizeDamageLowerBound = sdlb;
+        else
+            Config.World.SizeDamageLowerBound = 10;
+
+        if (int.TryParse(SizeDamageInterval.text, out int sdi))
+            Config.World.SizeDamageInterval = sdi;
+        else
+            Config.World.SizeDamageInterval = 5;
 
         foreach (MonsterSpawnerPanel spawner in MonsterSpawners)
         {
@@ -1340,19 +1285,19 @@ public class ContentSettings : MonoBehaviour
         PlayerPrefs.SetFloat("WeightLossFractionBody", WeightLossFractionBody.value);
         PlayerPrefs.SetFloat("WeightLossFractionDick", WeightLossFractionDick.value);
         if (int.TryParse(GrowthDecayIncreaseRate.text, out int gir))
-            PlayerPrefs.SetFloat("GrowthDecayIncreaseRate", gir/1000f);
+            PlayerPrefs.SetFloat("GrowthDecayIncreaseRate", gir / 1000f);
         else
             PlayerPrefs.SetFloat("GrowthDecayIncreaseRate", 0.04f);
         if (int.TryParse(GrowthDecayOffset.text, out int gos))
-            PlayerPrefs.SetFloat("GrowthDecayOffset", gos/100f);
+            PlayerPrefs.SetFloat("GrowthDecayOffset", gos / 100f);
         else
             PlayerPrefs.SetFloat("GrowthDecayOffset", 0);
         if (int.TryParse(GrowthMod.text, out int gm))
-            PlayerPrefs.SetFloat("GrowthMod", gm/100f);
+            PlayerPrefs.SetFloat("GrowthMod", gm / 100f);
         else
             PlayerPrefs.SetFloat("GrowthMod", 1f);
         if (int.TryParse(GrowthCap.text, out int gc))
-            PlayerPrefs.SetFloat("GrowthCap", gc/100f);
+            PlayerPrefs.SetFloat("GrowthCap", gc / 100f);
         else
             PlayerPrefs.SetFloat("GrowthCap", 5f);
         PlayerPrefs.SetFloat("TacticalWaterValue", TacticalWaterValue.value);
@@ -1374,7 +1319,7 @@ public class ContentSettings : MonoBehaviour
         PlayerPrefs.SetFloat("DigestionSpeedMult", DigestionSpeedMult.value);
         PlayerPrefs.SetFloat("AbsorbSpeedMult", AbsorbSpeedMult.value);
         PlayerPrefs.SetFloat("BellyRubEffMult", BellyRubEffMult.value);
-        PlayerPrefs.SetInt("BellyRubEffMult", (int)BellyRubsPerTurn.value);
+        PlayerPrefs.SetInt("BellyRubsPerTurn", (int)BellyRubsPerTurn.value);
         PlayerPrefs.SetFloat("DigestionRamp", DigestionRamp.value);
         PlayerPrefs.SetInt("DigestionRampTurn", (int)DigestionRampTurn.value);
         PlayerPrefs.SetInt("DigestionRampCap", (int)DigestionRampCap.value);
@@ -1433,6 +1378,40 @@ public class ContentSettings : MonoBehaviour
         PlayerPrefs.SetFloat("CritDamageMod", CritDamageMod.value);
         PlayerPrefs.SetFloat("BaseGrazeChance", BaseGrazeChance.value);
         PlayerPrefs.SetFloat("GrazeDamageMod", GrazeDamageMod.value);
+
+
+        if (int.TryParse(TacticalMovementSoftCap.text, out int tmsc))
+            PlayerPrefs.SetFloat("TacticalMovementSoftCap", tmsc);
+        else
+            PlayerPrefs.SetFloat("TacticalMovementSoftCap", -1);
+        if (int.TryParse(TacticalMovementHardCap.text, out int tmhc))
+            PlayerPrefs.SetFloat("TacticalMovementHardCap", tmhc);
+        else
+            PlayerPrefs.SetFloat("TacticalMovementHardCap", -1);
+        if (float.TryParse(SizeAccuracyMod.text, out float sam))
+            PlayerPrefs.SetFloat("SizeAccuracyMod", sam);
+        else
+            PlayerPrefs.SetFloat("SizeAccuracyMod", 0);
+        if (float.TryParse(SizeAccuracyLowerBound.text, out float salb))
+            PlayerPrefs.SetFloat("SizeAccuracyLowerBound", salb);
+        else
+            PlayerPrefs.SetFloat("SizeAccuracyLowerBound", 10);
+        if (int.TryParse(SizeAccuracyInterval.text, out int sai))
+            PlayerPrefs.SetFloat("SizeAccuracyInterval", sai);
+        else
+            PlayerPrefs.SetFloat("SizeAccuracyInterval", 5);
+        if (float.TryParse(SizeDamageMod.text, out float sbm))
+            PlayerPrefs.SetFloat("SizeDamageMod", sbm);
+        else
+            PlayerPrefs.SetFloat("SizeDamageMod", 0);
+        if (float.TryParse(SizeDamageLowerBound.text, out float sblb))
+            PlayerPrefs.SetFloat("SizeDamageLowerBound", sblb);
+        else
+            PlayerPrefs.SetFloat("SizeDamageLowerBound", 10);
+        if (int.TryParse(SizeDamageInterval.text, out int sbi))
+            PlayerPrefs.SetFloat("SizeDamageInterval", sbi);
+        else
+            PlayerPrefs.SetFloat("SizeDamageInterval", 5);
 
         foreach (MonsterSpawnerPanel spawner in MonsterSpawners)
         {
@@ -1520,6 +1499,7 @@ public class ContentSettings : MonoBehaviour
     public void Exit()
     {
         SetValues();
+        buildingSettings.SoftSave();
         gameObject.SetActive(false);
     }
 
@@ -1527,6 +1507,11 @@ public class ContentSettings : MonoBehaviour
     {
         SetValues();
         SaveValues();
+
+        buildingSettings.DropdownUpdate();
+        buildingSettings.SoftSave();
+        buildingSettings.HardSave();
+
         gameObject.SetActive(false);
     }
 

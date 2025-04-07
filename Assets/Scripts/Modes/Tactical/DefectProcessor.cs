@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using static UnityEngine.UI.CanvasScaler;
 
 
 
@@ -46,7 +47,7 @@ class DefectProcessor
             DefectedAttackers++;
 
             attacker.Units.Remove(actor.Unit);
-            if (defender != null && defender.Units.Count < defender.MaxSize)
+            if (defender != null && StrategicUtilities.ArmyCanFitUnit(defender, actor.Unit))
             {
                 actor.Unit.Side = defender.Side;
                 defender.Units.Add(actor.Unit);
@@ -69,7 +70,7 @@ class DefectProcessor
             actor.Unit.Side = attacker.Side;
             DefectedDefenders++;
             defender.Units.Remove(actor.Unit);
-            if (attacker.Units.Count < attacker.MaxSize)
+            if (StrategicUtilities.ArmyCanFitUnit(attacker, actor.Unit))
             {
                 attacker.Units.Add(actor.Unit);
             }
@@ -90,7 +91,7 @@ class DefectProcessor
             actor.Unit.Side = attacker.Side;
             village.GetRecruitables().Remove(actor.Unit);
             DefectedGarrison++;
-            if (attacker.Units.Count < attacker.MaxSize)
+            if (StrategicUtilities.ArmyCanFitUnit(attacker, actor.Unit))
             {
                 attacker.Units.Add(actor.Unit);
             }

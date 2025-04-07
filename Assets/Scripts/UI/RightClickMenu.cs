@@ -215,7 +215,7 @@ public class RightClickMenu : MonoBehaviour
 
             if (target.Surrendered == false && actor.Unit.HasTrait(Traits.Cruel) == false && Config.AllowInfighting == false)
             {
-                if (actor.Unit.HasTrait(Traits.Endosoma))
+                if (actor.Unit.HasTrait(Traits.FriendlyStomach) || actor.Unit.HasTrait(Traits.Endosoma))
                 {
                     float devChance;
                     if (actor.Unit.Predator)

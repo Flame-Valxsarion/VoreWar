@@ -22,12 +22,13 @@ class TargetedTacticalAction
     internal bool RequiresPred;
     internal Predicate<Actor_Unit> AppearConditional;
     internal int MinimumMP;
+    internal int ManaCost;
     internal Color ButtonColor;
     internal Action OnClicked;
     internal Func<Actor_Unit, Actor_Unit, bool> OnExecute;
     internal Func<Actor_Unit, Vec2i, bool> OnExecuteLocation;
 
-    public TargetedTacticalAction(string name, bool requiresPred, Predicate<Actor_Unit> conditional, Action onClicked, Func<Actor_Unit, Actor_Unit, bool> onExecute, Func<Actor_Unit, Vec2i, bool> onExecuteLocation = null, int minimumMp = 1, Color color = default)
+    public TargetedTacticalAction(string name, bool requiresPred, Predicate<Actor_Unit> conditional, Action onClicked, Func<Actor_Unit, Actor_Unit, bool> onExecute, Func<Actor_Unit, Vec2i, bool> onExecuteLocation = null, int minimumMp = 1, Color color = default, int manaCost = 0)
     {
         Name = name;
         RequiresPred = requiresPred;
@@ -36,6 +37,7 @@ class TargetedTacticalAction
         OnExecute = onExecute;
         OnExecuteLocation = onExecuteLocation;
         MinimumMP = minimumMp;
+        ManaCost = manaCost;
         if (color == default)
             ButtonColor = new Color(.669f, .753f, 1);
         else
@@ -226,6 +228,35 @@ static class TacticalActionList
           onExecute: (a, t) => a.TailStrike(t),
           minimumMp: 1));
         TargetedDictionary[SpecialAction.TailStrike] = TargetedActions.Last();
+
+        TargetedActions.Add(new TargetedTacticalAction(
+          name: "Giant Sweep",
+          requiresPred: false,
+          conditional: (a) => a.Unit.HasTrait(Traits.Legendary),
+          onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.GiantSweep),
+          onExecute: (a, t) => a.SweepAttack(true),
+          manaCost: 40,
+          minimumMp: 1));
+        TargetedDictionary[SpecialAction.GiantSweep] = TargetedActions.Last();
+
+        TargetedActions.Add(new TargetedTacticalAction(
+          name: "SweepingSwallow",
+          requiresPred: false,
+          conditional: (a) => a.Unit.HasTrait(Traits.Legendary),
+          onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.SweepingSwallow),
+          onExecute: (a, t) => a.SweepAttack(false),
+          manaCost: 40,
+          minimumMp: 1));
+        TargetedDictionary[SpecialAction.SweepingSwallow] = TargetedActions.Last();
+
+        TargetedActions.Add(new TargetedTacticalAction(
+            name: "All-In Vore",
+            requiresPred: true,
+            conditional: (a) => a.Unit.HasTrait(Traits.AllIn) && a.Unit.Predator,
+            onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.AllInVore),
+            onExecute: (a, t) => a.AllInVore(t),
+            minimumMp: 2));
+        TargetedDictionary[SpecialAction.AllInVore] = TargetedActions.Last();
 
 
         //UntargetedActions.Add(new UntargetedTacticalAction("Shapeshift", () => State.GameManager.TacticalMode.ButtonCallback(16), (a) => a.Unit.ShifterShapes != null && a.Unit.ShifterShapes.Count > 1));

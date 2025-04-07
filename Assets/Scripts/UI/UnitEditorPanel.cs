@@ -17,6 +17,7 @@ public class UnitEditorPanel : CustomizerPanel
     public TextMeshProUGUI TraitList;
     public Slider ExpBar;
     public Slider HealthBar;
+    public Slider BarrierBar;
     public Slider ManaBar;
     public EditStatButton EditStatButtonPrefab;
     public GameObject StatButtonPanel;
@@ -63,6 +64,18 @@ public class UnitEditorPanel : CustomizerPanel
             traitDict[(Traits)rl.id] = val2;
             val2++;
             TraitDropdown.options.Add(new TMP_Dropdown.OptionData(rl.name.ToString()));
+        }
+        foreach (CustomTraitBoost ct in State.CustomTraitList)
+        {
+            traitDict[(Traits)ct.id] = val2;
+            val2++;
+            TraitDropdown.options.Add(new TMP_Dropdown.OptionData(ct.name.ToString()));
+        }
+        foreach (ConditionalTraitContainer cdt in State.ConditionalTraitList)
+        {
+            traitDict[(Traits)cdt.id] = val2;
+            val2++;
+            TraitDropdown.options.Add(new TMP_Dropdown.OptionData(cdt.name.ToString()));
         }
         foreach (Traits traitId in ((Traits[])Enum.GetValues(typeof(Traits))).OrderBy(s =>
        {
@@ -171,6 +184,7 @@ public class UnitEditorPanel : CustomizerPanel
         {
             InfoPanel.ExpBar = ExpBar;
             InfoPanel.HealthBar = HealthBar;
+            InfoPanel.BarrierBar = BarrierBar;
             InfoPanel.ManaBar = ManaBar;
             UnitEditor = new UnitEditor(actor, this, InfoPanel);
             SetUpRaces();
@@ -216,6 +230,7 @@ public class UnitEditorPanel : CustomizerPanel
         {
             InfoPanel.ExpBar = ExpBar;
             InfoPanel.HealthBar = HealthBar;
+            InfoPanel.BarrierBar = BarrierBar;
             InfoPanel.ManaBar = ManaBar;
             UnitEditor = new UnitEditor(unit, this, InfoPanel);
             SetUpRaces();
@@ -425,16 +440,36 @@ public class UnitEditorPanel : CustomizerPanel
         if (State.RandomizeLists.Any(rl => rl.name == TraitDropdown.options[TraitDropdown.value].text))
         {
             RandomizeList randomizeList = State.RandomizeLists.Single(rl => rl.name == TraitDropdown.options[TraitDropdown.value].text);
-            var resTraits = UnitEditor.Unit.RandomizeOne(randomizeList);
-            foreach (Traits resTrait in resTraits)
-            {
-                UnitEditor.AddTrait(resTrait);
-                if (resTrait == Traits.Resourceful || resTrait == Traits.BookWormI || resTrait == Traits.BookWormII || resTrait == Traits.BookWormIII)
+             if (randomizeList.level > UnitEditor.Unit.Level)
                 {
-                    UnitEditor.Unit.SetMaxItems();
-                    PopulateItems();
+                    UnitEditor.Unit.AddPermanentTrait((Traits)randomizeList.id);
+                } else
+                {
+                    var resTraits = UnitEditor.Unit.RandomizeOne(randomizeList);
+                    foreach (Traits resTrait in resTraits)
+                    {
+                        UnitEditor.AddTrait(resTrait);
+                        if (resTrait == Traits.Resourceful || resTrait == Traits.BookWormI || resTrait == Traits.BookWormII || resTrait == Traits.BookWormIII)
+                        {
+                            UnitEditor.Unit.SetMaxItems();
+                            PopulateItems();
+                        }
+                    }
                 }
-            }
+            UnitEditor.RefreshActor();
+            TraitList.text = UnitEditor.Unit.ListTraits();
+        }
+        if (State.CustomTraitList.Any(ct => ct.name == TraitDropdown.options[TraitDropdown.value].text))
+        {
+            CustomTraitBoost customTrait = State.CustomTraitList.Single(ct => ct.name == TraitDropdown.options[TraitDropdown.value].text);
+            UnitEditor.Unit.AddPermanentTrait((Traits)customTrait.id);
+            UnitEditor.RefreshActor();
+            TraitList.text = UnitEditor.Unit.ListTraits();
+        }
+        if (State.ConditionalTraitList.Any(ct => ct.name == TraitDropdown.options[TraitDropdown.value].text))
+        {
+            ConditionalTraitContainer conditionalTrait = State.ConditionalTraitList.Single(ct => ct.name == TraitDropdown.options[TraitDropdown.value].text);
+            UnitEditor.Unit.AddPermanentTrait((Traits)conditionalTrait.id);
             UnitEditor.RefreshActor();
             TraitList.text = UnitEditor.Unit.ListTraits();
         }
@@ -488,6 +523,28 @@ public class UnitEditorPanel : CustomizerPanel
 
             }
         }
+        foreach (CustomTraitBoost ct in (State.CustomTraitList))
+        {
+            if (TraitsText.text.ToLower().Contains(ct.name.ToString().ToLower()))
+            {
+                UnitEditor.AddTrait((Traits)ct.id);
+
+                UnitEditor.RefreshActor();
+                TraitList.text = UnitEditor.Unit.ListTraits();
+
+            }
+        }
+        foreach (ConditionalTraitContainer cdt in (State.ConditionalTraitList))
+        {
+            if (TraitsText.text.ToLower().Contains(cdt.name.ToString().ToLower()))
+            {
+                UnitEditor.AddTrait((Traits)cdt.id);
+
+                UnitEditor.RefreshActor();
+                TraitList.text = UnitEditor.Unit.ListTraits();
+
+            }
+        }
         foreach (Traits trait in (Stat[])Enum.GetValues(typeof(Traits)))
         {
             if (TraitsText.text.ToLower().Contains(trait.ToString().ToLower()))
@@ -509,6 +566,35 @@ public class UnitEditorPanel : CustomizerPanel
     {
         if (UnitEditor.Unit == null)
             return;
+
+        RandomizeList rList = State.RandomizeLists.Where(rl => rl.name == TraitDropdown.options[TraitDropdown.value].text).FirstOrDefault();
+        if (rList != null)
+        {
+            UnitEditor.RemoveTrait((Traits)rList.id);
+            UnitEditor.RefreshActor();
+            TraitList.text = UnitEditor.Unit.ListTraits();
+            if ((Traits)rList.id == Traits.Resourceful)
+            {
+                UnitEditor.Unit.SetMaxItems();
+                PopulateItems();
+            }
+        }
+        
+        CustomTraitBoost cBoost = State.CustomTraitList.Where(ct => ct.name == TraitDropdown.options[TraitDropdown.value].text).FirstOrDefault();
+        if (cBoost != null)
+        {
+            UnitEditor.RemoveTrait((Traits)cBoost.id);
+            UnitEditor.RefreshActor();
+            TraitList.text = UnitEditor.Unit.ListTraits();
+        }
+        
+        ConditionalTraitContainer condCont = State.ConditionalTraitList.Where(ct => ct.name == TraitDropdown.options[TraitDropdown.value].text).FirstOrDefault();
+        if (condCont != null)
+        {
+            UnitEditor.RemoveTrait((Traits)condCont.id);
+            UnitEditor.RefreshActor();
+            TraitList.text = UnitEditor.Unit.ListTraits();
+        }
 
         if (Enum.TryParse(TraitDropdown.options[TraitDropdown.value].text, out Traits trait))
         {

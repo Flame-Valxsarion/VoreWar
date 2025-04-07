@@ -61,6 +61,7 @@ static class SpellList
     static internal readonly DamageSpell ExplosiveHug;
     static internal readonly DamageSpell Explode;
     static internal readonly DamageSpell Flamberge;
+    static internal readonly DamageSpell ForkLightning;
     //static internal readonly Spell Warp;
     //static internal readonly DamageSpell MagicWall;
     static internal readonly StatusSpell Poison;
@@ -935,6 +936,7 @@ static class SpellList
         };
         SpellDict[SpellTypes.SummonSpawn] = SummonSpawn;
 
+
         Reanimate = new Spell()
         {
             Name = "Reanimate",
@@ -1569,6 +1571,28 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.Flamberge] = Flamberge;
+
+        ForkLightning = new DamageSpell()
+        {
+            Name = "ForkLightning",
+            Id = "fork-lightning",
+            SpellType = SpellTypes.ForkLightning,
+            Description = "Deals damage to a target and targets behind, sets ground on fire for a few turns",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy},
+            Range = new Range(6),
+            AOEType = AreaOfEffectType.Full,
+            AreaOfEffect = 2,
+            Tier = 4,
+            Resistable = true,
+            Damage = (a, t) => 10 + a.Unit.GetStat(Stat.Mind) / 7,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(ForkLightning, t);
+                TacticalGraphicalEffects.CreateFireBall(a.Position, t.Position, t);
+                TacticalUtilities.CreateEffectWithPattern(t.Position, a.Position, TileEffectType.Fire, 1 + a.Unit.GetStat(Stat.Mind) / 30, 4, Flamberge.Pattern, Flamberge.AOEType);
+            },
+        };
+        SpellDict[SpellTypes.ForkLightning] = ForkLightning;
     }
 }
 

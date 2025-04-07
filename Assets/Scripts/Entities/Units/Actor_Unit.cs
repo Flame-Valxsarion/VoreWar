@@ -1,7 +1,7 @@
-
 using OdinSerializer;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 
 public class Actor_Unit
@@ -78,6 +78,8 @@ public class Actor_Unit
 
     internal bool Intimidated;
 
+    internal bool IsAllIn = false;
+
     [OdinSerialize]
     public Weapon BestMelee;
     [OdinSerialize]
@@ -97,6 +99,8 @@ public class Actor_Unit
 
     [OdinSerialize]
     public bool Slimed;
+    [OdinSerialize]
+    public int TurnsSlacking = 0;
     [OdinSerialize]
     public bool Paralyzed;
 
@@ -237,8 +241,38 @@ public class Actor_Unit
             Movement = CurrentMaxMovement() / 2;
             Slimed = false;
         }
+        else if (TurnsSlacking >= 1) 
+        {
+            Movement = 0;
+            TurnsSlacking--;
+        }
         else
             Movement = CurrentMaxMovement();
+
+        if ((Unit.HasTrait(Traits.Slacker) || Unit.HasTrait(Traits.Juggernaut)) && Movement > 0)
+        {
+            TurnsSlacking++;
+            if (Unit.HasTrait(Traits.Slacker) && Unit.HasTrait(Traits.Juggernaut))
+            {
+                TurnsSlacking++;
+            }
+        }
+
+        if (Movement > Config.TacticalMovementHardCap && Config.TacticalMovementHardCap > 0)
+        {
+            Movement = Config.TacticalMovementHardCap;
+        }
+        if (Movement > Config.TacticalMovementSoftCap && Config.TacticalMovementSoftCap >= 0)
+        {
+            int excess = Movement - Config.TacticalMovementSoftCap;
+            int required = 2;
+            Movement = Config.TacticalMovementSoftCap;
+            while (excess >= required) 
+            {
+                Movement++;
+                required *= 2;
+            }
+        }
     }
 
 
@@ -285,6 +319,8 @@ public class Actor_Unit
         }
         total = (int)(total * Unit.TraitBoosts.SpeedMultiplier);
         if (Unit.HasTrait(Traits.AllOutFirstStrike) && HasAttackedThisCombat)
+            total /= 2;
+        if (Unit.HasTrait(Traits.SlowStart) && State.GameManager.TacticalMode.currentTurn <= 5)
             total /= 2;
         if (total < Unit.TraitBoosts.MinSpeed)
             total = Unit.TraitBoosts.MinSpeed;
@@ -417,7 +453,7 @@ public class Actor_Unit
 
     public void GenerateSpritePrefab(Transform folder)
     {
-        UnitSprite = Object.Instantiate(State.GameManager.UnitBase, new Vector3(Position.x, Position.y), new Quaternion(), folder).GetComponent<UnitSprite>();
+        UnitSprite = UnityEngine.Object.Instantiate(State.GameManager.UnitBase, new Vector3(Position.x, Position.y), new Quaternion(), folder).GetComponent<UnitSprite>();
         UnitSprite.UpdateHealthBar(this);
     }
 
@@ -934,7 +970,52 @@ public class Actor_Unit
         float oddsReductionFactor = (3 * adjustment) + defenderBonusShift; //Lower factor is increased odds
         float odds = minimumOdds + (maximumBoost / (1 + Mathf.Pow(2, oddsReductionFactor)));
 
+        if (attacker.Unit.HasTrait(Traits.Farsighted))
+        {
+            if (range <= 5)
+            {
+                // Math wouldn't work here, no clue why.
+                switch (range)
+                {
+                    case 5:
+                        odds *= 0.8f;
+                        break;
+                    case 4:
+                        odds *= 0.6f;
+                        break;
+                    case 3:
+                        odds *= 0.4f;
+                        break;
+                    case 2:
+                        odds *= 0.2f;
+                        break;
+                    default:
+                        break;
+                }
+            };
+        }
+
         odds *= Unit.TraitBoosts.FlatHitReduction;
+
+        if (Config.SizeAccuracyMod > 0 && Config.SizeAccuracyInterval > 0)
+        {
+            float sizeDiff = Math.Abs(BodySize() - attacker.BodySize());
+            if (sizeDiff > Config.SizeAccuracyLowerBound)
+            {
+                float oddMod = ((sizeDiff - Config.SizeAccuracyLowerBound) / Config.SizeAccuracyInterval) * Config.SizeAccuracyMod;
+                float oddMult = 1f;
+                // If we are larger than the attacker, increase accuracy of attack. Otherwise, reduce it
+                if (BodySize() > attacker.BodySize())
+                {
+                    oddMult += oddMod;
+                }
+                else
+                {
+                    oddMult -= oddMod;
+                }
+                odds *= oddMult;
+            }
+        }
 
         if (Config.BoostedAccuracy)
             odds = 100 - ((100 - odds) * .5f);
@@ -1015,6 +1096,9 @@ public class Actor_Unit
             {
                 damageScalar *= 1.15f;
             }
+            if (target.Unit.GetStatusEffect(StatusEffectType.Errosion) != null)
+                damageScalar += damageScalar * (target.Unit.GetStatusEffect(StatusEffectType.Errosion).Strength / 5);
+
             if (Unit.GetStatusEffect(StatusEffectType.Valor) != null)
             {
                 damageScalar *= 1.25f;
@@ -1083,10 +1167,47 @@ public class Actor_Unit
             }
         }
 
+        if (Unit.HasTrait(Traits.Duelist))
+        {
+            damage *= 2;
+
+            int adj = TacticalUtilities.UnitsWithinTiles(Position, 1).Where(u => u.Unit.IsEnemyOfSide(Unit.Side)).Count();
+            damage /= adj != 0 ? adj : 1;
+        }
+
+        if (Unit.HasTrait(Traits.Fervor))
+        {
+            damage = (int)Math.Ceiling(damage * .25f);
+
+            int adj = TacticalUtilities.UnitsWithinTiles(Position, 1).Where(u => u.Unit.IsEnemyOfSide(Unit.Side)).Count();
+            damage *= adj != 0 ? adj : 1;
+        }
+
         if (TacticalUtilities.SneakAttackCheck(Unit, target.Unit)) // sneakAttack
         {
             damage *= 3;
         }
+
+        if (Config.SizeDamageMod > 0 && Config.SizeDamageInterval > 0)
+        {
+            float sizeDiff = Math.Abs(BodySize() - target.BodySize());
+            if (sizeDiff > Config.SizeDamageLowerBound)
+            {
+                float damMod = ((sizeDiff - Config.SizeDamageLowerBound) / Config.SizeDamageInterval) * Config.SizeDamageMod;
+                float damMult = 1f;
+                // If we are larger than the attacker, increase damage of attack. Otherwise, reduce it
+                if (BodySize() > target.BodySize())
+                {
+                    damMult += damMod;
+                }
+                else
+                {
+                    damMult -= damMod;
+                }
+                damage = (int)Math.Round(damage * damMult);
+            }
+        }
+
         if (damage < 1)
             damage = 1;
         return damage;
@@ -1229,7 +1350,7 @@ public class Actor_Unit
         {
             if (State.GameManager.TacticalMode.TacticalSoundBlocked() == false)
             {
-                var obj = Object.Instantiate(State.GameManager.TacticalEffectPrefabList.ShunGokuSatsu);
+                var obj = UnityEngine.Object.Instantiate(State.GameManager.TacticalEffectPrefabList.ShunGokuSatsu);
                 obj.transform.SetPositionAndRotation(new Vector3(target.Position.x, target.Position.y), new Quaternion());
                 MiscUtilities.DelayedInvoke(() => State.GameManager.SoundManager.PlayArrowHit(null), .06f);
                 MiscUtilities.DelayedInvoke(() => State.GameManager.SoundManager.PlayMeleeHit(null), .12f);
@@ -1292,6 +1413,7 @@ public class Actor_Unit
         TestAttack(tempTarget);
         tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2(0, -1));
         TestAttack(tempTarget);
+        Attack(target, false, damageMultiplier: .66f);
 
         Movement = 0;
 
@@ -1307,6 +1429,98 @@ public class Actor_Unit
         }
     }
 
+    public bool SweepAttack(bool attack_ver)
+    {
+        if (Movement < 1 || Unit.HasTrait(Traits.Legendary) == false)
+            return false;
+        if (!Unit.SpendMana(40))
+        {
+            return false;
+        }
+        List<Actor_Unit> targets = TacticalUtilities.UnitsWithinPattern(Position, new int[3, 3] { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } });
+        List<AbilityTargets> targetTypes = new List<AbilityTargets>();
+        targetTypes.Add(AbilityTargets.Enemy);
+
+        foreach (var target in targets)
+        {
+            if (!TacticalUtilities.MeetsQualifier(targetTypes, this, target))
+                return false;
+            if (attack_ver)
+                TestAttack(target);
+            else
+                TestSwallow(target);
+        }
+
+        Movement = 0;
+
+        return true;
+
+        void TestAttack(Actor_Unit sideTarget)
+        {
+            if (sideTarget != null && sideTarget.Position.GetNumberOfMovesDistance(Position) == 1)
+            {
+                Movement = 1;
+                Attack(sideTarget, false, damageMultiplier: .66f);
+            }
+        }
+        void TestSwallow(Actor_Unit sideTarget)
+        {
+            if (sideTarget != null && sideTarget.Position.GetNumberOfMovesDistance(Position) == 1)
+            {
+                Movement = 1;
+                PredatorComponent.Devour(sideTarget);
+
+            }
+        }
+    }
+
+    public bool AllInVore(Actor_Unit target, SpecialAction voreType = SpecialAction.None, bool AIAutoPick = false)
+    {
+        if (Movement < 1 || Unit.HasTrait(Traits.AllIn) == false)
+            return false;
+        if (TacticalUtilities.AppropriateVoreTarget(this, target) == false)
+            return false;
+        if (PredatorComponent.FreeCap() < target.Bulk())
+            return false;
+
+        bool succeded_attempt;
+        IsAllIn = true;
+        if (AIAutoPick)
+        {
+            succeded_attempt = PredatorComponent.UsePreferredVore(target);
+        }
+        else
+        {
+            switch (voreType)
+            {
+                case SpecialAction.BreastVore:
+                    succeded_attempt = PredatorComponent.BreastVore(target);
+                    break;
+                case SpecialAction.CockVore:
+                    succeded_attempt = PredatorComponent.CockVore(target);
+                    break;
+                case SpecialAction.Unbirth:
+                    succeded_attempt = PredatorComponent.Unbirth(target);
+                    break;
+                case SpecialAction.TailVore:
+                    succeded_attempt = PredatorComponent.TailVore(target);
+                    break;
+                case SpecialAction.AnalVore:
+                    succeded_attempt = PredatorComponent.AnalVore(target);
+                    break;
+                default:
+                    succeded_attempt = PredatorComponent.Devour(target);
+                    break;
+            }
+        }
+        IsAllIn = false;
+        if (!succeded_attempt && target.Unit.Predator)
+        {
+            return !target.PredatorComponent.UsePreferredVore(this);
+        }
+        return true;
+    }
+
     public bool Attack(Actor_Unit target, bool ranged, bool forceBite = false, float damageMultiplier = 1, bool canKill = true)
     {
         Weapon weapon;
@@ -1320,6 +1534,8 @@ public class Actor_Unit
         {
             return false;
         }
+        //check range
+        int targetRange = target.Position.GetNumberOfMovesDistance(Position);
 
         if (target.Unit.HasTrait(Traits.Dazzle))
         {
@@ -1333,6 +1549,22 @@ public class Actor_Unit
                 return false;
             }
         }
+
+        if (Unit.HasTrait(Traits.HaplessPrey) && target.Unit.Predator && targetRange < 2)
+        {
+            float haplessChance = .10f;
+            int levelDiff = target.Unit.Level - Unit.Level;
+            if (levelDiff < 0)
+                levelDiff = 0;
+            haplessChance += levelDiff / 20;
+            if (haplessChance >= State.Rand.NextDouble())
+            {
+                Movement = 0;
+                TacticalUtilities.ForceFeed(this, target, false);
+                return false;
+            }
+        }
+
         float origDamageMult = damageMultiplier;
         bool grazebool = false;
         bool critbool = false;
@@ -1373,8 +1605,6 @@ public class Actor_Unit
                 grazebool = false;
             }
         }
-        //check range
-        int targetRange = target.Position.GetNumberOfMovesDistance(Position);
         if (weapon.Range > 1)
         {
             if ((targetRange >= 2 || (targetRange >= 1 && weapon.Omni)) && targetRange <= weapon.Range)
@@ -1383,6 +1613,13 @@ public class Actor_Unit
                     TacticalGraphicalEffects.SuccubusSwordEffect(target.Position);
                 animationUpdateTime = 1.0F;
                 Mode = DisplayMode.Attacking;
+
+                if (Unit.HasTrait(Traits.AwfulAim))
+                {
+                    var possibleTargets = TacticalUtilities.UnitsWithinTiles(target.Position, 2);
+                    target = possibleTargets[State.Rand.Next(0,possibleTargets.Count()-1)];
+                }
+
                 if (Unit.TraitBoosts.RangedAttacks > 1)
                 {
                     int movementFraction = 1 + MaxMovement() / Unit.TraitBoosts.RangedAttacks;
@@ -1472,6 +1709,8 @@ public class Actor_Unit
                     {
                         trait.ApplyStatusEffect(this, target, false, damage);
                     }
+                    if (target.Unit.HasTrait(Traits.PoorConstitution) && State.Rand.Next(10) == 0)
+                        target.Unit.ApplyStatusEffect(StatusEffectType.Sleeping, 1, 2);
                     if (Unit.HasTrait(Traits.WeaponChanneler) && Unit.Mana >= 6)
                         Unit.SpendMana(6);
                     if (Unit.HasTrait(Traits.BladeDance))
@@ -1558,6 +1797,17 @@ public class Actor_Unit
         Unit.EnemiesKilledThisBattle++;
         target.Unit.KilledBy = Unit;
         target.Unit.Kill();
+        foreach (var item in target.Unit.AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnDeath || t.trigger == TraitConditionTrigger.All).ToList())
+        {
+            if (ConditionalTraitConditionChecker.TacticalTraitConditionActive(target, item))
+            {
+                target.Unit.ActivateConditionalTrait(item.id);
+            }
+            else
+            {
+                target.Unit.DeactivateConditionalTrait(item.id);
+            }
+        }
         if (Unit.HasTrait(Traits.KillerKnowledge) && Unit.KilledUnits % 4 == 0)
             Unit.GeneralStatIncrease(1);
         if (Unit.HasTrait(Traits.TasteForBlood))
@@ -1591,6 +1841,17 @@ public class Actor_Unit
         Unit.EnemiesKilledThisBattle++;
         target.Unit.KilledBy = Unit;
         target.Unit.Kill();
+        foreach (var item in target.Unit.AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnDeath || t.trigger == TraitConditionTrigger.All).ToList())
+        {
+            if (ConditionalTraitConditionChecker.TacticalTraitConditionActive(target, item))
+            {
+                target.Unit.ActivateConditionalTrait(item.id);
+            }
+            else
+            {
+                target.Unit.DeactivateConditionalTrait(item.id);
+            }
+        }
         if (Unit.HasTrait(Traits.KillerKnowledge) && Unit.KilledUnits % 4 == 0)
             Unit.GeneralStatIncrease(1);
         if (Unit.HasTrait(Traits.TasteForBlood))
@@ -1831,7 +2092,7 @@ public class Actor_Unit
         {
             return 0;
         }
-        if (Surrendered || (attacker.Unit.HasTrait(Traits.Endosoma) && (Unit.FixedSide == attacker.Unit.GetApparentSide(Unit)) || Unit.GetStatusEffect(StatusEffectType.Hypnotized)?.Strength == attacker.Unit.FixedSide))
+        if (Surrendered || ((attacker.Unit.HasTrait(Traits.FriendlyStomach) || attacker.Unit.HasTrait(Traits.Endosoma)) && (Unit.FixedSide == attacker.Unit.GetApparentSide(Unit)) || Unit.GetStatusEffect(StatusEffectType.Hypnotized)?.Strength == attacker.Unit.FixedSide))
             return 1f;
 
         float predVoracity = Mathf.Pow(15 + skillBoost + attacker.Unit.GetStat(Stat.Voracity), 1.5f);
@@ -1947,7 +2208,7 @@ public class Actor_Unit
             return false;
         target.RubCount++;
         target.BeingRubbed = true;
-        int index = Random.Range(0, possible.Count - 1);
+        int index = UnityEngine.Random.Range(0, possible.Count - 1);
         type = possible[index];
         switch (type)
         {
@@ -1984,6 +2245,11 @@ public class Actor_Unit
         target.DigestCheck();
         if (Unit.HasTrait(Traits.PleasurableTouch))
             target.DigestCheck();
+        if (Unit.HasTrait(Traits.RoughMassage))
+        {
+            target.DigestCheck();
+            target.Unit.AddWeakness();
+        }
         target.BeingRubbed = false;
         int thirdMovement = MaxMovement() / 3;
         if (Movement > thirdMovement)
@@ -2239,27 +2505,10 @@ public class Actor_Unit
 
     public void NewTurn()
     {
-        if (Surrendered && Unit.HasTrait(Traits.Fearless))
-        {
-            Surrendered = false;
-        }
-        else if (SurrenderedThisTurn)
-        {
-            SurrenderedThisTurn = false;
-            Movement = 0;
-        }
-
         AIAvoidEat--;
-        if (Unit.HasTrait(Traits.ManaAttuned))
-        {
-            if (!Unit.SpendMana(Unit.MaxMana / 10))
-                if (Unit.Mana > 0)
-                    Unit.SpendMana(Unit.Mana); //Zero out mana
-                else
-                    Unit.ApplyStatusEffect(StatusEffectType.Sleeping, 1, 2);
-            if (Unit.GetStatusEffect(StatusEffectType.Sleeping) != null)
-                Unit.RestoreMana(Unit.MaxMana / 2);
-        }
+
+        NewTurnPreMPTraits();
+
         Unit.RestoreMana(Unit.TraitBoosts.ManaRegen);
         UnitSprite.UpdateHealthBar(this);
         TurnsSinceLastParalysis++;
@@ -2267,14 +2516,7 @@ public class Actor_Unit
             RestoreMP();
         Unit.TickStatusEffects();
         Unit.Heal(Unit.TraitBoosts.HealthRegen);
-        if (Unit.HasTrait(Traits.Perseverance) && TurnsSinceLastDamage > 3)
-        {
-            Unit.HealPercentage(0.03f * TurnsSinceLastDamage);
-        }
-        if (Unit.HasTrait(Traits.Timid) && ((Unit.NearbyEnemies - 1) > Unit.NearbyFriendlies))
-        {
-            Unit.ApplyStatusEffect(StatusEffectType.Shaken, .2f, 1);
-        }
+
         if ((Config.AbsorbLoss ? PredatorComponent?.AlivePrey <= 0 : PredatorComponent.Fullness <= 0))
         {
             RampStacks -= Config.DigestionRampLoss;
@@ -2287,8 +2529,121 @@ public class Actor_Unit
         else
             RampStacks += (Config.DigestionRampLoss >= 0 ? 1 : -1) / Config.DigestionRampTurn;
 
+        NewTurnPostMPTraits();
+        
         RubCount = 0;
         TurnsSinceLastDamage++;
+        if (Unit.GetStatusEffect(StatusEffectType.Agony) != null)
+        {
+            StatusEffect eff = Unit.GetStatusEffect(StatusEffectType.Agony);
+            int totalDamage = (int)Math.Round(eff.Strength / eff.Duration);
+            Damage(totalDamage, true, true);
+            eff.Strength -= totalDamage;
+        }
+    }
+
+    //Traits that should be applied before MP is refreshed.
+    public void NewTurnPreMPTraits()
+    {
+        if (Surrendered && Unit.HasTrait(Traits.Fearless))
+        {
+            Surrendered = false;
+        }
+        else if (SurrenderedThisTurn)
+        {
+            SurrenderedThisTurn = false;
+            Movement = 0;
+        }
+
+        if (Unit.HasTrait(Traits.ManaAttuned))
+        {
+            if (!Unit.SpendMana(Unit.MaxMana / 10))
+                if (Unit.Mana > 0)
+                    Unit.SpendMana(Unit.Mana); //Zero out mana
+                else
+                    Unit.ApplyStatusEffect(StatusEffectType.Sleeping, 1, 2);
+            if (Unit.GetStatusEffect(StatusEffectType.Sleeping) != null)
+                Unit.RestoreMana(Unit.MaxMana / 2);
+        }
+
+        if (Unit.HasTrait(Traits.SiphoningAura))
+        {
+            var targets = TacticalUtilities.UnitsWithinTiles(Position, 1).Where(u => this != u && !u.Unit.IsEnemyOfSide(Unit.Side)).ToList();
+            if (targets.Any())
+            {
+                foreach (var target in targets)
+                {
+                    target.Unit.AddWeakness();
+                }
+                Unit.AddBolster(targets.Count);
+            }
+        }
+
+        if (Unit.HasTrait(Traits.CurseOfImmolation) && Surrendered == false)
+        {
+            if (SelfPrey == null)
+            {
+                var targets = TacticalUtilities.UnitsWithinTiles(Position, 1).ToList();
+                if (targets.Any())
+                {
+                    foreach (var target in targets)
+                    {
+                        target.Damage(Unit.Level, true, false, DamageTypes.Fire);
+                    }
+                }
+            }
+            else
+            {
+                Damage(Unit.Level, true, false, DamageTypes.Fire);
+                SelfPrey.Predator.Damage(Unit.Level, true, false, DamageTypes.Fire);
+            }
+        }
+
+        if (Unit.HasTrait(Traits.CurseOfEquivalency))
+        {
+            Unit.SpecificStatIncrease(-1, Unit.GetHighestStatIndex());
+            Unit.SpecificStatIncrease(1, Unit.GetLowestStatIndex());
+        }
+
+        if (Unit.HasTrait(Traits.Perseverance) && TurnsSinceLastDamage > 3)
+        {
+            Unit.HealPercentage(0.03f * TurnsSinceLastDamage);
+        }
+
+        if (Unit.HasTrait(Traits.Timid) && ((Unit.NearbyEnemies - 1) > Unit.NearbyFriendlies))
+        {
+            Unit.ApplyStatusEffect(StatusEffectType.Shaken, .2f, 2);
+        }
+
+        if (Unit.HasTrait(Traits.FoodComaProne))
+        {
+            if (PredatorComponent != null && Unit.GetStatusEffect(StatusEffectType.Sleeping) == null)
+            {
+                if (PredatorComponent.UsageFraction >= State.Rand.NextDouble())
+                {
+                    Unit.ApplyStatusEffect(StatusEffectType.Sleeping, 1, 2);
+                }
+            }
+        }
+
+
+    }
+
+    //Traits that should be applied after MP is refreshed.
+    public void NewTurnPostMPTraits()
+    {
+        if (Unit.HasTrait(Traits.IntrusiveAppetite))
+        {
+            if (Movement > 0 && SelfPrey == null && State.Rand.Next(10) == 0)
+            {
+                var targets = TacticalUtilities.UnitsWithinTiles(Position, 1).Where(u => this != u).ToList();
+                if (targets.Any())
+                {
+                    var target = targets[State.Rand.Next(0, targets.Count())];
+                    PredatorComponent.UsePreferredVore(target);
+                }
+            }
+        }
     }
 
     public void SubtractHealth(int damage)
@@ -2331,6 +2686,7 @@ public class Actor_Unit
         return damage;
     }
 
+
     public bool Damage(int damage, bool spellDamage = false, bool canKill = true, DamageTypes damageType = DamageTypes.Generic)
     {
         if (Unit.IsDead)
@@ -2344,7 +2700,13 @@ public class Actor_Unit
         }        
         int modifiedDamage = CalculateDamageWithResistance(damage, damageType);
         UnitSprite.DisplayDamage(modifiedDamage, spellDamage);
+        modifiedDamage = Unit.DamageBarrier(modifiedDamage);
         SubtractHealth(modifiedDamage);
+        if (Unit.GetStatusEffect(StatusEffectType.Agony) != null)
+        {
+            StatusEffect eff = Unit.GetStatusEffect(StatusEffectType.Agony);
+            eff.Strength += modifiedDamage * 0.35f;
+        }
         if ((State.Rand.NextDouble() > Unit.HealthPct))
         {
             if (Unit.HasTrait(Traits.Cowardly))
@@ -2369,6 +2731,29 @@ public class Actor_Unit
             {
                 GoneBerserk = true;
                 Unit.ApplyStatusEffect(StatusEffectType.Berserk, 1, 3);
+            }
+        }
+        if (Unit.HasTrait(Traits.CurseOfPhasing))
+        {
+            if (true)
+            {
+                var teleport_tiles = TacticalUtilities.TilesWithinRange(Position, 3).Where(t => TacticalUtilities.IsWalkable(t.x, t.y, this)).ToList();
+                var target_tile = teleport_tiles[State.Rand.Next(0, teleport_tiles.Count())];
+                var unit_check = TacticalUtilities.UnitOnTile(target_tile);
+                if (unit_check == null)
+                {
+                    SetPos(target_tile);
+                    State.GameManager.TacticalMode.Translator.SetTranslator(UnitSprite.transform, Position, target_tile, 0, State.GameManager.TacticalMode.IsPlayerTurn);
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{Unit.Name} disappears, only to reappear somwhere else.");
+                }
+                else
+                {
+                    if (unit_check.Unit.Predator)
+                    {
+                        unit_check.PredatorComponent.ForceConsumeAuto(this);
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{Unit.Name} disappears. {unit_check.Unit.Name} is surprised as {Unit.Name} ends up inside of them.");
+                    }
+                }
             }
         }
         if ((canKill == false && Unit.IsDead) || (Config.AutoSurrender && Unit.IsDead && State.Rand.NextDouble() < Config.AutoSurrenderChance && Surrendered == false && Unit.HasTrait(Traits.Fearless) == false && !KilledByDigestion && Unit.GetStatusEffect(StatusEffectType.Respawns) == null))
@@ -2828,7 +3213,7 @@ public class Actor_Unit
                 if (outcome == 3)
                 {
                     State.GameManager.SoundManager.PlayMisc("unbound", this);
-                    var obj = Object.Instantiate(State.GameManager.TacticalEffectPrefabList.ShunGokuSatsu);
+                    var obj = UnityEngine.Object.Instantiate(State.GameManager.TacticalEffectPrefabList.ShunGokuSatsu);
                     obj.transform.SetPositionAndRotation(new Vector3(t.Position.x, t.Position.y), new Quaternion());
                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Suddenly, there is a flash of light and both casters stagger for a moment. What happened?.");
                     t.Unit.Type = UnitType.Adventurer;
@@ -2878,7 +3263,7 @@ public class Actor_Unit
                 else if (outcome == 0)
                 {
                     State.GameManager.SoundManager.PlayMisc("unbound", this);
-                    var obj = Object.Instantiate(State.GameManager.TacticalEffectPrefabList.ShunGokuSatsu);
+                    var obj = UnityEngine.Object.Instantiate(State.GameManager.TacticalEffectPrefabList.ShunGokuSatsu);
                     obj.transform.SetPositionAndRotation(new Vector3(t.Position.x, t.Position.y), new Quaternion());
                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Suddenly, there is a flash of light and both casters stagger for a moment. What happened?.");
                     t.Unit.Type = UnitType.Adventurer;
@@ -3111,6 +3496,7 @@ public class Actor_Unit
             AnimationController = new AnimationController();
             Unit.ReloadTraits();
             Unit.InitializeTraits();
+            Unit.Health = (int)Math.Round(Math.Min(Unit.MaxHealth, Math.Max(Unit.MaxHealth * Unit.HealthPct, 1)));
         }, 0.4f);
         
     }

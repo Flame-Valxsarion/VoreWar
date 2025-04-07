@@ -66,6 +66,12 @@ public class Army
 
     [OdinSerialize]
     internal int MonsterTurnsRemaining;
+    [OdinSerialize]
+    internal Teleporter LinkedTeleporter = null;
+    [OdinSerialize]
+    internal int teleportStoneCoolDown = 0;
+    [OdinSerialize]
+    internal int teleportCoolDown = 0;
 
     public bool DevourThisTurn { get; private set; } = false;
 
@@ -91,7 +97,16 @@ public class Army
     public float HealRate;
 
     [OdinSerialize]
+    public float UsedSize;
+    public float RemainnigSize => MaxSize - UsedSize;
+    public float PercentFull => UsedSize / MaxSize;
+    public bool MostlyFull => RemainnigSize - Empire.GetAvgDeployCost() <= 0; //Checks if army can fit any more units on average
+
+    [OdinSerialize]
     private ItemStock itemStock;
+
+    [OdinSerialize]
+    public bool IsMonsterArmy = false;
 
     internal ItemStock ItemStock
     {
@@ -131,6 +146,7 @@ public class Army
         Position = p;
         Units = new List<Unit>();
         JustCreated = true;
+        UsedSize = 0;
 
         NameArmy(empire);
         if (empire.Side < 32)
@@ -191,34 +207,73 @@ public class Army
         GetTileHealRate();
         ProcessInVillageOnTurn();
         SCooldown = 0;
+        teleportStoneCoolDown = teleportStoneCoolDown >= 0 ? teleportStoneCoolDown - 1 : 0;
+        teleportCoolDown = teleportCoolDown >= 0 ? teleportCoolDown - 1 : 0;
     }
 
     public int GetMaxMovement()
     {
+        int movement = 0;
         if (Units.Count <= Config.ScoutMax)
         {
             SCooldownOffset = ((Config.ArmyMP + Config.ScoutMP) + (int)(Config.ArmyMP * MPMod) - (int)SCooldown);
             MPMod = Mathf.MoveTowards(MPMod, 0, MPCurve);
             if (-1f > MPMod)
-                return 0;
+                movement = 0;
             else if (Config.ArmyMP < (int)SCooldown)
             {
                 if ((int)SCooldownOffset > 0f)
-                    return ((int)SCooldownOffset);
+                    movement = ((int)SCooldownOffset);
                 else
-                    return 1;
+                    movement = 1;
             }
-            return (Config.ArmyMP + Config.ScoutMP) + (int)(Config.ArmyMP * MPMod);
+            movement = (Config.ArmyMP + Config.ScoutMP) + (int)(Config.ArmyMP * MPMod);
         }
         else
         {
             MPMod = Mathf.MoveTowards(MPMod, 0, MPCurve);
            if (-1f > MPMod)
-                return 0;
+                movement = 0;
            if (SCooldown > (Config.ArmyMP + (int)(Config.ArmyMP * MPMod)))
-                return 1;
-            return Config.ArmyMP + (int)(Config.ArmyMP * MPMod) - (int)SCooldown;
+                movement = 1;
+            movement = Config.ArmyMP + (int)(Config.ArmyMP * MPMod) - (int)SCooldown;
         }
+        var temporalTowers = StrategicUtilities.GetActiveEmpireBuildingsWithinXTiles(Position, empire, Config.BuildConfig.BuildingPassiveRange).Where(b => b is TemporalTower);
+        if (temporalTowers != null)
+        {
+            foreach (var building in temporalTowers)
+            {
+                TemporalTower tower = building as TemporalTower;
+                if (Empire.IsEnemy(tower.Owner))
+                {
+                    if (IsMonsterArmy)
+                    {
+                        if (tower.disruptUpgrade.built)
+                        {
+                            movement = 1;
+                            break;
+                        }
+                        else 
+                        {
+                            movement -= 1;
+                        }
+                    }
+                    else if (tower.tuneUpgrade.built)
+                    {
+                        movement -= 1;
+
+                    }
+                }
+                else if (tower.improveUpgrade.built)
+                {
+                    movement += 1;
+                }
+            }
+        }
+        if (movement < 0)
+            { movement = 0; }
+
+        return movement + (int)Math.Floor(AcademyResearch.GetValueFromEmpire(empire, AcademyResearchType.ArmyMP));
     }
 
     public void RefreshMovementMode()
@@ -634,6 +689,7 @@ public class Army
         {
             HealRate = State.World.Villages[InVillageIndex].Healrate();
         }
+        HealRate *= 1 + 0.25f * AcademyResearch.GetValueFromEmpire(Empire, AcademyResearchType.ArmyHealRate);
     }
 
     internal void ProcessInVillageOnTurn()
@@ -714,6 +770,7 @@ public class Army
     internal void Train(int level)
     {
         int xpGain = TrainingGetExpValue(level);
+        xpGain += (int)Math.Round(xpGain * 0.25f * AcademyResearch.GetValueFromEmpire(empire, AcademyResearchType.TrainingEXP));
         int cost = TrainingGetCost(level);
 
         if (empire.Gold >= cost)
@@ -803,5 +860,25 @@ public class Army
             }
         }
 
+    }
+
+    internal void RecalculateSizeValue()
+    {
+        UsedSize = 0;
+        foreach (Unit unit in Units)
+        {
+            UsedSize += State.RaceSettings.GetDeployCost(unit.Race) * unit.TraitBoosts.DeployCostMult;
+        }
+    }
+
+    internal float GetAverageArmyDeployment()
+    {
+        float avgDeploy = 0;
+        foreach (Unit unit in Units)
+        {
+            avgDeploy += State.RaceSettings.GetDeployCost(unit.Race) * unit.TraitBoosts.DeployCostMult;
+        }
+        avgDeploy /= Units.Count;
+        return avgDeploy;
     }
 }

@@ -36,6 +36,8 @@ public class AdvancedUnitCommands : MonoBehaviour
                     SetButton("Crop Vore", action.OnClicked, action.ButtonColor);
                 else if (action.Name == "Breast Vore" && actor.Unit.Race == Race.Kangaroos)
                     SetButton("Pouch Vore", action.OnClicked, action.ButtonColor);
+                else if (action.ManaCost > 0)
+                    SetButton(action.Name, action.OnClicked, action.ButtonColor, false, actor, action.ManaCost);
                 else
                     SetButton(action.Name, action.OnClicked, action.ButtonColor);
             }
@@ -63,7 +65,7 @@ public class AdvancedUnitCommands : MonoBehaviour
 
     }
 
-    internal Button SetButton(string text, Action action, Color color, bool marksSelected = true)
+    internal Button SetButton(string text, Action action, Color color, bool marksSelected = true, Actor_Unit actor = null, int manaCost = 0)
     {
         Button button;
         if (Buttons[index] == null)
@@ -98,7 +100,20 @@ public class AdvancedUnitCommands : MonoBehaviour
         }
 
         button.gameObject.SetActive(true);
-        button.interactable = true;
+
+        if (actor != null)
+        {
+            bool has_mana = actor.Unit.Mana >= manaCost;
+            button.interactable = has_mana;
+            if (!has_mana)
+            {
+                button.GetComponentInChildren<Text>().text = text + "\n(no mana)";
+            }
+        }
+        else
+        {
+            button.interactable = true;
+        }
         index++;
         return button;
     }

@@ -11,4 +11,6 @@ public class StatusBarPanel : MonoBehaviour
     public Button RecreateWorld;
     public Button ShowTurnReport;
     public Button EmpireStatus;
+    public Button Build;
+
 }

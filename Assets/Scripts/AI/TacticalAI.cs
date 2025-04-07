@@ -742,7 +742,7 @@ public abstract class TacticalAI : ITacticalAI
                     if (distance <= movement || anyDistance)
                     {
                         float chance = unit.GetDevourChance(actor, true);
-                        if ((chance > .5f || (actor.Unit.HasTrait(Traits.Biter) && chance > .25f && actor.Unit.GetBestMelee().Damage > 2)) && unit.AIAvoidEat <= 0)
+                        if (((chance > .5f || (actor.Unit.HasTrait(Traits.Biter) && chance > .25f && actor.Unit.GetBestMelee().Damage > 2)) || actor.Unit.HasTrait(Traits.VoreObsession)) && unit.AIAvoidEat <= 0)
                         {
                             if (distance > 1 && TacticalUtilities.FreeSpaceAroundTarget(unit.Position, actor) == false)
                                 continue;

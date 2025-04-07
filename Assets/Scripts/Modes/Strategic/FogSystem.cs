@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -45,14 +46,14 @@ class FogSystem
         {
             if ((village.Empire.IsAlly(playerEmpire) || (State.World.IsNight && Config.DayNightCosmetic && !Config.FogOfWar)) && village.GetTotalPop() > 0)
             {
-                ClearWithinXTilesOf(village.Position);
+                ClearWithinXTilesOf(village.Position, village.Empire);
             }
         }
         foreach (Army army in armies)
         {
             if (army.Empire.IsAlly(playerEmpire) || (State.World.IsNight && Config.DayNightCosmetic && !Config.FogOfWar))
             {
-                ClearWithinXTilesOf(army.Position);
+                ClearWithinXTilesOf(army.Position, army.Empire);
             }
         }
 
@@ -114,9 +115,9 @@ class FogSystem
 
     }
 
-    void ClearWithinXTilesOf(Vec2i pos)
+    void ClearWithinXTilesOf(Vec2i pos, Empire empire)
     {
-        int dist = Config.FogDistance - ((State.World.IsNight && Config.FogOfWar) ? Config.NightStrategicSightReduction : 0);
+        int dist = Config.FogDistance - ((State.World.IsNight && Config.FogOfWar) ? Config.NightStrategicSightReduction : 0) + (int)Math.Floor(AcademyResearch.GetValueFromEmpire(empire, AcademyResearchType.FOWSightRange));
         for (int x = pos.x - dist; x <= pos.x + dist; x++)
         {
             for (int y = pos.y - dist; y <= pos.y + dist; y++)

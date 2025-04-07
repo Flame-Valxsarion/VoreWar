@@ -9,12 +9,15 @@ class StatusEffect
     internal float Strength;
     [OdinSerialize]
     internal int Duration;
+    [OdinSerialize]
+    internal Unit Applicator;
 
-    public StatusEffect(StatusEffectType type, float strength, int duration)
+    public StatusEffect(StatusEffectType type, float strength, int duration, Unit applicator = null)
     {
         Type = type;
         Strength = strength;
         Duration = duration;
+        Applicator = applicator;
     }
 
 }

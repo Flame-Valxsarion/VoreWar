@@ -559,7 +559,7 @@ It should be fairly stable though.  There are a few places that are still keyed 
             case 216:
                 return "Controls whether winter holiday mode is enabled (changes the decorations for snow, and enables certain races to spawn with holiday related outfits)\nNote that when this expires or is turned off, units will still keep wearing what they were wearing.";
             case 217:
-                return "Controls how much maintenance each unit in an army costs per turn.";
+                return "Controls how much maintenance each unit in an army costs per turn regardless of race. A value below 0 will use individual race settings.";
             case 218:
                 return "Changes which types of feeding are allowed. After a unit digests a unit in their breast(s) or cock, they can use that organ to feed allies in order to heal them.";
             case 219:
@@ -766,6 +766,26 @@ Does not retroactively affect already created units.";
                 return "Controls if when a unit auto-surrenders if they are healed to full health. Can be changed from if only defecting units are healed, only units that remain loyal are healed, or if all auto-surrendered units are healed.";
             case 314:
                 return "Enables explosive fluffles of Boom Bunnies.";
+            case 315:
+                return "Sets the amont of slots in an army this unit takes up.";
+            case 316:
+                return "Sets a soft cap on AP.  Every AP past this value will take double the regen than the last.\n Example: At a value of 4, A unit that would normally start with 10 AP will instead start with 6 AP. The first point of AP past 4 requires 2 AP and the second requires 4 AP, resulting in 6.";
+            case 317:
+                return "Sets a hard cap on AP.  Unit AP will never go above this value.";
+            case 318:
+                return "Modifies the accuracy of a weapon attack based on unit size.\nNote: Small values go a long way. Additionally, units also increase their size when full.\n Example: A value of 0.1 will increase an accuracy of 30% by 10%, resulting in an accuracy of 33%.";
+            case 319:
+                return "Sets the bounds for the difference of body size. If the difference is within these bounds, the accuracy of an attack will not be modified.";
+            case 320:
+                return "Sets the interval the above accuracy modifier will be applied. Only applies to targets outside of the bounds.\n Example: With an interval value of 5, bounds of 10, and modifier of 0.1, a unit of size 10 will have 10% increased accuracy against a unit of size 25, ~15% increased accuracy against a unit of size 27, and 20% increased accuracy against a unit of size 30";
+            case 321:
+                return "Modifies the damage of a weapon attack based on unit size.\nNote: Small values go a long way. Additionally, units also increase their size when full.\n Example: A value of 0.1 will increase a damage of 10 by 10%, resulting in 11 damage.";
+            case 322:
+                return "Sets the bounds for the difference of body size. If the difference is within these bounds, the damage of an attack will not be modified.";
+            case 323:
+                return "Sets the interval the above damage modifier will be applied. Only applies to targets outside of the bounds.\n Example: With an interval value of 5, bounds of 10, and modifier of 0.1, a unit of size 25 will have 10% increased damage against a unit of size 10, ~15% increased accuracy against a unit of size 7, and 20% increased accuracy against a unit of size 5";
+            case 324:
+                return "Sets the upkeep one unit of this race will incur.";
 
             default:
                 return "";

@@ -1,12 +1,15 @@
 using LegacyAI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TacticalDecorations;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Experimental.UIElements;
 using UnityEngine.Networking.Types;
 using UnityEngine.Tilemaps;
+using static UnityEngine.UI.CanvasScaler;
 
 public class TacticalMode : SceneBase
 {
@@ -116,6 +119,7 @@ public class TacticalMode : SceneBase
     public RightClickMenu RightClickMenu;
 
     bool manualSkip = false;
+    bool blockActive = true;
 
     public TacticalStats TacticalStats;
 
@@ -212,6 +216,9 @@ public class TacticalMode : SceneBase
     List<Unit> retreatedDefenders;
 
     List<Actor_Unit> garrison;
+
+    internal List<ConstructibleBuilding> attackerBuildingsInRange;
+    internal List<ConstructibleBuilding> defenderBuildingsInRange;
 
     SpecialAction specialType;
     SpecialAction lastSpecial;
@@ -515,6 +522,7 @@ public class TacticalMode : SceneBase
 
         int summonedUnits = SummonUnits(mapGen, AttackerLeader, DefenderLeader);
         int antSummonedUnits = SummonAnts(mapGen, AttackerLeader, DefenderLeader);
+        int DefCampSummonedUnits = 0;
 
 
         activeSide = armies[0].Side;
@@ -590,6 +598,576 @@ public class TacticalMode : SceneBase
         if (units.Any(actor => State.World.AllActiveEmpires != null && State.World.GetEmpireOfSide(actor.Unit.FixedSide)?.StrategicAI == null))
             skip = false;
 
+        ActivatePreBattleTraits();
+
+        if (!State.GameManager.PureTactical)
+        {
+            foreach (ConstructibleBuilding building in attackerBuildingsInRange)
+            {
+                if (building is BlackMagicTower)
+                {
+                    BlackMagicTower darkMagicTower = building as BlackMagicTower;
+                    int acc = 5;
+                    int durr = 3;
+                    int eff = 1 + (darkMagicTower.afflictUpgrade.built ? darkMagicTower.PactLevel : 0);
+                    switch (darkMagicTower.Affliction)
+                    {
+                        case StatusEffectType.Necrosis:
+                            if (darkMagicTower.PactLevel >= 1)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            if (darkMagicTower.PactLevel >= 2)
+                                durr += Config.BuildConfig.DarkMagicTowerDurationImprovement;
+                            break;
+                        case StatusEffectType.Errosion:
+                            if (darkMagicTower.PactLevel >= 4)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            if (darkMagicTower.PactLevel >= 5)
+                                durr += Config.BuildConfig.DarkMagicTowerDurationImprovement;
+                            break;
+                        case StatusEffectType.Lethargy:
+                            if (darkMagicTower.PactLevel >= 7)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            if (darkMagicTower.PactLevel >= 8)
+                                durr += Config.BuildConfig.DarkMagicTowerDurationImprovement;
+                            break;
+                        case StatusEffectType.Agony:
+                            if (darkMagicTower.PactLevel >= 10)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            eff = 0;
+                            durr *= 2;
+                            break;
+                        default:
+                            break;
+                    }
+                    foreach (Actor_Unit unit in defenders)
+                    {
+                        if (acc > State.Rand.Next(20))
+                        {
+                            unit.Unit.ApplyStatusEffect(darkMagicTower.Affliction, eff, durr);
+                        }
+                    }
+                }
+                if (building is BarrierTower)
+                {
+                    BarrierTower barrierTower = (BarrierTower)building;
+                    if (barrierTower.AvailCores <= 0)
+                    {
+                        continue;
+                    }
+                    if (barrierTower.CoreProtection && !AIAttacker)
+                    {
+                        bool shouldskip = false;
+                        StartCoroutine(WaitForBuildingInput());
+                        var box = Instantiate(State.GameManager.DialogBoxPrefab).GetComponent<DialogBox>();
+                        Action action = delegate ()
+                        {
+                            shouldskip = true;
+                            blockActive = false;
+                        };
+                        box.SetData(action, "No", "Yes", $"Would you like to activate the barrier tower for this battle?\nAvailable Cores: {barrierTower.AvailCores}\nA {barrierTower.CurrentDowntimeValue} turn downtime will be incured if used.", ()=>blockActive = false);
+                        if (shouldskip)
+                        {                      
+                            continue;
+                        }
+                    }
+                    if (!Config.BuildConfig.BarrierTowerIgnoreDowntime)
+                    {
+                        if (barrierTower.DowntimeSlot1 <= 0)
+                        {
+                            barrierTower.DowntimeSlot1 = barrierTower.CurrentDowntimeValue;
+                        }
+                        else if (barrierTower.DowntimeSlot2 <= 0 && barrierTower.improveUpgrade.built)
+                        {
+                            barrierTower.DowntimeSlot2 = barrierTower.CurrentDowntimeValue;
+                        }
+                        else if (barrierTower.DowntimeSlot3 <= 0 && barrierTower.improveUpgrade.built)
+                        {
+                            barrierTower.DowntimeSlot3 = barrierTower.CurrentDowntimeValue;
+                        }
+                    }
+                    foreach (Actor_Unit unit in attackers)
+                    {
+                        unit.Unit.RestoreBarrier(Config.BuildConfig.BarrierTowerBaseBarrierStrength * barrierTower.BarrierMagnitude);
+                        if (barrierTower.healUpgrade.built && barrierTower.MendingMagnitude > 0)
+                        {
+                            unit.Unit.ApplyStatusEffect(StatusEffectType.Mending, barrierTower.MendingMagnitude, 4 + barrierTower.MendingMagnitude);
+                        }
+                        if (barrierTower.buffUpgrade.built && barrierTower.EmpowerMagnitude > 0)
+                        {
+                            unit.Unit.ApplyStatusEffect(StatusEffectType.Empowered, 3f, barrierTower.EmpowerMagnitude);
+                        }
+                    }
+                }
+
+                if (building is CasterTower)
+                {
+                    CasterTower casterTower = (CasterTower)building;
+                    Unit newUnit = new NPC_unit(10, false, 2, armies[0].Side, Race.Fairies, 0, false);
+                    newUnit.Type = UnitType.Summon;
+                    newUnit.Name = $"{casterTower.Owner.Name} Tower Mage";
+                    Actor_Unit unit = new Actor_Unit(new Vec2i(Config.TacticalSizeX / 2, Config.TacticalSizeY - 1), newUnit);
+                    unit.Visible = false;
+                    unit.Targetable = false;
+                    foreach (var spellCasts in casterTower.spellCasts)
+                    {
+                        if (casterTower.ManaCharges <= 0)
+                        {
+                            break;
+                        }                        
+                        int counter = 0;
+                        switch (spellCasts.Key)
+                        {
+                            case SpellTypes.Fireball:
+                                counter = casterTower.spellCasts[spellCasts.Key];
+                                while (counter > 0)
+                                {
+                                    SpellList.Fireball.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                    newUnit.RestoreMana(100); unit.Movement = 1;
+                                    casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBaseChargeCost;
+                                    counter--;
+                                }
+                                break;
+                            case SpellTypes.PowerBolt:
+                                counter = casterTower.spellCasts[spellCasts.Key];
+                                while (counter > 0)
+                                {
+                                    SpellList.PowerBolt.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                    newUnit.RestoreMana(100); unit.Movement = 1;
+                                    casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBaseChargeCost;
+                                    counter--;
+                                }
+                                break;
+                            case SpellTypes.LightningBolt:
+                                counter = casterTower.spellCasts[spellCasts.Key];
+                                while (counter > 0)
+                                {
+                                    SpellList.LightningBolt.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                    newUnit.RestoreMana(100); unit.Movement = 1;
+                                    casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBaseChargeCost;
+                                    counter--;
+                                }
+                                break;
+                            case SpellTypes.Shield:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Shield.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Speed:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Speed.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Valor:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Valor.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Predation:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Predation.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.IceBlast:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.IceBlast.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Pyre:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Pyre.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Flamberge:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Flamberge.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.ForkLightning:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.ForkLightning.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    unit.UnitSprite.GraphicsFolder.gameObject.SetActive(false);
+                    unit.UnitSprite.OtherFolder.gameObject.SetActive(false);
+                }
+            }
+
+            foreach (ConstructibleBuilding building in defenderBuildingsInRange)
+            {
+                if (building is DefenseEncampment)
+                {
+                    DefenseEncampment defenseEncampment = (DefenseEncampment)building;
+                    int summonCount = (int)Math.Ceiling(attackers.Count() * (Config.BuildConfig.DefenseEncampmentArmyPercentage * (defenseEncampment.unitUpgrade.built ? 1.5f : 1)));
+                    while (summonCount > 0 && defenseEncampment.AvailibleDefenders > 0)
+                    {
+                        Empire empire = armies[1].Empire;
+                        float advancedChance = 0.2f * (defenseEncampment.improveUpgrade.built ? 4f : 1);
+                        float unitScale = Config.BuildConfig.DefenseEncampmentUnitScale * (defenseEncampment.levelUpgrade.built ? 1.5f : 1);
+                        Unit newUnit = new NPC_unit((int)Math.Max(Mathf.Floor(empire.Leader.Level * unitScale),1), advancedChance >= State.Rand.NextDouble(), 2, armies[1].Side, empire.Race, 0, empire.CanVore);
+                        newUnit.Type = UnitType.Reinforcement;
+                        Actor_Unit unit = new Actor_Unit(mapGen.RandomActorPosition(tiles, BlockedTile, units, TacticalMapGenerator.SpawnLocation.lower, newUnit.GetBestRanged() == null), newUnit);
+                        if (defenseEncampment.improveUpgrade.built)
+                        {
+                            switch (State.Rand.Next(5))
+                            {
+                                case 0:
+                                    newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Helmet);
+                                    break;
+                                case 1:
+                                    newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.BodyArmor);
+                                    break;
+                                case 2:
+                                    newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Shoes);
+                                    break;
+                                case 3:
+                                    newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Bolas);
+                                    break;
+                                case 4:
+                                    if (newUnit.GetBestRanged().Range > 2)
+                                    {
+                                        newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Gloves);
+                                    }
+                                    else
+                                    {
+                                        newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Gauntlet);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        unit.UpdateBestWeapons();
+                        units.Add(unit);
+                        unit.Unit.CurrentLeader = DefenderLeader;
+                        DefCampSummonedUnits++;
+                        defenseEncampment.AvailibleDefenders--;
+                        summonCount--;
+                    }
+                }
+                if (building is BarrierTower)
+                {
+                    BarrierTower barrierTower = (BarrierTower)building;
+                    if (barrierTower.AvailCores <= 0)
+                    {
+                        continue;
+                    }
+                    if (barrierTower.CoreProtection && !AIDefender)
+                    {
+                        bool shouldskip = false;
+                        StartCoroutine(WaitForBuildingInput());
+                        var box = Instantiate(State.GameManager.DialogBoxPrefab).GetComponent<DialogBox>();
+                        Action action = delegate ()
+                        {
+                            shouldskip = true;
+                            blockActive = false;
+                        };
+                        box.SetData(action, "No", "Yes", $"Would you like to activate the barrier tower for this battle?\nAvailable Cores: {barrierTower.AvailCores}\nA {barrierTower.CurrentDowntimeValue} turn downtime will be incured if used.", () => blockActive = false);
+                        if (shouldskip)
+                        {
+                            continue;
+                        }
+                    }
+                    if (!Config.BuildConfig.BarrierTowerIgnoreDowntime)
+                    {
+                        if (barrierTower.DowntimeSlot1 <= 0)
+                        {
+                            barrierTower.DowntimeSlot1 = barrierTower.CurrentDowntimeValue;
+                        }
+                        else if (barrierTower.DowntimeSlot2 <= 0 && barrierTower.improveUpgrade.built)
+                        {
+                            barrierTower.DowntimeSlot2 = barrierTower.CurrentDowntimeValue;
+                        }
+                        else if (barrierTower.DowntimeSlot3 <= 0 && barrierTower.improveUpgrade.built)
+                        {
+                            barrierTower.DowntimeSlot3 = barrierTower.CurrentDowntimeValue;
+                        }
+                    }
+                    foreach (Actor_Unit unit in defenders)
+                    {
+                        unit.Unit.RestoreBarrier(Config.BuildConfig.BarrierTowerBaseBarrierStrength * barrierTower.BarrierMagnitude);
+                        if (barrierTower.healUpgrade.built && barrierTower.MendingMagnitude > 0)
+                        {
+                            unit.Unit.ApplyStatusEffect(StatusEffectType.Mending, barrierTower.MendingMagnitude, 4 + barrierTower.MendingMagnitude);
+                        }
+                        if (barrierTower.buffUpgrade.built && barrierTower.EmpowerMagnitude > 0)
+                        {
+                            unit.Unit.ApplyStatusEffect(StatusEffectType.Empowered, 3f, barrierTower.EmpowerMagnitude);
+                        }
+                    }
+                }
+                if (building is BlackMagicTower)
+                {
+                    BlackMagicTower darkMagicTower = building as BlackMagicTower;
+                    int acc = 5;
+                    int durr = 3;
+                    int eff = 1 + (darkMagicTower.afflictUpgrade.built ? darkMagicTower.PactLevel : 0);
+                    switch (darkMagicTower.Affliction)
+                    {
+                        case StatusEffectType.Necrosis:
+                            if (darkMagicTower.PactLevel >= 1)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            if (darkMagicTower.PactLevel >= 2)
+                                durr += Config.BuildConfig.DarkMagicTowerDurationImprovement;
+                            break;
+                        case StatusEffectType.Errosion:
+                            if (darkMagicTower.PactLevel >= 4)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            if (darkMagicTower.PactLevel >= 5)
+                                durr += Config.BuildConfig.DarkMagicTowerDurationImprovement;
+                            break;
+                        case StatusEffectType.Lethargy:
+                            if (darkMagicTower.PactLevel >= 7)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            if (darkMagicTower.PactLevel >= 8)
+                                durr += Config.BuildConfig.DarkMagicTowerDurationImprovement;
+                            break;
+                        case StatusEffectType.Agony:
+                            if (darkMagicTower.PactLevel >= 10)
+                                acc = Config.BuildConfig.DarkMagicTowerAccImprovement;
+                            eff = 0;
+                            break;
+                        default:
+                            break;
+                    }
+                    foreach (Actor_Unit unit in attackers)
+                    {
+                        if (acc > State.Rand.Next(20))
+                        {
+                            unit.Unit.ApplyStatusEffect(darkMagicTower.Affliction, eff, durr);
+                        }
+                    }
+                }
+                if (building is CasterTower)
+                {
+                    CasterTower casterTower = (CasterTower)building;
+                    Unit newUnit = new NPC_unit(10, false, 2, armies[1].Side, Race.Fairies, 0, false);
+                    newUnit.Type = UnitType.Summon;
+                    newUnit.Name = $"{casterTower.Owner.Name} Tower Mage";
+                    Actor_Unit unit = new Actor_Unit(new Vec2i(Config.TacticalSizeX / 2, 0), newUnit);
+                    unit.Visible = false;
+                    unit.Targetable = false;
+                    foreach (var spellCasts in casterTower.spellCasts)
+                    {
+                        if (casterTower.ManaCharges <= 0)
+                        {
+                            break;
+                        }
+                        casterTower.ManaCharges--;
+                        int counter = 0;
+                        switch (spellCasts.Key)
+                        {
+                            case SpellTypes.Fireball:
+                                counter = casterTower.spellCasts[spellCasts.Key];
+                                while (counter > 0)
+                                {
+                                    SpellList.Fireball.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                    newUnit.RestoreMana(100); unit.Movement = 1;
+                                    casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBaseChargeCost;
+                                    counter--;
+                                }
+                                break;
+                            case SpellTypes.PowerBolt:
+                                counter = casterTower.spellCasts[spellCasts.Key];
+                                while (counter > 0)
+                                {
+                                    SpellList.PowerBolt.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                    newUnit.RestoreMana(100); unit.Movement = 1;
+                                    casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBaseChargeCost;
+                                    counter--;
+                                }
+                                break;
+                            case SpellTypes.LightningBolt:
+                                counter = casterTower.spellCasts[spellCasts.Key];
+                                while (counter > 0)
+                                {
+                                    SpellList.LightningBolt.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                    newUnit.RestoreMana(100); unit.Movement = 1;
+                                    casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBaseChargeCost;
+                                    counter--;
+                                }
+                                break;
+                            case SpellTypes.Shield:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Shield.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Speed:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Speed.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Valor:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Valor.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Predation:
+                                if (casterTower.buffUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Predation.TryCast(unit, defenders[State.Rand.Next(defenders.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBuffChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.IceBlast:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.IceBlast.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Pyre:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Pyre.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.Flamberge:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.Flamberge.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            case SpellTypes.ForkLightning:
+                                if (casterTower.forceUpgrade.built)
+                                {
+                                    counter = casterTower.spellCasts[spellCasts.Key];
+                                    while (counter > 0)
+                                    {
+                                        SpellList.ForkLightning.TryCast(unit, attackers[State.Rand.Next(attackers.Count())]);
+                                        newUnit.RestoreMana(100); unit.Movement = 1;
+                                        casterTower.ManaCharges -= Config.BuildConfig.CasterTowerBetterTierChargeCost;
+                                        counter--;
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    unit.UnitSprite.GraphicsFolder.gameObject.SetActive(false);
+                    unit.UnitSprite.OtherFolder.gameObject.SetActive(false);
+                }
+            }
+        }       
+
         if (skip)
         {
             TurboMode();
@@ -599,13 +1177,15 @@ public class TacticalMode : SceneBase
             turboMode = false;
             State.Save($"{State.SaveDirectory}Autosave_Battle.sav");
             defectors.DefectReport();
-            if (summonedUnits > 0 || antSummonedUnits > 0)
+            if (summonedUnits > 0 || antSummonedUnits > 0 || DefCampSummonedUnits > 0)
             {
                 string message = "";
                 if (summonedUnits > 0)
                     message += $"{summonedUnits} units were summoned by astral call\n";
                 if (antSummonedUnits > 0)
-                    message += $"{antSummonedUnits} units were summoned by ant pheromones";
+                    message += $"{antSummonedUnits} units were summoned by ant pheromones\n";
+                if (DefCampSummonedUnits > 0)
+                    message += $"{DefCampSummonedUnits} units join as reinforcements";
                 if (AIDefender && AIAttacker)
                     State.GameManager.CreateMessageBox(message, 4);
                 else
@@ -860,7 +1440,7 @@ public class TacticalMode : SceneBase
         if (State.GameManager.CurrentScene == State.GameManager.TacticalMode && State.GameManager.StatScreen.gameObject.activeSelf == false)
             Log.RefreshListing();
         if (Time.realtimeSinceStartup - time > .5f)
-            Debug.Log($"{AttackerName} vs {DefenderName} - {Time.realtimeSinceStartup - time}");
+            Debug.Log($"{AttackerName} vs {DefenderName} - {Time.realtimeSinceStartup - time} - {currentTurn}");
         if (State.Warned == false && Time.realtimeSinceStartup - time > 4f)
         {
             State.Warned = true;
@@ -1346,9 +1926,9 @@ Turns: {currentTurn}
                                 FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.TileTypes[startIndex + 3]);
                             else
                                 FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.TileTypes[startIndex + State.Rand.Next(2)]);
-                            if (tiles[i, j+1] >= (TacticalTileType)500 && (tiles[i, j + 1] < (TacticalTileType)2000 || tiles[i, j + 1] >= (TacticalTileType)2300))
+                            if ((tiles[i, j + 1] >= (TacticalTileType)500 && tiles[i, j + 1] < (TacticalTileType)600) || (tiles[i, j + 1] >= (TacticalTileType)2300 && tiles[i, j + 1] < (TacticalTileType)2400))
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.VolcanicTileTypes[1]);
-                            else if ((tiles[i, j+1] >= (TacticalTileType)200))
+                            else if ((tiles[i, j+1] >= (TacticalTileType)200 && tiles[i, j + 1] < (TacticalTileType)300) || (tiles[i, j + 1] >= (TacticalTileType)2000 && tiles[i, j + 1] < (TacticalTileType)2200))
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.DesertTileTypes[1]);
                             else
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassEnviroment[0]);
@@ -1714,6 +2294,27 @@ Turns: {currentTurn}
         }
     }
 
+    void ShowBoostedVoreHitPercentages(Actor_Unit actor, int skillBoost, PreyLocation location = PreyLocation.stomach)
+    {
+        foreach (Actor_Unit target in units)
+        {
+            if (TacticalUtilities.AppropriateVoreTarget(actor, target) == false)
+                continue;
+            if ((Config.EdibleCorpses == false && target.Targetable == false && target.Visible) || target.Visible == false)
+                continue;
+            Vec2i pos = target.Position;
+            target.UnitSprite.HitPercentagesDisplayed(true);
+            if (actor.PredatorComponent.FreeCap() < target.Bulk() || (actor.BodySize() < target.BodySize() * 3 && actor.Unit.HasTrait(Traits.TightNethers) && PreyLocationMethods.IsGenital(location)))
+                target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true, skillBoost), Color.yellow);
+            else if (actor.Unit.CanVore(location) != actor.PredatorComponent.CanVore(location,target))
+                target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true, skillBoost), Color.yellow);
+            else if (actor.Position.GetNumberOfMovesDistance(target.Position) < 2)
+                target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true, skillBoost), Color.red);
+            else
+                target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true, skillBoost), Color.black);
+        }
+    }
+
 
     internal bool TakeSpecialAction(SpecialAction type, Actor_Unit actor, Actor_Unit target)
     {
@@ -1810,6 +2411,17 @@ Turns: {currentTurn}
                 break;
             case SpecialAction.TailStrike:
                 ShowMeleeHitPercentages(actor, .66f);
+                break;
+            case SpecialAction.SweepingSwallow:
+                ShowVoreHitPercentages(actor, PreyLocation.stomach);
+                UpdateOTargetGrid(actor.Position);
+                break;
+            case SpecialAction.GiantSweep:
+                ShowMeleeHitPercentages(actor, .66f);
+                UpdateOTargetGrid(actor.Position);
+                break;
+            case SpecialAction.AllInVore:
+                ShowBoostedVoreHitPercentages(actor, 50);
                 break;
         }
 
@@ -2150,6 +2762,21 @@ Turns: {currentTurn}
         TestTile(pos + new Vec2(-1, 0));
         TestTile(pos + new Vec2(0, -1));
 
+        void TestTile(Vec2 p)
+        {
+            if (SelectedUnit.Position.GetNumberOfMovesDistance(p.x, p.y) == 1)
+                MovementGrid.SetTile(new Vector3Int(p.x, p.y, 0), MovementGridTileTypes[1]);
+        }
+
+    }
+    void UpdateOTargetGrid(Vec2i location)
+    {
+        MovementGrid.ClearAllTiles();
+        foreach (var item in TacticalUtilities.TilesOnPattern(location, new int[3, 3] { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } }, 1))
+        {
+            Vec2 pos = item;
+            TestTile(item);
+        }
         void TestTile(Vec2 p)
         {
             if (SelectedUnit.Position.GetNumberOfMovesDistance(p.x, p.y) == 1)
@@ -3539,7 +4166,7 @@ Turns: {currentTurn}
         UpdateActorColor(actor);
         if (actor.Unit.Type != UnitType.Summon)
         {
-            if (armies[1] != null && armies[1].Units.Count < armies[1].MaxSize)
+            if (armies[1] != null && StrategicUtilities.ArmyCanFitUnit(armies[1], actor.Unit))
             {
                 armies[1].Units.Add(actor.Unit);
             }
@@ -3561,7 +4188,7 @@ Turns: {currentTurn}
         UpdateActorColor(actor);
         if (actor.Unit.Type != UnitType.Summon)
         {
-            if (armies[0] != null && armies[0].Units.Count < armies[0].MaxSize)
+            if (armies[0] != null && StrategicUtilities.ArmyCanFitUnit(armies[0], actor.Unit))
             {
                 armies[0].Units.Add(actor.Unit);
             }
@@ -3698,6 +4325,18 @@ Turns: {currentTurn}
             if (units[i].SelfPrey != null)
                 units[i].SelfPrey.TurnsSinceLastDamage++;
 
+            foreach (var item in units[i].Unit.AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnTacticalTurnStart || t.trigger == TraitConditionTrigger.All).ToList())
+            {
+                if (ConditionalTraitConditionChecker.TacticalTraitConditionActive(units[i], item))
+                {
+                    units[i].Unit.ActivateConditionalTrait(item.id);
+                }
+                else
+                {
+                    units[i].Unit.DeactivateConditionalTrait(item.id);
+                }
+            }
+
         }
         for (int i = 0; i < units.Count; i++)
         {
@@ -3725,7 +4364,7 @@ Turns: {currentTurn}
                 {
                     RetreatedDigestors[i].DigestCheck();
                 }
-                if (RetreatedDigestors[i].Unit.HasTrait(Traits.Endosoma))
+                if (RetreatedDigestors[i].Unit.HasTrait(Traits.FriendlyStomach) || RetreatedDigestors[i].Unit.HasTrait(Traits.Endosoma))
                 {
                     foreach (var prey in RetreatedDigestors[i].PredatorComponent.GetAllPrey())
                     {
@@ -3820,13 +4459,13 @@ Turns: {currentTurn}
             return false;
         int remainingAttackers = 0;
         int remainingDefenders = 0;
-
         CalculateRemaining(ref remainingAttackers, ref remainingDefenders);
+
         if (remainingAttackers == 0 || remainingDefenders == 0)
         {
             foreach (Actor_Unit actor in units)
             {
-                if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && actor.TurnsSinceLastDamage < 2) return false;
+                if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && (actor.TurnsSinceLastDamage < 2 & !actor.Unit.HasTrait(Traits.CurseOfImmolation))) return false;
                 if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && !actor.Unit.hiddenFixedSide && units.Any(u => u.Targetable && !u.Fled && u.Visible && TacticalUtilities.TreatAsHostile(actor, u))) return false;
                 if (actor.Unit.Predator == false)
                     continue;
@@ -3834,6 +4473,35 @@ Turns: {currentTurn}
                 {
                     actor.PredatorComponent.FreeGreatEscapePrey(prey);
                     RetreatUnit(prey.Actor, prey.Unit.Side == defenderSide);
+                }
+                if (actor.Unit.HasTrait(Traits.Endosoma))
+                {
+                    foreach (var prey in actor.PredatorComponent.GetDirectPrey().Where(s => s.Unit.Stamina <= 0).ToList())
+                    {
+                        actor.PredatorComponent.FreeEndoPrey(prey);
+                        if (actor.Unit.HasTrait(Traits.Friendosoma))
+                        {
+                            SwitchAlignment(prey.Actor);
+                            RetreatUnit(prey.Actor, prey.Unit.Side == defenderSide);
+                        }
+                        else
+                        {
+                            prey.Actor.Unit.Health = 0;
+                            prey.Actor.Unit.Kill();
+                            foreach (var item in prey.Actor.Unit.AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnDeath || t.trigger == TraitConditionTrigger.All).ToList())
+                            {
+                                if (ConditionalTraitConditionChecker.TacticalTraitConditionActive(prey.Actor, item))
+                                {
+                                    prey.Actor.Unit.ActivateConditionalTrait(item.id);
+                                }
+                                else
+                                {
+                                    prey.Actor.Unit.DeactivateConditionalTrait(item.id);
+                                }
+                            }
+                        }
+
+                    }
                 }
                 if (actor.Fled == false)
                     continue;
@@ -3914,6 +4582,39 @@ Turns: {currentTurn}
             BattleReviewText.SetActive(false);
             foreach (Actor_Unit actor in units.ToList())
             {
+
+                if (actor.Unit.IsDead)
+                {
+                    if (defenderBuildingsInRange != null)
+                    {
+                        IEnumerable<BlackMagicTower> possible_BlackTowers = defenderBuildingsInRange.Where(b => b is BlackMagicTower).Cast<BlackMagicTower>();
+                        foreach (BlackMagicTower tower in possible_BlackTowers)
+                        {
+                            tower.SoulPower += actor.Unit.Level * (tower.soulUpgrade.built ? 2 : 1);
+                        }
+                    }
+                    if (attackerBuildingsInRange != null)
+                    {
+                        IEnumerable<BlackMagicTower> possible_BlackTowers = attackerBuildingsInRange.Where(b => b is BlackMagicTower).Cast<BlackMagicTower>();
+                        foreach (BlackMagicTower tower in possible_BlackTowers)
+                        {
+                            tower.SoulPower += actor.Unit.Level * (tower.soulUpgrade.built ? 2 : 1);
+                        }
+                    }
+                }
+
+                if (actor.Unit.Type == UnitType.Reinforcement && actor.Unit.IsDead == false)
+                {
+                    IEnumerable<DefenseEncampment> possible_camps = defenderBuildingsInRange.Where(b => b is DefenseEncampment).Cast<DefenseEncampment>();
+                    if (possible_camps != null)
+                    {
+                        DefenseEncampment camp = possible_camps.Where(d => d.maxDefenders > d.AvailibleDefenders).First();
+                        if (camp != null)
+                            camp.AvailibleDefenders++;
+                    }
+                    units.Remove(actor);
+                    continue;
+                }
                 actor.Unit.SetSizeToDefault();
                 actor.Unit.EnemiesKilledThisBattle = 0;
                 if (actor.Unit.IsDead && actor.Unit.Type != UnitType.Summon &&
@@ -4264,7 +4965,7 @@ Turns: {currentTurn}
                     //    actor.Visible = true;
                     //    actor.Targetable = true;
                     //}
-                    if ((actor.SelfPrey?.Predator == null || actor.SelfPrey?.Predator.PredatorComponent?.IsActorInPrey(actor) == false || actor.SelfPrey.TurnsSinceLastDamage > 3 && actor.SelfPrey.Predator.Unit.HasTrait(Traits.Endosoma)) && actor.Unit.IsDead == false && actor.Visible == false && actor.Targetable == false)
+                    if ((actor.SelfPrey?.Predator == null || actor.SelfPrey?.Predator.PredatorComponent?.IsActorInPrey(actor) == false || actor.SelfPrey.TurnsSinceLastDamage > 3 && (actor.SelfPrey.Predator.Unit.HasTrait(Traits.FriendlyStomach) || actor.SelfPrey.Predator.Unit.HasTrait(Traits.Endosoma))) && actor.Unit.IsDead == false && actor.Visible == false && actor.Targetable == false)
                     {
                         actor.SelfPrey = null;
                         Debug.Log("Prey orphan found, fixing");
@@ -4278,7 +4979,7 @@ Turns: {currentTurn}
                     if (actor.Unit.Side == armies[0].Side)
                     {
                         remainingAttackers++;
-                        if (actor.SelfPrey != null && actor.Unit.HasTrait(Traits.TheGreatEscape))
+                        if ((actor.SelfPrey != null && actor.Unit.HasTrait(Traits.TheGreatEscape) || (actor.SelfPrey != null && actor.Unit.Stamina <= 0)))
                             remainingAttackers--;
                         if (actor.Surrendered)
                             surrenderedAttackers++;
@@ -4286,21 +4987,20 @@ Turns: {currentTurn}
                         if (preyCount > 0)
                         {
                             remainingDefenders += preyCount;
-                            if (actor.Unit.HasTrait(Traits.Endosoma))
+                            if ((actor.Unit.HasTrait(Traits.FriendlyStomach) || actor.Unit.HasTrait(Traits.Endosoma)))
                             {
-                                remainingDefenders -= actor.PredatorComponent.GetDirectPrey().Where(s => actor.Unit.Side == s.Unit.Side || s.Unit.HasTrait(Traits.TheGreatEscape)).Count();
+                                remainingDefenders -= actor.PredatorComponent.GetDirectPrey().Where(s => actor.Unit.Side == s.Unit.Side || s.Unit.HasTrait(Traits.TheGreatEscape) || s.Unit.Stamina <= 0).Count();
                             }
                             else
                             {
                                 remainingDefenders -= actor.PredatorComponent.GetDirectPrey().Where(s => s.Unit.HasTrait(Traits.TheGreatEscape)).Count(); 
                             }
                         }
-
                     }
                     else
                     {
                         remainingDefenders++;
-                        if (actor.SelfPrey != null && actor.Unit.HasTrait(Traits.TheGreatEscape))
+                        if ((actor.SelfPrey != null && actor.Unit.HasTrait(Traits.TheGreatEscape) || (actor.SelfPrey != null && actor.Unit.Stamina <= 0)))
                             remainingDefenders--;
                         if (actor.Surrendered)
                             surrenderedDefenders++;
@@ -4308,9 +5008,9 @@ Turns: {currentTurn}
                         if (preyCount > 0)
                         {
                             remainingAttackers += preyCount;
-                            if (actor.Unit.HasTrait(Traits.Endosoma))
+                            if (actor.Unit.HasTrait(Traits.FriendlyStomach) || actor.Unit.HasTrait(Traits.Endosoma))
                             {
-                                remainingAttackers -= actor.PredatorComponent.GetDirectPrey().Where(s => actor.Unit.Side == s.Unit.Side || s.Unit.HasTrait(Traits.TheGreatEscape)).Count();
+                                remainingAttackers -= actor.PredatorComponent.GetDirectPrey().Where(s => actor.Unit.Side == s.Unit.Side || s.Unit.HasTrait(Traits.TheGreatEscape) || s.Unit.Stamina <= 0).Count();
                             }
                             else
                             {
@@ -4395,14 +5095,14 @@ Turns: {currentTurn}
                     State.World.Stats?.SoldiersLost(1, unit.Side);
                 }
             }
-            while (army.Units.Count() < army.MaxSize && actors.Any())
+            while (StrategicUtilities.ArmyCanFitUnit(army, actors[0].Unit) && actors.Any())
             {
                 army.Units.Add(actors[0].Unit);
                 actors.RemoveAt(0);
             }
-            while (army.Units.Count() > army.MaxSize)
+            while (StrategicUtilities.ArmyCanFitUnit(army, army.Units.OrderByDescending(u => State.RaceSettings.GetDeployCost(u.Race) * u.TraitBoosts.DeployCostMult).Last()))
             {
-                var last = army.Units.Last();
+                var last = army.Units.OrderByDescending(u => State.RaceSettings.GetDeployCost(u.Race) * u.TraitBoosts.DeployCostMult).Last();
                 army.Units.Remove(last);
                 actors.Add(new Actor_Unit(last));
             }
@@ -4483,6 +5183,17 @@ Turns: {currentTurn}
             TacticalStats.RegisterAllyVore(predatorUnit.Unit.Side);
             predatorUnit.Unit.DigestedUnits++;
             preyUnit.Unit.Kill();
+            foreach (var item in preyUnit.Unit.AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnDeath || t.trigger == TraitConditionTrigger.All).ToList())
+            {
+                if (ConditionalTraitConditionChecker.TacticalTraitConditionActive(preyUnit, item))
+                {
+                    preyUnit.Unit.ActivateConditionalTrait(item.id);
+                }
+                else
+                {
+                    preyUnit.Unit.DeactivateConditionalTrait(item.id);
+                }
+            }
             if (predatorUnit.Unit.HasTrait(Traits.EssenceAbsorption) && predatorUnit.Unit.DigestedUnits % 4 == 0)
                 predatorUnit.Unit.GeneralStatIncrease(1);
             preyUnit.Unit.Health = -999999;
@@ -4695,5 +5406,68 @@ Turns: {currentTurn}
         village?.GetRecruitables().Remove(target.Unit);
         target.Unit.Side = caster.Side;
         State.GameManager.TacticalMode.UpdateActorColor(target);
+    }
+
+    internal int ExposeRemainingUnits(bool attackers)
+    {
+        int remainingAttackers = 0;
+        int remainingDefenders = 0;
+        CalculateRemaining(ref remainingAttackers, ref remainingDefenders);
+        if (attackers)
+        {
+            return remainingAttackers;
+        }
+        return remainingDefenders;
+    }
+
+    internal void ActivatePreBattleTraits()
+    {
+        foreach (var actor in units)
+        {
+            if (actor.Unit.HasTrait(Traits.CurseOfCraving))
+            {
+                if (actor.Unit.Predator)
+                {
+                    if (State.Rand.Next(2) == 0)
+                    {
+                        var possible_targets = units.Where(u => !u.Unit.IsEnemyOfSide(actor.Unit.Side) && u != actor && u.SelfPrey == null).ToList();
+                        if (possible_targets.Any())
+                        {
+                            actor.PredatorComponent.ForceConsumeAuto(possible_targets[State.Rand.Next(0, possible_targets.Count())]);
+                        }
+                    }
+
+                }
+            }
+
+            if (actor.Unit.HasTrait(Traits.CurseOfPreyportaion))
+            {
+                if (State.Rand.Next(4) == 0)
+                {
+                    var possible_targets = units.Where(u => u.Unit.Predator && u != actor && u.SelfPrey == null).ToList();
+                    if (possible_targets.Any())
+                    {
+                        possible_targets[State.Rand.Next(0, possible_targets.Count())].PredatorComponent.ForceConsumeAuto(actor);
+                    }
+
+                }
+            }
+        }
+    }
+
+    private IEnumerator WaitForBuildingInput()
+    {
+        paused = true;
+
+        yield return BuildingInputUnpause();
+
+        paused = false;
+    }
+    private IEnumerator BuildingInputUnpause()
+    {
+        while (blockActive)
+        {
+            yield return null;
+        }
     }
 }

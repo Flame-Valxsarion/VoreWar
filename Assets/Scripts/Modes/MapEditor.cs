@@ -47,7 +47,18 @@ namespace MapObjects
         [OdinSerialize]
         public Vec2i Position { get; set; }
     }
-
+    struct MapConstructible
+    {
+        public MapConstructible(ConstructibleType type, Vec2i position) : this()
+        {
+            Type = type;
+            Position = position;
+        }
+        [OdinSerialize]
+        public ConstructibleType Type { get; private set; }
+        [OdinSerialize]
+        public Vec2i Position { get; set; }
+    }
     class Map
     {
         [OdinSerialize]
@@ -59,7 +70,11 @@ namespace MapObjects
         [OdinSerialize]
         internal Vec2i[] mercLocations;
         [OdinSerialize]
+        internal Vec2i[] teleLocations;
+        [OdinSerialize]
         internal MapClaimable[] claimables;
+        [OdinSerialize]
+        internal MapConstructible[] constructibles;
 
         static public Map Get(string filename)
         {
@@ -130,6 +145,9 @@ public class MapEditor : SceneBase
     internal bool ActiveSpecial = false;
     SpecialType activeSpecialType;
 
+    internal bool ActiveBuilding = false;
+    MapBuildingType activeBuildingType;
+
     List<UndoMapAction> UndoActions = new List<UndoMapAction>();
     UndoMapAction LastActionBuilder;
 
@@ -140,6 +158,18 @@ public class MapEditor : SceneBase
     public Button ExitMapEditor;
     public Button LoadMapButton;
     public Button ResizeButton;
+
+    public Button TilesButton;
+    public Button EmpiresButton;
+    public Button SpawnersButton;
+    public Button DoodadsButton;
+    public Button BuildingsButton;
+
+    public GameObject TilePanel;
+    public GameObject EmpiresPanel;
+    public GameObject SpawnersPanel;
+    public GameObject DoodadsPanel;
+    public GameObject BuildingsPanel;
 
     public Toggle SimpleDisplay;
 
@@ -152,11 +182,14 @@ public class MapEditor : SceneBase
 
     public TileBase[] SpawnerTypes;
     public Sprite[] Sprites;
+    public Sprite[] Buildings;
     public Sprite[] VillageSprites;
+    public Sprite[] WallMultiSprites;
     GameObject[] SpriteCategories;
 
     public Transform VillageFolder;
     public Transform ArmyFolder;
+    public Transform WallRoadsFolder;
 
     public TMP_Dropdown BrushType;
 
@@ -169,6 +202,29 @@ public class MapEditor : SceneBase
     {
         MercenaryHouse,
         GoldMine,
+        AncientTeleporter,
+    }
+    public enum MapBuildingType
+    {
+        //Production
+        WorkCamp,
+        LumberSite,
+        Quarry,
+
+        //Defense   
+        CasterTower,
+        BarrierTower,
+        DefEncampment,
+
+        //Utility
+        Academy,
+        BlackMagicTower,
+        TemporalTower,
+
+        //Manupulation
+        Laborotory,
+        Teleporter,
+        TownHall
     }
 
     public void CloseEditor()
@@ -219,6 +275,8 @@ public class MapEditor : SceneBase
             State.World.Tiles = new StrategicTileType[Config.StrategicWorldSizeX, Config.StrategicWorldSizeY];
         if (State.World.Claimables == null)
             State.World.Claimables = new ClaimableBuilding[0];
+        if (State.World.Constructibles == null)
+            State.World.Constructibles = new ConstructibleBuilding[0];
         if (State.World.Doodads == null)
             State.World.Doodads = new StrategicDoodadType[Config.StrategicWorldSizeX, Config.StrategicWorldSizeY];
         CatchUpEmpires();
@@ -228,6 +286,7 @@ public class MapEditor : SceneBase
         TileTypes = State.GameManager.StrategyMode.TileTypes;
         DoodadTypes = State.GameManager.StrategyMode.DoodadTypes;
         Sprites = State.GameManager.StrategyMode.Sprites;
+        Buildings = State.GameManager.StrategyMode.Buildings;
         VillageSprites = State.GameManager.StrategyMode.VillageSprites;
         SpriteCategories = State.GameManager.StrategyMode.SpriteCategories;
         EditingActiveMap = editingActiveMap;
@@ -242,6 +301,7 @@ public class MapEditor : SceneBase
             ExitMapEditor.GetComponentInChildren<Text>().text = "Exit to Main Menu";
         }
         RecreateObjects();
+        ActivateTiles();
     }
 
     void CatchUpEmpires()
@@ -303,6 +363,7 @@ public class MapEditor : SceneBase
         ActiveSpecial = false;
         ActiveVillage = false;
         ActiveDoodad = false;
+        ActiveBuilding = false;
         SelectionBackground.SetActive(true);
         SelectionBackground.transform.position = location.position;
     }
@@ -323,6 +384,7 @@ public class MapEditor : SceneBase
         ActiveTile = false;
         ActiveSpecial = true;
         ActiveDoodad = false;
+        ActiveBuilding = false;
         activeSpecialType = type;
         SelectionBackground.SetActive(true);
         SelectionBackground.transform.position = location.position;
@@ -338,7 +400,69 @@ public class MapEditor : SceneBase
             case SpecialType.GoldMine:
                 Tooltip.text = $"Place Gold Mine";
                 break;
+            case SpecialType.AncientTeleporter:
+                Tooltip.text = $"Place Ancient Teleporter";
+                break;
         }
+
+
+    }
+    internal void SetBuildingType(MapBuildingType type, Transform location)
+    {
+        ActiveVillage = false;
+        ActiveTile = false;
+        ActiveSpecial = false;
+        ActiveDoodad = false;
+        ActiveBuilding = true;
+        activeBuildingType = type;
+        SelectionBackground.SetActive(true);
+        SelectionBackground.transform.position = location.position;
+    }
+    internal void SetBuildingTooltip(MapBuildingType type)
+    {
+        Tooltip.gameObject.SetActive(true);
+        switch (type)
+        {
+            case MapBuildingType.WorkCamp:
+                Tooltip.text = $"Place Work Camp";
+                break;
+            case MapBuildingType.LumberSite:
+                Tooltip.text = $"Place Lumber Site";
+                break;
+            case MapBuildingType.Quarry:
+                Tooltip.text = $"Place Quarry";
+                break;
+            case MapBuildingType.CasterTower:
+                Tooltip.text = $"Place Caster Tower";
+                break;
+            case MapBuildingType.BarrierTower:
+                Tooltip.text = $"Place Barrier Tower";
+                break;
+            case MapBuildingType.DefEncampment:
+                Tooltip.text = $"Place Defense Encampment";
+                break;
+            case MapBuildingType.Academy:
+                Tooltip.text = $"Place Academy";
+                break;
+            case MapBuildingType.BlackMagicTower:
+                Tooltip.text = $"Place Dark Magic Tower";
+                break;
+            case MapBuildingType.TemporalTower:
+                Tooltip.text = $"Place Temporal Tower";
+                break;
+            case MapBuildingType.Laborotory:
+                Tooltip.text = $"Place Laborotory";
+                break;
+            case MapBuildingType.Teleporter:
+                Tooltip.text = $"Place Teleporter";
+                break;
+            case MapBuildingType.TownHall:
+                Tooltip.text = $"Place Town Hall";
+                break;
+            default:
+                break;
+        }
+
 
 
     }
@@ -351,6 +475,7 @@ public class MapEditor : SceneBase
         ActiveTile = false;
         ActiveSpecial = false;
         ActiveDoodad = false;
+        ActiveBuilding = false;
         SelectionBackground.SetActive(true);
         SelectionBackground.transform.position = location.position;
     }
@@ -371,8 +496,79 @@ public class MapEditor : SceneBase
         ActiveSpecial = false;
         ActiveVillage = false;
         ActiveDoodad = true;
+        ActiveBuilding = false;
         SelectionBackground.SetActive(true);
         SelectionBackground.transform.position = location.position;
+    }
+
+    public void ActivateTiles()
+    {
+        TilePanel.SetActive(true);
+        EmpiresPanel.SetActive(false);
+        SpawnersPanel.SetActive(false);
+        DoodadsPanel.SetActive(false);
+        BuildingsPanel.SetActive(false);
+        TilesButton.interactable = false;
+        EmpiresButton.interactable = true;
+        SpawnersButton.interactable = true;
+        DoodadsButton.interactable = true;
+        BuildingsButton.interactable = true;
+    }
+
+    public void ActivateEmpires()
+    {
+        TilePanel.SetActive(false);
+        EmpiresPanel.SetActive(true);
+        SpawnersPanel.SetActive(false);
+        DoodadsPanel.SetActive(false);
+        BuildingsPanel.SetActive(false);
+        TilesButton.interactable = true;
+        EmpiresButton.interactable = false;
+        SpawnersButton.interactable = true;
+        DoodadsButton.interactable = true;
+        BuildingsButton.interactable = true;
+    }
+
+    public void ActivateSpawners()
+    {
+        TilePanel.SetActive(false);
+        EmpiresPanel.SetActive(false);
+        SpawnersPanel.SetActive(true);
+        DoodadsPanel.SetActive(false);
+        BuildingsPanel.SetActive(false);
+        TilesButton.interactable = true;
+        EmpiresButton.interactable = true;
+        SpawnersButton.interactable = false;
+        DoodadsButton.interactable = true;
+        BuildingsButton.interactable = true;
+    }
+
+    public void ActivateDoodads()
+    {
+        TilePanel.SetActive(false);
+        EmpiresPanel.SetActive(false);
+        SpawnersPanel.SetActive(false);
+        DoodadsPanel.SetActive(true);
+        BuildingsPanel.SetActive(false);
+        TilesButton.interactable = true;
+        EmpiresButton.interactable = true;
+        SpawnersButton.interactable = true;
+        DoodadsButton.interactable = false;
+        BuildingsButton.interactable = true;
+    }
+
+    public void ActivateBuildings()
+    {
+        TilePanel.SetActive(false);
+        EmpiresPanel.SetActive(false);
+        SpawnersPanel.SetActive(false);
+        DoodadsPanel.SetActive(false);
+        BuildingsPanel.SetActive(true);
+        TilesButton.interactable = true;
+        EmpiresButton.interactable = true;
+        SpawnersButton.interactable = true;
+        DoodadsButton.interactable = true;
+        BuildingsButton.interactable = false;
     }
 
     internal void SetDoodadTooltip(StrategicDoodadType type)
@@ -397,6 +593,9 @@ public class MapEditor : SceneBase
                 break;
             case StrategicDoodadType.virtualBridgeIntersection:
                 Tooltip.text = $"Place sea path tile (An alternate bridge)\nAlso looks better than bridges for things such as wide bridges or diagonal bridges\nMakes walkable and lowers movement cost to 1";
+                break;
+            case StrategicDoodadType.wall:
+                Tooltip.text = $"Place a wall, making the tile impassible to walking.";
                 break;
             case StrategicDoodadType.SpawnerVagrant:
                 Tooltip.text = $"Place a monster spawn location for Vagrants, they have to spawn within 2 tiles of a spawner if at least one exists";
@@ -597,7 +796,54 @@ public class MapEditor : SceneBase
                     {
                         if (doodads[i, j] < StrategicDoodadType.SpawnerVagrant)
                         {
-                            TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
+                            if (doodads[i, j] == StrategicDoodadType.wall)
+                            {
+                                bool north = j + 1 <= tiles.GetUpperBound(1) ? doodads[i, j + 1] == StrategicDoodadType.wall : false;
+                                bool east = i + 1 <= tiles.GetUpperBound(0) ? doodads[i + 1, j] == StrategicDoodadType.wall : false;
+                                bool south = j - 1 >= 0 ? doodads[i, j - 1] == StrategicDoodadType.wall : false;
+                                bool west = i - 1 >= 0 ? doodads[i - 1, j] == StrategicDoodadType.wall : false;
+                                int spr = 0;   
+
+                                if (north && east && south && west)                                
+                                    spr = 7;                                
+                                else if (north && east && south)
+                                    spr = 13;
+                                else if (north && east && west)
+                                    spr = 14;
+                                else if (north && south && west)
+                                    spr = 12;
+                                else if (east && south && west)
+                                    spr = 15;
+                                else if (north && east)
+                                    spr = 11;
+                                else if (north && south)
+                                    spr = 4;
+                                else if (north && west)
+                                    spr = 10;
+                                else if (east && south)
+                                    spr = 9;
+                                else if (south && west)
+                                    spr = 8;
+                                else if (east && west)
+                                    spr = 1;
+                                else if (north)
+                                    spr = 6;
+                                else if (east)
+                                    spr = 2;
+                                else if (south)
+                                    spr = 5;
+                                else if (west)
+                                    spr = 3;
+
+                                GameObject wall = Instantiate(SpriteCategories[2], new Vector3(i,j,0), new Quaternion(), WallRoadsFolder);
+                                wall.name = "Wall";
+                                wall.GetComponent<SpriteRenderer>().sprite = WallMultiSprites[spr];
+                                wall.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                            }
+                            else
+                            {
+                                TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
+                            }
                         }
                         else
                         {
@@ -643,38 +889,25 @@ public class MapEditor : SceneBase
         {
             for (int j = minY; j <= maxY; j++)
             {
-                if (overTiles[i, j] >= (StrategicTileType)2000)
-                {
-                    TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.WaterFloat[(int)overTiles[i, j] - 2000]);
-                }
-                else if (overTiles[i, j] != 0)
-                {
-                    TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(overTiles[i, j], i, j)]);
-                }
-                else
-                {
-                    var type = StrategicTileInfo.GetObjectTileType(this.tiles[i, j], i, j);
-                    if (type != -1)
-                        TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.Objects[type]);
 
-                }
-                if (tiles[i, j] >= (StrategicTileType)2100 && underTiles[i, j] >= (StrategicTileType)2200)
+                //if (overTiles[i, j] >= (StrategicTileType)2300)
+                //{
+                //    TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), TileDictionary.DeepWaterOverWater[(int)overTiles[i, j] - 2300]);
+                //}
+                //Debug.Log(underTiles[i, j] + ", " + i + ", " + j);
+                int current_layer = 0;
+                int liquid_layer = 0;
+                if (tiles[i, j] >= (StrategicTileType)2100)
                 {
-                    TilemapLayers[1].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.GrassFloat[(int)tiles[i, j] - 2100]);
-                    TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.IceOverSnow[(int)underTiles[i, j] - 2200]);
-                    //TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[(int)underTiles[i, j]]);
-
-                }
-                else if (tiles[i, j] >= (StrategicTileType)2100)
-                {
-                    TilemapLayers[1].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.GrassFloat[(int)tiles[i, j] - 2100]);
+                    current_layer = ApplyFloat(i, j, current_layer);
                     if (underTiles[i, j] != (StrategicTileType)99)
                     {
                         TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[(int)underTiles[i, j]]);
                     }
                     else
                     {
-                        switch (this.tiles[i, j])
+                        TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(State.World.Tiles[i, j], i, j)]);
+                        switch (State.World.Tiles[i, j])
                         {
                             case StrategicTileType.field:
                                 TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[(int)StrategicTileType.grass]);
@@ -686,7 +919,7 @@ public class MapEditor : SceneBase
                                 TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[(int)StrategicTileType.snow]);
                                 break;
                             default:
-                                TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(this.tiles[i, j], i, j)]);
+                                TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(State.World.Tiles[i, j], i, j)]);
                                 break;
 
                         }
@@ -706,20 +939,163 @@ public class MapEditor : SceneBase
                     //TilemapLayers[1].SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassFloat[(int)tiles[i, j] - 2100]);
                     TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(tiles[i, j], i, j)]);
                 }
-
-                if (doodads != null && doodads[i, j] > 0)
+                if (overTiles[i, j] >= (StrategicTileType)2000)
                 {
-                    if (doodads[i, j] < StrategicDoodadType.SpawnerVagrant)
+                    current_layer++;
+                    liquid_layer = current_layer;
+                    switch (State.World.Tiles[i, j])
                     {
-                        TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
+                        case StrategicTileType.water:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.WaterFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.ocean:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.OceanFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.lava:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.LavaFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.ice:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.IceOverSnow[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.shallowWater:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.ShallowWaterFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.smallIslands:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.SmallIslandsFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        default:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.LavaFloat[(int)overTiles[i, j] - 2000]);
+                            break;
                     }
-                    else
+                    foreach (KeyValuePair<int, StrategicTileType> tiletype in logic.GetSurroundingLiquid((int)overTiles[i, j] - 2000, State.World.Tiles[i, j], new Vec2(i, j)))
                     {
-                        TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), SpawnerTypes[0]);
-                        TilemapLayers[4].SetTile(new Vector3Int(i, j, 0), SpawnerTypes[-1000 + (int)doodads[i, j]]);
+                        current_layer++;
+                        switch (tiletype.Value)
+                        {
+                            case StrategicTileType.water:
+                                if (StrategicTileType.water > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.WaterLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.ocean:
+                                if (StrategicTileType.ocean > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.OceanLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.lava:
+                                if (StrategicTileType.lava > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.LavaLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.ice:
+                                if (StrategicTileType.ice > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.IceLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.shallowWater:
+                                if (StrategicTileType.shallowWater > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.ShallowWaterLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.smallIslands:
+                                if (StrategicTileType.shallowWater > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.ShallowWaterLiquidFloat[tiletype.Key]);
+                                break;
+                            default:
+                                break;
+                        }
                     }
+
+                }
+                else if (overTiles[i, j] != 0)
+                {
+                    TilemapLayers[9].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(overTiles[i, j], i, j)]);
+                }
+                else
+                {
+                    var type = StrategicTileInfo.GetObjectTileType(State.World.Tiles[i, j], i, j);
+                    if (type != -1)
+                    {
+                        TileBase tile_base = State.GameManager.StrategyMode.TileDictionary.Objects[type];
+                        TilemapLayers[9].SetTile(new Vector3Int(i, j, 0), tile_base);
+                    }
+
+
                 }
             }
+        }
+
+        int ApplyFloat(int x, int y, int curr_layer)
+        {
+            int counter = curr_layer;
+            StrategicTileType type = State.World.Tiles[x, y];
+            bool liquid_tile = StrategicTileInfo.ConsideredLiquid.Contains(State.World.Tiles[x, y]);
+            foreach (KeyValuePair<int, StrategicTileType> tiletype in logic.DetermineOverlay(x, y))
+            {
+                counter++;
+                switch (tiletype.Value)
+                {
+                    case (StrategicTileType.grass):
+                        if (type <= StrategicTileType.grass || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.GrassFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.desert):
+                        if (type <= StrategicTileType.desert || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.DesertFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.snow):
+                        if (type <= StrategicTileType.snow || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.SnowFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.ashen):
+                        if (type <= StrategicTileType.ashen || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.AshenFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.volcanic):
+                        if (type <= StrategicTileType.volcanic || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.VolcanicFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.swamp):
+                        if (type <= StrategicTileType.swamp || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.SwampFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.drySwamp):
+                        if (type <= StrategicTileType.drySwamp || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.DrySwampFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.purpleSwamp):
+                        if (type <= StrategicTileType.purpleSwamp || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.PurpleBogFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.savannah):
+                        if (type <= StrategicTileType.savannah || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.SavannahFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.smallIslands):
+                        if (type <= StrategicTileType.smallIslands || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.SmallIslandsFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.rainforest):
+                        if (type <= StrategicTileType.rainforest || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.RainforestFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.water):
+                        break;
+                    case (StrategicTileType.ocean):
+                        break;
+                    case (StrategicTileType.shallowWater):
+                        /*
+                        if (liquid_tile && overTiles[x, y] == (StrategicTileType)2009)
+                        {
+                            TilemapLayers[9 - Math.Min(8, counter)].SetTile(new Vector3Int(x, y, 0), TileDictionary.SmallIslandsFloat[tiletype.Key]);
+                        }
+                        */
+                        break;
+                    case (StrategicTileType.ice):
+                        break;
+                    case (StrategicTileType.lava):
+                        break;
+                    default:
+                        TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), State.GameManager.StrategyMode.TileDictionary.GrassFloat[tiletype.Key]);
+                        break;
+                }
+            }
+            return counter;
         }
     }
 
@@ -775,6 +1151,12 @@ public class MapEditor : SceneBase
             merc.GetComponent<SpriteRenderer>().sprite = Sprites[14];
             merc.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
+        foreach (var teleporter in State.World.AncientTeleporters)
+        {
+            GameObject tele = Instantiate(SpriteCategories[2], new Vector3(teleporter.Position.x, teleporter.Position.y), new Quaternion(), VillageFolder);
+            tele.GetComponent<SpriteRenderer>().sprite = Buildings[96];
+            tele.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
         foreach (var claimable in State.World.Claimables)
         {
             int spr = 0;
@@ -790,6 +1172,16 @@ public class MapEditor : SceneBase
             villShield.GetComponent<SpriteRenderer>().sprite = Sprites[10];
             villShield.GetComponent<SpriteRenderer>().sortingOrder = 2;
             villShield.GetComponent<SpriteRenderer>().color = claimable.Owner?.UnityColor ?? Color.clear;
+        }
+        foreach (var constructable in State.World.Constructibles)
+        {
+            int spr = constructable.spriteID;
+            GameObject vill = Instantiate(SpriteCategories[2], new Vector3(constructable.Position.x, constructable.Position.y), new Quaternion(), VillageFolder);
+            vill.GetComponent<SpriteRenderer>().sprite = Buildings[spr];
+            vill.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            GameObject villColored = Instantiate(SpriteCategories[2], new Vector3(constructable.Position.x, constructable.Position.y), new Quaternion(), VillageFolder);
+            villColored.GetComponent<SpriteRenderer>().sprite = Buildings[spr + 1];
+            villColored.GetComponent<SpriteRenderer>().color = constructable.Owner?.UnityColor ?? Color.clear;
         }
     }
 
@@ -897,7 +1289,7 @@ public class MapEditor : SceneBase
         }
         else if (ActiveVillage)
         {
-            if (StrategicUtilities.GetVillageAt(clickLocation) == null && StrategicUtilities.GetMercenaryHouseAt(clickLocation) == null)
+            if (StrategicUtilities.GetVillageAt(clickLocation) == null && StrategicUtilities.GetMercenaryHouseAt(clickLocation) == null && StrategicUtilities.GetConstructibleAt(clickLocation) == null)
             {
                 if (x >= tiles.GetLength(0) - 1 || x < 1)
                     return;
@@ -1041,7 +1433,7 @@ public class MapEditor : SceneBase
                 }
             }
         }
-        else if (ActiveSpecial && StrategicUtilities.GetVillageAt(clickLocation) == null && StrategicUtilities.GetMercenaryHouseAt(clickLocation) == null)
+        else if (ActiveSpecial && StrategicUtilities.GetVillageAt(clickLocation) == null && StrategicUtilities.GetMercenaryHouseAt(clickLocation) == null && StrategicUtilities.GetConstructibleAt(clickLocation) == null)
         {
             if (CanWalkInto(x, y) == false)
             {
@@ -1067,11 +1459,18 @@ public class MapEditor : SceneBase
                     State.World.Claimables = claimables.ToArray();
                     LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
                     break;
+                case SpecialType.AncientTeleporter:
+                    AncientTeleporter newTele = new AncientTeleporter(clickLocation);
+                    var teles = State.World.AncientTeleporters.ToList();
+                    teles.Add(newTele);
+                    State.World.AncientTeleporters = teles.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
             }
             RedrawTiles();
             RedrawVillages();
         }
-        else if (ActiveDoodad && StrategicUtilities.GetVillageAt(clickLocation) == null && StrategicUtilities.GetMercenaryHouseAt(clickLocation) == null)
+        else if (ActiveDoodad && StrategicUtilities.GetVillageAt(clickLocation) == null && StrategicUtilities.GetMercenaryHouseAt(clickLocation) == null && StrategicUtilities.GetConstructibleAt(clickLocation) == null)
         {
             if (doodads == null)
                 doodads = new StrategicDoodadType[Config.StrategicWorldSizeX, Config.StrategicWorldSizeY];
@@ -1084,6 +1483,107 @@ public class MapEditor : SceneBase
 
             doodads[x, y] = currentDoodadType;
             RedrawTiles();
+        }
+        else if (ActiveBuilding && StrategicUtilities.GetVillageAt(clickLocation) == null && StrategicUtilities.GetMercenaryHouseAt(clickLocation) == null && StrategicUtilities.GetClaimableAt(clickLocation) == null)
+        {
+            if (CanWalkInto(x, y) == false)
+            {
+                var lastTile = tiles[x, y];
+                LastActionBuilder.Add(() => tiles[x, y] = lastTile);
+                tiles[x, y] = StrategicTileType.grass;
+            }
+
+            DestroyVillagesAtTile(clickLocation);
+            List<ConstructibleBuilding> contstruct;
+            switch (activeBuildingType)
+            {
+                case MapBuildingType.WorkCamp:
+                    WorkCamp newCamp = new WorkCamp(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newCamp);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.LumberSite:
+                    LumberSite newLumber = new LumberSite(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newLumber);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.Quarry:
+                    Quarry newQuarry = new Quarry(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newQuarry);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.CasterTower:
+                    CasterTower newCasterTower = new CasterTower(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newCasterTower);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.BarrierTower:
+                    BarrierTower newBarrierTower = new BarrierTower(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newBarrierTower);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.DefEncampment:
+                    DefenseEncampment newDefenseEncampment = new DefenseEncampment(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newDefenseEncampment);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.Academy:
+                    Academy newAdventureGuild = new Academy(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newAdventureGuild);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.BlackMagicTower:
+                    BlackMagicTower newBlackMagicTower = new BlackMagicTower(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newBlackMagicTower);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.TemporalTower:
+                    TemporalTower newTemporalTower = new TemporalTower(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newTemporalTower);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.Laborotory:
+                    Laboratory newLaborotory = new Laboratory(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newLaborotory);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.Teleporter:
+                    Teleporter newTeleporter = new Teleporter(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newTeleporter);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+                case MapBuildingType.TownHall:
+                    TownHall newTownHall = new TownHall(clickLocation);
+                    contstruct = State.World.Constructibles.ToList();
+                    contstruct.Add(newTownHall);
+                    State.World.Constructibles = contstruct.ToArray();
+                    LastActionBuilder.Add(() => DestroyVillagesAtTile(new Vec2i(x, y)));
+                    break;
+            }
+            RedrawTiles();
+            RedrawVillages();
         }
 
     }
@@ -1177,7 +1677,37 @@ public class MapEditor : SceneBase
             State.World.MercenaryHouses = houses.ToArray();
             RedrawVillages();
         }
+        AncientTeleporter teleAtTile = StrategicUtilities.GetTeleAt(clickLocation);
+        if (teleAtTile != null)
+        {
+            LastActionBuilder.Add(() =>
+            {
+                var tempTele = State.World.AncientTeleporters.ToList();
+                tempTele.Add(teleAtTile);
+                State.World.AncientTeleporters = tempTele.ToArray();
+                RedrawVillages();
+            });
+            var teles = State.World.AncientTeleporters.ToList();
+            teles.Remove(teleAtTile);
+            State.World.AncientTeleporters = teles.ToArray();
+            RedrawVillages();
+        }
         ClaimableBuilding claimableAtTile = StrategicUtilities.GetClaimableAt(clickLocation);
+        if (claimableAtTile != null)
+        {
+            LastActionBuilder.Add(() =>
+            {
+                var tempClaimables = State.World.Claimables.ToList();
+                tempClaimables.Add(claimableAtTile);
+                State.World.Claimables = tempClaimables.ToArray();
+                RedrawVillages();
+            });
+            var claimables = State.World.Claimables.ToList();
+            claimables.Remove(claimableAtTile);
+            State.World.Claimables = claimables.ToArray();
+            RedrawVillages();
+        }
+        ConstructibleBuilding constructibleAtTile = StrategicUtilities.GetConstructibleAt(clickLocation);
         if (claimableAtTile != null)
         {
             LastActionBuilder.Add(() =>
@@ -1235,6 +1765,21 @@ public class MapEditor : SceneBase
         else
         {
             State.World.MercenaryHouses = new MercenaryHouse[0];
+        }if (map.teleLocations != null)
+        {
+            List<AncientTeleporter> teles = new List<AncientTeleporter>();
+            foreach (var tel in map.teleLocations)
+            {
+                teles.Add(new AncientTeleporter(tel));
+            }
+            if (teles.Count > 0)
+                State.World.AncientTeleporters = teles.ToArray();
+            else
+                State.World.AncientTeleporters = new AncientTeleporter[0];
+        }
+        else
+        {
+            State.World.AncientTeleporters = new AncientTeleporter[0];
         }
         if (map.claimables != null)
         {
@@ -1250,6 +1795,43 @@ public class MapEditor : SceneBase
         else
         {
             State.World.Claimables = new ClaimableBuilding[0];
+        }
+        if (map.constructibles != null)
+        {
+            List<ConstructibleBuilding> constructibles = new List<ConstructibleBuilding>();
+            foreach (var construct in map.constructibles)
+            {
+                if (construct.Type == ConstructibleType.WorkCamp)
+                    constructibles.Add(new WorkCamp(construct.Position));
+                if (construct.Type == ConstructibleType.LumberSite)
+                    constructibles.Add(new LumberSite(construct.Position));
+                if (construct.Type == ConstructibleType.Quarry)
+                    constructibles.Add(new Quarry(construct.Position));
+                if (construct.Type == ConstructibleType.CasterTower)
+                    constructibles.Add(new CasterTower(construct.Position));
+                if (construct.Type == ConstructibleType.BarrierTower)
+                    constructibles.Add(new BarrierTower(construct.Position));
+                if (construct.Type == ConstructibleType.DefEncampment)
+                    constructibles.Add(new DefenseEncampment(construct.Position));
+                if (construct.Type == ConstructibleType.Academy)
+                    constructibles.Add(new Academy(construct.Position));
+                if (construct.Type == ConstructibleType.DarkMagicTower)
+                    constructibles.Add(new BlackMagicTower(construct.Position));
+                if (construct.Type == ConstructibleType.TemporalTower)
+                    constructibles.Add(new TemporalTower(construct.Position));
+                if (construct.Type == ConstructibleType.Laboratory)
+                    constructibles.Add(new Laboratory(construct.Position));
+                if (construct.Type == ConstructibleType.Teleporter)
+                    constructibles.Add(new Teleporter(construct.Position));
+                if (construct.Type == ConstructibleType.TownHall)
+                    constructibles.Add(new TownHall(construct.Position));
+            }
+            if (constructibles.Count > 0)
+                State.World.Constructibles = constructibles.ToArray();
+        }
+        else
+        {
+            State.World.Constructibles = new ConstructibleBuilding[0];
         }
 
         Config.World.StrategicWorldSizeX = tiles.GetLength(0);
@@ -1281,11 +1863,46 @@ public class MapEditor : SceneBase
         {
             storedMercLocations.Add(mercHouse.Position);
         }
+        List<Vec2i> storedTeleLocations = new List<Vec2i>();
+        foreach (AncientTeleporter Tele in State.World.AncientTeleporters)
+        {
+            storedTeleLocations.Add(Tele.Position);
+        }
         List<MapClaimable> storedClaimables = new List<MapClaimable>();
+        List<MapConstructible> storedConstructibles = new List<MapConstructible>();
         foreach (ClaimableBuilding claimable in State.World.Claimables)
         {
             if (claimable is GoldMine)
                 storedClaimables.Add(new MapClaimable(ClaimableType.GoldMine, claimable.Position));
+        }
+        foreach (ConstructibleBuilding constructible in State.World.Constructibles)
+        {
+
+            if (constructible is WorkCamp)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.WorkCamp, constructible.Position));
+            if (constructible is LumberSite)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.LumberSite, constructible.Position));
+            if (constructible is Quarry)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.Quarry, constructible.Position));
+            if (constructible is CasterTower)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.CasterTower, constructible.Position));
+            if (constructible is BarrierTower)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.BarrierTower, constructible.Position));
+            if (constructible is DefenseEncampment)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.DefEncampment, constructible.Position));
+            if (constructible is Academy)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.Academy, constructible.Position));
+            if (constructible is BlackMagicTower)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.DarkMagicTower, constructible.Position));
+            if (constructible is TemporalTower)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.TemporalTower, constructible.Position));
+            if (constructible is Laboratory)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.Laboratory, constructible.Position));
+            if (constructible is Teleporter)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.Teleporter, constructible.Position));
+            if (constructible is TownHall)
+                storedConstructibles.Add(new MapConstructible(ConstructibleType.TownHall, constructible.Position));
+
         }
         Map map = new Map
         {
@@ -1405,6 +2022,16 @@ public class MapEditor : SceneBase
         }
         State.World.MercenaryHouses = newMercs.ToArray();
 
+        List<AncientTeleporter> newTele = new List<AncientTeleporter>();
+        foreach (AncientTeleporter tele in State.World.AncientTeleporters.ToList())
+        {
+            tele.Position.x += diffX;
+            tele.Position.y += diffY;
+            if (tele.Position.x < x - 1 && tele.Position.x > 0 && tele.Position.y < y - 1 && tele.Position.y > 0)
+                newTele.Add(tele);
+        }
+        State.World.AncientTeleporters = newTele.ToArray();
+
         List<ClaimableBuilding> newClaims = new List<ClaimableBuilding>();
         foreach (ClaimableBuilding claim in State.World.Claimables.ToList())
         {
@@ -1412,6 +2039,14 @@ public class MapEditor : SceneBase
             claim.Position.y += diffY;
             if (claim.Position.x < x - 1 && claim.Position.x > 0 && claim.Position.y < y - 1 && claim.Position.y > 0)
                 newClaims.Add(claim);
+        }
+        List<ConstructibleBuilding> newCosntruct = new List<ConstructibleBuilding>();
+        foreach (ConstructibleBuilding cosntruct in State.World.Constructibles.ToList())
+        {
+            cosntruct.Position.x += diffX;
+            cosntruct.Position.y += diffY;
+            if (cosntruct.Position.x < x - 1 && cosntruct.Position.x > 0 && cosntruct.Position.y < y - 1 && cosntruct.Position.y > 0)
+                newCosntruct.Add(cosntruct);
         }
         State.World.Claimables = newClaims.ToArray();
 
@@ -1483,9 +2118,14 @@ public class MapEditor : SceneBase
         if (villageAtCursor == null)
         {
             MercenaryHouse house = StrategicUtilities.GetMercenaryHouseAt(new Vec2i(ClickX, ClickY));
+            AncientTeleporter tele = StrategicUtilities.GetTeleAt(new Vec2i(ClickX, ClickY));
             if (house != null)
             {
                 Tooltip.text = "Mercenary House";
+            }
+            else if (tele != null)
+            {
+                Tooltip.text = "Ancient Teleporter";
             }
             else
             {

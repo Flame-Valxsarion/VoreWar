@@ -27,6 +27,21 @@ abstract class VoreTrait : Trait, IVoreCallback
     public virtual bool OnSwallow(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 }
 
+/* 
+ * Note to anyone adding to PermanentBoosts, if you would like to add your variable to the Custom Trait menu, follow these steps:
+ * 1. Add you variable to PermanantBoosts
+ * 2. Navigate to UI/Connectors/CustomTrait.cs
+ * 3. Add your variable to he CustomTraitComp Enum
+ *      3a. If you added to DirectionalStat, add both an Outgoing and an Incoming version instead.
+ * 4. Add your variable's Name and Description to ChangeToolTip(), following the current implementation.
+ * 5. If your variable is a bool, like OnLevelUpAllowAnyStat, add it to IsToggle, so the prefab becomes a toggle instead of an InputField
+ * 5. Navigate to Utility/CustomTraitBoost.cs and add your variable to the ToBooster() functinon with the proper modifier.
+ * 
+ * I apologize for the extra work, but this WAS a 9 step guide with a lot of moving parts before I spent two days making it as developer friendly as possible, 
+ * so I don't want to hear any belly aching. Enjoy.
+ * ~CaneSugarCat
+ */
+
 class PermanentBoosts
 {
     internal float ExpRequired = 1.0f;
@@ -48,7 +63,9 @@ class PermanentBoosts
     internal int RangedAttacks = 1;
     internal int VoreAttacks = 1;
     internal int SpellAttacks = 1;
+    internal float HealthMultiplier = 1.0f;
     internal float ManaMultiplier = 1.0f;
+    internal float StaminaMultiplier = 1.0f;
     internal int VoreMinimumOdds = 0;
     internal int TurnCanFlee = 8;
     internal int DigestionImmunityTurns = Config.DigestionGraceTurns;
@@ -59,6 +76,14 @@ class PermanentBoosts
     internal bool OnLevelUpAllowAnyStat = false;
     internal float Scale = 1f;
     internal float StatMult = 1f;
+    internal float StrengthMult = 1f;
+    internal float DexterityMult = 1f;
+    internal float VoracityMult = 1f;
+    internal float AgilityMult = 1f;
+    internal float WillMult = 1f;
+    internal float MindMult = 1f;
+    internal float EnduranceMult = 1f;
+    internal float StomachMult = 1f;
     internal float VirtualDexMult = 1;
     internal float VirtualStrMult = 1;
     internal float FireDamageTaken = 1;
@@ -66,6 +91,8 @@ class PermanentBoosts
     internal float ElecDamageTaken = 1;
     internal float GrowthDecayRate = 1;
     internal int SightRangeBoost = 0;
+    internal float DeployCostMult = 1f;
+    internal float UpkeepMult = 1f;
 }
 
 class DirectionalStat
@@ -195,8 +222,10 @@ static class TraitList
         [Traits.Stinger] = new Stinger(),
         [Traits.DefensiveStance] = new DefensiveStance(),
         [Traits.Ravenous] = new Ravenous(),
+        [Traits.EasilySatisfied] = new EasilySatisfied(),
         [Traits.Possession] = new Possession(),
         [Traits.UnpleasantDigestion] = new UnpleasantDigestion(),
+        [Traits.PleasantDigestion] = new PleasantDigestion(),
         [Traits.Parasite] = new Parasite(),
         [Traits.Whispers] = new Whispers(),
         [Traits.Metamorphosis] = new Metamorphosis(),
@@ -290,6 +319,7 @@ static class TraitList
         [Traits.LightFrame] = new Booster("Unit can melee attack twice in a turn, though it loses this ability while it contains any prey.  Unit also takes 25% more damage from all sources", (s) => { s.Incoming.MeleeDamage *= 1.25f; s.Incoming.RangedDamage *= 1.25f; s.Incoming.MagicDamage *= 1.25f; s.VirtualStrMult *= 1.7f; }),
         [Traits.Featherweight] = new Booster("Unit moves slightly faster (+1 AP) and gets a melee/vore dodge bonus, but takes extra damage from melee.", (s) => { s.SpeedBonus += 1; s.Incoming.MeleeShift += .75f; s.Incoming.VoreOddsMult *= 0.75f; s.Incoming.MeleeDamage *= 1.2f; }),
         [Traits.Elite] = new Booster("Unit is skilled and trained in advanced tactics but requires more Exp to level ( All stats +120% but 2x Exp required)", (s) => {s.StatMult *= 2.2f; s.ExpRequired *= 2.0f; }),
+        [Traits.Juggernaut] = new Booster("Unit's stats are increased by 100%, but MP regeneration is delayed by one turn after it regenerates MP.", (s) => {s.StatMult *= 2f;}),
         [Traits.PeakCondition] = new Booster("Unit is at the height of their physical condition (All stats × 1.5)", (s) => s.StatMult *= 1.5f),
         [Traits.Fit] = new Booster("Unit is in better shape than the average unit (All stats × 1.2)", (s) => s.StatMult *= 1.2f),
         [Traits.Illness] = new Booster("Unit is sick and is in poor shape (All stats × 0.8)", (s) => s.StatMult *= 0.8f),
@@ -316,7 +346,7 @@ static class TraitList
         [Traits.AccuteDodge] = new Booster("Unit has a 10% chance to minimise recieved damage when being attacked. (Excludes spells and vore damage).", (s) => { s.Outgoing.GrazeRateShift += 0.1f; }),
         [Traits.ViralDigestion] = new ViralDigestion(),
         [Traits.AwkwardShape] = new Booster("This unit has a very strange body type, making them harder to swallow and providing less sustenance as prey.", (s) => { s.Incoming.VoreOddsMult *= 0.75f; s.Outgoing.Nutrition *= 0.25f; }),
-        [Traits.Legendary] = new Booster("<b>This unit is a legendary predator renowned throughout the realm, possessing a wide array of skills learned from generations upon generations of experiences.</b> \n<b>StrongGullet:</b> May attempt <b>2</b> vore attacks per turn, each using half of max AP. \n<b>BornToMove:</b> Total prey does not affect unit's movement speed. \n<b>IronGut:</b> It is much harder for prey to escape this unit's innards once devoured. \n<b>MagicResistance:</b> This unit is harder to hit with magic. \n<b>GreatlyTempered:</b>Recieves less damage from ranged attacks, but full damage from melee attacks. \nCheat Trait", (s) => { s.VoreAttacks += 1; s.SpeedLossFromWeightMultiplier = 0; s.DodgeLossFromWeightMultiplier = 0.2f; s.Outgoing.ChanceToEscape *= 0.5f; s.Incoming.MagicShift += 0.2f; s.Incoming.RangedDamage *= .7f; }),
+        [Traits.Legendary] = new Booster("<b>This unit is a legendary predator renowned throughout the realm, possessing a wide array of skills learned from generations upon generations of experiences.</b> \n<b>StrongGullet:</b> May attempt <b>2</b> vore attacks per turn, each using half of max AP. \n<b>BornToMove:</b> Total prey does not affect unit's movement speed. \n<b>IronGut:</b> It is much harder for prey to escape this unit's innards once devoured. \n<b>MagicResistance:</b> This unit is harder to hit with magic. \n<b>GreatlyTempered:</b>Recieves less damage from ranged attacks, but full damage from melee attacks. \n<b>WideRanged:</b>Grants GiantSweep and SweepingSwallow abilities. \nCheat Trait", (s) => { s.VoreAttacks += 1; s.SpeedLossFromWeightMultiplier = 0; s.DodgeLossFromWeightMultiplier = 0.2f; s.Outgoing.ChanceToEscape *= 0.5f; s.Incoming.MagicShift += 0.2f; s.Incoming.RangedDamage *= .7f; }),
         [Traits.FireVulnerable] = new Booster("Unit takes extra damage from all sources of fire. (150%)", (s) => s.FireDamageTaken *= 1.5f),
         [Traits.IceVulnerable] = new Booster("Unit takes extra damage from all sources of ice. (150%)", (s) => s.IceDamageTaken *= 1.5f),
         [Traits.ElecVulnerable] = new Booster("Unit takes extra damage from all sources of electricity. (150%)", (s) => s.ElecDamageTaken *= 1.5f),
@@ -471,6 +501,18 @@ internal class Ravenous : Trait, IVoreAttackOdds
         }
     }
 }
+internal class EasilySatisfied : Trait, IVoreAttackOdds
+{
+    public EasilySatisfied() => Description = "Unit gets a reduction to vore chance if units are in its stomach";
+
+    public void VoreAttack(Actor_Unit attacker, ref float voreMult)
+    {
+        if (attacker.PredatorComponent.Fullness >= 1)
+        {
+            voreMult *= .5f;
+        }
+    }
+}
 
 internal class UnpleasantDigestion : VoreTrait
 {
@@ -484,6 +526,21 @@ internal class UnpleasantDigestion : VoreTrait
     public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
     {
         predUnit.Damage(1);
+        return true;
+    }
+}
+internal class PleasantDigestion : VoreTrait
+{
+    public PleasantDigestion()
+    {
+        Description = "While digesting, prey heals the predator";
+    }
+
+    public override bool IsPredTrait => false;
+
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    {
+        predUnit.Unit.Heal(1);
         return true;
     }
 }

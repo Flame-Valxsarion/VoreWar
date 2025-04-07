@@ -2,12 +2,14 @@
 using MapObjects;
 using OdinSerializer;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.CanvasScaler;
 
 public enum TacticalAIType
 {
@@ -40,6 +42,7 @@ public struct StrategicCreationArgs
     internal int[] Team;
     internal int MercCamps;
     internal int GoldMines;
+    internal int AncientTeleporters;
 
     internal WorldGenerator.MapGenArgs MapGen;
 
@@ -52,6 +55,7 @@ public struct StrategicCreationArgs
         crazyBuildings = false;
         MercCamps = 0;
         GoldMines = 0;
+        AncientTeleporters = 0;
 
         MapGen = new WorldGenerator.MapGenArgs();
 
@@ -87,6 +91,7 @@ public class CreateStrategicGame : MonoBehaviour
 
     public InputField GoldMines;
     public InputField MercenaryHouses;
+    public InputField AncientTeleporters;
 
     public Toggle SpawnTeamsTogether;
     public Toggle FirstTurnArmiesIdle;
@@ -620,6 +625,7 @@ public class CreateStrategicGame : MonoBehaviour
 
             }
             args.MercCamps = Convert.ToInt32(MercenaryHouses.text);
+            args.AncientTeleporters = Convert.ToInt32(AncientTeleporters.text);
             args.GoldMines = Convert.ToInt32(GoldMines.text);
             args.crazyBuildings = CrazyBuildings.isOn;
 
@@ -725,18 +731,20 @@ public class CreateStrategicGame : MonoBehaviour
             UIUnitSprite sprite = obj.GetComponentInChildren<UIUnitSprite>();
             Actor_Unit actor = new Actor_Unit(new Vec2i(0, 0), new Unit(1, (Race)i, 0, true));
             TextMeshProUGUI text = obj.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI dcosttext = obj.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI upkeeptext = obj.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
             obj.GetComponentInChildren<UnitInfoPanel>().Unit = actor.Unit;
             var racePar = RaceParameters.GetTraitData(actor.Unit);
             text.text = $"{(Race)i}\nBody Size: {State.RaceSettings.GetBodySize(actor.Unit.Race)}\nBase Stomach Size: {State.RaceSettings.GetStomachSize(actor.Unit.Race)}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
             sprite.UpdateSprites(actor);
+            dcosttext.text = (State.RaceSettings.GetDeployCost(actor.Unit.Race) * actor.Unit.TraitBoosts.DeployCostMult).ToString();
+            upkeeptext.text = (State.RaceSettings.GetUpkeep(actor.Unit.Race) * actor.Unit.TraitBoosts.UpkeepMult).ToString();
             Button button = obj.GetComponentInChildren<Button>();
             int temp = i;
             button.onClick.AddListener(() => AddRace(temp));
             button.onClick.AddListener(() => Destroy(obj));
         }
-
         RaceUI.gameObject.SetActive(true);
-
     }
 
     void AddRace(int race)

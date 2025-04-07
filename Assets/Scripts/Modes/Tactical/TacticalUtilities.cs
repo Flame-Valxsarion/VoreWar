@@ -280,7 +280,7 @@ static class TacticalUtilities
             return false;
         if (pred.Unit.Side == prey.Unit.Side)
         {
-            if (prey.Surrendered || pred.Unit.HasTrait(Traits.Cruel) || Config.AllowInfighting || pred.Unit.HasTrait(Traits.Endosoma) || !(prey.Unit.GetApparentSide(pred.Unit) == pred.Unit.FixedSide && prey.Unit.GetApparentSide(pred.Unit) == pred.Unit.GetApparentSide()) || GetMindControlSide(prey.Unit) != -1 || GetMindControlSide(pred.Unit) != -1 )
+            if (prey.Surrendered || pred.Unit.HasTrait(Traits.Cruel) || Config.AllowInfighting || pred.Unit.HasTrait(Traits.FriendlyStomach) || pred.Unit.HasTrait(Traits.Endosoma) || !(prey.Unit.GetApparentSide(pred.Unit) == pred.Unit.FixedSide && prey.Unit.GetApparentSide(pred.Unit) == pred.Unit.GetApparentSide()) || GetMindControlSide(prey.Unit) != -1 || GetMindControlSide(pred.Unit) != -1 )
                 return true;
             return false;
         }
@@ -629,10 +629,10 @@ static class TacticalUtilities
     }
 
 
-    //public bool IsWalkable(int x, int y, Actor_Unit actor)
-    //{
-    //    return TacticalTileInfo.CanWalkInto(tiles[x, y], actor);
-    //}
+    static public bool IsWalkable(int x, int y, Actor_Unit actor)
+    {
+        return TacticalTileInfo.CanWalkInto(tiles[x, y], actor);
+    }
 
 
     static public bool FlyableTile(int x, int y)
@@ -779,6 +779,18 @@ static class TacticalUtilities
             }
         }
         return unitList;
+    }
+    static internal Actor_Unit UnitOnTile(Vec2 target)
+    {
+        List<Actor_Unit> unitList = new List<Actor_Unit>();
+        foreach (Actor_Unit actor in Units)
+        {
+            if (actor.Position == target)
+            {
+                return actor;
+            }
+        }
+        return null;
     }
 
     static internal List<Vec2i> TilesOnPattern(Vec2i location, int[,] TargetTiles, int rows)
@@ -1054,26 +1066,73 @@ static class TacticalUtilities
             UnityEngine.Object.Destroy(UnitPickerUI.ActorFolder.transform.GetChild(i).gameObject);
         }
         Actor_Unit[] list = Units.Where(s => s.Unit.Side == side && s.Unit.IsDead && s.Unit.Type != UnitType.Summon && s.Unit.Level > 0).OrderByDescending(s => s.Unit.Experience).ToArray();
-        foreach (Actor_Unit actor in list)
+        foreach (Actor_Unit actorUnit in list)
         {
-            GameObject obj = UnityEngine.Object.Instantiate(UnitPickerUI.HiringUnitPanel, UnitPickerUI.ActorFolder);
+            Unit unit = actorUnit.Unit;
+            GameObject obj = GameObject.Instantiate(UnitPickerUI.HiringUnitPanel, UnitPickerUI.ActorFolder);
             UIUnitSprite sprite = obj.GetComponentInChildren<UIUnitSprite>();
-            Text text = obj.transform.GetChild(3).GetComponent<Text>();
-            text.text = $"Level: {actor.Unit.Level} Exp: {(int)actor.Unit.Experience}\n" +
-                $"Health : {100 * actor.Unit.HealthPct}%\n" +
-                $"Items: {actor.Unit.GetItem(0)?.Name} {actor.Unit.GetItem(1)?.Name}\n" +
-                $"Str: {actor.Unit.GetStatBase(Stat.Strength)} Dex: {actor.Unit.GetStatBase(Stat.Dexterity)} Agility: {actor.Unit.GetStatBase(Stat.Agility)}\n" +
-                $"Mind: {actor.Unit.GetStatBase(Stat.Mind)} Will: {actor.Unit.GetStatBase(Stat.Will)} Endurance: {actor.Unit.GetStatBase(Stat.Endurance)}\n";
-            if (actor.Unit.Predator)
-                text.text += $"Vore: {actor.Unit.GetStatBase(Stat.Voracity)} Stomach: {actor.Unit.GetStatBase(Stat.Stomach)}";
+            Actor_Unit actor = new Actor_Unit(new Vec2i(0, 0), unit);
+            //Text text = obj.transform.GetChild(3).GetComponent<Text>();
+            Text GenderText = obj.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>();
+            Text EXPText = obj.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(1).GetComponent<Text>();
+            GameObject EquipRow = obj.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(2).gameObject;
+            GameObject StatRow1 = obj.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(3).gameObject;
+            GameObject StatRow2 = obj.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(4).gameObject;
+            GameObject StatRow3 = obj.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(5).gameObject;
+            GameObject StatRow4 = obj.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(6).gameObject;
+            Text TraitList = obj.transform.GetChild(2).GetChild(0).GetChild(1).GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
+
+            string gender;
+            if (actor.Unit.GetGender() != Gender.None)
+            {
+                if (actor.Unit.GetGender() == Gender.Hermaphrodite)
+                    gender = "Herm";
+                else
+                    gender = actor.Unit.GetGender().ToString();
+                GenderText.text = $"{gender}";
+            }
+            EXPText.text = $"Level {unit.Level} ({(int)unit.Experience} EXP)";
+            if (actor.Unit.HasTrait(Traits.Resourceful))
+            {
+                EquipRow.transform.GetChild(2).gameObject.SetActive(true);
+                EquipRow.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = unit.GetItem(0)?.Name;
+                EquipRow.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = unit.GetItem(1)?.Name;
+                EquipRow.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = unit.GetItem(2)?.Name;
+            }
+            else
+            {
+                EquipRow.transform.GetChild(2).gameObject.SetActive(false);
+                EquipRow.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = unit.GetItem(0)?.Name;
+                EquipRow.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = unit.GetItem(1)?.Name;
+            }
+            StatRow1.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Strength).ToString();
+            StatRow1.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Dexterity).ToString();
+            StatRow2.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Mind).ToString();
+            StatRow2.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Will).ToString();
+            StatRow3.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Endurance).ToString();
+            StatRow3.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Agility).ToString();
+            if (actor.PredatorComponent != null)
+            {
+                StatRow4.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Voracity).ToString();
+                StatRow4.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = unit.GetStatBase(Stat.Stomach).ToString();
+            }
+            else
+                StatRow4.SetActive(false);
+            TraitList.text = RaceEditorPanel.TraitListToText(unit.GetTraits, true).Replace(", ", "\n");
+            //text.text += $"STR: {unit.GetStatBase(Stat.Strength)} DEX: { unit.GetStatBase(Stat.Dexterity)}\n" +
+            //    $"MND: {unit.GetStatBase(Stat.Mind)} WLL: { unit.GetStatBase(Stat.Will)} \n" +
+            //    $"END: {unit.GetStatBase(Stat.Endurance)} AGI: {unit.GetStatBase(Stat.Agility)}\n";
+            //if (actor.PredatorComponent != null)
+            //    text.text += $"VOR: {unit.GetStatBase(Stat.Voracity)} STM: { unit.GetStatBase(Stat.Stomach)}";
             actor.UpdateBestWeapons();
             sprite.UpdateSprites(actor);
-            sprite.Name.text = actor.Unit.Name;
+            sprite.Name.text = unit.Name;
             Button button = obj.GetComponentInChildren<Button>();
-            button.onClick.AddListener(() => Resurrect(loc, actor));
+            button.GetComponentInChildren<Text>().text = "Resurrect";
+            button.onClick.AddListener(() => Resurrect(loc, actorUnit));
             button.onClick.AddListener(() => UnitPickerUI.gameObject.SetActive(false));
         }
-        UnitPickerUI.ActorFolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 300 * (1 + (list.Length / 3)));
+        UnitPickerUI.ActorFolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 300 * (1 + (children) / 3));
         UnitPickerUI.gameObject.SetActive(true);
     }
 
@@ -1138,6 +1197,7 @@ static class TacticalUtilities
             sprite.UpdateSprites(actor);
             sprite.Name.text = actor.Unit.Name;
             Button button = obj.GetComponentInChildren<Button>();
+            button.GetComponentInChildren<Text>().text = "Reanimate";
             button.onClick.AddListener(() => {
                 State.GameManager.SoundManager.PlaySpellCast(SpellList.Summon, actor);
                 Reanimate(loc, actor, unit);
@@ -1375,7 +1435,7 @@ static class TacticalUtilities
         return false;
     }
 
-    internal static void ForceFeed(Actor_Unit actor, Actor_Unit targetPred)
+    internal static void ForceFeed(Actor_Unit actor, Actor_Unit targetPred, bool DisablecontrolBypass = true)
     {
         float r = (float)State.Rand.NextDouble();
         if (targetPred.Unit.Predator)
@@ -1389,7 +1449,7 @@ static class TacticalUtilities
             if (targetPred.Unit.CanCockVore && State.RaceSettings.GetVoreTypes(targetPred.Unit.Race).Contains(VoreType.CockVore)) possibilities.Add("Cock", PreyLocation.balls);
             if (targetPred.Unit.CanUnbirth && State.RaceSettings.GetVoreTypes(targetPred.Unit.Race).Contains(VoreType.Unbirth)) possibilities.Add("Pussy", PreyLocation.womb);
 
-            if (State.GameManager.TacticalMode.IsPlayerInControl && State.GameManager.CurrentScene == State.GameManager.TacticalMode && possibilities.Count > 1)
+            if (State.GameManager.TacticalMode.IsPlayerInControl && State.GameManager.CurrentScene == State.GameManager.TacticalMode && possibilities.Count > 1 && DisablecontrolBypass)
             {
                 var box = State.GameManager.CreateOptionsBox();
                 box.SetData($"Which way do you want to enter?", "Maw", () => targetPred.PredatorComponent.ForceConsume(actor, preyLocation), possibilities.Keys.ElementAtOrDefault(1), () => targetPred.PredatorComponent.ForceConsume(actor, possibilities.Values.ElementAtOrDefault(1)), possibilities.Keys.ElementAtOrDefault(2), () => targetPred.PredatorComponent.ForceConsume(actor, possibilities.Values.ElementAtOrDefault(2)), possibilities.Keys.ElementAtOrDefault(3), () => targetPred.PredatorComponent.ForceConsume(actor, possibilities.Values.ElementAtOrDefault(3)), possibilities.Keys.ElementAtOrDefault(4), () => targetPred.PredatorComponent.ForceConsume(actor, possibilities.Values.ElementAtOrDefault(4)));
@@ -1399,7 +1459,7 @@ static class TacticalUtilities
             {
                 preyLocation = possibilities.Values.ToList()[State.Rand.Next(possibilities.Count)];
                 actor.Movement = 0;
-                targetPred.PredatorComponent.ForceConsume(actor, preyLocation);
+                targetPred.PredatorComponent.ForceConsumeAuto(actor);
             }
         }
         else
@@ -1488,7 +1548,7 @@ static class TacticalUtilities
 
     internal static bool IsPreyEndoTargetForUnit(Prey preyUnit, Unit unit)
     {
-        return unit.HasTrait(Traits.Endosoma) && (preyUnit.Unit.FixedSide == unit.GetApparentSide(preyUnit.Unit)) && preyUnit.Unit.IsDead == false;
+        return (unit.HasTrait(Traits.FriendlyStomach) && (preyUnit.Unit.FixedSide == unit.GetApparentSide(preyUnit.Unit))) || unit.HasTrait(Traits.Endosoma) && preyUnit.Unit.IsDead == false;
     }
 }
 

@@ -31,6 +31,9 @@ public enum VillageBuilding : int
     market3,
     MagicGuild,
     Cathedral,
+    builder1,
+    builder2,
+    builder3,
     LastIndex, //Keep this last
 
 }
@@ -559,6 +562,16 @@ public static class VillageBuildingList
             RequiresSubjugatedRace = true,
             Cost = new BuildingCost() { Wealth = 180 },
             Boosts = new VillageBoosts() { MaxHappinessAdd = 15, },
+        },
+
+        [VillageBuilding.builder1] = new VillageBuildingDefinition(
+            VillageBuilding.builder1, "Builder Workshop",
+            "A place for builders to work. Max Builders +1"
+        )
+        {
+            RequiresSubjugatedRace = true,
+            Cost = new BuildingCost() { Wealth = 75 },
+            Boosts = new VillageBoosts() { BuilderCount = 1, },
         },
 
     };

@@ -38,6 +38,7 @@
     UnstableMana = 26,
     Meditate = 27,
     Bloodrite = 28,
+    Protect = 29,
 
     ForcePulse = 35,
     Trance = 36,
@@ -69,6 +70,8 @@
     ManaExpolsion = 114,
     Conduit = 115,
     Flamberge = 116,
-    Explode = 117,
+    ForkLightning = 117,
+    Explode = 118,
+    SweepingSwallow = 119,
 }
 

@@ -52,6 +52,10 @@ static class StrategicUtilities
     public static Army[] GetAllHostileArmies(Empire empire, bool includeGoblins = false)
     {
         List<Army> hostileArmies = new List<Army>();
+        if (empire == null)
+        {
+            return hostileArmies.ToArray();
+        }
         foreach (Empire hostileEmpire in State.World.AllActiveEmpires)
         {
             if (empire.IsEnemy(hostileEmpire) == false || (includeGoblins == false && hostileEmpire.Team == -200))
@@ -62,6 +66,43 @@ static class StrategicUtilities
             }
         }
         return hostileArmies.ToArray();
+    }
+    public static Army[] GetAllAlliedArmies(Empire empire, bool includeGoblins = false)
+    {
+        List<Army> allyArmies = new List<Army>();
+        if (empire == null)
+        {
+            return allyArmies.ToArray();
+        }
+        foreach (Empire hostileEmpire in State.World.AllActiveEmpires)
+        {
+            if (empire.IsEnemy(hostileEmpire) == true || (includeGoblins == false && hostileEmpire.Team == -200))
+                continue;
+            foreach (Army army in hostileEmpire.Armies)
+            {
+                allyArmies.Add(army);
+            }
+        }
+        return allyArmies.ToArray();
+    }
+
+    public static ConstructibleBuilding[] GetAllHostileBuildings(Empire empire)
+    {
+        List<ConstructibleBuilding> hostileBuildings = new List<ConstructibleBuilding>();
+        if (empire.Buildings == null)
+        {
+            empire.Buildings = new List<ConstructibleBuilding>();
+        }
+        foreach (Empire hostileEmpire in State.World.AllActiveEmpires)
+        {
+            if (empire.IsEnemy(hostileEmpire) == false)
+                continue;
+            foreach (ConstructibleBuilding building in hostileEmpire.Buildings)
+            {
+                hostileBuildings.Add(building);
+            }
+        }
+        return hostileBuildings.ToArray();
     }
 
     public static Army ArmyAt(Vec2i location)
@@ -109,6 +150,17 @@ static class StrategicUtilities
         }
         return null;
     }
+    public static AncientTeleporter GetTeleAt(Vec2i location)
+    {
+        foreach (AncientTeleporter tele in State.World.AncientTeleporters)
+        {
+            if (tele.Position.Matches(location))
+            {
+                return tele;
+            }
+        }
+        return null;
+    }
 
     public static ClaimableBuilding GetClaimableAt(Vec2i location)
     {
@@ -120,6 +172,31 @@ static class StrategicUtilities
             }
         }
         return null;
+    }
+
+    public static ConstructibleBuilding GetConstructibleAt(Vec2i location)
+    {
+        foreach (ConstructibleBuilding constructible in State.World.Constructibles)
+        {
+            if (constructible.Position.Matches(location))
+            {
+                return constructible;
+            }
+        }
+        return null;
+    }
+
+    public static bool IsSpaceOpenForBuild(Vec2i location)
+    {
+        if (GetVillageAt(location) == null && 
+            GetMercenaryHouseAt(location) == null && 
+            GetTeleAt(location)==null &&
+            GetClaimableAt(location) == null &&
+            GetConstructibleAt(location) == null)
+        {
+            return true;
+        }
+        return false;
     }
 
     public static void TryClaim(Vec2i location, Empire empire)
@@ -145,6 +222,35 @@ static class StrategicUtilities
                     State.GameManager.StrategyMode.UndoMoves.Clear();
                     RelationsManager.GoldMineTaken(empire, claimable.Owner);
                     claimable.Owner = empire;
+                }
+
+            }
+            State.GameManager.StrategyMode.RedrawVillages();
+        }
+
+        ConstructibleBuilding construct = GetConstructibleAt(location);
+        if (construct != null)
+        {
+            if (empire.Race >= Race.Vagrants)
+            {
+                construct.Owner = null;
+            }
+            else
+            {
+                if (construct.Owner != null && RelationsManager.GetRelation(construct.Owner.Side, empire.Side).Type != RelationState.Enemies)
+                {
+                    return;
+                }
+                if (construct.Owner != empire && (construct.CaptureTime <= 0 || construct.Owner == null))
+                {
+                    State.GameManager.StrategyMode.UndoMoves.Clear();
+                    RelationsManager.GoldMineTaken(empire, construct.Owner);
+                    if (construct.Owner != null)
+                    {
+                        construct.Owner.Buildings.Remove(construct);
+                    }
+                    empire.Buildings.Add(construct);
+                    construct.Owner = empire;
                 }
 
             }
@@ -638,6 +744,20 @@ static class StrategicUtilities
         }
         return retMercs.ToArray();
     }
+    internal static AncientTeleporter[] GetUnoccupiedAncientTeleporter(Empire empire)
+    {
+        AncientTeleporter[] teles = State.World.AncientTeleporters;
+        List<AncientTeleporter> retTeles = new List<AncientTeleporter>();
+        for (int i = 0; i < State.World.AncientTeleporters.Length; i++)
+        {
+            if (ArmyAt(teles[i].Position) == null)
+            {
+                retTeles.Add(teles[i]);
+
+            }
+        }
+        return retTeles.ToArray();
+    }
 
     internal static bool IsVillageOccupied(Empire empire, int i)
     {
@@ -672,6 +792,74 @@ static class StrategicUtilities
                 return true;
         }
         return false;
+    }    
+
+    internal static List<Army> GetEnemyArmyWithinXTiles(ConstructibleBuilding building, int tiles)
+    {
+        List<Army> armyList = new List<Army>();
+        foreach (Army enemyArmy in GetAllHostileArmies(building.Owner))
+        {
+            if (enemyArmy.Position.GetNumberOfMovesDistance(building.Position) <= tiles)
+            {
+                armyList.Add(enemyArmy);
+            }
+        }
+        return armyList;
+    }
+    internal static List<Army> GetOwnerArmyWithinXTiles(ConstructibleBuilding building, int tiles)
+    {
+        List<Army> armyList = new List<Army>();
+        foreach (Army allyArmy in building.Owner.Armies)
+        {
+            if (allyArmy.Position.GetNumberOfMovesDistance(building.Position) <= tiles)
+                armyList.Add(allyArmy);
+        }
+        return armyList;
+    }
+    internal static List<Army> GetAllyArmyWithinXTiles(Vec2i pos, int tiles, Empire empire)
+    {
+        List<Army> armyList = new List<Army>();
+        foreach (Army allyArmy in GetAllArmies().Where(a=> a.Empire == empire))
+        {
+            if (allyArmy.Position.GetNumberOfMovesDistance(pos) <= tiles)
+                armyList.Add(allyArmy);
+        }
+
+        return armyList;
+    }
+    internal static List<AncientTeleporter> GetAncientTeleportersWithinXTiles(Vec2i pos, int tiles)
+    {
+        List<AncientTeleporter> teleList = new List<AncientTeleporter>();
+        foreach (AncientTeleporter tele in State.World.AncientTeleporters)
+        {
+            if (tele.Position.GetNumberOfMovesDistance(pos) <= tiles)
+                teleList.Add(tele);
+        }
+
+        return teleList;
+    }
+    internal static List<ConstructibleBuilding> GetEnemyBuildingsWithinXTiles(Army army, int tiles)
+    {
+        List<ConstructibleBuilding> buildingList = new List<ConstructibleBuilding>();
+        foreach (ConstructibleBuilding enemyBuilding in GetAllHostileBuildings(army.Empire))
+        {
+            if (enemyBuilding.Position.GetNumberOfMovesDistance(army.Position) <= tiles)
+                buildingList.Add(enemyBuilding);
+        }
+        return buildingList;
+    }
+    internal static List<ConstructibleBuilding> GetActiveEmpireBuildingsWithinXTiles(Vec2i position, Empire empire, int tiles)
+    {
+        List<ConstructibleBuilding> buildingList = new List<ConstructibleBuilding>();
+        foreach (ConstructibleBuilding empireBuilding in empire.Buildings)
+        {
+            if (!empireBuilding.active)
+               continue;
+         
+            if (empireBuilding.Position.GetNumberOfMovesDistance(position) <= tiles)
+                buildingList.Add(empireBuilding);
+        }
+        return buildingList;
     }
 
     internal static void BuyBasicWeapons(Village village)
@@ -1065,6 +1253,37 @@ static class StrategicUtilities
                 Debug.Log(unit.Name + " is returning to " + closestFriendlyVillage.Name);
             }
         };
+    }
+
+    static public bool ArmyCanFitUnit(Army army, Unit unit)
+    {
+        army.RecalculateSizeValue();
+        if (army.RemainnigSize - (State.RaceSettings.GetDeployCost(unit.Race) * unit.TraitBoosts.DeployCostMult) >= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    static public List<Vec2i> GetTilesInRange(Vec2i location, int range)
+    {
+        List<Vec2i> tile_positions = new List<Vec2i>();
+        int outer_matrix_cursor = 0;
+        for (int y = location.y + range; y >= location.y - range; y--)
+        {
+            int inner_matrix_cursor = 0;
+            for (int x = location.x + range; x >= location.x - range; x--)
+            {
+                if (x < 0 || y < 0 || x > State.World.Tiles.GetUpperBound(0) || y > State.World.Tiles.GetUpperBound(1))
+                {
+                    inner_matrix_cursor++;
+                    continue;
+                }
+                tile_positions.Add(new Vec2i(x, y));
+            }
+            outer_matrix_cursor++;
+        }
+        return tile_positions;
     }
 }
 

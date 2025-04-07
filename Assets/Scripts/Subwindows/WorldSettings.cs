@@ -135,7 +135,9 @@ public class WorldSettings : MonoBehaviour
             State.World.MainEmpires[i].UnityColor = CreateStrategicGame.ColorFromIndex(Empires[i].PrimaryColor.value);
             State.World.MainEmpires[i].UnitySecondaryColor = CreateStrategicGame.GetDarkerColor(CreateStrategicGame.ColorFromIndex(Empires[i].SecondaryColor.value));
             State.World.MainEmpires[i].MaxArmySize = (int)Empires[i].MaxArmySize.value;
+            State.World.MainEmpires[i].OrigMaxArmySize = (int)Empires[i].MaxArmySize.value;
             State.World.MainEmpires[i].MaxGarrisonSize = (int)Empires[i].MaxGarrisonSize.value;
+            State.World.MainEmpires[i].OrigMaxGarrisonSize = (int)Empires[i].MaxGarrisonSize.value;
             State.World.MainEmpires[i].TurnOrder = Convert.ToInt32(Empires[i].TurnOrder.text);
         }
         if (Config.Diplomacy == false)

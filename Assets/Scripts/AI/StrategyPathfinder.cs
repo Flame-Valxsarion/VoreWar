@@ -376,6 +376,8 @@ public static class StrategyPathfinder
     {
         List<StrategicTileType> impassables = new List<StrategicTileType>() 
         { StrategicTileType.mountain, StrategicTileType.snowMountain, StrategicTileType.water, StrategicTileType.lava, StrategicTileType.ocean, StrategicTileType.brokenCliffs };
+        if (State.World.Doodads != null && State.World.Doodads[pos.x, pos.y] == StrategicDoodadType.wall)
+            return false;
         if (State.World.Doodads != null && State.World.Doodads[pos.x, pos.y] >= StrategicDoodadType.bridgeVertical && State.World.Doodads[pos.x, pos.y] <= StrategicDoodadType.virtualBridgeIntersection)
             return true;
         if (Grid[pos.x, pos.y].FriendlyOccupied)

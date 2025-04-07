@@ -79,13 +79,14 @@ public class InfoPanel
         UnitInfoPanel.ExpBar.GetComponentInChildren<Text>().text = $"EXP: {(int)actor.Experience} ";
         if (showNextText)
             UnitInfoPanel.ExpBar.GetComponentInChildren<Text>().text += $"(To Next: {actor.ExperienceRequiredForNextLevel - (int)actor.Experience})";
-        UnitInfoPanel.HealthBar.GetComponentInChildren<Text>().text = $"Health: {actor.Health}/{actor.MaxHealth}";
+        UnitInfoPanel.HealthBar.GetComponentInChildren<Text>().text = $"Health: {actor.Health}/{actor.MaxHealth}" + (actor.Barrier > 0 ? $" + {actor.Barrier}" : "");
         UnitInfoPanel.ManaBar.GetComponentInChildren<Text>().text = $"Mana: {actor.Mana}/{actor.MaxMana}";
         if (actor.ExperienceRequiredForNextLevel != 0)
             UnitInfoPanel.ExpBar.value = (actor.Experience - actor.GetExperienceRequiredForLevel(actor.Level - 1)) / (actor.ExperienceRequiredForNextLevel - actor.GetExperienceRequiredForLevel(actor.Level - 1));
         else
             UnitInfoPanel.ExpBar.value = 1;
         UnitInfoPanel.HealthBar.value = actor.HealthPct;
+        UnitInfoPanel.BarrierBar.value = actor.BarrierPct;
         UnitInfoPanel.ManaBar.value = (float)actor.Mana / actor.MaxMana;
     }
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
 public enum UnitType
 {
@@ -15,6 +16,7 @@ public enum UnitType
     Adventurer,
     Spawn,
     Boss,
+    Reinforcement,
 }
 
 public enum AIClass
@@ -107,7 +109,12 @@ public class Unit
     [OdinSerialize]
     internal int Mana { get; private set; }
 
+    [OdinSerialize]
+    internal int Barrier { get; private set; }
+    [OdinSerialize]
+    internal int MaxBarrier { get; private set; }
     internal int MaxMana => (int)(GetStatBase(Stat.Mind) + GetStatBase(Stat.Will) * 2 * TraitBoosts.ManaMultiplier);
+    internal int MaxStamina => (int)((GetStatBase(Stat.Strength) + GetStatBase(Stat.Endurance) * 2) * TraitBoosts.StaminaMultiplier);
 
     private int _maxHealth = 99999;
 
@@ -118,7 +125,7 @@ public class Unit
             if (Stats == null) return 1;
             if (!Config.StatBoostsAffectMaxHP) {
                 _maxHealth = Stats[(int)Stat.Endurance] * 2 + Stats[(int)Stat.Strength];
-                 return _maxHealth;
+                 return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
             }
 
             int oldMax = _maxHealth;
@@ -126,10 +133,9 @@ public class Unit
             if (oldMax > 1 && oldMax != _maxHealth && _healthPct > 0)
             {
                 int healthChange = (int)Math.Round((_maxHealth - oldMax) * _healthPct);
-                if (healthChange > 0)
-                    Health = Math.Min(_maxHealth,Math.Max(1, Health + healthChange));
+                Health = Math.Min(_maxHealth,Math.Max(1, Health + healthChange));
             }
-            return _maxHealth;
+            return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
         }
         set => _maxHealth = value;
     }
@@ -137,6 +143,11 @@ public class Unit
     {
         throw new NotImplementedException();
     }
+
+    [OdinSerialize]
+    internal int DeployCost;
+    [OdinSerialize]
+    internal float Upkeep;
 
     [OdinSerialize]
     internal AIClass AIClass;
@@ -521,6 +532,68 @@ public class Unit
             Mana = MaxMana;
     }
 
+    internal bool SpendStam(int amount)
+    {
+        if (Stamina >= amount)
+        {
+            Stamina -= amount;
+            return true;
+        }
+        return false;
+    }
+    internal void RestoreStamPct(float pct)
+    {
+        Stamina += (int)(MaxStamina * pct);
+        if (Stamina > MaxStamina)
+            Stamina = MaxStamina;
+    }
+    internal int DamageBarrier(int amount)
+    {
+        int remaining = amount;
+        if (remaining > Barrier)
+        {
+            remaining = amount - Barrier;
+            Barrier = 0;
+            MaxBarrier = 1;
+        }
+        else
+        {
+            remaining = 0;
+            Barrier -= amount;
+            if (Barrier > MaxBarrier)
+                MaxBarrier = Barrier;
+        }
+        return remaining;
+    }
+    internal void RestoreBarrier(int amt)
+    {
+        Barrier += amt;
+        if (Barrier > MaxBarrier)
+            MaxBarrier = Barrier;
+    }
+    internal void RestoreBarrierPct(float pct)
+    {
+        Barrier += (int)(Barrier * pct);
+        if (Barrier > MaxBarrier)
+            MaxBarrier = Barrier;
+    }
+    internal void SetBarrier(int amount)
+    {
+        Barrier = amount;
+        MaxBarrier = amount;
+        if (MaxBarrier <= 0)
+        {
+            MaxBarrier = 1;
+        }
+    }
+
+    internal void RestoreStam(int amt)
+    {
+        Stamina += amt;
+        if (Stamina > MaxStamina)
+            Stamina = MaxStamina;
+    }
+
 
     internal int NearbyFriendlies = 0;
     internal int NearbyEnemies = 0;
@@ -548,6 +621,8 @@ public class Unit
     protected List<Traits> SharedTraits;
     [OdinSerialize]
     protected List<Traits> PersistentSharedTraits;
+    [OdinSerialize]
+    protected List<Traits> ActiveConditionalTraits;
 
     /// <summary>
     /// Traits that are considered to be permanent, i.e. do not disappear during refreshes
@@ -560,6 +635,13 @@ public class Unit
     /// </summary>
     [OdinSerialize]
     protected List<Traits> RemovedTraits;
+
+    /// <summary>
+    /// Holds All of a units conditional traits.
+    /// Key: Trait, Value: If Trait is active
+    /// </summary>
+    [OdinSerialize]
+    internal Dictionary<ConditionalTraitContainer, bool> AllConditionalTraits;
 
     //internal List<Trait> TraitsList = new List<Trait>();
     internal List<IStatBoost> StatBoosts;
@@ -576,6 +658,8 @@ public class Unit
     [OdinSerialize]
     public Actor_Unit BoundUnit;
 
+    [OdinSerialize]
+    internal int Stamina;
 
     /// <summary>
     /// Creates an empty unit for various purposes
@@ -594,6 +678,8 @@ public class Unit
         Stats[(int)Stat.Stomach] = 12 + State.Rand.Next(4);
         Health = MaxHealth;
         Mana = MaxMana;
+        Stamina = MaxStamina;
+        Barrier = 0;
     }
 
     public Unit(int side, Race race, int startingXP, bool predator, UnitType type = UnitType.Soldier, bool immuneToDefectons = false)
@@ -606,6 +692,7 @@ public class Unit
         Tags = new List<Traits>();
         PermanentTraits = new List<Traits>();
         RemovedTraits = new List<Traits>();
+        AllConditionalTraits = new Dictionary<ConditionalTraitContainer, bool>();
         Type = type;
 
         Predator = predator;
@@ -652,6 +739,8 @@ public class Unit
         RandomSkills();
         Health = MaxHealth;
         Mana = MaxMana;
+        Stamina = MaxStamina;
+        Barrier = 0;
 
         if (UniformDataStorer.GetUniformOdds(race) >= State.Rand.NextDouble())
         {
@@ -1313,6 +1402,24 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             return _manaPct;
         }
     }
+    private float _stamPct = 100f;
+    public float StamPct
+    {
+        get
+        {
+            _stamPct = (float)Stamina / MaxStamina;
+            return _stamPct;
+        }
+    }
+    private float _barrierPct = 1f;
+    public float BarrierPct
+    {
+        get
+        {
+            _barrierPct = (float)Barrier / MaxBarrier;
+            return _barrierPct;
+        }
+    }
 
     internal float GetHealthPctWithoutUpdating() // Important for calculating stat boosts that depend on health percentages, otherwise it's circular.
     {
@@ -1331,8 +1438,16 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             if (PermanentTraits == null)
                 return Tags.ToList();
             if (SharedTraits == null)
-                return Tags.Concat(PermanentTraits).ToList();
-            return Tags.Concat(PermanentTraits).ToList().Concat(SharedTraits).ToList();
+            {
+                if (ActiveConditionalTraits == null)              
+                    return Tags.Concat(PermanentTraits).ToList();
+                return Tags.Concat(PermanentTraits).ToList().Concat(ActiveConditionalTraits).ToList();
+            }
+            if (ActiveConditionalTraits == null)
+            {
+                return Tags.Concat(PermanentTraits).ToList().Concat(SharedTraits).ToList();
+            }
+            return Tags.Concat(PermanentTraits).ToList().Concat(SharedTraits).ToList().Concat(ActiveConditionalTraits).ToList();
         }
     }
 
@@ -1433,11 +1548,35 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             bonus += stacks + (GetStatBase(Stat.Mind) * (stacks/10));
         }
 
+        if (GetStatusEffect(StatusEffectType.Bolstered) != null)
+        {
+            int stacks = GetStatusEffect(StatusEffectType.Bolstered).Duration;
+            bonus += stacks + (GetStatBase(stat) * (stacks / 100));
+        }
+
         bonus -= GetStatBase(stat) * (GetStatusEffect(StatusEffectType.Shaken)?.Strength ?? 0);
+
+        bonus -= GetStatBase(stat) * (GetStatusEffect(StatusEffectType.Weakness)?.Duration/33 ?? 0);
 
         if (GetStatusEffect(StatusEffectType.Webbed) != null)
             bonus -= GetStatBase(stat) * .3f;
 
+        if (GetStatusEffect(StatusEffectType.Lethargy) != null)
+        {
+            StatusEffect eff = GetStatusEffect(StatusEffectType.Lethargy);
+            if (stat == Stat.Strength)
+            {
+                bonus -= GetStatBase(stat) * (eff.Strength * eff.Duration / 50);
+            }
+            if (stat == Stat.Dexterity)
+            {
+                bonus -= GetStatBase(stat) * (eff.Strength * eff.Duration / 50);
+            }
+            if (stat == Stat.Agility)
+            {
+                bonus -= GetStatBase(stat) * (eff.Strength * eff.Duration / 50);
+            }
+        }
 
         return Mathf.RoundToInt(bonus);
 
@@ -1449,7 +1588,35 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         total *= GetScale();
 
         total *= TraitBoosts.StatMult;
-
+        switch (stat)
+        {
+            case Stat.Strength:
+                total *= TraitBoosts.StrengthMult;
+                break;
+            case Stat.Dexterity:
+                total *= TraitBoosts.DexterityMult;
+                break;
+            case Stat.Voracity:
+                total *= TraitBoosts.VoracityMult;
+                break;
+            case Stat.Agility:
+                total *= TraitBoosts.AgilityMult;
+                break;
+            case Stat.Will:
+                total *= TraitBoosts.WillMult;
+                break;
+            case Stat.Mind:
+                total *= TraitBoosts.MindMult;
+                break;
+            case Stat.Endurance:
+                total *= TraitBoosts.EnduranceMult;
+                break;
+            case Stat.Stomach:
+                total *= TraitBoosts.StomachMult;
+                break;
+            default:
+                break;
+        }
         if (total < 1)
             return 1;
 
@@ -1576,12 +1743,18 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
     public int Heal(int amount)
     {
         int diff = MaxHealth - Health;
-        Health += amount;
+        int modAmount = amount;
+        if (GetStatusEffect(StatusEffectType.Necrosis) != null)
+        {
+            float effect = 0.25f * GetStatusEffect(StatusEffectType.Necrosis).Strength;
+            modAmount -= (int)Math.Round(modAmount * effect);
+        }
+        Health += modAmount;
         if (Health > MaxHealth)
         {
             Health = MaxHealth;
         }
-        int actualHeal = Math.Min(diff, amount);
+        int actualHeal = Math.Min(diff, modAmount);
         State.GameManager.TacticalMode?.TacticalStats?.RegisterHealing(actualHeal, Side);
         return actualHeal;
     }
@@ -1605,15 +1778,25 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         {
             if (!(hideSecret && secretTags.Contains(Tags[i])))
             {
+                bool color = false;
+                string tagString = "";
                 if (ret != "")
                     ret += "\n";
                 if (TemporaryTraits != null && TemporaryTraits.Count > 0 && TemporaryTraits.Contains(Tags[i]))
                 {
                     if (PermanentTraits != null && PermanentTraits.Count > 0 && !PermanentTraits.Contains(Tags[i]))
-                        ret += "<color=#402B8Dff>" + Tags[i].ToString() + "</color>";
+                        color = true;
                 }
+                if (State.RandomizeLists.Any(rl => (Traits)rl.id == Tags[i]))
+                    tagString = State.RandomizeLists.Where(rl => (Traits)rl.id == Tags[i]).FirstOrDefault().name;
+                else if (State.CustomTraitList.Any(ct => (Traits)ct.id == Tags[i]))
+                    tagString = State.CustomTraitList.Where(ct => (Traits)ct.id == Tags[i]).FirstOrDefault().name;
+                else if (State.ConditionalTraitList.Any(ct => (Traits)ct.id == Tags[i]))
+                    tagString = State.ConditionalTraitList.Where(ct => (Traits)ct.id == Tags[i]).FirstOrDefault().name;
                 else
-                    ret += Tags[i].ToString();
+                    tagString = Tags[i].ToString();
+
+                ret += color ? "<color=#402B8Dff>" + tagString + "</color>" : tagString;
             }
         }
         if (PermanentTraits != null && PermanentTraits.Count > 0)
@@ -1626,8 +1809,15 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                 {
                     if (ret != "")
                         ret += "\n";
-                    ret += PermanentTraits[i].ToString();
-                }
+                    if (State.RandomizeLists.Any(rl => (Traits)rl.id == PermanentTraits[i]))
+                        ret += State.RandomizeLists.Where(rl => (Traits)rl.id == PermanentTraits[i]).FirstOrDefault().name;
+                    else if (State.CustomTraitList.Any(ct => (Traits)ct.id == PermanentTraits[i]))
+                        ret += State.CustomTraitList.Where(ct=> (Traits)ct.id == PermanentTraits[i]).FirstOrDefault().name;
+                    else if (State.ConditionalTraitList.Any(ct => (Traits)ct.id == PermanentTraits[i]))
+                        ret += State.ConditionalTraitList.Where(ct=> (Traits)ct.id == PermanentTraits[i]).FirstOrDefault().name;
+                    else
+                        ret += PermanentTraits[i].ToString();
+                    }
             }
         }
         return ret;
@@ -1656,6 +1846,12 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         if (HasTrait(traitIdToAdd))
             return;
 
+        if (traitIdToAdd >= (Traits)6000)
+        {
+            var newTrait = State.ConditionalTraitList.Where(t => t.id == (int)traitIdToAdd).First();
+            AllConditionalTraits.Add(newTrait, ConditionalTraitConditionChecker.StrategicTraitConditionActive(this, newTrait));
+        }
+
         Tags.Add(traitIdToAdd);
         RecalculateStatBoosts();
     }
@@ -1673,6 +1869,12 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
         if (HasTrait(traitIdToAdd))
             return false;
+
+        if (traitIdToAdd >= (Traits)6000)
+        {
+            var newTrait = State.ConditionalTraitList.Where(t => t.id == (int)traitIdToAdd).First();
+            AllConditionalTraits.Add(newTrait, ConditionalTraitConditionChecker.StrategicTraitConditionActive(this,newTrait));
+        }
 
         PermanentTraits.Add(traitIdToAdd);
         RecalculateStatBoosts();
@@ -1728,7 +1930,11 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         {
             foreach (var trait in Tags)
             {
-                Trait ITrait = TraitList.GetTrait(trait);
+                Trait ITrait;
+                if (trait >= (Traits)3001 && trait <= (Traits)5999)
+                    ITrait = State.CustomTraitList.Where(ct => trait == (Traits)ct.id).FirstOrDefault().ToBooster();
+                else
+                    ITrait = TraitList.GetTrait(trait);              
                 if (ITrait is IStatBoost boost)
                     StatBoosts.Add(boost);
                 if (ITrait is IVoreAttackOdds voreAttackOdds)
@@ -1748,7 +1954,11 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         {
             foreach (var trait in Tags.Concat(PermanentTraits).Distinct())
             {
-                Trait ITrait = TraitList.GetTrait(trait);
+                Trait ITrait;
+                if (trait >= (Traits)3001 && trait <= (Traits)5999)
+                    ITrait = State.CustomTraitList.Where(ct => trait == (Traits)ct.id).FirstOrDefault().ToBooster();
+                else
+                    ITrait = TraitList.GetTrait(trait);
                 if (ITrait is IStatBoost boost)
                     StatBoosts.Add(boost);
                 if (ITrait is IVoreAttackOdds voreAttackOdds)
@@ -1768,7 +1978,11 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         {
             foreach (var trait in SharedTraits)
             {
-                Trait ITrait = TraitList.GetTrait(trait);
+                Trait ITrait;
+                if (trait >= (Traits)3000 && trait <= (Traits)5999)
+                    ITrait = State.CustomTraitList.Where(ct => trait == (Traits)ct.id).FirstOrDefault().ToBooster();
+                else
+                    ITrait = TraitList.GetTrait(trait);   
                 if (ITrait is IStatBoost boost)
                     StatBoosts.Add(boost);
                 if (ITrait is IVoreAttackOdds voreAttackOdds)
@@ -1784,8 +1998,6 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             }
         }
     }
-
-
 
     internal void SetMaxItems()
     {
@@ -1912,6 +2124,102 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         RemoveTrait(trait);
     }
 
+    public bool HasActiveConditionalTrait(Traits trait)
+    {
+        if (ActiveConditionalTraits == null)
+            ActiveConditionalTraits = new List<Traits>();
+        return (ActiveConditionalTraits.Contains(trait));
+    }
+
+    public void AddActiveConditionalTrait(Traits trait)
+    {
+        if (ActiveConditionalTraits == null)
+            ActiveConditionalTraits = new List<Traits>();
+        if (!ActiveConditionalTraits.Contains(trait) && !HasTrait(trait))
+            ActiveConditionalTraits.Add(trait);
+        AddTrait(trait);
+
+    }
+
+    public void ResetConditionalTraits()
+    {
+        if (ActiveConditionalTraits == null)
+            ActiveConditionalTraits = new List<Traits>();
+        foreach (Traits trait in ActiveConditionalTraits)
+        {
+            RemoveTrait(trait);
+        }
+        ActiveConditionalTraits.Clear();
+    }
+
+    public void RemoveActiveConditionalTrait(Traits trait)
+    {
+        if (ActiveConditionalTraits == null)
+            ActiveConditionalTraits = new List<Traits>();
+        if (ActiveConditionalTraits.Contains(trait) && HasTrait(trait))
+            ActiveConditionalTraits.Remove(trait);
+        RemoveTrait(trait);
+    }
+
+    public void ActivateConditionalTrait(int id)
+    {
+        if (AllConditionalTraits == null)
+            AllConditionalTraits = new Dictionary<ConditionalTraitContainer, bool>();
+        if (AllConditionalTraits.Keys.Where(t => t.id == id).Any())
+        {
+            var toAdd = AllConditionalTraits.Keys.Where(t => t.id == id).First();
+            AllConditionalTraits[toAdd] =  true;
+            AddActiveConditionalTrait(toAdd.associatedTrait);
+            if (toAdd.classification == TraitConditionalClassification.Permanent)
+            {
+                if (Tags.Contains((Traits)id))
+                {
+                    Tags.Remove((Traits)id);
+                }
+                if (PermanentTraits.Contains((Traits)id))
+                {
+                    PermanentTraits.Remove((Traits)id);
+                }
+                if (SharedTraits != null)
+                {
+                    if (SharedTraits.Contains((Traits)id))
+                        SharedTraits.Remove((Traits)id);
+                }
+                AllConditionalTraits.Remove(toAdd);
+            }
+            RecalculateStatBoosts();
+        }
+
+    }
+    public void DeactivateConditionalTrait(int id)
+    {
+        if (AllConditionalTraits == null)
+            AllConditionalTraits = new Dictionary<ConditionalTraitContainer, bool>();
+        if (AllConditionalTraits.Keys.Where(t => t.id == id).Any())
+        {
+            var toRemove = AllConditionalTraits.Keys.Where(t => t.id == id).First();
+            AllConditionalTraits[toRemove] = false;
+            RemoveActiveConditionalTrait(toRemove.associatedTrait);
+            if (toRemove.classification == TraitConditionalClassification.Temporary)
+            {
+                if (Tags.Contains((Traits)id))
+                {
+                    Tags.Remove((Traits)id);
+                }
+                if (PermanentTraits.Contains((Traits)id))
+                {
+                    PermanentTraits.Remove((Traits)id);
+                }
+                if (SharedTraits != null)
+                {
+                    if (SharedTraits.Contains((Traits)id))
+                        SharedTraits.Remove((Traits)id);
+                }
+            }
+            RecalculateStatBoosts();
+        }
+    }
+
     internal void ReloadTraits()
     {
         Tags = new List<Traits>();
@@ -1966,7 +2274,16 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         }
         if (!State.TutorialMode)
             RandomizeTraits();
-        Tags = Tags.Distinct().ToList();
+         Tags = Tags.Distinct().ToList();
+        foreach (var t in Tags)
+        {
+            if (t >= (Traits)6000)
+            {
+                var newTrait = State.ConditionalTraitList.Where(x => x.id == (int)t).First();
+                AllConditionalTraits.Add(newTrait, ConditionalTraitConditionChecker.StrategicTraitConditionActive(this, newTrait));
+            }
+        }
+
         if (HasTrait(Traits.Prey))
             Predator = false;
         else if (fixedPredator == false)
@@ -2017,37 +2334,42 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
     private void RandomizeTraits()
     {
-        while (true) { 
-        var customs = Tags.Where(t => State.RandomizeLists.Any(rl => (Traits)rl.id == t)).ToList();
-            customs.AddRange(PermanentTraits.Where(t => State.RandomizeLists.Any(rl => (Traits)rl.id == t)));
+        while (true)
+        {
+            var customs = Tags.Where(t => State.RandomizeLists.Any(rl => (Traits)rl.id == t && rl.level <= level)).ToList();
+            customs.AddRange(PermanentTraits.Where(t => State.RandomizeLists.Any(rl => (Traits)rl.id == t && rl.level <= level)));
             if (!customs.Any())
                 break;
-        customs.ForEach(ct =>
-        {
-            RandomizeList randomizeList = State.RandomizeLists.Single(rl => (Traits)rl.id == ct);
-            var chance = randomizeList.chance;
-            while (chance > 0 && State.Rand.NextDouble() < randomizeList.chance)
+            customs.ForEach(ct =>
             {
-                List<Traits> gainable = randomizeList.RandomTraits.Where(rt => !Tags.Contains(rt) && !PermanentTraits.Contains(rt)).ToList();
-                if (gainable.Count() > 0)
-                {
-                    var randomPick = gainable[State.Rand.Next(gainable.Count())];
-                    PermanentTraits.Add(randomPick);
-                    RemovedTraits?.Remove(randomPick); // Even if manually removed before, rng-sus' word is law
-                    gainable.Remove(randomPick);
-                    GivePrerequisiteTraits(randomPick);
-                }
-                chance -= 1;
-            }
-            if (RemovedTraits == null)
-                RemovedTraits = new List<Traits>();
-            RemovedTraits.Add(ct);
-            foreach (Traits trait in RemovedTraits)
-            {
-                Tags.Remove(trait);
-                PermanentTraits.Remove(trait);
-            }
-        });
+                    RandomizeList randomizeList = State.RandomizeLists.Single(rl => (Traits)rl.id == ct);
+                    var chance = randomizeList.chance;
+                    var rolls = UnityEngine.Random.Range(0,randomizeList.count);
+                    while (chance > 0 && State.Rand.NextDouble() < randomizeList.chance)
+                    {
+                        List<Traits> gainable = randomizeList.RandomTraits.Where(rt => !Tags.Contains(rt) && !PermanentTraits.Contains(rt)).ToList();
+                        if (gainable.Count() > 0)
+                        {                           
+                            var randomPick = gainable[State.Rand.Next(gainable.Count())];
+                            PermanentTraits.Add(randomPick);
+                            RemovedTraits?.Remove(randomPick); // Even if manually removed before, rng-sus' word is law
+                            gainable.Remove(randomPick);
+                            GivePrerequisiteTraits(randomPick);
+                        }
+                        if(!(rolls > 0))
+                            chance -= 1;
+                        rolls--;
+                    }
+                    if (RemovedTraits == null)
+                        RemovedTraits = new List<Traits>();
+                    RemovedTraits.Add(ct);
+                    foreach (Traits trait in RemovedTraits)
+                    {
+                        Tags.Remove(trait);
+                        PermanentTraits.Remove(trait);
+                    }
+                
+            });
         }
 
     }
@@ -2060,6 +2382,9 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             prereq = Traits.Growth;
         }
         if ( randomPick == Traits.HealingBelly)
+        {
+            prereq = Traits.FriendlyStomach;
+        }if ( randomPick == Traits.Friendosoma)
         {
             prereq = Traits.Endosoma;
         }
@@ -2177,6 +2502,16 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         }
         Health += 3 * amount;
     }
+    public void RandomStatIncrease(int amount)
+    {
+        int x = State.Rand.Next(Stats.Length);
+        if (Stats[x] > 0)
+            Stats[x] += amount;      
+    }
+    public void SpecificStatIncrease(int amount, int index)
+    {
+        Stats[index] += amount;
+    }
 
     public void LevelUp(Stat stat)
     {
@@ -2208,6 +2543,20 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         {
             Health += 4;
         }
+
+        foreach (var item in AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnLevelUp || t.trigger == TraitConditionTrigger.All).ToList())
+        {
+            if (ConditionalTraitConditionChecker.StrategicTraitConditionActive(this, item))
+            {
+                ActivateConditionalTrait(item.id);
+            }
+            else
+            {
+                DeactivateConditionalTrait(item.id);
+            }
+        }
+
+        RandomizeTraits();
     }
 
     public void LeaderLevelDown()
@@ -2288,6 +2637,27 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             + GetStat(Stat.Voracity) + GetStat(Stat.Stomach);
     }
 
+    public int GetHighestStatIndex()
+    {
+        int highestType = 0;
+        for (int i = 0; i < Stats.Length; i++)
+        {
+            if (Stats[i] > Stats[highestType])
+                highestType = i;
+        }
+        return highestType;
+    }
+    public int GetLowestStatIndex()
+    {
+        int lowestType = 0;
+        for (int i = 0; i < Stats.Length; i++)
+        {
+            if (Stats[lowestType] > Stats[i])
+                lowestType = i;
+        }
+        return lowestType;
+    }
+    
     public void LevelDown()
     {
         if (level <= 1)
@@ -2638,6 +3008,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         if (HasEffect(StatusEffectType.Sleeping)) ret++;
         if (HasEffect(StatusEffectType.Staggering)) ret++;
         if (HasEffect(StatusEffectType.Virus)) ret++;
+        if (HasEffect(StatusEffectType.Weakness)) ret++;
 
         bool HasEffect(StatusEffectType type)
         {
@@ -2818,7 +3189,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         }
         else
         {
-            ApplyStatusEffect(StatusEffectType.SpellForce, 1, 1);
+            ApplyStatusEffect(StatusEffectType.Staggering, 1, 1);
         }
 
     }
@@ -2832,6 +3203,61 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             stag.Strength--;
             if (stag.Duration == 0)
                 StatusEffects.Remove(stag);
+        }
+    }
+
+    internal void AddBolster(int ammount)
+    {
+        var bol = GetStatusEffect(StatusEffectType.Bolstered);
+        if (bol != null)
+        {
+            bol.Duration += ammount;
+            bol.Strength += ammount;
+        }
+        else
+        {
+            ApplyStatusEffect(StatusEffectType.Bolstered, ammount, ammount);
+        }
+
+    }
+
+    internal void RemoveBolster()
+    {
+        var bol = GetStatusEffect(StatusEffectType.Bolstered);
+        if (bol != null)
+        {
+            bol.Duration--;
+            bol.Strength--;
+            if (bol.Duration == 0)
+                StatusEffects.Remove(bol);
+        }
+    }
+    
+
+    internal void AddWeakness()
+    {
+        var wkns = GetStatusEffect(StatusEffectType.Weakness);
+        if (wkns != null)
+        {
+            wkns.Duration++;
+            wkns.Strength++;
+        }
+        else
+        {
+            ApplyStatusEffect(StatusEffectType.Weakness, 1, 1);
+        }
+
+    }
+
+    internal void RemoveWeakness()
+    {
+        var wkns = GetStatusEffect(StatusEffectType.Weakness);
+        if (wkns != null)
+        {
+            wkns.Duration--;
+            wkns.Strength--;
+            if (wkns.Duration == 0)
+                StatusEffects.Remove(wkns);
         }
     }
 
@@ -2853,7 +3279,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             NonFatalDamage((int)effect.Strength, "virus");
         foreach (var eff in StatusEffects.ToList())
         {
-            if (eff.Type == StatusEffectType.Respawns || eff.Type == StatusEffectType.BladeDance || eff.Type == StatusEffectType.Tenacious || eff.Type == StatusEffectType.Focus)
+            if (eff.Type == StatusEffectType.Respawns || eff.Type == StatusEffectType.BladeDance || eff.Type == StatusEffectType.Tenacious || eff.Type == StatusEffectType.Focus || eff.Type == StatusEffectType.Weakness || eff.Type == StatusEffectType.Bolstered)
                 continue;
             var actor = TacticalUtilities.Units.Where(s => s.Unit == this).FirstOrDefault();
             var pred = actor.SelfPrey?.Predator;
@@ -2864,8 +3290,18 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                     continue;
                 }
             }
+
             if (eff.Type == StatusEffectType.Staggering || eff.Type == StatusEffectType.SpellForce)
                 StatusEffects.Remove(eff);
+
+            if (eff.Type == StatusEffectType.Sleeping && HasTrait(Traits.SleepItOff))
+            {
+                if (actor.PredatorComponent.UsageFraction >= State.Rand.NextDouble())
+                {
+                    continue;
+                }
+            }              
+
             eff.Duration -= 1;
             if (eff.Duration <= 0)
             {
@@ -2909,7 +3345,12 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
     internal List<Traits> RandomizeOne(RandomizeList randomizeList)
     {
+        if (randomizeList.level > Level)
+            {
+                return new List<Traits>() { (Traits)randomizeList.id };
+            }
         var chance = randomizeList.chance;
+        var rolls = UnityEngine.Random.Range(0, randomizeList.count);
         var traitsToAdd = new List<Traits>();
         List<Traits> gainable = randomizeList.RandomTraits.Where(rt => !Tags.Contains(rt) && !PermanentTraits.Contains(rt)).ToList();
         while (State.Rand.NextDouble() < chance)
@@ -2929,7 +3370,9 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                     traitsToAdd.Add(randomPick);
                 gainable.Remove(randomPick);
             }
-            chance -= 1;
+            if (!(rolls > 0))
+                chance -= 1;
+            rolls--;
         }
         return traitsToAdd;
     }
@@ -3048,5 +3491,4 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         else
             return State.RaceSettings.GetConversionRace(Race);
     }
-
 }

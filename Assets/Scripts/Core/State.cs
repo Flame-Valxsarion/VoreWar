@@ -10,13 +10,18 @@ using UnityEngine;
 public static class State
 {
     static int saveErrors = 0;
-    public const string Version = "43D";
+    public const string Version = "44A";
     public static World World;
     public static Rand Rand = new Rand();
     public static NameGenerator NameGen;
     public static GameManager GameManager;
     public static AssimilateList AssimilateList;
+    public static Dictionary<Traits,TaggedTrait> TieredTraitsList;
+    public static List<String> TieredTraitsTagsList;
     public static List<RandomizeList> RandomizeLists;
+    public static List<CustomTraitBoost> CustomTraitList;
+    public static List<ConditionalTraitContainer> ConditionalTraitList;
+    public static Dictionary<TaggedTrait,bool> UntaggedTraits;
 
     internal static EventList EventList;
 
@@ -28,6 +33,8 @@ public static class State
     public static string SaveDirectory;
     public static string StorageDirectory;
     public static string MapDirectory;
+    public static string CustomTraitDirectory;
+    public static string ConditionalTraitDirectory;
 
     public static int RaceSlot;
     public static string RaceSaveDataName;
@@ -39,27 +46,37 @@ public static class State
             SaveDirectory = Application.persistentDataPath + $"Saves{Path.DirectorySeparatorChar}";
             StorageDirectory = Application.persistentDataPath + Path.DirectorySeparatorChar;
             MapDirectory = Application.persistentDataPath + $"Maps{Path.DirectorySeparatorChar}";
+            CustomTraitDirectory = Application.persistentDataPath + $"CustomTraits{Path.DirectorySeparatorChar}";
+            ConditionalTraitDirectory = Application.persistentDataPath + $"ConditionalTraits{Path.DirectorySeparatorChar}";
         }
         else
         {
             SaveDirectory = $"UserData{Path.DirectorySeparatorChar}Saves{Path.DirectorySeparatorChar}";
             StorageDirectory = $"UserData{Path.DirectorySeparatorChar}";
             MapDirectory = $"UserData{Path.DirectorySeparatorChar}Maps{Path.DirectorySeparatorChar}";
+            CustomTraitDirectory = $"UserData{Path.DirectorySeparatorChar}CustomTraits{Path.DirectorySeparatorChar}";
+            ConditionalTraitDirectory = $"UserData{Path.DirectorySeparatorChar}ConditionalTraits{Path.DirectorySeparatorChar}";
         }
         try
         {
             Directory.CreateDirectory(StorageDirectory.TrimEnd(new char[] { '\\', '/' }));
             Directory.CreateDirectory(MapDirectory.TrimEnd(new char[] { '\\', '/' }));
             Directory.CreateDirectory(SaveDirectory.TrimEnd(new char[] { '\\', '/' }));
+            Directory.CreateDirectory(CustomTraitDirectory.TrimEnd(new char[] { '\\', '/' }));
+            Directory.CreateDirectory(ConditionalTraitDirectory.TrimEnd(new char[] { '\\', '/' }));
         }
         catch
         {
             SaveDirectory = Application.persistentDataPath + $"Saves{Path.DirectorySeparatorChar}";
             StorageDirectory = Application.persistentDataPath + Path.DirectorySeparatorChar;
             MapDirectory = Application.persistentDataPath + $"Maps{Path.DirectorySeparatorChar}";
+            CustomTraitDirectory = Application.persistentDataPath + $"CustomTraits{Path.DirectorySeparatorChar}";
+            ConditionalTraitDirectory = Application.persistentDataPath + $"ConditionalTraits{Path.DirectorySeparatorChar}";
             Directory.CreateDirectory(StorageDirectory.TrimEnd(new char[] { '\\', '/' }));
             Directory.CreateDirectory(MapDirectory.TrimEnd(new char[] { '\\', '/' }));
             Directory.CreateDirectory(SaveDirectory.TrimEnd(new char[] { '\\', '/' }));
+            Directory.CreateDirectory(CustomTraitDirectory.TrimEnd(new char[] { '\\', '/' }));
+            Directory.CreateDirectory(ConditionalTraitDirectory.TrimEnd(new char[] { '\\', '/' }));
         }
 
 
@@ -89,6 +106,10 @@ public static class State
                 File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFeralOrcas.txt", $"{StorageDirectory}maleFeralOrcas.txt");
             if (File.Exists($"{StorageDirectory}femaleFeralOrcas.txt") == false)
                 File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFeralOrcas.txt", $"{StorageDirectory}femaleFeralOrcas.txt");
+            if (File.Exists($"{StorageDirectory}taggedTraits.json") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}taggedTraits.json", $"{StorageDirectory}taggedTraits.json");
+            if (File.Exists($"{StorageDirectory}buildingConfig.json") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}buildingConfig.json", $"{StorageDirectory}buildingConfig.json");
         }
         catch
         {
@@ -100,6 +121,14 @@ public static class State
         NameGen = new NameGenerator();
         EventList = new EventList();
         AssimilateList = new AssimilateList();
+        CustomTraitList = new List<CustomTraitBoost>();
+        ConditionalTraitList = new List<ConditionalTraitContainer>();
+        UntaggedTraits = new Dictionary<TaggedTrait, bool>();
+
+        TieredTraitsList = ExternalTraitHandler.TaggedTraitParser();
+        TieredTraitsTagsList = new List<string>();
+        ExternalTraitHandler.CustomTraitParser();
+        ExternalTraitHandler.ConditionalTraitParser();
 
         Encoding encoding = Encoding.GetEncoding("iso-8859-1");
         List<string> lines;
@@ -123,13 +152,62 @@ public static class State
                         custom.id = int.Parse(strings[0]);
                         custom.name = strings[1];
                         custom.chance = float.Parse(strings[2], new CultureInfo("en-US"));
+                        custom.level = 0;
+                        custom.count = 1;
                         custom.RandomTraits = strings[3].Split('|').ToList().ConvertAll(s => (Traits)int.Parse(s));
+                        RandomizeLists.Add(custom);
+                    } else if (strings.Length == 6)
+                    {
+                        custom.id = int.Parse(strings[0]);
+                        custom.name = strings[1];
+                        custom.chance = float.Parse(strings[2], new CultureInfo("en-US"));
+                        custom.count = int.Parse(strings[3]);
+                        custom.level = int.Parse(strings[4]);
+                        custom.RandomTraits = strings[5].Split('|').ToList().ConvertAll(s => (Traits)int.Parse(s));
                         RandomizeLists.Add(custom);
                     }
                 });
             }
-               
         }
+
+        foreach (Traits trait in (Traits[])Enum.GetValues(typeof(Traits)))
+        {
+            if (TieredTraitsList.Keys.Contains(trait))
+            {
+                if (TieredTraitsList[trait].tags == null)
+                {
+                    UntaggedTraits.Add(TieredTraitsList[trait], true);
+                    continue;
+                }
+                if (TieredTraitsList[trait].tags.Count <= 0)
+                {
+                    UntaggedTraits.Add(TieredTraitsList[trait], true);
+                }
+            }
+            else
+            {
+                TaggedTrait newTrait = new TaggedTrait();
+                newTrait.name = trait.ToString();
+                newTrait.tierValue = TraitTier.Neutral;
+                newTrait.tier = newTrait.tierValue.ToString();
+                newTrait.traitEnum = trait;
+                UntaggedTraits.Add(newTrait, false);
+            }
+        }
+
+        List<TaggedTrait> newTraits = new List<TaggedTrait>();
+        foreach (var newTrait in UntaggedTraits) 
+        {
+            if (newTrait.Value)
+            {
+                continue;
+            }
+            newTraits.Add(newTrait.Key);
+        }
+
+        ExternalTraitHandler.AppendTaggedTrait(newTraits);
+
+
     }
 
     public static void SaveEditedRaces()
@@ -318,10 +396,25 @@ public static class State
                 }
             }
 
+            if (World.AncientTeleporters == null)
+                World.AncientTeleporters = new AncientTeleporter[0];
+
+            foreach (MercenaryHouse house in World.MercenaryHouses)
+            {
+                if (house.Mercenaries != null)
+                {
+                    foreach (var merc in house.Mercenaries)
+                    {
+                        merc.Unit.InitializeTraits();
+                    }
+                }
+            }
 
 
             if (World.Claimables == null)
                 World.Claimables = new ClaimableBuilding[0];
+            if (World.Constructibles == null)
+                World.Constructibles = new ConstructibleBuilding[0];
 
             //Always runs for new versions           
             if (World.SaveVersion != Version && World.AllActiveEmpires != null)

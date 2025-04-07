@@ -27,6 +27,7 @@ class MonsterStrategicAI : IStrategicAI
     {
         foreach (Army army in empire.Armies.ToList())
         {
+            army.IsMonsterArmy = true;
             if (army.RemainingMP < 1)
                 continue;
             if (path != null && pathIsFor == army)
@@ -364,7 +365,6 @@ class MonsterStrategicAI : IStrategicAI
                 return;
             }
         }
-        Debug.Log(timedMovementType);
         if ((!spawner.MonsterScoutMP) && army.RemainingMP > Config.ArmyMP)
             army.RemainingMP = Config.ArmyMP;
         if(timedMovementType == Config.DayNightMovemntType.Night && !State.World.IsNight && Config.DayNightEnabled) //DayNight Modification (zero's out monster AP based on their settings)
@@ -418,6 +418,24 @@ class MonsterStrategicAI : IStrategicAI
                     potentialTargets.Add(villages[i].Position);
                     potentialTargetValue.Add(-8);
                 }
+            }
+        }
+
+        foreach (ConstructibleBuilding construct in State.World.Constructibles)
+        {
+            if (empire.IsEnemy(construct.Owner) && !construct.ruined && Config.BuildConfig.MonsterBuildingCapture != 0)
+            {
+                Army defender = StrategicUtilities.ArmyAt(construct.Position);
+                if (defender != null && StrategicUtilities.ArmyPower(defender) > MaxDefenderStrength * StrategicUtilities.ArmyPower(army))
+                    continue;
+                potentialTargets.Add(construct.Position);
+                int value = -6;
+                // Stay on building to trigger capture effect
+                if (construct.Position == army.Position)
+                {
+                    value = 100;
+                }
+                potentialTargetValue.Add(value);
             }
         }
 

@@ -50,11 +50,11 @@
     Infected = 23,
     /// <summary>Prevents movement, dodging, and struggling, they are easy to eat</summary>
     Sleeping = 24,
-    // <summary>Movement is reduced by half and damage taken increased by 20%, all stacks removed end of turn.</summary>
+    /// <summary>Movement is reduced by half and damage taken increased by 20%, all stacks removed end of turn.</summary>
     Staggering = 25,
-    // <summary>Mind is increased by 1 + 1%.</summary>
+    /// <summary>Mind is increased by 1 + 1%.</summary>
     Focus = 26,
-    // <summary>Mind is increased by 1 + 10% and spell mana cost by 10% per stack.</summary>
+    /// <summary>Mind is increased by 1 + 10% and spell mana cost by 10% per stack.</summary>
     SpellForce = 27,
     /// <summary>Unit has been infected by a virus</summary>
     Virus = 28,
@@ -66,9 +66,21 @@
     Snared = 33,
     /// <summary>Remaining respawns for the respawner traits.</summary>
     Respawns = 34,
+    /// <summary>All stats are reduced by 3% per stack.</summary>
+    Weakness = 35,
+    /// <summary>All stats are increased by 1 + 1% per stack.</summary>
+    Bolstered = 36,
+    /// <summary>Healing on unit is reduced based on effect strength</summary>
+    Necrosis = 37,
+    /// <summary>Unit takes increased damage based on effect strength</summary>
+    Errosion = 38,
+    /// <summary>Unit takes part of the damage it took after this effect expires</summary>
+    Agony = 39,
+    /// <summary>Strength, Dexterity, and Agility are reduced based on remaining duration</summary>
+    Lethargy = 40,
     /// <summary>Prevents movement and dodging, but halves damage taken from attacks and doubles bulk as prey.</summary>
-    Frozen = 35,
+    Frozen = 41,
     /// <summary>Increases damage recived from electric spells.</summary>
-    Static = 36,
+    Static = 42,
 }
 

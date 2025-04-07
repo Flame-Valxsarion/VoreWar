@@ -61,19 +61,22 @@ public class StandardTacticalAI : TacticalAI
             RunSpells(actor);
         if (path != null)
             return;
-        if (actor.Unit.HasTrait(Traits.Pounce) && actor.Movement >= 2)
+        if (!actor.Unit.HasTrait(Traits.VoreObsession))
         {
-            if (IsRanged(actor) == false)
+            if (actor.Unit.HasTrait(Traits.Pounce) && actor.Movement >= 2)
             {
-                RunMeleePounce(actor);
-                if (didAction) return;
+                if (IsRanged(actor) == false)
+                {
+                    RunMeleePounce(actor);
+                    if (didAction) return;
+                }
             }
+            if (foundPath || didAction) return;
+            if (IsRanged(actor))
+                RunRanged(actor);
+            else
+                RunMelee(actor);
         }
-        if (foundPath || didAction) return;
-        if (IsRanged(actor))
-            RunRanged(actor);
-        else
-            RunMelee(actor);
         if (foundPath || didAction) return;
         //Search for surrendered targets outside of vore range
         //If no path to any targets, will sit out its turn

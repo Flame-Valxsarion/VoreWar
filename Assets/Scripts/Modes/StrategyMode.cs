@@ -1,7 +1,7 @@
-using OdinSerializer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -100,6 +100,8 @@ public class StrategyMode : SceneBase
 
     bool runningQueued = true;
 
+    bool buildingRangeOn = false;
+
     bool mouseMovementMode = false;
     PathNodeManager arrowManager;
     List<PathNode> queuedPath;
@@ -112,33 +114,42 @@ public class StrategyMode : SceneBase
 
     List<GameObject> currentVillageTiles;
     List<GameObject> currentClaimableTiles;
+    List<GameObject> currentBuildingTiles;
 
     public Tilemap[] TilemapLayers;
     public Tilemap FogOfWar;
     public TileBase FogTile;
+    public TileBase[] BuildIndicator;
     internal Tile[] TileTypes;
     public TileBase[] DoodadTypes;
     public Sprite[] Sprites;
+    public Sprite[] Buildings;
     public Sprite[] VillageSprites;
+    public Sprite[] WallMultiSprites;
     public GameObject[] SpriteCategories;
 
     public Sprite[] Banners;
 
     public Transform VillageFolder;
     public Transform ArmyFolder;
+    public Transform WallRoadFolder;
 
     public ArmyStatusPanel ArmyStatusUI;
     public StatusBarPanel StatusBarUI;
     public DevourPanel DevourUI;
     public TurnReportPanel ReportUI;
     public TrainPanel TrainUI;
+    public BuildMenu BuildMenu;
+    public UpgradeMenu UpgradeMenu;
+    public AncientTeleporterMenu AncientTeleportMenu;
+    public BuildingArmyPopup BuildingArmyPopup;
     public GameObject EnemyTurnText;
     public GameObject PausedText;
 
     public EventScreen EventUI;
 
     public float NightChance = Config.BaseNightChance;
-	
+
     public GameObject NotificationWindow;
     public TMPro.TextMeshProUGUI NotificationText;
     float remainingNotificationTime;
@@ -162,6 +173,9 @@ public class StrategyMode : SceneBase
     bool pickingExchangeLocation = false;
 
     internal bool Paused;
+
+    internal bool BuildMode;
+    internal ConstructibleType SelectedConstruction;
 
     public Sprite[] TileSprites;
 
@@ -207,6 +221,7 @@ public class StrategyMode : SceneBase
                 OnlyAIPlayers = false;
             }
             emp.Regenerate();
+            emp.constructionResources.SetResources(10, 10, 10, 10, 10, 10);
         }
         State.World.PopulateMonsterTurnOrders();
         State.World.RefreshTurnOrder();
@@ -363,6 +378,7 @@ public class StrategyMode : SceneBase
         StatusBarUI.EmpireStatus.interactable = ActingEmpire?.StrategicAI == null || OnlyAIPlayers;
         StatusBarUI.ShowTurnReport.gameObject.SetActive(ActingEmpire?.StrategicAI == null && ActingEmpire.Reports.Count > 0);
         StatusBarUI.RecreateWorld.gameObject.SetActive(false);
+        StatusBarUI.Build.gameObject.SetActive(Config.BuildConfig.BuildingSystemEnabled);
         EnemyTurnText.SetActive(ActingEmpire?.StrategicAI != null);
     }
 
@@ -575,7 +591,7 @@ public class StrategyMode : SceneBase
 
     internal void ReassignArmyEmpire(Army army)
     {
-        var sidesRepresented = new Dictionary<int,int>();
+        var sidesRepresented = new Dictionary<int, int>();
         army.Units.ForEach(unit =>
         {
             if (sidesRepresented.ContainsKey(unit.FixedSide))
@@ -587,7 +603,7 @@ public class StrategyMode : SceneBase
                 sidesRepresented.Add(unit.FixedSide, 1);
             }
         });
-        
+
         var finalSide = sidesRepresented.OrderByDescending(s => s.Value).First();
         var emp = State.World.GetEmpireOfSide(finalSide.Key);
         var pos = army.Position;
@@ -629,17 +645,19 @@ public class StrategyMode : SceneBase
                     loc = spot;
             }
         }
-        pos = new Vec2i(loc.x,loc.y);
+        pos = new Vec2i(loc.x, loc.y);
         if (emp != null)
         {
             var newArmy = new Army(emp, pos, emp.Side);
             newArmy.Units = army.Units;
             emp.Armies.Add(newArmy);
             newArmy.Units.ForEach(u => u.Side = newArmy.Side);
-        } else // we'll literally make up an empire on the spot. Should rarely happen
+        }
+        else // we'll literally make up an empire on the spot. Should rarely happen
         {
             var monsterEmp = State.World.MonsterEmpires.Where(e => e.Race == army.Units.Where(u => u.FixedSide == finalSide.Key).FirstOrDefault()?.Race).FirstOrDefault();
-            if (monsterEmp != null) {
+            if (monsterEmp != null)
+            {
                 Empire brandNewEmp = new MonsterEmpire(new Empire.ConstructionArgs(finalSide.Key, UnityEngine.Color.white, UnityEngine.Color.white, monsterEmp.BannerType, StrategyAIType.Monster, TacticalAIType.Full, 2000 + finalSide.Key, monsterEmp.MaxArmySize, 0));
                 brandNewEmp.ReplacedRace = monsterEmp.Race;
                 brandNewEmp.TurnOrder = 1234;
@@ -724,37 +742,19 @@ public class StrategyMode : SceneBase
                 //{
                 //    TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), TileDictionary.DeepWaterOverWater[(int)overTiles[i, j] - 2300]);
                 //}
-                if (overTiles[i, j] >= (StrategicTileType)2000)
+                //Debug.Log(underTiles[i, j] + ", " + i + ", " + j);
+                int current_layer = 0;
+                int liquid_layer = 0;
+                if (tiles[i, j] >= (StrategicTileType)2100)
                 {
-                    TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), TileDictionary.WaterFloat[(int)overTiles[i, j] - 2000]);
-                }
-                else if (overTiles[i, j] != 0)
-                {
-                    TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(overTiles[i, j], i, j)]);
-                }
-                else
-                {
-                    var type = StrategicTileInfo.GetObjectTileType(State.World.Tiles[i, j], i, j);
-                    if (type != -1)
-                        TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), TileDictionary.Objects[type]);
-
-                }
-                if (tiles[i, j] >= (StrategicTileType)2100 && underTiles[i, j] >= (StrategicTileType)2200)
-                {
-                    TilemapLayers[1].SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassFloat[(int)tiles[i, j] - 2100]);
-                    TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileDictionary.IceOverSnow[(int)underTiles[i, j] - 2200]);
-                    //TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[(int)underTiles[i, j]]);
-
-                }
-                else if (tiles[i, j] >= (StrategicTileType)2100)
-                {
-                    TilemapLayers[1].SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassFloat[(int)tiles[i, j] - 2100]);
+                    current_layer = ApplyFloat(i, j, current_layer);
                     if (underTiles[i, j] != (StrategicTileType)99)
                     {
                         TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[(int)underTiles[i, j]]);
                     }
                     else
                     {
+                        TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(State.World.Tiles[i, j], i, j)]);
                         switch (State.World.Tiles[i, j])
                         {
                             case StrategicTileType.field:
@@ -775,7 +775,7 @@ public class StrategyMode : SceneBase
                     }
 
                     //TilemapLayers[1].SetTile(new Vector3Int(i, j, 0), TileDictionary.IceOverSnow[(int)tiles[i, j] - 2100]);
-                }
+                }                
                 //else if (tiles[i, j] >= (StrategicTileType)2000)
                 //{
                 //    TilemapLayers[2].SetTile(new Vector3Int(i, j, 0), TileDictionary.WaterFloat[(int)tiles[i, j] - 2000]);
@@ -787,19 +787,220 @@ public class StrategyMode : SceneBase
                     //TilemapLayers[1].SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassFloat[(int)tiles[i, j] - 2100]);
                     TilemapLayers[0].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(tiles[i, j], i, j)]);
                 }
+                if (overTiles[i, j] >= (StrategicTileType)2000)
+                {
+                    current_layer++;
+                    liquid_layer = current_layer;
+                    switch (State.World.Tiles[i, j])
+                    {
+                        case StrategicTileType.water:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.WaterFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.ocean:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.OceanFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.lava:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.LavaFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.ice:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.IceOverSnow[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.shallowWater:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.ShallowWaterFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        case StrategicTileType.smallIslands:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.SmallIslandsFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                        default:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.LavaFloat[(int)overTiles[i, j] - 2000]);
+                            break;
+                    }
+                    foreach (KeyValuePair<int, StrategicTileType> tiletype in logic.GetSurroundingLiquid((int)overTiles[i, j] - 2000, State.World.Tiles[i, j], new Vec2(i, j)))
+                    {
+                        current_layer++;
+                        switch (tiletype.Value)
+                        {
+                            case StrategicTileType.water:
+                                if (StrategicTileType.water > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.WaterLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.ocean:
+                                if (StrategicTileType.ocean > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.OceanLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.lava:
+                                if (StrategicTileType.lava > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.LavaLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.ice:
+                                if (StrategicTileType.ice > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.IceLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.shallowWater:
+                                if (StrategicTileType.shallowWater > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.ShallowWaterLiquidFloat[tiletype.Key]);
+                                break;
+                            case StrategicTileType.smallIslands:
+                                if (StrategicTileType.shallowWater > State.World.Tiles[i, j])
+                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.ShallowWaterLiquidFloat[tiletype.Key]);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+                else if (overTiles[i, j] != 0)
+                {
+                    TilemapLayers[9].SetTile(new Vector3Int(i, j, 0), TileTypes[StrategicTileInfo.GetTileType(overTiles[i, j], i, j)]);
+                }
+                else
+                {
+                    var type = StrategicTileInfo.GetObjectTileType(State.World.Tiles[i, j], i, j);
+                    if (type != -1)
+                        TilemapLayers[9].SetTile(new Vector3Int(i, j, 0), TileDictionary.Objects[type]);
+
+                }
             }
         }
         StrategicDoodadType[,] doodads = State.World.Doodads;
         if (doodads != null)
         {
+
             for (int i = 0; i <= doodads.GetUpperBound(0); i++)
             {
                 for (int j = 0; j <= doodads.GetUpperBound(1); j++)
                 {
                     if (doodads[i, j] > 0 && doodads[i, j] < StrategicDoodadType.SpawnerVagrant)
-                        TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
+                    {
+                        if (doodads[i, j] == StrategicDoodadType.wall)
+                        {
+                            bool north = j + 1 <= tiles.GetUpperBound(1) ? doodads[i, j + 1] == StrategicDoodadType.wall : false;
+                            bool east = i + 1 <= tiles.GetUpperBound(0) ? doodads[i + 1, j] == StrategicDoodadType.wall : false;
+                            bool south = j - 1 >= 0 ? doodads[i, j - 1] == StrategicDoodadType.wall : false;
+                            bool west = i - 1 >= 0 ? doodads[i - 1, j] == StrategicDoodadType.wall : false;
+                            int spr = 0;
+
+                            if (north && east && south && west)
+                                spr = 7;
+                            else if (north && east && south)
+                                spr = 13;
+                            else if (north && east && west)
+                                spr = 14;
+                            else if (north && south && west)
+                                spr = 12;
+                            else if (east && south && west)
+                                spr = 15;
+                            else if (north && east)
+                                spr = 11;
+                            else if (north && south)
+                                spr = 4;
+                            else if (north && west)
+                                spr = 10;
+                            else if (east && south)
+                                spr = 9;
+                            else if (south && west)
+                                spr = 8;
+                            else if (east && west)
+                                spr = 1;
+                            else if (north)
+                                spr = 6;
+                            else if (east)
+                                spr = 2;
+                            else if (south)
+                                spr = 5;
+                            else if (west)
+                                spr = 3;
+
+                            GameObject wall = Instantiate(SpriteCategories[4], new Vector3(i, j, 0), new Quaternion(), WallRoadFolder);
+                            wall.GetComponent<SpriteRenderer>().sprite = WallMultiSprites[spr];
+                            wall.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                        }
+                        else
+                        {
+                            TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
+                        }
+                    }
                 }
             }
+        }
+
+        int ApplyFloat(int x, int y, int curr_layer)
+        {
+            int counter = curr_layer;
+            StrategicTileType type = State.World.Tiles[x,y];
+            bool liquid_tile = StrategicTileInfo.ConsideredLiquid.Contains(State.World.Tiles[x, y]);
+            foreach (KeyValuePair<int, StrategicTileType> tiletype in logic.DetermineOverlay(x, y))
+            {
+                counter++;
+                switch (tiletype.Value)
+                {
+                    case (StrategicTileType.grass):
+                        if (type <= StrategicTileType.grass || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.GrassFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.desert):
+                        if (type <= StrategicTileType.desert || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.DesertFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.snow):
+                        if (type <= StrategicTileType.snow || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.SnowFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.ashen):
+                        if (type <= StrategicTileType.ashen || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.AshenFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.volcanic):
+                        if (type <= StrategicTileType.volcanic || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.VolcanicFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.swamp):
+                        if (type <= StrategicTileType.swamp || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.SwampFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.drySwamp):
+                        if (type <= StrategicTileType.drySwamp || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.DrySwampFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.purpleSwamp):
+                        if (type <= StrategicTileType.purpleSwamp || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.PurpleBogFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.savannah):
+                        if (type <= StrategicTileType.savannah || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.SavannahFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.smallIslands):
+                        if (type <= StrategicTileType.smallIslands || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.SmallIslandsFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.rainforest):
+                        if (type <= StrategicTileType.rainforest || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.RainforestFloat[tiletype.Key]);
+                        break;
+                    case (StrategicTileType.water):
+                        break;
+                    case (StrategicTileType.ocean):
+                        break;
+                    case (StrategicTileType.shallowWater):
+                        /*
+                        if (liquid_tile && overTiles[x, y] == (StrategicTileType)2009)
+                        {
+                            TilemapLayers[9 - Math.Min(8, counter)].SetTile(new Vector3Int(x, y, 0), TileDictionary.SmallIslandsFloat[tiletype.Key]);
+                        }
+                        */
+                        break;
+                    case (StrategicTileType.ice):
+                        break;
+                    case (StrategicTileType.lava):
+                        break;
+                    default:
+                        TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.GrassFloat[tiletype.Key]);
+                        break;
+                }
+            }
+            return counter;
         }
     }
 
@@ -811,6 +1012,7 @@ public class StrategyMode : SceneBase
         Village[] villages = State.World.Villages;
         currentVillageTiles = new List<GameObject>();
         currentClaimableTiles = new List<GameObject>();
+        currentBuildingTiles = new List<GameObject>();
         int highestVillageSprite = VillageSprites.Count() - 1;
         for (int i = 0; i < villages.Length; i++)
         {
@@ -845,6 +1047,12 @@ public class StrategyMode : SceneBase
             merc.GetComponent<SpriteRenderer>().sprite = Sprites[14];
             merc.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
+        foreach (var teleporter in State.World.AncientTeleporters)
+        {
+            GameObject tele = Instantiate(SpriteCategories[2], new Vector3(teleporter.Position.x, teleporter.Position.y), new Quaternion(), VillageFolder);
+            tele.GetComponent<SpriteRenderer>().sprite = Buildings[96];
+            tele.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
         foreach (var claimable in State.World.Claimables)
         {
             int spr = 0;
@@ -868,6 +1076,31 @@ public class StrategyMode : SceneBase
             currentClaimableTiles.Add(villColored);
             currentClaimableTiles.Add(villShield);
             currentClaimableTiles.Add(villShieldInner);
+        }
+        foreach(var constructable in State.World.Constructibles)
+        {
+            int spr = constructable.spriteID;
+            spr = Math.Min(constructable.upgradeStage, 3) * 2 + spr;           
+            GameObject vill = Instantiate(SpriteCategories[2], new Vector3(constructable.Position.x, constructable.Position.y), new Quaternion(), VillageFolder);
+            vill.GetComponent<SpriteRenderer>().sprite = Buildings[spr];
+            vill.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            GameObject villColored = Instantiate(SpriteCategories[2], new Vector3(constructable.Position.x, constructable.Position.y), new Quaternion(), VillageFolder);
+            villColored.GetComponent<SpriteRenderer>().sprite = Buildings[spr + 1];
+            villColored.GetComponent<SpriteRenderer>().color = constructable.Owner?.UnityColor ?? Color.clear;
+            currentBuildingTiles.Add(vill);
+            currentBuildingTiles.Add(villColored);
+            if (constructable.ruined)
+            {
+                GameObject disabled = Instantiate(SpriteCategories[2], new Vector3(constructable.Position.x, constructable.Position.y), new Quaternion(), VillageFolder);
+                disabled.GetComponent<SpriteRenderer>().sprite = Buildings[98];
+                disabled.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            } 
+            else if (!constructable.active)
+            {
+                GameObject hammer = Instantiate(SpriteCategories[2], new Vector3(constructable.Position.x, constructable.Position.y), new Quaternion(), VillageFolder);
+                hammer.GetComponent<SpriteRenderer>().sprite = Buildings[97];
+                hammer.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
         }
 
 
@@ -894,12 +1127,14 @@ public class StrategyMode : SceneBase
         {
             LastHumanEmpire = State.World.MainEmpires.Where(s => s.StrategicAI == null).FirstOrDefault();
         }
-        if (!initialLoad) { 
-        foreach (Empire empire in State.World.AllActiveEmpires)
+        if (!initialLoad)
         {
-            empire.ArmyCleanup(); 
+            foreach (Empire empire in State.World.AllActiveEmpires)
+            {
+                empire.ArmyCleanup();
+            }
         }
-        }
+        StatusBarUI.Build.onClick.AddListenerOnce(() => BuildMenu.Open(ActingEmpire));
         ActingEmpire.CalcIncome(State.World.Villages);
         if (ActingEmpire.StrategicAI == null || OnlyAIPlayers || Config.CheatExtraStrategicInfo || State.World.MainEmpires.Where(s => s.IsAlly(ActingEmpire) && s.StrategicAI == null).Any())
         {
@@ -1117,7 +1352,7 @@ public class StrategyMode : SceneBase
                         Devour(SelectedArmy, numToEat);
                         subWindowUp = false;
                         DevourUI.gameObject.SetActive(false);
-                        break;
+                        break; 
                     case 14:
                         DevourUI.gameObject.SetActive(false);
                         subWindowUp = false;
@@ -1167,11 +1402,12 @@ public class StrategyMode : SceneBase
                         {
                             Village village = StrategicUtilities.GetVillageAt(ExchangerUI.RightArmy.Position);
                             var infilitrators = new List<Unit>();
-                            
-                                
-                                ExchangerUI.RightArmy.Units.ForEach(unit => {
-                                    infilitrators.Add(unit);
-                                });
+
+
+                            ExchangerUI.RightArmy.Units.ForEach(unit =>
+                            {
+                                infilitrators.Add(unit);
+                            });
                             if (village != null && village.Empire.IsEnemy(ExchangerUI.LeftArmy.Empire))
                             {
                                 infilitrators.ForEach(inf =>
@@ -1184,7 +1420,8 @@ public class StrategyMode : SceneBase
                             else
                             {
                                 MercenaryHouse mercHouse = StrategicUtilities.GetMercenaryHouseAt(ExchangerUI.RightArmy.Position);
-                                if (mercHouse != null) {
+                                if (mercHouse != null)
+                                {
                                     infilitrators.ForEach(inf =>
                                     {
                                         StrategicUtilities.TryInfiltrate(ExchangerUI.RightArmy, inf, null, mercHouse);
@@ -1564,7 +1801,7 @@ public class StrategyMode : SceneBase
             if (maxTrainLevel >= 5) options.Add($"Extreme Training - {trainExp[4]} EXP, {trainCost[4]}G");
             if (maxTrainLevel >= 6) options.Add($"Hero Training - {trainExp[5]} EXP, {trainCost[5]}G");
             if (maxTrainLevel >= 7) options.Add($"Godly Training - {trainExp[6]} EXP, {trainCost[6]}G");
-            
+
             TrainUI.TrainingLevel.ClearOptions();
             TrainUI.TrainingLevel.AddOptions(options);
             if (TrainUI.TrainingLevel.value >= maxTrainLevel)
@@ -1626,9 +1863,10 @@ public class StrategyMode : SceneBase
 
 
     void EndTurn()
-    {       
+    {
         UndoMoves.Clear();
         ActingEmpire.Reports.Clear();
+        ActingEmpire.OwnedTiles.Clear();
         if (State.World.EmpireOrder == null || State.World.EmpireOrder.Count != State.World.AllActiveEmpires.Count)
             State.World.RefreshTurnOrder();
         int startingIndex = State.World.EmpireOrder.IndexOf(ActingEmpire);
@@ -1636,6 +1874,10 @@ public class StrategyMode : SceneBase
         StatusBarUI.EndTurn.interactable = false;
         StatusBarUI.ShowTurnReport.gameObject.SetActive(false);
         StatusBarUI.EmpireStatus.interactable = OnlyAIPlayers;
+        foreach (Village vil in State.World.Villages.Where(s => s.Side == ActingEmpire.Side))
+        {
+            ClaimWithinXTilesOf(vil.Position, 2);
+        }
         if (startingIndex + 1 >= State.World.EmpireOrder.Count)
         {
 
@@ -1662,12 +1904,32 @@ public class StrategyMode : SceneBase
         }
         else
         {
+            foreach (var army in ActingEmpire.Armies)
+            {
+                foreach (var unit in army.Units)
+                {
+                    if (unit.AllConditionalTraits != null)
+                    {
+                        foreach (var item in unit.AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnStrategicTurnEnd || t.trigger == TraitConditionTrigger.All).ToList())
+                        {
+                            if (ConditionalTraitConditionChecker.StrategicTraitConditionActive(unit, item))
+                            {
+                                unit.ActivateConditionalTrait(item.id);
+                            }
+                            else
+                            {
+                                unit.DeactivateConditionalTrait(item.id);
+                            }
+                        }
+                    }
+                }
+            }
             ActingEmpire = State.World.EmpireOrder[startingIndex + 1];
         }
 
         float NightRoll = (float)State.Rand.NextDouble();
         if (Config.DayNightEnabled)
-        {           
+        {
             if (Config.DayNightSchedule && State.World.Turn % Config.World.NightRounds == 0)
             {
                 State.World.IsNight = true;
@@ -1737,6 +1999,7 @@ public class StrategyMode : SceneBase
         }
 #endif
         ProcessIncome(ActingEmpire);
+        HandleBuildings(ActingEmpire);
         if (ActingEmpire.StrategicAI == null)
         {
             if (State.World.Turn > 1)
@@ -1760,6 +2023,7 @@ public class StrategyMode : SceneBase
             StatusBarUI.EmpireStatus.interactable = ActingEmpire.IsAlly(LastHumanEmpire) || OnlyAIPlayers;
             EnemyTurnText.SetActive(true);
         }
+        StatusBarUI.Build.onClick.AddListenerOnce(() => BuildMenu.Open(ActingEmpire));
         runningQueued = true;
         Regenerate();
     }
@@ -1778,7 +2042,14 @@ public class StrategyMode : SceneBase
         if (ActingEmpire.KnockedOut == false && StrategicUtilities.GetAllArmies().Where(s => s.Empire.IsAlly(ActingEmpire)).Any() == false && State.World.Villages.Where(s => s.Empire.IsAlly(ActingEmpire)).Count() == 0 && ActingEmpire is MonsterEmpire == false)
         {
             ActingEmpire.KnockedOut = true;
-
+            if (ActingEmpire.Buildings.Any())
+            {
+                foreach (var item in ActingEmpire.Buildings)
+                {
+                    item.Owner = null;
+                    ActingEmpire.Buildings.Remove(item);
+                }
+            }
             if (ActingEmpire.StrategicAI == null)
             {
                 OnlyAIPlayers = true;
@@ -1894,13 +2165,22 @@ public class StrategyMode : SceneBase
                         }
                     }
                     dismissOrder[k].Health = 0;
-                    income += Config.World.ArmyUpkeep;
+                    income += (int)Math.Round(Config.World.ArmyUpkeep * RaceParameters.GetTraitData(dismissOrder[k]).Upkeep);
                 }
             }
 
             Regenerate();
         }
 
+    }
+    
+    void HandleBuildings(Empire empire)
+    {
+        ConstructibleBuilding[] owned_buildings = State.World.Constructibles.Where(x => x.Owner == empire).ToArray();
+        foreach (var constructable in owned_buildings)
+        {
+            constructable.RunBuildingTurn();
+        }
     }
 
     void ProcessGrowth()
@@ -1942,6 +2222,19 @@ public class StrategyMode : SceneBase
             {
                 if (army.Position.GetDistance(clickLocation) < 1)
                 {
+                    var building = StrategicUtilities.GetConstructibleAt(army.Position);
+                    bool buildingOwned = false;
+                    if (building != null)
+                    {
+                        if (building.Owner == ActingEmpire)
+                        {
+                            buildingOwned = true;
+                        }
+                    }
+                    else if (buildingOwned)
+                    {
+                        BuildingArmyPopup.Open(army, building);
+                    }
                     if (SelectedArmy != army)
                     {
                         SelectedArmy = army;
@@ -1960,10 +2253,23 @@ public class StrategyMode : SceneBase
             {
                 if (army.Position.GetDistance(clickLocation) < 1)
                 {
+                    var building = StrategicUtilities.GetConstructibleAt(army.Position);
+                    bool buildingOwned = false;
+                    if (building != null)
+                    {
+                        if (building.Owner == ActingEmpire)
+                        {
+                            buildingOwned = true;
+                        }
+                    }
                     Village village = StrategicUtilities.GetVillageAt(army.Position);
                     if (village != null)
                     {
                         State.GameManager.ActivateRecruitMode(village, ActingEmpire);
+                    }
+                    else if (buildingOwned)
+                    {
+                        BuildingArmyPopup.Open(army, building);
                     }
                     else
                     {
@@ -1983,10 +2289,23 @@ public class StrategyMode : SceneBase
             {
                 if (army.Position.GetDistance(clickLocation) < 1)
                 {
+                    var building = StrategicUtilities.GetConstructibleAt(army.Position);
+                    bool buildingOwned = false;
+                    if (building != null)
+                    {
+                        if (building.Owner == ActingEmpire)
+                        {
+                            buildingOwned = true;
+                        }
+                    }
                     Village village = StrategicUtilities.GetVillageAt(army.Position);
                     if (village != null)
                     {
                         State.GameManager.ActivateRecruitMode(village, ActingEmpire);
+                    }
+                    else if (buildingOwned)
+                    {
+                        BuildingArmyPopup.Open(army, building);
                     }
                     else
                     {
@@ -2005,6 +2324,19 @@ public class StrategyMode : SceneBase
             {
                 if (army.Position.GetDistance(clickLocation) < 1)
                 {
+                    var building = StrategicUtilities.GetConstructibleAt(army.Position);
+                    bool buildingOwned = false;
+                    if (building != null)
+                    {
+                        if (building.Owner == ActingEmpire)
+                        {
+                            buildingOwned = true;
+                        }
+                    }
+                    else if (buildingOwned)
+                    {
+                        BuildingArmyPopup.Open(army, building);
+                    }
                     Village village = StrategicUtilities.GetVillageAt(army.Position);
                     if (village != null)
                     {
@@ -2035,19 +2367,40 @@ public class StrategyMode : SceneBase
                 }
             }
 
+            for (int i = 0; i < State.World.Constructibles.Length; i++)
+            {
+                if (State.World.Constructibles[i].Position.GetDistance(clickLocation) == 0)
+                {
+                    if (State.World.Constructibles[i].Owner == ActingEmpire && State.World.Constructibles[i].active)
+                    {
+                        UpgradeMenu.Open(State.World.Constructibles[i]);
+                        return;
+                    }
+                }
+            }
+
             if (Config.CheatViewHostileArmies)
             {
                 if (ProcessClickWithoutEmpire(x, y))
                     return;
             }
 
+            for (int i = 0; i < State.World.AncientTeleporters.Length; i++)
+            {
+                if (State.World.AncientTeleporters[i].Position.GetDistance(clickLocation) == 0)
+                {
+                    AncientTeleportMenu.Open(State.World.AncientTeleporters[i], ActingEmpire);
+                    return;
+                }
+            }
             SelectedArmy = null;
         }
     }
 
     private bool ContainsFriendly(Army s)
     {
-        return s.Units.Any(u => {
+        return s.Units.Any(u =>
+        {
             return u.FixedSide == ActingEmpire.Side || (State.World.GetEmpireOfSide(u.FixedSide)?.IsAlly(ActingEmpire) ?? false);
         });
     }
@@ -2266,17 +2619,103 @@ public class StrategyMode : SceneBase
             int y = (int)(currentMousePos.y + 0.5f);
             if (x >= 0 && x < Config.StrategicWorldSizeX && y >= 0 && y < Config.StrategicWorldSizeY)
             {
-                UpdateTooltips(x, y);
-                if (Input.GetMouseButtonDown(0) && ActingEmpire.StrategicAI == null && subWindowUp == false && QueuedPath == null)
-                    ProcessClick(x, y);
-                else if (Input.GetMouseButtonDown(0) && OnlyAIPlayers)
-                    ProcessClickWithoutEmpire(x, y);
-                else if (Input.GetMouseButtonDown(0) && LastHumanEmpire.IsAlly(ActingEmpire))
-                    ProcessClickBetweenTurns(x, y);
-                if (Input.GetMouseButtonDown(1) && ActingEmpire.StrategicAI == null && subWindowUp == false && QueuedPath == null && SelectedArmy != null && SelectedArmy.RemainingMP > 0)
-                    SetSelectedArmyPathTo(x, y);
-                if (mouseMovementMode)
-                    CheckPath(new Vec2i(x, y));
+                if (BuildMode)
+                {
+                    TilemapLayers[14].ClearAllTiles();
+                    TilemapLayers[14].SetTile(new Vector3Int(x, y, 0), BuildIndicator[2]);
+                    Vec2i position = new Vec2i(x, y);
+                    if (Input.GetMouseButtonDown(0) && StrategicUtilities.IsSpaceOpenForBuild(position) && StrategicTileInfo.CanWalkInto(State.World.Tiles[position.x, position.y]) && TilemapLayers[13].GetTile(new Vector3Int(x, y, 0)) != BuildIndicator[1])
+                    {
+                        BuildMode = false;
+                        TilemapLayers[14].ClearAllTiles();
+                        TilemapLayers[13].ClearAllTiles();
+                        ConstructibleBuilding newBuilding;
+                        switch (SelectedConstruction)
+                        {
+                            case ConstructibleType.WorkCamp:
+                                newBuilding = new WorkCamp(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.LumberSite:
+                                newBuilding = new LumberSite(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.Quarry:
+                                newBuilding = new Quarry(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.CasterTower:
+                                newBuilding = new CasterTower(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.BarrierTower:
+                                newBuilding = new BarrierTower(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.DefEncampment:
+                                newBuilding = new DefenseEncampment(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.Academy:
+                                newBuilding = new Academy(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.DarkMagicTower:
+                                newBuilding = new BlackMagicTower(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.TemporalTower:
+                                newBuilding = new TemporalTower(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.Laboratory:
+                                newBuilding = new Laboratory(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.Teleporter:
+                                newBuilding = new Teleporter(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                            case ConstructibleType.TownHall:
+                                newBuilding = new TownHall(position);
+                                newBuilding.Owner = ActingEmpire;
+                                newBuilding.ConstructBuilding();
+                                break;
+                        }
+                    }
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        TilemapLayers[14].ClearAllTiles();
+                        TilemapLayers[13].ClearAllTiles();
+                        BuildMode = false;
+                    }
+                }
+                else
+                {
+                    UpdateTooltips(x, y);
+                    if (Input.GetMouseButtonDown(0) && ActingEmpire.StrategicAI == null && subWindowUp == false && QueuedPath == null)
+                        ProcessClick(x, y);
+                    else if (Input.GetMouseButtonDown(0) && OnlyAIPlayers)
+                        ProcessClickWithoutEmpire(x, y);
+                    else if (Input.GetMouseButtonDown(0) && LastHumanEmpire.IsAlly(ActingEmpire))
+                        ProcessClickBetweenTurns(x, y);
+                    if (Input.GetMouseButtonDown(1) && ActingEmpire.StrategicAI == null && subWindowUp == false && QueuedPath == null && SelectedArmy != null && SelectedArmy.RemainingMP > 0)
+                        SetSelectedArmyPathTo(x, y);
+                    if (mouseMovementMode)
+                        CheckPath(new Vec2i(x, y));
+                }
+
             }
             else
             {
@@ -2290,6 +2729,11 @@ public class StrategyMode : SceneBase
             State.GameManager.OpenMenu();
         }
 
+        if (!buildingRangeOn && !BuildMode)
+        {
+            TilemapLayers[14].ClearAllTiles();
+        }
+        buildingRangeOn = false;
         if (Paused)
             return;
 
@@ -2485,6 +2929,12 @@ public class StrategyMode : SceneBase
                 VillageTooltip.gameObject.SetActive(true);
                 VillageTooltip.Text.text = $"Mercenary House\nMercs: {house.Mercenaries.Count}\nHas Special? {(MercenaryHouse.UniqueMercs.Count > 0 ? "Yes" : "No")}";
             }
+            AncientTeleporter tele = StrategicUtilities.GetTeleAt(new Vec2i(ClickX, ClickY));
+            if (tele != null)
+            {
+                VillageTooltip.gameObject.SetActive(true);
+                VillageTooltip.Text.text = $"Ancient Teleporter";
+            }
             ClaimableBuilding claimable = StrategicUtilities.GetClaimableAt(new Vec2i(ClickX, ClickY));
             if (claimable != null)
             {
@@ -2494,6 +2944,49 @@ public class StrategyMode : SceneBase
                     VillageTooltip.Text.text = $"Gold Mine\nOwner: {claimable.Owner?.Name}\nGold Per Turn: {Config.GoldMineIncome}";
                 }
 
+            }
+            ConstructibleBuilding constructible = StrategicUtilities.GetConstructibleAt(new Vec2i(ClickX, ClickY));
+            if (constructible != null)
+            {
+                VillageTooltip.gameObject.SetActive(true);
+                string owner_name;
+                if (constructible.Owner == null)
+                    owner_name = "None";
+                else
+                    owner_name = constructible.Owner.Name;
+
+                VillageTooltip.Text.text = $"{constructible.Name}\nOwner: {owner_name}";
+
+                if (constructible.ruined)
+                {
+                    VillageTooltip.Text.text += $"\n Building Disabled" ;
+                }
+                else if (constructible.constructing)
+                {
+                    VillageTooltip.Text.text += $"\n Constructing in {constructible.turnsToCompletion} turn(s)" ;
+                }
+                else if (constructible.upgrading)
+                {
+                    VillageTooltip.Text.text += $"\n Upgrading for {constructible.turnsToUpgrade} turn(s)";
+                }
+
+                switch (constructible.buildingType)
+                {
+                    case ConstructibleType.CasterTower:
+                    case ConstructibleType.BarrierTower:
+                    case ConstructibleType.DefEncampment:
+                    case ConstructibleType.Academy:
+                    case ConstructibleType.DarkMagicTower:
+                    case ConstructibleType.TemporalTower:
+                        buildingRangeOn = true;
+                        foreach (var tile in StrategicUtilities.GetTilesInRange(constructible.Position, Config.BuildConfig.BuildingPassiveRange))
+                        {
+                            TilemapLayers[14].SetTile(new Vector3Int(tile.x, tile.y, 0), BuildIndicator[1]);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
 
         }
@@ -2620,6 +3113,44 @@ public class StrategyMode : SceneBase
     {
 
 
+    }
+
+    void ClaimWithinXTilesOf(Vec2i pos, int dist)
+    {
+        for (int x = pos.x - dist; x <= pos.x + dist; x++)
+        {
+            for (int y = pos.y - dist; y <= pos.y + dist; y++)
+            {
+                Vec2i claimPos = new Vec2i(x, y);
+                if (!ActingEmpire.OwnedTiles.Contains(claimPos))
+                    ActingEmpire.OwnedTiles.Add(claimPos);
+            }
+        }
+    }
+
+    public void InitiateBuildMode(ConstructibleType selected)
+    {
+        SelectedArmy = null;
+        BuildMode = true;
+        //List<Vec2i> validtiles = ActingEmpire.OwnedTiles;
+        List<Vec2i> invalidtiles = new List<Vec2i>();
+        SelectedConstruction = selected;
+        foreach (var empire in State.World.MainEmpires)
+        {
+            if (!ActingEmpire.IsAlly(empire))
+            {
+                invalidtiles.AddRange(empire.OwnedTiles);
+            }
+        }
+        /*
+        foreach (var tile in validtiles)
+        {
+            TilemapLayers[13].SetTile(new Vector3Int(tile.x, tile.y, 0), BuildIndicator[0]);
+        }*/
+        foreach (var tile in invalidtiles)
+        {
+            TilemapLayers[13].SetTile(new Vector3Int(tile.x, tile.y, 0), BuildIndicator[1]);
+        }
     }
 }
 

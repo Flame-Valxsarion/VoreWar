@@ -15,6 +15,7 @@ public class UnitInfoPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public GameObject StatBlock;
     public Slider ExpBar;
     public Slider HealthBar;
+    public Slider BarrierBar;
     public Slider ManaBar;
     internal Unit Unit;
     internal Actor_Unit Actor;

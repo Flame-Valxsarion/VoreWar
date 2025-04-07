@@ -201,7 +201,10 @@ public class GameManager : MonoBehaviour
         Menu.UIPanel.SetActive(false);
         menuOpen = false;
         if (currentScene == StrategyMode)
+        {
             StrategyMode.ButtonCallback(70);
+            StrategyMode.StatusBarUI.Build.gameObject.SetActive(Config.BuildConfig.BuildingSystemEnabled);
+        }
     }
 
     public void CloseStatsScreen()
@@ -402,7 +405,11 @@ public class GameManager : MonoBehaviour
             }
 
         }
-
+        TacticalMode.attackerBuildingsInRange = StrategicUtilities.GetActiveEmpireBuildingsWithinXTiles(invader.Position, attackerEmpire, Config.BuildConfig.BuildingPassiveRange);
+        if (defender != null)
+            TacticalMode.defenderBuildingsInRange = StrategicUtilities.GetActiveEmpireBuildingsWithinXTiles(defender.Position, defenderEmpire, Config.BuildConfig.BuildingPassiveRange);
+        else
+            TacticalMode.defenderBuildingsInRange = StrategicUtilities.GetActiveEmpireBuildingsWithinXTiles(village.Position, defenderEmpire, Config.BuildConfig.BuildingPassiveRange);
 
         TacticalMode.ClearNames();
         TacticalMode.Begin(tiletype, village, invader, defender, attackerEmpire?.TacticalAIType ?? TacticalAIType.Full, defenderType, tacticalBattleOverride);

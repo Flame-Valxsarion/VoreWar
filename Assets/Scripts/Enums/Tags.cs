@@ -156,7 +156,7 @@ public enum Traits
     /// <summary>Allows a weaker, 3-tile attack.</summary>
     TailStrike = 80,
     /// <summary>Unit does not digest friendly units.</summary>
-    Endosoma = 81,
+    FriendlyStomach = 81,
     /// <summary>Halves chance for unit's prey to escape.</summary>
     IronGut = 82,
     /// <summary>Reduces chance for unit's prey to escape by 15%.</summary>
@@ -384,8 +384,68 @@ public enum Traits
     RespawnerIII = 193,
     /// <summary>Unit has set chance to return to army after dying in battle regardless of outcome. Chance starts at 100% then decreases 10% with each death, bottoming out at 10%.</summary>
     DeathCheater = 194,
+    /// <summary>Unit deals no digestion damage, enemies eaten by this unit will eventually lose the ability to escape and will be considered defeated.</summary>
+    Endosoma = 195,
+    /// <summary>Units defeated by the Endosoma trait will now be recruited instead at the end of battle.</summary>
+    Friendosoma = 196,
     /// <summary>Unit deals bonus ranged and melee damage to members of the same race.</summary>
-    Competitive = 195,
+    Competitive = 197,
+
+    /// <summary>Melee damage is increased by 100%. Damage is divided by the amount of adjacent enemy units.</summary>
+    Duelist = 500,
+    /// <summary>Melee damage is reduced to 12.5%. Damage is multiplied by the amount of adjacent enemy units.</summary>
+    Fervor = 501,
+    /// <summary>Accuracy is reduced against targets within 5 tiles. Closer targets are even harder to hit.</summary>
+    Farsighted = 502,
+    /// <summary>Unit has 50% reduced vore chance when it has prey.</summary>
+    EasilySatisfied = 503,
+    /// <summary>Unit's ranged attacks can instead attack any unit within 2 spaces of the target.</summary>
+    AwfulAim = 504,
+    /// <summary>Unit's MP regeneration is delayed by one turn after it regenerates MP.</summary>
+    Slacker = 505,
+    /// <summary>Unit's stats are increased by 100%, but MP regeneration is delayed by one turn after it regenerates MP.</summary>
+    Juggernaut = 506,
+    /// <summary>When attacked in melee, unit has a 10% chance to be afflicted with sleep for 2 turns.</summary>
+    PoorConstitution = 507,
+    /// <summary>At the start of each turn, if this unit is not full, it has a 10% chance to spend MP and attempt to eat a random adjacent unit.</summary>
+    IntrusiveAppetite = 508,
+    /// <summary>When digested, unit will permanently increase one of predator's stats by one for each of this unit's levels..</summary>
+    ExtraNutritious = 509,
+    /// <summary>While full, at the start of turn, unit has a chance based on current fullness to fall asleep.</summary>
+    FoodComaProne = 510,
+    /// <summary>While asleep, unit's digestion damage and absorption rate is doubled. Unit has a chance based on fullness to extend it's own sleep status by a turn.</summary>
+    SleepItOff = 511,
+    /// <summary>Unit has a 10% chance of force-feeding themselves to their melee attack target instead of attacking, if possible. Chance is increased by 5% per difference in level.</summary>
+    HaplessPrey = 512,
+    /// <summary>While being digested, unit will heal it's predator each turn.</summary>
+    PleasantDigestion = 513,
+    /// <summary>Unit gains the ability to make a vore attempt at increased odds, if it fails their target vores them instead, if possible.</summary>
+    AllIn = 514,
+    /// <summary>At the start of turn, Unit applies 1 stack of Weakened to all adjacent allies and Unit gainst 1 stack of Bolstered for every ally afflicted.</summary>
+    SiphoningAura = 515,
+    /// <summary>Unit has a small chance to gain Temptation each time an ally within 3 spaces is eaten.</summary>
+    EnviousPrey = 516,
+    /// <summary>When an another nearby unit is eaten, it has the chance to eat a random adjacent unit.</summary>
+    CompetetivePredator = 517,
+    /// <summary>When an another nearby unit is eaten, it has the chance to eat a random adjacent unit.</summary>
+    RoughMassage = 518,
+    /// <summary>For the first 5 turns of battle, unit's MP is reduced by 50%.</summary>
+    SlowStart = 519,
+    /// <summary>When a unit within 3 spaces is consumed, this unit has a 10% chance to trade places with them and be consumed instead.</summary>
+    CurseOfSacrifice = 520,
+    /// <summary>At start of turn, Unit deals it's level in fire damage to itself and all units around it or it's predator, if this unit has been consumed. This damage can not kill. Effect does not activate if unit has surrendered.</summary>
+    CurseOfImmolation = 521,
+    /// <summary>At the start of each turn, this unit's highest stat is reduced by 1 and this unit's lowest stat is increased by 1.</summary>
+    CurseOfEquivalency = 522,
+    /// <summary>When hit by an attack, unit has a 50% chance to teleport to a random space within 3 spaces. If a unit occupies that space, this unit is consumed by the occupier.</summary>
+    CurseOfPhasing = 523,
+    /// <summary>At the start of battle, this unit has a 50% chance to have eaten one of it's allies.</summary>
+    CurseOfCraving = 524,
+    /// <summary>At the start of battle, this unit has a 25% chance to teleported into a random predator.</summary>
+    CurseOfPreyportaion = 525,
+    /// <summary>Prevents the AI from using weapons. AI will still buy weapons.</summary>
+    VoreObsession = 526,
+
 
 
 

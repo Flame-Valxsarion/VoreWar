@@ -42,8 +42,13 @@ public class World
     public MonsterEmpire[] MonsterEmpires;
 
     public MercenaryHouse[] MercenaryHouses;
+
+    public AncientTeleporter[] AncientTeleporters;
+
     [OdinSerialize]
     internal ClaimableBuilding[] Claimables;
+    [OdinSerialize]
+    internal ConstructibleBuilding[] Constructibles;
 
     public List<Empire> AllActiveEmpires;
 
@@ -76,7 +81,9 @@ public class World
         }
         AllActiveEmpires = MainEmpires;
         MercenaryHouses = new MercenaryHouse[0];
+        AncientTeleporters = new AncientTeleporter[0];
         Claimables = new ClaimableBuilding[0];
+        Constructibles = new ConstructibleBuilding[0];
     }
 
     internal World(StrategicCreationArgs args, Map map)
@@ -91,7 +98,9 @@ public class World
             int empireCount = Config.VillagesPerEmpire.Where(s => s > 0).Count();
             worldGen.GenerateWorld(ref Tiles, ref Villages, args.Team, args.MapGen);
             Claimables = new ClaimableBuilding[0];
+            Constructibles = new ConstructibleBuilding[0];
             worldGen.PlaceMercenaryHouses(args.MercCamps);
+            worldGen.PlaceAncientTeleporters(args.AncientTeleporters);
             worldGen.PlaceGoldMines(args.GoldMines);
             Doodads = new StrategicDoodadType[Config.StrategicWorldSizeX, Config.StrategicWorldSizeY];
             WorldGenerator.ClearVillagePaths(args.MapGen);
@@ -103,7 +112,9 @@ public class World
             MapVillagePopulator pop = new MapVillagePopulator(Tiles);
             pop.PopulateVillages(map, ref Villages);
             pop.PopulateMercenaryHouses(map, ref MercenaryHouses);
+            pop.PopulateAncientTeleporters(map, ref AncientTeleporters);
             pop.PopulateClaimables(map, ref Claimables);
+            pop.PopulateConstructibles(map, ref Constructibles);
         }
 
 

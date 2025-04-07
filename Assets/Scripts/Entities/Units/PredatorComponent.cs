@@ -457,7 +457,7 @@ public class PredatorComponent
     {
         get
         {
-            if (unit.HasTrait(Traits.Endosoma))
+            if (unit.HasTrait(Traits.FriendlyStomach) || unit.HasTrait(Traits.Endosoma))
                 return prey.Where(s => actor.Unit.GetApparentSide(s.Unit) != s.Unit.FixedSide || s.Unit.IsDead).Count();
             return prey.Count;
         }
@@ -790,7 +790,7 @@ public class PredatorComponent
         var target = alives[State.Rand.Next(alives.Length)];
         if (TacticalUtilities.OpenTile(location, target.Actor) == false)
             return null;
-        if (!unit.HasTrait(Traits.Endosoma) || !(target.Unit.FixedSide == unit.GetApparentSide(target.Unit)))
+        if (!unit.HasTrait(Traits.FriendlyStomach) || !unit.HasTrait(Traits.Endosoma) || !(target.Unit.FixedSide == unit.GetApparentSide(target.Unit)))
             unit.GiveScaledExp(-4, unit.Level - target.Unit.Level, true);
         target.Actor.SetPos(location);
         target.Actor.Visible = true;
@@ -799,6 +799,7 @@ public class PredatorComponent
         target.Actor.UnitSprite.DisplayEscape();
         TacticalUtilities.Log.RegisterRegurgitate(actor.Unit, target.Actor.Unit, actor.PredatorComponent.Location(target));
         RemovePrey(target);
+        unit.RestoreStamPct(1);
         UpdateFullness();
         return target;
     }
@@ -806,6 +807,12 @@ public class PredatorComponent
     internal void FreeGreatEscapePrey(Prey preyUnit)
     {
         TacticalUtilities.Log.LogGreatEscapeFlee(unit, preyUnit.Unit, Location(preyUnit));
+        RemovePrey(preyUnit);
+        preyUnit.Actor.SelfPrey = null;
+    }
+    internal void FreeEndoPrey(Prey preyUnit)
+    {
+        //TacticalUtilities.Log.LogGreatEscapeFlee(unit, preyUnit.Unit, Location(preyUnit));
         RemovePrey(preyUnit);
         preyUnit.Actor.SelfPrey = null;
     }
@@ -1085,6 +1092,10 @@ public class PredatorComponent
             }
             if (TacticalUtilities.IsPreyEndoTargetForUnit(preyUnit, unit))
             {
+                if (unit.HasTrait(Traits.Endosoma) && (preyUnit.Unit.Side != unit.Side))
+                {
+                    preyUnit.Unit.Stamina -= preyDamage;
+                }
                 if (unit.HasTrait(Traits.HealingBelly))
                     preyDamage = Math.Min(unit.MaxHealth / -10, -1);
                 else
@@ -1202,6 +1213,8 @@ public class PredatorComponent
         preyScore /= preyUnit.Unit.TraitBoosts.Incoming.DigestionRate;
         int damage = (int)Math.Round(predScore / preyScore);
         damage = ApplySettingsToDamage(damage, preyUnit);
+        if (unit.HasTrait(Traits.SleepItOff) && unit.GetStatusEffect(StatusEffectType.Sleeping) != null)
+            damage *= 2;
         if (damage < 1)
             damage = 1;
 
@@ -1521,6 +1534,17 @@ public class PredatorComponent
             unit.EnemiesKilledThisBattle++;
             preyUnit.Unit.KilledBy = unit;
             preyUnit.Unit.Kill();
+            foreach (var item in preyUnit.Unit.AllConditionalTraits.Keys.Where(t => t.trigger == TraitConditionTrigger.OnDeath || t.trigger == TraitConditionTrigger.All).ToList())
+            {
+                if (ConditionalTraitConditionChecker.TacticalTraitConditionActive(preyUnit.Actor, item))
+                {
+                    preyUnit.Unit.ActivateConditionalTrait(item.id);
+                }
+                else
+                {
+                    preyUnit.Unit.DeactivateConditionalTrait(item.id);
+                }
+            }
             for (int i = 0; i < 20; i++)
             {
                 Actor_Unit next = TacticalUtilities.FindPredator(existingPredator);
@@ -1533,6 +1557,13 @@ public class PredatorComponent
             if (unit.HasTrait(Traits.MetabolicSurge))
             {
                 unit.ApplyStatusEffect(StatusEffectType.Empowered, 1.0f, 5);
+            }
+            if (preyUnit.Unit.HasTrait(Traits.ExtraNutritious))
+            {
+                for (int i = 0; i < preyUnit.Unit.Level; i++)
+                {
+                    unit.RandomStatIncrease(1);
+                }
             }
             if (preyUnit.Unit.GetStatusEffect(StatusEffectType.Respawns) != null && (preyUnit.Unit.HasTrait(Traits.Respawner) || preyUnit.Unit.HasTrait(Traits.RespawnerIII)))
             {
@@ -2333,7 +2364,11 @@ public class PredatorComponent
             if (Config.ExtraTacticalInfo)
             {
                 prey.UpdateEscapeRate();
-                ret += $" loc: {loc}\n escape: {Math.Round(prey.EscapeRate * 100, 2)}%\n health: {Math.Round(prey.Unit.HealthPct * 100, 1)}%\n";
+                if (unit.HasTrait(Traits.Endosoma) && unit.Side != prey.Unit.Side)
+                    ret += $" loc: {loc}\n escape: {(prey.Unit.Stamina > 0 ? Math.Round(prey.EscapeRate * 100, 2) : 0)}%\n stamina: {(prey.Unit.Stamina > 0 ? Math.Round(prey.Unit.StamPct * 100, 1) : 0)}%\n";
+                else
+                    ret += $" loc: {loc}\n escape: {Math.Round(prey.EscapeRate * 100, 2)}%\n health: {Math.Round(prey.Unit.HealthPct * 100, 1)}%\n";
+
             }
 
         }
@@ -2344,7 +2379,10 @@ public class PredatorComponent
             if (Config.ExtraTacticalInfo)
             {
                 prey.UpdateEscapeRate();
-                ret += $" loc: {loc}\n escape: {Math.Round(prey.EscapeRate * 100, 2)}%\n health: {Math.Round(prey.Unit.HealthPct * 100, 1)}%\n";
+                if (unit.HasTrait(Traits.Endosoma) && unit.Side != prey.Unit.Side)
+                    ret += $" loc: {loc}\n escape: {(prey.Unit.Stamina > 0 ? Math.Round(prey.EscapeRate * 100, 2) : 0)}%\n stamina: {(prey.Unit.Stamina > 0 ? Math.Round(prey.Unit.StamPct * 100, 1) : 0)}%\n";
+                else
+                    ret += $" loc: {loc}\n escape: {Math.Round(prey.EscapeRate * 100, 2)}%\n health: {Math.Round(prey.Unit.HealthPct * 100, 1)}%\n";
             }
 
         }
@@ -2481,7 +2519,7 @@ public class PredatorComponent
     internal bool MagicConsume(Spell spell, Actor_Unit target, PreyLocation preyLocation = PreyLocation.stomach)
     {
         bool sneakAttack = false;
-        if (TacticalUtilities.SneakAttackCheck(actor.Unit, target.Unit) && !actor.Unit.HasTrait(Traits.Endosoma))
+        if (TacticalUtilities.SneakAttackCheck(actor.Unit, target.Unit) && (!actor.Unit.HasTrait(Traits.FriendlyStomach) || !actor.Unit.HasTrait(Traits.Endosoma)))
         {
             actor.Unit.hiddenFixedSide = false;
             sneakAttack = true;
@@ -2517,7 +2555,7 @@ public class PredatorComponent
 
                 if (target.Unit.Side == unit.Side)
                     State.GameManager.TacticalMode.TacticalStats.RegisterAllyVore(unit.Side);
-                if (!(target.Unit.FixedSide == unit.GetApparentSide(target.Unit)) || !unit.HasTrait(Traits.Endosoma))
+                if (!(target.Unit.FixedSide == unit.GetApparentSide(target.Unit)) || !unit.HasTrait(Traits.FriendlyStomach) || !unit.HasTrait(Traits.Endosoma))
                 {
                     unit.GiveScaledExp(4 * target.Unit.ExpMultiplier, unit.Level - target.Unit.Level, true);
                 }
@@ -2563,6 +2601,10 @@ public class PredatorComponent
                 return false;
             boost = -3 * (dist - 1);
         }
+        if (actor.IsAllIn)
+        {
+            boost += 50;
+        }
         else if (target.Position.GetNumberOfMovesDistance(actor.Position) > 1)
         {
             return false;
@@ -2591,7 +2633,7 @@ public class PredatorComponent
                 }
             }
             actor.SetPredMode(preyType);
-            if (TacticalUtilities.SneakAttackCheck(unit, target.Unit) && !actor.Unit.HasTrait(Traits.Endosoma))
+            if (TacticalUtilities.SneakAttackCheck(unit, target.Unit) && (!actor.Unit.HasTrait(Traits.FriendlyStomach) || !actor.Unit.HasTrait(Traits.Endosoma)))
             {
                 actor.Unit.hiddenFixedSide = false;
                 boost += 3;
@@ -2607,6 +2649,7 @@ public class PredatorComponent
             float v = target.GetDevourChance(actor, skillBoost: boost);
             if (r < v)
             {
+                target = PreformNearbyTraitCheck(target);
                 PerformConsume(target, action, preyType, v, delay);
                 if (actor.Unit.FixedSide == TacticalUtilities.GetMindControlSide(target.Unit))
                 {
@@ -2648,7 +2691,7 @@ public class PredatorComponent
 
             }
 
-            if (bit == false && (target.Surrendered || (unit.HasTrait(Traits.Endosoma) && (target.Unit.FixedSide == unit.GetApparentSide(target.Unit))) || target.Unit.GetStatusEffect(StatusEffectType.Hypnotized)?.Strength == actor.Unit.FixedSide))
+            if (bit == false && (target.Surrendered || ((unit.HasTrait(Traits.FriendlyStomach) || unit.HasTrait(Traits.Endosoma)) && (target.Unit.FixedSide == unit.GetApparentSide(target.Unit))) || target.Unit.GetStatusEffect(StatusEffectType.Hypnotized)?.Strength == actor.Unit.FixedSide))
                 actor.Movement = Math.Max(actor.Movement - 2, 0);
             else
             {
@@ -2676,6 +2719,53 @@ public class PredatorComponent
             actor.Movement = 0;
     }
 
+    private Actor_Unit PreformNearbyTraitCheck(Actor_Unit target)
+    {
+        Actor_Unit ret = target;
+        foreach (Actor_Unit checkedunit in TacticalUtilities.UnitsWithinTiles(actor.Position, 3))
+        {
+            if (!checkedunit.Unit.IsEnemyOfSide(target.Unit.Side))
+            {
+                if (checkedunit.Unit.HasTrait(Traits.EnviousPrey))
+                {
+                    if (State.Rand.Next(10) == 0)
+                    {
+                        checkedunit.UnitSprite.DisplayCharm();
+                        checkedunit.Unit.ApplyStatusEffect(StatusEffectType.Charmed, actor.Unit.GetApparentSide(checkedunit.Unit), 3);
+                        checkedunit.Unit.ApplyStatusEffect(StatusEffectType.Temptation, actor.Unit.GetApparentSide(checkedunit.Unit), 3);
+                    }
+                }
+            }
+
+            if (checkedunit.Unit.HasTrait(Traits.CompetetivePredator))
+            {
+                if (checkedunit.SelfPrey == null && State.Rand.Next(10) == 0)
+                {
+                    var targets = TacticalUtilities.UnitsWithinTiles(checkedunit.Position, 1).Where(u => checkedunit != u).ToList();
+                    if (targets.Any())
+                    {
+                        var pot_target = targets[State.Rand.Next(0, targets.Count() - 1)];
+                        checkedunit.PredatorComponent.UsePreferredVore(pot_target);
+                    }
+                }
+            }
+
+            if (checkedunit.Unit.HasTrait(Traits.CurseOfSacrifice))
+            {
+                if (checkedunit.Targetable)
+                {
+                    if (State.Rand.Next(10) == 0)
+                    {
+                        checkedunit.SetPos(target.Position);
+                        target.SetPos(checkedunit.Position);
+                        ret = checkedunit;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
     void PerformConsume(Actor_Unit target, Action<Actor_Unit, float, Prey, float> action, PreyLocation preyType, float odds = 1f, float delay = 0f)
     {
         if (target.Unit.IsDead == false)
@@ -2687,7 +2777,7 @@ public class PredatorComponent
         target.Visible = false;
         target.Targetable = false;
         State.GameManager.TacticalMode.DirtyPack = true;
-        if (!(target.Unit.FixedSide == unit.GetApparentSide(target.Unit)) || !unit.HasTrait(Traits.Endosoma))
+        if (!(target.Unit.FixedSide == unit.GetApparentSide(target.Unit)) || !(unit.HasTrait(Traits.FriendlyStomach) || unit.HasTrait(Traits.Endosoma)))
         {
             unit.GiveScaledExp(4 * target.Unit.ExpMultiplier, unit.Level - target.Unit.Level, true);
         }
@@ -2700,7 +2790,7 @@ public class PredatorComponent
 
     void MagicDevour(Actor_Unit target, float v, Prey preyref, PreyLocation preyLocation)
     {
-        if (actor.Unit.Side == target.Unit.GetApparentSide() && !actor.Unit.HasTrait(Traits.Endosoma))
+        if (actor.Unit.Side == target.Unit.GetApparentSide() && !(actor.Unit.HasTrait(Traits.FriendlyStomach) || actor.Unit.HasTrait(Traits.Endosoma)))
         {
             actor.Unit.hiddenFixedSide = false;
         }
@@ -3907,7 +3997,7 @@ public class PredatorComponent
         forcePrey.Visible = false;
         forcePrey.Targetable = false;
         State.GameManager.TacticalMode.DirtyPack = true;
-        if (!(forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit)) || !unit.HasTrait(Traits.Endosoma))
+        if (!(forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit)) || !(unit.HasTrait(Traits.FriendlyStomach) || unit.HasTrait(Traits.Endosoma)))
         {
             unit.GiveScaledExp(4 * forcePrey.Unit.ExpMultiplier, unit.Level - forcePrey.Unit.Level, true);
         }
@@ -4204,6 +4294,110 @@ public class PredatorComponent
         }
         AddPrey(preyref);
         actor.SetPredMode(preyLocation);
+        actor.SetVoreSuccessMode();
+        UpdateFullness();
+    }
+
+    internal void ForceConsumeAuto(Actor_Unit forcePrey)
+    {
+        if (forcePrey.Unit.IsDead == false)
+            AlivePrey++;
+        State.GameManager.TacticalMode.TacticalStats.RegisterVore(unit.Side);
+
+        if (forcePrey.Unit.Side == unit.Side)
+            State.GameManager.TacticalMode.TacticalStats.RegisterAllyVore(unit.Side);
+        forcePrey.Visible = false;
+        forcePrey.Targetable = false;
+        State.GameManager.TacticalMode.DirtyPack = true;
+        if (!(forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit)) || !(unit.HasTrait(Traits.FriendlyStomach) || unit.HasTrait(Traits.Endosoma)))
+        {
+            unit.GiveScaledExp(4 * forcePrey.Unit.ExpMultiplier, unit.Level - forcePrey.Unit.Level, true);
+        }
+        forcePrey.Movement = 0;
+        Prey preyref = new Prey(forcePrey, actor, forcePrey.PredatorComponent?.prey);
+
+        List<VoreType> allowedVoreTypes = State.RaceSettings.GetVoreTypes(unit.Race);
+
+        if (State.GameManager.TacticalMode.turboMode) //When turboing, just pick the fast solution.
+        { AddToStomach(preyref, 1f); return; }
+
+        WeightedList<VoreType> options = new WeightedList<VoreType>();
+
+        List<VoreType> voreTypes = new List<VoreType>();
+        if (allowedVoreTypes.Contains(VoreType.Oral) && Config.OralWeight > 0)
+            options.Add(VoreType.Oral, Config.OralWeight);
+        if (allowedVoreTypes.Contains(VoreType.Unbirth) && CanUnbirth(forcePrey) && Config.UnbirthWeight > 0 && (actor.BodySize() >= forcePrey.BodySize() * 3 || !actor.Unit.HasTrait(Traits.TightNethers)))
+            options.Add(VoreType.Unbirth, Config.UnbirthWeight);
+        if (allowedVoreTypes.Contains(VoreType.CockVore) && CanCockVore(forcePrey) && Config.CockWeight > 0 && (actor.BodySize() >= forcePrey.BodySize() * 3 || !actor.Unit.HasTrait(Traits.TightNethers)))
+            options.Add(VoreType.CockVore, Config.CockWeight);
+        if (allowedVoreTypes.Contains(VoreType.BreastVore) && CanBreastVore(forcePrey) && Config.BreastWeight > 0)
+            options.Add(VoreType.BreastVore, Config.BreastWeight);
+        if (allowedVoreTypes.Contains(VoreType.TailVore) && CanTailVore(forcePrey) && Config.TailWeight > 0)
+            options.Add(VoreType.TailVore, Config.TailWeight);
+        if (allowedVoreTypes.Contains(VoreType.Anal) && CanAnalVore(forcePrey) && Config.AnalWeight > 0)
+            options.Add(VoreType.Anal, Config.AnalWeight);
+
+        var type = options.GetResult();
+        PreyLocation loc = PreyLocation.stomach;
+        if (type == VoreType.All || type == VoreType.Oral)
+        {
+            State.GameManager.SoundManager.PlaySwallow(PreyLocation.stomach, actor);
+            AddToStomach(preyref, 1f);
+        }
+        else if (type == VoreType.Unbirth)
+        {
+            State.GameManager.SoundManager.PlaySwallow(PreyLocation.womb, actor);
+            loc = PreyLocation.womb;
+            AddToWomb(preyref, 1f);
+        }
+        else if (type == VoreType.CockVore)
+        {
+            State.GameManager.SoundManager.PlaySwallow(PreyLocation.balls, actor);
+            loc = PreyLocation.balls;
+            AddToBalls(preyref, 1f);
+        }
+        else if (type == VoreType.BreastVore)
+        {
+            var data = Races.GetRace(unit.Race);
+            loc = PreyLocation.breasts;
+            if (data.ExtendedBreastSprites)
+            {
+                State.GameManager.SoundManager.PlaySwallow(PreyLocation.breasts, actor);
+                if (LeftBreastFullness < RightBreastFullness || State.Rand.Next(2) == 0)
+                {
+                    leftBreast.Add(preyref);
+                }
+                else
+                {
+                    rightBreast.Add(preyref);
+                }
+            }
+            else
+            {
+                State.GameManager.SoundManager.PlaySwallow(PreyLocation.breasts, actor);
+                breasts.Add(preyref);
+            }
+        }
+        if (type == VoreType.TailVore)
+        {
+            State.GameManager.SoundManager.PlaySwallow(PreyLocation.tail, actor);
+            loc = PreyLocation.tail;
+            tail.Add(preyref);
+        }
+        else if (type == VoreType.Anal)
+        {
+            State.GameManager.SoundManager.PlaySwallow(PreyLocation.anal, actor);
+            loc = PreyLocation.anal;
+            AddToStomach(preyref, 1f);
+        }
+        else
+        {
+            State.GameManager.SoundManager.PlaySwallow(PreyLocation.stomach, actor);
+            AddToStomach(preyref, 1f);
+        }
+
+        AddPrey(preyref);
+        actor.SetPredMode(loc);
         actor.SetVoreSuccessMode();
         UpdateFullness();
     }
