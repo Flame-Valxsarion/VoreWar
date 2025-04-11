@@ -12,7 +12,7 @@ class Aabayx : DefaultRaceData
         HairStyles = 0;
         HairColors = 0;
         BodyAccentTypes1 = 0; // eyebrows
-        EyeColors = 0;
+        EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.AabayxSkin);
         EyeTypes = 21;
         MouthTypes = 0;
         TailTypes = 16;
@@ -461,7 +461,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.SkinColor);
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.EyeColor);
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
@@ -483,7 +483,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.SkinColor);
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.EyeColor);
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
@@ -505,7 +505,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.SkinColor);
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.EyeColor);
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
@@ -527,7 +527,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.SkinColor);
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.EyeColor);
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
@@ -549,7 +549,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.SkinColor);
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.EyeColor);
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
@@ -571,7 +571,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.SkinColor);
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.EyeColor);
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
@@ -593,7 +593,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.SkinColor);
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AabayxSkin, actor.Unit.EyeColor);
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)

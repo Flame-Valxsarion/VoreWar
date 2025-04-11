@@ -259,6 +259,7 @@ class Prey
             case Race.RockSlugs:
             case Race.SpitterSlugs:
             case Race.SpringSlugs:
+            case Race.Aabayx:
                 // No bone
                 break;
             case Race.Dragon:

@@ -26,7 +26,10 @@ class ScatV2Discard : MiscDiscard
         var scatFront = Object.Instantiate(State.GameManager.DiscardedClothing, loc, new Quaternion(), folder).GetComponent<SpriteRenderer>();
         scatFront.sortingOrder = sortOrder + 1 + scatInfo.bonesInfos.Count;
 
-        if (color != -1)
+
+        if (scatInfo.predRace == Race.Aabayx)
+        {}// No color changes needed
+        else if (color != -1 && scatInfo.predRace != Race.Aabayx)
         {
             scatBack.color = ColorPaletteMap.GetSlimeBaseColor(color);
             scatFront.color = ColorPaletteMap.GetSlimeBaseColor(color);
@@ -46,14 +49,30 @@ class ScatV2Discard : MiscDiscard
         if (scatInfo.preySize < 9)
         {
             int rndNum = Random.Range(0, State.GameManager.SpriteDictionary.ScatV2SBack.Length);
-            scatBack.sprite = State.GameManager.SpriteDictionary.ScatV2SBack[rndNum];
-            scatFront.sprite = State.GameManager.SpriteDictionary.ScatV2SFront[rndNum];
+            if(scatInfo.predRace == Race.Aabayx)
+            {
+                scatBack.sprite = State.GameManager.SpriteDictionary.ScatViralV2SBack[rndNum];
+                scatFront.sprite = State.GameManager.SpriteDictionary.ScatViralV2SFront[rndNum];
+            }
+            else
+            {
+                scatBack.sprite = State.GameManager.SpriteDictionary.ScatV2SBack[rndNum];
+                scatFront.sprite = State.GameManager.SpriteDictionary.ScatV2SFront[rndNum];
+            }
         }
         else if (scatInfo.preySize > 15)
         {
             int rndNum = Random.Range(0, State.GameManager.SpriteDictionary.ScatV2LBack.Length);
-            scatBack.sprite = State.GameManager.SpriteDictionary.ScatV2LBack[rndNum];
-            scatFront.sprite = State.GameManager.SpriteDictionary.ScatV2LFront[rndNum];
+            if(scatInfo.predRace == Race.Aabayx)
+            {
+                scatBack.sprite = State.GameManager.SpriteDictionary.ScatViralV2SBack[rndNum];
+                scatFront.sprite = State.GameManager.SpriteDictionary.ScatViralV2SFront[rndNum];
+            }
+            else
+            {
+                scatBack.sprite = State.GameManager.SpriteDictionary.ScatV2SBack[rndNum];
+                scatFront.sprite = State.GameManager.SpriteDictionary.ScatV2SFront[rndNum];
+            }
             int baseSize = scatInfo.preySize - 16; // min = 0
             float xy = 1f + baseSize / (100.0f + baseSize);
             scatSpriteScalingGloble = new Vector3(xy, xy);
@@ -63,8 +82,16 @@ class ScatV2Discard : MiscDiscard
         else
         {
             int rndNum = Random.Range(0, State.GameManager.SpriteDictionary.ScatV2MBack.Length);
-            scatBack.sprite = State.GameManager.SpriteDictionary.ScatV2MBack[rndNum];
-            scatFront.sprite = State.GameManager.SpriteDictionary.ScatV2MFront[rndNum];
+            if(scatInfo.predRace == Race.Aabayx)
+            {
+                scatBack.sprite = State.GameManager.SpriteDictionary.ScatViralV2SBack[rndNum];
+                scatFront.sprite = State.GameManager.SpriteDictionary.ScatViralV2SFront[rndNum];
+            }
+            else
+            {
+                scatBack.sprite = State.GameManager.SpriteDictionary.ScatV2SBack[rndNum];
+                scatFront.sprite = State.GameManager.SpriteDictionary.ScatV2SFront[rndNum];
+            }
         }
 
         //insert bones

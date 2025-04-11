@@ -14,8 +14,10 @@ TextureImporter:
     21300018: Scat_1
     21300020: Scat_2
     21300022: Scat_3
+    21300024: Scat_4
+    21300026: Scat_5
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -100,6 +102,46 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 150
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c332aa821e148534d9c27f72c1b0357b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scat_1
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 150
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 433f9216db6e28a4eb18f08962157459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scat_2
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 75
         width: 75
         height: 75
@@ -110,13 +152,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e710a72adf5b874dba6d8e97b3f173b
+      spriteID: 28db27f2a0060e94694c1576ea364e91
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Scat_1
+      name: Scat_3
       rect:
         serializedVersion: 2
         x: 75
@@ -130,13 +172,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b8b33febdf10334ead32734268b3462
+      spriteID: ca2f16b3535ae6c41b081254fc9c87ea
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Scat_2
+      name: Scat_4
       rect:
         serializedVersion: 2
         x: 0
@@ -150,13 +192,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 058a893d369edae42a33435e331c2c54
+      spriteID: f1b6856e08d07934d8ca4298f0ad679f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Scat_3
+      name: Scat_5
       rect:
         serializedVersion: 2
         x: 75
@@ -170,7 +212,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe5bbc525d550ae488a591e621728f1b
+      spriteID: d04a45337f51273428c04ab4ade59460
       vertices: []
       indices: 
       edges: []

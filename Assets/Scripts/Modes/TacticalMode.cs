@@ -1648,7 +1648,13 @@ Turns: {currentTurn}
         else
         {
             int spriteNum;
-            int offset = scatInfo.predRace == Race.Slimes ? 2 : 0;
+            int offset;
+            if (scatInfo.predRace == Race.Slimes)
+            {offset = 2;}
+            else if (scatInfo.predRace == Race.Aabayx)
+            {offset = 4;}
+            else
+            {offset = 0;}
 
             if (Config.ScatBones == false)
             {

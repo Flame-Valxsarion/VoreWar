@@ -688,19 +688,19 @@ static class SpellList
                 if (t.Unit.Health <= 5 && t.Unit.CanBeConverted())
                 {
                     if (State.Rand.Next(10) == 1)
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{t.Unit.Name} barely managed to shake off the net!");
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{t.Unit.Name}</b> barely managed to shake off the net!");
                     else
                     {
                         State.GameManager.TacticalMode.SwitchAlignment(t);
                         t.Surrendered = true;
                         t.Movement = 0;
                         t.AIAvoidEat = 2;
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{a.Unit.Name} captured {t.Unit.Name}!");
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{a.Unit.Name}</b> captured <b>{t.Unit.Name}</b>!");
                     }
                 }
                 else
                 {
-                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{a.Unit.Name} hit {t.Unit.Name} in the face with the net dealing minimal damage.");
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{a.Unit.Name}</b> hit <b>{t.Unit.Name}</b> in the face with the net dealing minimal damage.");
                     t.Unit.Heal(-2);
                 }
             },

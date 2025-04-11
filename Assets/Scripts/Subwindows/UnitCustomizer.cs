@@ -490,6 +490,7 @@ public class UnitCustomizer
             case Race.Aabayx:
                 buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Head Color";
                 buttons[(int)ButtonTypes.ClothingExtraType1].Label.text = "Face Paint";
+                buttons[(int)ButtonTypes.EyeColor].Label.text = "Face Paint Color";
                 break;
             case Race.Mice:
                 buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Face Pattern";

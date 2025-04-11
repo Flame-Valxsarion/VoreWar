@@ -352,6 +352,12 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] ScatV2MFront;
     public Sprite[] ScatV2SBack;
     public Sprite[] ScatV2SFront;
+    public Sprite[] ScatViralV2LBack;
+    public Sprite[] ScatViralV2LFront;
+    public Sprite[] ScatViralV2MBack;
+    public Sprite[] ScatViralV2MFront;
+    public Sprite[] ScatViralV2SBack;
+    public Sprite[] ScatViralV2SFront;
     public Sprite[] Bones;
     public Sprite[] CleanDisposalL;
     public Sprite[] CleanDisposalM;
