@@ -54,7 +54,6 @@
     static internal Hamsters Hamsters = new Hamsters();
     static internal RwuMercenaries RwuMercenaries = new RwuMercenaries();
     static internal Centaur Centaur = new Centaur();
-    static internal Viisels Viisels = new Viisels();
 
     static internal Vagrants Vagrants = new Vagrants();
     static internal Serpents Serpents = new Serpents();
@@ -98,6 +97,7 @@
     static internal BoomBunnies BoomBunnies = new BoomBunnies();
     static internal FeralSlime FeralSlime = new FeralSlime();
     static internal ViraeUltimae ViraeUltimae = new ViraeUltimae();
+    static internal Viisels Viisels = new Viisels();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();

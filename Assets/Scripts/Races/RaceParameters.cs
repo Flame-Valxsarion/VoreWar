@@ -3602,10 +3602,10 @@ static class RaceParameters
             {
                 Strength = new RaceStats.StatRange(5, 8),
                 Dexterity = new RaceStats.StatRange(5, 8),
-                Endurance = new RaceStats.StatRange(9, 11),
+                Endurance = new RaceStats.StatRange(7, 11),
                 Mind = new RaceStats.StatRange(8, 12),
                 Will = new RaceStats.StatRange(6, 13),
-                Agility = new RaceStats.StatRange(17, 21),
+                Agility = new RaceStats.StatRange(15, 18),
                 Voracity = new RaceStats.StatRange(12, 15),
                 Stomach = new RaceStats.StatRange(12, 15),
             },
@@ -3614,6 +3614,7 @@ static class RaceParameters
                 Traits.ArtfulDodge,
                 Traits.StretchyInsides,
                 Traits.Ravenous,
+                Traits.EasyToVore,
         },
             RaceDescription = "The Viisels, after first arriving in this world, used to live in burrows and only hunted those who got too close. But after one of their own, Ki, proved himself a capable battler, they've been forced onto the offensive as the people of the world are no longer willing to leave them be, though as the Viisels have gained a taste for other people, the small sapients grow increasingly bold... And hungry.",
         };

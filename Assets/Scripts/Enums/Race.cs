@@ -54,7 +54,6 @@
     Hamsters = 63,
     RwuMercenaries = 64,
     Centaur = 65,
-    Viisels = 66,
 
     Vagrants = 100,
     Serpents = 101,
@@ -104,6 +103,7 @@
     Otachi = 145,
     FeralSlime = 146,
     ViraeUltimae = 147,
+    Viisels = 148,
 
     Selicia = 170,
     Vision = 171,

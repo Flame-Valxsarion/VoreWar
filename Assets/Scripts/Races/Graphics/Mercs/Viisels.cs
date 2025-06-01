@@ -65,7 +65,7 @@ class Viisels : BlankSlate
 
     internal override void RunFirst(Actor_Unit actor)
     {
-        actor.UnitSprite.GraphicsFolder.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+        actor.UnitSprite.GraphicsFolder.transform.localScale = new Vector3(0.4f, 0.4f, 1); // Smolness activated!
     }
 
     protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Viisels[0];

@@ -345,6 +345,8 @@ public class InfoPanel
                 return "Elf";
             case Race.ViraeUltimae:
                 return "Virae Ultimae";
+            case Race.Viisels:
+                return "Viisel";
             case Race.none:
                 return "None";
         }
@@ -549,6 +551,8 @@ public class InfoPanel
                 return "Mainland Elf";
             case Race.ViraeUltimae:
                 return "Virae Ultimae";
+            case Race.Viisels:
+                return "Viisel";
         }
         return empire.ReplacedRace.ToString();
     }
