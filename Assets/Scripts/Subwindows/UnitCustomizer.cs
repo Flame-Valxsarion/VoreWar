@@ -519,6 +519,9 @@ public class UnitCustomizer
             case Race.ViraeUltimae:
                 buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Head Color";
                 break;
+            case Race.Viisels:
+                buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Faceplate Color";
+                break;
         }
     }
 

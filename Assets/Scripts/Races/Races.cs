@@ -38,7 +38,6 @@
     static internal MatronsMinions MatronsMinions = new MatronsMinions();
     static internal Gnolls Gnolls = new Gnolls();
     static internal MainlandElves MainlandElves = new MainlandElves();
-    static internal Bears Bears = new Bears();
 
 
     static internal Tigers Tigers = new Tigers();
@@ -55,6 +54,7 @@
     static internal Hamsters Hamsters = new Hamsters();
     static internal RwuMercenaries RwuMercenaries = new RwuMercenaries();
     static internal Centaur Centaur = new Centaur();
+    static internal Viisels Viisels = new Viisels();
 
     static internal Vagrants Vagrants = new Vagrants();
     static internal Serpents Serpents = new Serpents();
@@ -381,8 +381,8 @@
                 return MainlandElves;
             case Race.ViraeUltimae:
                 return ViraeUltimae;
-            case Race.Bears:
-                return Bears;
+            case Race.Viisels:
+                return Viisels;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

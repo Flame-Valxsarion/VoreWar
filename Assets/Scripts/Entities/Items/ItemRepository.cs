@@ -104,6 +104,7 @@ public enum SpecialItems
     OmniLauncher,
     TaraWeapon,
     XelhildeWeapon,
+    ViiselWeapon,
 }
 
 
@@ -308,6 +309,7 @@ public class ItemRepository
             new Weapon(name:"Omni Launcher", description:"A ranged weapon made from a semi-morphic material that takes on a form best suited to it's wielder. (Dissapates upon separation from it's wielder.)", cost:4, graphic:6, damage:8, range:6, accuracyModifier:.75f),
             new Weapon(name:"Tara's Claws", description:"A fearsome set of claws attatched to an equally fearsome dragon.", cost:4, graphic:0, damage:8, range:1, lockedItem:true),
             new Weapon(name:"Xelhilde's Zweihänder", description:"A cobalt zweihänder forged in Mondfeld. It's edge seems to shimer like the moon.", cost:4, graphic:0, damage:9, range:1, accuracyModifier: 1.4f, lockedItem:true),
+            new Weapon(name:"Viisel Claw", description:"Claw Attack", cost:4, graphic:0, damage:8, range:1),
         };
 
 

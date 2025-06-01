@@ -122,6 +122,7 @@ static class RaceParameters
     static readonly RaceTraits FeralSlime;
     static readonly RaceTraits Olivia;
     static readonly RaceTraits ViraeUltimae;
+    static readonly RaceTraits Viisels;
 
     static Unit tempUnit;
 
@@ -383,6 +384,8 @@ static class RaceParameters
                 return Bears;
             case Race.ViraeUltimae:
                 return ViraeUltimae;
+            case Race.Viisels:
+                return Viisels;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -946,10 +949,22 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.Anal },
+            RaceStats = new RaceStats()
+        {
+                Strength = new RaceStats.StatRange(4, 10),
+                Dexterity = new RaceStats.StatRange(4, 10),
+                Endurance = new RaceStats.StatRange(10, 14),
+                Mind = new RaceStats.StatRange(6, 13),
+                Will = new RaceStats.StatRange(6, 13),
+                Agility = new RaceStats.StatRange(6, 10),
+                Voracity = new RaceStats.StatRange(18, 24),
+                Stomach = new RaceStats.StatRange(12, 15),
+        },
             RacialTraits = new List<Traits>()
         {
                 Traits.ViralBiology,
                 Traits.SlowBreeder,
+                Traits.FastDigestion,
         },
             RaceDescription = "The Aabayx are a species of virosapiens who recently revealed themselves to the world and were quick to commit to the stage of war.  Strangely enough, they are not new arrivals to the realm, but rather have been in extreme isolation in an unknown location and were waiting for the exact right time to resurface and conquer the masses.  That time is now.",
         };
@@ -3421,7 +3436,7 @@ static class RaceParameters
             StomachSize = 15,
             FavoredStat = Stat.Strength,
             HasTail = true,
-            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal},
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.Unbirth},
             ExpMultiplier = 1.4f,
             PowerAdjustment = 2f,
             DeployCost = 1,
@@ -3570,6 +3585,37 @@ static class RaceParameters
                 Traits.Brainless,
         },
             RaceDescription = "How the Virae Ultimae are able to function at all with no brain is an enigma. Hearing and perpetual humming are their only ways of interacting with the world minus attacking and attempting to reproduce more of themselves by infecting hosts with their viral injectors. These things operate as brainless biological automata, and their sheer refusal to cease their attack under any conditions can be quite scary.",
+        };
+
+        Viisels = new RaceTraits()
+        {
+            BodySize = 10,
+            StomachSize = 17,
+            HasTail = true,
+            FavoredStat = Stat.Voracity,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore , VoreType.Unbirth},
+            ExpMultiplier = 1f,
+            PowerAdjustment = 1f,
+            DeployCost = 1,
+            Upkeep = 3f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(5, 8),
+                Dexterity = new RaceStats.StatRange(5, 8),
+                Endurance = new RaceStats.StatRange(9, 11),
+                Mind = new RaceStats.StatRange(8, 12),
+                Will = new RaceStats.StatRange(6, 13),
+                Agility = new RaceStats.StatRange(17, 21),
+                Voracity = new RaceStats.StatRange(12, 15),
+                Stomach = new RaceStats.StatRange(12, 15),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.ArtfulDodge,
+                Traits.StretchyInsides,
+                Traits.Ravenous,
+        },
+            RaceDescription = "The Viisels, after first arriving in this world, used to live in burrows and only hunted those who got too close. But after one of their own, Ki, proved himself a capable battler, they've been forced onto the offensive as the people of the world are no longer willing to leave them be, though as the Viisels have gained a taste for other people, the small sapients grow increasingly bold... And hungry.",
         };
 
     }
