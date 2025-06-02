@@ -3,7 +3,7 @@ using UnityEngine;
 
 class Viisels : BlankSlate
 {
-    internal Viisels()
+    internal Viisels() // Sprites by Yonell!
     {
         SpecialAccessoryCount = 4;
         ClothingShift = new Vector3(0, 0, 0);
