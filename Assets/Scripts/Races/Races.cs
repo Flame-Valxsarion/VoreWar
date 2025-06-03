@@ -98,6 +98,7 @@
     static internal BoomBunnies BoomBunnies = new BoomBunnies();
     static internal FeralSlime FeralSlime = new FeralSlime();
     static internal ViraeUltimae ViraeUltimae = new ViraeUltimae();
+    static internal Viisels Viisels = new Viisels();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();
@@ -383,6 +384,8 @@
                 return ViraeUltimae;
             case Race.Bears:
                 return Bears;
+            case Race.Viisels:
+                return Viisels;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

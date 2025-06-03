@@ -110,6 +110,282 @@ public static class State
                 File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleAabayx.txt", $"{StorageDirectory}femaleAabayx.txt");
             if (File.Exists($"{StorageDirectory}maleAabayx.txt") == false)
                 File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleAabayx.txt", $"{StorageDirectory}maleAabayx.txt");
+            if (File.Exists($"{StorageDirectory}Cake.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Cake.txt", $"{StorageDirectory}Cake.txt");
+            if (File.Exists($"{StorageDirectory}Collectors.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Collectors.txt", $"{StorageDirectory}Collectors.txt");
+            if (File.Exists($"{StorageDirectory}Compy.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Compy.txt", $"{StorageDirectory}Compy.txt");
+            if (File.Exists($"{StorageDirectory}CoralSlugs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}CoralSlugs.txt", $"{StorageDirectory}CoralSlugs.txt");
+            if (File.Exists($"{StorageDirectory}DarkSwallower.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}DarkSwallower.txt", $"{StorageDirectory}DarkSwallower.txt");
+            if (File.Exists($"{StorageDirectory}Dragonfly.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Dragonfly.txt", $"{StorageDirectory}Dragonfly.txt");
+            if (File.Exists($"{StorageDirectory}Earthworms.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Earthworms.txt", $"{StorageDirectory}Earthworms.txt");
+            if (File.Exists($"{StorageDirectory}femaleAlligators.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleAlligators.txt", $"{StorageDirectory}femaleAlligators.txt");
+            if (File.Exists($"{StorageDirectory}maleAlligators.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleAlligators.txt", $"{StorageDirectory}maleAlligators.txt");
+            if (File.Exists($"{StorageDirectory}femaleAlraune.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleAlraune.txt", $"{StorageDirectory}femaleAlraune.txt");
+            if (File.Exists($"{StorageDirectory}maleAlraune.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleAlraune.txt", $"{StorageDirectory}maleAlraune.txt");
+            if (File.Exists($"{StorageDirectory}femaleAnts.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleAnts.txt", $"{StorageDirectory}femaleAnts.txt");
+            if (File.Exists($"{StorageDirectory}maleAnts.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleAnts.txt", $"{StorageDirectory}maleAnts.txt");
+            if (File.Exists($"{StorageDirectory}femaleAvians.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleAvians.txt", $"{StorageDirectory}femaleAvians.txt");
+            if (File.Exists($"{StorageDirectory}maleAvians.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleAvians.txt", $"{StorageDirectory}maleAvians.txt");
+            if (File.Exists($"{StorageDirectory}femaleBats.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleBats.txt", $"{StorageDirectory}femaleBats.txt");
+            if (File.Exists($"{StorageDirectory}maleBats.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleBats.txt", $"{StorageDirectory}maleBats.txt");
+            if (File.Exists($"{StorageDirectory}femaleBees.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleBees.txt", $"{StorageDirectory}femaleBees.txt");
+            if (File.Exists($"{StorageDirectory}maleBees.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleBees.txt", $"{StorageDirectory}maleBees.txt");
+            if (File.Exists($"{StorageDirectory}femaleBunnies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleBunnies.txt", $"{StorageDirectory}femaleBunnies.txt");
+            if (File.Exists($"{StorageDirectory}maleBunnies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleBunnies.txt", $"{StorageDirectory}maleBunnies.txt");
+            if (File.Exists($"{StorageDirectory}femaleCats.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleCats.txt", $"{StorageDirectory}femaleCats.txt");
+            if (File.Exists($"{StorageDirectory}maleCats.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleCats.txt", $"{StorageDirectory}maleCats.txt");
+            if (File.Exists($"{StorageDirectory}femaleCockatrice.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleCockatrice.txt", $"{StorageDirectory}femaleCockatrice.txt");
+            if (File.Exists($"{StorageDirectory}maleCockatrice.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleCockatrice.txt", $"{StorageDirectory}maleCockatrice.txt");
+            if (File.Exists($"{StorageDirectory}femaleCrux.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleCrux.txt", $"{StorageDirectory}femaleCrux.txt");
+            if (File.Exists($"{StorageDirectory}maleCrux.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleCrux.txt", $"{StorageDirectory}maleCrux.txt");
+            if (File.Exists($"{StorageDirectory}femaleCrypters.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleCrypters.txt", $"{StorageDirectory}femaleCrypters.txt");
+            if (File.Exists($"{StorageDirectory}maleCrypters.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleCrypters.txt", $"{StorageDirectory}maleCrypters.txt");
+            if (File.Exists($"{StorageDirectory}femaleDeer.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleDeer.txt", $"{StorageDirectory}femaleDeer.txt");
+            if (File.Exists($"{StorageDirectory}maleDeer.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleDeer.txt", $"{StorageDirectory}maleDeer.txt");
+            if (File.Exists($"{StorageDirectory}femaleDewSprites.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleDewSprites.txt", $"{StorageDirectory}femaleDewSprites.txt");
+            if (File.Exists($"{StorageDirectory}femaleDogs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleDogs.txt", $"{StorageDirectory}femaleDogs.txt");
+            if (File.Exists($"{StorageDirectory}maleDogs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleDogs.txt", $"{StorageDirectory}maleDogs.txt");
+            if (File.Exists($"{StorageDirectory}femaleDragon.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleDragon.txt", $"{StorageDirectory}femaleDragon.txt");
+            if (File.Exists($"{StorageDirectory}maleDragon.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleDragon.txt", $"{StorageDirectory}maleDragon.txt");
+            if (File.Exists($"{StorageDirectory}femaleDratopyr.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleDratopyr.txt", $"{StorageDirectory}femaleDratopyr.txt");
+            if (File.Exists($"{StorageDirectory}maleDratopyr.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleDratopyr.txt", $"{StorageDirectory}maleDratopyr.txt");
+            if (File.Exists($"{StorageDirectory}femaleDriders.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleDriders.txt", $"{StorageDirectory}femaleDriders.txt");
+            if (File.Exists($"{StorageDirectory}maleDriders.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleDriders.txt", $"{StorageDirectory}maleDriders.txt");
+            if (File.Exists($"{StorageDirectory}femaleEasternDragon.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleEasternDragon.txt", $"{StorageDirectory}femaleEasternDragon.txt");
+            if (File.Exists($"{StorageDirectory}maleEasternDragon.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleEasternDragon.txt", $"{StorageDirectory}maleEasternDragon.txt");
+            if (File.Exists($"{StorageDirectory}femaleEquines.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleEquines.txt", $"{StorageDirectory}femaleEquines.txt");
+            if (File.Exists($"{StorageDirectory}maleEquines.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleEquines.txt", $"{StorageDirectory}maleEquines.txt");
+            if (File.Exists($"{StorageDirectory}femaleFairies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFairies.txt", $"{StorageDirectory}femaleFairies.txt");
+            if (File.Exists($"{StorageDirectory}maleFairies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFairies.txt", $"{StorageDirectory}maleFairies.txt");
+            if (File.Exists($"{StorageDirectory}femaleFeralBats.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFeralBats.txt", $"{StorageDirectory}femaleFeralBats.txt");
+            if (File.Exists($"{StorageDirectory}maleFeralBats.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFeralBats.txt", $"{StorageDirectory}maleFeralBats.txt");
+            if (File.Exists($"{StorageDirectory}femaleFeralFox.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFeralFox.txt", $"{StorageDirectory}femaleFeralFox.txt");
+            if (File.Exists($"{StorageDirectory}maleFeralFox.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFeralFox.txt", $"{StorageDirectory}maleFeralFox.txt");
+            if (File.Exists($"{StorageDirectory}femaleFeralHorses.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFeralHorses.txt", $"{StorageDirectory}femaleFeralHorses.txt");
+            if (File.Exists($"{StorageDirectory}maleFeralHorses.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFeralHorses.txt", $"{StorageDirectory}maleFeralHorses.txt");
+            if (File.Exists($"{StorageDirectory}femaleFeralLizards.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFeralLizards.txt", $"{StorageDirectory}femaleFeralLizards.txt");
+            if (File.Exists($"{StorageDirectory}maleFeralLizards.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFeralLizards.txt", $"{StorageDirectory}maleFeralLizards.txt");
+            if (File.Exists($"{StorageDirectory}femaleFoxes.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFoxes.txt", $"{StorageDirectory}femaleFoxes.txt");
+            if (File.Exists($"{StorageDirectory}maleFoxes.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFoxes.txt", $"{StorageDirectory}maleFoxes.txt");
+            if (File.Exists($"{StorageDirectory}femaleFrogs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleFrogs.txt", $"{StorageDirectory}femaleFrogs.txt");
+            if (File.Exists($"{StorageDirectory}maleFrogs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFrogs.txt", $"{StorageDirectory}maleFrogs.txt");
+            if (File.Exists($"{StorageDirectory}femaleGazelle.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleGazelle.txt", $"{StorageDirectory}femaleGazelle.txt");
+            if (File.Exists($"{StorageDirectory}maleGazelle.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleGazelle.txt", $"{StorageDirectory}maleGazelle.txt");
+            if (File.Exists($"{StorageDirectory}femaleGoblins.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleGoblins.txt", $"{StorageDirectory}femaleGoblins.txt");
+            if (File.Exists($"{StorageDirectory}maleGoblins.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleGoblins.txt", $"{StorageDirectory}maleGoblins.txt");
+            if (File.Exists($"{StorageDirectory}femaleGryphons.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleGryphons.txt", $"{StorageDirectory}femaleGryphons.txt");
+            if (File.Exists($"{StorageDirectory}maleGryphons.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleGryphons.txt", $"{StorageDirectory}maleGryphons.txt");
+            if (File.Exists($"{StorageDirectory}femaleHamsters.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleHamsters.txt", $"{StorageDirectory}femaleHamsters.txt");
+            if (File.Exists($"{StorageDirectory}maleHamsters.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleHamsters.txt", $"{StorageDirectory}maleHamsters.txt");
+            if (File.Exists($"{StorageDirectory}femaleHarpies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleHarpies.txt", $"{StorageDirectory}femaleHarpies.txt");
+            if (File.Exists($"{StorageDirectory}maleHarpies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleHarpies.txt", $"{StorageDirectory}maleHarpies.txt");
+            if (File.Exists($"{StorageDirectory}femaleHippos.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleHippos.txt", $"{StorageDirectory}femaleHippos.txt");
+            if (File.Exists($"{StorageDirectory}maleHippos.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleHippos.txt", $"{StorageDirectory}maleHippos.txt");
+            if (File.Exists($"{StorageDirectory}femaleHumans.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleHumans.txt", $"{StorageDirectory}femaleHumans.txt");
+            if (File.Exists($"{StorageDirectory}maleHumans.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleHumans.txt", $"{StorageDirectory}maleHumans.txt");
+            if (File.Exists($"{StorageDirectory}femaleImps.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleImps.txt", $"{StorageDirectory}femaleImps.txt");
+            if (File.Exists($"{StorageDirectory}maleImps.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleImps.txt", $"{StorageDirectory}maleImps.txt");
+            if (File.Exists($"{StorageDirectory}femaleKangaroos.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleKangaroos.txt", $"{StorageDirectory}femaleKangaroos.txt");
+            if (File.Exists($"{StorageDirectory}maleKangaroos.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleKangaroos.txt", $"{StorageDirectory}maleKangaroos.txt");
+            if (File.Exists($"{StorageDirectory}femaleKobolds.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleKobolds.txt", $"{StorageDirectory}femaleKobolds.txt");
+            if (File.Exists($"{StorageDirectory}maleKobolds.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleKobolds.txt", $"{StorageDirectory}maleKobolds.txt");
+            if (File.Exists($"{StorageDirectory}femaleKomodos.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleKomodos.txt", $"{StorageDirectory}femaleKomodos.txt");
+            if (File.Exists($"{StorageDirectory}maleKomodos.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleKomodos.txt", $"{StorageDirectory}maleKomodos.txt");
+            if (File.Exists($"{StorageDirectory}femaleLamia.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleLamia.txt", $"{StorageDirectory}femaleLamia.txt");
+            if (File.Exists($"{StorageDirectory}maleLamia.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleLamia.txt", $"{StorageDirectory}maleLamia.txt");
+            if (File.Exists($"{StorageDirectory}femaleLizards.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleLizards.txt", $"{StorageDirectory}femaleLizards.txt");
+            if (File.Exists($"{StorageDirectory}maleLizards.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleLizards.txt", $"{StorageDirectory}maleLizards.txt");
+            if (File.Exists($"{StorageDirectory}femaleMantis.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleMantis.txt", $"{StorageDirectory}femaleMantis.txt");
+            if (File.Exists($"{StorageDirectory}maleMantis.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleMantis.txt", $"{StorageDirectory}maleMantis.txt");
+            if (File.Exists($"{StorageDirectory}femaleMerfolk.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleMerfolk.txt", $"{StorageDirectory}femaleMerfolk.txt");
+            if (File.Exists($"{StorageDirectory}maleMerfolk.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleMerfolk.txt", $"{StorageDirectory}maleMerfolk.txt");
+            if (File.Exists($"{StorageDirectory}femaleMonitors.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleMonitors.txt", $"{StorageDirectory}femaleMonitors.txt");
+            if (File.Exists($"{StorageDirectory}maleMonitors.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleMonitors.txt", $"{StorageDirectory}maleMonitors.txt");
+            if (File.Exists($"{StorageDirectory}femalePanthers.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femalePanthers.txt", $"{StorageDirectory}femalePanthers.txt");
+            if (File.Exists($"{StorageDirectory}malePanthers.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}malePanthers.txt", $"{StorageDirectory}malePanthers.txt");
+            if (File.Exists($"{StorageDirectory}femalePuca.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femalePuca.txt", $"{StorageDirectory}femalePuca.txt");
+            if (File.Exists($"{StorageDirectory}malePuca.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}malePuca.txt", $"{StorageDirectory}malePuca.txt");
+            if (File.Exists($"{StorageDirectory}femaleScylla.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleScylla.txt", $"{StorageDirectory}femaleScylla.txt");
+            if (File.Exists($"{StorageDirectory}maleScylla.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleScylla.txt", $"{StorageDirectory}maleScylla.txt");
+            if (File.Exists($"{StorageDirectory}femaleSergal.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleSergal.txt", $"{StorageDirectory}femaleSergal.txt");
+            if (File.Exists($"{StorageDirectory}maleSergal.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleSergal.txt", $"{StorageDirectory}maleSergal.txt");
+            if (File.Exists($"{StorageDirectory}femaleSharks.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleSharks.txt", $"{StorageDirectory}femaleSharks.txt");
+            if (File.Exists($"{StorageDirectory}maleSharks.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleSharks.txt", $"{StorageDirectory}maleSharks.txt");
+            if (File.Exists($"{StorageDirectory}femaleSlimes.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleSlimes.txt", $"{StorageDirectory}femaleSlimes.txt");
+            if (File.Exists($"{StorageDirectory}maleSlimes.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleSlimes.txt", $"{StorageDirectory}maleSlimes.txt");
+            if (File.Exists($"{StorageDirectory}femaleSuccubi.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleSuccubi.txt", $"{StorageDirectory}femaleSuccubi.txt");
+            if (File.Exists($"{StorageDirectory}maleSuccubi.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleSuccubi.txt", $"{StorageDirectory}maleSuccubi.txt");
+            if (File.Exists($"{StorageDirectory}femaleTaurus.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleTaurus.txt", $"{StorageDirectory}femaleTaurus.txt");
+            if (File.Exists($"{StorageDirectory}maleTaurus.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleTaurus.txt", $"{StorageDirectory}maleTaurus.txt");
+            if (File.Exists($"{StorageDirectory}femaleTerrorbird.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleTerrorbird.txt", $"{StorageDirectory}femaleTerrorbird.txt");
+            if (File.Exists($"{StorageDirectory}maleTerrorbird.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleTerrorbird.txt", $"{StorageDirectory}maleTerrorbird.txt");
+            if (File.Exists($"{StorageDirectory}femaleTigers.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleTigers.txt", $"{StorageDirectory}femaleTigers.txt");
+            if (File.Exists($"{StorageDirectory}maleTigers.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleTigers.txt", $"{StorageDirectory}maleTigers.txt");
+            if (File.Exists($"{StorageDirectory}femaleVargul.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleVargul.txt", $"{StorageDirectory}femaleVargul.txt");
+            if (File.Exists($"{StorageDirectory}maleVargul.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleVargul.txt", $"{StorageDirectory}maleVargul.txt");
+            if (File.Exists($"{StorageDirectory}femaleVipers.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleVipers.txt", $"{StorageDirectory}femaleVipers.txt");
+            if (File.Exists($"{StorageDirectory}maleVipers.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleVipers.txt", $"{StorageDirectory}maleVipers.txt");
+            if (File.Exists($"{StorageDirectory}femaleWolves.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleWolves.txt", $"{StorageDirectory}femaleWolves.txt");
+            if (File.Exists($"{StorageDirectory}maleWolves.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleWolves.txt", $"{StorageDirectory}maleWolves.txt");
+            if (File.Exists($"{StorageDirectory}femaleWyvern.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleWyvern.txt", $"{StorageDirectory}femaleWyvern.txt");
+            if (File.Exists($"{StorageDirectory}maleWyvern.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleWyvern.txt", $"{StorageDirectory}maleWyvern.txt");
+            if (File.Exists($"{StorageDirectory}femaleYouko.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleYouko.txt", $"{StorageDirectory}femaleYouko.txt");
+            if (File.Exists($"{StorageDirectory}maleYouko.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleYouko.txt", $"{StorageDirectory}maleYouko.txt");
+            if (File.Exists($"{StorageDirectory}FeralAnts.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}FeralAnts.txt", $"{StorageDirectory}FeralAnts.txt");
+            if (File.Exists($"{StorageDirectory}FeralFrogs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}FeralFrogs.txt", $"{StorageDirectory}FeralFrogs.txt");
+            if (File.Exists($"{StorageDirectory}FeralSharks.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}FeralSharks.txt", $"{StorageDirectory}FeralSharks.txt");
+            if (File.Exists($"{StorageDirectory}FeralWolves.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}FeralWolves.txt", $"{StorageDirectory}FeralWolves.txt");
+            if (File.Exists($"{StorageDirectory}Harvesters.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Harvesters.txt", $"{StorageDirectory}Harvesters.txt");
+            if (File.Exists($"{StorageDirectory}Raptor.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Raptor.txt", $"{StorageDirectory}Raptor.txt");
+            if (File.Exists($"{StorageDirectory}RockSlugs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}RockSlugs.txt", $"{StorageDirectory}RockSlugs.txt");
+            if (File.Exists($"{StorageDirectory}Salamanders.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Salamanders.txt", $"{StorageDirectory}Salamanders.txt");
+            if (File.Exists($"{StorageDirectory}Schiwardez.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Schiwardez.txt", $"{StorageDirectory}Schiwardez.txt");
+            if (File.Exists($"{StorageDirectory}Serpents.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Serpents.txt", $"{StorageDirectory}Serpents.txt");
+            if (File.Exists($"{StorageDirectory}SpitterSlugs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}SpitterSlugs.txt", $"{StorageDirectory}SpitterSlugs.txt");
+            if (File.Exists($"{StorageDirectory}SpringSlugs.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}SpringSlugs.txt", $"{StorageDirectory}SpringSlugs.txt");
+            if (File.Exists($"{StorageDirectory}Voilin.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Voilin.txt", $"{StorageDirectory}Voilin.txt");
+            if (File.Exists($"{StorageDirectory}WarriorAnts.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}WarriorAnts.txt", $"{StorageDirectory}WarriorAnts.txt");
+            if (File.Exists($"{StorageDirectory}Whisp.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}Whisp.txt", $"{StorageDirectory}Whisp.txt");
+            if (File.Exists($"{StorageDirectory}femaleBoomBunnies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}femaleBoomBunnies.txt", $"{StorageDirectory}femaleBoomBunnies.txt");
+            if (File.Exists($"{StorageDirectory}maleBoomBunnies.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleBoomBunnies.txt", $"{StorageDirectory}maleBoomBunnies.txt");
+            if (File.Exists($"{StorageDirectory}WyvernMatron.txt") == false)
+                File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}WyvernMatron.txt", $"{StorageDirectory}WyvernMatron.txt");
             if (File.Exists($"{StorageDirectory}maleFeralOrcas.txt") == false)
                 File.Copy($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}maleFeralOrcas.txt", $"{StorageDirectory}maleFeralOrcas.txt");
             if (File.Exists($"{StorageDirectory}femaleFeralOrcas.txt") == false)

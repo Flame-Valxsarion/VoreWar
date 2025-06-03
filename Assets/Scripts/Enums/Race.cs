@@ -103,6 +103,7 @@
     Otachi = 145,
     FeralSlime = 146,
     ViraeUltimae = 147,
+    Viisels = 148,
 
     Selicia = 170,
     Vision = 171,

@@ -104,6 +104,7 @@ public enum SpecialItems
     OmniLauncher,
     TaraWeapon,
     XelhildeWeapon,
+    ViiselWeapon,
 }
 
 
@@ -280,6 +281,7 @@ public class ItemRepository
             new Weapon(name:"Otachi Claws", description:"The all-powerful kaiju claws of the Otachi.", cost:4, graphic:0, damage:6, range:1),
             new Weapon(name:"Slime Tackle", description:"Slime attack.", cost:4, graphic:0, damage:4, range:1),
             new Weapon(name:"Viral Stinger", description:"A viral stinger laced with Virae Ultimae cells to infect prey.", cost:4, graphic:0, damage:5, range:1),
+            new Weapon(name:"Viisel Claw", description:"Claw Attack", cost:4, graphic:0, damage:4, range:1),
         };
 
         specialItems = new List<Item>()

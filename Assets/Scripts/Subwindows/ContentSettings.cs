@@ -564,6 +564,9 @@ public class ContentSettings : MonoBehaviour
             case Race.ViraeUltimae:
                 tooltip.value = 332;
                 break;
+            case Race.Viisels:
+                tooltip.value = 333;
+                break;
         }
         return spawner;
     }
