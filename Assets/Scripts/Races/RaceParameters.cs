@@ -951,14 +951,14 @@ static class RaceParameters
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.Anal },
             RaceStats = new RaceStats()
         {
-                Strength = new RaceStats.StatRange(4, 10),
-                Dexterity = new RaceStats.StatRange(4, 10),
-                Endurance = new RaceStats.StatRange(10, 14),
-                Mind = new RaceStats.StatRange(6, 13),
-                Will = new RaceStats.StatRange(6, 13),
-                Agility = new RaceStats.StatRange(6, 10),
-                Voracity = new RaceStats.StatRange(18, 24),
-                Stomach = new RaceStats.StatRange(12, 15),
+                Strength = new RaceStats.StatRange(10, 18),
+                Dexterity = new RaceStats.StatRange(10, 18),
+                Endurance = new RaceStats.StatRange(6, 10),
+                Mind = new RaceStats.StatRange(7, 9),
+                Will = new RaceStats.StatRange(10, 15),
+                Agility = new RaceStats.StatRange(9, 17),
+                Voracity = new RaceStats.StatRange(8, 14),
+                Stomach = new RaceStats.StatRange(8, 16),
         },
             RacialTraits = new List<Traits>()
         {
