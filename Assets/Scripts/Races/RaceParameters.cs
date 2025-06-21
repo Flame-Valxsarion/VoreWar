@@ -131,6 +131,7 @@ static class RaceParameters
     static readonly RaceTraits FeralEqualeon;
     static readonly RaceTraits Skapa;
     static readonly RaceTraits Tatltuae;
+    static readonly RaceTraits Lupine;
 
     static Unit tempUnit;
 
@@ -410,6 +411,8 @@ static class RaceParameters
                 return Skapa;
             case Race.Tatltuae:
                 return Tatltuae;
+            case Race.Lupine:
+                return Lupine;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -1151,6 +1154,22 @@ static class RaceParameters
             Traits.Intimidating,
             Traits.PackStrength,
             Traits.EscapeArtist,
+        },
+            RaceDescription = "",
+        };
+
+        Lupine = new RaceTraits()
+        {
+            BodySize = 15,
+            StomachSize = 20,
+            HasTail = false,
+            FavoredStat = Stat.Endurance,
+            DeployCost = 1,
+            Upkeep = 3f,
+            RacialTraits = new List<Traits>()
+        {
+            Traits.Intimidating,
+            Traits.HardSkin,
         },
             RaceDescription = "",
         };

@@ -33,7 +33,7 @@ class MainlandElves : DefaultRaceData
         Head = new SpriteExtraInfo(6, HeadSprite, null, (s) => FurryColor(s));
         BodyAccessory = new SpriteExtraInfo(22, AccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedSkin, s.Unit.SkinColor)); // Ears
         BodyAccent = new SpriteExtraInfo(3, BodyAccentSprite, WhiteColored); // Extra weapon sprite
-        BodyAccent2 = new SpriteExtraInfo(0, BodyAccentSprite2, WhiteColored); // Back weapon sprite
+        BodyAccent2 = null;
         BodyAccent3 = new SpriteExtraInfo(23, BodyAccentSprite3, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedSkin, s.Unit.SkinColor)); // Ear Accessory
         BodyAccent5 = new SpriteExtraInfo(0, BodyAccentSprite5, WhiteColored); // Back weapon sprite;
         BodyAccent6 = null;
@@ -364,41 +364,6 @@ class MainlandElves : DefaultRaceData
                 return null;
             case 7:
                 return null;
-            default:
-                return null;
-        }
-    }
-
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Extra weapon sprite 2
-    {
-        return null;
-
-        switch (actor.GetWeaponSprite())
-        {
-            case 0:
-                BodyAccent2.layer = 22;
-                return Sprites3[143];
-            case 1:
-                BodyAccent2.layer = 22;
-                return Sprites3[143];
-            case 2:
-                BodyAccent2.layer = 22;
-                return Sprites3[143];
-            case 3:
-                BodyAccent2.layer = 22;
-                return Sprites3[143];
-            case 4:
-                BodyAccent2.layer = 0;
-                return Sprites3[142];
-            case 5:
-                BodyAccent2.layer = 0;
-                return Sprites3[142];
-            case 6:
-                BodyAccent2.layer = 0;
-                return Sprites3[142];
-            case 7:
-                BodyAccent2.layer = 0;
-                return Sprites3[142];
             default:
                 return null;
         }

@@ -104,15 +104,20 @@ class StrategicBuildingContractor
         List<Vec2i> ValidLocations = new List<Vec2i>();
         foreach (Vec2i loc in empire.OwnedTiles)
         {
-            if (StrategicUtilities.GetVillageAt(loc) == null &&
-                StrategicUtilities.GetMercenaryHouseAt(loc) == null &&
-                StrategicUtilities.GetTeleAt(loc) == null &&
-                StrategicUtilities.GetClaimableAt(loc) == null &&
-                StrategicUtilities.GetConstructibleAt(loc) == null &&
-                StrategicTileInfo.CanWalkInto(State.World.Tiles[loc.x, loc.y]))
-            {
-                ValidLocations.Add(loc);
-            }
+            if (!(StrategicUtilities.GetVillageAt(loc) == null))
+                continue;
+            if (!(StrategicUtilities.GetMercenaryHouseAt(loc) == null))
+                continue;
+            if (!(StrategicUtilities.GetTeleAt(loc) == null))
+                continue;
+            if (!(StrategicUtilities.GetClaimableAt(loc) == null))
+                continue;
+            if (!(StrategicUtilities.GetConstructibleAt(loc) == null))
+                continue;
+            if (!StrategicTileInfo.CanWalkInto(loc.x, loc.y))
+                continue;
+
+            ValidLocations.Add(loc);
         }
         if (ValidLocations.Count() <= 0)
         {

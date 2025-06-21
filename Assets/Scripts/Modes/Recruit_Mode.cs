@@ -1311,8 +1311,8 @@ public class Recruit_Mode : SceneBase
     internal void PotionShopTransferItemToCharacter(int type) => potionShop.TransferItemToCharacter(type);
     internal void PotionShopTransferItemToAll(int type) => potionShop.TransferItemToAll(type);
     internal void PotionShopSellItemFromInventory(int type) => potionShop.SellItemFromInventory(type);
-    internal void PotionShopIncreaseCount(Unit unit, Item type) => potionShop.IncreaseCount(unit, type);
-    internal void PotionShopDecCount(Unit unit, Item type) => potionShop.DecreaseCount(unit, type);
+    internal void PotionShopIncreaseCount(Unit unit, int type) => potionShop.IncreaseCount(unit, type);
+    internal void PotionShopDecCount(Unit unit, int type) => potionShop.DecreaseCount(unit, type);
     internal void PotionShopGenerateBuyButton(int type)
     {
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))

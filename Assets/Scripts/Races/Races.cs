@@ -39,8 +39,8 @@
     static internal Gnolls Gnolls = new Gnolls();
     static internal MainlandElves MainlandElves = new MainlandElves();
     static internal Bears Bears = new Bears();
-    static internal Eevee Eevee = new Eevee();
     static internal Umbreon Umbreon = new Umbreon();
+    static internal Lupine Lupine = new Lupine();
 
 
     static internal Tigers Tigers = new Tigers();
@@ -57,6 +57,7 @@
     static internal Hamsters Hamsters = new Hamsters();
     static internal RwuMercenaries RwuMercenaries = new RwuMercenaries();
     static internal Centaur Centaur = new Centaur();
+    static internal Eevee Eevee = new Eevee();
     static internal Equaleon Equaleon = new Equaleon();
 
     static internal Vagrants Vagrants = new Vagrants();
@@ -396,6 +397,8 @@
                 return Eevee;
             case Race.Umbreon:
                 return Umbreon;
+            case Race.Lupine:
+                return Lupine;
             case Race.Equaleon:
                 return Equaleon;
             case Race.Viisels:

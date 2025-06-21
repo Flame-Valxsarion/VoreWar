@@ -534,6 +534,16 @@ public class UnitCustomizer
             case Race.Viisels:
                 buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Faceplate Color";
                 break;
+            case Race.Lupine:
+                buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Iris Color";
+                buttons[(int)ButtonTypes.EyeColor].Label.text = "Sclera Color";
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Chest Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Arm Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Leg Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Head Pattern";
+                buttons[(int)ButtonTypes.HairStyle].Label.text = "Cheek Fluff";
+                buttons[(int)ButtonTypes.BodyAccessoryType].gameObject.SetActive(false);
+                break;
             case Race.Tatltuae:
                 buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Hat";
                 buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Glasses";

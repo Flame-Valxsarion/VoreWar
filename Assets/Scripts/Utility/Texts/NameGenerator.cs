@@ -48,6 +48,7 @@ public class NameGenerator
     List<string> bearTownNames;
     List<string> mainlandElvenTownNames;
     List<string> umbreonTownNames;
+    List<string> lupineTownNames;
 
     List<string> compyNames;
     List<string> vagrantNames;
@@ -930,26 +931,39 @@ public class NameGenerator
             "Duskville",
             "Shadowwall",
         };
+        lupineTownNames = new List<string>
+        {
+            "Denko", 
+            "Zebooth", 
+            "District 0", 
+            "The Black Market", 
+            "Fang City", 
+            "Direfort", 
+            "Howlburg", 
+            "Bitetown", 
+            "The Pack", 
+            "Moonlight"
+        };
 
         Encoding encoding = Encoding.GetEncoding("iso-8859-1");
 
-        if (File.Exists($"{State.StorageDirectory}males.txt"))
+        if (File.Exists($"{State.NameFileDirectory}males.txt"))
         {
-            var logFile = File.ReadAllLines($"{State.StorageDirectory}males.txt", encoding);
+            var logFile = File.ReadAllLines($"{State.NameFileDirectory}males.txt", encoding);
             if (logFile.Any())
                 maleNames = new List<string>(logFile);
         }
 
-        if (File.Exists($"{State.StorageDirectory}females.txt"))
+        if (File.Exists($"{State.NameFileDirectory}females.txt"))
         {
-            var logFile = File.ReadAllLines($"{State.StorageDirectory}females.txt", encoding);
+            var logFile = File.ReadAllLines($"{State.NameFileDirectory}females.txt", encoding);
             if (logFile.Any())
                 femaleNames = new List<string>(logFile);
         }
 
-        if (File.Exists($"{State.StorageDirectory}monsters.txt"))
+        if (File.Exists($"{State.NameFileDirectory}monsters.txt"))
         {
-            var logFile = File.ReadAllLines($"{State.StorageDirectory}monsters.txt", encoding);
+            var logFile = File.ReadAllLines($"{State.NameFileDirectory}monsters.txt", encoding);
             if (logFile.Any())
                 monsterNames = new List<string>(logFile);
         }
@@ -957,9 +971,9 @@ public class NameGenerator
         ArmyNames = new Dictionary<Race, List<string>>();
         ArmyNameDefault = new Dictionary<Race, string>();
 
-        if (File.Exists($"{State.StorageDirectory}armyNames.txt"))
+        if (File.Exists($"{State.NameFileDirectory}armyNames.txt"))
         {
-            var logFile = File.ReadAllLines($"{State.StorageDirectory}armyNames.txt", encoding);
+            var logFile = File.ReadAllLines($"{State.NameFileDirectory}armyNames.txt", encoding);
             bool expectingdefault = false;
             Race currentRace = Race.Cats;
             foreach (string entry in logFile)
@@ -999,21 +1013,21 @@ public class NameGenerator
 
         foreach (Race race in (Race[])Enum.GetValues(typeof(Race)))
         {
-            if (File.Exists($"{State.StorageDirectory}male{race}.txt"))
+            if (File.Exists($"{State.NameFileDirectory}male{race}.txt"))
             {
-                var logFile = File.ReadAllLines($"{State.StorageDirectory}male{race}.txt", encoding);
+                var logFile = File.ReadAllLines($"{State.NameFileDirectory}male{race}.txt", encoding);
                 var names = new List<string>(logFile);
                 RaceMaleNames[race] = names;
             }
-            if (File.Exists($"{State.StorageDirectory}female{race}.txt"))
+            if (File.Exists($"{State.NameFileDirectory}female{race}.txt"))
             {
-                var logFile = File.ReadAllLines($"{State.StorageDirectory}female{race}.txt", encoding);
+                var logFile = File.ReadAllLines($"{State.NameFileDirectory}female{race}.txt", encoding);
                 var names = new List<string>(logFile);
                 RaceFemaleNames[race] = names;
             }
-            if (File.Exists($"{State.StorageDirectory}{race}.txt"))
+            if (File.Exists($"{State.NameFileDirectory}{race}.txt"))
             {
-                var logFile = File.ReadAllLines($"{State.StorageDirectory}{race}.txt", encoding);
+                var logFile = File.ReadAllLines($"{State.NameFileDirectory}{race}.txt", encoding);
                 var names = new List<string>(logFile);
                 RaceMonsterNames[race] = names;
             }

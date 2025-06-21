@@ -72,6 +72,8 @@ class Equaleon : DefaultRaceData
     internal override void RandomCustom(Unit unit)
     {
         base.RandomCustom(unit);
+
+        unit.EarType = State.Rand.Next(EarTypes);
     }
 
     internal override int BreastSizes => 6;

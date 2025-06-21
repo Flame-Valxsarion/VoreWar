@@ -26,10 +26,10 @@ public class Potion : Item
 
     public bool ActivatePotion(Actor_Unit user, Actor_Unit target)
     {
-        if (user.Unit.EquippedPotions.ContainsKey(this)) return false;
-        if (user.Movement <= 0 || user.Unit.EquippedPotions[this][0] <= 0) return false;
-        user.Unit.EquippedPotions[this][0] = user.Unit.EquippedPotions[this][0] - 1;
-        Debug.Log(user.Unit.EquippedPotions[this][0]);
+        int type = (int)State.World.ItemRepository.GetItemType(this);
+        if (user.Movement <= 0 || user.Unit.EquippedPotions[type][0] <= 0) return false;
+        user.Unit.EquippedPotions[type][0] = user.Unit.EquippedPotions[type][0] - 1;
+        Debug.Log(user.Unit.EquippedPotions[type][0]);
         if (TileFunction != null)
         {
             TileFunction.Invoke(target.Position, user);

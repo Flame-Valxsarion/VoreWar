@@ -166,7 +166,7 @@ public class AdvancedUnitCommands : MonoBehaviour
         index++;
         return button;
     }
-    internal Button SetButtonPotion(Actor_Unit actor, Potion potion)
+    internal Button SetButtonPotion(Actor_Unit actor, int potion)
     {
         Color color = new Color(.669f, .753f, 1);
         Button button;
@@ -182,8 +182,8 @@ public class AdvancedUnitCommands : MonoBehaviour
             button = Buttons[index];
             button.onClick.RemoveAllListeners();
         }
-        button.GetComponentInChildren<Text>().text = potion.Name;
-        button.onClick.AddListener(new UnityEngine.Events.UnityAction(() => State.GameManager.TacticalMode.SetPotionMode(potion)));
+        button.GetComponentInChildren<Text>().text = State.World.ItemRepository.GetItem(potion).Name;
+        button.onClick.AddListener(new UnityEngine.Events.UnityAction(() => State.GameManager.TacticalMode.SetPotionMode((Potion)State.World.ItemRepository.GetItem(potion))));
 
         button.onClick.AddListener(() =>
         {

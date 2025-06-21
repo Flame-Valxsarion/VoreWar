@@ -17,7 +17,7 @@ class FeralEqualeon : BlankSlate
 
         Body = new SpriteExtraInfo(0, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor));
         BodyAccessory = new SpriteExtraInfo(1, AccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.AccessoryColor)); //Fluff
-        Mouth = new SpriteExtraInfo(8, MouthSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.HairColor));
+        Mouth = new SpriteExtraInfo(8, MouthSprite, WhiteColored);
         BodyAccent = new SpriteExtraInfo(4, BodyAccentSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor)); // legs
         BodyAccent2 = new SpriteExtraInfo(5, BodyAccentSprite2, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor)); // legsfluff
         BodyAccent3 = new SpriteExtraInfo(8, BodyAccentSprite3, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.AccessoryColor)); // other eye stuff
@@ -94,6 +94,9 @@ class FeralEqualeon : BlankSlate
     internal override void RandomCustom(Unit unit)
     {
         unit.SkinColor = State.Rand.Next(SkinColors);
+        unit.AccessoryColor = State.Rand.Next(AccessoryColors);
+        unit.EyeColor = State.Rand.Next(EyeColors);
+        unit.HairStyle = State.Rand.Next(HairStyles);
     }
     protected override Sprite BodySprite(Actor_Unit actor)
     {

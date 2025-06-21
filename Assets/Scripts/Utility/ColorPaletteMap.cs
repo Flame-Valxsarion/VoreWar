@@ -118,6 +118,8 @@ public static class ColorPaletteMap
         EqualeonEyes,
         PlantSkin,
         ViiselSkin,
+        LupineSkin,
+        LupineReversed,
     }
 
     static Dictionary<SwapType, List<ColorSwapPalette>> Swaps;
@@ -264,6 +266,8 @@ public static class ColorPaletteMap
         List<ColorSwapPalette> AabayxSkinSwaps = WireUp(SwapType.AabayxSkin);
         List<ColorSwapPalette> MiceSkinSwaps = WireUp(SwapType.MiceSkin);
         List<ColorSwapPalette> MiceHumanSkinSwaps = WireUp(SwapType.MiceHumanSkin);
+        List<ColorSwapPalette> LupineSkinSwaps = WireUp(SwapType.LupineSkin);
+        List<ColorSwapPalette> LupineReverseSwaps = WireUp(SwapType.LupineReversed);
 
         List<ColorSwapPalette> FeralHorseSkinSwaps = WireUp(SwapType.FeralHorseSkin);
         List<ColorSwapPalette> WyvernMatronSwaps = WireUp(SwapType.WyvernMatron);
@@ -1929,6 +1933,51 @@ public static class ColorPaletteMap
             MiceHumanSkinSwaps.Add(swap);
         }
 
+        map = State.GameManager.PaletteDictionary.LupineSkin;
+        for (int pixelY = 0; pixelY < map.height; pixelY++)
+        {
+            Dictionary<int, Color> swapDict = new Dictionary<int, Color>
+            {
+                [45] = map.GetPixel(11, pixelY),
+                [60] = map.GetPixel(10, pixelY),
+                [90] = map.GetPixel(9, pixelY),
+                [120] = map.GetPixel(8, pixelY),
+                [135] = map.GetPixel(7, pixelY),
+                [150] = map.GetPixel(6, pixelY),
+                [165] = map.GetPixel(5, pixelY),
+                [180] = map.GetPixel(4, pixelY),
+                [210] = map.GetPixel(3, pixelY),
+                [225] = map.GetPixel(2, pixelY),
+                [240] = map.GetPixel(1, pixelY),
+                [255] = map.GetPixel(0, pixelY),
+                
+            };
+            ColorSwapPalette swap = new ColorSwapPalette(swapDict);
+            LupineSkinSwaps.Add(swap);
+        }
+
+        map = State.GameManager.PaletteDictionary.LupineReverse;
+        for (int pixelY = 0; pixelY < map.height; pixelY++)
+        {
+            Dictionary<int, Color> swapDict = new Dictionary<int, Color>
+            {
+                [45] = map.GetPixel(11, pixelY),
+                [60] = map.GetPixel(10, pixelY),
+                [90] = map.GetPixel(9, pixelY),
+                [120] = map.GetPixel(8, pixelY),
+                [135] = map.GetPixel(7, pixelY),
+                [150] = map.GetPixel(6, pixelY),
+                [165] = map.GetPixel(5, pixelY),
+                [180] = map.GetPixel(4, pixelY),
+                [210] = map.GetPixel(3, pixelY),
+                [225] = map.GetPixel(2, pixelY),
+                [240] = map.GetPixel(1, pixelY),
+                [255] = map.GetPixel(0, pixelY),
+            };
+            ColorSwapPalette swap = new ColorSwapPalette(swapDict);
+            LupineReverseSwaps.Add(swap);
+        }
+
         map = State.GameManager.PaletteDictionary.FeralLionsFur;
         for (int pixelY = 0; pixelY < map.height; pixelY++)
         {
@@ -2137,14 +2186,14 @@ public static class ColorPaletteMap
             {
                 [5] = map.GetPixel(0, pixelY),
                 [63] = map.GetPixel(1, pixelY),
+                [75] = map.GetPixel(9, pixelY),
+                [120] = map.GetPixel(7, pixelY),
                 [126] = map.GetPixel(2, pixelY),
+                [175] = map.GetPixel(8, pixelY),
                 [189] = map.GetPixel(3, pixelY),
                 [200] = map.GetPixel(4, pixelY),
                 [225] = map.GetPixel(5, pixelY),
                 [255] = map.GetPixel(6, pixelY),
-                [120] = map.GetPixel(7, pixelY),
-                [175] = map.GetPixel(8, pixelY),
-                [75] = map.GetPixel(9, pixelY),
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             UmbreonSkinSwaps.Add(swap);
@@ -2185,18 +2234,18 @@ public static class ColorPaletteMap
             Dictionary<int, Color> swapDict = new Dictionary<int, Color>
             {
                 [70] = map.GetPixel(9, pixelY),
-                [255] = map.GetPixel(10, pixelY),
-                [200] = map.GetPixel(11, pixelY),
                 [84] = map.GetPixel(12, pixelY),
                 [66] = map.GetPixel(0, pixelY),
-                [224] = map.GetPixel(1, pixelY),
+                [91] = map.GetPixel(7, pixelY),
+                [112] = map.GetPixel(8, pixelY),
+                [116] = map.GetPixel(6, pixelY),
+                [140] = map.GetPixel(5, pixelY),
                 [150] = map.GetPixel(2, pixelY),
                 [186] = map.GetPixel(3, pixelY),
                 [158] = map.GetPixel(4, pixelY),
-                [140] = map.GetPixel(5, pixelY),
-                [116] = map.GetPixel(6, pixelY),
-                [91] = map.GetPixel(7, pixelY),
-                [112] = map.GetPixel(8, pixelY),
+                [200] = map.GetPixel(11, pixelY),
+                [224] = map.GetPixel(1, pixelY),
+                [255] = map.GetPixel(10, pixelY),
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             UmbreonArmorSwaps.Add(swap);
@@ -2224,13 +2273,14 @@ public static class ColorPaletteMap
         {
             Dictionary<int, Color> swapDict = new Dictionary<int, Color>
             {
+                [15] = map.GetPixel(6, pixelY),
+                [100] = map.GetPixel(4, pixelY),
                 [152] = map.GetPixel(0, pixelY),
+                [190] = map.GetPixel(5, pixelY),
                 [225] = map.GetPixel(1, pixelY),
                 [236] = map.GetPixel(2, pixelY),
                 [244] = map.GetPixel(3, pixelY),
-                [100] = map.GetPixel(4, pixelY),
-                [190] = map.GetPixel(5, pixelY),
-                [15] = map.GetPixel(6, pixelY),
+
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             EeveeEqualeonExtSwaps.Add(swap);
@@ -2241,13 +2291,13 @@ public static class ColorPaletteMap
         {
             Dictionary<int, Color> swapDict = new Dictionary<int, Color>
             {
+                [1] = map.GetPixel(1, pixelY),
+                [2] = map.GetPixel(0, pixelY),
                 [50] = map.GetPixel(6, pixelY),
                 [100] = map.GetPixel(5, pixelY),
                 [150] = map.GetPixel(4, pixelY),
                 [200] = map.GetPixel(3, pixelY),
                 [250] = map.GetPixel(2, pixelY),
-                [1] = map.GetPixel(1, pixelY),
-                [2] = map.GetPixel(0, pixelY),
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             EeveeEqualeonClothingSwaps.Add(swap);

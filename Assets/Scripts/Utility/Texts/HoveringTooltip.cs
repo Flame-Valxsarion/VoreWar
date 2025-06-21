@@ -794,7 +794,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.GiantSlayer:
                 return Config.SizeDamageMod > 0 && Config.SizeDamageInterval > 0 ? "Bonus damage from larger units is reduced by 75% and Unit's damage against larger targets is not reduced" : "Units damage is increased by 1% for every 1 size larger the target is. (capped at 25)";
             case Traits.Crusher:
-                return Config.SizeDamageMod > 0 && Config.SizeDamageInterval > 0 ? "Bonus damage against smaller targets is increased by 50%." : "Units damage is increased by 1% for every 1 size smaller the target is. (capped at 25)";
+                return Config.SizeDamageMod > 0 && Config.SizeDamageInterval > 0 ? "Bonus damage against smaller targets is increased by 50% and unit ignores size bounds." : "Units damage is increased by 1% for every 1 size smaller the target is. (capped at 25)";
             case Traits.Cartography:
                 return "This unit provides the army it's in with +1 MP and allows transversal of all terrain at a movement cost of 1";
             case Traits.BoundWeapon:

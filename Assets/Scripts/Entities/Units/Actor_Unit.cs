@@ -1220,24 +1220,29 @@ public class Actor_Unit
             float sizeDiff = Math.Abs(BodySize() - target.BodySize());
             if (sizeDiff > Config.SizeDamageLowerBound)
             {
-                float damMod = ((sizeDiff - Config.SizeDamageLowerBound) / Config.SizeDamageInterval) * Config.SizeDamageMod;
-                damMod += 1;
+                float damMod = 0;
+                int bonusDamage = 0;
+                if (Unit.HasTrait(Traits.Crusher))
+                {
+                    damMod = (sizeDiff / Config.SizeDamageInterval) * Config.SizeDamageMod;
+                    damMod *= 1.5f;
+                }
+                else
+                {
+                    damMod = ((sizeDiff - Config.SizeDamageLowerBound) / Config.SizeDamageInterval) * Config.SizeDamageMod;
+                }
                 if (damMod > Config.SizeDamageCap && Config.SizeDamageCap > 0)
                 {
                     damMod = Config.SizeDamageCap;
                 }
-                if (Unit.HasTrait(Traits.GiantSlayer))
-                {
-                    damMod *= 0.25f;
-                }
-                if (Unit.HasTrait(Traits.Crusher))
-                {
-                    damMod *= 1.5f;
-                }
                 // If we are larger than the attacker, increase damage of attack. Otherwise, reduce it
                 if (BodySize() > target.BodySize())
                 {
-                    damage = (int)Math.Round(damage * damMod);
+                    if (target.Unit.HasTrait(Traits.GiantSlayer))
+                    {
+                        damMod *= 0.25f;
+                    }
+                    bonusDamage = (int)Math.Round(damage * damMod);
                 }
                 else
                 {
@@ -1246,14 +1251,15 @@ public class Actor_Unit
                         damage = (int)Math.Round(damage / damMod);
                     }
                 }
+                damage += bonusDamage;
             }
         }
-        else if (Unit.HasTrait(Traits.GiantSlayer) && BodySize() < target.BodySize())
+        else if (Unit.HasTrait(Traits.GiantSlayer) && BodySize() < target.BodySize()) // Setting off GiantSlayer Version
         {
             float sizeDiff = Math.Abs(BodySize() - target.BodySize());
             damage = (int)Math.Round(damage * (1 + (.01f * Math.Min(sizeDiff, 25))));
         }
-        else if (Unit.HasTrait(Traits.Crusher) && BodySize() > target.BodySize())
+        else if (Unit.HasTrait(Traits.Crusher) && BodySize() > target.BodySize()) // Setting off GiantSlayer Version
         {
             float sizeDiff = Math.Abs(BodySize() - target.BodySize());
             damage = (int)Math.Round(damage * (1 + (.01f * Math.Min(sizeDiff, 25))));

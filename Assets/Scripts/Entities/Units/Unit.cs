@@ -271,7 +271,7 @@ public class Unit
     [OdinSerialize]
     public int[] ItemCooldowns;
     [OdinSerialize]
-    public Dictionary<Potion, int[]> EquippedPotions;
+    public Dictionary<int, int[]> EquippedPotions;
     [OdinSerialize]
     public string Name { get; set; }
     [OdinSerialize]
@@ -719,7 +719,7 @@ public class Unit
         Items = new Item[Config.ItemSlots];
         ItemUses = new int[] {1, 1, 1};
         ItemCooldowns = new int[3];
-        EquippedPotions = new Dictionary<Potion, int[]>();
+        EquippedPotions = new Dictionary<int, int[]>();
 
 
 
@@ -1017,7 +1017,7 @@ public class Unit
             if (!skipTraitItems)
                 GiveTraitBooks();
         }
-    }
+    } 
 
     internal void GiveTraitBooks()
     {
@@ -2354,7 +2354,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             Tags.Add(Traits.Prey);
         SetMaxItems();
         if (EquippedPotions == null)
-            EquippedPotions = new Dictionary<Potion, int[]>();
+            EquippedPotions = new Dictionary<int, int[]>();
         //if (HasTrait(Traits.Shapeshifter) || HasTrait(Traits.Skinwalker))
         //{
         //    if (ShifterShapes == null)

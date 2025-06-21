@@ -28,7 +28,7 @@ class Umbreon : DefaultRaceData
         BodyAccent2 = new SpriteExtraInfo(8, BodyAccentSprite2, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, s.Unit.AccessoryColor)); // Dick rings
         BodyAccent3 = new SpriteExtraInfo(18, BodyAccentSprite3, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, s.Unit.AccessoryColor)); // Left Breast Ring color
         BodyAccent4 = new SpriteExtraInfo(18, BodyAccentSprite4, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, s.Unit.AccessoryColor)); // Right Breast Ring color
-        BodyAccent5 = new SpriteExtraInfo(21, BodyAccentSprite5, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, s.Unit.AccessoryColor)); // Belly ring color
+        BodyAccent5 = new SpriteExtraInfo(31, BodyAccentSprite5, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, s.Unit.AccessoryColor)); // Belly ring color
         BodyAccent6 = null;
         BodyAccent7 = null;
         BodyAccent8 = null;
@@ -785,7 +785,6 @@ class Umbreon : DefaultRaceData
             clothing4 = new SpriteExtraInfo(24, null, WhiteColored); //'Uncolored part'
             clothing5 = new SpriteExtraInfo(25, null, null); //Rust
             clothing6 = new SpriteExtraInfo(25, null, null); //LegRust
-            clothing7 = new SpriteExtraInfo(21, null, null); //Spike
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -796,7 +795,6 @@ class Umbreon : DefaultRaceData
             clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Umbreon[actor.IsAttacking ? (actor.Unit.Furry ? 139 : 138) : 137];
             clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Umbreon[actor.IsAttacking ? (actor.Unit.Furry ? 152 : 151) : 150];
             clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Umbreon[153];
-            clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Umbreon[154];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonArmor, actor.Unit.ExtraColor1);
             clothing7.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonArmor, actor.Unit.ExtraColor2);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, actor.Unit.AccessoryColor);

@@ -1682,12 +1682,19 @@ public abstract class TacticalAI : ITacticalAI
     {
         if (actor.Unit.EquippedPotions == null || actor.Unit.EquippedPotions.Any(p => p.Value[0] > 0) == false)
             return;
-        var availablePotions = actor.Unit.EquippedPotions.Where(p => p.Value[0] > 0).ToList();
+        List<Potion> availablePotions = new List<Potion>();
+        foreach (var potionStash in actor.Unit.EquippedPotions)
+        {
+            if (potionStash.Value[0] > 0)
+            {
+                availablePotions.Add((Potion)State.World.ItemRepository.GetItem(potionStash.Key));
+            }
+        }
 
         if (availablePotions == null || availablePotions.Any() == false)
             return;
 
-        Potion potion = availablePotions[State.Rand.Next(availablePotions.Count())].Key;
+        Potion potion = availablePotions[State.Rand.Next(availablePotions.Count())];
 
         if (State.GameManager.TacticalMode.IsOnlyOneSideVisible())
             return;

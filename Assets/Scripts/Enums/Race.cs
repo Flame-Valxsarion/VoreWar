@@ -38,6 +38,7 @@
     MainlandElves = 33,
     Bears = 34,
     Umbreon = 35,
+    Lupine = 36,
 
     Succubi = 50,
     Tigers = 51,

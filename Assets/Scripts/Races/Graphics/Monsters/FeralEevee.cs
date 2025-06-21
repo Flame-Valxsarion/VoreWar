@@ -7,13 +7,14 @@ class FeralEevee : BlankSlate
     {
         CanBeGender = new List<Gender>() { Gender.None };
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
+        AccessoryColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
         GentleAnimation = true;
 
         CanBeGender = new List<Gender>() { Gender.None };
         GentleAnimation = true;
 
         Body = new SpriteExtraInfo(0, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor));
-        BodyAccessory = new SpriteExtraInfo(5, AccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor)); //Fluff
+        BodyAccessory = new SpriteExtraInfo(5, AccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.AccessoryColor)); //Fluff
         Mouth = new SpriteExtraInfo(8, MouthSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.HairColor));
         BodyAccent = new SpriteExtraInfo(4, BodyAccentSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor)); // legs
         BodyAccent2 = new SpriteExtraInfo(1, BodyAccentSprite2, WhiteColored);
@@ -41,6 +42,7 @@ class FeralEevee : BlankSlate
     internal override void RandomCustom(Unit unit)
     {
         unit.SkinColor = State.Rand.Next(SkinColors);
+        unit.AccessoryColor = State.Rand.Next(AccessoryColors);
     }
     protected override Sprite BodySprite(Actor_Unit actor)
     {
