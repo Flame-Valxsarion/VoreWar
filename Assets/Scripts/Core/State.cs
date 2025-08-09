@@ -109,7 +109,7 @@ public static class State
         {
             Debug.Log("Initial setup failed!");
         }
-        string[] nameTextFileNames = new string[] {"armyNames", "males","females","monsters","femaleFeralLions","maleFeralLions","femaleAabayx","maleAabayx","Cake","Collectors","Compy","CoralSlugs","DarkSwallower","Dragonfly","Earthworms","femaleAlligators"
+        string[] nameTextFileNames = new string[] {"armyNames", "males","females","monsters","femaleFeralLions","maleFeralLions","femaleAabayx","maleAabayx","Cake","Collectors","Compy","CoralSlugs","DarkSwallower","Dragonfly","Catfish","Earthworms","Vagrants","femaleAlligators"
             ,"maleAlligators","femaleAlraune","maleAlraune","femaleAnts","maleAnts","femaleAvians","maleAvians","femaleBats","maleBats","femaleBees","maleBees","femaleBunnies","maleBunnies","femaleCats","maleCats","femaleCockatrice","maleCockatrice","femaleCrux","maleCrux","femaleCrypters"
             ,"maleCrypters","femaleDeer","maleDeer","femaleDewSprites","femaleDogs","maleDogs","femaleDragon","maleDragon","femaleDratopyr","maleDratopyr","femaleDriders","maleDriders","femaleEasternDragon","maleEasternDragon","femaleEquines","maleEquines","femaleFairies","maleFairies"
             ,"femaleFeralBats","maleFeralBats","femaleFeralFox","maleFeralFox","femaleFeralHorses","maleFeralHorses","femaleFeralLizards","maleFeralLizards","femaleFoxes","maleFoxes","femaleFrogs","maleFrogs","femaleGazelle","maleGazelle","femaleGoblins","maleGoblins"
@@ -117,9 +117,9 @@ public static class State
             ,"maleKomodos","femaleLamia","maleLamia","femaleLizards","maleLizards","femaleMantis","maleMantis","femaleMerfolk","maleMerfolk","femaleMonitors","maleMonitors","femalePanthers","malePanthers","femalePuca","malePuca","femaleScylla","maleScylla","femaleSergal"
             ,"maleSergal","femaleSharks","maleSharks","femaleSlimes","maleSlimes","femaleSuccubi","maleSuccubi","femaleTaurus","maleTaurus","femaleTerrorbird","maleTerrorbird","femaleTigers","maleTigers","femaleVargul","maleVargul","femaleVipers","maleVipers","femaleWolves","maleWolves"
             ,"femaleWyvern","maleWyvern","femaleYouko","maleYouko","FeralAnts","FeralFrogs","FeralSharks","FeralWolves","Harvesters","Raptor","RockSlugs","Salamanders","Schiwardez","Serpents","SpitterSlugs","SpringSlugs","Voilin","WarriorAnts","Whisp","femaleBoomBunnies"
-            ,"maleBoomBunnies","WyvernMatron","maleFeralOrcas","femaleFeralOrcas","femaleBears","maleBears","femaleCentaurs","maleCentaurs","femaleGnolls","maleGnolls","femaleMainlandElves","maleMainlandElves","femaleViisel","maleViisel","FeralSlimes","femaleEevee","maleEevee","femaleEqualeon"
-            ,"maleEqualeon","femaleUmbreon","maleUmbreon","maleLupine","femaleLupine","femaleMatronsMinions","maleMatronsMinions","femaleJackals","maleJackals","femaleRwuMercenaries","maleRwuMercenaries","TwistedVines","femaleOtachi","maleOtachi","femaleRaiju","maleRaiju","femaleSmudgers","maleSmudgers"
-            ,"WoodDryad","RiverDryad","EarthDryad","FungalDryad","maleGhost","femaleGhost","femaleUtahraptor","maleUtahraptor","femaleTrex","maleTrex","femaleSpaceroach","maleSpaceroach"};
+            ,"maleBoomBunnies","WyvernMatron","maleFeralOrcas","femaleFeralOrcas","femaleBears","maleBears","femaleCentaur","maleCentaur","femaleGnolls","maleGnolls","femaleMainlandElves","maleMainlandElves","femaleViisels","maleViisels","FeralSlimes","femaleEevee","maleEevee","femaleEqualeon"
+            ,"maleEqualeon","femaleUmbreon","maleUmbreon","maleLupine","femaleLupine","femaleMatronsMinions","maleMatronsMinions","femaleJackals","maleJackals","femaleRwuMercenaries","maleRwuMercenaries","TwistedVines","femaleOtachi","maleOtachi","femaleRaiju","maleRaiju","femaleSmudger","maleSmudger"
+            ,"WoodDryad","RiverDryad","EarthDryad","FungalDryad","maleGhosts","femaleGhosts","femaleUtahraptor","maleUtahraptor","femaleTrex","maleTrex","femaleSpaceCroach","maleSpaceCroach","femaleMice","maleMice","Terminid","femaleFeralEevee","maleFeralEevee","femaleFeralEqualeon","maleFeralEqualeon","femaleFeralUmbreon","maleFeralUmbreon"};
 
         try
         {

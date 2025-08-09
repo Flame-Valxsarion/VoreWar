@@ -25,7 +25,7 @@ Ulis
 Will
 Zach
 Sam
-Vic’
+Vic
 Sticky Alex
 Sticky Bob
 Sticky Curt
@@ -48,7 +48,7 @@ Sticky Ulis
 Sticky Will
 Sticky Zach
 Sticky Sam
-Sticky Vic’
+Sticky Vic
 Stinky Alex
 Stinky Bob
 Stinky Curt
@@ -71,7 +71,7 @@ Stinky Ulis
 Stinky Will
 Stinky Zach
 Stinky Sam
-Stinky Vic’
+Stinky Vic
 Hungry Alex
 Hungry Bob
 Hungry Curt
@@ -94,7 +94,7 @@ Hungry Ulis
 Hungry Will
 Hungry Zach
 Hungry Sam
-Hungry Vic’
+Hungry Vic
 Nasty Alex
 Nasty Bob
 Nasty Curt
@@ -117,7 +117,7 @@ Nasty Ulis
 Nasty Will
 Nasty Zach
 Nasty Sam
-Nasty Vic’
+Nasty Vic
 Massive Alex
 Massive Bob
 Massive Curt
@@ -140,7 +140,7 @@ Massive Ulis
 Massive Will
 Massive Zach
 Massive Sam
-Massive Vic’
+Massive Vic
 Edgy Alex
 Edgy Bob
 Edgy Curt
@@ -163,7 +163,7 @@ Edgy Ulis
 Edgy Will
 Edgy Zach
 Edgy Sam
-Edgy Vic’
+Edgy Vic
 Big Alex
 Big Bob
 Big Curt
@@ -186,30 +186,30 @@ Big Ulis
 Big Will
 Big Zach
 Big Sam
-Big Vic’
-Scamn’ Alex
-Scamn’ Bob
-Scamn’ Curt
-Scamn’ Don
-Scamn’ Ed
-Scamn’ Fred
-Scamn’ Gary
-Scamn’ Hari
-Scamn’ Joel
-Scamn’ Kai
-Scamn’ Liam
-Scamn’ Max
-Scamn’ Noah
-Scamn’ Owen
-Scamn’ Pat
-Scamn’ Reed
-Scamn’ Sean
-Scamn’ Tom
-Scamn’ Ulis
-Scamn’ Will
-Scamn’ Zach
-Scamn’ Sam
-Scamn’ Vic’
+Big Vic
+Scamn Alex
+Scamn Bob
+Scamn Curt
+Scamn Don
+Scamn Ed
+Scamn Fred
+Scamn Gary
+Scamn Hari
+Scamn Joel
+Scamn Kai
+Scamn Liam
+Scamn Max
+Scamn Noah
+Scamn Owen
+Scamn Pat
+Scamn Reed
+Scamn Sean
+Scamn Tom
+Scamn Ulis
+Scamn Will
+Scamn Zach
+Scamn Sam
+Scamn Vic
 Calm Alex
 Calm Bob
 Calm Curt
@@ -232,7 +232,7 @@ Calm Ulis
 Calm Will
 Calm Zach
 Calm Sam
-Calm Vic’
+Calm Vic
 Runner Alex
 Runner Bob
 Runner Curt
@@ -255,7 +255,7 @@ Runner Ulis
 Runner Will
 Runner Zach
 Runner Sam
-Runner Vic’
+Runner Vic
 Lucky Alex
 Lucky Bob
 Lucky Curt
@@ -278,7 +278,7 @@ Lucky Ulis
 Lucky Will
 Lucky Zach
 Lucky Sam
-Lucky Vic’
+Lucky Vic
 Badshot Alex
 Badshot Bob
 Badshot Curt
@@ -301,15 +301,15 @@ Badshot Ulis
 Badshot Will
 Badshot Zach
 Badshot Sam
-Badshot Vic’
-Mumblin’ Bob
-Mumblin’ Don
-Mumblin’ Ed
-Mumblin’ Kai
-Mumblin’ Max
-Mumblin’ Pat
-Mumblin’ Tom
-Mumblin’ Sam
+Badshot Vic
+Mumblin Bob
+Mumblin Don
+Mumblin Ed
+Mumblin Kai
+Mumblin Max
+Mumblin Pat
+Mumblin Tom
+Mumblin Sam
 Virile Alex
 Virile Bob
 Virile Curt
@@ -332,4 +332,4 @@ Virile Ulis
 Virile Will
 Virile Zach
 Virile Sam
-Virile Vic’
+Virile Vic

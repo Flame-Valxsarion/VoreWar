@@ -3,7 +3,7 @@ Bchux
 Bdux
 Bfux
 Bgux
-B’hux
+B-hux
 Bjux
 Bkux
 Blux
@@ -23,7 +23,7 @@ Chbux
 Chdux
 Chfux
 Chgux
-Ch’hux
+Ch-hux
 Chkux
 Chlux
 Chmux
@@ -44,7 +44,7 @@ Dbux
 Dchux
 Dfux
 Dgux
-D’hux
+D-hux
 Djux
 Dkux
 Dlux
@@ -65,7 +65,7 @@ Fbux
 Fchux
 Fdux
 Fgux
-F’hux
+F-hux
 Fjux
 Fkux
 Flux
@@ -85,7 +85,7 @@ Gbux
 Gchux
 Gdux
 Gfux
-G’hux
+G-hux
 Gjux
 Glux
 Gmux
@@ -125,7 +125,7 @@ Jbux
 Jdux
 Jfux
 Jgux
-J’hux
+J-hux
 Jkux
 Jlux
 Jmux
@@ -145,10 +145,10 @@ Kbux
 Kchux
 Kdux
 Kfux
-K’hux
+K-hux
 Kjux
 Kmux
-K’nux
+K-nux
 Kpux
 Krux
 Ksux
@@ -163,7 +163,7 @@ Lchux
 Ldux
 Lfux
 Lgux
-L’hux
+L-hux
 Ljux
 Lkux
 Lmux
@@ -184,7 +184,7 @@ Mchux
 Mdux
 Mfux
 Mgux
-M’hux
+M-hux
 Mjux
 Mkux
 Mlux
@@ -205,7 +205,7 @@ Nchux
 Ndux
 Nfux
 Ngux
-N’hux
+N-hux
 Njux
 Nkux
 Nlux
@@ -226,16 +226,16 @@ Pchux
 Pdux
 Pfux
 Pgux
-P’hux
+P-hux
 Pjux
 Pkux
 Plux
-P’mux
-P’nux
+P-mux
+P-nux
 Pqux
 Prux
 Psux
-P’tux
+P-tux
 Pux
 Pvux
 Pwux
@@ -248,7 +248,7 @@ Rchux
 Rdux
 Rfux
 Rgux
-R’hux
+R-hux
 Rjux
 Rkux
 Rlux
@@ -268,7 +268,7 @@ Schux
 Sdux
 Sfux
 Sgux
-S’hux
+S-hux
 Sjux
 Skux
 Slux
@@ -287,7 +287,7 @@ Tbux
 Tchux
 Tfux
 Tgux
-T’hux
+T-hux
 Tjux
 Tkux
 Tmux
@@ -295,7 +295,7 @@ Tnux
 Tpux
 Tqux
 Trux
-T’sux
+T-sux
 Tux
 Tvux
 Twux
@@ -307,7 +307,7 @@ Vbux
 Vchux
 Vdux
 Vgux
-V’hux
+V-hux
 Vjux
 Vkux
 Vlux
@@ -328,7 +328,7 @@ Wchux
 Wdux
 Wfux
 Wgux
-W’hux
+W-hux
 Wjux
 Wkux
 Wlux
@@ -336,7 +336,7 @@ Wmux
 Wnux
 Wpux
 Wqux
-W’rux
+W-rux
 Wsux
 Wtux
 Wux
@@ -348,7 +348,7 @@ Xchux
 Xdux
 Xfux
 Xgux
-X’hux
+X-hux
 Xjux
 Xkux
 Xlux
@@ -368,7 +368,7 @@ Ychux
 Ydux
 Yfux
 Ygux
-Y’hux
+Y-hux
 Yjux
 Ykux
 Ylux
@@ -389,7 +389,7 @@ Zchux
 Zdux
 Zfux
 Zgux
-Z’hux
+Z-hux
 Zjux
 Zkux
 Zlux

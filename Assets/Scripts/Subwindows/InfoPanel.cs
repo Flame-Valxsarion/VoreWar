@@ -344,7 +344,7 @@ public class InfoPanel
             case Race.MainlandElves:
                 return "Elf";
             case Race.ViraeUltimae:
-                return "Virae Ultimae";
+                return "ViraeUltimae";
             case Race.Viisels:
                 return "Viisel";
             case Race.Umbreon:
@@ -362,13 +362,13 @@ public class InfoPanel
             case Race.Ghosts:
                 return "Ghost";
             case Race.WoodDryad:
-                return "Wood Dryad";
+                return "WoodDryad";
             case Race.EarthDryad:
-                return "Earth Dryad";
+                return "EarthDryad";
             case Race.RiverDryad:
-                return "River Dryad";
+                return "RiverDryad";
             case Race.FungalDryad:
-                return "Fungal Dryad";
+                return "FungalDryad";
             case Race.Otachi:
                 return "Otachi";
             case Race.Raiju:
@@ -376,7 +376,7 @@ public class InfoPanel
             case Race.Smudger:
                 return "Smudger";    
             case Race.SpaceCroach:
-                return "Space Roach";
+                return "SpaceRoach";
             case Race.Trex:
                 return "T-Rex";
             case Race.Utahraptor:

@@ -1,4 +1,4 @@
-Ll’lithrith
+Ll-lithrith
 Lla-nswrtool
 Llaamaansnio
 Llaftri
@@ -93,7 +93,7 @@ Llundergwakth
 Llundranlitnin
 Llundri
 Llundri-Llaftri
-Llunkr’wk
+Llunkr-wk
 Llunshifis
 Llyaksatharthi
 Llynmoldoks

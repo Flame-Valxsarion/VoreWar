@@ -1,4 +1,4 @@
-Ali’ali
+Ali-ali
 Andermach
 Anterax
 Axkriktki
@@ -8,12 +8,12 @@ Buftormek
 Buntriktil
 Chanerjal
 Chantlithi
-Chapa’ichak
+Chapa-ichak
 Chulpokwas
 Denetelet
 Denfraxine
 Dishnichlar
-Duqi’mo’mo
+Duqi-mo-mo
 Echiqlask
 Encholcheth
 Engesi
@@ -37,7 +37,7 @@ Ix
 Jalien
 Jinslilth
 Jipiltin
-Ji’upup
+Ji-upup
 Kinsqli
 Kitskriktiig
 Klikrikin
@@ -59,14 +59,14 @@ Okrikriig
 Onkrikiig
 Opelich
 Paq
-Pashnyomknir’r
+Pashnyomknir-r
 Pintritiil
 Pundermis
 Qathnokwai
 Qonqosiil
 Quiliquai
 Qul
-Raknara’i
+Raknara-i
 Rokorol
 Roswel
 Rul
@@ -77,7 +77,7 @@ Sul
 Tendith
 Tul
 Tundru
-T’clasak
+T-clasak
 Ulbarpl
 Unflexinfloxoshastiras
 Unshermaxiq
@@ -92,7 +92,7 @@ Winto
 Wtlakni
 Xaj
 Xanifiiz
-Xantili’qi
+Xantili-qi
 Xenolas
 Yaplach
 Ygtrasiish

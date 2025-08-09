@@ -72,4 +72,4 @@ Hanzi
 Letter
 Vowel
 Consonent
-Ge’ez
+Ge-ez

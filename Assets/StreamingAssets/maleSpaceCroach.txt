@@ -13,7 +13,7 @@ Chifinisk
 Daq
 Dentlark
 Dentlikris
-Du’usk
+Du-usk
 Echinvech
 Edgar
 Ekliktix
@@ -26,18 +26,18 @@ Fuq
 Galf
 Garglblaster
 Gontraktnir
-G’ijil
+G-ijil
 Hatal
 Hilmarnth
 Himpo
 Hiplix
 Ichilk
 Intia
-Iqinqin’k
+Iqinqin-k
 Ix
 Jiljath
 Jinthlik
-Ji’iijiig
+Ji-iijiig
 Jusk
 Kil
 Klask
@@ -47,7 +47,7 @@ Lask
 Lik
 Limklith
 Lusk
-Mee’yuntwunt
+Mee-yuntwunt
 Mib
 Miklaxtlak
 Mosklaqnart
@@ -101,5 +101,5 @@ Yiklisk
 Yish
 Zalg
 Zaq
-Za’akinkisk
+Za-akinkisk
 Ziklisk

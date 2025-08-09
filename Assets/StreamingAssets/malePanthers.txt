@@ -120,7 +120,7 @@ Acan
 Ah Ciliz
 Ah Mun
 Ah Tabai
-Ah-Bolom-Dz’acab
+Ah-Bolom-Dz-acab
 Ah-Bolom-Tzacab
 Ah-Chuy-Kat
 Ah-Ciliz
@@ -145,7 +145,7 @@ Ajbit
 Ajtzak
 Akbit
 Alom
-Bolon-D’zacab
+Bolon-D-zacab
 Buluc-Chabtan
 Cabaguil
 Cabrakan
@@ -164,7 +164,7 @@ Ekchauh
 Ekchuah
 Eztli
 Gukumatz
-Hacha’kyum
+Hacha-kyum
 Hapikern
 Hozanek
 Hun-Batz
@@ -184,7 +184,7 @@ Ixmacane
 Ixmucane
 Ixpiyacoc
 Izel
-K’awai
+K-awai
 Kan
 Kan-Xib-Yui
 Kawil
@@ -201,7 +201,7 @@ Och-Kan
 Papan
 Pawahtuun
 Poxlom
-Q’uq’umatz
+Q-uq-umatz
 Qaholom
 Tecumbalam
 Tepeu
@@ -211,7 +211,7 @@ Uc-Zip
 Voltan
 Votan
 Vukub-Cakix
-Xaman’Ek
+Xaman-Ek
 Xamaniqinqu
 Xbalanque
 Xecotcovach
