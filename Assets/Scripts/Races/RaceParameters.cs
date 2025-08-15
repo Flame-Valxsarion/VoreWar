@@ -1205,6 +1205,7 @@ static class RaceParameters
             Traits.PackStrength,
             Traits.EscapeArtist,
         },
+            ConversionRace = Race.Eevee,
             RaceDescription = "After the fall of the \"Eeveelution Empire\", The Umbreons took the first opportunity they had to attack the Sylveons, Before eventually running off. Unlike most Eeveelutions, They got away with very little resources due to the fact they were too busy filling their bellies with Sylveons to gather anything. So they resorted to taking the weapons and armor from those they defeated and melted it down to form their weapons and armor. Also unlike most Eeveelutions, They deny any resemblance to their feral counter parts. They are also quite intelligent... When they aren't drunk having discovered various forms of alcohol.",
         };
 
@@ -1265,6 +1266,8 @@ static class RaceParameters
             StomachSize = 20,
             HasTail = true,
             FavoredStat = Stat.Endurance,
+            DeployCost = 1,
+            Upkeep = 4f,
             RacialTraits = new List<Traits>()
             {
                 Traits.DualStomach,
@@ -1428,6 +1431,7 @@ static class RaceParameters
             Traits.PackWill,
             Traits.FastDigestion,
         },
+            ConversionRace = Race.Eevee,
             RaceDescription = "After the arrival of the anthro Eeveelutions into this Realm, they have begun to experience a number of new Eeveelutions, seemingly some odd effect this Realm has on how Eevees evolve. Equaleons are one of these new forms, essentially a larger, more powerful Eevee that seemingly is the result of evolving without meeting the criteria for the other Eeveelutions. Given their somewhat smaller population, rather than host a nation of their own, most Equaleons prefer to sell their strength as mercenaries.",
         };
 
@@ -3197,6 +3201,7 @@ static class RaceParameters
                 Traits.Pounce,
                 Traits.PackStrength,
         },
+            ConversionRace = Race.FeralEevee,
             RaceDescription = "Umbreon, the Moonlight Pokémon. A medium sized canine, Feral Umbreons also seemed to come from the same place as Feral Eevees, Also gaining the same hunger Feral Eevees acquired. They will mostly live in packs with other Feral Umbreons and some Feral Eevees. Some claim they have even seen them adopting the Feral Eevees anthro counter part, mistaking it as one of their own. But this has yet to be proven true. Feral Umbreons, like their anthro counter part, share their hatred for Sylveons. Fights between Feral Umbreons and Feral Sylveons have been recorded several times.",
 
         };
@@ -3229,6 +3234,7 @@ static class RaceParameters
                 Traits.ArtfulDodge,
                 Traits.PackWill,
         },
+            ConversionRace = Race.FeralEevee,
             RaceDescription = "Equaleon, the Equalized Pokémon. Evolving from Eevee under unique conditions, Equaleon represents a unique form of eeveelution that retains for more of the traits of Eevee than normal, simply scaled up to a larger size and power. They are often just as friendly as Eevees, but a lot better at not accidentally eating those they're playing with. Instead, they mostly consume anything they deem a threat to themselves or the ones they care about. But so long as you aren't either of those, they're actually quite playful and nice to be around. They're seemingly unique to this Realm.",
 
         };
@@ -4240,7 +4246,7 @@ static class RaceParameters
             },
             RacialTraits = new List<Traits>()
         {
-                Traits.Endosoma,
+                Traits.FriendlyStomach,
                 Traits.Pounce,
                 Traits.Timid,
                 Traits.Submissive,

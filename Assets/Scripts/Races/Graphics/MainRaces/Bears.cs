@@ -19,8 +19,8 @@ class Bears : DefaultRaceData
         Head = new SpriteExtraInfo(3, HeadSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Fur, s.Unit.AccessoryColor));
         BodyAccessory = new SpriteExtraInfo(2, AccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Fur, s.Unit.AccessoryColor)); // ears
         BodyAccent = new SpriteExtraInfo(4, BodyAccentSprite, WhiteColored); // panda
-        BodyAccent2 = null;
-        BodyAccent3 = null;
+        BodyAccent2 = new SpriteExtraInfo(4, BodyAccentSprite2, WhiteColored); // panda ears
+        BodyAccent3 = new SpriteExtraInfo(18, BodyAccentSprite3, WhiteColored); // axe head
         BodyAccent4 = null;
         BodyAccent5 = null;
         BodyAccent6 = null;
@@ -47,7 +47,6 @@ class Bears : DefaultRaceData
         {
             TaurusClothingTypes.Shirt,
             new Bikini(),
-            TaurusClothingTypes.HolidayOutfit,
             new Leathers()
         };
         AllowedWaistTypes = new List<MainClothing>()
@@ -55,11 +54,19 @@ class Bears : DefaultRaceData
             TaurusClothingTypes.BikiniBottom,
             TaurusClothingTypes.Loincloth,
         };
+        AllowedClothingHatTypes = new List<ClothingAccessory>()
+        {
+            new Hat(),
+            MainAccessories.SantaHat
+        };
     }
 
     internal override void RandomCustom(Unit unit)
     {
         base.RandomCustom(unit);
+        unit.ClothingHatType = State.Rand.Next(2);
+        unit.BodyAccentType1 = State.Rand.Next(BodyAccentTypes1);
+        unit.EarType = State.Rand.Next(EarTypes);
     }
 
     internal override int BreastSizes => 5;
@@ -87,6 +94,24 @@ class Bears : DefaultRaceData
             sprite = 8;
 
         return State.GameManager.SpriteDictionary.Bears[sprite];
+    }
+
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor)
+    {
+        if (actor.Unit.BodyAccentType1 == 1)
+        {
+            return State.GameManager.SpriteDictionary.Bears[65 + actor.Unit.EarType];
+        }
+        return null;
+    }
+
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor)
+    {
+        if(actor.Unit.HasWeapon && actor.Surrendered == false && actor.GetWeaponSprite() == 2)
+        {
+            return State.GameManager.SpriteDictionary.Bears[67];
+        }
+        return null;
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Bears[11 + actor.Unit.EarType];
@@ -140,32 +165,6 @@ class Bears : DefaultRaceData
         }
         if (actor.Unit.HasWeapon && actor.Surrendered == false)
         {
-            int weaponSprite = actor.GetWeaponSprite();
-            switch (weaponSprite)
-            {
-                case 1:
-                    if (actor.Unit.DickSize < 0)
-                        AddOffset(Weapon, 0, 0);
-                    else
-                        AddOffset(Weapon, 5 * .625f, 1 * .625f);
-                    break;
-                case 3:
-                    if (actor.Unit.DickSize < 0)
-                        AddOffset(Weapon, 0, 11 * .625f);
-                    else
-                        AddOffset(Weapon, 5 * .625f, 12 * .625f);
-                    break;
-                case 5:
-                    AddOffset(Weapon, 2 * .625f, 0);
-                    break;
-                case 7:
-                    AddOffset(Weapon, 11 * .625f, 0);
-                    break;
-                default:
-                    AddOffset(Weapon, 0, 0);
-                    break;
-            }
-
             return State.GameManager.SpriteDictionary.Bears[29 + actor.GetWeaponSprite()];
         }
         else
@@ -324,6 +323,21 @@ class Bears : DefaultRaceData
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
             clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.BearsClothes[15 + actor.Unit.BreastSize];
             actor.SquishedBreasts = true;
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class Hat : ClothingAccessory
+    {
+        public Hat()
+        {
+            clothing1 = new SpriteExtraInfo(6, null, WhiteColored);
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.BearsClothes[13];
+
             base.Configure(sprite, actor);
         }
     }
