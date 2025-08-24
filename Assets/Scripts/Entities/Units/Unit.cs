@@ -1355,7 +1355,22 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
         experience += exp;
     }
+	
+    public float CalcGiveExp(float exp, bool voreSource = false, bool isKill = false)// Used for calculations
+    {
+        exp *= TraitBoosts.ExpGain;
 
+        if (State.World.GetEmpireOfSide(Side)?.StrategicAI is StrategicAI ai)
+        {
+            if (ai.CheatLevel > 0)
+                exp *= 1 + .25f * ai.CheatLevel;
+        }
+
+        if (voreSource) exp *= TraitBoosts.ExpGainFromVore;
+        if (voreSource && isKill) exp *= TraitBoosts.ExpGainFromAbsorption;
+
+        return exp;
+    }
     public void GiveRawExp(int exp) => experience += exp;
 
     public bool IsDeadAndOverkilledBy(int overkill)
@@ -1405,6 +1420,31 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         }
 
         experience += exp;
+    }
+
+    public float CalcScaledExp(float exp, int attackerLevelAdvantage, bool voreSource = false, bool isKill = false)//Used for calculations only
+    {
+        if (Config.FlatExperience)
+        {
+            return CalcGiveExp(exp, voreSource, isKill);
+        }
+        if (State.World.GetEmpireOfSide(Side)?.StrategicAI is StrategicAI ai)
+        {
+            if (ai.CheatLevel > 0)
+                exp *= 1 + .25f * ai.CheatLevel;
+        }
+        exp *= TraitBoosts.ExpGain;
+        if (voreSource) exp *= TraitBoosts.ExpGainFromVore;
+        if (voreSource && isKill) exp *= TraitBoosts.ExpGainFromAbsorption;
+
+        if (attackerLevelAdvantage > 0)
+            exp = Math.Max(exp * (1 - ((float)Math.Pow(attackerLevelAdvantage, 1.2) / 24f)), .3f * exp);
+        else if (attackerLevelAdvantage < 0)
+        {
+            exp = Math.Min(exp * (1 + ((float)Math.Pow(-attackerLevelAdvantage, 1.2) / 12f)), 6f * exp);
+        }
+
+        return exp;
     }
 
     public static int GetExperienceRequiredForLevel(int level, float expRequiredMod)

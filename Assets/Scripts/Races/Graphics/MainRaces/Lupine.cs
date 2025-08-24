@@ -36,10 +36,10 @@ class Lupine : DefaultRaceData
         BodyAccessory = new SpriteExtraInfo(25, AccessorySprite, null, (s) => LupineColor(s)); // Ears
         BodyAccent = new SpriteExtraInfo(5, BodyAccentSprite, null, (s) => LupineColor(s)); // Body Pattern
         BodyAccent2 = new SpriteExtraInfo(5, BodyAccentSprite2, null, (s) => LupineColor(s)); // Arm Pattern
-        BodyAccent3 = new SpriteExtraInfo(5, BodyAccentSprite3, null, (s) => LupineColor(s)); // Leg Pattern
+        BodyAccent3 = new SpriteExtraInfo(4, BodyAccentSprite3, null, (s) => LupineColor(s)); // Leg Pattern
         BodyAccent4 = new SpriteExtraInfo(22, BodyAccentSprite4, null, (s) => LupineColor(s)); // Head Pattern
         BodyAccent5 = new SpriteExtraInfo(3, BodyAccentSprite5, null, (s) => LupineColor(s)); // Right Arm
-        BodyAccent6 = new SpriteExtraInfo(4, BodyAccentSprite6, WhiteColored); // claws
+        BodyAccent6 = new SpriteExtraInfo(5, BodyAccentSprite6, WhiteColored); // claws
         BodyAccent7 = new SpriteExtraInfo(1, BodyAccentSprite7, null, (s) => LupineColor(s)); // Tail
         Mouth = new SpriteExtraInfo(21, MouthSprite, WhiteColored);
         Hair = new SpriteExtraInfo(24, HairSprite, null, (s) => LupineColor(s));
