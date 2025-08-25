@@ -200,12 +200,12 @@ public class WorldConfig
     // Critical strikes
     [OdinSerialize, AllowEditing, ProperName("Base Critical Chance"), FloatRange(0, 1), Description("Base chance for a critical strike if not calculated from stats. If 'Stat Based Crit' is enabled with this, the chance will never be lower than this percentage, but it can be higher. Set to 0 to disable.")]
     internal float BaseCritChance = 0.05f;
-    [OdinSerialize, AllowEditing, ProperName("Critical Damage Multiplier"), FloatRange(0, 1), Description("Damage is multiplied by this number. At default value (1.5), 10 damage is modified to 15")]
+    [OdinSerialize, AllowEditing, ProperName("Critical Damage Multiplier"), FloatRange(0, 10), Description("Damage is multiplied by this number. At default value (1.5), 10 damage is modified to 15")]
     internal float CritDamageMod = 1.5f;
     // Graze
     [OdinSerialize, AllowEditing, ProperName("Base Graze Chance"), FloatRange(0, 1), Description("Base chance for a graze if not calculated from stats. If 'Stat Based Graze' is enabled, the chance will never be lower than this percentage, but it can be higher. Set to 0 to disable.")]
     internal float BaseGrazeChance = 0.10f;
-    [OdinSerialize, AllowEditing, ProperName("Graze Damage Multiplier"), FloatRange(0, 1), Description("Damage is multiplied by this number. At default value (0.3), 10 damage is modified to 3")]
+    [OdinSerialize, AllowEditing, ProperName("Graze Damage Multiplier"), FloatRange(0, 10), Description("Damage is multiplied by this number. At default value (0.3), 10 damage is modified to 3")]
     internal float GrazeDamageMod = 0.30f;
 
     [OdinSerialize]

@@ -753,6 +753,11 @@ public class Recruit_Mode : SceneBase
         {
             army.RemainingMP = Config.ArmyMP;
         }
+        if (Config.LeaderSpawnFreeze)
+        {
+            army.JustSpawnedLeader = true;
+            army.RemainingMP = 0;
+        }
     }
 
     void BuildRename()
