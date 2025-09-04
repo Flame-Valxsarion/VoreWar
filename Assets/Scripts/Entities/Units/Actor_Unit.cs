@@ -437,6 +437,11 @@ public class Actor_Unit
             Unit.MultiUseSpells.Add(SpellList.ForceFeed.SpellType);
             Unit.UpdateSpells();
         }
+        if (Unit.HasTrait(Traits.DimensionalAntilock) && State.World?.ItemRepository != null) //protection for the create strat screen
+        {
+            Unit.SingleUseSpells.Add(SpellList.DimensionShift.SpellType);
+            Unit.UpdateSpells();
+        }
         if (State.World?.ItemRepository != null) //protection for the create strat screen
         {
             foreach (Traits trait in Unit.GetTraits.Where(t => (TraitList.GetTrait(t) != null) && TraitList.GetTrait(t) is IProvidesSingleSpell))
@@ -1073,6 +1078,14 @@ public class Actor_Unit
             {
                 damageScalar *= 1.15f;
             }
+            if (target.Unit.GetStatusEffect(StatusEffectType.Fractured) == null && target.Unit.HasTrait(Traits.Crystaline))
+            {
+                damageScalar *= 0.75f;
+            }
+            if (target.Unit.GetStatusEffect(StatusEffectType.Fractured) != null)
+            {
+                damageScalar *= 1.50f;
+            }
             if (Unit.GetStatusEffect(StatusEffectType.Valor) != null)
             {
                 damageScalar *= 1.25f;
@@ -1127,6 +1140,14 @@ public class Actor_Unit
             if (Unit.HasTrait(Traits.Competitive) && Unit.Race == target.Unit.Race)
             {
                 damageScalar *= 1.15f;
+            }
+            if (target.Unit.GetStatusEffect(StatusEffectType.Fractured) == null && target.Unit.HasTrait(Traits.Crystaline))
+            {
+                damageScalar *= 0.75f;
+            }
+            if (target.Unit.GetStatusEffect(StatusEffectType.Fractured) != null)
+            {
+                damageScalar *= 1.50f;
             }
             if (target.Unit.GetStatusEffect(StatusEffectType.Errosion) != null)
                 damageScalar += damageScalar * (target.Unit.GetStatusEffect(StatusEffectType.Errosion).Strength / 5);
@@ -1755,6 +1776,8 @@ public class Actor_Unit
                         target.Unit.AddTenacious();
                     if (target.Unit.GetStatusEffect(StatusEffectType.Focus) != null)                  
                         target.Unit.RemoveFocus();
+                    if (target.Unit.HasTrait(Traits.Crystaline) && State.Rand.Next(4) == 0)
+                        target.Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
                     if (Unit.GetStatusEffect(StatusEffectType.Sharpness) != null)                  
                         Unit.RemoveStackStatus(StatusEffectType.Sharpness, Unit.GetStatusEffect(StatusEffectType.Sharpness).Duration / 2);
 
@@ -1861,6 +1884,8 @@ public class Actor_Unit
                         target.Unit.RemoveFocus();
                     if (target.Unit.HasTrait(Traits.Toxic) && State.Rand.Next(8) == 0)
                         Unit.ApplyStatusEffect(StatusEffectType.Poisoned, 2 + target.Unit.GetStat(Stat.Endurance) / 20, 3);
+                    if (target.Unit.HasTrait(Traits.Crystaline) && State.Rand.Next(4) == 0)
+                        target.Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
                     if (Unit.HasTrait(Traits.ForcefulBlow))
                         TacticalUtilities.KnockBack(this, target);
                     if (Unit.GetStatusEffect(StatusEffectType.Sharpness) != null)
@@ -1969,6 +1994,14 @@ public class Actor_Unit
         }
 
         Unit.GiveScaledExp(4 * target.Unit.ExpMultiplier, Unit.Level - target.Unit.Level);
+        if (target.Unit.HasTrait(Traits.DyingStrike) && target.Position.GetNumberOfMovesDistance(Position) <= 1 && State.Rand.Next(2) == 0)
+        {
+            this.Damage(target.WeaponDamageAgainstTarget(this, false));
+            if (State.Rand.Next(2) == 0)
+                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"In a final death throe <b>{target.Unit.Name}</b> attacks <b>{Unit.Name}</b> dealing <color=red>{target.WeaponDamageAgainstTarget(this, false)}</color> damage!");
+            else
+                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"In {LogUtilities.GPPHis(target.Unit)} last moments <b>{target.Unit.Name}</b> attacks <b>{Unit.Name}</b> dealing <color=red>{target.WeaponDamageAgainstTarget(this, false)}</color> damage!");
+        }
         if (target.Unit.GetStatusEffect(StatusEffectType.Respawns) != null && (target.Unit.HasTrait(Traits.Respawner) || target.Unit.HasTrait(Traits.RespawnerIII)))
         {
             var spawnLoc = TacticalUtilities.GetRandomTileForActor(target);
@@ -2087,6 +2120,14 @@ public class Actor_Unit
 
         if (DefendSpellCheck(spell, attacker, out float chance))
         {
+            if (Unit.GetStatusEffect(StatusEffectType.Fractured) == null && Unit.HasTrait(Traits.Crystaline))
+            {
+                Unit.TraitBoosts.Incoming.MagicDamage *= 0.75f;
+            }
+            if (Unit.GetStatusEffect(StatusEffectType.Fractured) != null)
+            {
+                Unit.TraitBoosts.Incoming.MagicDamage *= 1.50f;
+            }
             damage = (int)(damage * attacker.Unit.TraitBoosts.Outgoing.MagicDamage * Unit.TraitBoosts.Incoming.MagicDamage * TagConditionChecker.ApplyTagEffect(attacker.Unit, Unit, UnitTagModifierEffect.MagicDamageMult));
             EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.WhenHitBySpellDamage, new object[] { this, attacker, damage });
             State.GameManager.TacticalMode.TacticalStats.RegisterHit(spell, Mathf.Min(damage, Unit.Health), attacker.Unit.Side);
@@ -2100,6 +2141,8 @@ public class Actor_Unit
                     Unit.StatusEffects.Remove(charm);                // betrayal dispels charm
                 }
             }
+            if (Unit.HasTrait(Traits.Crystaline) && State.Rand.Next(4) == 0)
+                Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
             if (attacker.Unit.HasTrait(Traits.ArcaneMagistrate))
             {
                 attacker.Unit.AddFocus((Unit.IsDead ? 5 : 1));
@@ -3028,7 +3071,7 @@ public class Actor_Unit
                 {
                     SetPos(target_tile);
                     State.GameManager.TacticalMode.Translator.SetTranslator(UnitSprite.transform, Position, target_tile, 0, State.GameManager.TacticalMode.IsPlayerTurn);
-                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{Unit.Name} disappears, only to reappear somwhere else.");
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{Unit.Name} disappears, only to reappear somewhere else.");
                 }
                 else
                 {
@@ -3090,7 +3133,7 @@ public class Actor_Unit
             State.GameManager.TacticalMode.DirtyPack = true;
             Targetable = false;
             Surrendered = true;
-            if (Config.VisibleCorpses && Unit.Race != Race.Erin)
+            if (Config.VisibleCorpses && Unit.Race != Race.Erin && Unit.Race != Race.Iliijiith)
             {
                 float angle = 40 + State.Rand.Next(280);
                 UnitSprite.transform.rotation = Quaternion.Euler(0, 0, angle);

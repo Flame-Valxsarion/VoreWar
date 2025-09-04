@@ -133,6 +133,8 @@ public static class ColorPaletteMap
         DryadMushroom,
         GhostSkin,
         TrexSkin,
+        IliijiithIdleColor,
+        IliijiithAttackColor,
     }
 
     static Dictionary<SwapType, List<ColorSwapPalette>> Swaps;
@@ -312,6 +314,8 @@ public static class ColorPaletteMap
         List<ColorSwapPalette> SpaceCroachSkinSwaps = WireUp(SwapType.SpaceCroachSkin);
         List<ColorSwapPalette> RaijuSkinSwaps = WireUp(SwapType.RaijuSkin);
         List<ColorSwapPalette> TrexSkinSwaps = WireUp(SwapType.TrexSkin);
+        List<ColorSwapPalette> IliijiithIdleColorSwaps = WireUp(SwapType.IliijiithIdleColor);
+        List<ColorSwapPalette> IliijiithAttackColorSwaps = WireUp(SwapType.IliijiithAttackColor);
 
         int[] NormalIndexes = { 81, 153, 198, 229, 255 };
         Texture2D map = State.GameManager.PaletteDictionary.SimpleHair;
@@ -2623,6 +2627,36 @@ public static class ColorPaletteMap
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             TrexSkinSwaps.Add(swap);
+        }
+
+        map = State.GameManager.PaletteDictionary.IliijiithIdleColor;
+        for (int pixelY = 0; pixelY < map.height; pixelY++)
+        {
+            if (pixelY == 0) //Skip the template
+                continue;
+            Dictionary<int, Color> swapDict = new Dictionary<int, Color>
+            {
+                [50] = map.GetPixel(0, pixelY),
+                [100] = map.GetPixel(1, pixelY),
+                [150] = map.GetPixel(2, pixelY),
+            };
+            ColorSwapPalette swap = new ColorSwapPalette(swapDict);
+            IliijiithIdleColorSwaps.Add(swap);
+        }
+
+        map = State.GameManager.PaletteDictionary.IliijiithAttackColor;
+        for (int pixelY = 0; pixelY < map.height; pixelY++)
+        {
+            if (pixelY == 0) //Skip the template
+                continue;
+            Dictionary<int, Color> swapDict = new Dictionary<int, Color>
+            {
+                [50] = map.GetPixel(0, pixelY),
+                [100] = map.GetPixel(1, pixelY),
+                [150] = map.GetPixel(2, pixelY)
+            };
+            ColorSwapPalette swap = new ColorSwapPalette(swapDict);
+            IliijiithAttackColorSwaps.Add(swap);
         }
     }
 

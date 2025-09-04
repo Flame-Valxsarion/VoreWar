@@ -97,4 +97,6 @@ public class PaletteDictionary : MonoBehaviour
     public Texture2D SpaceCroachSkin;
     public Texture2D RaijuSkin;
     public Texture2D TrexSkin;
+    public Texture2D IliijiithIdleColor;
+    public Texture2D IliijiithAttackColor;
 }

@@ -600,6 +600,14 @@ public enum Traits
     BoundWeapon  = 312,
     /// <summary>Reduced nutrition as prey. Impossible to convert, as well as have a hard time converting other races to its race. (50% convert rate and can only convert).</summary>
     AcellularBody  = 313,
+    /// <summary>Unit doesn't produce any post-vore discards.</summary>
+    TotalAbsorption  = 314,
+    /// <summary>Unit takes 25% reduced damage from all sources, has a chance to gain the 'Fractured' status effect when attacked; greatly increasing damage from all sources. 'Fractured' lasts until the battle is over.</summary>
+    Crystaline  = 315,
+    /// <summary>When unit is killed in melee or digested does has a 1/3 chance of hiting with a melee attack against the agressor, 3/4 hit chance if vored.</summary>
+    DyingStrike  = 316,
+    /// <summary>Provides 1 use of Dimension Shift spell.</summary>
+    DimensionalAntilock  = 317,
 
 
     // Growth-related section

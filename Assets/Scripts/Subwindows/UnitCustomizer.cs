@@ -566,6 +566,9 @@ public class UnitCustomizer
             case Race.Skapa:
                 buttons[(int)ButtonTypes.TailTypes].Label.text = "Facing";
                 break;
+            case Race.Ryan:
+                buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Armor";
+                break;
             case Race.Jackals:
                 buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Fur Color";
                 buttons[(int)ButtonTypes.ClothingExtraType1].Label.text = "Leg Ring";

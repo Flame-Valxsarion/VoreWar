@@ -263,6 +263,8 @@ public class HoveringTooltip : MonoBehaviour
                         return $"Unit's Str,Dex, and Agi are reduced by {(effect.Strength * effect.Duration / 50)*100}% \nTurns Remaining: {effect.Duration}";
                     case StatusEffectType.Agony:
                         return $"Unit takes an additional 35% weapon damage, which is dealt over the duration of the effect.\n Stored damage: {(int)Math.Round(effect.Strength)}\nIncoming damage: {(int)Math.Round(effect.Strength / effect.Duration)}\n Turns Remaining: {effect.Duration}";
+                    case StatusEffectType.Fractured:
+                        return $"Unit takes 150% damage from all sources until the end of combat.";
                 }
             }
         }
@@ -674,11 +676,11 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.Whispers:
                 return "When eaten, Predator is afflicted by Prey's curse, and has a chance to be charmed each round";
             case Traits.TraitBorrower:
-                return "While digesting, , Predator is able to use prey's normal traits";
+                return "While digesting, the Predator is able to use prey's normal traits";
             case Traits.Changeling:
-                return "While Absorbing a prey, Becomes that prey's Race until absorption";
+                return "While absorbing a prey, Becomes that prey's Race until absorption is complete";
             case Traits.GreaterChangeling:
-                return "While digesing a prey, Becomes that prey's Race until absorption";
+                return "While digesting a prey, Becomes that prey's Race until absorption";
             case Traits.SpiritPossession:
                 return "Units soul continues to possess pred after death";
             case Traits.ForcedMetamorphosis:
@@ -819,6 +821,14 @@ public class HoveringTooltip : MonoBehaviour
                 return "This unit restores mana to any unit that buffs it, for 10% of Mind every turn while the buff persists. This unit gives 'Focus' to an ally within 2 spaces every other turn, stacks scaling with level.";
             case Traits.BlessingOfFerocity:
                 return "This unit grants sharpness to any unit that buffs it, equal to 10% of Strength every turn while the buff persists. This unit gives 'Valor' to an ally within 2 spaces every other turn, duration scaling with level.";
+            case Traits.TotalAbsorption:
+                return "This unit does not produce waste or remains when digesting absorbing prey.";
+            case Traits.Crystaline:
+                return "Unit takes 25% reduced damage from all sources, but each time it is hit it has a 1/4 chance to gain the 'Fractured' status effect, canceling out this trait and greatly increasing damage from all sources. 'Fractured' lasts until the battle is over.";
+            case Traits.DyingStrike:
+                return "When unit is killed in melee or digested does has a 1/3 chance of hiting with a melee attack against the agressor, 3/4 hit chance if vored.";
+            case Traits.DimensionalAntilock:
+                return "This unit is not completely fixed to the space around it. \n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
         }  
         return "<b>This trait needs a tooltip!</b>";
     }

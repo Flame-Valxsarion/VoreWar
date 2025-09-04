@@ -743,6 +743,9 @@ public class MapEditor : SceneBase
             case StrategicDoodadType.SpawnerUtahraptor:
                 Tooltip.text = $"Place a monster spawn location for the Utahraptors, they have to spawn within 2 tiles of a spawner if at least one exists";
                 break;
+            case StrategicDoodadType.SpawnerIliijiith:
+                Tooltip.text = $"Place a monster spawn location for the Iliijiith, they have to spawn within 2 tiles of a spawner if at least one exists";
+                break;
             default:
                 Tooltip.text = $"Place {type} tile\n";
                 break;

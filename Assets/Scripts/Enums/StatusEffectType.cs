@@ -90,5 +90,7 @@
     Diluted = 45,
     /// <summary>Weapon damage increased by strength as a percentage for the next attack.</summary>
     Sharpness = 46,
+    /// <summary>Unit takes 150% damage from all sources.</summary>
+    Fractured = 47,
 }
 

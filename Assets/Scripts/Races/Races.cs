@@ -118,6 +118,7 @@
     static internal SpaceCroach SpaceCroach = new SpaceCroach();
     static internal Trex Trex = new Trex();
     static internal Utahraptor Utahraptor = new Utahraptor();
+    static internal Iliijiith Iliijiith = new Iliijiith();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();
@@ -147,6 +148,8 @@
     static internal Skapa Skapa = new Skapa();
     static internal Tatltuae Tatltuae = new Tatltuae();
     static internal Firefly Firefly = new Firefly();
+    static internal Nectar Nectar = new Nectar();
+    static internal Ryan Ryan = new Ryan();
 
 
     static internal DefaultRaceData GetRace(Unit unit)
@@ -428,6 +431,10 @@
                 return Jackals;
             case Race.Firefly:
                 return Firefly;
+            case Race.Nectar:
+                return Nectar;
+            case Race.Ryan:
+                return Ryan;
             case Race.Otachi:
                 return Otachi;
             case Race.Raiju:
@@ -450,6 +457,8 @@
                 return Trex;
             case Race.Utahraptor:
                 return Utahraptor;
+            case Race.Iliijiith:
+                return Iliijiith;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

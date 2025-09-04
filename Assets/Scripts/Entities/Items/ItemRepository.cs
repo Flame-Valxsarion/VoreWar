@@ -108,6 +108,8 @@ public enum SpecialItems
     TatltuaeWeapon,
     FireflyMelee,
     FireflyRange,
+    NectarWeapon,
+    RyanWeapon,
 }
 
 
@@ -297,6 +299,7 @@ public class ItemRepository
             new Weapon(name:"Fungal Claw", description:"Sharp claws of a fungal dryad", cost:4, graphic:0, damage:4, range:1),
             new Weapon(name:"Rex Jaws", description:"Chomp!", cost:4, graphic:0, damage:15, range:1),
             new Weapon(name:"Utahraptor Claws", description:"Utahraptor Claws", cost:4, graphic:0, damage:6, range:1),
+            new Weapon(name:"Asterial Strike", description:"A channeled strike from a dimension that exists and doesn't", cost:4, graphic:0, damage:4, range:1),
         };
 
         specialItems = new List<Item>()
@@ -329,6 +332,8 @@ public class ItemRepository
             new Weapon(name:"Entropic Chaos", description:"Cantrip Tatltuae learned some time ago that creates pockets of intense chaotic entropy, ripping the very matter of his foes apart.", cost:4, graphic:0, damage:7, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
             new Weapon(name:"Pilot Knife", description:"Standard issue holdout weapon for Wanzer pilots; Firefly is rather skilled with this one.", cost:4, graphic:0, damage:8, range:1, accuracyModifier: 1.4f, lockedItem:true),
             new Weapon(name:"HND15", description:"Firefly's faithful pistol.", cost:4, graphic:0, damage:5, range:7, accuracyModifier: 0.7f, lockedItem:true),
+            new Weapon(name:"Nectar's Claws", description:"Large razor sharp sphinx claws, more than capable of leaving deep gashes in most foes.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
+            new Weapon(name:"Captain's Polearm", description:"A trusty polearm that has seen many battles, and slain many more.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
         };
 
 

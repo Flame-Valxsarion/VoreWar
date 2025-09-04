@@ -223,8 +223,8 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
 
             base.Configure(sprite, actor);
         }
@@ -287,8 +287,8 @@ class Youko : Humans, IVoreRestrictions
                 clothing3.GetSprite = null;
             }
 
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
 
             base.Configure(sprite, actor);
         }
@@ -353,8 +353,8 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
 
             base.Configure(sprite, actor);
         }
@@ -417,8 +417,8 @@ class Youko : Humans, IVoreRestrictions
                 clothing3.GetSprite = null;
             }
 
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
 
             base.Configure(sprite, actor);
         }
@@ -483,8 +483,8 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
 
             base.Configure(sprite, actor);
         }
@@ -549,8 +549,8 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
 
             base.Configure(sprite, actor);
         }
@@ -613,8 +613,8 @@ class Youko : Humans, IVoreRestrictions
                 clothing3.GetSprite = null;
             }
 
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
 
             base.Configure(sprite, actor);
         }
@@ -993,8 +993,8 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -1194,8 +1194,8 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -1395,8 +1395,8 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -1528,14 +1528,20 @@ class Youko : Humans, IVoreRestrictions
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
-            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
-            clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);;
+            clothing2.GetPalette = (s) => FurryColor(s);
+            clothing3.GetPalette = (s) => FurryColor(s);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
         }
     }
 
+    static ColorSwapPalette FurryColor(Actor_Unit actor)
+    {
+        if (actor.Unit.Furry)
+            return ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedFur, actor.Unit.AccessoryColor);
+        return ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RedSkin, actor.Unit.SkinColor);
+    }
 
 
 }

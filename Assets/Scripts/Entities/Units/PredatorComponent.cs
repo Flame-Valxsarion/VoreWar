@@ -1626,6 +1626,14 @@ public class PredatorComponent
 
         if (freshKill)
         {
+            if (preyUnit.Unit.HasTrait(Traits.DyingStrike) && State.Rand.Next(4) == 0)
+            {
+                actor.Damage(preyUnit.Actor.WeaponDamageAgainstTarget(actor, false));
+                if (State.Rand.Next(2) == 0)
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{preyUnit.Unit.Name}</b> perishes {LogUtilities.GPPHe(preyUnit.Unit)} do{LogUtilities.EsIfSingular(preyUnit.Unit)} one last attack against <b>{actor.Unit.Name}</b> dealing <color=red>{preyUnit.Actor.WeaponDamageAgainstTarget(actor, false)}</color> damage!");
+                else
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"In {LogUtilities.GPPHis(preyUnit.Unit)} last moments <b>{preyUnit.Unit.Name}</b> strikes at {LogUtilities.GetRandomStringFrom($"{LogUtilities.GPPHis(preyUnit.Unit)} captor", $"<b>{actor.Unit.Name}</b>")} dealing <color=red>{preyUnit.Actor.WeaponDamageAgainstTarget(actor, false)}</color> damage!");
+            }
             preyUnit.Actor.Unit.Health = 0;
             foreach (IVoreCallback callback in Callbacks)
             {
@@ -2051,7 +2059,7 @@ public class PredatorComponent
 
         DefaultRaceData preyRace = Races.GetRace(preyUnit.Unit);
 
-        if (Config.ClothingDiscards)
+        if (Config.ClothingDiscards && !actor.Unit.HasTrait(Traits.TotalAbsorption))
         {
             if (preyRace.AllowedMainClothingTypes.Count >= preyUnit.Unit.ClothingType && preyUnit.Unit.ClothingType > 0)
             {
@@ -2147,10 +2155,11 @@ public class PredatorComponent
                 State.GameManager.SoundManager.PlayFart(actor);
             }
 
-            if (Config.Scat && preyUnit.ScatDisabled == false)
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            else if (Config.Scat && preyUnit.ScatDisabled == false)
             {
                 State.GameManager.SoundManager.PlayAbsorb(location, actor);
-                if (preyUnit.Unit.Race == Race.Slimes && Config.CleanDisposal == false)
+                if ((preyUnit.Unit.Race == Race.Slimes || preyUnit.Unit.Race == Race.FeralSlime) && Config.CleanDisposal == false)
                 {
                     State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.SlimePile, preyUnit.Unit.Name, preyUnit.Unit.AccessoryColor);
                 }
@@ -2166,7 +2175,8 @@ public class PredatorComponent
         else if (location == PreyLocation.balls)
         {
             State.GameManager.SoundManager.PlayAbsorb(location, actor);
-            if (Config.Cumstains)
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            else if (Config.Cumstains)
             {
                 if (unit.Race == Race.Selicia)
                     State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.CumPuddle, preyUnit.Unit.Name, 0);
@@ -2179,7 +2189,8 @@ public class PredatorComponent
         else if (location == PreyLocation.womb || (location == PreyLocation.breasts && unit.Race != Race.Kangaroos) || location == PreyLocation.leftBreast || location == PreyLocation.rightBreast)
         {
             State.GameManager.SoundManager.PlayAbsorb(location, actor);
-            if (Config.Cumstains)
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            else if (Config.Cumstains)
             {
                 if (unit.Race == Race.Selicia)
                     State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.CumPuddle, preyUnit.Unit.Name, 0);
@@ -2192,7 +2203,9 @@ public class PredatorComponent
         else if (location == PreyLocation.tail && unit.Race == Race.Bees && Config.Cumstains)
         {
             State.GameManager.SoundManager.PlayAbsorb(location, actor);
-            State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.HoneyPuddle, preyUnit.Unit.Name);
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            else
+                State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.HoneyPuddle, preyUnit.Unit.Name);
         }
     }
 
@@ -2708,7 +2721,12 @@ public class PredatorComponent
                     }
                 }
                 if (!State.GameManager.TacticalMode.turboMode)
-                    actor.SetVoreSuccessMode();
+                {
+                    if (preyType == PreyLocation.stomach && actor.Unit.Race == Race.Ryan)
+                        actor.SetVoreSuccessMode();
+                    if (actor.Unit.Race != Race.Ryan)
+                        actor.SetVoreSuccessMode();
+                }
                 if (unit.HasTrait(Traits.Tenacious))
                     unit.RemoveTenacious();
                 if (unit.HasTrait(Traits.FearsomeAppetite))
@@ -4391,7 +4409,10 @@ public class PredatorComponent
         }
         AddPrey(preyref);
         actor.SetPredMode(preyLocation);
-        actor.SetVoreSuccessMode();
+        if (preyLocation == PreyLocation.stomach && actor.Unit.Race == Race.Ryan)
+            actor.SetVoreSuccessMode();
+        if (actor.Unit.Race != Race.Ryan)
+            actor.SetVoreSuccessMode();
         UpdateFullness();
     }
 
@@ -4781,7 +4802,10 @@ public class PredatorComponent
         }
         AddPrey(preyref);
         actor.SetPredMode(loc);
-        actor.SetVoreSuccessMode();
+        if (loc == PreyLocation.stomach && actor.Unit.Race == Race.Ryan)
+            actor.SetVoreSuccessMode();
+        if (actor.Unit.Race != Race.Ryan)
+            actor.SetVoreSuccessMode();
         UpdateFullness();
     }
 }

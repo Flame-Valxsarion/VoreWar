@@ -123,6 +123,7 @@ static class RaceParameters
     static readonly RaceTraits FeralSlime;
     static readonly RaceTraits Olivia;
     static readonly RaceTraits ViraeUltimae;
+    static readonly RaceTraits Iliijiith;
     static readonly RaceTraits Equaleon;
     static readonly RaceTraits Viisels;
     static readonly RaceTraits FeralEevee;
@@ -133,6 +134,8 @@ static class RaceParameters
     static readonly RaceTraits Lupine;
     static readonly RaceTraits Jackals;
     static readonly RaceTraits Firefly;
+    static readonly RaceTraits Nectar;
+    static readonly RaceTraits Ryan;
     static readonly RaceTraits Otachi;
     static readonly RaceTraits Raiju;
     static readonly RaceTraits Smudger;
@@ -409,6 +412,8 @@ static class RaceParameters
                 return Umbreon;
             case Race.ViraeUltimae:
                 return ViraeUltimae;
+            case Race.Iliijiith:
+                return Iliijiith;
             case Race.Viisels:
                 return Viisels;
             case Race.FeralEevee:
@@ -427,6 +432,10 @@ static class RaceParameters
                 return Jackals;
             case Race.Firefly:
                 return Firefly;
+            case Race.Nectar:
+                return Nectar;
+            case Race.Ryan:
+                return Ryan;
             case Race.Otachi:
                 return Otachi;
             case Race.Raiju:
@@ -3072,6 +3081,40 @@ static class RaceParameters
             RaceDescription = "How the Virae Ultimae are able to function at all with no brain is an enigma. Hearing and perpetual humming are their only ways of interacting with the world minus attacking and attempting to reproduce more of themselves by infecting hosts with their viral injectors. These things operate as brainless biological automata, and their sheer refusal to cease their attack under any conditions can be quite scary.",
         };
 
+        Iliijiith = new RaceTraits()
+        {
+            BodySize = 6,
+            StomachSize = 12,
+            HasTail = false,
+            FavoredStat = Stat.Voracity,
+            DeployCost = 1,
+            Upkeep = 3f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(8, 16),
+                Dexterity = new RaceStats.StatRange(8, 16),
+                Endurance = new RaceStats.StatRange(12, 16),
+                Mind = new RaceStats.StatRange(1, 16),
+                Will = new RaceStats.StatRange(8, 16),
+                Agility = new RaceStats.StatRange(4, 16),
+                Voracity = new RaceStats.StatRange(10, 16),
+                Stomach = new RaceStats.StatRange(10, 16),
+            },
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.AcellularBody,
+                Traits.Brainless,
+                Traits.Fearless,
+                Traits.Replaceable,
+                Traits.Crystaline,
+                Traits.DimensionalAntilock,
+                Traits.DyingStrike,
+                Traits.TotalAbsorption,
+        },
+            RaceDescription = "I NEED INFO!",
+        };
+
         Viisels = new RaceTraits()
         {
             BodySize = 10,
@@ -4297,6 +4340,8 @@ static class RaceParameters
             FavoredStat = Stat.Dexterity,
             HasTail = true,
             AllowedVoreTypes = new List<VoreType> { },//Perma-prey until vore sprites added
+            ExpMultiplier = 1.4f,
+            PowerAdjustment = 2f,
             DeployCost = 1,
             Upkeep = 9f,
             RaceStats = new RaceStats()
@@ -4325,6 +4370,71 @@ static class RaceParameters
             RaceDescription = "An unnatural Umbreon from a different universe from the others. His body shape seems different than the Umbreons, Having a differently shaped head, digigrade legs, and a fox like appearance. He claims to come from a realm where the world was much more advanced, having been transported with what he calls a \"HND15\" some kind of \"handgun\" similar to the tarous' revolvers. Being from another realm these bullets are in short supply, forcing him to save the magazines and to forge new bullets to load into them. He also carries around a knife for backup, it seems extra sharp compared to the others of it's kind. Although he prefers to stick along side them, He claims to not be related to the Anthro Umbreons that roam around.",
         };
 
+        Nectar = new RaceTraits()
+        {
+            BodySize = 100,
+            StomachSize = 100,
+            FavoredStat = Stat.Mind,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.BreastVore, VoreType.Unbirth },
+            ExpMultiplier = 7f,
+            PowerAdjustment = 15f,
+            DeployCost = 4,
+            Upkeep = 36f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(22, 30),
+                Dexterity = new RaceStats.StatRange(30, 45),
+                Endurance = new RaceStats.StatRange(22, 30),
+                Mind = new RaceStats.StatRange(32, 46),
+                Will = new RaceStats.StatRange(32, 46),
+                Agility = new RaceStats.StatRange(28, 34),
+                Voracity = new RaceStats.StatRange(26, 34),
+                Stomach = new RaceStats.StatRange(30, 45),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.Flight,
+                Traits.Tenacious,
+                Traits.FastCaster,
+                Traits.BookEater,
+                Traits.MagicProwess,
+                Traits.RangedVore,
+        },
+            RaceDescription = "Nectar, one of the eleven sphinxes who created her world, was exiled after consuming too many of the inhabitants. Now, she roams the multiverse, searching for the tastiest snacks and shiniest treasures. Whenever she dies to a stronger foe, you can bet that she'll be back for revenge, sometimes decades or even centuries later. After all, cats are spiteful creatures, and Nectar has far more than 9 lives....",
+        };
+
+        Ryan = new RaceTraits()
+        {
+            BodySize = 20,
+            StomachSize = 20,
+            FavoredStat = Stat.Endurance,
+            HasTail = true,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore },
+            ExpMultiplier = 2f,
+            PowerAdjustment = 5f,
+            DeployCost = 2,
+            Upkeep = 20f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(24, 32),
+                Dexterity = new RaceStats.StatRange(20, 24),
+                Endurance = new RaceStats.StatRange(24, 32),
+                Mind = new RaceStats.StatRange(20, 24),
+                Will = new RaceStats.StatRange(24, 32),
+                Agility = new RaceStats.StatRange(20, 24),
+                Voracity = new RaceStats.StatRange(24, 32),
+                Stomach = new RaceStats.StatRange(24, 32),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.StrongMelee,
+                Traits.Pounce,
+                Traits.DoubleAttack,
+                Traits.Growth,
+                Traits.GiantSlayer,
+        },
+            RaceDescription = "A skilled warrior captain from the same world as the other Sergals. Strangely enough, not only does he look physically different from them, but he seems to hold some sort of resentment for them as well. He's an incredibly deadly frontline fighter, almost like he has been fighting in wars since birth. Many warriors, even whole companies have already fallen to either his polearm, or his voracious appetite. Needless to say: He seems to feel perfectly in his element here.",
+        };
 
     }
 

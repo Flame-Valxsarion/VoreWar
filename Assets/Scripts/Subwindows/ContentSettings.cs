@@ -598,6 +598,9 @@ public class ContentSettings : MonoBehaviour
             case Race.Utahraptor:
                 tooltip.value = 343;
                 break;
+            case Race.Iliijiith:
+                tooltip.value = 346;
+                break;
         }
         return spawner;
     }

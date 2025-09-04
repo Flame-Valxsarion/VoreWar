@@ -587,7 +587,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86037;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -604,7 +604,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86038;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -621,7 +621,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86039;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -638,7 +638,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86037;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -656,7 +656,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86037;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -674,7 +674,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86037;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -692,7 +692,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86037;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -710,7 +710,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86037;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
@@ -728,7 +728,7 @@ class Umbreon : DefaultRaceData
             blocksDick = true;
             coversBreasts = false;
             Type = 86037;
-            clothing1 = new SpriteExtraInfo(17, null, null); //Pants
+            clothing1 = new SpriteExtraInfo(5, null, null); //Pants
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)

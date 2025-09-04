@@ -318,6 +318,9 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Skapa;
     public Sprite[] Tatltuae;
     public Sprite[] Firefly;
+    public Sprite[] Nectar;
+    public Sprite[] Ryan;
+    public Sprite[] RyanVore;
     
     [Header("Bosses")]
     public Sprite[] Abakhanskya;
@@ -389,6 +392,7 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Utahraptor240A;
     public Sprite[] Utahraptor240B;
     public Sprite[] Trex;
+    public Sprite[] Iliijiith;
 
     public Sprite[] DryadSprites1;
     public Sprite[] DryadSprites2;

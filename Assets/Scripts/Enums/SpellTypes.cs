@@ -64,6 +64,7 @@
     Whispers = 77,
     //Corrupt = 78,
     ExplosiveHug = 79,
+    DimensionShift = 80,
 
     ViperDamage = 110,
     ForceFeed = 111,

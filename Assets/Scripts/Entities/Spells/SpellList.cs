@@ -107,6 +107,7 @@ static class SpellList
     static internal readonly Spell AssumeForm;
     static internal readonly Spell RevertForm;
     static internal readonly Spell Bind;
+    static internal readonly Spell DimensionShift;
 
     static internal readonly DamageSpell ViperPoisonDamage;
     static internal readonly StatusSpell ViperPoisonStatus;
@@ -1343,6 +1344,33 @@ static class SpellList
             OnExecuteTile = (a, l) => a.SummonBound(l),
         };
         SpellDict[SpellTypes.Bind] = Bind;
+
+        DimensionShift = new Spell()
+        {
+            Name = "Dimension Shift",
+            Id = "DimensionShift",
+            SpellType = SpellTypes.DimensionShift,
+            Description = "Teleports the User to a random open tile within 20 tiles",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Self },
+            Range = new Range(1),
+            Tier = 1,
+            Resistable = false,
+            OnExecute = (a, t) =>
+            {
+                a.CastSpell(DimensionShift, t);
+                var teleport_tiles = TacticalUtilities.TilesWithinRange(a.Position, 20).Where(loc => TacticalUtilities.OpenTile(loc.x, loc.y, a)).ToList();
+                var target_tile = teleport_tiles[State.Rand.Next(0, teleport_tiles.Count())];
+                if (target_tile != null)
+                {
+                    a.SetPos(target_tile);
+                    State.GameManager.TacticalMode.Translator.SetTranslator(a.UnitSprite.transform, a.Position, target_tile, 0, State.GameManager.TacticalMode.IsPlayerTurn);
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{a.Unit.Name} appears to \"blink\" to somewhere else on the battlefield.");
+                }
+                else
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{a.Unit.Name} attempts to dimension shift to somewhere else but fails.");
+            },
+        };
+        SpellDict[SpellTypes.DimensionShift] = DimensionShift;
 
         ForceFeed = new Spell()
         {
