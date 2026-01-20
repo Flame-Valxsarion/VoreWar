@@ -96,11 +96,11 @@ public class Unit
     {
         get
         {
-            if (_baseScale < 1 || HasTrait(Traits.Growth) == false)
+            if (HasTrait(Traits.Growth) == false)
                 return 1;
             return _baseScale;
         }
-        set => _baseScale = value;
+        set => _baseScale = Math.Max(Math.Min(value, Config.GrowthCap), 1);
     }
     [OdinSerialize]
     public float ExpMultiplier { get; protected set; } = 1;
@@ -620,6 +620,20 @@ public class Unit
     internal int NearbyEnemies = 0;
     internal bool Harassed = false;
 
+	public float Bulk ()
+	{
+        float size = State.RaceSettings.GetBodySize(Race);
+        size *= GetScale(2);
+        size *= TraitBoosts.BulkMultiplier;
+
+        if (GetStatusEffect(StatusEffectType.Petrify) != null)
+            size *= 3;
+        if (GetStatusEffect(StatusEffectType.Frozen) != null)
+            size *= 2;
+
+		return size;
+	}
+	
     public bool IsDead => (Health < 1);
     private PermanentBoosts _traitBoosts;
     internal PermanentBoosts TraitBoosts
