@@ -575,8 +575,7 @@ static class StrategicUtilities
     {
         if (unit.Race == Race.Fairies)
             unit.AIClass = AIClass.MagicRanged;
-        else if ((unit.Race == Race.Succubi || unit.FixedGear == false) && unit.BestSuitedForRanged() ||
-            (unit.FixedGear && unit.GetBestRanged() != null))
+        else if ((unit.Race == Race.Succubi || unit.FixedGear == false) && unit.BestSuitedForRanged() || (unit.FixedGear && unit.GetBestRanged() != null))
         {
             if (unit.Items[1] is SpellBook || State.Rand.NextDouble() < magicChance)
                 unit.AIClass = AIClass.MagicRanged;
@@ -633,7 +632,7 @@ static class StrategicUtilities
                 var racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
-                    racePower = RaceParameters.GetTraitData(unit).PowerAdjustment;
+                    racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
                 }
                 double weaponFactor;
                 if (unit.GetBestRanged() != null) weaponFactor = 1.5 / 4 * unit.GetBestRanged().Damage;
@@ -660,7 +659,7 @@ static class StrategicUtilities
                 var racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
-                    racePower = RaceParameters.GetTraitData(unit).PowerAdjustment;
+                    racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
                 }
                 double weaponFactor;
                 if (unit.GetBestRanged() != null) weaponFactor = 1.5 / 4 * unit.GetBestRanged().Damage;
@@ -687,7 +686,7 @@ static class StrategicUtilities
                 var racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
-                    racePower = RaceParameters.GetTraitData(unit).PowerAdjustment;
+                    racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
                 }
                 double weaponFactor;
                 if (unit.GetBestRanged() != null) weaponFactor = 1.5 / 4 * unit.GetBestRanged().Damage;
@@ -1171,7 +1170,7 @@ static class StrategicUtilities
             var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
             if (power == 0)
             {
-                power = RaceParameters.GetTraitData(merc.Unit).PowerAdjustment;
+                power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
             }
             merc.Cost = (int)((25 + State.Rand.Next(15) + (.12 * unit.Experience)) * UnityEngine.Random.Range(0.8f, 1.2f) * power);
             mercDestination.Add(merc);
@@ -1218,7 +1217,7 @@ static class StrategicUtilities
             var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
             if (power == 0)
             {
-                power = RaceParameters.GetTraitData(merc.Unit).PowerAdjustment;
+                power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
             }
             merc.Cost = (int)((25 + State.Rand.Next(15) + (.12 * unit.Experience)) * UnityEngine.Random.Range(0.8f, 1.2f) * power);
             mercDestination.Add(merc);

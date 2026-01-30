@@ -21,7 +21,7 @@ abstract class VoreTrait : Trait, IVoreCallback
 
     public virtual bool OnFinishAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
-    public virtual bool OnFinishDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true; // Returning false here will prevent the digestion kill.
+    public virtual bool OnFinishDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true; // Returning false here will prevent the digestion kill, as well as precluding any IVoreCallback of later ProcessingPriority.
 
     public virtual bool OnRemove(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
@@ -30,7 +30,7 @@ abstract class VoreTrait : Trait, IVoreCallback
 
 /* 
  * Note to anyone adding to PermanentBoosts, if you would like to add your variable to the Custom Trait menu, follow these steps:
- * 1. Add you variable to PermanantBoosts
+ * 1. Add your variable to PermanantBoosts
  * 2. Navigate to UI/Connectors/CustomTrait.cs
  * 3. Add your variable to he CustomTraitComp Enum
  *      3a. If you added to DirectionalStat, add both an Outgoing and an Incoming version instead.

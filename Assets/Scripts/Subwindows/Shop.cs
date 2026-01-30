@@ -53,8 +53,6 @@ public class Shop
             }
         }
         RegenButtonTextAndClickability();
-
-
     }
 
     public void TransferItemToInventory(int slot)
@@ -180,7 +178,7 @@ public class Shop
         {
             if (shopUI.BuyPanels[i] == null)
                 continue;
-            var racePar = RaceParameters.GetTraitData(unit);
+            var racePar = RaceParameters.GetRaceTraits(unit.Race);
             if (racePar.CanUseRangedWeapons == false && State.World.ItemRepository.ItemIsRangedWeapon(i))
             {
                 shopUI.BuyPanels[i].gameObject.SetActive(false);
@@ -211,9 +209,7 @@ public class Shop
                     {
                         shopUI.BuyPanels[i].BuyButton.interactable = false;
                     }
-
                 }
-
             }
             if (item is Equipment equipment)
             {
@@ -228,7 +224,6 @@ public class Shop
                     {
                         shopUI.BuyPanels[i].BuyButton.interactable = false;
                     }
-
                 }
             }
 
@@ -236,7 +231,6 @@ public class Shop
             {
                 shopUI.BuyPanels[i].gameObject.SetActive(false);
             }
-
 
             shopUI.BuyPanels[i].TakeFromInventoryButton.interactable = army.ItemStock.HasItem((ItemType)i);
             shopUI.BuyPanels[i].InventoryButtonText.text = $"Take from army inventory (You have {army.ItemStock.ItemCount((ItemType)i)})";
@@ -250,8 +244,6 @@ public class Shop
             }
             if (item.Cost > empire.Gold)
                 shopUI.BuyPanels[i].BuyButton.interactable = false;
-
-
         }
     }
 
@@ -278,7 +270,5 @@ public class Shop
                 shopUI.SellPanels[i].MoveToInventoryButton.interactable = false;
             }
         }
-
     }
-
 }

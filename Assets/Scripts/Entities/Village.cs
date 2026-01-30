@@ -330,8 +330,7 @@ public class Village
             }
             if (buildingDef.AddedOnOriginalOwner && side == (int)OriginalRace)
             {
-                if (buildingDef.RequiresRaceCapitol == false ||
-                    (buildingDef.RequiresRaceCapitol && Capital))
+                if (buildingDef.RequiresRaceCapitol == false || (buildingDef.RequiresRaceCapitol && Capital))
                 {
                     buildings.Add(building);
                 }
@@ -1385,7 +1384,7 @@ public class Village
         var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
         if (power == 0)
         {
-            power = RaceParameters.GetTraitData(merc.Unit).PowerAdjustment;
+            power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
         }
         StrategicUtilities.SetAIClass(merc.Unit);
         StrategicUtilities.SpendLevelUps(merc.Unit);
@@ -1453,7 +1452,7 @@ public class Village
         var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
         if (power == 0)
         {
-            power = RaceParameters.GetTraitData(merc.Unit).PowerAdjustment;
+            power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
         }
         StrategicUtilities.SetAIClass(merc.Unit);
         StrategicUtilities.SpendLevelUps(merc.Unit);

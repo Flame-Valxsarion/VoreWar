@@ -1668,6 +1668,7 @@ public static class State
                     GameManager.TacticalMode.RefreshPureTacticalTraits();
                     GameManager.TacticalMode.ForceUpdate();
                 }
+                GameManager.TacticalMode.RefreshTileEffects();
             }
             
             if (versionUpdateMessage != "")

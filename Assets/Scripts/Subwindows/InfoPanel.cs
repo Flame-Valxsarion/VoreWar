@@ -42,7 +42,6 @@ public class InfoPanel
         UnitInfoPanel.gameObject.SetActive(true);
         UnitInfoPanel.Sprite?.transform.parent.gameObject.SetActive(Config.HideUnitViewer == false);
         UpdatePanel(actor);
-
     }
 
     private void UpdatePanel(Actor_Unit actor)
@@ -138,7 +137,6 @@ public class InfoPanel
     {
         UnitInfoPanel.Sprite.transform.parent.gameObject.SetActive(false);
     }
-
 
     public static string RaceSingular(Unit unit)
     {
@@ -374,7 +372,7 @@ public class InfoPanel
             case Race.Raiju:
                 return "Raiju";
             case Race.Smudger:
-                return "Smudger";    
+                return "Smudger";
             case Race.SpaceCroach:
                 return "SpaceRoach";
             case Race.Trex:
@@ -614,7 +612,7 @@ public class InfoPanel
             case Race.Raiju:
                 return "Raiju";
             case Race.Smudger:
-                return "Smudger";    
+                return "Smudger";
             case Race.SpaceCroach:
                 return "Space Roach";
             case Race.Trex:
@@ -679,10 +677,10 @@ public class InfoPanel
             if (unit.HasTrait(Traits.Resourceful))
             {
                 EquipRow.transform.GetChild(2).gameObject.SetActive(true);
-            if (unit.GetItem(2)?.Name == null)
-                EquipRow.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
-            else
-                EquipRow.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = unit.GetItem(2)?.Name;
+                if (unit.GetItem(2)?.Name == null)
+                    EquipRow.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+                else
+                    EquipRow.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = unit.GetItem(2)?.Name;
             }
             else
                 EquipRow.transform.GetChild(2).gameObject.SetActive(false);
@@ -814,7 +812,7 @@ public class InfoPanel
             if (sbSecond.Length > 10)
                 sb.Append($"{sbSecond}");
 
-            var racePar = RaceParameters.GetTraitData(unit);
+            var racePar = RaceParameters.GetRaceTraits(unit.Race);
 
             if ((unit.InnateSpells?.Any() ?? false) || (racePar.InnateSpells?.Any() ?? false))
             {
@@ -868,8 +866,5 @@ public class InfoPanel
     void BuildPredStat(StringBuilder sb, Actor_Unit unit)
     {
         sb.Append(unit.PredatorComponent.GetPreyInformation());
-
     }
-
-
 }

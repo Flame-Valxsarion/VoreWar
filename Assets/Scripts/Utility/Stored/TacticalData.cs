@@ -92,7 +92,7 @@ public class TacticalData
     [OdinSerialize]
     internal TacticalBuilding[] buildings;
     [OdinSerialize]
-    internal Dictionary<Vec2, TileEffect> activeEffects;
+    internal Dictionary<Vec2i, TileEffect> activeEffects;
 
     [OdinSerialize]
     internal DecorationStorage[] decorationStorage;

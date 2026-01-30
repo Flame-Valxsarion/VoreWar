@@ -1483,13 +1483,13 @@ public class Actor_Unit
         }
 
         Attack(target, false, damageMultiplier: .66f);
-        Actor_Unit tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2(1, 0));
+        Actor_Unit tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2i(1, 0));
         TestAttack(tempTarget);
-        tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2(0, 1));
+        tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2i(0, 1));
         TestAttack(tempTarget);
-        tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2(-1, 0));
+        tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2i(-1, 0));
         TestAttack(tempTarget);
-        tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2(0, -1));
+        tempTarget = TacticalUtilities.GetActorAt(target.Position + new Vec2i(0, -1));
         TestAttack(tempTarget);
         Attack(target, false, damageMultiplier: .66f);
 
@@ -2627,7 +2627,7 @@ public class Actor_Unit
     {
         if (destination.x < 0 || destination.y < 0 || destination.x > tiles.GetUpperBound(0) || destination.y > tiles.GetUpperBound(1))
             return false;
-        int cost = TacticalTileInfo.TileCost(new Vec2(destination.x, destination.y));
+        int cost = TacticalTileInfo.TileCost(new Vec2i(destination.x, destination.y));
         if (Unit.HasTrait(Traits.Flight))
             cost = 1;
         if (Movement < cost)

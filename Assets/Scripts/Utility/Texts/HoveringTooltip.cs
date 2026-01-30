@@ -117,8 +117,8 @@ public class HoveringTooltip : MonoBehaviour
         string WLLDef = $"Affects vore defense, escape rate, mana capacity, and magic defense\n{StatData(Stat.Will)}";
         string MNDDef = $"Affects spell damage, success odds, and duration with a minor amount of mana capacity\n{StatData(Stat.Mind)}";
         string ENDDef = $"Affects total health, also reduces damage from acid, has a minor role in escape chance.\n{StatData(Stat.Endurance)}";
-        string STMDef = $"Affects stomach capacity and digestion rate.  Also helps keep prey from escaping.\n{StatData(Stat.Stomach)}\n" +
-                     (State.World?.ItemRepository == null ? $"" : $"{(!unit.Predator ? "" : $"Capacity: {(actor?.PredatorComponent != null ? $"{Math.Round(actor.PredatorComponent.GetBulkOfPrey(), 2)} / " : "")}{Math.Round(State.RaceSettings.GetStomachSize(unit.Race) * (unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult), 1)}")}");
+        string STMDef = $"Affects stomach capacity and digestion rate. Also helps keep prey from escaping.\n{StatData(Stat.Stomach)}\n" +
+                        (State.World?.ItemRepository == null ? $"" : $"{(!unit.Predator ? "" : $"Capacity: {(actor?.PredatorComponent != null ? $"{Math.Round(actor.PredatorComponent.GetBulkOfPrey(), 2)} / " : "")}{Math.Round(State.RaceSettings.GetStomachSize(unit.Race) * (unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult), 1)}")}");
         string LDRDef = $"Provides a stat boost for all friendly units\nStat value: {unit.GetStatBase(Stat.Leadership)}";
         if (Enum.TryParse(words[2], out Stat stat) && unit != null)
         {
@@ -144,6 +144,19 @@ public class HoveringTooltip : MonoBehaviour
                     return LDRDef;
             }
         }
+        
+        string UnitDesc()
+        {
+            var raceDesc = RaceParameters.GetRaceTraits(unit.Race).RaceDescription;
+            var bodySize = State.RaceSettings.GetBodySize(unit.Race);
+            var bulk = (actor?.Bulk() ?? unit.Bulk()).ToString("F2");
+            var stomachSize = State.RaceSettings.GetStomachSize(unit.Race);
+            var favStat = State.RaceSettings.GetFavoredStat(unit.Race);
+            var deployCost = State.RaceSettings.GetDeployCost(unit.Race) * unit.TraitBoosts.DeployCostMult;
+            var upkeep = State.RaceSettings.GetUpkeep(unit.Race) * unit.TraitBoosts.UpkeepMult;
+            return $"{unit.Race}\n{raceDesc}\nRace Body Size: {bodySize}\nCurrent Bulk: {bulk}\nBase Stomach Size: {stomachSize}\nFavored Stat: {favStat}\nDeployment Cost: {deployCost}\nUpkeep: {upkeep}";
+        }
+
         if (Enum.TryParse(words[2], out Race race))
         {
             if (unit == null) //Protector for the add a race screen
@@ -157,18 +170,6 @@ public class HoveringTooltip : MonoBehaviour
             return UnitDesc();
         }
         
-        string UnitDesc() // This mini-function is used in both the immediately prior blocks.
-        {
-            var raceDesc = RaceParameters.GetTraitData(unit).RaceDescription;
-            var bodySize = State.RaceSettings.GetBodySize(race);
-			var bulk = (actor?.Bulk() ?? unit.Bulk()).ToString("F2");
-            var stomachSize = State.RaceSettings.GetStomachSize(race);
-			var favStat = State.RaceSettings.GetFavoredStat(race);
-			var deployCost = State.RaceSettings.GetDeployCost(race) * unit.TraitBoosts.DeployCostMult;
-			var upkeep = State.RaceSettings.GetUpkeep(race) * unit.TraitBoosts.UpkeepMult;
-            return $"{race}\n{raceDesc}\nRace Body Size: {bodySize}\nCurrent Bulk: {bulk}\nBase Stomach Size: {stomachSize}\nFavored Stat: {favStat}\nDeployment Cost: {deployCost}\nUpkeep: {upkeep}";
-        }
-
         if (Enum.TryParse(words[2], out Traits trait))
         {
             return GetTraitData(trait);
@@ -184,7 +185,7 @@ public class HoveringTooltip : MonoBehaviour
                 case UnitType.Mercenary:
                     return "A hired mercenary from the mercenary camp";
                 case UnitType.Summon:
-                    return "A summoned unit.  It will vanish at the end of the battle";
+                    return "A summoned unit, who will vanish at the end of the battle";
                 case UnitType.SpecialMercenary:
                     return "A unique mercenary, only one of each can exist in the world at once, can not retreat and will return to the merc camp if dismissed";
                 case UnitType.Adventurer:
@@ -192,7 +193,7 @@ public class HoveringTooltip : MonoBehaviour
                 case UnitType.Spawn:
                     return "A weaker unit, created under certain conditions";
                 case UnitType.Boss:
-                    return "One of the most fierce beings found throughout the realm.  Are you sure you're prepared?";
+                    return "One of the most fierce beings found throughout the realm. Are you sure you're prepared?";
             }
         }
 
@@ -280,10 +281,10 @@ public class HoveringTooltip : MonoBehaviour
             return GetTraitData((Traits)State.ConditionalTraitList.Where(t => t.name == words[2]).First().id);
         }
 
+        string complete = $"{words[0]} {words[1]} {words[2]} {words[3]} {words[4]}";
         if (State.World?.ItemRepository != null)
         {
             List<Item> AllItems = State.World.ItemRepository.GetAllItems();
-            string complete = $"{words[0]} {words[1]} {words[2]} {words[3]} {words[4]}";
             for (int i = 0; i < AllItems.Count; i++)
             {
                 if (words[2] == AllItems[i].Name || (complete.Contains(AllItems[i].Name) && AllItems[i].Name.Contains(words[2]))) //Ensures that the phrase contains the highlighed word
@@ -308,15 +309,12 @@ public class HoveringTooltip : MonoBehaviour
             }
         }
 
+        List<Spell> AllSpells = SpellList.SpellDict.Select(s => s.Value).ToList();
+        for (int i = 0; i < AllSpells.Count; i++)
         {
-            List<Spell> AllSpells = SpellList.SpellDict.Select(s => s.Value).ToList();
-            string complete = $"{words[0]} {words[1]} {words[2]} {words[3]} {words[4]}";
-            for (int i = 0; i < AllSpells.Count; i++)
+            if (words[2] == AllSpells[i].Name || (complete.Contains(AllSpells[i].Name) && AllSpells[i].Name.Contains(words[2]))) // Ensures that the phrase contains the highlighed word
             {
-                if (words[2] == AllSpells[i].Name || (complete.Contains(AllSpells[i].Name) && AllSpells[i].Name.Contains(words[2]))) //Ensures that the phrase contains the highlighed word
-                {
-                    return $"{AllSpells[i].Description}\nRange: {AllSpells[i].Range.Min}-{AllSpells[i].Range.Max}\nMana Cost: {AllSpells[i].ManaCost}\nTargets: {string.Join(", ", AllSpells[i].AcceptibleTargets)}";
-                }
+                return $"{AllSpells[i].Description}\nRange: {AllSpells[i].Range.Min}-{AllSpells[i].Range.Max}\nMana Cost: {AllSpells[i].ManaCost}\nTargets: {string.Join(", ", AllSpells[i].AcceptibleTargets)}";
             }
         }
 
@@ -324,11 +322,9 @@ public class HoveringTooltip : MonoBehaviour
         {
             case "surrendered":
                 return "This unit has surrendered, all units have a 100% chance to eat it, and it only costs 2 AP to eat it.";
-
             case "Imprinted":
-                return $"This unit is imprinted in the village of {unit.SavedVillage.Name}, at level {unit.SavedCopy?.Level ?? 0} with {Math.Round(unit.SavedCopy?.Experience ?? 0)} exp.  " +
+                return $"This unit is imprinted in the village of {unit.SavedVillage.Name}, at level {unit.SavedCopy?.Level ?? 0} with {Math.Round(unit.SavedCopy?.Experience ?? 0)} exp. " +
                     $"Unit will automatically resurrect there at that power, assuming the village is controlled by friendlies when the unit dies";
-
             case "STR":
                 return STRDef;
             case "DEX":
@@ -347,7 +343,6 @@ public class HoveringTooltip : MonoBehaviour
                 return STMDef;
             case "LDR":
                 return LDRDef;
-
             default:
                 return "";
         }
@@ -364,43 +359,43 @@ public class HoveringTooltip : MonoBehaviour
             int effectBonus = unit.GetEffectBonus(Stat);
             if (effectBonus > 0) effects = $"+{effectBonus} from effects\n";
             else if (effectBonus < 0) effects = $"{effectBonus} from effects\n";
-			string scale = "";
-			float scaleMult = unit.GetScale();
-			if (scaleMult != 1f) scale = scaleMult.ToString("F2") + "x from scale\n";
-			string allstats = "";
-			float statBoost = unit.TraitBoosts.StatMult;
-			if (statBoost != 1f) allstats = statBoost.ToString("F2") + "x from boost to all stats\n";
-			string specificstat = "";
-			switch (Stat)
-			{
-				case Stat.Strength:
-					statBoost = unit.TraitBoosts.StrengthMult;
-					break;
-				case Stat.Dexterity:
-					statBoost = unit.TraitBoosts.DexterityMult;
-					break;
-				case Stat.Voracity:
-					statBoost = unit.TraitBoosts.VoracityMult;
-					break;
-				case Stat.Agility:
-					statBoost = unit.TraitBoosts.AgilityMult;
-					break;
-				case Stat.Will:
-					statBoost = unit.TraitBoosts.WillMult;
-					break;
-				case Stat.Mind:
-					statBoost = unit.TraitBoosts.MindMult;
-					break;
-				case Stat.Endurance:
-					statBoost = unit.TraitBoosts.EnduranceMult;
-					break;
-				case Stat.Stomach:
-					statBoost = unit.TraitBoosts.StomachMult;
-					break;
-				default:
-					break;
-			}
-			if (statBoost != 1f) specificstat = statBoost.ToString("F2") + "x from boost to this stat\n";
+            string scale = "";
+            float scaleMult = unit.GetScale();
+            if (scaleMult != 1f) scale = scaleMult.ToString("F2") + "x from scale\n";
+            string allstats = "";
+            float statBoost = unit.TraitBoosts.StatMult;
+            if (statBoost != 1f) allstats = statBoost.ToString("F2") + "x from boost to all stats\n";
+            string specificstat = "";
+            switch (Stat)
+            {
+                case Stat.Strength:
+                    statBoost = unit.TraitBoosts.StrengthMult;
+                    break;
+                case Stat.Dexterity:
+                    statBoost = unit.TraitBoosts.DexterityMult;
+                    break;
+                case Stat.Voracity:
+                    statBoost = unit.TraitBoosts.VoracityMult;
+                    break;
+                case Stat.Agility:
+                    statBoost = unit.TraitBoosts.AgilityMult;
+                    break;
+                case Stat.Will:
+                    statBoost = unit.TraitBoosts.WillMult;
+                    break;
+                case Stat.Mind:
+                    statBoost = unit.TraitBoosts.MindMult;
+                    break;
+                case Stat.Endurance:
+                    statBoost = unit.TraitBoosts.EnduranceMult;
+                    break;
+                case Stat.Stomach:
+                    statBoost = unit.TraitBoosts.StomachMult;
+                    break;
+                default:
+                    break;
+            }
+            if (statBoost != 1f) specificstat = statBoost.ToString("F2") + "x from boost to this stat\n";
             return $"{unit.GetStatBase(Stat)} base {Stat}\n{leader}{traits}{effects}{scale}{allstats}{specificstat}Final Stat: {unit.GetStat(Stat)}";
         }
     }
@@ -517,7 +512,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.AstralCall:
                 return "Unit has a chance at the beginning of battle to summon a weaker unit from its race\nThey return to their own dimension after the battle";
             case Traits.TentacleHarassment:
-                return "Shifting tentacles distract and harass opponents within 1 tile.\nLowers enemy stats by a small amount  (8%)";
+                return "Shifting tentacles distract and harass opponents within 1 tile.\nLowers enemy stats by a small amount (8%)";
             case Traits.BornToMove:
                 return "Experienced at carrying extra weight.\nUnit suffers no defense penalty and no movement penalty from units it is carrying.";
             case Traits.Resourceful:
@@ -537,11 +532,11 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.MadScience:
                 return "Allows casting of a random spell for normal mana cost once per battle";
             case Traits.ShunGokuSatsu:
-                return "Allows usage of a powerful ability that does attacks and vore.  Can only be used every 3 turns";
+                return "Allows usage of a powerful ability that does attacks and vore. Can only be used every 3 turns";
             case Traits.Eternal:
-                return "(Cheat Trait) - This unit can never die.  If it is killed during a battle, it will be set to full hp and act as though it fled (will rejoin if the army wins, otherwise sets off for the closest town)";
+                return "(Cheat Trait) - This unit can never die. If it is killed during a battle, it will be set to full hp and act as though it fled (will rejoin if the army wins, otherwise sets off for the closest town)";
             case Traits.Revenant:
-                return "(Cheat Trait) - This unit can never die from weapons or spells, though digestion can kill it permanently.  If it is 'killed' during a battle, it will be set to full hp and act as though it fled (will rejoin if the army wins, otherwise sets off for the closest town) Note that these don't give immunity to digestion conversion unlike the pure eternal trait";
+                return "(Cheat Trait) - This unit can never die from weapons or spells, though digestion can kill it permanently. If it is 'killed' during a battle, it will be set to full hp and act as though it fled (will rejoin if the army wins, otherwise sets off for the closest town) Note that these don't give immunity to digestion conversion unlike the pure eternal trait";
             case Traits.Reformer:
                 return "(Cheat Trait) - This unit can never die from being digested, but spells and weapons can kill it permanently. If it is digested during a battle, it will be set to full hp and act as though it fled (will rejoin if the army wins, otherwise sets off for the closest town). Note that these don't give immunity to digestion conversion unlike the pure eternal trait";
             case Traits.LuckySurvival:
@@ -563,19 +558,19 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.FearsomeAppetite:
                 return "Consuming a victim frightens nearby allies of the prey, temporarily reducing their stats";
             case Traits.FriendlyStomach:
-                return "Can vore friendly units, friendly units that are vored take no digestion damage \nThey do not try to escape, but can be regurgitated or are freed at the end of battle\nHas 100% chance to eat allies, and only costs 2 AP, like eating surrendered units.  May cause battles to not automatically end if used with TheGreatEscape";
+                return "Can vore friendly units, friendly units that are vored take no digestion damage \nThey do not try to escape, but can be regurgitated or are freed at the end of battle\nHas 100% chance to eat allies, and only costs 2 AP, like eating surrendered units. May cause battles to not automatically end if used with TheGreatEscape";
             case Traits.TailStrike:
                 return "An attack that does less damage, but attacks the tile and the 2 tiles adjacent to it that are within reach";
             case Traits.HealingBelly:
-                return "An accessory trait to endosoma that makes friendly prey receive healing each turn.  (Does nothing without the endosoma trait)\n(Cheat Trait)";
+                return "An accessory trait to endosoma that makes friendly prey receive healing each turn. (Does nothing without the endosoma trait)\n(Cheat Trait)";
             case Traits.Assimilate:
-                return "If the unit has less than 5 traits, upon finishing absorption of an enemy unit, will take a random trait from them that the unit doesn't currently have.  If the unit has 5 traits, the random trait will replace this trait. Transferable via Endosoma.\n(Cheat Trait)";
+                return "If the unit has less than 5 traits, upon finishing absorption of an enemy unit, will take a random trait from them that the unit doesn't currently have. If the unit has 5 traits, the random trait will replace this trait. Transferable via Endosoma.\n(Cheat Trait)";
             case Traits.AdaptiveBiology:
-                return "Upon finishing absorption of an enemy unit, will take a random trait from them that the unit doesn't currently have and add it to a list of 3 rotating traits.  If the list already has 3 rotating traits, the oldest trait is removed.  This can't trigger on the same kill as Assimilate. Transferable via Endosoma.\n(Cheat Trait)";
+                return "Upon finishing absorption of an enemy unit, will take a random trait from them that the unit doesn't currently have and add it to a list of 3 rotating traits. If the list already has 3 rotating traits, the oldest trait is removed. This can't trigger on the same kill as Assimilate. Transferable via Endosoma.\n(Cheat Trait)";
             case Traits.KillerKnowledge:
                 return "Every four weapon / spell kills (but not vore kills), the unit will get a permanent +1 to all stats\n(Cheat Trait)";
             case Traits.PollenProjector:
-                return "Allows using the pollen cloud ability once per battle, which attempts to inflict a few status effects in a 3x3 area for a small mana cost.  This trait also makes the unit immune to most of the statuses from this ability.";
+                return "Allows using the pollen cloud ability once per battle, which attempts to inflict a few status effects in a 3x3 area for a small mana cost. This trait also makes the unit immune to most of the statuses from this ability.";
             case Traits.Webber:
                 return "Allows using the web ability once per battle, which attempts to inflict the webbed status for 3 turns, which lowers AP to 1, and reduces stats.";
             case Traits.Camaraderie:
@@ -587,39 +582,39 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.InfiniteAssimilation:
                 return "Upon finishing absorption of an enemy unit, will take a random trait from them that the unit doesn't currently have. This version has no cap, so it can be a little bit of a text mess. Transferable via Endosoma.\n(Cheat Trait)";
             case Traits.GlueBomb:
-                return "Gives access to a single use ability that applies the glued status effect to a 3x3 group.  Glued units are very slow, and it takes a while to get it off.";
+                return "Gives access to a single use ability that applies the glued status effect to a 3x3 group. Glued units are very slow, and it takes a while to get it off.";
             case Traits.TasteForBlood:
                 return "After digesting or killing someone, the unit will get a random positive buff for 5 turns.";
             case Traits.PleasurableTouch:
                 return "This unit's belly rub actions are more effective on others (doubled effect).";
             case Traits.PoisonSpit:
-                return "Allows using the poison spit ability once per battle, which does damage in a 3x3 and attempts to apply a strong short term poison as well.  This trait also makes the unit immune to poison damage.";
+                return "Allows using the poison spit ability once per battle, which does damage in a 3x3 and attempts to apply a strong short term poison as well. This trait also makes the unit immune to poison damage.";
             case Traits.DigestionConversion:
-                return "When a unit finishes digesting someone, there's a 50% chance they will then convert to the predator's side, and be healed to half of their max life.  Can't convert leaders, summons, or units with saved copies.\n(Cheat Trait)";
+                return "When a unit finishes digesting someone, there's a 50% chance they will then convert to the predator's side, and be healed to half of their max life. Can't convert leaders, summons, or units with saved copies.\n(Cheat Trait)";
             case Traits.DigestionRebirth:
-                return "When a unit finishes digesting someone, there's a 50% chance they will then convert to the predator's side and change race to the predator's race, and be healed to half of their max life.  Can't convert leaders, summons, or units with saved copies.\n(Cheat Trait)";
+                return "When a unit finishes digesting someone, there's a 50% chance they will then convert to the predator's side and change race to the predator's race, and be healed to half of their max life. Can't convert leaders, summons, or units with saved copies.\n(Cheat Trait)";
             case Traits.SenseWeakness:
                 return "Unit does more melee/ranged damage against targets with less health, and also increases for every negative status effect the target has.";
             case Traits.BladeDance:
-                return "Unit gains a stack of blade dance every time they successfully hit their opponent with melee, and lose a stack every time they are hit with melee.  Each stack gives +2 strength and +1 agility.";
+                return "Unit gains a stack of blade dance every time they successfully hit their opponent with melee, and lose a stack every time they are hit with melee. Each stack gives +2 strength and +1 agility.";
             case Traits.EssenceAbsorption:
                 return "Every four vore digestions, the unit will get a permanent +1 to all stats\n(Cheat Trait)";
             case Traits.AntPheromones:
                 return "Unit will summon some friendly ants, depending on how many units have this trait.";
             case Traits.Fearless:
-                return "Unit can not flee nor surrender (also applies to auto-surrender).  If something does happen to make the unit surrender, it will automatically recover on the next turn.";
+                return "Unit can not flee nor surrender (also applies to auto-surrender). If something does happen to make the unit surrender, it will automatically recover on the next turn.";
             case Traits.Inedible:
-                return "Unit can not be vored by other units.  (It makes their effective size so big that no one has the capacity to eat them)\n(Cheat Trait)";
+                return "Unit can not be vored by other units. (It makes their effective size so big that no one has the capacity to eat them)\n(Cheat Trait)";
             case Traits.AllOutFirstStrike:
-                return "Unit starts battle in a protected state, with high dodge rate.  On their first attack or vore attempt of the battle, they get a significant bonus to damage or vore chance.  After that they become vulnerable, and move slower and have a dodge penalty.";
+                return "Unit starts battle in a protected state, with high dodge rate.  On their first attack or vore attempt of the battle, they get a significant bonus to damage or vore chance. After that they become vulnerable, and move slower and have a dodge penalty.";
             case Traits.VenomousBite:
                 return "A missed bite from the biter trait will also poison an enemy, and give them the shaken debuff.";
             case Traits.Petrifier:
-                return "Gives access to a single use ability that applies the petrified status effect to a target.  It prevents the target from acting, but also makes them resistant to damage and bulky to swallow.";
+                return "Gives access to a single use ability that applies the petrified status effect to a target. It prevents the target from acting, but also makes them resistant to damage and bulky to swallow.";
             case Traits.VenomShock:
                 return "Gives this unit significantly increased melee damage and vore odds against targets who are poisoned.";
             case Traits.Tenacious:
-                return "Unit gains a stack of tenacity every time they are hit or miss an attack, and lose five stacks every time they hit or vore an enemy.  Each stack gives +10% str/agi/vor.";
+                return "Unit gains a stack of tenacity every time they are hit or miss an attack, and lose five stacks every time they hit or vore an enemy. Each stack gives +10% str/agi/vor.";
             case Traits.PredConverter:
                 return "This unit will always convert unbirthed prey to their side upon full digestion regardless of KuroTenko settings, putting this together with PredRebirther or PredGusher on same unit is not recommended";
             case Traits.PredRebirther:
@@ -629,7 +624,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.SeductiveTouch:
                 return "Unit's belly rub action can make enemies pause for a turn, or even switch sides, as long as they haven't taken damage for two turns.\n(Cheat Trait)";
             case Traits.TheGreatEscape:
-                return "This unit cannot be digested, but the battle will end if only units with this remain and they're all eaten.  The prey are assumed to escape sometime later, and are count as fled units. (Note that you'd need end of battle review checked to see the escape messages as they happen at the very end of battle)";
+                return "This unit cannot be digested, but the battle will end if only units with this remain and they're all eaten. The prey are assumed to escape sometime later, and are count as fled units. (Note that you'd need end of battle review checked to see the escape messages as they happen at the very end of battle)";
             case Traits.Berserk:
                 return "If the unit is reduced below half health by an attack, will go berserk, greatly increasing its strength and voracity for 3 turns.\nCan only occur once per battle.";
             case Traits.SynchronizedEvolution:
@@ -641,7 +636,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.ForceFeeder:
                 return "Allows unit to attempt force-feeding itself to another unit at will.";
             case Traits.Possession:
-				return "Temporarily control a Pred unit while digesting inside\n (Cheat Hidden Trait)";    
+                return "Temporarily control a Pred unit while digesting inside\n(Cheat Hidden Trait)";
             case Traits.Corruption:
                 return "If a currupted unit is digested, the pred will build up corruption as a hidden status. Once corrupted prey with a stat total equal to that of the pred has been digested, they are under control of the side of the last-digested corrupted.\n(Hidden Trait)";
             case Traits.Reanimator:
@@ -667,7 +662,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.BookWormIII:
                 return "Unit generates with a random Tier 3-4 Book.";
             case Traits.Temptation:
-               return "Units that are put under a mindcontrol (e.g. Charm, Hypnosis) effect by this unit want to force-feed themselves to it or its close allies.";
+                return "Units that are put under a mindcontrol (e.g. Charm, Hypnosis) effect by this unit want to force-feed themselves to it or its close allies.";
             case Traits.Infertile:
                 return "Unit cannot contribute to village population growth.";
             case Traits.HillImpedence:
@@ -757,7 +752,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.Endosoma:
                 return "Units that are vored take no digestion damage \n Enemies lose stamina instead of health, enemies with no stamina no longer try to escape and are considered defeated at the end of battle, but not if freed. \n Has 100% chance to eat allies.Can vore friendly units, they do not try to escape. \n May cause battles to not automatically end if used with TheGreatEscape";
             case Traits.Friendosoma:
-                return "Enemies defeated by the Endosoma trait will now be recruited instead at the end of battle."; 
+                return "Enemies defeated by the Endosoma trait will now be recruited instead at the end of battle.";
             case Traits.Duelist:
                 return "Melee damage is increased by 100%, but Melee damage is divided by the number of adjacent enemy units.";
             case Traits.Fervor:
@@ -799,7 +794,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.CurseOfImmolation:
                 return "At start of turn, Unit deals its level in fire damage to itself and all units around it or its predator, if this unit has been consumed. This damage can not kill. Effect does not activate if unit has surrendered.";
             case Traits.CurseOfSacrifice:
-                return "When a unit within 3 spaces is consumed, this unit has a 10% chance to trade places with them and be consumed instead.";          
+                return "When a unit within 3 spaces is consumed, this unit has a 10% chance to trade places with them and be consumed instead.";
             case Traits.CurseOfEquivalency:
                 return "At the start of each turn, this unit's highest stat is reduced by 1 and this unit's lowest stat is increased by 1.";
             case Traits.CurseOfPhasing:
@@ -807,9 +802,9 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.CurseOfCraving:
                 return "At the start of battle, this unit has a 50% chance to have eaten one of its allies.";
             case Traits.CurseOfPreyportaion:
-                return "At the start of battle, this unit has a 25% chance to teleported into a random predator.";       
+                return "At the start of battle, this unit has a 25% chance to teleported into a random predator.";
             case Traits.Competitive:
-                return "Unit deals bonus ranged and melee damage to members of the same race.";      
+                return "Unit deals bonus ranged and melee damage to members of the same race.";
             case Traits.CompetetivePredator:
                 return "When an another nearby unit is eaten, this unit has a 10% chance to eat a random adjacent unit.";
             case Traits.PassThrough:
@@ -855,8 +850,8 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.DyingStrike:
                 return "When unit is killed in melee or digested does has a 1/3 chance of hitting with a melee attack against the aggressor, 3/4 hit chance if vored.";
             case Traits.DimensionalAntilock:
-                return "This unit is not completely fixed to the space around it. \n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
-        }  
+                return "This unit is not completely fixed to the space around it.\n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
+        }
         return "<b>This trait needs a tooltip!</b>";
     }
 
@@ -888,6 +883,7 @@ public class HoveringTooltip : MonoBehaviour
         }
         return trait.ToString();
     }
+    
     public static string GetAIData(RaceAI ai)
     {
         switch (ai)
@@ -907,7 +903,6 @@ public class HoveringTooltip : MonoBehaviour
 
     internal void UpdateInformationDefaultTooltip(int value)
     {
-
         string description = DefaultTooltips.Tooltip(value);
         InfoUpdate(description, true);
     }

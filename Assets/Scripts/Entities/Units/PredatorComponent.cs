@@ -918,9 +918,9 @@ public class PredatorComponent
     internal void OnSwallowCallbacks(Prey preyUnit)
     {
         var location = preyUnit.Location;
-        foreach(IVoreCallback callback in PopulateCallbacks(preyUnit).OrderBy((vt) => vt.ProcessingPriority))
+        foreach (IVoreCallback callback in PopulateCallbacks(preyUnit).OrderBy((vt) => vt.ProcessingPriority))
         {
-            if(!callback.OnSwallow(preyUnit, actor, location))
+            if (!callback.OnSwallow(preyUnit, actor, location))
                 return;
         }
     }
@@ -1250,7 +1250,7 @@ public class PredatorComponent
         Spawn spawnUnit = new Spawn(side,race,(int)(experience));
         Actor_Unit spawnActor = State.GameManager.TacticalMode.AddUnitToBattle(spawnUnit, actor);
         State.GameManager.TacticalMode.DirtyPack = true;
-        if(forced)
+        if (forced)
             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{InfoPanel.RaceSingular(spawnUnit)} Spawn <b>{spawnUnit.Name}</b> bursts from <b>{actor.Unit.Name}</b>'s body");
         else
             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> has created a {InfoPanel.RaceSingular(spawnUnit)} Spawn <b>{spawnUnit.Name}</b>.");
@@ -1477,10 +1477,10 @@ public class PredatorComponent
                     return 0;
             }
             if (preyUnit.Unit.CanBeConverted() &&
-             (Location(preyUnit) == PreyLocation.womb || Config.KuroTenkoConvertsAllTypes) &&
-             (Config.KuroTenkoEnabled && (Config.UBConversion == UBConversion.Both || Config.UBConversion == UBConversion.ConversionOnly) || unit.HasTrait(Traits.PredConverter)) &&
-             !unit.HasTrait(Traits.PredRebirther) &&
-             !unit.HasTrait(Traits.PredGusher) && !(preyUnit.Unit.AtypicalBiology() && !unit.AtypicalBiology()) && !(!preyUnit.Unit.AtypicalBiology() && unit.AtypicalBiology() && State.Rand.Next(2) == 0))
+                (Location(preyUnit) == PreyLocation.womb || Config.KuroTenkoConvertsAllTypes) &&
+                (Config.KuroTenkoEnabled && (Config.UBConversion == UBConversion.Both || Config.UBConversion == UBConversion.ConversionOnly) || unit.HasTrait(Traits.PredConverter)) &&
+                !unit.HasTrait(Traits.PredRebirther) &&
+                !unit.HasTrait(Traits.PredGusher) && !(preyUnit.Unit.AtypicalBiology() && !unit.AtypicalBiology()) && !(!preyUnit.Unit.AtypicalBiology() && unit.AtypicalBiology() && State.Rand.Next(2) == 0))
             {
                 preyUnit.Unit.Health = preyUnit.Unit.MaxHealth / 2;
                 preyUnit.Actor.Movement = 0;
@@ -1620,7 +1620,7 @@ public class PredatorComponent
             }
             
             // Take the prey's living subprey now, before end-of-turn failsafe code releases them.
-			if (preyUnit.SubPrey?.Count() > 0)
+            if (preyUnit.SubPrey?.Count() > 0)
             {
                 Prey[] aliveSubUnits = preyUnit.GetAliveSubPrey();
                 for (int i = 0; i < aliveSubUnits.Length; i++)
@@ -1738,10 +1738,10 @@ public class PredatorComponent
                         return 0;
                 }
                 if (preyUnit.Unit.CanBeConverted() &&
-                 (Location(preyUnit) == PreyLocation.womb || Config.KuroTenkoConvertsAllTypes) &&
-                 ((Config.KuroTenkoEnabled && (Config.UBConversion == UBConversion.Both || Config.UBConversion == UBConversion.RebirthOnly)) || unit.HasTrait(Traits.PredRebirther)) &&
-                 (Config.SpecialMercsCanConvert || unit.DetermineConversionRace() < Race.Selicia) &&
-                 !unit.HasTrait(Traits.PredGusher) && !(preyUnit.Unit.AtypicalBiology() && !unit.AtypicalBiology()) && !(!preyUnit.Unit.AtypicalBiology() && unit.AtypicalBiology() && State.Rand.Next(2) == 0))
+                    (Location(preyUnit) == PreyLocation.womb || Config.KuroTenkoConvertsAllTypes) &&
+                    ((Config.KuroTenkoEnabled && (Config.UBConversion == UBConversion.Both || Config.UBConversion == UBConversion.RebirthOnly)) || unit.HasTrait(Traits.PredRebirther)) &&
+                    (Config.SpecialMercsCanConvert || unit.DetermineConversionRace() < Race.Selicia) &&
+                    !unit.HasTrait(Traits.PredGusher) && !(preyUnit.Unit.AtypicalBiology() && !unit.AtypicalBiology()) && !(!preyUnit.Unit.AtypicalBiology() && unit.AtypicalBiology() && State.Rand.Next(2) == 0))
                 {
                     Race conversionRace = unit.DetermineConversionRace();
                     if (unit.HasTrait(Traits.PredRebirther) && !unit.HasSharedTrait(Traits.PredRebirther))
@@ -1911,7 +1911,6 @@ public class PredatorComponent
     void CheckPredTraitAbsorption(Prey preyUnit)
     {
         bool updated = false;
-        bool raceUpdated = true;
         if (unit.HasTrait(Traits.Extraction))
         {
             var possibleTraits = preyUnit.Unit.GetTraits.Where(s => unit.GetTraits.Contains(s) == false && State.AssimilateList.CanGet(s)).ToArray();
@@ -2352,43 +2351,43 @@ public class PredatorComponent
 
     bool PlacedPrey(Actor_Unit prey)
     {
-		int predx = actor.Position.x;
-		int predy = actor.Position.y;
-		IEnumerable<Vec2i> positions;
-		int i = 1;
-		PopulatePositionsList(i);
-		positions = positions.Where(pos => TacticalUtilities.FlyableTile(pos.x, pos.y)); // FlyableTile being a shorthand for "tile that is in bounds."
-		while (positions.Any())
-		{
-			positions = positions.Where(pos => TacticalUtilities.OpenTile(pos.x, pos.y, actor));
-			if (positions.Any())
-			{
-				List<Vec2i> list = new List<Vec2i>(positions);
-				prey.SetPos(list[State.Rand.Next(list.Count())]);
+        int predx = actor.Position.x;
+        int predy = actor.Position.y;
+        IEnumerable<Vec2i> positions;
+        int i = 1;
+        PopulatePositionsList(i);
+        positions = positions.Where(pos => TacticalUtilities.FlyableTile(pos.x, pos.y)); // FlyableTile being a shorthand for "tile that is in bounds."
+        while (positions.Any())
+        {
+            positions = positions.Where(pos => TacticalUtilities.OpenTile(pos.x, pos.y, actor));
+            if (positions.Any())
+            {
+                List<Vec2i> list = new List<Vec2i>(positions);
+                prey.SetPos(list[State.Rand.Next(list.Count())]);
                 return true;
-			}
-			
-			++i;
-			PopulatePositionsList(i);
-			positions = positions.Where(pos => TacticalUtilities.FlyableTile(pos.x, pos.y));
-		}
-		return false;
-		
-		void PopulatePositionsList(int j)
-		{
-			List<Vec2i> tmplist = new List<Vec2i>();
-			for (int x = -j; x <= j; ++x)
-			{
-				tmplist.Add(new Vec2i(predx + x, predy + j));
-				tmplist.Add(new Vec2i(predx + x, predy - j));
-			}
-			for (int y = 1 - j; y < j; ++y)
-			{
-				tmplist.Add(new Vec2i(predx + j, predy + y));
-				tmplist.Add(new Vec2i(predx - j, predy - y));
-			}
-			positions = tmplist;
-		}
+            }
+
+            ++i;
+            PopulatePositionsList(i);
+            positions = positions.Where(pos => TacticalUtilities.FlyableTile(pos.x, pos.y));
+        }
+        return false;
+        
+        void PopulatePositionsList(int j)
+        {
+            List<Vec2i> tmplist = new List<Vec2i>();
+            for (int x = -j; x <= j; ++x)
+            {
+                tmplist.Add(new Vec2i(predx + x, predy + j));
+                tmplist.Add(new Vec2i(predx + x, predy - j));
+            }
+            for (int y = 1 - j; y < j; ++y)
+            {
+                tmplist.Add(new Vec2i(predx + j, predy + y));
+                tmplist.Add(new Vec2i(predx - j, predy - y));
+            }
+            positions = tmplist;
+        }
     }
 
     public string GetPreyInformation()
@@ -3639,7 +3638,7 @@ public class PredatorComponent
             return false;
         }
         Prey preyref = new Prey(preyUnit.Actor, target, preyUnit.Actor.PredatorComponent?.prey);
-        if (target.Unit.HasVagina && RaceParameters.GetTraitData(target.Unit).AllowedVoreTypes.Contains(VoreType.Unbirth))
+        if (target.Unit.HasVagina && RaceParameters.GetRaceTraits(target.Unit.Race).AllowedVoreTypes.Contains(VoreType.Unbirth))
         {
             var box = State.GameManager.CreateDialogBox();
             box.SetData(() => TransferFinalize(target, preyUnit, preyref, PreyLocation.stomach), "Stomach", "Womb", "Transfer the prey to the womb or stomach?", () => TransferFinalize(target, preyUnit, preyref, PreyLocation.womb));
@@ -3963,7 +3962,7 @@ public class PredatorComponent
             return false;
         }
         Prey preyref = new Prey(preyUnit.Actor, actor, preyUnit.Actor.PredatorComponent?.prey);
-        if (actor.Unit.HasVagina && RaceParameters.GetTraitData(actor.Unit).AllowedVoreTypes.Contains(VoreType.Unbirth) && oldLocation == PreyLocation.balls)
+        if (actor.Unit.HasVagina && RaceParameters.GetRaceTraits(actor.Unit.Race).AllowedVoreTypes.Contains(VoreType.Unbirth) && oldLocation == PreyLocation.balls)
         {
             var box = State.GameManager.CreateDialogBox();
             box.SetData(() => VoreStealFinalize(target, preyUnit, preyref, PreyLocation.stomach, oldLocation), "Stomach", "Womb", "Transfer the prey to the womb or stomach?", () => VoreStealFinalize(target, preyUnit, preyref, PreyLocation.womb, oldLocation));

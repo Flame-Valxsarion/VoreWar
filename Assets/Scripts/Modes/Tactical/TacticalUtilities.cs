@@ -1308,7 +1308,7 @@ static class TacticalUtilities
 
     }
 
-    static internal Actor_Unit GetActorAt(Vec2 location)
+    static internal Actor_Unit GetActorAt(Vec2i location)
     {
         foreach (Actor_Unit actor in Units)
         {
@@ -1333,7 +1333,7 @@ static class TacticalUtilities
             {
                 if (x < 0 || y < 0 || x > tiles.GetUpperBound(0) || y > tiles.GetUpperBound(1))
                     continue;
-                Vec2 position = new Vec2(x, y);
+                Vec2i position = new Vec2i(x, y);
                 TileEffect effect = new TileEffect(duration, strength, type);
                 State.GameManager.TacticalMode.ActiveEffects[position] = effect;
                 switch (type)

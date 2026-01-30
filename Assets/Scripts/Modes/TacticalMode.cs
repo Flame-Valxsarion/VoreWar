@@ -73,14 +73,13 @@ public class TacticalMode : SceneBase
 
     internal void SetBlockedTiles(bool[,] tiles) => BlockedTile = tiles;
 
-    private Dictionary<Vec2, TileEffect> _activeEffects;
-
-    internal Dictionary<Vec2, TileEffect> ActiveEffects
+    private Dictionary<Vec2i, TileEffect> _activeEffects;
+    internal Dictionary<Vec2i, TileEffect> ActiveEffects
     {
         get
         {
             if (_activeEffects == null)
-                _activeEffects = new Dictionary<Vec2, TileEffect>();
+                _activeEffects = new Dictionary<Vec2i, TileEffect>();
             return _activeEffects;
         }
         set => _activeEffects = value;
@@ -126,6 +125,8 @@ public class TacticalMode : SceneBase
     internal InfoPanel InfoPanel;
 
     TacticalTileType[,] tiles;
+    public int width => tiles.GetUpperBound(0) + 1;
+    public int height => tiles.GetUpperBound(1) + 1;
     internal TacticalBuildings.TacticalBuilding[] Buildings;
 
     internal DecorationStorage[] DecorationStorage;
@@ -3793,7 +3794,7 @@ public class TacticalMode : SceneBase
 
         for (int i = 0; i < path.Count; i++)
         {
-            remainingMP -= TacticalTileInfo.TileCost(new Vec2(path[i].X, path[i].Y));
+            remainingMP -= TacticalTileInfo.TileCost(new Vec2i(path[i].X, path[i].Y));
             if (remainingMP > 1)
                 arrowManager.PlaceNode(Color.green, new Vec2i(path[i].X, path[i].Y));
             else if (remainingMP == 1)
@@ -5566,26 +5567,52 @@ public class TacticalMode : SceneBase
     {
         if (ActiveEffects == null)
             return;
-        foreach (var key in ActiveEffects.ToList())
+        foreach (KeyValuePair<Vec2i, TileEffect> item in ActiveEffects.ToList())
         {
-            key.Value.RemainingDuration -= 1;
+            item.Value.RemainingDuration -= 1;
 
-            if (key.Value.Type == TileEffectType.Fire)
+            if (item.Value.Type == TileEffectType.Fire)
             {
-                var actor = TacticalUtilities.GetActorAt(key.Key);
+                var actor = TacticalUtilities.GetActorAt(item.Key);
                 if (actor != null)
                 {
-                    int damage = Mathf.RoundToInt(key.Value.Strength * actor.Unit.TraitBoosts.FireDamageTaken);
+                    int damage = (int)Math.Round(item.Value.Strength * actor.Unit.TraitBoosts.FireDamageTaken);
                     if (actor.Damage(damage, true))
                     {
                         Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> took <color=red>{damage}</color> points of fire damage");
                     }
                 }
             }
-            if (key.Value.RemainingDuration <= 0)
+            if (item.Value.RemainingDuration <= 0)
             {
-                EffectTileMap.SetTile(new Vector3Int(key.Key.x, key.Key.y, 0), null);
-                ActiveEffects.Remove(key.Key);
+                EffectTileMap.SetTile(new Vector3Int(item.Key.x, item.Key.y, 0), null);
+                ActiveEffects.Remove(item.Key);
+            }
+        }
+    }
+    
+    public void RefreshTileEffects()
+    {
+        EffectTileMap.ClearAllTiles();
+        foreach (KeyValuePair<Vec2i, TileEffect> item in ActiveEffects.ToList())
+        {
+            Vec2i pos = item.Key;
+            TileEffect effect = item.Value;
+            if (effect == null)
+            {
+                EffectTileMap.SetTile(new Vector3Int(pos.x, pos.y, 0), null);
+            }
+            else
+            {
+                switch (effect.Type)
+                {
+                    case TileEffectType.Fire:
+                        EffectTileMap.SetTile(new Vector3Int(pos.x, pos.y, 0), State.GameManager.TacticalMode.Pyre);
+                        break;
+                    case TileEffectType.IcePatch:
+                        EffectTileMap.SetTile(new Vector3Int(pos.x, pos.y, 0), State.GameManager.TacticalMode.Ice);
+                        break;
+                }
             }
         }
     }
