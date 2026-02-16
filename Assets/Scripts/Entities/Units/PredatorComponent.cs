@@ -669,6 +669,58 @@ public class PredatorComponent
         return false;
     }
 
+	 public int GetSpecialPreySize(Race race, int size, int maxNoSpecial, int maxSpecial, params PreyLocation[] locations)
+    {
+        return GetSpecialPreySize(race, false, size, maxNoSpecial, maxSpecial, locations);
+    }
+
+	///function to handle smoothly transitioning off of special prey graphics when multiple prey are present (prevents full belly forcing max-level special graphic, even if the special prey is nearly finished absorbing)
+	///
+	///example usage (20 non-special states, 8 special states):
+	///
+	///int size = actor.GetStomachSize(27);
+	///size = actor.PredatorComponent.GetSpecialPreySize(Race.Selicia, size, 19, 27, PreyLocation.stomach);
+	///
+	///return myBellySprites[size];
+    public int GetSpecialPreySize(Race race, bool forceTopSpriteIfAlive, int size, int maxNoSpecial, int maxSpecial, params PreyLocation[] locations)
+    {
+        bool anyLocation = locations.Length == 0;
+        int sizeNoSpecial = Math.Min(maxNoSpecial, size);
+
+		if (Config.RaceSpecificVoreGraphicsDisabled)
+            return sizeNoSpecial;
+        
+        var Special = actor.PredatorComponent?.GetDirectPrey()
+            .Where((s) => s.Unit.Race == race && (anyLocation || locations.Contains(actor.PredatorComponent.Location(s))))
+            .OrderBy((s) => 
+            {
+                float health = 1;
+                if (s.Unit.IsDead)
+                {
+                    health *= s.Unit.Health + s.Unit.MaxHealth;
+                    health /= s.Unit.MaxHealth;
+                }
+                return -health;
+            }).First().Unit;
+
+        if (Special == null)
+            return sizeNoSpecial;
+
+        float SpecialSize = 1;
+        if (Special.IsDead)
+        {
+            SpecialSize *= Special.Health + Special.MaxHealth;
+            SpecialSize /= Special.MaxHealth;
+        }
+
+        if (forceTopSpriteIfAlive)
+        {
+            return (int)(sizeNoSpecial + ((maxSpecial - sizeNoSpecial) * SpecialSize));
+        }
+        else
+            return (int)Math.Min(size, sizeNoSpecial + ((maxSpecial - maxNoSpecial) * SpecialSize));
+    }
+
     public void FreeAnyAlivePrey()
     {
         List<Prey> preyUnits = new List<Prey>();
