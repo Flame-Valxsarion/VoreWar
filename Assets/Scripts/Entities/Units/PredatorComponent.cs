@@ -701,7 +701,7 @@ public class PredatorComponent
                     health /= s.Unit.MaxHealth;
                 }
                 return -health;
-            }).First().Unit;
+            }).FirstOrDefault()?.Unit;
 
         if (Special == null)
             return sizeNoSpecial;
