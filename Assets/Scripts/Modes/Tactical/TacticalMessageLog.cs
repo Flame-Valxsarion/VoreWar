@@ -637,7 +637,6 @@ public class TacticalMessageLog
             }
             if (action.Target.Race == Race.Cats)
             {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Boy, Ivy wouldn't be happy about this. Or she would.\"");
                 possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Your claws may be sharp. But mine are sharper!\"");
                 possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Aww, you don't look so happy. What's wrong? Cat got your tongue? HAH! ... Anyone? Come on it was funny in my head!\"");
                 possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Looks like the fox wins again! God, you suck at this.\"");
@@ -667,7 +666,6 @@ public class TacticalMessageLog
             {
                 possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hop around <i>that</i>, you little... runt.\"");
                 possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"You are fast. I am faster! You are bunny. I am bunnier!... I think I'm drunk again.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Sage shouldn't care about this. You aren't a rabbit. Are you a rabbit?\"");
                 possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Another <i>bunny</i> bites the <i>dust</i>! I need a joke book...\"");
             }
             if (action.Target.Race == Race.Humans)
@@ -701,7 +699,6 @@ public class TacticalMessageLog
             }
             if (action.Target.Race == Race.Scorch)
             {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I swear to god that was one of those dragon things Kiran told me about.\"");
                 possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Is my tail on fire?! No? Whew...\"");
             }
             if (action.Target.Race == Race.Asura)
