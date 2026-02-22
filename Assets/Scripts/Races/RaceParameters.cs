@@ -3750,33 +3750,34 @@ static class RaceParameters
 
         Pudding = new RaceTraits()
         {
-            BodySize = 30,
-            StomachSize = 30,
+            BodySize = 25,
+            StomachSize = 20,
             HasTail = false,
-            FavoredStat = Stat.Strength,
-            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore, VoreType.Unbirth },
-            ExpMultiplier = 4f,
-            PowerAdjustment = 2f,
-            DeployCost = 2,
-            Upkeep = 5f,
+            FavoredStat = Stat.Stomach,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
+            ExpMultiplier = 2.5f,
+            PowerAdjustment = 1.5f,
+            DeployCost = 1,
+            Upkeep = 6f,
             RaceStats = new RaceStats()
             {
-                Strength = new RaceStats.StatRange(15, 20),
-                Dexterity = new RaceStats.StatRange(8, 12),
-                Endurance = new RaceStats.StatRange(15, 20),
-                Mind = new RaceStats.StatRange(10, 14),
-                Will = new RaceStats.StatRange(10, 14),
-                Agility = new RaceStats.StatRange(12, 18),
-                Voracity = new RaceStats.StatRange(14, 20),
-                Stomach = new RaceStats.StatRange(14, 20),
+                Strength = new RaceStats.StatRange(6, 12),
+                Dexterity = new RaceStats.StatRange(4, 8),
+                Endurance = new RaceStats.StatRange(20, 30),
+                Mind = new RaceStats.StatRange(4, 10),
+                Will = new RaceStats.StatRange(6, 12),
+                Agility = new RaceStats.StatRange(6, 10),
+                Voracity = new RaceStats.StatRange(10, 18),
+                Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Charge,
-            Traits.Pounce,
-            Traits.Biter,
-            Traits.BornToMove,
-        },
+            {
+                Traits.MetabolicSurge,
+                Traits.ExtraNutritious,
+                Traits.SoftBody,
+                Traits.GelatinousBody,
+
+            },
             RaceDescription = "Utahraptors are much faster and more powerful thatn the usual raptors you see here and there.  More hungry too."
         };
 
