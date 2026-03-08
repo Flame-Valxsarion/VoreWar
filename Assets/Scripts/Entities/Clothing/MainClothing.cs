@@ -193,6 +193,11 @@ abstract class MainClothing
                 sprite.HideSprite(SpriteType.BodyAccent2); //Used for Dick Ring colors
             }
         }
+        if (inFrontOfDick)
+        {
+            sprite.ChangeLayer(SpriteType.Dick, (clothing1.layer - 1));
+            sprite.ChangeLayer(SpriteType.Balls, (clothing1.layer - 1));
+        }
 
         if (colorsBelly)
         {
