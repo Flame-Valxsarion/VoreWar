@@ -135,11 +135,11 @@
             case 65:
                 return "The multiplier converting a unit's deployment cost to capacity.\nExample: A value of 0.1 will cause an army of 15 units with 1 deployment cost to require 1.5 capacity.";
             case 66:
-                return "Decides what happens to a building when an enemy empire army moves onto it.\nNothing - Nothing will happen and AI will ignore buildings\nCapture - Building will switch ownership\nDisable - Building will be disabled and unable to activate passive or active effects until an ally army starts the turn on it\nDestroy - Building will be removed and have it's";
+                return "Decides what happens to a building when an enemy empire army moves onto it.\nNothing - Nothing will happen and AI will ignore buildings\nCapture - Building will switch ownership\nDisable - Building will be disabled and unable to activate passive or active effects until an ally army starts the turn on it\nDestroy - Building will be removed and have its build cap returned to the original empire";
            case 67:
-                return "Decides what happens to a building when an monster army moves onto it.\nNothing - Nothing will happen and AI will ignore buildings\nCapture - Building will switch ownership\nDisable - Building will be disabled and unable to activate passive or active effects until an ally army starts the turn on it\nDestroy - Building will be removed and have it's";
+                return "Decides what happens to a building when an monster army moves onto it.\nNothing - Nothing will happen and AI will ignore buildings\nCapture - Building will switch ownership\nDisable - Building will be disabled and unable to activate passive or active effects until an ally army starts the turn on it\nDestroy - Building will be removed and have its build cap returned to the original empire";
            case 68:
-                return "Determines how many consecutive turns an army needs to stay ontop of an enemy building to trigger the abore effect.\nThis is counted at the start of the building owner's turn.\n A value of 0 will trigger the effect immediately.";
+                return "Determines how many consecutive turns an army needs to stay on top of an enemy building to trigger the above effect.\nThis is counted at the start of the building owner's turn.\n A value of 0 will trigger the effect immediately.";
             default:
                 return "";
         }

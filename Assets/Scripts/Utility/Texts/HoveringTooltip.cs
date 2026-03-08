@@ -690,7 +690,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.MetamorphicConversion:
                 return "Unit changes Race and side upon digestion";
             case Traits.Perseverance:
-                return "Unit heals after not taking damage for a 3 turns, scaling higer with each turn without damage thereafter.";
+                return "Unit heals after not taking damage for a 3 turns, scaling higher with each turn without damage thereafter.";
             case Traits.ManaAttuned:
                 return "Unit thrives on mana, uses 10% of their max mana every turn. Unit falls asleep for 2 turns if they don't have enough mana, but regenerate 50% max mana every turn they are asleep.";
             case Traits.NightEye:
