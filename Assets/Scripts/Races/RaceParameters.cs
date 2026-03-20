@@ -146,6 +146,7 @@ static class RaceParameters
     static readonly RaceTraits FungalDryad;
     static readonly RaceTraits Cherub;
     static readonly RaceTraits Seraph;
+    static readonly RaceTraits SoulSprite;
 
     static Unit tempUnit;
 
@@ -455,6 +456,8 @@ static class RaceParameters
                 return Cherub;
             case Race.Seraph:
                 return Seraph;
+            case Race.SoulSprite:
+                return SoulSprite;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -3629,6 +3632,43 @@ static class RaceParameters
         },
             RaceDescription = "Utahraptors are much faster and more powerful thatn the usual raptors you see here and there.  More hungry too."
         };
+        
+
+        SoulSprite = new RaceTraits()
+        {
+            BodySize = 8,
+            StomachSize = 12,
+            FavoredStat = Stat.Mind,
+            HasTail = true,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
+            DeployCost = 1,
+            Upkeep = 3f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(4, 8),
+                Dexterity = new RaceStats.StatRange(4, 8),
+                Endurance = new RaceStats.StatRange(6, 8),
+                Mind = new RaceStats.StatRange(12, 16),
+                Will = new RaceStats.StatRange(10, 15),
+                Agility = new RaceStats.StatRange(6, 8),
+                Voracity = new RaceStats.StatRange(6, 10),
+                Stomach = new RaceStats.StatRange(8, 12),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.SlowMetabolism,
+                Traits.BoundWeapon,
+                Traits.Flight,
+                Traits.ManaDrain,
+                Traits.ManaRich,
+                Traits.ExtraNutritious,
+                Traits.Tasty,
+        },
+        InnateSpells = new List<SpellTypes>()
+            { SpellTypes.Meditate, },
+            RaceAI = RaceAI.ServantRace,
+            RaceDescription = "A relatively weak angelic being, created from the soul of a living creature purified by the higher-ranking angels. Soul Sprites act as the main workforce for the angels, and those who gain enough favor among their peers may ascend to higher ranks or even gain a chance to reincarnate to a new life... And it seems as of late, devouring their opponents on the battlefield is a lucrative means to gather favor.",
+        };
 
 
         Selicia = new RaceTraits()
@@ -4400,11 +4440,7 @@ static class RaceParameters
                 Traits.BookEater,
                 Traits.CreateSpawn,
         },
-        SpawnRace = Race.Whisp,
-            SpawnTraits = new List<Traits>()
-        {
-                Traits.Prey
-        },
+        SpawnRace = Race.SoulSprite,
         InnateSpells = new List<SpellTypes>()
             { SpellTypes.DivinitysEmbrace, SpellTypes.DivineNova, },
             RaceDescription = "The leader of the angelic beings that descended onto this world. Seraph has existed before recorded history and does not take lightly to troublemakers that disrupt the karmic balance of the world. Their arrival usually precedes a grand shift in the dynamics of a region, usually ending up with them leaving much fatter than they came.",

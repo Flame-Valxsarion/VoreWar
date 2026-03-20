@@ -118,6 +118,7 @@
     static internal SpaceCroach SpaceCroach = new SpaceCroach();
     static internal Trex Trex = new Trex();
     static internal Utahraptor Utahraptor = new Utahraptor();
+    static internal SoulSprite SoulSprite = new SoulSprite();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();
@@ -452,6 +453,8 @@
                 return Trex;
             case Race.Utahraptor:
                 return Utahraptor;
+            case Race.SoulSprite:
+                return SoulSprite;
             case Race.Cherub:
                 return Cherub;
             case Race.Seraph:

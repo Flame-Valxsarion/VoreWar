@@ -299,6 +299,7 @@ public class ItemRepository
             new Weapon(name:"Fungal Claw", description:"Sharp claws of a fungal dryad", cost:4, graphic:0, damage:4, range:1),
             new Weapon(name:"Rex Jaws", description:"Chomp!", cost:4, graphic:0, damage:15, range:1),
             new Weapon(name:"Utahraptor Claws", description:"Utahraptor Claws", cost:4, graphic:0, damage:6, range:1),
+            new Weapon(name:"Soul Spark", description:"Magical energy drawn from the soul, capable of being fired at range in relatively weak bursts.", cost:4, graphic:0, damage:5, range:5, omniWeapon:true, magicWeapon: true, lockedItem:true),
         };
 
         specialItems = new List<Item>()

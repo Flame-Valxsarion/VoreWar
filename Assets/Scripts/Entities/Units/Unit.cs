@@ -1010,7 +1010,7 @@ public class Unit
             }
             catch { }
         }
-        else if (race == Race.Cherub)
+        else if (race == Race.Cherub || race == Race.SoulSprite)
         {
             try
             {

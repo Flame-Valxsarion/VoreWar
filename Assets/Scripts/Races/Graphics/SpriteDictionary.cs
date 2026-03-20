@@ -400,6 +400,8 @@ public class SpriteDictionary : MonoBehaviour
 
     public Sprite[] Cake;
 
+    public Sprite[] SoulSprite;
+
 
     [Header("Other")]
     public Sprite[] Scat;

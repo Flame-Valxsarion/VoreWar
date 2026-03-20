@@ -122,6 +122,7 @@
     FungalDryad = 158,
     Trex = 159,
     Utahraptor = 160,
+    SoulSprite = 161,
 
     Selicia = 170,
     Vision = 171,
