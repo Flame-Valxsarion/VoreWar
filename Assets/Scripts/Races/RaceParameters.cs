@@ -3652,7 +3652,7 @@ static class RaceParameters
                 Will = new RaceStats.StatRange(10, 15),
                 Agility = new RaceStats.StatRange(6, 8),
                 Voracity = new RaceStats.StatRange(6, 10),
-                Stomach = new RaceStats.StatRange(8, 12),
+                Stomach = new RaceStats.StatRange(10, 16),
             },
             RacialTraits = new List<Traits>()
         {

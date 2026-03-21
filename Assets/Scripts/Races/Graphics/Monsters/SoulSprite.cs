@@ -6,20 +6,22 @@ class SoulSprite : BlankSlate
     readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.SoulSprite;
     internal SoulSprite()
     {
-        CanBeGender = new List<Gender>() { Gender.None };
-        Head = new SpriteExtraInfo(9, HeadSprite, WhiteColored);
+        SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.SoulSpriteSkin);
+        
+        CanBeGender = new List<Gender>() { Gender.None, Gender.Male, Gender.Female, Gender.Hermaphrodite };
+        Head = new SpriteExtraInfo(9, HeadSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor));
         HeadTypes = 6; // Facial Expressions
-        Body = new SpriteExtraInfo(8, BodySprite, WhiteColored);
-        BodyAccent = new SpriteExtraInfo(10, BodyAccentSprite, WhiteColored); // Halo
-        BodyAccent2 = new SpriteExtraInfo(1, BodyAccentSprite2, WhiteColored); // Ears
+        Body = new SpriteExtraInfo(8, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor));
+        BodyAccent = new SpriteExtraInfo(10, BodyAccentSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor)); // Halo
+        BodyAccent2 = new SpriteExtraInfo(1, BodyAccentSprite2, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor)); // Ears
         BodyAccentTypes1 = 2; // Halo
         BodyAccentTypes2 = 13; // Ears
-        Belly = new SpriteExtraInfo(9, null, WhiteColored);
-        Weapon = new SpriteExtraInfo(3, WeaponSprite, WhiteColored); // Arms in attack
-        SecondaryAccessory = new SpriteExtraInfo(11, SecondaryAccessorySprite, WhiteColored); // Arms resting
-        clothingColors = 0;
-        BodySize = new SpriteExtraInfo(7, BodySizeSprite, WhiteColored);
-        BodySizes = 6;        
+        Belly = new SpriteExtraInfo(9, null, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor));
+        Weapon = new SpriteExtraInfo(3, WeaponSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor)); // Arms in attack
+        SecondaryAccessory = new SpriteExtraInfo(11, SecondaryAccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor)); // Arms resting
+        BodySize = new SpriteExtraInfo(7, BodySizeSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SoulSpriteSkin, s.Unit.SkinColor));
+        BodySizes = 6;   
+
     }
 
     internal override void SetBaseOffsets(Actor_Unit actor) // Offset to give the floaty view
