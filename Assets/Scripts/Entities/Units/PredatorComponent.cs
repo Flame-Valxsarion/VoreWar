@@ -14,7 +14,7 @@ interface IVoreCallback
      */
     bool OnSwallow(Prey preyUnit, Actor_Unit predUnit, PreyLocation location);//any time prey is added (living or dead)
     bool OnRemove(Prey preyUnit, Actor_Unit predUnit, PreyLocation location);//any time prey is removed (living or dead)
-    bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location);//any time living prey is digested but won't die yet
+    bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey);//any time living prey is digested but won't die yet
     bool OnFinishDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location);//right before unit dies
     bool OnDigestionKill(Prey preyUnit, Actor_Unit predUnit, PreyLocation location);//right after unit dies
     bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey, int healingToPred);//any time a dead unit is being absorbed
@@ -25,7 +25,7 @@ interface IVoreRestrictions
 {
     /* Notes:
      * CheckVore needs to handle a null target
-     * Only specialVore types can be affected, disableing Vore overall will take more work
+     * Only specialVore types can be affected, disabling Vore overall will take more work
      */
     bool CheckVore(Actor_Unit actor, Actor_Unit target, PreyLocation location);
 }
@@ -1800,7 +1800,7 @@ public class PredatorComponent
         {
             foreach (IVoreCallback callback in Callbacks)
             {
-                if (!callback.OnDigestion(preyUnit, actor, location))
+                if (!callback.OnDigestion(preyUnit, actor, location, preyDamage))
                     return 0;
             }
             preyUnit.TurnsDigested++;
@@ -2502,7 +2502,6 @@ public class PredatorComponent
 
         WeightedList<VoreType> options = new WeightedList<VoreType>();
 
-        List<VoreType> voreTypes = new List<VoreType>();
         if (allowedVoreTypes.Contains(VoreType.Oral) && Config.OralWeight > 0)
             options.Add(VoreType.Oral, Config.OralWeight);
         if (allowedVoreTypes.Contains(VoreType.Unbirth) && CanUnbirth(target) && Config.UnbirthWeight > 0 && (actor.BodySize() >= target.BodySize() * 3 || !actor.Unit.HasTrait(Traits.TightNethers)))
@@ -2516,7 +2515,7 @@ public class PredatorComponent
         if (allowedVoreTypes.Contains(VoreType.Anal) && CanAnalVore(target) && Config.AnalWeight > 0)
             options.Add(VoreType.Anal, Config.AnalWeight);
 
-        var type = options.GetResult();
+        VoreType type = options.DrawResult();
 
         if (type == VoreType.All || type == VoreType.Oral)
             return Consume(target, Devour, PreyLocation.stomach);
@@ -4422,7 +4421,6 @@ public class PredatorComponent
 
         WeightedList<VoreType> options = new WeightedList<VoreType>();
 
-        List<VoreType> voreTypes = new List<VoreType>();
         if (allowedVoreTypes.Contains(VoreType.Oral) && Config.OralWeight > 0)
             options.Add(VoreType.Oral, Config.OralWeight);
         if (allowedVoreTypes.Contains(VoreType.Unbirth) && CanUnbirth(forcePrey) && Config.UnbirthWeight > 0 && (actor.BodySize() >= forcePrey.BodySize() * 3 || !actor.Unit.HasTrait(Traits.TightNethers)))
@@ -4436,7 +4434,7 @@ public class PredatorComponent
         if (allowedVoreTypes.Contains(VoreType.Anal) && CanAnalVore(forcePrey) && Config.AnalWeight > 0)
             options.Add(VoreType.Anal, Config.AnalWeight);
 
-        var type = options.GetResult();
+        VoreType type = options.DrawResult();
         PreyLocation loc = PreyLocation.stomach;
         switch (type)//Credits to Tatltuae for the additional lines. Coder's note: I would add Config.LewdDialog checks to these but seeing as the originals weren't exactly "platonic" I decided not to
         {

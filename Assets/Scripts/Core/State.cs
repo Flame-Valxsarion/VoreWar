@@ -1172,7 +1172,7 @@ public static class State
                     versionUpdateMessage += "Version 45: Changes to DefenseEncampments lost data for their available defenders. All DefenseEncampments have been assigned an arbitrary number of available defenders (half of their maxima).\n";
                 }
                 
-                // The Actor_Unit._position fix below will throw some exception for the tutorial. But the tutorial needs a fix anyway, so let's handle it.
+                // The tutorial needs a special fix for its Units (in addition to fixing their _position values, like in the else block below).
                 if (tutorial == true)
                 {
                     // One problem (introduced by Version 45) is the loss of position data, hereunder recreated manually.

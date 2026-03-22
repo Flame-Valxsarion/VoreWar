@@ -15,7 +15,7 @@ abstract class VoreTrait : Trait, IVoreCallback
 
     public virtual bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey, int healingToPred) => true;
 
-    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
+    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey) => true;
 
     public virtual bool OnDigestionKill(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
@@ -183,7 +183,7 @@ abstract class VoreTraitBooster : AbstractBooster, IVoreCallback
 
     public virtual bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey, int healingToPred) => true;
 
-    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
+    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey) => true;
 
     public virtual bool OnDigestionKill(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
@@ -565,7 +565,7 @@ internal class UnpleasantDigestion : VoreTrait
 
     public override bool IsPredTrait => false;
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey)
     {
         predUnit.Damage(1);
         return true;
@@ -580,7 +580,7 @@ internal class PleasantDigestion : VoreTrait
 
     public override bool IsPredTrait => false;
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey)
     {
         predUnit.Unit.Heal(1);
         return true;
@@ -598,7 +598,7 @@ internal class Whispers : VoreTrait, IProvidesSingleSpell
 
     public List<SpellTypes> GetSingleSpells(Unit unit) => new List<SpellTypes> { SpellList.Whispers.SpellType };
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey)
     {
         if(predUnit.Unit.FixedSide != preyUnit.Unit.FixedSide)
             preyUnit.Actor.CastStatusSpell(SpellList.Whispers, predUnit);
@@ -705,7 +705,7 @@ internal class Possession : VoreTraitBooster, INoAutoEscape
         return true;
     }
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, int damageToPrey)
     {
         predUnit.CheckPossession(preyUnit.Actor);
         return true;
