@@ -401,6 +401,7 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Cake;
 
     public Sprite[] SoulSprite;
+    public Sprite[] AngelProjectile;
 
 
     [Header("Other")]

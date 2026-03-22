@@ -25,6 +25,12 @@ static class TacticalGraphicalEffects
             PantherSetup(arrow, actor);
         if (actor.Unit.Race == Race.Bears)
             BearSetup(arrow, actor);
+        if (actor.Unit.Race == Race.Cherub)
+            CherubSetup(arrow, actor);
+        if (actor.Unit.Race == Race.Seraph)
+            SeraphSetup(arrow, actor);
+        if (actor.Unit.Race == Race.SoulSprite)
+            SoulSpriteSetup(arrow, actor);
         if (sprite != null) arrow.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
         if (material != null) arrow.GetComponentInChildren<SpriteRenderer>().material = material;
         arrow.Setup(actor.Position, target.Position, target);
@@ -87,6 +93,63 @@ static class TacticalGraphicalEffects
                 sprites[37],
             };
             anim.FrameTime = new float[] { .025f, .025f};
+        }
+
+    }
+    private static void CherubSetup(ArrowEffect obj, Actor_Unit actor)
+    {
+        Weapon weapon = actor.BestRanged;
+        {
+            var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
+            anim.Repeat = true;
+            Sprite[] sprites = State.GameManager.SpriteDictionary.AngelProjectile;
+            anim.Frame = new Sprite[]
+            {
+                sprites[0],
+                sprites[1],
+                sprites[2],
+                sprites[3],
+            };
+            anim.FrameTime = new float[] { .1f, .1f, .1f, .1f};
+        }
+
+    }
+    private static void SeraphSetup(ArrowEffect obj, Actor_Unit actor)
+    {
+        Weapon weapon = actor.BestRanged;
+        {
+            var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
+            anim.Repeat = true;
+            Sprite[] sprites = State.GameManager.SpriteDictionary.AngelProjectile;
+            anim.Frame = new Sprite[]
+            {
+                sprites[4],
+                sprites[5],
+                sprites[6],
+                sprites[7],
+            };
+            anim.FrameTime = new float[] { .1f, .1f, .1f, .1f};
+        }
+
+    }
+    private static void SoulSpriteSetup(ArrowEffect obj, Actor_Unit actor)
+    {
+        Weapon weapon = actor.BestRanged;
+        {
+            var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
+            anim.Repeat = true;
+            Sprite[] sprites = State.GameManager.SpriteDictionary.AngelProjectile;
+            anim.Frame = new Sprite[]
+            {
+                sprites[8],
+                sprites[9],
+                sprites[10],
+                sprites[11],
+                sprites[12],
+                sprites[13],
+                sprites[14],
+            };
+            anim.FrameTime = new float[] { .1f, .1f, .1f, .1f, .1f, .1f, .1f};
         }
 
     }
@@ -162,6 +225,12 @@ static class TacticalGraphicalEffects
             return State.GameManager.SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.Lupine && (weapon.Graphic == 4 || weapon.Graphic == 6))
             return State.GameManager.SpriteDictionary.Slimes[17];
+        else if (actor.Unit.Race == Race.Cherub)
+            return State.GameManager.SpriteDictionary.AngelProjectile[0];
+        else if (actor.Unit.Race == Race.Seraph)
+            return State.GameManager.SpriteDictionary.AngelProjectile[4];
+        else if (actor.Unit.Race == Race.Seraph)
+            return State.GameManager.SpriteDictionary.AngelProjectile[8];
         else if (actor.Unit.Race == Race.Bears)
         {
             if (weapon.Graphic == 4)

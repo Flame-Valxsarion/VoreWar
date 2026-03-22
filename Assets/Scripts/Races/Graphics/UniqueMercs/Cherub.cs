@@ -35,6 +35,8 @@ class Cherub : BlankSlate
         base.RandomCustom(unit);
         unit.Name = "Cherub";
         unit.BodySize = 0;
+        unit.BodyAccentType1 = 1;
+        unit.BodyAccentType2 = 1;
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)

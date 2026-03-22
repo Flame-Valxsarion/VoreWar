@@ -3657,17 +3657,16 @@ static class RaceParameters
             RacialTraits = new List<Traits>()
         {
                 Traits.SlowMetabolism,
-                Traits.BoundWeapon,
                 Traits.Flight,
-                Traits.ManaDrain,
                 Traits.ManaRich,
                 Traits.ExtraNutritious,
-                Traits.Tasty,
+                Traits.Charmer,
+                Traits.Temptation,
         },
         InnateSpells = new List<SpellTypes>()
-            { SpellTypes.Meditate, },
+            { SpellTypes.Trance, },
             RaceAI = RaceAI.ServantRace,
-            RaceDescription = "A relatively weak angelic being, created from the soul of a living creature purified by the higher-ranking angels. Soul Sprites act as the main workforce for the angels, and those who gain enough favor among their peers may ascend to higher ranks or even gain a chance to reincarnate to a new life... And it seems as of late, devouring their opponents on the battlefield is a lucrative means to gather favor.",
+            RaceDescription = "A relatively weak angelic being, created from the soul of a living creature purified by the higher-ranking angels. Soul Sprites act as the main workforce for the angels, and those who gain enough favor among their peers may ascend to higher ranks or even gain a chance to reincarnate to a new life... And it seems as of late, devouring their opponents on the battlefield is a lucrative means to gather said favor.",
         };
 
 
@@ -4402,6 +4401,7 @@ static class RaceParameters
                 Traits.ManaDrain,
                 Traits.ManaDynamo,
         },
+        SpawnRace = Race.SoulSprite,
         InnateSpells = new List<SpellTypes>()
             { SpellTypes.DivinitysEmbrace, SpellTypes.ForcePulse, },
             RaceAI = RaceAI.Hedonist,
