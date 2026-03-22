@@ -4437,7 +4437,6 @@ static class RaceParameters
                 Traits.ManaAttuned,
                 Traits.ManaBarrier,
                 Traits.Flight,
-                Traits.BookEater,
                 Traits.CreateSpawn,
         },
         SpawnRace = Race.SoulSprite,

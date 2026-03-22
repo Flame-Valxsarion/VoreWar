@@ -94,7 +94,8 @@ public enum StrategicDoodadType
     SpawnerSmudger = 1044,
     SpawnerSpaceCroach = 1045,
     SpawnerTrex = 1046,
-    SpawnerUtahraptor = 1047,
+    SpawnerUtahraptor = 1047,    
+    SpawnerSoulSprite = 1048,
 }
 
 public enum MovementType
