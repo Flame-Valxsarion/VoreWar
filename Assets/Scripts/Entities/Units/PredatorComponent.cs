@@ -2359,7 +2359,7 @@ public class PredatorComponent
         positions = positions.Where(pos => TacticalUtilities.FlyableTile(pos.x, pos.y)); // FlyableTile being a shorthand for "tile that is in bounds."
         while (positions.Any())
         {
-            positions = positions.Where(pos => TacticalUtilities.OpenTile(pos.x, pos.y, actor));
+            positions = positions.Where(pos => TacticalUtilities.OpenTile(pos.x, pos.y, prey));
             if (positions.Any())
             {
                 List<Vec2i> list = new List<Vec2i>(positions);
