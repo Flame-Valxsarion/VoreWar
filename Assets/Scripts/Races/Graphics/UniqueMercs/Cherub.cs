@@ -107,11 +107,11 @@ class Cherub : BlankSlate
     {
         if (actor.HasBelly == false)
             return null;
-        if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
-        {
-            if (actor.PredatorComponent.VisibleFullness > 3)
-                return State.GameManager.SpriteDictionary.Cherub[10];
-        }
+        /// if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
+        ///{
+        ///    if (actor.PredatorComponent.VisibleFullness > 3)
+        ///        return State.GameManager.SpriteDictionary.Cherub[10];
+        ///}
 
         return actor.HasBelly ? State.GameManager.SpriteDictionary.Cherub[18 + actor.GetStomachSize(7)] : null;
     }

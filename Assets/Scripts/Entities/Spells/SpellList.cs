@@ -1672,29 +1672,17 @@ static class SpellList
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(DivineNova, t);
-                float pulseDamage = 1.2f;
-                foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(t.Position, 2))
-                {
-                    TacticalUtilities.CheckSpellKnockBack(t.Position, a, splashTarget, ref pulseDamage);
-                    TacticalUtilities.SpellKnockBack(t.Position, a, splashTarget);
-                }
-                TacticalUtilities.CheckKnockBack(a, t, ref pulseDamage);
-                TacticalUtilities.KnockBack(a, t);
-                TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t);
+                TacticalGraphicalEffects.CreateDivineNova(t.Position);
                 State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
                 a.Unit.SpendMana(a.Unit.Mana);
             },
             OnExecuteTile = (a, l) =>
             {
                 a.CastOffensiveSpell(DivineNova, null, l);
-                float pulseDamage = 1.2f;
-                foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(l, 2))
-                {
-                    TacticalUtilities.CheckSpellKnockBack(l, a, splashTarget, ref pulseDamage);
-                    TacticalUtilities.SpellKnockBack(l, a, splashTarget);
-                }
-                TacticalGraphicalEffects.CreateGenericMagic(a.Position, l, null);
+                TacticalGraphicalEffects.CreateDivineNova(l);
                 State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
                 a.Unit.SpendMana(a.Unit.Mana);
             },
         };

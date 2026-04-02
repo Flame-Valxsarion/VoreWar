@@ -3645,9 +3645,9 @@ static class RaceParameters
             Upkeep = 3f,
             RaceStats = new RaceStats()
             {
-                Strength = new RaceStats.StatRange(4, 8),
+                Strength = new RaceStats.StatRange(2, 6),
                 Dexterity = new RaceStats.StatRange(4, 8),
-                Endurance = new RaceStats.StatRange(6, 8),
+                Endurance = new RaceStats.StatRange(4, 8),
                 Mind = new RaceStats.StatRange(12, 16),
                 Will = new RaceStats.StatRange(10, 15),
                 Agility = new RaceStats.StatRange(6, 8),

@@ -477,6 +477,14 @@ static class TacticalGraphicalEffects
 
     }
 
+    internal static void CreateDivineNova(Vec2 location)
+    {
+        if (State.GameManager.TacticalMode.turboMode)
+            return;
+        var prefab = State.GameManager.TacticalEffectPrefabList.DivineNovaBlast;
+        Object.Instantiate(prefab, new Vector3(location.x, location.y, 0), new Quaternion());
+    }
+
     internal static void CreateGenericMagic(Vec2i startLocation, Vec2i endLocation, Actor_Unit target, SpellEffectIcon icon = SpellEffectIcon.None)
     {
         if (State.GameManager.TacticalMode.turboMode)

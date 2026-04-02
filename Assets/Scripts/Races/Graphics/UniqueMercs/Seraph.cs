@@ -166,11 +166,11 @@ class Seraph : BlankSlate
     {
         if (actor.HasBelly == false)
             return null;
-        if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
-        {
-            if (actor.PredatorComponent.VisibleFullness > 3)
-                return State.GameManager.SpriteDictionary.Seraph[10];
-        }
+        ///if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
+        ///{
+        ///    if (actor.PredatorComponent.VisibleFullness > 3)
+        ///        return State.GameManager.SpriteDictionary.Seraph[10];
+        ///}
 
         return actor.HasBelly ? State.GameManager.SpriteDictionary.Seraph[18 + actor.GetStomachSize(13)] : null;
     }
