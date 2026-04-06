@@ -100,4 +100,5 @@ public class PaletteDictionary : MonoBehaviour
     public Texture2D IliijiithIdleColor;
     public Texture2D IliijiithAttackColor;
     public Texture2D BadgersSkin;
+    public Texture2D RenamonSkin;
 }

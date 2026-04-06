@@ -7,7 +7,7 @@ public class NPC_unit : Unit
             GenMelee(level - 1, advancedWeapons);
         else if (race >= Race.Vagrants)
             GenMonster(level - 1);
-        else if (FixedGear || race == Race.Succubi)
+        else if (FixedGear || race == Race.Succubi || race == Race.Renamon)
             StrategicUtilities.CheatForceLevelUps(this, level - 1);
         else
         {

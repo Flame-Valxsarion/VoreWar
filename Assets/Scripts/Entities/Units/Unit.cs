@@ -1023,6 +1023,11 @@ public class Unit
             FixedGear = true;
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RyanWeapon);
         }
+        else if (race == Race.Renamon)
+        {
+            FixedGear = false;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RenamonWeapon);
+        }
         else
         {
             FixedGear = false;

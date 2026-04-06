@@ -294,6 +294,16 @@ static class TacticalGraphicalEffects
 
     }
 
+    internal static void CreateDiamondStorm(Vec2i startLocation, Vec2i endLocation, Actor_Unit target)
+    {
+        if (State.GameManager.TacticalMode.turboMode)
+            return;
+        var prefab = State.GameManager.TacticalEffectPrefabList.DiamondStorm;
+        var effect = Object.Instantiate(prefab, new Vector3(startLocation.x, startLocation.y, 0), new Quaternion()).GetComponent<ArrowEffect>();
+        effect.Setup(startLocation, endLocation, target, null, null);
+
+    }
+
     internal static void CreateCrossShock(Vec2 location)
     {
         if (State.GameManager.TacticalMode.turboMode)

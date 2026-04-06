@@ -65,6 +65,7 @@
     //Corrupt = 78,
     ExplosiveHug = 79,
     DimensionShift = 80,
+    DiamondStorm = 81,
 
     ViperDamage = 110,
     ForceFeed = 111,

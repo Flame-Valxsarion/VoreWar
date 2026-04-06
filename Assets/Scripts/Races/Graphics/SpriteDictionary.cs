@@ -219,6 +219,11 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] RwuMercenaries7;
     public Sprite[] RwuMercenaries8a;
     public Sprite[] RwuMercenaries8b;
+    public Sprite[] RenamonBodies;
+    public Sprite[] RenamonClothes1;
+    public Sprite[] RenamonClothes2;
+    public Sprite[] RenamonClothes3;
+    public Sprite[] RenamonVore;
     public Sprite[] BadgersBodies;
     public Sprite[] BadgersClothes;
     public Sprite[] BadgersVoreBlack;

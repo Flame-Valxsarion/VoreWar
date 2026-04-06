@@ -61,6 +61,7 @@
     Eevee = 66,
     Equaleon = 67,
     Badgers = 68,
+    Renamon = 69, //Nice~
 
     Vagrants = 100,
     Serpents = 101,

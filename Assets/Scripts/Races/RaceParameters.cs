@@ -143,6 +143,7 @@ static class RaceParameters
     static readonly RaceTraits Trex;
     static readonly RaceTraits Utahraptor;
     static readonly RaceTraits Badgers;
+    static readonly RaceTraits Renamon;
     static readonly RaceTraits Ghosts;
     static readonly RaceTraits WoodDryad;
     static readonly RaceTraits EarthDryad;
@@ -461,6 +462,8 @@ static class RaceParameters
                 return Utahraptor;
             case Race.Badgers:
                 return Badgers;
+            case Race.Renamon:
+                return Renamon;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -1711,7 +1714,7 @@ static class RaceParameters
             CanUseRangedWeapons = false,
             PowerAdjustment = 1.4f,
             DeployCost = 1,
-            Upkeep = 7f,
+            Upkeep = 8f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(16, 24),
@@ -1731,6 +1734,37 @@ static class RaceParameters
                 Traits.Resilient,
             },
             RaceDescription = "Created by taking wild, feral badgers and infusing them various types of blood, the Badgers were originally made by a consortium of wizards to serve as their personal bodyguards. However, said consortium were rather unpleasant, and it was not long before they ended up as naught but badger padding. Ever since, the badgers have lived as fighters-for-hire, renowned among the civilized peoples of the realm for their battle prowess and resilience against even the toughest of foes. However, they are still just regular badgers at heart, often having quite the temper, and they aren't always the cleverest. But still, a valuable ally to have in battle.",
+        };
+
+        Renamon = new RaceTraits()
+        {
+            BodySize = 15,
+            StomachSize = 17,
+            HasTail = true,
+            FavoredStat = Stat.Mind,
+            CanUseRangedWeapons = false,
+            PowerAdjustment = 1.4f,
+            DeployCost = 1,
+            Upkeep = 7f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(14, 18),
+                Dexterity = new RaceStats.StatRange(8, 14),
+                Endurance = new RaceStats.StatRange(9, 15),
+                Mind = new RaceStats.StatRange(14, 22),
+                Will = new RaceStats.StatRange(9, 16),
+                Agility = new RaceStats.StatRange(10, 16),
+                Voracity = new RaceStats.StatRange(8, 14),
+                Stomach = new RaceStats.StatRange(12, 16),
+            },
+            RacialTraits = new List<Traits>()
+            {
+                Traits.StrongMelee,
+                Traits.ForcefulBlow,
+                Traits.SpellBlade,
+            },
+            InnateSpells = new List<SpellTypes>() { SpellTypes.DiamondStorm },
+            RaceDescription = "Powerful digital creatures from another world that have torn their way into this realm with their power of code seeking to get stronger.",
         };
 
         Vagrants = new RaceTraits()
