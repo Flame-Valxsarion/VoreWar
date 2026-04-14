@@ -1003,13 +1003,13 @@ public class Unit
             FixedGear = false;
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.TatltuaeWeapon);
         }
-        else if (race == Race.Firefly)
+        else if (race == Race.Seville)
         {
             try
             {
                 FixedGear = true;
-                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.FireflyMelee);
-                Items[1] = State.World.ItemRepository.GetSpecialItem(SpecialItems.FireflyRange);
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SevilleMelee);
+                Items[1] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SevilleArmor);
             }
             catch { }
         }

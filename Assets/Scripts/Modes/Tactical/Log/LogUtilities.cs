@@ -619,8 +619,8 @@ static class LogUtilities
                 return GetRandomStringFrom("elf", GetGenderString(unit, "woman", "man", "elf"), "humanoid");
             case Race.Tatltuae:
                 return GetRandomStringFrom("cartograher", "raven", "chaos mage", "corvid", State.Rand.Next(42) == 1 ? "bird" : "birb");
-            case Race.Firefly:
-                return GetRandomStringFrom("umbreon", "mon", "pilot", "merc", "mercenary");
+            case Race.Seville:
+                return GetRandomStringFrom("grand serpent", "snake", "mistress");
             case Race.Terrorbird:
                 return GetRandomStringFrom("bird", "long-necked avian", "flightless bird", "anger bird");
             case Race.Iliijiith:

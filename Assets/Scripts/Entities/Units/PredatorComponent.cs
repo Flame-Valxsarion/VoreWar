@@ -2804,9 +2804,9 @@ public class PredatorComponent
                 }
                 if (!State.GameManager.TacticalMode.turboMode)
                 {
-                    if (preyType == PreyLocation.stomach && actor.Unit.Race == Race.Ryan)
+                    if (preyType == PreyLocation.stomach && (actor.Unit.Race == Race.Ryan || actor.Unit.Race == Race.Seville))
                         actor.SetVoreSuccessMode();
-                    if (actor.Unit.Race != Race.Ryan)
+                    if (actor.Unit.Race != Race.Ryan && actor.Unit.Race != Race.Seville)
                         actor.SetVoreSuccessMode();
                 }
                 if (unit.HasTrait(Traits.Tenacious))
@@ -4543,9 +4543,9 @@ public class PredatorComponent
         }
         AddPrey(preyref);
         actor.SetPredMode(preyLocation);
-        if (preyLocation == PreyLocation.stomach && actor.Unit.Race == Race.Ryan)
+        if (preyLocation == PreyLocation.stomach && (actor.Unit.Race == Race.Ryan || actor.Unit.Race == Race.Seville))
             actor.SetVoreSuccessMode();
-        if (actor.Unit.Race != Race.Ryan)
+        if (actor.Unit.Race != Race.Ryan && actor.Unit.Race != Race.Seville)
             actor.SetVoreSuccessMode();
         UpdateFullness();
     }
@@ -4963,9 +4963,9 @@ public class PredatorComponent
         }
         AddPrey(preyref);
         actor.SetPredMode(loc);
-        if (loc == PreyLocation.stomach && actor.Unit.Race == Race.Ryan)
+        if (loc == PreyLocation.stomach && (actor.Unit.Race == Race.Ryan || actor.Unit.Race == Race.Seville))
             actor.SetVoreSuccessMode();
-        if (actor.Unit.Race != Race.Ryan)
+        if (actor.Unit.Race != Race.Ryan && actor.Unit.Race != Race.Seville)
             actor.SetVoreSuccessMode();
         UpdateFullness();
     }

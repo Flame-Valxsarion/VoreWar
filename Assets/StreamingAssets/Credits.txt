@@ -166,9 +166,6 @@ Scat sprites
 Whisp
 Youko
 
-<b><u>Liongaming1:</b></u>
-Firefly
-
 <b><u>Magentasaur:</b></u>
 D.R.A.C.O.
 Scorch
@@ -214,6 +211,7 @@ Vargul
 Vipers
 Badgers
 Ryan
+Renamon
 
 <b><u>Novoyetelo:</b></u>
 Abakhanskya
@@ -260,6 +258,7 @@ Sword alt sprites for maces on "default races"
 <b><u>Yonell:</b></u>
 Bears
 Viisels
+Seville
 
 
 [Old Graphics (now removed, but they helped guide the early stages, and were inspirations for their replacements):
@@ -327,8 +326,8 @@ Ryan
 <b><u>Zezmeril:</b></u>
 Skapa
 
-<b><u>Liongaming1:</b></u>
-Firefly
+<b><u>Yonell:</b></u>
+Seville
 
 <b><u>GAME FREAK/Creatures Inc./Nintendo:</b></u>
 Goodra

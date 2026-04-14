@@ -1784,13 +1784,13 @@ public class Actor_Unit
         {
             if ((targetRange >= 2 || (targetRange >= 1 && weapon.Omni)) && targetRange <= weapon.Range)
             {
+                animationUpdateTime = 1.0F;
                 if (Unit.Race == Race.Succubi)
                     TacticalGraphicalEffects.SuccubusSwordEffect(target.Position);
                 if (Unit.Race == Race.Tatltuae)
                     TacticalGraphicalEffects.EntropicChaosEffect(target.Position);
-                animationUpdateTime = 1.0F;
-                if (Unit.Race == Race.Firefly)//Use to specify races that can use differint attacks with the same weapon depending on range
-                    Mode = DisplayMode.RangeAttacking;
+                //if (Unit.Race == Race.Tigers)//Use to specify races that can use differint attacks with the same weapon depending on range (Currently unused)
+                //    Mode = DisplayMode.RangeAttacking;
                 else
                     Mode = DisplayMode.Attacking;
 
@@ -1881,8 +1881,10 @@ public class Actor_Unit
             if (targetRange < 2)
             {
                 animationUpdateTime = 1.0F;
-                if (Unit.Race == Race.Firefly)//Use to specify races that can use differint attacks with the same weapon depending on range
-                    Mode = DisplayMode.MeleeAttacking;
+                if (Unit.Race == Race.Seville)
+                    TacticalGraphicalEffects.VenomBiteEffect(target.Position);
+                //if (Unit.Race == Race.Tigers)//Use to specify races that can use differint attacks with the same weapon depending on range (Currently unused)
+                //    Mode = DisplayMode.MeleeAttacking;
                 else
                     Mode = DisplayMode.Attacking;
                 int meleeAttacks = Unit.TraitBoosts.MeleeAttacks;

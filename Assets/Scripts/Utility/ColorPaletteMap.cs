@@ -121,7 +121,6 @@ public static class ColorPaletteMap
         LupineSkin,
         LupineReversed,
         JackalSkin,
-        FireflyColor,
         SmudgerSkin,
         SpaceCroachSkin,
         RaijuSkin,
@@ -286,7 +285,6 @@ public static class ColorPaletteMap
         List<ColorSwapPalette> LupineSkinSwaps = WireUp(SwapType.LupineSkin);
         List<ColorSwapPalette> LupineReverseSwaps = WireUp(SwapType.LupineReversed);
         List<ColorSwapPalette> JackalSkinSwaps = WireUp(SwapType.JackalSkin);
-        List<ColorSwapPalette> FireflyColorSwaps = WireUp(SwapType.FireflyColor);
         List<ColorSwapPalette> DryadTrunkSwaps = WireUp(SwapType.DryadTrunk);
         List<ColorSwapPalette> DryadLeavesSwaps = WireUp(SwapType.DryadLeaves);
         List<ColorSwapPalette> DryadMudSwaps = WireUp(SwapType.DryadMud);
@@ -2027,22 +2025,6 @@ public static class ColorPaletteMap
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             JackalSkinSwaps.Add(swap);
-        }
-
-        map = State.GameManager.PaletteDictionary.FireflyColor;
-        for (int pixelY = 0; pixelY < map.height; pixelY++)
-        {
-            Dictionary<int, Color> swapDict = new Dictionary<int, Color>
-            {
-                [95] = map.GetPixel(5, pixelY),
-                [119] = map.GetPixel(4, pixelY),
-                [141] = map.GetPixel(3, pixelY),
-                [167] = map.GetPixel(2, pixelY),
-                [213] = map.GetPixel(1, pixelY),
-                [245] = map.GetPixel(0, pixelY),
-            };
-            ColorSwapPalette swap = new ColorSwapPalette(swapDict);
-            FireflyColorSwaps.Add(swap);
         }
 
         map = State.GameManager.PaletteDictionary.DryadTrunk;

@@ -174,7 +174,7 @@ class Ryan : BlankSlate // Sprite by Micadi Character by Legoshi
 
     protected override Sprite BodyAccentSprite8(Actor_Unit actor)
     {
-        if (actor.HasJustVored) // Handled uniquely for this unit to only work with ral vore successes check "actor.SetVoreSuccessMode();" in PredatorComponent.cs
+        if (actor.HasJustVored) // Handled uniquely for this unit to only work with oral vore successes. Check "actor.SetVoreSuccessMode();" in PredatorComponent.cs
             return Sprites1[72];
         else
             return null;

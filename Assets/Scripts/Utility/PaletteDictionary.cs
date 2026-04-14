@@ -92,7 +92,6 @@ public class PaletteDictionary : MonoBehaviour
     public Texture2D EqualeonEyes;
     public Texture2D PlantSkin;
     public Texture2D ViiselSkin;
-    public Texture2D FireflyColor;
     public Texture2D SmudgerSkin;
     public Texture2D SpaceCroachSkin;
     public Texture2D RaijuSkin;
