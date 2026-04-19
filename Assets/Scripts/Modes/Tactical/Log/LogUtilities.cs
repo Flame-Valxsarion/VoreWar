@@ -620,7 +620,7 @@ static class LogUtilities
             case Race.Tatltuae:
                 return GetRandomStringFrom("cartograher", "raven", "chaos mage", "corvid", State.Rand.Next(42) == 1 ? "bird" : "birb");
             case Race.Seville:
-                return GetRandomStringFrom("grand serpent", "snake", "mistress");
+                return GetRandomStringFrom("grand serpent", "witch", "mistress");
             case Race.Terrorbird:
                 return GetRandomStringFrom("bird", "long-necked avian", "flightless bird", "anger bird");
             case Race.Iliijiith:

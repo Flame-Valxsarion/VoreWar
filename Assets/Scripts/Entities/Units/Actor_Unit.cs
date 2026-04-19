@@ -308,6 +308,8 @@ public class Actor_Unit
             Unit.ApplyStatusEffect(StatusEffectType.Respawns, 1, 1);
         if (Unit.HasTrait(Traits.RespawnerIII) && (State.GameManager.TacticalMode.currentTurn == 1) && State.GameManager.TacticalMode.attackersTurnCheck == true)
             Unit.ApplyStatusEffect(StatusEffectType.Respawns, 3, 3);
+        if (Unit.Race == Race.Seville && !State.GameManager.TacticalMode.turboMode && TacticalUtilities.IsUnitControlledByPlayer(Unit) && (State.GameManager.TacticalMode.currentTurn == 1) && State.GameManager.TacticalMode.attackersTurnCheck == true && State.Rand.Next(20) == 1)
+            MiscUtilities.DelayedInvoke(() => State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Looking upon the battlefield before her, {LogUtilities.GetRandomStringFrom($"<b>{Unit.Name}</b>", $"the {LogUtilities.GetRaceDescSingl(Unit)}")} {LogUtilities.GetRandomStringFrom("smiles", "laughs", "grins")} {LogUtilities.GetRandomStringFrom("devilishly", "mischievously", "maliciously", "wickedly", "naughtily")}. \"Well, you\'ve got my attention. Now let me reward your curiosssity...\""), .2f); //Delayed to let the game fully load before executing
         int sizePenalty = (int)(PredatorComponent?.Fullness ?? 0);
         sizePenalty = (int)(sizePenalty * Unit.TraitBoosts.SpeedLossFromWeightMultiplier);
         int bonus = 0;

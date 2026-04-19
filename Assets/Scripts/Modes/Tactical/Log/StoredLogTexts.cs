@@ -330,6 +330,21 @@ static class StoredLogTexts
             new EventString((i) => $"<b>{i.Unit.Name}</b> {GetRandomStringFrom("swallows", "gulps down", "vores", "devours")} <b>{i.Target.Name}</b> and says \"I hope you enjoy your stay in there because I know I will!\" as she resumes panting adorably.",
             actorRace: Race.Xelhilde, priority: 9, conditional: s => TargetHumanoid(s) && !s.Target.IsDead),
             
+            //Seville
+            new EventString((i) => $"As <b>{i.Target.Name}</b> is {GetRandomStringFrom("eaten", "devoured", "swallowed", "wolfed")} whole by <b>{i.Unit.Name}</b>, the {GetRaceDescSingl(i.Unit)} {GetRandomStringFrom("snidely", "pompously", "smugly", "casually")} remarks, \"I've ssswallowed bigger.\"",
+            actorRace: Race.Seville, priority: 9, conditional: s => InStomach(s)),
+            new EventString((i) => $"Leering over <b>{i.Target.Name}</b>, <b>{i.Unit.Name}</b> licks {GPPHis(i.Unit)} lips, \"You're a sssmall one, but you sssmell divine!\" Not a moment later the {GetRaceDescSingl(i.Target)} is removed from the battlefield as {GPPHe(i.Target)} {IsAre(i.Target)} swallowed by the {GetRaceDescSingl(i.Unit)}.",
+            actorRace: Race.Seville, priority: 9, conditional: s => SizeDiff(s, 3) && InStomach(s)),
+            new EventString((i) => $"\"It isss a great honor to be devoured by a sssserpent of my sssstature. Consider yourssself lucky.\" <b>{i.Unit.Name}</b> says as {GPPHe(i.Unit)} wastes no time in swallowing <b>{i.Target.Name}</b> into {GPPHis(i.Unit)} {GetRandomStringFrom("hungry", "ravenous", "greedy")} {PreyLocStrings.ToSyn(i.preyLocation)}",
+            actorRace: Race.Seville, priority: 9, conditional: s => InStomach(s)),
+            new EventString((i) => $"As <b>{i.Target.Name}</b> vanishes into <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}, the {GetRaceDescSingl(i.Unit)} lets out a {GetRandomStringFrom("pleased", "satisfied", "lewd")} moan \"Unfff... you are sssstretching me out in the BESSST of waysss!\"",
+            actorRace: Race.Seville, priority: 9, conditional: s => !SizeDiff(s, 3)),
+            new EventString((i) => $"<b>{i.Target.Name}</b> attempts to break free of <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> grip, but it's too late as {GPPHe(i.Unit)} puts the {GetRaceDescSingl(i.Target)} into {GPPHis(i.Unit)} {PreyLocStrings.ToSyn(i.preyLocation)}. \"Better get comfortable, you're going to be in there for longer than you think~\"",
+            actorRace: Race.Seville, priority: 9),
+            new EventString((i) => $"\"No need to resissst. Let me do all the work. Jusssst relax...\" The {ApostrophizeWithOrWithoutS(GetRaceDescSingl(i.Unit))} words are the last thing <b>{i.Target.Name}</b> hears before {GPPHeIsAbbr(i.Target)} put in <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}.",
+            actorRace: Race.Seville, priority: 9),
+            
+
             //Alligators
             new EventString((i) => $"<b>{i.Unit.Name}</b> lumbers towards <b>{i.Target.Name}</b>, taking no heed of the {GetRaceDescSingl(i.Target)}'s attempt to ward {GPPHim(i.Unit)} off and {PreyLocStrings.GetOralVoreVPCT()} {GPPHis(i.Unit)} {GetPreyDesc(i.Target)} prey with gusto!",
             actorRace: Race.Alligators, priority: 9),
@@ -3089,6 +3104,13 @@ static class StoredLogTexts
             new EventString((i) =>$"After <b>{i.Target.Name}</b> jumped into <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> slit, {GPPHe(i.Target)} notice{SIfSingular(i.Target)} that {GPPHeIsAbbr(i.Target)} in <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> bladder. <b>{i.Unit.Name}</b> says simply \"would've ended up in my womb if you'd just gone slow.\"", priority: 10, conditional: (s) => Friendly(s) && Endo(s) && ActorHumanoid(s) && s.Unit.HasVagina),
             new EventString((i) =>$"<b>{i.Unit.Name}</b> offers to let <b>{i.Target.Name}</b> in {GPPHis(i.Target)} womb, and <b>{i.Target.Name}</b> accepts. Once <b>{i.Target.Name}</b> is fully inside, <b>{i.Unit.Name}</b> says \"Uh, you know that wasn't the hole to the womb, right?\"", priority: 10, conditional: (s) => Friendly(s) && Endo(s) && ActorHumanoid(s) && s.Unit.HasVagina),
             new EventString((i) =>$"<b>{i.Target.Name}</b> asks to go into <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> slit, to which <b>{i.Unit.Name}</b> says sure. As <b>{i.Target.Name}</b> enters the {ApostrophizeWithOrWithoutS(GetRaceDescSingl(i.Unit))} bladder, <b>{i.Unit.Name}</b> laughs and says \"you didn't say where you wanted to end up!\"", priority: 10, conditional: (s) => Friendly(s) && Endo(s) && ActorHumanoid(s) && s.Unit.HasVagina),
+            //Seville
+            new EventString((i) => $"As <b>{i.Target.Name}</b> vanishes into <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}, the {GetRaceDescSingl(i.Unit)} lets out a {GetRandomStringFrom("pleased", "satisfied", "lewd")} moan \"Unfff... you are sssstretching me out in the BESSST of waysss!\"",
+            actorRace: Race.Seville, priority: 9, conditional: s => !SizeDiff(s, 3)),
+            new EventString((i) => $"<b>{i.Target.Name}</b> attempts to break free of <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> grip, but it's too late as {GPPHe(i.Unit)} puts the {GetRaceDescSingl(i.Target)} into {GPPHis(i.Unit)} {PreyLocStrings.ToSyn(i.preyLocation)}. \"Better get comfortable, you're going to be in there for longer than you think~\"",
+            actorRace: Race.Seville, priority: 9),
+            new EventString((i) => $"\"No need to resissst. Let me do all the work. Jusssst relax...\" The {ApostrophizeWithOrWithoutS(GetRaceDescSingl(i.Unit))} words are the last thing <b>{i.Target.Name}</b> hears before {GPPHeIsAbbr(i.Target)} put in <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}.",
+            actorRace: Race.Seville, priority: 9),
         };
 
         CockVoreMessages = new List<EventString>()
@@ -3288,6 +3310,13 @@ static class StoredLogTexts
             actorRace: Race.Abakhanskya, priority: 11),
             new EventString((i) => $"<b>{i.Target.Name}</b> squirms and screams for help from their soldiers as <b>{i.Unit.Name}</b> engulfs them whole, disappearing up her {GetRandomStringFrom("ass", "asshole", "tailhole", "butt", "butthole", "rear entrance", "backdoor")}.",
             actorRace: Race.Abakhanskya, priority: 11),
+            //Seville
+            new EventString((i) => $"As <b>{i.Target.Name}</b> vanishes into <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}, the {GetRaceDescSingl(i.Unit)} lets out a {GetRandomStringFrom("pleased", "satisfied", "lewd")} moan \"Unfff... you are sssstretching me out in the BESSST of waysss!\"",
+            actorRace: Race.Seville, priority: 9, conditional: s => !SizeDiff(s, 3)),
+            new EventString((i) => $"<b>{i.Target.Name}</b> attempts to break free of <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> grip, but it's too late as {GPPHe(i.Unit)} puts the {GetRaceDescSingl(i.Target)} into {GPPHis(i.Unit)} {PreyLocStrings.ToSyn(i.preyLocation)}. \"Better get comfortable, you're going to be in there for longer than you think~\"",
+            actorRace: Race.Seville, priority: 9),
+            new EventString((i) => $"\"No need to resissst. Let me do all the work. Jusssst relax...\" The {ApostrophizeWithOrWithoutS(GetRaceDescSingl(i.Unit))} words are the last thing <b>{i.Target.Name}</b> hears before {GPPHeIsAbbr(i.Target)} put in <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}.",
+            actorRace: Race.Seville, priority: 9),
             //FeralEevee AV
             new EventString((i) => $"After a quick playful wrestle, <b>{i.Unit.Name}</b> sits proudly atop <b>{ApostrophizeWithOrWithoutS(i.Target.Name)}</b> head. Then {GPPHe(i.Target)} slip{SIfSingular(i.Target)}, and in a matter of moments, only <b>{ApostrophizeWithOrWithoutS(i.Target.Name)}</b> tail remains in the light, sticking out of an Eevee's anus.",
             actorRace: Race.FeralEevee, priority: 11, conditional: s => TargetHumanoid(s) && (s.Target.Race == Race.Lamia) || (s.Target.Race == Race.Vipers)),
@@ -3333,6 +3362,13 @@ static class StoredLogTexts
             new EventString((i) => $"After having sensed she had gained the advantage, <b>{i.Unit.Name}</b> seals <b>{i.Target.Name}</b> away lewdly, taking {GPPHim(i.Target)} in head first into her womb, gasping in delight as {GPPHe(i.Target)} passed through her slit.", actorRace: Race.Cierihaka, priority: 10),
             new EventString((i) => $"<b>{i.Unit.Name}</b> stands perfectly still for a moment, menacingly overlooking her fearful prey. Quickly feigning an incoming swallow, she instead rotates to show her rump and sits down upon <b>{i.Target.Name}</b>, causing {GPPHim(i.Target)} to pass straight in to her womb.", actorRace: Race.Cierihaka, priority: 10),
             
+            //Seville
+            new EventString((i) => $"As <b>{i.Target.Name}</b> vanishes into <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}, the {GetRaceDescSingl(i.Unit)} lets out a {GetRandomStringFrom("pleased", "satisfied", "lewd")} moan \"Unfff... you are sssstretching me out in the BESSST of waysss!\"",
+            actorRace: Race.Seville, priority: 9, conditional: s => !SizeDiff(s, 3)),
+            new EventString((i) => $"<b>{i.Target.Name}</b> attempts to break free of <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> grip, but it's too late as {GPPHe(i.Unit)} puts the {GetRaceDescSingl(i.Target)} into {GPPHis(i.Unit)} {PreyLocStrings.ToSyn(i.preyLocation)}. \"Better get comfortable, you're going to be in there for longer than you think~\"",
+            actorRace: Race.Seville, priority: 9),
+            new EventString((i) => $"\"No need to resissst. Let me do all the work. Jusssst relax...\" The {ApostrophizeWithOrWithoutS(GetRaceDescSingl(i.Unit))} words are the last thing <b>{i.Target.Name}</b> hears before {GPPHeIsAbbr(i.Target)} put in <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}.",
+            actorRace: Race.Seville, priority: 9),
             //Slime Pred
             new EventString((i) => $"<b>{i.Unit.Name}</b> launches {GPPHimself(i.Unit)} at <b>{i.Target.Name}</b>, engulfing {GPPHim(i.Target)} in {GPPHis(i.Unit)} womb!", actorRace: Race.Slimes, priority: 10),
             new EventString((i) => $"<b>{i.Unit.Name}</b> cascades over <b>{ApostrophizeWithOrWithoutS(i.Target.Name)}</b> body, sucking {GPPHim(i.Target)} into {GPPHis(i.Unit)} womb!", actorRace: Race.Slimes, priority: 10),
@@ -3920,6 +3956,9 @@ static class StoredLogTexts
             targetRace: Race.Feit, actorRace: Race.Cierihaka, priority: 11, conditional: CanBurp),
             new EventString((i) => $"<b>{i.Unit.Name}</b> can't help but let out a heavy <i>*BWUUOOOAARP!*</i> as <b>{i.Target.Name}</b> is finally {PreyLocStrings.DigestedVerbSyn()}... The {GetRaceDescSingl(i.Target)} put in all that work only to end up as {i.preyLocation.ToFluid()}!",
             targetRace: Race.Feit, actorRace: Race.Cierihaka, priority: 11, conditional: CanBurp),
+            //Seville
+            new EventString((i) => $"\"Will you be enough to sssatisfy me {GetRaceDescSingl(i.Target)}? Well, there'sss only one way to find out.\" With one final constriction, <b>{ApostrophizeWithOrWithoutS(i.Target.Name)}</b> fate is swiftly sealed as {GPPHe(i.Target)} {IsAre(i.Target)} claimed by <b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> {PreyLocStrings.ToSyn(i.preyLocation)}.",
+            actorRace: Race.Seville, priority: 9),
 
             //Orcas
             new EventString((i) => $"<b>{ApostrophizeWithOrWithoutS(i.Unit.Name)}</b> smooth {PreyLocStrings.ToSyn(PreyLocation.stomach)} growls menacingly as <b>{i.Target.Name}</b> is firmly squelched into their final stomach, ready to be made into blubber and a load of {GetRaceDescSingl(i.Target)} {PreyLocStrings.ScatSyn()}.",

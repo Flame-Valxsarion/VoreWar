@@ -4434,7 +4434,7 @@ static class RaceParameters
             Traits.StrongGullet,
             Traits.Toxic,
         },
-            RaceDescription = "A grand serpent who's power is great and hunger equal in magnitude",
+            RaceDescription = "The turmoil of wars have stirred many lingering threats from slumber or stillness, former allies turn foes and neutral forces turn voracious and violent. Under the shade of stones unturned rises a rumour shared in hisses and secrecy among snakes and lamias. From the mud of swamps wafts a poison queerly potent choking all life in its creeping embrace. \n\n A great witch has chosen to divest from her most passive schemes and mischief to take part in your conflict, whether with or against you to means undisclosed. Her slithers shall be met with fear and rapacity until she is slain or the battlefields of the land lay quiet and her endless gut cacophonous with churning death.",
         };
 
         Nectar = new RaceTraits()
