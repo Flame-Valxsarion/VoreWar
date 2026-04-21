@@ -1516,7 +1516,7 @@ public class PredatorComponent
         if (unit.HasTrait(Traits.Annihilation) && !TacticalUtilities.IsPreyEndoTargetForUnit(preyUnit, unit))
         {
             int prevLevelExp = preyUnit.Unit.GetExperienceRequiredForLevel(preyUnit.Unit.Level - 2);
-            if (preyUnit.Unit.Level == 1 && preyUnit.Unit.Race != Race.Erin && preyUnit.Unit.Race != Race.Olivia)
+            if (preyUnit.Unit.Level == 1 && preyUnit.Unit.Race != Race.Erin)
             {
                 preyUnit.Unit.SetLevel(0);
                 preyUnit.Unit.SetStatBaseAll(1);

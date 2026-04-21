@@ -4344,8 +4344,8 @@ static class RaceParameters
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.Unbirth, VoreType.CockVore, VoreType.BreastVore },
             ExpMultiplier = 1.4f,
             PowerAdjustment = 2f,
-            DeployCost = 1,
-            Upkeep = 9f,
+            DeployCost = 2,
+            Upkeep = 32f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 12),
@@ -4363,11 +4363,14 @@ static class RaceParameters
                 Traits.Pounce,
                 Traits.Timid,
                 Traits.Submissive,
-                Traits.Eternal,
+                Traits.BoundWeapon,
                 Traits.TheGreatEscape,
+                Traits.CloseCall,
         },
             InnateSpells = new List<SpellTypes>() { SpellTypes.CrossShock, SpellTypes.ArcBolt },
             RaceDescription = "A small fox with surprisingly strong lightning magic.",
+            CanUseRangedWeapons = false,
+            CanUseMeleeWeapons = false,
         };
 
         Tatltuae = new RaceTraits()
@@ -4556,6 +4559,7 @@ internal class RaceTraits
     /// </summary>
     internal float PowerAdjustment = 1f;
     internal bool CanUseRangedWeapons = true;
+    internal bool CanUseMeleeWeapons = true;
     internal string RaceDescription = "";
 
 }

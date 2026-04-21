@@ -3212,7 +3212,7 @@ public class Actor_Unit
             State.GameManager.TacticalMode.DirtyPack = true;
             Targetable = false;
             Surrendered = true;
-            if (Config.VisibleCorpses && Unit.Race != Race.Erin && Unit.Race != Race.Iliijiith && Unit.Race != Race.Olivia)
+            if (Config.VisibleCorpses && Unit.Race != Race.Erin && Unit.Race != Race.Iliijiith && !Unit.HasTrait(Traits.CloseCall))
             {
                 float angle = 40 + State.Rand.Next(280);
                 UnitSprite.transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -3221,6 +3221,8 @@ public class Actor_Unit
             else
             {
                 Visible = false;
+                if (Unit.HasTrait(Traits.CloseCall))
+                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Barely hanging on, {Unit.Name} quickly {LogUtilities.GetRandomStringFrom("flees", "bolts", "retreats")} out of combat with {LogUtilities.GPPHis(Unit)} life barely intact");
             }
 
             PredatorComponent?.FreeAnyAlivePrey();

@@ -111,6 +111,7 @@ public enum SpecialItems
     NectarWeapon,
     RyanWeapon,
     RenamonWeapon,
+    OliviaWeapon,
 }
 
 
@@ -336,6 +337,7 @@ public class ItemRepository
             new Weapon(name:"Nectar's Claws", description:"Large razor sharp sphinx claws, more than capable of leaving deep gashes in most foes.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
             new Weapon(name:"Captain's Polearm", description:"A trusty polearm that has seen many battles, and slain many more.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
             new Weapon(name:"Digi-Palm", description:"Palms capable of delivering deadly strikes when empowered with spiritual energy.", cost:4, graphic:0, damage:4, range:1, lockedItem:true),
+            new Weapon(name:"Electro Saber", description:"An unique electricity weapon summoned by the user that scales off of mind instead of strength.", cost:4, graphic:0, damage:5, range:1, lockedItem:true),
         };
 
 
@@ -451,6 +453,26 @@ public class ItemRepository
         if (item is Weapon weapon)
         {
             if (weapon.Range > 1)
+                return true;
+        }
+        return false;
+    }
+
+    public bool ItemIsMeleeWeapon(int i)
+    {
+        if (items[i] is Weapon weapon)
+        {
+            if (weapon.Range == 1)
+                return true;
+        }
+        return false;
+    }
+
+    public bool ItemIsMeleeWeapon(Item item)
+    {
+        if (item is Weapon weapon)
+        {
+            if (weapon.Range == 1)
                 return true;
         }
         return false;

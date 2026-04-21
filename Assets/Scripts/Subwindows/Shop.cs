@@ -181,12 +181,22 @@ public class Shop
             if (shopUI.BuyPanels[i] == null)
                 continue;
             var racePar = RaceParameters.GetTraitData(unit);
-            if (racePar.CanUseRangedWeapons == false && State.World.ItemRepository.ItemIsRangedWeapon(i))
+            if (racePar.CanUseRangedWeapons == false && racePar.CanUseMeleeWeapons == true  && State.World.ItemRepository.ItemIsRangedWeapon(i))
+            {
+                shopUI.BuyPanels[i].gameObject.SetActive(false);
+                continue;
+            }
+            if (racePar.CanUseRangedWeapons == true && racePar.CanUseMeleeWeapons == false  && State.World.ItemRepository.ItemIsMeleeWeapon(i))
             {
                 shopUI.BuyPanels[i].gameObject.SetActive(false);
                 continue;
             }
             Item item = State.World.ItemRepository.GetItem(i);
+            if (racePar.CanUseRangedWeapons == false && racePar.CanUseMeleeWeapons == false && item is Weapon)
+            {
+                shopUI.BuyPanels[i].gameObject.SetActive(false);
+                continue;
+            }
             if ((unit.HasTrait(Traits.Feral) || unit.FixedGear) && item is Weapon)
             {
                 shopUI.BuyPanels[i].gameObject.SetActive(false);

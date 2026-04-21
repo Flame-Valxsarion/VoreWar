@@ -4881,6 +4881,32 @@ Turns: {currentTurn}
                     actor.PredatorComponent?.PurgePrey();
                     units.Remove(actor);
                 }
+                else if (actor.Unit.IsDead && actor.Unit.Type != UnitType.Summon && (actor.Unit.HasTrait(Traits.CloseCall)) && actor.KilledByDigestion == false)
+                {
+                    actor.Surrendered = false;
+                    actor.Unit.Health = 1;
+                    if (actor.Unit.Side == defenderSide)
+                    {
+                        if (garrison.Contains(actor) && remainingDefenders > 0)
+                        {
+                            actor.Unit.Health = 1;
+                        }
+                        else
+                        {
+                            retreatedDefenders.Add(actor.Unit);
+                            armies[1]?.Units.Remove(actor.Unit);
+                            village?.GetRecruitables().Remove(actor.Unit);
+                        }
+
+                    }
+                    else
+                    {
+                        retreatedAttackers.Add(actor.Unit);
+                        armies[0].Units.Remove(actor.Unit);
+                    }
+                    actor.PredatorComponent?.PurgePrey();
+                    units.Remove(actor);
+                }
                 else if ((actor.Unit.HasTrait(Traits.Transmigration) || actor.Unit.HasTrait(Traits.InfiniteTransmigration)) && actor.KilledByDigestion && actor.Unit.IsDead
                     && actor.Unit.Type != UnitType.Summon && actor.Unit.Type != UnitType.Leader && actor.Unit.Type != UnitType.SpecialMercenary)
                 {

@@ -831,6 +831,8 @@ public class HoveringTooltip : MonoBehaviour
                 return "This unit is not completely fixed to the space around it. \n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
             case Traits.WildFury:
                 return "Unarmed but not harmless! Unit can melee attack twice if they have no weapon equipped.";
+            case Traits.CloseCall:
+                return "Unit will flee combat upon fatal strikes from weapons or spells with 1 HP rather than dying. (unit will rejoin if the army wins, otherwise sets off for the closest town) ";
         }  
         return "<b>This trait needs a tooltip!</b>";
     }
