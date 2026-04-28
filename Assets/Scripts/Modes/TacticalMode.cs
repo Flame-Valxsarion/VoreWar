@@ -1477,7 +1477,7 @@ public class TacticalMode : SceneBase
         if (State.Warned == false && Time.realtimeSinceStartup - time > 4f)
         {
             State.Warned = true;
-            State.GameManager.CreateMessageBox($@"Just had a quick simulated battle take more than 4 seconds to resolve (I.e. one your settings are set to not show).\nSmaller army sizes will be faster to process, so if the wait bothers you try playing with smaller max armies.\nThis warning will only appear once per session.\n\nMisc Info:\nBattle took {System.Math.Round(Time.realtimeSinceStartup - time, 2)} seconds.\n{units.Count()} Total units {AttackerName} vs {DefenderName}.\nTurns: {currentTurn}");
+            State.GameManager.CreateMessageBox($"Just had a quick simulated battle take more than 4 seconds to resolve (I.e. one your settings are set to not show).\nSmaller army sizes will be faster to process, so if the wait bothers you try playing with smaller max armies.\nThis warning will only appear once per session.\n\nMisc Info:\nBattle took {System.Math.Round(Time.realtimeSinceStartup - time, 2)} seconds.\n{units.Count()} Total units {AttackerName} vs {DefenderName}.\nTurns: {currentTurn}");
         }
     }
 
@@ -2659,14 +2659,14 @@ public class TacticalMode : SceneBase
                 continue;
             if (TacticalUtilities.FreeSpaceAroundTarget(target.Position, actor) == false)
                 continue;
-            int weaponDamage = actor.WeaponDamageAgainstTarget(target, false);
+            double weaponDamage = actor.WeaponDamageAgainstTarget(target, false);
             if (actor.Unit.HasTrait(Traits.HeavyPounce))
-                weaponDamage = (int)Mathf.Min((weaponDamage + ((weaponDamage * actor.PredatorComponent?.Fullness ?? 0) / 4)), weaponDamage * 2);
+                weaponDamage = Math.Min((weaponDamage + ((weaponDamage * actor.PredatorComponent?.Fullness ?? 0) / 4)), weaponDamage * 2);
             Vec2i pos = target.Position;
             if (actor.Position.GetNumberOfMovesDistance(target.Position) <= 4 && actor.Position.GetNumberOfMovesDistance(target.Position) >= 2)
-                target.UnitSprite.DisplayHitPercentage(target.GetAttackChance(actor, false, true), Color.red, weaponDamage);
+                target.UnitSprite.DisplayHitPercentage(target.GetAttackChance(actor, false, true), Color.red, (int)weaponDamage);
             else
-                target.UnitSprite.DisplayHitPercentage(target.GetAttackChance(actor, false, true), Color.black, weaponDamage);
+                target.UnitSprite.DisplayHitPercentage(target.GetAttackChance(actor, false, true), Color.black, (int)weaponDamage);
         }
     }
 
@@ -2716,7 +2716,7 @@ public class TacticalMode : SceneBase
                 continue;
             if (target.Targetable == false || target.Visible == false)
                 continue;
-            int weaponDamage = actor.WeaponDamageAgainstTarget(target, true);
+            int weaponDamage = (int)actor.WeaponDamageAgainstTarget(target, true);
 
             Vec2i pos = target.Position;
             if (actor.Position.GetNumberOfMovesDistance(target.Position) <= actor.BestRanged.Range && (actor.Position.GetNumberOfMovesDistance(target.Position) > 1 || (actor.BestRanged.Omni && actor.Position.GetNumberOfMovesDistance(target.Position) > 0)))
@@ -2739,7 +2739,7 @@ public class TacticalMode : SceneBase
 
             if (target.Targetable == false || target.Visible == false)
                 continue;
-            int spellDamage = 0;
+            double spellDamage = 0;
             if (CurrentSpell is DamageSpell damageSpell)
             {
                 spellDamage = damageSpell.Damage(actor, target);
@@ -2759,9 +2759,9 @@ public class TacticalMode : SceneBase
 
             Vec2i pos = target.Position;
             if (actor.Position.GetNumberOfMovesDistance(target.Position) <= CurrentSpell.Range.Max && (actor.Position.GetNumberOfMovesDistance(target.Position) >= CurrentSpell.Range.Min))
-                target.UnitSprite.DisplayHitPercentage(magicChance, Color.red, spellDamage);
+                target.UnitSprite.DisplayHitPercentage(magicChance, Color.red, (int)spellDamage);
             else
-                target.UnitSprite.DisplayHitPercentage(magicChance, Color.black, spellDamage);
+                target.UnitSprite.DisplayHitPercentage(magicChance, Color.black, (int)spellDamage);
         }
     }
 
@@ -2771,7 +2771,6 @@ public class TacticalMode : SceneBase
         {
             if (target.Targetable == false || target.Visible == false)
                 continue;
-            int weaponDamage = actor.WeaponDamageAgainstTarget(target, true);
 
             Vec2i pos = target.Position;
             if (target.Unit.IsEnemyOfSide(actor.Unit.Side))
@@ -3597,7 +3596,7 @@ public class TacticalMode : SceneBase
                         case 1:
                             if (actor.Position.GetNumberOfMovesDistance(SelectedUnit.Position) < 2)
                             {
-                                int weaponDamage = SelectedUnit.WeaponDamageAgainstTarget(actor, false);
+                                int weaponDamage = (int)SelectedUnit.WeaponDamageAgainstTarget(actor, false);
                                 string str = System.Math.Round(actor.GetAttackChance(SelectedUnit, false) * 100, 1) + "%\n-" + weaponDamage;
                                 StatusUI.HitRate.text = str;
                                 actor.UnitSprite.ShowDamagedHealthBar(actor, weaponDamage);
@@ -3608,7 +3607,7 @@ public class TacticalMode : SceneBase
                                     && actor.Position.GetNumberOfMovesDistance(SelectedUnit.Position) > 1
                                     && actor.Position.GetNumberOfMovesDistance(SelectedUnit.Position) <= SelectedUnit.BestRanged.Range)
                             {
-                                int weaponDamage = SelectedUnit.WeaponDamageAgainstTarget(actor, true);
+                                int weaponDamage = (int)SelectedUnit.WeaponDamageAgainstTarget(actor, true);
                                 string str = System.Math.Round(actor.GetAttackChance(SelectedUnit, true) * 100, 1) + "%\n-" + weaponDamage;
                                 StatusUI.HitRate.text = str;
                                 actor.UnitSprite.ShowDamagedHealthBar(actor, weaponDamage);
@@ -3639,12 +3638,12 @@ public class TacticalMode : SceneBase
                             }
                             else if (specialType == SpecialAction.PounceMelee)
                             {
-                                int weaponDamage = SelectedUnit.WeaponDamageAgainstTarget(actor, false);
+                                double weaponDamage = SelectedUnit.WeaponDamageAgainstTarget(actor, false);
                                 if (SelectedUnit.Unit.HasTrait(Traits.HeavyPounce))
-                                    weaponDamage = (int)Mathf.Min((weaponDamage + ((weaponDamage * SelectedUnit.PredatorComponent?.Fullness ?? 0) / 4)), weaponDamage * 2);
-                                string str = System.Math.Round(actor.GetAttackChance(SelectedUnit, false) * 100, 1) + "%\n-" + weaponDamage;
+                                    weaponDamage = Math.Min(weaponDamage + ((weaponDamage * SelectedUnit.PredatorComponent?.Fullness ?? 0) / 4), weaponDamage * 2);
+                                string str = System.Math.Round(actor.GetAttackChance(SelectedUnit, false) * 100, 1) + "%\n-" + (int)weaponDamage;
                                 StatusUI.HitRate.text = str;
-                                actor.UnitSprite.ShowDamagedHealthBar(actor, weaponDamage);
+                                actor.UnitSprite.ShowDamagedHealthBar(actor, (int)weaponDamage);
                             }
                             if (specialType == SpecialAction.TailStrike)
                             {
@@ -3718,13 +3717,11 @@ public class TacticalMode : SceneBase
                         {
                             if (actor != null)
                             {
-                                int spellDamage = spell.Damage(SelectedUnit, actor);
+                                double spellDamage = spell.Damage(SelectedUnit, actor);
                                 if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, actor.Unit)) // sneakAttack
-                                {
                                     spellDamage *= 3;
-                                }
-                                actor.UnitSprite.ShowDamagedHealthBar(actor, spellDamage);
-                                string str = System.Math.Round(actor.GetMagicChance(SelectedUnit, CurrentSpell) * 100, 1) + "%\n-" + spellDamage;
+                                actor.UnitSprite.ShowDamagedHealthBar(actor, (int)spellDamage);
+                                string str = System.Math.Round(actor.GetMagicChance(SelectedUnit, CurrentSpell) * 100, 1) + "%\n-" + (int)spellDamage;
                                 StatusUI.HitRate.text = str;
                             }
                         }
@@ -3734,36 +3731,30 @@ public class TacticalMode : SceneBase
                 {
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinPattern(mouseLocation, spell.Pattern))
                     {
-                        int spellDamage = spell.Damage(SelectedUnit, splashTarget);
+                        double spellDamage = spell.Damage(SelectedUnit, splashTarget);
                         if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
                             spellDamage *= 3;
-                        }
-                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
+                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, (int)spellDamage);
                     }
                 }
                 else if (spell.AOEType == AreaOfEffectType.RotatablePattern)
                 {
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinRotatingPattern(mouseLocation, spell.Pattern, TacticalUtilities.GetRotatingOctant(SelectedUnit.Position, mouseLocation)))
                     {
-                        int spellDamage = spell.Damage(SelectedUnit, splashTarget);
+                        double spellDamage = spell.Damage(SelectedUnit, splashTarget);
                         if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
                             spellDamage *= 3;
-                        }
-                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
+                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, (int)spellDamage);
                     }
                 }
                 else if (mouseLocation != null)
                 {
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(mouseLocation, spell.AreaOfEffect))
                     {
-                        int spellDamage = spell.Damage(SelectedUnit, splashTarget);
+                        double spellDamage = spell.Damage(SelectedUnit, splashTarget);
                         if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
                             spellDamage *= 3;
-                        }
-                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
+                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, (int)spellDamage);
                     }
                 }
             }
@@ -5576,7 +5567,7 @@ public class TacticalMode : SceneBase
                 var actor = TacticalUtilities.GetActorAt(item.Key);
                 if (actor != null)
                 {
-                    int damage = (int)Math.Round(item.Value.Strength * actor.Unit.TraitBoosts.FireDamageTaken);
+                    double damage = item.Value.Strength * actor.Unit.TraitBoosts.FireDamageTaken;
                     if (actor.Damage(damage, true))
                     {
                         Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> took <color=red>{damage}</color> points of fire damage");

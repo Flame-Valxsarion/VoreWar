@@ -116,7 +116,6 @@ static class SpellList
 
     static internal Dictionary<SpellTypes, Spell> SpellDict;
 
-
     static SpellList()
     {
         SpellDict = new Dictionary<SpellTypes, Spell>();
@@ -132,7 +131,7 @@ static class SpellList
             Tier = 1,
             Resistable = true,
             DamageType = DamageTypes.Fire,
-            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(Fireball, t);
@@ -157,7 +156,7 @@ static class SpellList
             AreaOfEffect = 0,
             Tier = 1,
             Resistable = false,
-            Damage = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 5,
+            Damage = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 5.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(PowerBolt, t);
@@ -178,7 +177,7 @@ static class SpellList
             Tier = 1,
             Resistable = true,
             DamageType = DamageTypes.Ice,
-            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 int curr = t.Unit.Health;
@@ -207,7 +206,7 @@ static class SpellList
             Tier = 1,
             Resistable = true,
             DamageType = DamageTypes.Elec,
-            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(LightningBolt, t);
@@ -228,7 +227,7 @@ static class SpellList
             Tier = 2,
             Resistable = true,
             DamageType = DamageTypes.Elec,
-            Damage = (a, t) => 15 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 15 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(ArcBolt, t);
@@ -251,17 +250,17 @@ static class SpellList
             Resistable = true,
             ResistanceMult = .90f,
             DamageType = DamageTypes.Elec,
-            Damage = (a, t) => 6 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 6 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
-                float crashDamage = 1.2f;
+                double crashDamage = 1.2;
                 int curr = t.Unit.Health;
                 a.CastOffensiveSpell(JoltCrash, t);
                 bool didSpellHit = curr != t.Unit.Health;
                 if (didSpellHit)
                 {
-                    TacticalUtilities.CheckKnockBack(a, t, ref crashDamage);
-                    TacticalUtilities.KnockBack(a, t);
+                    TacticalUtilities.CheckKnockBack(a.Position, a, t, crashDamage);
+                    TacticalUtilities.KnockBack(a.Position, a, t);
                     t.Unit.ApplyStatusEffect(StatusEffectType.Static, 1f, 2);
                     State.GameManager.SoundManager.PlaySpellCast(LightningBolt, a);
                 }
@@ -408,7 +407,7 @@ static class SpellList
             Tier = 2,
             Resistable = true,
             DamageType = DamageTypes.Ice,
-            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(IceBlast, t);
@@ -436,7 +435,7 @@ static class SpellList
             Tier = 2,
             Resistable = true,
             DamageType = DamageTypes.Fire,
-            Damage = (a, t) => 7 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 7 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(Pyre, t);
@@ -465,7 +464,7 @@ static class SpellList
             Pattern = new int[3, 3] { { 1, 0, 1 }, { 0, 1, 0 }, { 1, 0, 1 } },
             Resistable = true,
             DamageType = DamageTypes.Elec,
-            Damage = (a, t) => 8 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 8 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 int curr = 0;
@@ -518,11 +517,11 @@ static class SpellList
             Tier = -1,
             Resistable = true,
             ResistanceMult = .50f,
-            Damage = (a, t) => (a.Unit.Health / 3) * 2,
+            Damage = (a, t) => 2.0 * a.Unit.Health / 3,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(ExplosiveHug, t);
-                if(a.Unit.HasTrait(Traits.Fearless))//Auto-surrender prevention
+                if (a.Unit.HasTrait(Traits.Fearless)) // Auto-surrender prevention
                     a.CastOffensiveSpell(Explode, a);
                 else
                 {
@@ -537,7 +536,7 @@ static class SpellList
 
         Explode = new DamageSpell()
         {
-            Name = "Explosive Hug",
+            Name = "Explode",
             Id = "explode",
             SpellType = SpellTypes.Explode,
             Description = "Used to kill the exploding unit.",
@@ -545,7 +544,7 @@ static class SpellList
             Range = new Range(1),
             Tier = -1,
             Resistable = false,
-            Damage = (a, t) => a.Unit.Health + 5,
+            Damage = (a, t) => a.Unit.Health + 5.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(Explode, a);
@@ -569,7 +568,7 @@ static class SpellList
         //            a.Position.x = loc.x;
         //            a.Position.y = loc.y;
         //            TacticalUtilities.UpdateActorLocations();
-        //        }               
+        //        }
         //    },
         //};
         //SpellDict[SpellTypes.Warp] = Warp;
@@ -628,7 +627,7 @@ static class SpellList
             Tier = 1,
             Resistable = true,
             ResistanceMult = 0.90f,
-            Damage = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 25,
+            Damage = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 25.0,
             OnExecute = (a, t) =>
             {
                 int curr = t.Unit.Health;
@@ -664,7 +663,7 @@ static class SpellList
             Pattern = new int[3, 3] { { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 } },
             Resistable = true,
             DamageType = DamageTypes.Fire,
-            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 7,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 7.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(FlameWave, t);
@@ -694,7 +693,7 @@ static class SpellList
             Resistable = true,
             ResistanceMult = .80f,
             DamageType = DamageTypes.Fire,
-            Damage = (a, t) => 8 + a.Unit.GetStat(Stat.Dexterity) / 9,
+            Damage = (a, t) => 8 + a.Unit.GetStat(Stat.Dexterity) / 9.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(FireBomb, t);
@@ -728,7 +727,6 @@ static class SpellList
                 TacticalGraphicalEffects.CreateBola(a.Position, t.Position, t);
                 State.GameManager.SoundManager.PlaySwing(a);
             },
-
         };
         SpellDict[SpellTypes.Bolas] = Bolas;
 
@@ -780,29 +778,29 @@ static class SpellList
             AreaOfEffect = 1,
             Tier = 1,
             Resistable = true,
-            Damage = (a, t) => 3 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 3 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(ForcePulse, t);
-                float pulseDamage = 1.2f;
+                double pulseDamage = 1.2;
                 foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(t.Position, ForcePulse.AreaOfEffect))
                 {
-                    TacticalUtilities.CheckSpellKnockBack(t.Position, a, splashTarget, ref pulseDamage);
-                    TacticalUtilities.SpellKnockBack(t.Position, a, splashTarget);
+                    pulseDamage = TacticalUtilities.CheckKnockBack(t.Position, a, splashTarget, pulseDamage);
+                    TacticalUtilities.KnockBack(t.Position, a, splashTarget);
                 }
-                TacticalUtilities.CheckKnockBack(a, t, ref pulseDamage);
-                TacticalUtilities.KnockBack(a, t);
+                pulseDamage = TacticalUtilities.CheckKnockBack(a.Position, a, t, pulseDamage);
+                TacticalUtilities.KnockBack(a.Position, a, t);
                 TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t);
                 State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
             },
             OnExecuteTile = (a, l) =>
             {
                 a.CastOffensiveSpell(ForcePulse, null, l);
-                float pulseDamage = 1.2f;
+                double pulseDamage = 1.2; // BUG: pulseDamage is increased cumulatively in the following loop, and also is never applied as damage to any of the targets.
                 foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(l, ForcePulse.AreaOfEffect))
                 {
-                    TacticalUtilities.CheckSpellKnockBack(l, a, splashTarget, ref pulseDamage);
-                    TacticalUtilities.SpellKnockBack(l, a, splashTarget);
+                    pulseDamage = TacticalUtilities.CheckKnockBack(l, a, splashTarget, pulseDamage);
+                    TacticalUtilities.KnockBack(l, a, splashTarget);
                 }
                 TacticalGraphicalEffects.CreateGenericMagic(a.Position, l, null);
                 State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
@@ -875,7 +873,7 @@ static class SpellList
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy },
             Range = new Range(6),
             Duration = (a, t) => 2 + a.Unit.GetStat(Stat.Mind) / 10,
-            Effect = (a, t) => a.Unit.GetApparentSide(t.Unit),         // the unit will act to the best of its knowledge
+            Effect = (a, t) => a.Unit.GetApparentSide(t.Unit), // the unit will act to the best of its knowledge
             Type = StatusEffectType.Charmed,
             Tier = 3,
             Resistable = true,
@@ -925,7 +923,6 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.Summon] = Summon;
-
 
         SummonDoppelganger = new Spell()
         {
@@ -1002,7 +999,6 @@ static class SpellList
         };
         SpellDict[SpellTypes.SummonSpawn] = SummonSpawn;
 
-
         Reanimate = new Spell()
         {
             Name = "Reanimate",
@@ -1031,7 +1027,6 @@ static class SpellList
                         }
                     }
                 }
-
             },
         };
         SpellDict[SpellTypes.Reanimate] = Reanimate;
@@ -1056,7 +1051,6 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.Enlarge] = Enlarge;
-
 
         Diminishment = new StatusSpell()
         {
@@ -1092,7 +1086,6 @@ static class SpellList
         };
         SpellDict[SpellTypes.GateMaw] = GateMaw;
 
-
         Resurrection = new Spell()
         {
             Name = "Resurrection",
@@ -1120,7 +1113,6 @@ static class SpellList
                         }
                     }
                 }
-
             },
         };
         SpellDict[SpellTypes.Resurrection] = Resurrection;
@@ -1137,14 +1129,12 @@ static class SpellList
             Tier = 0,
             Resistable = true,
             DamageType = DamageTypes.Poison,
-            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 10.0,
             OnExecute = (a, t) =>
             {
-
             },
             OnExecuteTile = (a, l) =>
             {
-
             },
         };
         SpellDict[SpellTypes.ViperDamage] = ViperPoisonDamage;
@@ -1178,7 +1168,6 @@ static class SpellList
                 a.CastOffensiveSpell(ViperPoisonDamage, null, loc);
                 TacticalGraphicalEffects.CreatePoisonCloud(loc);
             }
-
         };
         SpellDict[SpellTypes.ViperPoison] = ViperPoisonStatus;
 
@@ -1208,7 +1197,6 @@ static class SpellList
                 a.CastStatusSpell(AlraunePuff, null, loc);
                 TacticalGraphicalEffects.CreatePollenCloud(loc);
             }
-
         };
         SpellDict[SpellTypes.AlraunePuff] = AlraunePuff;
 
@@ -1231,7 +1219,6 @@ static class SpellList
                 a.CastStatusSpell(Web, t);
                 TacticalGraphicalEffects.CreateSpiderWeb(a.Position, t.Position, t);
             },
-
         };
         SpellDict[SpellTypes.Web] = Web;
 
@@ -1260,7 +1247,6 @@ static class SpellList
                 a.CastStatusSpell(GlueBomb, null, loc);
                 TacticalGraphicalEffects.CreateGlueBomb(a.Position, loc);
             }
-
         };
         SpellDict[SpellTypes.GlueBomb] = GlueBomb;
 
@@ -1282,7 +1268,6 @@ static class SpellList
             {
                 a.CastStatusSpell(Petrify, t);
             },
-
         };
         SpellDict[SpellTypes.Petrify] = Petrify;
 
@@ -1331,7 +1316,6 @@ static class SpellList
                 }
                 TacticalGraphicalEffects.CreateGasCloud(loc);
             }
-
         };
         SpellDict[SpellTypes.HypnoGas] = HypnoGas;
 
@@ -1428,7 +1412,6 @@ static class SpellList
         };
         SpellDict[SpellTypes.AssumeForm] = AssumeForm;
 
-
         Whispers = new StatusSpell()
         {
             Name = "Whispers",
@@ -1446,7 +1429,6 @@ static class SpellList
             {
                 a.CastStatusSpell(Whispers, t);
             },
-
         };
         SpellDict[SpellTypes.Whispers] = Whispers;
 
@@ -1560,7 +1542,7 @@ static class SpellList
             Range = new Range(6),
             Tier = 1,
             AreaOfEffect = 0,
-            Damage = (a, t) => (a.Unit.GetStat(Stat.Mind) / 5) + ((a.Unit.MaxMana - a.Unit.Mana)/10),
+            Damage = (a, t) => a.Unit.GetStat(Stat.Mind) / 5.0 + (a.Unit.MaxMana - a.Unit.Mana) / 10.0,
             Resistable = true,
             OnExecute = (a, t) =>
             {
@@ -1579,7 +1561,7 @@ static class SpellList
             Range = new Range(6),
             Tier = 0,
             AreaOfEffect = 0,
-            Damage = (a, t) => (a.Unit.Mana / 4) + a.Unit.GetStat(Stat.Mind) / 5,
+            Damage = (a, t) => a.Unit.Mana / 4.0 + a.Unit.GetStat(Stat.Mind) / 5.0,
             Resistable = true,
             OnExecute = (a, t) =>
             {
@@ -1606,7 +1588,7 @@ static class SpellList
             Range = new Range(6),
             Tier = 0,
             AreaOfEffect = 1,
-            Damage = (a, t) => t.Unit.Mana / 2,
+            Damage = (a, t) => t.Unit.Mana / 2.0,
             Resistable = true,
             ResistanceMult = 0.2f,
             OnExecute = (a, t) =>
@@ -1626,7 +1608,7 @@ static class SpellList
             Tier = 1,
             AOEType = AreaOfEffectType.FixedPattern,
             Pattern = new int[3,3] { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } },
-            Damage = (a, t) => (a.Unit.GetStat(Stat.Mind) / 10) + (t.Unit.GetStat(Stat.Mind) / 10),
+            Damage = (a, t) => a.Unit.GetStat(Stat.Mind) / 10.0 + t.Unit.GetStat(Stat.Mind) / 10.0,
             Resistable = true,
             OnExecute = (a, t) =>
             {
@@ -1649,7 +1631,7 @@ static class SpellList
             Pattern = new int[5, 5] { { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 }, { 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0 } },
             Resistable = true,
             DamageType = DamageTypes.Fire,
-            Damage = (a, t) => 10 + a.Unit.GetStat(Stat.Mind) / 7,
+            Damage = (a, t) => 10 + a.Unit.GetStat(Stat.Mind) / 7.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(Flamberge, t);
@@ -1677,7 +1659,7 @@ static class SpellList
             AreaOfEffect = 2,
             Tier = 4,
             Resistable = true,
-            Damage = (a, t) => 10 + a.Unit.GetStat(Stat.Mind) / 7,
+            Damage = (a, t) => 10 + a.Unit.GetStat(Stat.Mind) / 7.0,
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(ForkLightning, t);
@@ -1688,7 +1670,6 @@ static class SpellList
         SpellDict[SpellTypes.ForkLightning] = ForkLightning;
     }
 }
-
 
 public class Spell
 {
@@ -1725,7 +1706,6 @@ public class Spell
     internal float ResistanceMult = 1;
     internal Action<Actor_Unit, Actor_Unit> OnExecute;
     internal bool IsFree = false;
-    
 
     internal bool TryCast(Actor_Unit actor, Vec2i location)
     {
@@ -1759,16 +1739,13 @@ public class Spell
     }
 
     internal int ManaCost => 2 * (int)Math.Pow(2, Tier);
-
-
 }
 
 //May redo this with interfaces later on
 
 class DamageSpell : Spell
 {
-
-    internal Func<Actor_Unit, Actor_Unit, int> Damage;
+    internal Func<Actor_Unit, Actor_Unit, double> Damage;
     internal DamageTypes DamageType = DamageTypes.Generic;
 }
 

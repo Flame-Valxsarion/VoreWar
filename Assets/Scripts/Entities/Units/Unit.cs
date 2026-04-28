@@ -302,6 +302,16 @@ public class Unit
 
     [OdinSerialize]
     private List<StatusEffect> _statusEffects;
+    internal List<StatusEffect> StatusEffects
+    {
+        get
+        {
+            if (_statusEffects == null)
+                _statusEffects = new List<StatusEffect>();
+            return _statusEffects;
+        }
+        set => _statusEffects = value;
+    }
 
     [OdinSerialize]
     public bool EarnedMask = false;
@@ -322,17 +332,6 @@ public class Unit
     /// </summary>
     [OdinSerialize]
     public bool fixedPredator;
-
-    internal List<StatusEffect> StatusEffects
-    {
-        get
-        {
-            if (_statusEffects == null)
-                _statusEffects = new List<StatusEffect>();
-            return _statusEffects;
-        }
-        set => _statusEffects = value;
-    }
 
     [OdinSerialize]
     public List<SpellTypes> InnateSpells;
@@ -686,6 +685,23 @@ public class Unit
 
     [OdinSerialize]
     internal int Stamina;
+
+    public Army Army()
+    {
+        try
+        {
+            foreach (Empire empire in State.World.AllActiveEmpires)
+                foreach (Army army in empire.Armies)
+                    if (army.Units.Contains(this))
+                        return army;
+        }
+        catch (NullReferenceException e)
+        {
+            // When called (e.g., for debugging purposes) at the title menu, State.World will not exist, and will throw a NullReferenceException when dereferenced.
+            // Take no action, and proceed with the null return.
+        }
+        return null;
+    }
 
     public Unit(Race race) : this(0, race, 0, true) { } // This is mostly used to easily create an example/preview unit of a given race.
 
@@ -1443,8 +1459,7 @@ public class Unit
     {
         if (level >= Config.HardLevelCap)
             return 99999999;
-        return (int)(expRequiredMod * level * Config.ExperiencePerLevel + ((level >= Config.SoftLevelCap ? 8 : 0) + (level * Config.AdditionalExperiencePerLevel * (level - 1) / 2)) *
-            (level >= Config.SoftLevelCap ? (int)Math.Pow(2, level + 1 - Config.SoftLevelCap) : 1));
+        return (int)(expRequiredMod * level * Config.ExperiencePerLevel + ((level >= Config.SoftLevelCap ? 8 : 0) + (level * Config.AdditionalExperiencePerLevel * (level - 1) / 2)) * (level >= Config.SoftLevelCap ? (int)Math.Pow(2, level + 1 - Config.SoftLevelCap) : 1));
     }
 
     public static int GetLevelFromExperience(int experience)
@@ -1852,15 +1867,6 @@ public class Unit
         EquipmentFunctions.CheckEquipment(this, EquipmentActivator.OnHeal, new object[] { this, actualHeal, null });
         State.GameManager.TacticalMode?.TacticalStats?.RegisterHealing(actualHeal, Side);
         return actualHeal;
-    }
-
-    void NonFatalDamage(int amount, string type)
-    {
-        if (Health <= 0)
-            return;
-        int actual = Math.Min(Health - 1, amount);
-        Health -= actual;
-        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{Name}</b> took <color=red>{actual}</color> points of {type} damage");
     }
 
     internal string ListTraits(bool hideSecret = false)
@@ -2744,9 +2750,7 @@ public class Unit
 
     public virtual int GetStatTotal()
     {
-        return GetStat(Stat.Agility) + GetStat(Stat.Will) + GetStat(Stat.Mind)
-            + GetStat(Stat.Dexterity) + GetStat(Stat.Endurance) + GetStat(Stat.Strength)
-            + GetStat(Stat.Voracity) + GetStat(Stat.Stomach);
+        return GetStat(Stat.Agility) + GetStat(Stat.Will) + GetStat(Stat.Mind) + GetStat(Stat.Dexterity) + GetStat(Stat.Endurance) + GetStat(Stat.Strength) + GetStat(Stat.Voracity) + GetStat(Stat.Stomach);
     }
 
     public int GetHighestStatIndex()
@@ -3179,7 +3183,7 @@ public class Unit
         var dance = GetStatusEffect(StatusEffectType.BladeDance);
         if (dance != null)
         {
-            if (!(HasTrait(Traits.Unflinching) && Health * .1f > dance.Strength)) 
+            if (!(HasTrait(Traits.Unflinching) && Health * .1f > dance.Strength))
             {
                 dance.Duration--;
                 dance.Strength--;
@@ -3464,107 +3468,6 @@ public class Unit
     internal StatusEffect GetLongestStatusEffect(StatusEffectType type)
     {
         return StatusEffects.Where(s => s.Type == type).OrderByDescending(s => s.Duration).FirstOrDefault();
-    }
-
-    internal void TickStatusEffects()
-    {
-        var effect = GetStatusEffect(StatusEffectType.Mending);
-        if (effect != null)
-            HealPercentageCap(.2f, (int)(2 + effect.Strength / 4));
-        effect = GetStatusEffect(StatusEffectType.Poisoned);
-        if (effect != null)
-            NonFatalDamage((int)effect.Strength, "poison");
-        effect = GetStatusEffect(StatusEffectType.Virus);
-        if (effect != null)
-            NonFatalDamage((int)effect.Strength, "virus");
-        foreach (var eff in StatusEffects.ToList())
-        {
-            if (eff.Type == StatusEffectType.Fractured || eff.Type == StatusEffectType.Respawns || eff.Type == StatusEffectType.BladeDance || eff.Type == StatusEffectType.Tenacious || eff.Type == StatusEffectType.Focus || eff.Type == StatusEffectType.Weakness || eff.Type == StatusEffectType.Bolstered)
-                continue;
-            var actor = TacticalUtilities.Units.Where(s => s.Unit == this).FirstOrDefault();
-            var pred = actor.SelfPrey?.Predator;
-            if (pred != null && eff.Type == StatusEffectType.Diminished)
-            {
-                if (pred.Unit.HasTrait(Traits.TightNethers) && (actor.SelfPrey.Location == PreyLocation.balls || actor.SelfPrey.Location == PreyLocation.womb))
-                {
-                    continue;
-                }
-            }
-
-            if (eff.Type == StatusEffectType.Staggering || eff.Type == StatusEffectType.SpellForce)
-                StatusEffects.Remove(eff);
-
-            if (eff.Type == StatusEffectType.Sleeping && HasTrait(Traits.SleepItOff))
-            {
-                if (actor.PredatorComponent.UsageFraction >= State.Rand.NextDouble())
-                {
-                    continue;
-                }
-            }
-
-            eff.Duration -= 1;
-            if (eff.Duration <= 0)
-            {
-                if (eff.Type == StatusEffectType.Morphed)
-                {
-                    RevertMorph(eff.Applicator);
-                }
-                if (eff.ExpireEffect != null)
-                {
-                    ApplyStatusEffect(eff.ExpireEffect.Type, eff.ExpireEffect.Strength, eff.ExpireEffect.Duration, eff.ExpireEffect.Applicator, eff.ExpireEffect.ExpireEffect);
-                }
-
-                StatusEffects.Remove(eff);
-                if (eff.Type == StatusEffectType.Diminished)
-                {
-                    var still = GetStatusEffect(StatusEffectType.Diminished);
-                    if (still == null)
-                    {
-                        if (actor != null)
-                        {
-                            if (pred != null)
-                            {
-                                State.GameManager.TacticalMode.Log.RegisterDiminishmentExpiration(pred.Unit, this, actor.SelfPrey.Location);
-                            }
-                        }
-                    }
-                }
-                if (eff.Type == StatusEffectType.WillingPrey)
-                {
-                    var still = GetStatusEffect(StatusEffectType.WillingPrey);
-                    if (still == null)
-                    {
-                        if (actor != null)
-                        {
-                            if (pred != null)
-                            {
-                                State.GameManager.TacticalMode.Log.RegisterCurseExpiration(pred.Unit, this, actor.SelfPrey.Location);
-                            }
-                        }
-                    }
-                }
-                if (eff.Type == StatusEffectType.Warping)
-                {
-                    var still = GetStatusEffect(StatusEffectType.WillingPrey);
-                    if (still == null)
-                    {
-                        if (actor != null)
-                        {
-                            if (pred != null)
-                            {
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> warped out of the battle, and out of <b>{pred.Unit.Name}</b>.");
-                                pred.PredatorComponent.FreePrey(actor.SelfPrey, true);
-                            }
-                            else
-                            {
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> warped out of the battle.");
-                            }
-                            State.GameManager.TacticalMode.AttemptRetreat(actor,false,true);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     internal List<Traits> RandomizeOne(RandomizeList randomizeList)
