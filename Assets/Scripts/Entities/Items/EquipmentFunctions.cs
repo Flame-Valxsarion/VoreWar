@@ -92,7 +92,7 @@
     internal static bool UseEquipmentBrambleBand(Unit unit, Actor_Unit attacker)
     {
         double damage = unit.GetStat(Stat.Endurance) / 10.0;
-        attacker.Damage(damage, false, false);
+        attacker.Damage(damage, false, DamageLethality.NonLethal);
         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{attacker.Unit.Name}</b> took <color=red>{damage}</color> damage from {unit.Name}'s Bramble Band.");
         return true;
     }

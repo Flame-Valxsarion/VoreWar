@@ -1114,7 +1114,7 @@ public class PredatorComponent
             {
                 State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{actor.Unit.Name}'s prey deal {finalDamage} damage to {LogUtilities.GPPHim(actor.Unit)}");
                 actor.UnitSprite.DisplayDamage(finalDamage);
-                actor.Damage(finalDamage, false, DamageAccumulator.Lethality == DamageLethality.Lethal);
+                actor.Damage(finalDamage, false, DamageAccumulator.Lethality);
             }
         }
         DamageAccumulator.Deactivate(); // Executed (with custom Tactical log messages) below.
@@ -2676,7 +2676,7 @@ public class PredatorComponent
                 if (actor.Unit.HasTrait(Traits.Biter))
                 {
                     int oldMP = actor.Movement;
-                    actor.Attack(target, false, true, canKill: false);
+                    actor.Attack(target, false, true, lethality: DamageLethality.ForceSurrender);
                     actor.Movement = oldMP;
                     bit = true; //Used because killed units are considered to be surrendered, so this prevents a bite that kills a unit being counted as 2 AP
                 }
