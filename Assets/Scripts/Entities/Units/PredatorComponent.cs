@@ -2485,6 +2485,8 @@ public class PredatorComponent
         var loc = prey.Location.ToString();
         if (unit.Race == Race.Terrorbird && prey.Location == PreyLocation.tail)
             loc = "crop";
+        if (unit.Race == Race.Tatltuae && prey.Location == PreyLocation.tail)
+            loc = "hackle";
         if (unit.Race == Race.Kangaroos && prey.Location == PreyLocation.breasts)
             loc = "pouch";
         if (prey.Unit.IsDead == false && unit.HasTrait(Traits.DualStomach) && stomach.Contains(prey))
@@ -4416,6 +4418,32 @@ public class PredatorComponent
             case PreyLocation.tail:
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.tail, actor);
                 tail.Add(preyref);
+                if (unit.Race == Race.Tatltuae)
+                switch (State.Rand.Next(3))
+                {
+                    case 0:
+                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. \"What the?!- Hey, get out of there!\" The raven glares at nothing in particular for a moment before letting out an annoyed sigh. \"Fine. Enjoy. Feel lucky I didn't swap the dimensions in time, or this would've ended <i>very</i> differently for you.\"");
+                        else
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. In response, the raven just chuckles. \"I saw you coming, you know. Hope you enjoy being absorbed into feathers.\"");
+                        break;
+                    case 1:
+                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the fuck! Could've just asked, jerk!\" The corvid grumbles as he pulls himself back up off the ground.");
+                        else
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the hell? Do you <i>want</i> to be part of my plumage or something?\"");
+                        break;
+                    case 2:
+                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. I swear, if they mess with any of my stuff I'll figure out a spell to turn their blood into mercury or something...\"");
+                        else
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
+                        break;
+                    default:
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
+                        break;
+                }
+                else
                 switch (State.Rand.Next(4))
                 {
                     case 0:
@@ -4456,7 +4484,7 @@ public class PredatorComponent
                         else if (unit.Race == Race.Bees)
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sneaks up behind <b>{unit.Name}</b>, before shoving the {LogUtilities.GetRaceDescSingl(unit)} hard, knocking {LogUtilities.GPPHim(unit)} off balance. By the time {LogUtilities.GPPHe(unit)} {LogUtilities.HasHave(unit)} regained that balance, <b>{forcePrey.Unit.Name}</b> is mostly inside {LogUtilities.GPPHis(unit)} stinger.");
                         else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel{LogUtilities.SIfSingular(unit)} something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
                         break;
                     default:
                         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
@@ -4835,6 +4863,32 @@ public class PredatorComponent
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.tail, actor);
                 loc = PreyLocation.tail;
                 tail.Add(preyref);
+                if (unit.Race == Race.Tatltuae)
+                switch (State.Rand.Next(3))
+                {
+                    case 0:
+                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. \"What the?!- Hey, get out of there!\" The raven glares at nothing in particular for a moment before letting out an annoyed sigh. \"Fine. Enjoy. Feel lucky I didn't swap the dimensions in time, or this would've ended <i>very</i> differently for you.\"");
+                        else
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. In response, the raven just chuckles. \"I saw you coming, you know. Hope you enjoy being absorbed into feathers.\"");
+                        break;
+                    case 1:
+                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the fuck! Could've just asked, jerk!\" The corvid grumbles as he pulls himself back up off the ground.");
+                        else
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the hell? Do you <i>want</i> to be part of my plumage or something?\"");
+                        break;
+                    case 2:
+                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. I swear, if they mess with any of my stuff I'll figure out a spell to turn their blood into mercury or something...\"");
+                        else
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
+                        break;
+                    default:
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
+                        break;
+                }
+                else
                 switch (State.Rand.Next(4))
                 {
                     case 0:
@@ -4875,7 +4929,7 @@ public class PredatorComponent
                         else if (unit.Race == Race.Bees)
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sneaks up behind <b>{unit.Name}</b>, before shoving the {LogUtilities.GetRaceDescSingl(unit)} hard, knocking {LogUtilities.GPPHim(unit)} off balance. By the time {LogUtilities.GPPHe(unit)} {LogUtilities.HasHave(unit)} regained that balance, <b>{forcePrey.Unit.Name}</b> is mostly inside {LogUtilities.GPPHis(unit)} stinger.");
                         else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel{LogUtilities.SIfSingular(unit)} something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
                         break;
                     default:
                         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");

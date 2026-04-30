@@ -370,6 +370,8 @@ public class TacticalMessageLog
                             default:
                                 return $"<b>{action.Unit.Name}</b> {GetRandomStringFrom("headbutts", "bashes")} <b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> crop attempting to release <b>{action.Prey.Name}</b>. After failing <b>{action.Target.Name}</b> simply stares {GetRandomStringFrom("soul-piercingly", "fearlessly", "daggers", "intimidatingly", "blanky")} with {GPPHis(action.Target)} eyes at <b>{action.Unit.Name}</b>.";
                         }
+                    if (action.Target.Race == Race.Tatltuae)
+                        return $"<b>{action.Unit.Name}</b> sticks {GPPHis(action.Unit)} head into <b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> {GetRandomStringFrom("neck feathers", "hackles")}, only to bump into the raven's actual neck, and not the the strange pocket dimension the raven had stuffed <b>{action.Prey.Name}</b> into.";
                     else
                         switch (State.Rand.Next(4))
                         {
@@ -699,6 +701,8 @@ public class TacticalMessageLog
         {
             if (action.Target.Race < Race.Vagrants || action.Target.Race >= Race.Selicia) // Prey Humanoid
             {
+                if ((action.Unit.Race == Race.Slimes || action.Unit.Race == Race.FeralSlime) && State.Rand.Next(3) == 1 && (action.Target.Race == Race.Tatltuae))
+                    return $"With a final push, <b>{action.Target.Name}</b> pushes free of the {GetRandomStringFrom("goopy", "amorphous")} pred who'd caught him. He first looks at his feathers, dripping with slime, and then looks at <b>{action.Unit.Name}</b> with barely disguised hatred in his eyes. \"I am going to murder you.\"{odds}";
                 if (action.Unit.Race < Race.Vagrants || action.Unit.Race >= Race.Selicia) // Pred Humanoid
                     return GetRandomStringFrom(
                     $"From within <b>{action.Unit.Name}</b>’s gurgling gut, <b>{action.Target.Name}</b> remembers all the loved ones that would miss {GPPHim(action.Target)} and with this incentive forces {GPPHis(action.Target)} way out.{odds}",
@@ -799,6 +803,16 @@ public class TacticalMessageLog
             }
             if (action.preyLocation == PreyLocation.tail)
             {
+                if (action.Unit.Race == Race.Tatltuae)
+                {
+                    if ((action.Target.Race < Race.Vagrants || action.Target.Race >= Race.Selicia) && State.Rand.Next(2) == 1)
+                        return $"<b>{action.Target.Name}</b> calls out to <b>{action.Unit.Name}</b>. \"Let me out of here and I'll give you something shiny!\" Not expecting this to work, {GPPHeIsAbbr(action.Target)} rather surprised when, moments later, <b>{action.Unit.Name}</b> drags {GPPHim(action.Target)} out of his {GetRandomStringFrom("neck feathers", "hackles")} and looks at {GPPHim(action.Target)} with excitement. \"Really?!\" As the seconds pass by and it becomes clear to the raven that he was tricked and there is no shiny to claim, his face shifts to one of anger.{odds}";
+                    return GetRandomStringFrom(
+                    $"<b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> {GetRandomStringFrom("neck feathers", "hackles")} shake violently for a moment, as though being hit by some powerful wind, before <b>{action.Target.Name}</b> bursts forth from them, landing on the ground as {GPPHe(action.Target)} scramble{SIfSingular(action.Target)} away from the corvid.{odds}",
+                    $"<b>{action.Target.Name}</b> pushes through the dense warm black feathers around {GPPHim(action.Target)} until, with a burst of light and cool air, {GPPHe(action.Target)} find{SIfSingular(action.Target)} {GPPHimself(action.Target)} back outself the {GetRandomStringFrom("neck feathers", "hackles")}{GetRandomStringFrom(".", $", <b>{action.Unit.Name}</b> looking down at {GPPHim(action.Target)} in confusion.", $", <b>{action.Unit.Name}</b> looking down at {GPPHim(action.Target)} in confusion. \"How'd you get out?\"")}{odds}",
+                    $"<b>{action.Target.Name}</b> can feel the feathers closing in around {GPPHim(action.Target)}, threatening to absorb the {GetRaceDescSingl(action.Target)} into them, but {GPPHe(action.Target)} refuse{SIfSingular(action.Target)} to go out like this! With a final burst of effort, {GPPHe(action.Target)} pulls and pushes against the feathers, soon climbing back out of <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> {GetRandomStringFrom("neck feathers", "hackles")}{GetRandomStringFrom(".", $", the raven looking at {GPPHim(action.Target)} with a bit of frustration.", $", the raven looking at {GPPHim(action.Target)} with a bit of frustration. \"Hey! Get back in there!\"")}{odds}"
+                    );
+                }
                 if (action.Unit.Race == Race.Bees)
                 {
                     return GetRandomStringFrom(
@@ -891,7 +905,7 @@ public class TacticalMessageLog
             return GetRandomStringFrom(possibleLines.ToArray());
         }
         possibleLines.Add($"<b>{action.Unit.Name}</b> decides to {GetRandomStringFrom("release", "free", "regurgitate", "eject")} <b>{action.Target.Name}</b>.");//Generic unspecified line
-        if (!(action.preyLocation == PreyLocation.tail && ((action.Unit.Race == Race.Youko) || (action.Unit.Race == Race.Terrorbird))) && !(action.preyLocation == PreyLocation.breasts && (action.Unit.Race == Race.Kangaroos)))//Exclude races that use repurposed vore locations from generic lines that specify the prey location
+        if (!(action.preyLocation == PreyLocation.tail && ((action.Unit.Race == Race.Youko) || (action.Unit.Race == Race.Terrorbird) || (action.Unit.Race == Race.Tatltuae))) && !(action.preyLocation == PreyLocation.breasts && (action.Unit.Race == Race.Kangaroos)))//Exclude races that use repurposed vore locations from generic lines that specify the prey location
         {
         possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("regurgitated", "released", "freed", "pushed out")} <b>{action.Target.Name}</b>{GetRandomStringFrom(".", $" from {GPPHis(action.Unit)} {PreyLocStrings.ToSyn(action.preyLocation)}.")}");
         possibleLines.Add($"<b>{action.Unit.Name}</b> decides to eject <b>{action.Target.Name}</b> from {GPPHis(action.Unit)} {PreyLocStrings.ToSyn(action.preyLocation)}.");
@@ -996,7 +1010,7 @@ public class TacticalMessageLog
         }
         else if (action.preyLocation == PreyLocation.tail)
         {
-            if (!(action.Unit.Race == Race.Youko) && !(action.Unit.Race == Race.Terrorbird))
+            if (!(action.Unit.Race == Race.Youko) && !(action.Unit.Race == Race.Terrorbird) && !(action.Unit.Race == Race.Tatltuae))
             {
                 possibleLines.Add($"No longer able to tolerate the weight of <b>{action.Target.Name}</b> in {GPPHis(action.Unit)} tail, <b>{action.Unit.Name}</b> presses on the bulge {GPPHe(action.Target)} make{SIfSingular(action.Unit)}, and pushes {GPPHim(action.Target)} back out into the world.");
                 possibleLines.Add($"{GetRandomStringFrom("Done with", "No longer wanting to hold onto")} <b>{action.Target.Name}</b>, <b>{action.Unit.Name}</b> starts to swing {GPPHis(action.Unit)} tail back and forth, slowly at first, then faster with each swing until the {GetRaceDescSingl(action.Target)} is forced out of the tail, landing with a wet splat on the ground.");
@@ -1029,6 +1043,18 @@ public class TacticalMessageLog
                     possibleLines.Add($"Bored of holding <b>{action.Target.Name}</b> in {GPPHis(action.Unit)} tails, <b>{action.Unit.Name}</b> decides to let {GPPHim(action.Target)} go, unfurling {GPPHis(action.Unit)} tails and dropping the {GetRaceDescSingl(action.Target)} unceremoniously on the ground.");
                     possibleLines.Add($"<b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bunched up tails pull apart, revealing <b>{action.Target.Name}</b>, disappointed that the {ApostrophizeWithOrWithoutS(GetRaceDescSingl(action.Unit))} soft tails are no longer blanketing {GPPHim(action.Target)} on all sides.");
                     possibleLines.Add($"Slowly, the clump of soft fur cradling <b>{action.Target.Name}</b> parts, as <b>{action.Unit.Name}</b> decides {GPPHe(action.Unit)} no longer want{SIfSingular(action.Unit)} to carry {GPPHim(action.Target)}.");
+                }
+            }
+            if (action.Unit.Race == Race.Tatltuae)
+            {
+                possibleLines.Add($"As {GPPHe(action.Target)} sit{SIfSingular(action.Target)} in a void of soft feathers, <b>{action.Target.Name}</b> is startled by the wing-arm of <b>{action.Unit.Name}</b> reaching in and pulling {GPPHim(action.Target)} out of his {GetRandomStringFrom("neck feathers", "hackles")}.");
+                possibleLines.Add($"<b>{action.Unit.Name}</b>, irritated by the struggles of <b>{action.Target.Name}</b>, stops and shakes his head vigorously, the {GetRaceDescSingl(action.Target)} being tossed out of his {GetRandomStringFrom("neck feathers", "hackles")} and onto the ground.");
+                possibleLines.Add($"<b>{action.Target.Name}</b> feels {GPPHimself(action.Target)} suddenly get grabbed by something and yanked out of the raven's {GetRandomStringFrom("neck feathers", "hackles")} as <b>{action.Unit.Name}</b> tosses {GPPHim(action.Target)} out.");
+                if (action.Unit.Side == action.Target.Side && ( action.Unit.HasTrait(Traits.FriendlyStomach) || action.Unit.HasTrait(Traits.Endosoma)))
+                {
+                    possibleLines.Add($"As {GPPHe(action.Target)} sit{SIfSingular(action.Target)} in a void of soft feathers and assorted items, <b>{action.Target.Name}</b> is startled by the wing-arm of <b>{action.Unit.Name}</b> reaching in and pulling {GPPHim(action.Target)} out of his {GetRandomStringFrom("neck feathers", "hackles")}. \"Ok, you've had your stay, time to get out again.\"");
+                    possibleLines.Add($"<b>{action.Unit.Name}</b>, done holding onto <b>{action.Target.Name}</b>, stops and shakes his head vigorously, the {GetRaceDescSingl(action.Target)} being tossed out of his {GetRandomStringFrom("neck feathers", "hackles")} and onto the ground, alongside some assorted items the raven quickly collects and puts back in his feathers.");
+                    possibleLines.Add($"<b>{action.Target.Name}</b> feels {GPPHimself(action.Target)} suddenly get grabbed by something and gently pulled out of the raven's {GetRandomStringFrom("neck feathers", "hackles")} as <b>{action.Unit.Name}</b> sets {GPPHim(action.Target)} on the ground.");
                 }
             }
         }

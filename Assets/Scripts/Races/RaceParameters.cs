@@ -4379,7 +4379,7 @@ static class RaceParameters
             StomachSize = 27,
             FavoredStat = Stat.Mind,
             HasTail = true,
-            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore, VoreType.BladderVore },
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore, VoreType.BladderVore, VoreType.TailVore },
             ExpMultiplier = 1.4f,
             PowerAdjustment = 2f,
             DeployCost = 1,

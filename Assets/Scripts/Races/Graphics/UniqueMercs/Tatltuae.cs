@@ -5,6 +5,7 @@ using UnityEngine;
 class Tatltuae : DefaultRaceData
 {
     readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Tatltuae;
+    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.TatltuaeHackleVore;
     bool facingFront = true;
     internal Tatltuae()
     {
@@ -35,29 +36,29 @@ class Tatltuae : DefaultRaceData
         ExtendedBreastSprites = false;
 
         Body = new SpriteExtraInfo(3, BodySprite, WhiteColored);
-        Head = new SpriteExtraInfo(6, HeadSprite, WhiteColored);
+        Head = new SpriteExtraInfo(7, HeadSprite, WhiteColored);
         BodyAccessory = null;
         BodyAccent = new SpriteExtraInfo(5, BodyAccentSprite, WhiteColored); // Shirt
         BodyAccent2 = new SpriteExtraInfo(4, BodyAccentSprite2, WhiteColored); // Pants
-        BodyAccent3 = new SpriteExtraInfo(8, BodyAccentSprite3, WhiteColored); // Glasses
-        BodyAccent4 = new SpriteExtraInfo(9, BodyAccentSprite4, WhiteColored); // Hat
-        BodyAccent5 = null;
+        BodyAccent3 = new SpriteExtraInfo(9, BodyAccentSprite3, WhiteColored); // Glasses
+        BodyAccent4 = new SpriteExtraInfo(10, BodyAccentSprite4, WhiteColored); // Hat
+        BodyAccent5 = new SpriteExtraInfo(6, BodyAccentSprite5, WhiteColored); // Hackles!!!
         BodyAccent6 = null;
         Mouth = null;
         Hair = null;
         Hair2 = null;
-        Eyes = new SpriteExtraInfo(7, EyesSprite, WhiteColored);
+        Eyes = new SpriteExtraInfo(8, EyesSprite, WhiteColored);
         SecondaryEyes = null;
         SecondaryAccessory = null;
-        Belly = new SpriteExtraInfo(11, null, WhiteColored);
+        Belly = new SpriteExtraInfo(12, null, WhiteColored);
         SecondaryBelly = null;
         Weapon = null;
         BackWeapon = null;
         BodySize = null;
         Breasts = null;
         BreastShadow = null;
-        Dick = new SpriteExtraInfo(8, DickSprite, WhiteColored); 
-        Balls = new SpriteExtraInfo(7, BallsSprite, WhiteColored); 
+        Dick = new SpriteExtraInfo(9, DickSprite, WhiteColored); 
+        Balls = new SpriteExtraInfo(8, BallsSprite, WhiteColored); 
     }
 
     internal override int BreastSizes => 1;
@@ -219,6 +220,33 @@ class Tatltuae : DefaultRaceData
             return null;
     }
 
+    protected override Sprite BodyAccentSprite5(Actor_Unit actor) // hackles
+    {
+        int sizet = actor.GetTailSize(2);
+        if (actor.Unit.Predator == false || actor.PredatorComponent?.TailFullness == 0 || !facingFront)
+            return null;
+        else
+            {
+                if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.tail) && sizet == 2)
+                {
+                    AddOffset(Belly, 0, -34 * .625f);
+                    return Sprites2[5];
+                }
+                else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.tail) && sizet == 2)
+                {
+                    AddOffset(Belly, 0, -34 * .625f);
+                    return Sprites2[4];
+                }
+                else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.tail) && sizet == 1)
+                {
+                    AddOffset(Belly, 0, -34 * .625f);
+                    return Sprites2[3];
+                }
+                else
+                    return Sprites2[(sizet)];
+            }
+    }
+
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
 
@@ -229,7 +257,7 @@ class Tatltuae : DefaultRaceData
         {
             belly.transform.localScale = new Vector3(1, 1, 1);
             belly.SetActive(true);
-            Belly.layer = 11;
+            Belly.layer = 12;
             int size = actor.GetStomachSize(31, 0.8f);
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && size == 31)
             {
@@ -293,7 +321,7 @@ class Tatltuae : DefaultRaceData
                     belly.transform.localScale = new Vector3(xScale, yScale, 1);
                 }
                 belly.SetActive(true);
-                Belly.layer = 4;
+                Belly.layer = 5;
                 int size = actor.GetStomachSize(30, 0.8f);
                 return Sprites[Math.Min(95 + size, 110)];
             }
@@ -314,7 +342,7 @@ class Tatltuae : DefaultRaceData
             {
                 if (actor.PredatorComponent?.VisibleFullness < .75f)
                 {
-                    Dick.layer = 18;
+                    Dick.layer = 19;
                     if (actor.IsCockVoring)
                     {
                         return Sprites[20];
@@ -326,7 +354,7 @@ class Tatltuae : DefaultRaceData
                 }
                 else
                 {
-                    Dick.layer = 10;
+                    Dick.layer = 11;
                     if (actor.IsCockVoring)
                     {
                         return Sprites[22];
@@ -337,12 +365,12 @@ class Tatltuae : DefaultRaceData
                     }
                 }
             }
-            Dick.layer = 8;
+            Dick.layer = 9;
             return null;
         }
         else
         {
-            Dick.layer = 5;
+            Dick.layer = 6;
             return Sprites[26];
         }
     }
@@ -357,11 +385,11 @@ class Tatltuae : DefaultRaceData
                 return null;
             if (actor.IsErect() && (actor.PredatorComponent?.VisibleFullness < .75f))
             {
-                Balls.layer = 17;
+                Balls.layer = 18;
             }
             else
             {
-                Balls.layer = 7;
+                Balls.layer = 8;
             }
             int offset = actor.GetBallSize(27, .8f);
             if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false) && offset == 27)
@@ -418,7 +446,7 @@ class Tatltuae : DefaultRaceData
         }
         else
         {
-            Balls.layer = 7;
+            Balls.layer = 8;
             int offset = actor.GetBallSize(15, .8f);
             if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false) && offset == 15)
             {
