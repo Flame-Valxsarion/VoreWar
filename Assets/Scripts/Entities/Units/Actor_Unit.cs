@@ -1517,7 +1517,7 @@ public class Actor_Unit
         return true;
     }
 
-    public bool Attack(Actor_Unit target, bool ranged, bool forceBite = false, float damageMultiplier = 1, bool canKill = true)
+    public bool Attack(Actor_Unit target, bool ranged, bool forceBite = false, float damageMultiplier = 1, DamageLethality lethality = DamageLethality.Lethal)
     {
         Weapon weapon;
         if (ranged)
@@ -1644,7 +1644,7 @@ public class Actor_Unit
                 if (Unit.GetStatusEffect(StatusEffectType.Sharpness) != null)
                     damage += damage * (Unit.GetStatusEffect(StatusEffectType.Sharpness).Duration / 100);
                 State.GameManager.SoundManager.PlaySwing(this);
-                if (target.Defend(this, damage, true, out float chance, canKill))
+                if (target.Defend(this, damage, true, out float chance, lethality))
                 {
                     EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnRangedHit, new object[] { this, target, damage });
 
@@ -1742,7 +1742,7 @@ public class Actor_Unit
                     }
                 }
 
-                if (target.Defend(this, damage, false, out float chance, canKill))
+                if (target.Defend(this, damage, false, out float chance, lethality))
                 {
                     EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnMeleeHit, new object[] { this, target, damage });
 
@@ -2153,7 +2153,7 @@ public class Actor_Unit
         return false;
     }
 
-    public bool Defend(Actor_Unit attacker, double damage, bool ranged, out float chance, bool canKill = true)
+    public bool Defend(Actor_Unit attacker, double damage, bool ranged, out float chance, DamageLethality lethality = DamageLethality.Lethal)
     {
         EquipmentFunctions.CheckEquipment(Unit, ranged ? EquipmentActivator.WhenRangedAttacked : EquipmentActivator.WhenMeleeAttacked, new object[] { this, attacker, damage });
 
@@ -2178,8 +2178,8 @@ public class Actor_Unit
         {
             EquipmentFunctions.CheckEquipment(Unit, ranged ? EquipmentActivator.WhenRangedHit : EquipmentActivator.WhenMeleeHit, new object[] { this, attacker, damage });
 
-            Damage(damage, canKill: canKill);
-            if (canKill == false && attacker.Unit.HasTrait(Traits.VenomousBite))
+            Damage(damage, lethality: lethality);
+            if (lethality == DamageLethality.ForceSurrender && attacker.Unit.HasTrait(Traits.VenomousBite)) // "ForceSurrender" attacks being, for the moment, synonymous with Bite attacks, this works. It may need changing in the future.
             {
                 Unit.ApplyStatusEffect(StatusEffectType.Poisoned, 3, 3);
                 Unit.ApplyStatusEffect(StatusEffectType.Shaken, .2f, 2);
@@ -2767,14 +2767,14 @@ public class Actor_Unit
                 {
                     foreach (var target in targets)
                     {
-                        target.Damage(Unit.Level, true, false, DamageTypes.Fire);
+                        target.Damage(Unit.Level, true, DamageLethality.NonLethal, DamageTypes.Fire);
                     }
                 }
             }
             else
             {
-                Damage(Unit.Level, true, false, DamageTypes.Fire);
-                SelfPrey.Predator.Damage(Unit.Level, true, false, DamageTypes.Fire);
+                Damage(Unit.Level, true, DamageLethality.NonLethal, DamageTypes.Fire);
+                SelfPrey.Predator.Damage(Unit.Level, true, DamageLethality.NonLethal, DamageTypes.Fire);
             }
         }
 
@@ -2952,7 +2952,7 @@ public class Actor_Unit
         return damage;
     }
 
-    public bool Damage(double damage, bool spellDamage = false, bool canKill = true, DamageTypes damageType = DamageTypes.Generic)
+    public bool Damage(double damage, bool spellDamage = false, DamageLethality lethality = DamageLethality.Lethal, DamageTypes damageType = DamageTypes.Generic)
     {
         if (Unit.IsDead)
         {
@@ -2978,12 +2978,14 @@ public class Actor_Unit
         UnitSprite.DisplayDamage(finalDamage, spellDamage);
         finalDamage = Unit.DamageBarrier(finalDamage);
         SubtractHealth(finalDamage);
+        if (Unit.IsDead && lethality == DamageLethality.NonLethal)
+            Unit.Health = 1;
         if (Unit.GetStatusEffect(StatusEffectType.Agony) != null)
         {
             StatusEffect eff = Unit.GetStatusEffect(StatusEffectType.Agony);
             eff.Strength += finalDamage * 0.35f;
         }
-        if ((State.Rand.NextDouble() > Unit.HealthPct))
+        if (State.Rand.NextDouble() > Unit.HealthPct)
         {
             if (Unit.HasTrait(Traits.Cowardly))
             {
@@ -3032,7 +3034,7 @@ public class Actor_Unit
                 }
             }
         }
-        if ((canKill == false && Unit.IsDead) || (Config.AutoSurrender && Unit.IsDead && State.Rand.NextDouble() < Config.AutoSurrenderChance && Surrendered == false && Unit.HasTrait(Traits.Fearless) == false && !KilledByDigestion && Unit.GetStatusEffect(StatusEffectType.Respawns) == null))
+        if (Unit.IsDead && (lethality == DamageLethality.ForceSurrender || (Config.AutoSurrender && State.Rand.NextDouble() < Config.AutoSurrenderChance && Surrendered == false && Unit.HasTrait(Traits.Fearless) == false && !KilledByDigestion && Unit.GetStatusEffect(StatusEffectType.Respawns) == null)))
         {
             Unit.Health = 1;
             Surrendered = true;
@@ -3561,7 +3563,7 @@ public class Actor_Unit
                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Suddenly, there is a flash of light and both casters stagger for a moment. What happened?.");
                     t.Unit.Type = UnitType.Adventurer;
                     t.Surrendered = true;
-                    t.Damage(9999999, true, true);
+                    t.Damage(9999999, true);
                     t.Visible = false;
                     t.Unit.Name += " The Banished";
                 }
