@@ -1189,6 +1189,8 @@ public class TacticalMessageLog
                     return $"As the {PreyLocStrings.ToFluid(PreyLocation.bladder)} around <b>{action.Target.Name}</b> fizzes violently, the {GetRaceDescSingl(action.Target)} commits to one last struggle. Either {GPPHe(action.Target)} escape{SIfSingular(action.Target)}, or {GPPHe(action.Target)} become{SIfSingular(action.Target)} {PreyLocStrings.ToFluid(PreyLocation.bladder)}.";
             }
         }
+        if (action.preyLocation == PreyLocation.tail && action.Unit.Race == Race.Tatltuae)
+            return $"<b>{action.Target.Name}</b> finds it harder and harder to keep focused as the feathers around {GPPHim(action.Target)} get softer and warmer, and the urge to sleep rises.";
         int ran = Random.Range(0, 9);
         switch (ran)
         {

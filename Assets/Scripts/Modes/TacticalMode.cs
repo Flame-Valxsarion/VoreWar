@@ -3503,6 +3503,10 @@ Turns: {currentTurn}
                 {
                     unit.UnitSprite.AnimateSecondBelly(unit.PredatorComponent.PreyNearLocation(PreyLocation.stomach2, true) * 0.0022f);
                 }
+                if (unit.PredatorComponent?.TailFullness > 0 && unit.PredatorComponent?.AlivePrey > 0 && unit.Unit.Race == Race.Tatltuae)//Wiggle the hackles
+                {
+                    unit.UnitSprite.AnimateSecondBelly(unit.PredatorComponent.PreyNearLocation(PreyLocation.tail, true) * 0.0022f);
+                }
                 if (unit.PredatorComponent?.BallsFullness > 0 && unit.PredatorComponent?.AlivePrey > 0)
                 {
                     unit.UnitSprite.AnimateBalls(unit.PredatorComponent.PreyNearLocation(PreyLocation.balls, true) * 0.0022f);

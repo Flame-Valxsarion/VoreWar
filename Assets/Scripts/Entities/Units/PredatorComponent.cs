@@ -290,6 +290,11 @@ public class PredatorComponent
             case PreyLocation.bladder:
             case PreyLocation.anal:
             case PreyLocation.tail:
+                foreach (Prey unit in tail)
+                {
+                    if (unit.Unit.IsDead != alive)
+                        prey += 1;
+                }
                 foreach (Prey unit in stomach)
                 {
                     if (unit.Unit.IsDead != alive)

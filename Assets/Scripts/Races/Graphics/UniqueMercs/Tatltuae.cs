@@ -36,13 +36,13 @@ class Tatltuae : DefaultRaceData
         ExtendedBreastSprites = false;
 
         Body = new SpriteExtraInfo(3, BodySprite, WhiteColored);
-        Head = new SpriteExtraInfo(7, HeadSprite, WhiteColored);
+        Head = new SpriteExtraInfo(6, HeadSprite, WhiteColored);
         BodyAccessory = null;
         BodyAccent = new SpriteExtraInfo(5, BodyAccentSprite, WhiteColored); // Shirt
         BodyAccent2 = new SpriteExtraInfo(4, BodyAccentSprite2, WhiteColored); // Pants
         BodyAccent3 = new SpriteExtraInfo(9, BodyAccentSprite3, WhiteColored); // Glasses
         BodyAccent4 = new SpriteExtraInfo(10, BodyAccentSprite4, WhiteColored); // Hat
-        BodyAccent5 = new SpriteExtraInfo(6, BodyAccentSprite5, WhiteColored); // Hackles!!!
+        BodyAccent5 = null;
         BodyAccent6 = null;
         Mouth = null;
         Hair = null;
@@ -51,7 +51,7 @@ class Tatltuae : DefaultRaceData
         SecondaryEyes = null;
         SecondaryAccessory = null;
         Belly = new SpriteExtraInfo(12, null, WhiteColored);
-        SecondaryBelly = null;
+        SecondaryBelly = new SpriteExtraInfo(7, SecondaryBellySprite, WhiteColored); // Hackles!!!
         Weapon = null;
         BackWeapon = null;
         BodySize = null;
@@ -220,7 +220,7 @@ class Tatltuae : DefaultRaceData
             return null;
     }
 
-    protected override Sprite BodyAccentSprite5(Actor_Unit actor) // hackles
+    protected override Sprite SecondaryBellySprite(Actor_Unit actor) // hackles
     {
         int sizet = actor.GetTailSize(2);
         if (actor.Unit.Predator == false || actor.PredatorComponent?.TailFullness == 0 || !facingFront)
@@ -489,7 +489,6 @@ class Tatltuae : DefaultRaceData
 
     protected override Sprite AccessorySprite(Actor_Unit actor) => null;
     protected override Sprite BackWeaponSprite(Actor_Unit actor) => null;
-    protected override Sprite SecondaryBellySprite(Actor_Unit actor) => null;
     protected override Color BodyAccessoryColor(Actor_Unit actor) => Color.white;
     protected override Color BodyColor(Actor_Unit actor) => Color.white;
     protected override Sprite BodySizeSprite(Actor_Unit actor) => null;
