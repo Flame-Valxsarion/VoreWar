@@ -176,6 +176,7 @@ Alraune
 Ants
 Warrior Ants
 Avians
+Badgers
 Bees
 Cockatrice
 Deer
@@ -196,6 +197,8 @@ Mantis
 Merfolk
 Monitors
 Raiju
+Renamon
+Ryan
 Sharks
 Singularity
 Skapa
@@ -209,9 +212,6 @@ T-Rex
 Utahraptors
 Vargul
 Vipers
-Badgers
-Ryan
-Renamon
 
 <b><u>Novoyetelo:</b></u>
 Abakhanskya
@@ -239,12 +239,13 @@ Olivia
 <b><u>Tatltuae:</b></u>
 Aabayx
 Banner updates (w/ Wolfwar)
+Bird scat sprites
+Iliijiith
+Schiwardez OV Belly sprites
 Tatltuae
 Twisted Vine Updates
-Virae Ultimae
-Iliijiith
-Bird scat sprites
 Urine sprites
+Virae Ultimae
 
 <b><u>Wolfwar106:</b></u>
 Boom Bunnies
@@ -326,9 +327,14 @@ Ryan
 <b><u>Zezmeril:</b></u>
 Skapa
 
+<b><u>IronGelatin:</b></u>
+Nectar
+
 <b><u>Yonell:</b></u>
 Seville
 
+<b><u>Bandi Namco/Toei Animation:</b></u>
+Renamon
 <b><u>GAME FREAK/Creatures Inc./Nintendo:</b></u>
 Goodra
 Eevee, Anthro and Feral
