@@ -4769,6 +4769,7 @@ Turns: {currentTurn}
                 StatusUI.EndTurn.interactable = true;
                 return false;
             }
+            HandlePostBattleTraits();
             ProcessReplaceable(remainingAttackers);
 
             foreach (Actor_Unit actor in units)
@@ -5658,6 +5659,17 @@ Turns: {currentTurn}
     {
         foreach (var actor in units)
         {
+            if (actor.Unit.HasTrait(Traits.InherentGlamour))
+            {
+                var possible_targets = units.Where(u => !u.Unit.IsEnemyOfSide(actor.Unit.Side) && !u.Unit.HasTrait(Traits.InherentGlamour)).ToList();
+                if (possible_targets.Any())
+                {
+                    actor.Unit.TacticalCopy = possible_targets[State.Rand.Next(0, possible_targets.Count())].Unit;
+                    actor.Unit.CopyTacticalUnit();
+                    actor.UpdateBestWeapons();
+                }
+            }
+
             if (actor.Unit.HasTrait(Traits.CurseOfCraving))
             {
                 if (actor.Unit.Predator)
@@ -5684,6 +5696,21 @@ Turns: {currentTurn}
                         possible_targets[State.Rand.Next(0, possible_targets.Count())].PredatorComponent.ForceConsumeAuto(actor);
                     }
 
+                }
+            }
+        }
+    }
+
+    internal void HandlePostBattleTraits()
+    {
+        foreach (var actor in units)
+        {
+            // Check if Unit is still a copy of another unit.
+            if (actor.Unit.IsACopy())
+            {
+                if (actor.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour))
+                {
+                    actor.Unit.RevertCopiedUnit(); // Return unit to initial state
                 }
             }
         }

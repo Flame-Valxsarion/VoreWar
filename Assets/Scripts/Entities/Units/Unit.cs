@@ -319,6 +319,11 @@ public class Unit
     public List<Unit> ShifterShapes;
 
     [OdinSerialize]
+    internal Unit TacticalCopy;
+    [OdinSerialize]
+    internal Unit OriginalUnit;
+
+    [OdinSerialize]
     public Unit MorphUnit = null;
 
     public override string ToString() => Name;
@@ -748,6 +753,8 @@ public class Unit
 
         InnateSpells = new List<SpellTypes>();
         ShifterShapes = new List<Unit>();
+        TacticalCopy = null;
+        OriginalUnit = null;
 
         if (race == Race.Dragon)
         {
@@ -1419,6 +1426,8 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         TimesKilled++;
         if (SavedCopy != null)
             SavedCopy.TimesKilled++;
+        if (OriginalUnit != null)
+            RevertCopiedUnit();          
     }
 
     public void DrainExp(float exp)
@@ -2819,6 +2828,12 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         }
         return highestType;
     }
+
+    public Stat GetHighestStat()
+    {
+        return (Stat)GetHighestStatIndex();
+    }
+
     public int GetLowestStatIndex()
     {
         int lowestType = 0;
@@ -3539,6 +3554,76 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
         InitializeTraits();
         SetMaxItems();
+    }
+
+    internal void SetCopyUnit(Unit unit)
+    {
+        TacticalCopy = unit;
+    }
+
+    internal void CopyTacticalUnit()
+    {
+        if (TacticalCopy == null)
+        {
+            return;
+        }
+
+        Unit original = Clone();
+        original.TacticalCopy = null;
+        original.HardCopyUnit(this);
+        OriginalUnit = original;
+
+        HardCopyUnit(TacticalCopy);
+
+        TacticalCopy = null;
+    }
+
+    internal void RevertCopiedUnit()
+    {
+        if (OriginalUnit == null)
+        {
+            return;
+        }
+        HardCopyUnit(OriginalUnit);
+
+        Health = OriginalUnit.Health;
+
+        InitializeTraits();
+        SetMaxItems();
+        OriginalUnit = null;
+    }
+
+    internal void HardCopyUnit(Unit unit)
+    {
+        Race = unit.Race;
+        Name = unit.Name;
+        level = unit.level;
+        Stats = unit.Stats;
+        CopyAppearance(unit);
+        ClearAllTraits();
+        PermanentTraits.Clear();
+        RemovedTraits.Clear();
+        ReloadTraits();
+
+        Tags = new List<Traits>(unit.Tags);
+        PermanentTraits = new List<Traits>(unit.PermanentTraits);
+        RemovedTraits = new List<Traits>(unit.RemovedTraits);
+
+        InitializeTraits();
+        SetMaxItems();
+
+        Items = unit.Items;
+        ItemUses = unit.ItemUses;
+        ItemCooldowns = unit.ItemCooldowns;
+        EquippedPotions = new Dictionary<int, int[]>(unit.EquippedPotions);
+        Health = unit.Health;
+        Mana = unit.Mana;
+
+    }
+
+    internal bool IsACopy()
+    {
+        return OriginalUnit != null;
     }
 
     internal StatusEffect GetLongestStatusEffect(StatusEffectType type)

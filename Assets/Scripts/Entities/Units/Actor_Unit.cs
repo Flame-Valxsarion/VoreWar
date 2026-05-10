@@ -1778,6 +1778,13 @@ public class Actor_Unit
                         target.Unit.RemoveFocus();
                     if (target.Unit.HasTrait(Traits.Crystaline) && State.Rand.Next(4) == 0)
                         target.Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
+                    if (target.Unit.IsACopy())
+                    {
+                        if (target.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour))
+                        {
+                            target.Unit.RevertCopiedUnit();
+                        }
+                    }
                     if (Unit.GetStatusEffect(StatusEffectType.Sharpness) != null)                  
                         Unit.RemoveStackStatus(StatusEffectType.Sharpness, Unit.GetStatusEffect(StatusEffectType.Sharpness).Duration / 2);
 
@@ -1890,6 +1897,13 @@ public class Actor_Unit
                         TacticalUtilities.KnockBack(this, target);
                     if (Unit.GetStatusEffect(StatusEffectType.Sharpness) != null)
                         Unit.RemoveStackStatus(StatusEffectType.Sharpness, Unit.GetStatusEffect(StatusEffectType.Sharpness).Duration / 2);
+                    if (target.Unit.IsACopy())
+                    {
+                        if (target.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour))
+                        {
+                            target.Unit.RevertCopiedUnit();
+                        }
+                    }
                     State.GameManager.SoundManager.PlayMeleeHit(target);
 
                     State.GameManager.TacticalMode.TacticalStats.RegisterHit(BestMelee, Mathf.Min(damage, remainingHealth), Unit.Side);

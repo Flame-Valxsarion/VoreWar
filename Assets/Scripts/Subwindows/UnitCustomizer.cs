@@ -619,6 +619,22 @@ public class UnitCustomizer
                 buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Spots Type";
                 buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Lower Mushroom Type";
                 break;
+            case Race.OoviKat:
+                buttons[(int)ButtonTypes.BeardStyle].Label.text = "Thigh Pattern";
+                buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Flower Type";
+                buttons[(int)ButtonTypes.HeadType].Label.text = "Head Pattern";
+                buttons[(int)ButtonTypes.ExtraColor1].Label.text = "Secondary Color";
+                buttons[(int)ButtonTypes.ExtraColor2].Label.text = "Flower Color";
+                buttons[(int)ButtonTypes.ExtraColor4].Label.text = "Shin Pattern";
+                buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Main Pattern Color";
+                buttons[(int)ButtonTypes.FurTypes].Label.text = "Main Pattern Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Eyebrows";
+                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Face Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Shoulder Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Hand Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes5].Label.text = "Shin Bright Pattern";
+                buttons[(int)ButtonTypes.VulvaTypes].Label.text = "Head Accessory";
+                break;
         }
     }
 

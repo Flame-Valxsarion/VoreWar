@@ -279,6 +279,7 @@ class OoviKat : DefaultRaceData
         unit.BodyAccentType5 = State.Rand.Next(BodyAccentTypes5);
         unit.FurType = State.Rand.Next(FurTypes);
         unit.VulvaType = State.Rand.Next(VulvaTypes);
+        unit.TailType = State.Rand.Next(TailTypes);
 
         if (unit.HasDick && unit.HasBreasts)
         {

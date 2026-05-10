@@ -127,6 +127,7 @@ static class RaceParameters
     static readonly RaceTraits Iliijiith;
     static readonly RaceTraits Equaleon;
     static readonly RaceTraits Viisels;
+    static readonly RaceTraits Pudding;
     static readonly RaceTraits FeralEevee;
     static readonly RaceTraits FeralUmbreon;
     static readonly RaceTraits FeralEqualeon;
@@ -422,6 +423,8 @@ static class RaceParameters
                 return Iliijiith;
             case Race.Viisels:
                 return Viisels;
+            case Race.Pudding:
+                return Pudding;
             case Race.FeralEevee:
                 return FeralEevee;
             case Race.FeralUmbreon:
@@ -1323,7 +1326,7 @@ static class RaceParameters
         {
             BodySize = 15,
             StomachSize = 20,
-            HasTail = false,
+            HasTail = true,
             FavoredStat = Stat.Mind,
             DeployCost = 1,
             Upkeep = 5f,
@@ -1332,6 +1335,7 @@ static class RaceParameters
                 Traits.Flight,
                 Traits.NaturalCaster,
                 Traits.StrongGullet,
+                Traits.Hoarder,
         },
             RaceDescription = "Dragon goes brrr",
         };
@@ -1343,12 +1347,12 @@ static class RaceParameters
             HasTail = false,
             FavoredStat = Stat.Mind,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 3f,
             RacialTraits = new List<Traits>()
         {
-                Traits.Flight,
-                Traits.NaturalCaster,
-                Traits.StrongGullet,
+            Traits.MagicProwess,
+            Traits.Multifaceted,
+            Traits.EasyToVore,
         },
             RaceDescription = "Your honor,League of Legends.",
         };
@@ -1774,12 +1778,10 @@ static class RaceParameters
             },
             RacialTraits = new List<Traits>()
         {
-            Traits.StrongMelee,
-            Traits.PackStrength,
-            Traits.Resilient,
+            Traits.InherentGlamour,
             Traits.Biter,
         },
-            RaceDescription = "A race renowned for their excellent smithing and startling strength despite their stature. Their settlements have rarely been seen above ground however, they are known to have ginormous kingdoms underground that dwarf most other faction's capitals.",
+            RaceDescription = ".",
         };
 
         RwuMercenaries = new RaceTraits()
@@ -3271,6 +3273,38 @@ static class RaceParameters
                 Traits.EasyToVore,
         },
             RaceDescription = "The Viisels, after first arriving in this world, used to live in burrows and only hunted those who got too close. But after one of their own, Ki, proved himself a capable battler, they've been forced onto the offensive as the people of the world are no longer willing to leave them be, though as the Viisels have gained a taste for other people, the small sapients grow increasingly bold... And hungry.",
+        };
+
+        Pudding = new RaceTraits()
+        {
+            BodySize = 20,
+            StomachSize = 20,
+            HasTail = false,
+            FavoredStat = Stat.Stomach,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
+            ExpMultiplier = 1.75f,
+            PowerAdjustment = 1.25f,
+            DeployCost = 1,
+            Upkeep = 6f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(6, 12),
+                Dexterity = new RaceStats.StatRange(4, 8),
+                Endurance = new RaceStats.StatRange(15, 20),
+                Mind = new RaceStats.StatRange(4, 10),
+                Will = new RaceStats.StatRange(6, 12),
+                Agility = new RaceStats.StatRange(6, 10),
+                Voracity = new RaceStats.StatRange(10, 18),
+                Stomach = new RaceStats.StatRange(15, 25),
+            },
+            RacialTraits = new List<Traits>()
+            {
+                    Traits.Tasty,
+                    Traits.SoftBody,
+                    Traits.BoggingSlime,
+                    Traits.SlowerDigestion,
+            },
+            RaceDescription = "",
         };
 
         Goodra = new RaceTraits()

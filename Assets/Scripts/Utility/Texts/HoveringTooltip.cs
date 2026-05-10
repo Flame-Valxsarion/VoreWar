@@ -263,6 +263,8 @@ public class HoveringTooltip : MonoBehaviour
                         return $"Unit's Str,Dex, and Agi are reduced by {(effect.Strength * effect.Duration / 50)*100}% \nTurns Remaining: {effect.Duration}";
                     case StatusEffectType.Agony:
                         return $"Unit takes an additional 35% weapon damage, which is dealt over the duration of the effect.\n Stored damage: {(int)Math.Round(effect.Strength)}\nIncoming damage: {(int)Math.Round(effect.Strength / effect.Duration)}\n Turns Remaining: {effect.Duration}";
+                    case StatusEffectType.Sharpness:
+                        return $"Unit deals {(effect.Duration) * 100}% increased damage on its next non-magic attack. This effect is halved after every attack.";
                     case StatusEffectType.Fractured:
                         return $"Unit takes 150% damage from all sources until the end of combat.";
                 }
@@ -830,9 +832,9 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.DimensionalAntilock:
                 return "This unit is not completely fixed to the space around it. \n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
             case Traits.Hoarder:
-                return "Race increase the income of a village by 0.1% per population with this trait.";
+                return "Race increase the income of a village by 0.1%.";
             case Traits.NaturalCaster:
-                return "This unit is not completely fixed to the space around it. \n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
+                return "Unit gains Icicle, Fireball, Lightning Bolt, PowerBolt, or Poison as an innate spell.";
         }  
         return "<b>This trait needs a tooltip!</b>";
     }

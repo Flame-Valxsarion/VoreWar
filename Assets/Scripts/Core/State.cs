@@ -210,6 +210,10 @@ public static class State
             {
                 if (TieredTraitsList[trait].tags == null)
                 {
+                    if (UntaggedTraits.ContainsKey(TieredTraitsList[trait]))
+                    {
+                        continue;
+                    }
                     UntaggedTraits.Add(TieredTraitsList[trait], true);
                     continue;
                 }
