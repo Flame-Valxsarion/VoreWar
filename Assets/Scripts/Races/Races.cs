@@ -122,6 +122,7 @@
     static internal Trex Trex = new Trex();
     static internal Utahraptor Utahraptor = new Utahraptor();
     static internal Iliijiith Iliijiith = new Iliijiith();
+    static internal Pudding Pudding = new Pudding();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();
@@ -471,6 +472,8 @@
                 return Utahraptor;
             case Race.Iliijiith:
                 return Iliijiith;
+            case Race.Pudding:
+                return Pudding;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

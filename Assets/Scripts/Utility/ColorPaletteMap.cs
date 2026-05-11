@@ -140,6 +140,7 @@ public static class ColorPaletteMap
         YordleEyes,
         OoviKatMain,
         OoviKatBright,
+        PuddingSkin,
     }
 
     static Dictionary<SwapType, List<ColorSwapPalette>> Swaps;
@@ -326,6 +327,7 @@ public static class ColorPaletteMap
         List<ColorSwapPalette> YordleEyeSwaps = WireUp(SwapType.YordleEyes);
         List<ColorSwapPalette> OoviKatMainSwaps = WireUp(SwapType.OoviKatMain);
         List<ColorSwapPalette> OoviKatBrightSwaps = WireUp(SwapType.OoviKatBright);
+        List<ColorSwapPalette> PuddingSkinSwaps = WireUp(SwapType.PuddingSkin);
 
         int[] NormalIndexes = { 81, 153, 198, 229, 255 };
         Texture2D map = State.GameManager.PaletteDictionary.SimpleHair;
@@ -2480,6 +2482,21 @@ public static class ColorPaletteMap
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             OoviKatBrightSwaps.Add(swap);
+        }
+
+        map = State.GameManager.PaletteDictionary.PuddingSkin;
+        for (int pixelY = 0; pixelY < map.height; pixelY++)
+        {
+            Dictionary<int, Color> swapDict = new Dictionary<int, Color>
+            {
+                [62] = map.GetPixel(0, pixelY),
+                [96] = map.GetPixel(1, pixelY),
+                [123] = map.GetPixel(2, pixelY),
+                [151] = map.GetPixel(3, pixelY),
+                [200] = map.GetPixel(4, pixelY),
+            };
+            ColorSwapPalette swap = new ColorSwapPalette(swapDict);
+            PuddingSkinSwaps.Add(swap);
         }
 
         map = State.GameManager.PaletteDictionary.UmbreonSkin;

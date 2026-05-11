@@ -353,22 +353,27 @@ class Lamia : DefaultRaceData
             if (actor.Unit.HasDick == false)
                 return null;
 
+            int size = actor.Unit.DickSize;
+            if (size >= 6)
+            {
+                size = 6;
+            }
             if (actor.IsErect())
             {
                 if (actor.HasBelly == false)
                 {
                     Dick.layer = 18;
-                    return State.GameManager.SpriteDictionary.LamiaScalesBits[actor.Unit.DickSize + 1];
+                    return State.GameManager.SpriteDictionary.LamiaScalesBits[size];
                 }
                 else
                 {
                     Dick.layer = 12;
-                    return State.GameManager.SpriteDictionary.LamiaScalesBits[actor.Unit.DickSize + 1];
+                    return State.GameManager.SpriteDictionary.LamiaScalesBits[size];
                 }
             }
 
             Dick.layer = 9;
-            return State.GameManager.SpriteDictionary.LamiaScalesBits[1 + actor.Unit.DickSize];
+            return State.GameManager.SpriteDictionary.LamiaScalesBits[size];
         }
         if (actor.Unit.HasDick == false)
             return null;

@@ -598,6 +598,9 @@ public class StrategyMode : SceneBase
                             case StrategicDoodadType.SpawnerIliijiith:
                                 Spawners.Add(new MonsterSpawnerLocation(new Vec2i(i, j), Race.Iliijiith));
                                 break;
+                            case StrategicDoodadType.SpawnerPudding:
+                                Spawners.Add(new MonsterSpawnerLocation(new Vec2i(i, j), Race.Iliijiith));
+                                break;
                         }
                     }
                 }

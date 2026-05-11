@@ -104,4 +104,5 @@ public class PaletteDictionary : MonoBehaviour
     public Texture2D YordleEyes;
     public Texture2D OoviKatMain;
     public Texture2D OoviKatBright;
+    public Texture2D PuddingSkin;
 }

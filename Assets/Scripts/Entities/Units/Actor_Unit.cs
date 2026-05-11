@@ -2763,7 +2763,11 @@ public class Actor_Unit
         if (Targetable && Visible && Surrendered == false && Fled == false)
             RestoreMP();
         Unit.TickStatusEffects();
-        Unit.Heal(Unit.TraitBoosts.HealthRegen);
+        if (SelfPrey != null)
+        {
+            if (SelfPrey.TurnsDigested <= 100)
+                Unit.Heal(Unit.TraitBoosts.HealthRegen);
+        }
 
         if ((Config.AbsorbLoss ? PredatorComponent?.AlivePrey <= 0 : PredatorComponent.Fullness <= 0))
         {

@@ -301,6 +301,7 @@ public class ItemRepository
             new Weapon(name:"Rex Jaws", description:"Chomp!", cost:4, graphic:0, damage:15, range:1),
             new Weapon(name:"Utahraptor Claws", description:"Utahraptor Claws", cost:4, graphic:0, damage:6, range:1),
             new Weapon(name:"Exomatter Pulse", description:"A destructive pulse of theoretical particles that sit on the border between being real and not. Harmless if you aren't the target... Very harmful if you are.", cost:4, graphic:0, damage:5, range:1),
+            new Weapon(name:"Pudding Jaws", description:"Slimy and Sweet", cost:4, graphic:0, damage:3, range:1),
         };
 
         specialItems = new List<Item>()
