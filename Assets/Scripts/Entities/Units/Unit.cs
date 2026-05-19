@@ -2829,9 +2829,9 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         return highestType;
     }
 
-    public Stat GetHighestStat()
+    public bool IsHighestStat(Stat stat)
     {
-        return (Stat)GetHighestStatIndex();
+        return (Stat)GetHighestStatIndex() == stat;
     }
 
     public int GetLowestStatIndex()

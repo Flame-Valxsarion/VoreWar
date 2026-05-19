@@ -1063,6 +1063,17 @@ public class PredatorComponent
             {
                 preyUnit.Unit.ApplyStatusEffect(StatusEffectType.WillingPrey, 0, 3);
             }
+            if (actor.Unit.HasTrait(Traits.Multifaceted) && actor.Unit.IsHighestStat(Stat.Stomach))
+            {
+                if (preyUnit.Unit.GetStatusEffect(StatusEffectType.Lethargy) == null)
+                {
+                    preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Lethargy, 0.1f, 3);
+                }
+                else
+                {
+                    preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Lethargy, preyUnit.Unit.GetStatusEffect(StatusEffectType.Lethargy).Strength + 0.1f, 3);
+                }
+            }
             int preyDamage = CalculateDigestionDamage(preyUnit);
             if (preyUnit.Predator.Unit.HasTrait(Traits.Honeymaker) && preyUnit.Unit.IsDead && (preyUnit.Location == PreyLocation.breasts || preyUnit.Location == PreyLocation.leftBreast || preyUnit.Location == PreyLocation.rightBreast))
                 preyDamage /= 2;
@@ -2755,6 +2766,13 @@ public class PredatorComponent
                     target.UnitSprite.DisplayResist();
                     if (unit.HasTrait(Traits.Tenacious))
                         unit.AddTenacious();
+                }
+                if (actor.Unit.HasTrait(Traits.Multifaceted) && actor.Unit.IsHighestStat(Stat.Voracity))
+                {
+                    if (actor.Unit.GetStatusEffect(StatusEffectType.Predation) == null)
+                    {
+                        actor.Unit.ApplyStatusEffect(StatusEffectType.Predation, 0.2f, 2);
+                    }
                 }
 
             }

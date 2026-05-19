@@ -115,7 +115,7 @@ class Pudding : BlankSlate
         unit.BodyAccentType3 = State.Rand.Next(BodyAccentTypes3);
         unit.SpecialAccessoryType = State.Rand.Next(SpecialAccessoryCount);
         unit.MouthType = State.Rand.Next(MouthTypes);
-        unit.EarType = State.Rand.Next(EyeTypes);
+        unit.EyeType = State.Rand.Next(EyeTypes);
     }
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {

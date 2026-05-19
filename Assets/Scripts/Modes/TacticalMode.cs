@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TacticalDecorations;
+using UnityEditor.Experimental.UIElements.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Experimental.UIElements;
@@ -3812,10 +3813,7 @@ Turns: {currentTurn}
                             if (actor != null)
                             {
                                 int spellDamage = spell.Damage(SelectedUnit, actor);
-                                if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, actor.Unit)) // sneakAttack
-                                {
-                                    spellDamage *= 3;
-                                }
+                                spellDamage = SpellDamageMod(SelectedUnit, actor, spellDamage);
                                 actor.UnitSprite.ShowDamagedHealthBar(actor, spellDamage);
                                 string str = System.Math.Round(actor.GetMagicChance(SelectedUnit, CurrentSpell) * 100, 1) + "%\n-" + spellDamage;
                                 StatusUI.HitRate.text = str;
@@ -3828,10 +3826,7 @@ Turns: {currentTurn}
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinPattern(mouseLocation, spell.Pattern))
                     {
                         int spellDamage = spell.Damage(SelectedUnit, splashTarget);
-                        if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
-                            spellDamage *= 3;
-                        }
+                        spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
                         splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
                     }
                 }
@@ -3840,10 +3835,7 @@ Turns: {currentTurn}
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinRotatingPattern(mouseLocation, spell.Pattern, TacticalUtilities.GetRotatingOctant(SelectedUnit.Position, mouseLocation)))
                     {
                         int spellDamage = spell.Damage(SelectedUnit, splashTarget);
-                        if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
-                            spellDamage *= 3;
-                        }
+                        spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
                         splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
                     }
                 }
@@ -3852,16 +3844,27 @@ Turns: {currentTurn}
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(mouseLocation, spell.AreaOfEffect))
                     {
                         int spellDamage = spell.Damage(SelectedUnit, splashTarget);
-                        if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
-                            spellDamage *= 3;
-                        }
+                        spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
                         splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
                     }
                 }
 
 
             }
+        }
+
+        int SpellDamageMod(Actor_Unit attacker, Actor_Unit target, int damage)
+        {
+            int damMod = damage;
+            if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, target.Unit)) // sneakAttack
+            {
+                damMod *= 3;
+            }
+            if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) //For correct display of damage
+            {
+                damMod += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.2f);
+            }
+            return damMod;
         }
     }
 

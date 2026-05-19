@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.UI.CanvasScaler;
 
 public class Actor_Unit
 {
@@ -137,7 +138,8 @@ public class Actor_Unit
 
     [OdinSerialize]
     internal int TurnUsedShun = -5;
-
+    [OdinSerialize]
+    internal int MultifacetedCooldown = 0;
     [OdinSerialize]
     internal int TurnsSinceLastDamage = 9999;
 
@@ -286,6 +288,8 @@ public class Actor_Unit
         int bonus = 0;
         if (Unit.HasTrait(Traits.Charge) && State.GameManager.TacticalMode.currentTurn <= 2)
             bonus += 4;
+        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Agility) && Unit.HealthPct >= 0.5f)
+            bonus += 2;
         bonus += Unit.TraitBoosts.SpeedBonus;
         if (State.World?.ItemRepository != null && Unit.Items.Contains(State.World.ItemRepository.GetItem(ItemType.Shoes)))
             bonus += 1;
@@ -345,6 +349,7 @@ public class Actor_Unit
         Unit = unit;
         Visible = true;
         Targetable = true;
+        MultifacetedCooldown = Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity) ? Unit.Level + 1 : 0; // Set timer for extra attacks.
     }
 
     public Actor_Unit(Unit unit, Actor_Unit reciepient)
@@ -358,6 +363,7 @@ public class Actor_Unit
         Unit = unit;
         Visible = false;
         Targetable = false;
+        MultifacetedCooldown = Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity) ? Unit.Level + 1 : 0; // Set timer for extra attacks.
         RestoreMP();
         ReloadSpellTraits();
     }
@@ -371,6 +377,7 @@ public class Actor_Unit
         animationUpdateTime = 0;
         Position = p;
         Unit = unit;
+        MultifacetedCooldown = Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity) ? Unit.Level + 1 : 0; // Set timer for extra attacks.
         Visible = true;
         Targetable = true;
         RestoreMP();
@@ -1041,6 +1048,11 @@ public class Actor_Unit
             }
         }
 
+        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Agility) && Unit.HealthPct <= 0.5f)
+        {
+            odds *= 0.9f;
+        }
+
         if (Config.BoostedAccuracy)
             odds = 100 - ((100 - odds) * .5f);
 
@@ -1207,6 +1219,12 @@ public class Actor_Unit
                 damage += (int)(damage * 0.2f);
             }
         }
+
+        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Strength) && MultifacetedCooldown == 0)
+        {
+            damage += (int)Math.Round(target.Unit.MaxHealth * 0.05f);
+        }
+
         if (Unit.HasTrait(Traits.SwiftStrike))
         {
             int current_weapon_class = GetWeaponSprite();
@@ -1294,6 +1312,18 @@ public class Actor_Unit
             float sizeDiff = Math.Abs(BodySize() - target.BodySize());
             damage = (int)Math.Round(damage * (1 + (.01f * Math.Min(sizeDiff, 25))));
         }
+
+        if (target.Unit.HasTrait(Traits.Multifaceted) && target.Unit.IsHighestStat(Stat.Endurance))
+        {
+            int tenP = (int)Math.Round(target.Unit.Health * 0.1f);
+            if (damage > tenP) // Check if damage is over 10% current
+            {
+                int mitigation = damage - tenP;
+                mitigation = (int)Math.Floor(mitigation * 0.5f);
+                damage -= mitigation;
+            }
+        }
+
 
         if (damage < 1)
             damage = 1;
@@ -1677,6 +1707,12 @@ public class Actor_Unit
             }
         }
 
+        int extraAttacks = 0; // Temporary Extra Attacks
+        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity) && MultifacetedCooldown > 0)
+        {
+            extraAttacks += 1;
+        }
+
         float origDamageMult = damageMultiplier;
         bool grazebool = false;
         bool critbool = false;
@@ -1745,6 +1781,7 @@ public class Actor_Unit
                 if (Unit.TraitBoosts.RangedAttacks > 1)
                 {
                     int movementFraction = 1 + MaxMovement() / Unit.TraitBoosts.RangedAttacks;
+                    movementFraction += extraAttacks;
                     if (Movement > movementFraction)
                         Movement -= movementFraction;
                     else
@@ -1835,6 +1872,7 @@ public class Actor_Unit
                 else
                     Mode = DisplayMode.Attacking;
                 int meleeAttacks = Unit.TraitBoosts.MeleeAttacks;
+                meleeAttacks += extraAttacks;
                 if (Unit.HasTrait(Traits.LightFrame) && PredatorComponent?.PreyCount == 0)
                     meleeAttacks++;
                 if (meleeAttacks > 1)
@@ -2143,6 +2181,11 @@ public class Actor_Unit
                 Unit.TraitBoosts.Incoming.MagicDamage *= 1.50f;
             }
             damage = (int)(damage * attacker.Unit.TraitBoosts.Outgoing.MagicDamage * Unit.TraitBoosts.Incoming.MagicDamage * TagConditionChecker.ApplyTagEffect(attacker.Unit, Unit, UnitTagModifierEffect.MagicDamageMult));
+            if (attacker.Unit.HasTrait(Traits.Multifaceted) && attacker.Unit.IsHighestStat(Stat.Mind))
+            {
+                damage += (int)Math.Round(Unit.GetStat(Stat.Mind) * 0.2f);
+            }
+
             EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.WhenHitBySpellDamage, new object[] { this, attacker, damage });
             State.GameManager.TacticalMode.TacticalStats.RegisterHit(spell, Mathf.Min(damage, Unit.Health), attacker.Unit.Side);
             Damage(damage, true, damageType: spell.DamageType);
@@ -2311,6 +2354,11 @@ public class Actor_Unit
             {
                 Unit.ApplyStatusEffect(StatusEffectType.Poisoned, 3, 3);
                 Unit.ApplyStatusEffect(StatusEffectType.Shaken, .2f, 2);
+            }
+
+            if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Strength))
+            {
+                MultifacetedCooldown = 4;
             }
 
             return true;
@@ -2797,6 +2845,7 @@ public class Actor_Unit
     //Traits that should be applied before MP is refreshed.
     public void NewTurnPreMPTraits()
     {
+
         if (Surrendered && Unit.HasTrait(Traits.Fearless))
         {
             Surrendered = false;
@@ -2806,6 +2855,15 @@ public class Actor_Unit
             SurrenderedThisTurn = false;
             Movement = 0;
         }
+
+        if (Unit.HasTrait(Traits.Multifaceted))
+        {
+            if (MultifacetedCooldown > 0)
+            {
+                MultifacetedCooldown--;
+            }
+        }
+
 
         if (Unit.HasTrait(Traits.ManaAttuned))
         {
@@ -3304,6 +3362,7 @@ public class Actor_Unit
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return false;
         Unit.GiveExp(1);
+        OnSpellCast(spell, target);
         //if (target != null && target.DefendSpellCheck(spell, this, out float chance) == false)
         //    return false;
 
@@ -3351,7 +3410,7 @@ public class Actor_Unit
             return;
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return;
-
+        OnSpellCast(spell, target);
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
         if (target != null)
         {
@@ -3399,8 +3458,7 @@ public class Actor_Unit
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return;
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
-
-        EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnSpellCast, new object[] { this, target, spell });
+        OnSpellCast(spell, target);
 
         if (target != null)
         {
@@ -3492,12 +3550,10 @@ public class Actor_Unit
     {
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return false;
-
+        OnSpellCast(spell, target);
         bool hit = false;
 
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
-
-        EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnSpellCast, new object[] { this, target, spell } );
 
         if (target != null)
         {
@@ -3755,6 +3811,23 @@ public class Actor_Unit
             return true;
         }
         return false;
+    }
+
+    public void OnSpellCast(Spell spell, Actor_Unit target)
+    {
+        EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnSpellCast, new object[] { this, target, spell });
+
+        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Will))
+        {
+            if (target.Unit.IsEnemyOfSide(target.Unit.Side))
+            {
+                target.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 20, 2);
+            }
+            else
+            {
+                target.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 20);
+            }
+        }
     }
 
     public void ChangeRacePrey()
