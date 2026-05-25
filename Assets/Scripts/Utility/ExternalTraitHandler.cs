@@ -33,6 +33,7 @@ public class TaggedTrait
 
 public class ExternalTraitHandler
 {
+    // Loads current Tagged Trait File
     public static Dictionary<Traits, TaggedTrait> TaggedTraitParser()
     {
         string readContents;
@@ -60,9 +61,83 @@ public class ExternalTraitHandler
         }
         catch (Exception e)
         {
-            Debug.LogError(e.Message + " Remove the old trait entry in ./VoreWar/UserData/taggedTraits.json or delete the file so it refreshes. Sorry about that! ~CSC");
+            Debug.LogError(e.Message + "you may have edited or removed the trait in the Enum file. The entry has been removed from the file. " +
+                "If this error still appears for this trait, navigate and fix the entry in ./VoreWar/UserData/taggedTraits.json or delete the file so it refreshes." +
+                "Cheers! ~CSC");
         }
+        traitJson.Close();
         return taggedTraitsList;
+    }
+
+    // Loads Tagged Trait File from shared assets and updates current file with any trait additions.
+    // Also deletes traits from the current file that no longer exist for whatever reason.
+    public static Dictionary<Traits, TaggedTrait> TaggedTraitUpdater()
+    {
+        // Loads Contents from Streaming Assets same as parser.
+        string readContents;
+        FileStream traitJson = File.OpenRead($"{Application.streamingAssetsPath}{Path.DirectorySeparatorChar}taggedTraits.json");
+        using (StreamReader streamReader = new StreamReader(traitJson))
+        {
+            readContents = streamReader.ReadToEnd();
+        }
+        Dictionary<Traits, TaggedTrait> updatedTaggedTraitsList = new Dictionary<Traits, TaggedTrait>(State.TieredTraitsList);
+        JObject results = JObject.Parse(readContents);
+        IList<JToken> traitList = results["traits"].Children().ToList();
+        try
+        {
+            foreach (JToken t in traitList)
+            {
+                TaggedTrait trait = new TaggedTrait();
+                trait.name = t["name"].ToString();
+                trait.tier = t["tier"].ToString();
+                trait.tags = t["tags"].ToObject<List<string>>();
+                trait.tierValue = (TraitTier)Enum.Parse(typeof(TraitTier), trait.tier);
+                trait.traitEnum = (Traits)Enum.Parse(typeof(Traits), trait.name);
+                // Add anything that is not in current list
+                if (!updatedTaggedTraitsList.ContainsKey(trait.traitEnum))
+                {
+                    updatedTaggedTraitsList.Add(trait.traitEnum, trait);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message + "There was an issue while updating tagged traits.");
+        }
+        traitJson.Close();
+        // Check if tagged trait file exists
+        if (File.Exists($"{State.StorageDirectory}taggedTraits.json"))
+        {
+            //Create a backup
+            File.Copy($"{State.StorageDirectory}taggedTraits.json", $"{State.StorageDirectory}taggedTraits.json.bak", true);
+            //Delete current
+            File.Delete($"{State.StorageDirectory}taggedTraits.json");
+        }
+
+        List<TaggedTrait> newTraitList = new List<TaggedTrait>();
+        var rootObject = new RootObject();
+        rootObject.traits = new List<TaggedTraitTempClass>();
+
+        // load up list to be writen
+        foreach (TaggedTrait trait in updatedTaggedTraitsList.Values)
+        {
+            TaggedTraitTempClass toBeAdded = new TaggedTraitTempClass();
+            toBeAdded.name = trait.name;
+            toBeAdded.tier = trait.tier;
+            toBeAdded.tier = trait.tier.ToString();
+            toBeAdded.tags = trait.tags;  
+            toBeAdded.traitEnum = trait.traitEnum;
+            toBeAdded.tierValue = trait.tierValue;
+            rootObject.traits.Add(toBeAdded);
+        }
+
+        // Write new file
+        using (StreamWriter file = File.CreateText(State.StorageDirectory + "\\taggedTraits.json"))
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.Serialize(file, rootObject);
+        }
+        return updatedTaggedTraitsList;
     }
 
     public static void AppendTaggedTrait(List<TaggedTrait> newTrait)

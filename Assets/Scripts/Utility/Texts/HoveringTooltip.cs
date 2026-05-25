@@ -267,6 +267,10 @@ public class HoveringTooltip : MonoBehaviour
                         return $"Unit deals {(effect.Duration) * 100}% increased damage on its next non-magic attack. This effect is halved after every attack.";
                     case StatusEffectType.Fractured:
                         return $"Unit takes 150% damage from all sources until the end of combat.";
+                    case StatusEffectType.Marked:
+                        return $"Unit has {(effect.Strength)}% added to weapon accuracy against them.";
+                    case StatusEffectType.Gorging:
+                        return $"Unit gains +{(int)(effect.Strength * 10)} effective stomach capacity. Unit will fall asleep for {(int)(effect.Strength)} turn(s) if this effect expires and they are overcapacity.";
                 }
             }
         }

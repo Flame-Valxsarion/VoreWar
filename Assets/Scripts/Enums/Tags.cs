@@ -472,8 +472,27 @@ public enum Traits
     /// <summary>Units highest stat becomes favored and gains the following effect. Violent(Str): 5% Max HP Attack on 4turn CD; Excitable(Dex):+1 attack per turn for each level; Vor: Failed vore attempt grants increasing predation; Playful(Agi): +2 mov above 50%hp +10% Dodge below; 
     ///           Whimsical(Will): Spells apply barrier on allies and mark on enemies; Entropic(Mnd): Dmg spells deal 20% of target's mnd; Valient(End): damage over 10% current health, excess is reduced by by 50%.; Gloomy(Stm): Inflicts Lethargy on consumed enemies</summary>
     Multifaceted = 538,
-    /// <summary>Unit becomes a copy of a random unit that does not own this trait. Unit reverts to its initial form once damaged.</summary>
-    InherentGlamour = 538,
+    /// <summary>Unit becomes a copy of a random unit that does not own this trait. Unit has a chance to revert to its initial form once damaged with a chance equal to double theri missing HP percentage.</summary>
+    InherentGlamour = 539,
+    /// <summary>Unit's weapon attacks use mana to place a random tile effect under their target lasting 3 turns.</summary>
+    Elementist = 540,
+    /// <summary>This Unit's spell damage also deals 50% of the damage to the target's mana. If the target has no mana, this damage is dealt to health instead.</summary>
+    ManaBurn = 541,
+    /// <summary>This Unit restores 50% of its MP when defeating a unit with an attack.</summary>
+    KillingMomentum = 542,
+    /// <summary>This Unit restores 50% of its MP when defeating a unit with an attack.</summary>
+    ThrillingMomentum = 543,   
+    /// <summary>At the start of battle, this Unit recives bonus health equal to the current health of every ally with this trait. All allies with this trait take damage and are healed when this unit is.</summary>
+    MutualBiology = 544,
+    /// <summary>Unit gains a stacking effect each time they swallow a unit. This effect increases their stomach capacity, but puts the unit to sleep if it expires and they are overcapacity.</summary>
+    SerialSwallower = 545,
+    /// <summary>Unit's melee attacks also attack enemies adjacent to the target with 50% damage.</summary>
+    SweepingStrikes = 546,
+    /// <summary>If this unit is eaten, and there is another living prey in the same location, this unit has a 1/4 chance to attempt to swallow each one.</summary>
+    GreedyStruggles = 547,
+    /// <summary>Unit does not suffer AP reduction when escaping.</summary>
+    InvigoratingEscape = 548,
+
 
 
 

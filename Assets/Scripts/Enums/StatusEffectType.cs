@@ -94,5 +94,7 @@
     Fractured = 47,
     /// <summary>Unit is more likey to be hit by weapons and spells by 1% multiplied by effect strength.</summary>
     Marked = 48,
+    /// <summary>Unit gains +10 effective stomach capacity. Unit will fall asleep for every turn they have this effect if this effect expires.</summary>
+    Gorging = 49,
 }
 

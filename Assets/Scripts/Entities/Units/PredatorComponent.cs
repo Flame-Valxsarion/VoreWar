@@ -751,10 +751,15 @@ public class PredatorComponent
     {
         float c = State.RaceSettings.GetStomachSize(unit.Race);
 
+        if (unit.GetStatusEffect(StatusEffectType.Gorging) != null)
+        {
+            c += unit.GetStatusEffect(StatusEffectType.Gorging).Strength * 10;
+        }
+
         c *= unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult;
 
         //c *= unit.GetScale(3);  It may be more realistic, but having huge resulting in 81 times the base stomach capacity is just overkill
-
+        
         return c;
     }
 
@@ -2686,6 +2691,17 @@ public class PredatorComponent
         else if (actor.Movement == 0)
         {
             return false;
+        }
+        if (unit.HasTrait(Traits.SerialSwallower))
+        {
+            if (unit.GetStatusEffect(StatusEffectType.Gorging) != null)
+            {
+                unit.ApplyStatusEffect(StatusEffectType.Gorging, unit.GetStatusEffect(StatusEffectType.Gorging).Strength + 1, 2);
+            }
+            else
+            {
+                unit.ApplyStatusEffect(StatusEffectType.Gorging, 1, 2);
+            }
         }
         if (target.Unit == unit)
             return false;

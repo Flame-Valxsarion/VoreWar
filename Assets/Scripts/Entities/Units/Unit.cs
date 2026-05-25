@@ -124,7 +124,7 @@ public class Unit
             if (Stats == null) return 1;
             if (!Config.StatBoostsAffectMaxHP) {
                 _maxHealth = Stats[(int)Stat.Endurance] * 2 + Stats[(int)Stat.Strength];
-                 return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
+                 return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
             }
 
             int oldMax = _maxHealth;
@@ -137,7 +137,7 @@ public class Unit
                 int healthChange = (int)Math.Round((_maxHealth - oldMax) * _healthPct);
                 Health = Math.Min(_maxHealth,Math.Max(lowestHP, Health + healthChange));
             }
-            return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
+            return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
         }
         set => _maxHealth = value;
     }
@@ -636,6 +636,17 @@ public class Unit
             return _traitBoosts;
         }
         set => _traitBoosts = value;
+    }
+    private TempBoosts _tempBoosts;
+    internal TempBoosts TempBoosts
+    {
+        get
+        {
+            if (_tempBoosts == null)
+                _tempBoosts = new TempBoosts();
+            return _tempBoosts;
+        }
+        set => _tempBoosts = value;
     }
 
     [OdinSerialize]
@@ -3711,6 +3722,10 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                         }
 
                     }
+                }
+                if (eff.Type == StatusEffectType.Gorging)
+                {
+                    ApplyStatusEffect(StatusEffectType.Sleeping, eff.Strength, (int)eff.Strength);
                 }
                 if (eff.Type == StatusEffectType.Warping)
                 {

@@ -1707,11 +1707,7 @@ public class Actor_Unit
             }
         }
 
-        int extraAttacks = 0; // Temporary Extra Attacks
-        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity) && MultifacetedCooldown > 0)
-        {
-            extraAttacks += 1;
-        }
+        int extraAttacks = CalculateExtraAttacks();
 
         float origDamageMult = damageMultiplier;
         bool grazebool = false;
@@ -1781,7 +1777,7 @@ public class Actor_Unit
                 if (Unit.TraitBoosts.RangedAttacks > 1)
                 {
                     int movementFraction = 1 + MaxMovement() / Unit.TraitBoosts.RangedAttacks;
-                    movementFraction += extraAttacks;
+                    movementFraction += extraAttacks + Unit.TempBoosts.ExtraAttacks;
                     if (Movement > movementFraction)
                         Movement -= movementFraction;
                     else
@@ -1817,7 +1813,7 @@ public class Actor_Unit
                         target.Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
                     if (target.Unit.IsACopy())
                     {
-                        if (target.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour))
+                        if (target.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour) && (target.Unit.HealthPct - 1) * 2 > (float)State.Rand.NextDouble())
                         {
                             target.Unit.RevertCopiedUnit();
                         }
@@ -1872,7 +1868,7 @@ public class Actor_Unit
                 else
                     Mode = DisplayMode.Attacking;
                 int meleeAttacks = Unit.TraitBoosts.MeleeAttacks;
-                meleeAttacks += extraAttacks;
+                meleeAttacks += extraAttacks + Unit.TempBoosts.ExtraAttacks;
                 if (Unit.HasTrait(Traits.LightFrame) && PredatorComponent?.PreyCount == 0)
                     meleeAttacks++;
                 if (meleeAttacks > 1)
@@ -1937,7 +1933,7 @@ public class Actor_Unit
                         Unit.RemoveStackStatus(StatusEffectType.Sharpness, Unit.GetStatusEffect(StatusEffectType.Sharpness).Duration / 2);
                     if (target.Unit.IsACopy())
                     {
-                        if (target.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour))
+                        if (target.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour) && (target.Unit.HealthPct - 1) * 2 > (float)State.Rand.NextDouble())
                         {
                             target.Unit.RevertCopiedUnit();
                         }
@@ -3048,6 +3044,17 @@ public class Actor_Unit
                 }
             }
         }
+    }
+
+    // Inline calculation of extra attacks
+    public int CalculateExtraAttacks()
+    {
+        int extra = 0;
+        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity) && MultifacetedCooldown > 0)
+        {
+            extra++;
+        }
+        return extra;
     }
 
     public void SubtractHealth(int damage)

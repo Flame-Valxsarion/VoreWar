@@ -635,6 +635,11 @@ public class UnitCustomizer
                 buttons[(int)ButtonTypes.BodyAccentTypes5].Label.text = "Shin Bright Pattern";
                 buttons[(int)ButtonTypes.VulvaTypes].Label.text = "Head Accessory";
                 break;
+            case Race.Pudding:
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Cream Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Ear Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Topping Type";
+                break;
         }
     }
 

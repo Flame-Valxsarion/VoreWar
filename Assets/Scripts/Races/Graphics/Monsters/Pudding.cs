@@ -31,7 +31,7 @@ class Pudding : BlankSlate
     internal override void SetBaseOffsets(Actor_Unit actor)
     {
         int offset = 0;
-        switch (actor.GetStomachSize(25))
+        switch (actor.GetStomachSize(24))
         {
             case 0:
             case 1:
@@ -96,11 +96,18 @@ class Pudding : BlankSlate
             default:
                 break;
         }
-
+        if (actor.Unit.SpecialAccessoryType == 1)
+        {
+            AddOffset(BodyAccent2, 0, (offset - 5) * .625f);
+            AddOffset(BodyAccent3, 0, (offset - 5) * .625f);
+        }
+        else
+        {
+            AddOffset(BodyAccent2, 0, offset * .625f);
+            AddOffset(BodyAccent3, 0, offset * .625f);
+        }
         AddOffset(BodyAccessory, 0, offset * .625f);
         AddOffset(BodyAccent, 0, offset * .625f);
-        AddOffset(BodyAccent2, 0, offset * .625f);
-        AddOffset(BodyAccent3, 0, offset * .625f);
         AddOffset(BodyAccent4, 0, offset * .625f);
         AddOffset(BodyAccent5, 0, offset * .625f);
         AddOffset(Mouth, 0, offset * .625f);
@@ -122,7 +129,7 @@ class Pudding : BlankSlate
         if (actor.HasBelly == false)
             return State.GameManager.SpriteDictionary.Pudding[0];
 
-        return State.GameManager.SpriteDictionary.Pudding[0 + actor.GetStomachSize(25)];
+        return State.GameManager.SpriteDictionary.Pudding[0 + actor.GetStomachSize(24)];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
@@ -145,6 +152,10 @@ class Pudding : BlankSlate
     {
         if (actor.Unit.SpecialAccessoryType != 0 && actor.Unit.BodyAccentType3 >= 4)
         {
+            if (actor.Unit.BodyAccentType3 == 7 && actor.Unit.BodyAccentType1 == 4)
+            {
+                return State.GameManager.SpriteDictionary.Pudding[63];
+            }
             return State.GameManager.SpriteDictionary.Pudding[52 + actor.Unit.BodyAccentType3 - 4];
         }
         return State.GameManager.SpriteDictionary.Pudding[56 + actor.Unit.BodyAccentType3];
