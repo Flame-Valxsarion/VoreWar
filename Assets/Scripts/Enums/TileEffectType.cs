@@ -1,6 +1,8 @@
 ﻿public enum TileEffectType
 {
     Fire,
-    IcePatch
+    IcePatch,
+    // Also used to count all effects
+    None, 
 }
 

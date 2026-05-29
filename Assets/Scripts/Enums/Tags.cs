@@ -480,18 +480,16 @@ public enum Traits
     ManaBurn = 541,
     /// <summary>This Unit restores 50% of its MP when defeating a unit with an attack.</summary>
     KillingMomentum = 542,
-    /// <summary>This Unit restores 50% of its MP when defeating a unit with an attack.</summary>
-    ThrillingMomentum = 543,   
+    /// <summary>This Unit has a chance to inflict the sleep status on its prey for 1 to 4 turns plus the units level difference.</summary>
+    SedativeStomach = 543,   
     /// <summary>At the start of battle, this Unit recives bonus health equal to the current health of every ally with this trait. All allies with this trait take damage and are healed when this unit is.</summary>
     MutualBiology = 544,
     /// <summary>Unit gains a stacking effect each time they swallow a unit. This effect increases their stomach capacity, but puts the unit to sleep if it expires and they are overcapacity.</summary>
     SerialSwallower = 545,
-    /// <summary>Unit's melee attacks also attack enemies adjacent to the target with 50% damage.</summary>
+    /// <summary>Unit's melee attacks also make an attack on units adjacent to the target with 33% damage.</summary>
     SweepingStrikes = 546,
-    /// <summary>If this unit is eaten, and there is another living prey in the same location, this unit has a 1/4 chance to attempt to swallow each one.</summary>
-    GreedyStruggles = 547,
     /// <summary>Unit does not suffer AP reduction when escaping.</summary>
-    InvigoratingEscape = 548,
+    InvigoratingEscape = 547,
 
 
 

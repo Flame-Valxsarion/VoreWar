@@ -263,6 +263,10 @@ class Yordles : DefaultRaceData
             actor.Unit.BodyAccentType5 == 9 ||
             actor.Unit.BodyAccentType5 == 11)
         {
+            if (actor.Unit.BodyAccentType2 > 8)
+            {
+                actor.Unit.BodyAccentType2 = 8;
+            }
             return YordlesCustomization1[140 + (actor.Unit.BodyAccentType2 * 2) + (actor.IsOralVoring ? 1 : 0)];
         }
         else

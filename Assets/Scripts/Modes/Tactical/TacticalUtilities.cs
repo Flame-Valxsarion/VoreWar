@@ -9,6 +9,7 @@ static class TacticalUtilities
     static Army[] armies;
     static Village village;
     static List<Actor_Unit> garrison;
+    static Dictionary<Traits, List<Actor_Unit>> linkedUnits;
     static TacticalTileType[,] tiles;
     static bool[,] blockedTiles;
     static bool[,] blockedClimberTiles;
@@ -29,7 +30,7 @@ static class TacticalUtilities
         blockedClimberTiles = null;
     }
 
-    static internal void ResetData(Army[] larmies, Village lvillage, List<Actor_Unit> lunits, List<Actor_Unit> lgarrison, TacticalTileType[,] ltiles, bool[,] lblockedTiles, bool[,] lblockedClimberTiles)
+    static internal void ResetData(Army[] larmies, Village lvillage, List<Actor_Unit> lunits, List<Actor_Unit> lgarrison, TacticalTileType[,] ltiles, bool[,] lblockedTiles, bool[,] lblockedClimberTiles, Dictionary<Traits, List<Actor_Unit>> llinkedUnits)
     {
         armies = larmies;
         village = lvillage;
@@ -38,6 +39,7 @@ static class TacticalUtilities
         garrison = lgarrison;
         blockedTiles = lblockedTiles;
         blockedClimberTiles = lblockedClimberTiles;
+        linkedUnits = llinkedUnits;
         UnitPickerUI = State.GameManager.TacticalMode.UnitPickerUI;
     }
 
@@ -708,6 +710,22 @@ static class TacticalUtilities
         Target.Movement -= 1;
 
         return;
+    }
+
+    static public void MutuallyDamageUnits(Actor_Unit source, int damage)
+    {
+        foreach (var unit in linkedUnits[Traits.MutualBiology].Where(u => u != source && !u.Unit.IsEnemyOfSide(source.Unit.Side)))
+        {
+            unit.Damage(damage, damageType: DamageTypes.Mutual);
+        }
+    }
+
+    static public void MutuallyHeaUnits(Unit source, int amt)
+    {
+        foreach (var unit in linkedUnits[Traits.MutualBiology].Where(u => u.Unit != source && !u.Unit.IsEnemyOfSide(source.Side)))
+        {
+            unit.Unit.Heal(amt, true);
+        }
     }
 
     static internal PredatorComponent GetPredatorComponentOfUnit(Unit unit)

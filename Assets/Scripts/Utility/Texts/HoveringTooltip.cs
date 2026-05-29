@@ -166,7 +166,11 @@ public class HoveringTooltip : MonoBehaviour
         }
 
         if (Enum.TryParse(words[2], out Traits trait))
-        {
+        {            
+            if (trait == Traits.Multifaceted)
+            {
+                return GetTraitDataWithActorData(trait, actor);
+            }
             return GetTraitData(trait);
         }
         if (Enum.TryParse(words[2], out UnitType unitType))
@@ -784,7 +788,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.CurseOfPhasing:
                 return "When hit by an attack, unit has a 50% chance to teleport to a random space within 3 spaces. If a unit occupies that space, this unit is consumed by the occupier.";
             case Traits.CurseOfCraving:
-                return "At the start of battle, this unit has a 50% chance to have eaten one of it's allies.";
+                return "At the start of battle, this unit has a 50% chance to have eaten one of its allies.";
             case Traits.CurseOfPreyportaion:
                 return "At the start of battle, this unit has a 25% chance to teleported into a random predator.";       
             case Traits.Competitive:
@@ -839,7 +843,71 @@ public class HoveringTooltip : MonoBehaviour
                 return "Race increase the income of a village by 0.1%.";
             case Traits.NaturalCaster:
                 return "Unit gains Icicle, Fireball, Lightning Bolt, PowerBolt, or Poison as an innate spell.";
+            case Traits.Multifaceted:
+                return "Units highest stat becomes its favored stat and gains the following effect based on their highest stat:\n" +
+                    "STR: Bonus damage on a 4 turn cooldown.\n" +
+                    "DEX: 1 additional attack per turn, lasting one turn per level.\n" +
+                    "VOR: Failed vore attempt grants predation\n" +
+                    "AGI: +2 mov above 50%hp +10% Dodge below.\n" +
+                    "WILL: Spells apply barrier on allies and mark on enemies.\n" +
+                    "MND: Dmg spells deal 20% of target's mnd.\n" +
+                    "END: damage over 10% current health, excess is reduced by by 50%.\n" +
+                    "STM: Inflicts Lethargy on consumed enemies.";
+            case Traits.InherentGlamour:
+                return "Unit becomes a copy of a random ally that does not own this trait. Unit has a chance to revert to its initial form once damaged. (Equal to double its missing HP percentage.)";
+            case Traits.Elementist:
+                return "Unit's weapon attacks use 3 mana to place a random effect tile effect under their target, lasting 3 turns";
+            case Traits.ManaBurn:
+                return "This Unit's spell damage also deals 50% of the damage to the target's mana. If the target has no mana, this damage is dealt to health instead.";
+            case Traits.KillingMomentum:
+                return "This Unit restoresrestores 50% of its MP when killing a unit with an attack.";
+            case Traits.SedativeStomach:
+                return "This Unit has a chance to inflict the sleep status on its prey for 1 to 4 turns, plus the units level difference.";
+            case Traits.MutualBiology:
+                return "At the start of battle, this Unit recives bonus health equal to the current health of every ally with this trait. All allies with this trait take damage and are healed when this unit is.";
+            case Traits.SerialSwallower:
+                return "Unit gains a stacking effect each time they swallow a unit. This effect increases their stomach capacity, but puts the unit to sleep if it expires and they are overcapacity.";
+            case Traits.SweepingStrikes:
+                return "Unit's melee attacks also make an attack on units adjacent to the target at 33% damage.";
+            case Traits.InvigoratingEscape:
+                return "Unit does not suffer AP reduction when escaping.";
         }  
+        return "<b>This trait needs a tooltip!</b>";
+    }
+
+    // For traits that need more informaiton to adjust their tooltip. 
+    public static string GetTraitDataWithActorData(Traits trait, Actor_Unit actor)
+    {
+        switch (trait)
+        {
+            case Traits.Multifaceted when actor == null:
+                return "Units highest stat becomes its favored stat and gains the following effect based on their highest stat:\n" +
+                    "STR: Bonus damage on a 4 turn cooldown.\n" +
+                    "DEX: 1 additional attack per turn, lasting one turn per level.\n" +
+                    "VOR: Failed vore attempt grants predation\n" +
+                    "AGI: +2 mov above 50%hp +10% Dodge below.\n" +
+                    "WILL: Spells apply barrier on allies and mark on enemies.\n" +
+                    "MND: Dmg spells deal 20% of target's mnd.\n" +
+                    "END: damage over 10% current health, excess is reduced by by 50%.\n" +
+                    "STM: Inflicts Lethargy on consumed enemies.";
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 0:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Violent(Str)</b>: Weapon attacks deal 5% of the target's Max HP once every 4 turns.\n" + "Avalible in: " + actor.MultifacetedCooldown + " turn(s).";
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 1:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gans 1 additional attack per turn, lasting one turn per level.\n" + "Remaining Turns: " + actor.MultifacetedCooldown;
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 2:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: A failed vore attempt grants predation to this unit.";
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 3:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gains +2 mov while above 50%hp and +10% Dodge while below 50% HP.";
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 4:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit's Spells that terget allies grant " + (actor.Unit.GetStat(Stat.Will) / 20) + "barrier to them.\n" + "Spells that terget enemies applies marked for 2 turns.";
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 5:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: This unit's damage spells also deal 20% of their target's mind stat as damage.";
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 6:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: When this unit takes dDamage over 10% of its current health, the excess is reduced by by 50%.";
+            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 7:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: This unit inflicts Lethargy on consumed enemies, reducing their offensive stats.";
+
+        }
         return "<b>This trait needs a tooltip!</b>";
     }
 

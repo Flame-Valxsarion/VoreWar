@@ -1894,7 +1894,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         EquipmentFunctions.CheckEquipment(this, EquipmentActivator.OnHeal, new object[] { this, h, null });
     }
 
-    public int Heal(int amount)
+    public int Heal(int amount, bool mutual = false)
     {
         int diff = MaxHealth - Health;
         int modAmount = amount;
@@ -1911,6 +1911,10 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         int actualHeal = Math.Min(diff, modAmount);
         EquipmentFunctions.CheckEquipment(this, EquipmentActivator.OnHeal, new object[] { this, actualHeal, null });
         State.GameManager.TacticalMode?.TacticalStats?.RegisterHealing(actualHeal, Side);
+        if (State.GameManager.TacticalMode != null && HasTrait(Traits.MutualBiology) && !mutual)
+        {
+            TacticalUtilities.MutuallyHeaUnits(this, amount);
+        }
         return actualHeal;
     }
 
@@ -2653,7 +2657,10 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
         if (favored != Stat.None)
             stats[(int)favored] = -1;
-
+        if (HasTrait(Traits.Multifaceted))
+        {
+            favored = (Stat)GetHighestStatIndex();
+        }
         stats = stats.Where(s => s >= 0).ToArray();
 
         for (int i = 0; i < stats.GetUpperBound(0); i++) //Randomize the order
@@ -3610,6 +3617,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         Name = unit.Name;
         level = unit.level;
         Stats = unit.Stats;
+        TempBoosts = unit.TempBoosts;
         CopyAppearance(unit);
         ClearAllTraits();
         PermanentTraits.Clear();

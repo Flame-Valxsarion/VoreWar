@@ -30,7 +30,6 @@ class Prey
     public bool ScatDisabled { get; set; }
 
 
-
     [OdinSerialize]
     public List<Traits> SharedTraits;
 
@@ -60,6 +59,12 @@ class Prey
             EscapeRate = 0;
             return;
         }
+        if (Unit.GetStatusEffect(StatusEffectType.Sleeping) != null)
+        {
+            EscapeRate = 0;
+            return;
+        }
+
         float predVoracity = Mathf.Pow(15 + Predator.Unit.GetStat(Stat.Voracity), 1.5f);
         float predStomach = Mathf.Pow(15 + Predator.Unit.GetStat(Stat.Stomach), 1.5f);
         float preyStrength = Mathf.Pow(15 + Unit.GetStat(Stat.Strength), 1.5f);
@@ -73,7 +78,7 @@ class Prey
         preyScore *= Unit.TraitBoosts.Incoming.ChanceToEscape;
         predScore /= Predator.Unit.TraitBoosts.Outgoing.ChanceToEscape;
 
-        if (Predator.Unit.HasTrait(Traits.Inescapable) || Unit.GetStatusEffect(StatusEffectType.Sleeping) != null)
+        if (Predator.Unit.HasTrait(Traits.Inescapable))
             preyScore = 0;
 
         if (Predator.Unit.HasTrait(Traits.DualStomach))

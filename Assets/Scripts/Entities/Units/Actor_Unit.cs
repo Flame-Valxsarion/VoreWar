@@ -1663,7 +1663,7 @@ public class Actor_Unit
         return true;
     }
 
-    public bool Attack(Actor_Unit target, bool ranged, bool forceBite = false, float damageMultiplier = 1, bool canKill = true)
+    public bool Attack(Actor_Unit target, bool ranged, bool forceBite = false, float damageMultiplier = 1, bool canKill = true, bool canRecurse = true)
     {
         Weapon weapon;
         if (ranged)
@@ -1803,6 +1803,8 @@ public class Actor_Unit
                     }
                     if (Unit.HasTrait(Traits.WeaponChanneler) && Unit.Mana >= 6)
                         Unit.SpendMana(6);
+                    if (Unit.HasTrait(Traits.Elementist) && Unit.SpendMana(3))
+                        TacticalUtilities.CreateEffect(target.Position,  (TileEffectType)State.Rand.Next(0, (int)TileEffectType.None), 1, 1 + Unit.GetStat(Stat.Mind) / 30, 4);
                     if (Unit.HasTrait(Traits.Tenacious))
                         Unit.RemoveTenacious();
                     if (target.Unit.HasTrait(Traits.Tenacious))
@@ -1913,6 +1915,8 @@ public class Actor_Unit
                         target.Unit.ApplyStatusEffect(StatusEffectType.Sleeping, 1, 2);
                     if (Unit.HasTrait(Traits.WeaponChanneler) && Unit.Mana >= 6)
                         Unit.SpendMana(6);
+                    if (Unit.HasTrait(Traits.Elementist) && Unit.SpendMana(3))
+                        TacticalUtilities.CreateEffect(target.Position, (TileEffectType)State.Rand.Next(0, (int)TileEffectType.None), 1, 1 + Unit.GetStat(Stat.Mind) / 30, 4);
                     if (Unit.HasTrait(Traits.BladeDance))
                         Unit.AddBladeDance();
                     if (target.Unit.HasTrait(Traits.BladeDance))
@@ -1990,6 +1994,14 @@ public class Actor_Unit
                     EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnMeleeMiss, new object[] { this, target, damage });
                    
                 }
+
+                if (Unit.HasTrait(Traits.SweepingStrikes) && canRecurse == true)
+                {
+                    foreach (var sweepTarget in TacticalUtilities.UnitsWithinTiles(target.Position, 1).Where(u => u != target && u != this))
+                    {
+                        Attack(sweepTarget, false, false, 0.33f, true, false);
+                    }
+                }
             }
 
         }
@@ -2033,6 +2045,11 @@ public class Actor_Unit
         }
         if (Unit.HasTrait(Traits.KillerKnowledge) && Unit.KilledUnits % 4 == 0)
             Unit.GeneralStatIncrease(1);
+        if (Unit.HasTrait(Traits.KillingMomentum))
+        {
+            RestoreMP();
+            Movement /= 2;
+        }       
         if (Unit.HasTrait(Traits.TasteForBlood))
             GiveRandomBoost();
         if (Unit.HasTrait(Traits.InfectiousReproduction) && target.Unit.GetStatusEffect(StatusEffectType.Poisoned) != null)
@@ -2090,6 +2107,11 @@ public class Actor_Unit
         }
         if (Unit.HasTrait(Traits.KillerKnowledge) && Unit.KilledUnits % 4 == 0)
             Unit.GeneralStatIncrease(1);
+        if (Unit.HasTrait(Traits.KillingMomentum))
+        {
+            RestoreMP();
+            Movement /= 2;
+        }
         if (Unit.HasTrait(Traits.TasteForBlood))
             GiveRandomBoost();
         Unit.GiveScaledExp(4 * target.Unit.ExpMultiplier, Unit.Level - target.Unit.Level);
@@ -2181,7 +2203,13 @@ public class Actor_Unit
             {
                 damage += (int)Math.Round(Unit.GetStat(Stat.Mind) * 0.2f);
             }
-
+            if (attacker.Unit.HasTrait(Traits.ManaBurn))
+            {
+                if (!Unit.SpendMana(damage/2))
+                {
+                    damage += damage / 2; 
+                }
+            }
             EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.WhenHitBySpellDamage, new object[] { this, attacker, damage });
             State.GameManager.TacticalMode.TacticalStats.RegisterHit(spell, Mathf.Min(damage, Unit.Health), attacker.Unit.Side);
             Damage(damage, true, damageType: spell.DamageType);
@@ -3113,7 +3141,8 @@ public class Actor_Unit
             return false;
         }        
         int modifiedDamage = CalculateDamageWithResistance(damage, damageType);
-        UnitSprite.DisplayDamage(modifiedDamage, spellDamage);
+        if (damageType != DamageTypes.Mutual)//Prevents damage from flashing every unit.
+            UnitSprite.DisplayDamage(modifiedDamage, spellDamage);
         modifiedDamage = Unit.DamageBarrier(modifiedDamage);
         SubtractHealth(modifiedDamage);
         if (Unit.GetStatusEffect(StatusEffectType.Agony) != null)
@@ -3138,6 +3167,11 @@ public class Actor_Unit
                 State.GameManager.TacticalMode.SwitchAlignment(this);
                 State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{Unit.Name} switched sides when they were hit");
             }
+        }
+        if (Unit.HasTrait(Traits.MutualBiology) && damageType != DamageTypes.Mutual)
+        {
+            TacticalUtilities.MutuallyDamageUnits(this, damage);
+            Debug.Log(Unit.TempBoosts.HealthBoost);
         }
         if (Unit.HasTrait(Traits.Berserk) && GoneBerserk == false)
         {

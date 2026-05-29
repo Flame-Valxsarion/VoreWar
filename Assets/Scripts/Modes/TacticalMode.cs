@@ -219,6 +219,7 @@ public class TacticalMode : SceneBase
     List<Unit> retreatedDefenders;
 
     List<Actor_Unit> garrison;
+    Dictionary<Traits, List<Actor_Unit>> linkedUnits;
 
     internal List<ConstructibleBuilding> attackerBuildingsInRange;
     internal List<ConstructibleBuilding> defenderBuildingsInRange;
@@ -565,6 +566,36 @@ public class TacticalMode : SceneBase
 
         IsPlayerTurn = !AIAttacker;
 
+        if (!State.GameManager.PureTactical)//Apply Empire Traits to units that don't have them at the start of combat
+        {
+            foreach (Actor_Unit actor in attackers)
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+            foreach (Actor_Unit actor in defenders)
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+            foreach (Actor_Unit actor in garrison.ToList())
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+        }
+
+        ActivatePreBattleTraits();
+
         GeneralSetup();
 
         if ((armies[1]?.Units.Count ?? 0) <= 0 && garrison.Count <= 0)
@@ -618,37 +649,7 @@ public class TacticalMode : SceneBase
         if (tacticalBattleOverride == TacticalBattleOverride.ForceSkip && AIAttacker && AIDefender)
             skip = true;
         if (units.Any(actor => State.World.AllActiveEmpires != null && State.World.GetEmpireOfSide(actor.Unit.FixedSide)?.StrategicAI == null))
-            skip = false;
-
-        ActivatePreBattleTraits();
-
-        if (!State.GameManager.PureTactical)//Apply Empire Traits to units that don't have them at the start of combat
-        {
-            foreach (Actor_Unit actor in attackers)
-            {
-                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
-                foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
-                {
-                    actor.Unit.AddPermanentTrait(trait);
-                }
-            }
-            foreach (Actor_Unit actor in defenders)
-            {
-                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
-                foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
-                {
-                    actor.Unit.AddPermanentTrait(trait);
-                }
-            }
-            foreach (Actor_Unit actor in garrison.ToList())
-            {
-                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
-                foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
-                {
-                    actor.Unit.AddPermanentTrait(trait);
-                }
-            }
-        }
+            skip = false;       
 
         if (!State.GameManager.PureTactical)
         {
@@ -1716,7 +1717,7 @@ Turns: {currentTurn}
             StatusUI.DefenderText.fontStyle = FontStyle.Bold;
         }
 
-        TacticalUtilities.ResetData(armies, village, units, garrison, tiles, BlockedTile, BlockedClimberTile);
+        TacticalUtilities.ResetData(armies, village, units, garrison, tiles, BlockedTile, BlockedClimberTile, linkedUnits);
     }
 
     void RebuildDecorations()
@@ -1794,6 +1795,8 @@ Turns: {currentTurn}
 
             garrison = garrison,
 
+            linkedUnits = linkedUnits,
+
             selectedUnit = SelectedUnit,
 
             activeEffects = ActiveEffects,
@@ -1847,6 +1850,7 @@ Turns: {currentTurn}
         Buildings = data.buildings;
 
         garrison = data.garrison;
+        linkedUnits = data.linkedUnits;
 
         tiles = data.tiles;
         DecorationStorage = data.decorationStorage;
@@ -4844,6 +4848,7 @@ Turns: {currentTurn}
                     continue;
                 }
                 actor.Unit.SetSizeToDefault();
+                actor.Unit.TempBoosts.ResetAll();
                 actor.Unit.EnemiesKilledThisBattle = 0;
                 if (actor.Unit.IsDead && actor.Unit.Type != UnitType.Summon &&
                     (actor.Unit.HasTrait(Traits.Eternal) || (actor.Unit.HasTrait(Traits.LuckySurvival) && State.Rand.Next(5) != 0) ||
@@ -5660,6 +5665,14 @@ Turns: {currentTurn}
 
     internal void ActivatePreBattleTraits()
     {
+        int MutualBiologyHealthAttacker = 0;
+        int MutualBiologyHealthDefender = 0;
+
+        // Link up all units with their respecive triat
+        linkedUnits = new Dictionary<Traits, List<Actor_Unit>>
+        {
+            { Traits.MutualBiology, new List<Actor_Unit>() }
+        };
         foreach (var actor in units)
         {
             if (actor.Unit.HasTrait(Traits.InherentGlamour))
@@ -5670,6 +5683,52 @@ Turns: {currentTurn}
                     actor.Unit.TacticalCopy = possible_targets[State.Rand.Next(0, possible_targets.Count())].Unit;
                     actor.Unit.CopyTacticalUnit();
                     actor.UpdateBestWeapons();
+                }
+            }
+
+            if (actor.Unit.HasTrait(Traits.MutualBiology))
+            {
+                linkedUnits[Traits.MutualBiology].Add(actor);
+                if (actor.Unit.Side == attackerSide)
+                {
+                    if (MutualBiologyHealthAttacker == 0)
+                    {
+                        foreach (var unit in armies[0].Units)
+                        {
+                            if (unit.HasTrait(Traits.MutualBiology))
+                            {
+                                MutualBiologyHealthAttacker += unit.Health;
+                                //Debug.Log("Adding: " + MutualBiologyHealthDefender);
+                            }
+                        }
+                    }
+                    actor.Unit.TempBoosts.HealthBoost += MutualBiologyHealthAttacker - actor.Unit.Health; //Gain all health and remove this units contribution from itself.
+                    actor.Unit.Health += MutualBiologyHealthAttacker - actor.Unit.Health;
+                }
+                else
+                {
+                    if (MutualBiologyHealthDefender == 0)
+                    {
+                        if (armies[1] != null)
+                        {
+                            foreach (var unit in armies[1].Units)
+                            {
+                                if (unit.HasTrait(Traits.MutualBiology))
+                                {
+                                    MutualBiologyHealthDefender += unit.Health;
+                                }
+                            }
+                        }
+                        foreach (var unit in garrison)
+                        {
+                            if (unit.Unit.HasTrait(Traits.MutualBiology))
+                            {
+                                MutualBiologyHealthDefender += unit.Unit.Health;
+                            }
+                        }
+                    }
+                    actor.Unit.TempBoosts.HealthBoost += MutualBiologyHealthDefender - actor.Unit.Health; //Gain all health and remove this units contribution from itself.
+                    actor.Unit.Health += MutualBiologyHealthDefender - actor.Unit.Health;
                 }
             }
 

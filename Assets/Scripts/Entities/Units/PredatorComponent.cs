@@ -378,6 +378,71 @@ public class PredatorComponent
         }
         return prey;
     }
+    List<Prey> PreyRefInLocation(PreyLocation location)
+    {
+        List <Prey> prey = new List<Prey>();
+        switch (location)
+        {
+            case PreyLocation.balls:
+                foreach (Prey unit in balls)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+            case PreyLocation.stomach:
+            case PreyLocation.anal:
+                foreach (Prey unit in stomach)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+            case PreyLocation.stomach2:
+                foreach (Prey unit in stomach2)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+            case PreyLocation.tail:
+                foreach (Prey unit in tail)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+            case PreyLocation.womb:
+                foreach (Prey unit in womb)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+            case PreyLocation.leftBreast:
+                foreach (Prey unit in leftBreast)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+            case PreyLocation.rightBreast:
+                foreach (Prey unit in rightBreast)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+            case PreyLocation.breasts:
+                foreach (Prey unit in breasts)
+                {
+                    if (!unit.Unit.IsDead)
+                        prey.Add(unit);
+                }
+                break;
+        }
+        return prey;
+    }
 
 
     internal void UpdateAlivePrey()
@@ -858,7 +923,7 @@ public class PredatorComponent
                 preyUnit.Actor.Visible = true;
                 preyUnit.Actor.Targetable = true;
 
-                if (Config.DisorientedPrey)
+                if (Config.DisorientedPrey && !preyUnit.Unit.HasTrait(Traits.InvigoratingEscape))
                 {
                     preyUnit.Actor.WasJustFreed = true;
                     preyUnit.Actor.Movement = Mathf.Min(Mathf.Max(2, (int)(.2f * preyUnit.Actor.CurrentMaxMovement())), 5);
@@ -1640,6 +1705,10 @@ public class PredatorComponent
         {
             preyUnit.Actor.SubtractHealth(preyDamage);
             preyUnit.TurnsSinceLastDamage = 0;
+            if (preyUnit.Actor.Unit.HasTrait(Traits.MutualBiology))
+            {
+                TacticalUtilities.MutuallyDamageUnits(preyUnit.Actor, preyDamage);
+            }
         }
 
         if (freshKill)
@@ -1829,6 +1898,15 @@ public class PredatorComponent
             }
             preyUnit.TurnsDigested++;
             AlivePrey++;
+
+            if (actor.Unit.HasTrait(Traits.SedativeStomach) && State.Rand.NextDouble() > 0.80f - (preyUnit.TurnsDigested * 0.01f))
+            {
+                if (actor.Unit.Level - preyUnit.Unit.Level >= -3)
+                {
+                    preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Sleeping, 1, 1 + State.Rand.Next(4) + (actor.Unit.Level - preyUnit.Unit.Level));
+                }
+            }
+
             preyUnit.UpdateEscapeRate();
             float escapeMult = 1;
             if (FreeCap() < 0)
@@ -1855,6 +1933,20 @@ public class PredatorComponent
                     FreePrey(preyUnit, false);
                 }
 
+            }
+            if (preyUnit.Unit.HasTrait(Traits.GreedyStruggles))
+            {
+                // If unit can act, is not surrendered, and is a pred 
+                if (preyUnit.Actor.Surrendered == false && preyUnit.Unit.Predator)
+                {
+                    foreach (var target in PreyRefInLocation(preyUnit.Location).Where(u => u != preyUnit))
+                    {
+                        if (true)
+                        {
+                            preyUnit.Actor.PredatorComponent?.UsePreferredVore(target.Actor);
+                        }
+                    }
+                }
             }
         }
         return totalHeal;
