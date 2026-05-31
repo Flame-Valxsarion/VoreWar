@@ -22,4 +22,5 @@
     SweepingSwallow,
     AllInVore,
     DireInfection,
+    BladderVore,
 }

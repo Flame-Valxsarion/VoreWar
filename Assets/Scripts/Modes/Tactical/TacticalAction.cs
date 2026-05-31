@@ -125,6 +125,14 @@ static class TacticalActionList
             onExecute: (a, t) => a.PredatorComponent.TailVore(t)));
         TargetedDictionary[SpecialAction.TailVore] = TargetedActions.Last();
 
+        TargetedActions.Add(new TargetedTacticalAction(
+            name: "Bladder Vore",
+            requiresPred: true,
+            conditional: (a) => a.Unit.CanBladderVore && State.RaceSettings.GetVoreTypes(a.Unit.Race).Contains(VoreType.BladderVore),
+            onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.BladderVore),
+            onExecute: (a, t) => a.PredatorComponent.BladderVore(t)));
+        TargetedDictionary[SpecialAction.BladderVore] = TargetedActions.Last();
+
 
 
         //TargetedActions.Add(new TargetedTacticalAction(
@@ -243,7 +251,7 @@ static class TacticalActionList
 
         TargetedActions.Add(new TargetedTacticalAction(
           name: "SweepingSwallow",
-          requiresPred: false,
+          requiresPred: true,
           conditional: (a) => a.Unit.HasTrait(Traits.Legendary),
           onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.SweepingSwallow),
           onExecute: (a, t) => a.SweepAttack(false),

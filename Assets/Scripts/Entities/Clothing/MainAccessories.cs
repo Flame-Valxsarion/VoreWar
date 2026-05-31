@@ -63,6 +63,9 @@ class SantaHat : ClothingAccessory
             case Race.Bears:
                 clothing1.YOffset = 12 * .625f;
                 break;
+            case Race.Ghosts:
+                clothing1.YOffset = 12 * .625f;
+                break;
             default:
                 clothing1.YOffset = 0;
                 break;

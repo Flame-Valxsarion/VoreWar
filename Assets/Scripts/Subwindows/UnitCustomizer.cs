@@ -514,11 +514,15 @@ public class UnitCustomizer
                 buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Top";
                 buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Pants";
                 break;
-            case Race.Firefly:
-                buttons[(int)ButtonTypes.Skintone].Label.text = "Secondary Color";
-                buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Primary Color";
-                buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Outfit";
-                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Shoulder Pad";
+            case Race.Renamon:
+                buttons[(int)ButtonTypes.ClothingExtraType1].Label.text = "Gloves";
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Head Shape";
+                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Leg Markings";
+                buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Chest Floof";
+                buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Tail";
+                break;
+            case Race.Seville:
+                buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Raiments";
                 break;
             case Race.Taraluxia:
                 Taraluxia();
@@ -651,6 +655,11 @@ public class UnitCustomizer
                 buttons[(int)ButtonTypes.HatType].gameObject.SetActive(false);
                 buttons[(int)ButtonTypes.BodyAccessoryColor].gameObject.SetActive(false);
                 break;
+            case Race.Badgers:
+                buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Body Pattern Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Ear Shape";
+                break;
+
         }
     }
 

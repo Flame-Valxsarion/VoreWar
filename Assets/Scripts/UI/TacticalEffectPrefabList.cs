@@ -23,4 +23,5 @@ public class TacticalEffectPrefabList : MonoBehaviour
     public GameObject CrossShock;
     public GameObject Potion;
     public GameObject DivineNovaBlast;
+    public GameObject DiamondStorm;
 }

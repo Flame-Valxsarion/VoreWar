@@ -32,6 +32,10 @@ abstract class MainClothing
     internal bool OccupiesAllSlots = false;
     /// <summary>Discarded sprite uses palettes instead of the solid color</summary>
     internal bool DiscardUsesPalettes = false;
+    /// <summary>Discarded sprite uses non-standard palettes instead of the solid color. Check ClothingDiscards.cs </summary>
+    internal bool DiscardUsesAltPalettes = false;
+    /// <summary>Discarded sprite uses skin palettes instead of the solid color. Setup in the race's .cs</summary>
+    internal int AltPaletteColor = 0;
     /// <summary>Defaults to true, if true lowers breast layer to 8 so that it will be under clothing</summary>
     protected bool coversBreasts = true;
     /// <summary>Turns off the breast sprites entirely</summary>
@@ -192,6 +196,11 @@ abstract class MainClothing
             {
                 sprite.HideSprite(SpriteType.BodyAccent2); //Used for Dick Ring colors
             }
+        }
+        if (inFrontOfDick)
+        {
+            sprite.ChangeLayer(SpriteType.Dick, (clothing1.layer - 1));
+            sprite.ChangeLayer(SpriteType.Balls, (clothing1.layer - 1));
         }
 
         if (colorsBelly)

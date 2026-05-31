@@ -64,6 +64,8 @@
     static internal Eevee Eevee = new Eevee();
     static internal Equaleon Equaleon = new Equaleon();
     static internal OoviKat OoviKat = new OoviKat();
+    static internal Badgers Badgers = new Badgers();
+    static internal Renamon Renamon = new Renamon();
 
     static internal Vagrants Vagrants = new Vagrants();
     static internal Serpents Serpents = new Serpents();
@@ -152,7 +154,7 @@
     static internal Olivia Olivia = new Olivia();
     static internal Skapa Skapa = new Skapa();
     static internal Tatltuae Tatltuae = new Tatltuae();
-    static internal Firefly Firefly = new Firefly();
+    static internal Seville Seville = new Seville();
     static internal Nectar Nectar = new Nectar();
     static internal Ryan Ryan = new Ryan();
     static internal Konane Konane = new Konane();
@@ -439,8 +441,8 @@
                 return Tatltuae;
             case Race.Jackals:
                 return Jackals;
-            case Race.Firefly:
-                return Firefly;
+            case Race.Seville:
+                return Seville;
             case Race.Nectar:
                 return Nectar;
             case Race.Ryan:
@@ -483,6 +485,10 @@
                 return Cherub;
             case Race.Seraph:
                 return Seraph;
+            case Race.Badgers:
+                return Badgers;
+            case Race.Renamon:
+                return Renamon;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

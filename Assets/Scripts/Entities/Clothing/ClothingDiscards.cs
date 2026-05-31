@@ -96,6 +96,9 @@ internal class ClothingDiscards
             AllClothes.AddRange(Races.Jackals.ExtraMainClothing3Types);
             AllClothes.AddRange(Races.Yordles.AllowedMainClothingTypes);
             AllClothes.AddRange(Races.Yordles.AllowedWaistTypes);
+            AllClothes.AddRange(Races.Renamon.AllowedMainClothingTypes);
+            AllClothes.AddRange(Races.Renamon.AllowedWaistTypes);
+            AllClothes.AddRange(Races.Renamon.ExtraMainClothing1Types);
             AllClothes = AllClothes.Distinct().ToList();
         }
         var clothingType = AllClothes.Where(s => s.Type == type).FirstOrDefault();
@@ -105,6 +108,13 @@ internal class ClothingDiscards
         {
             if (clothingType.DiscardUsesPalettes)
                 sprite.GetComponentInChildren<SpriteRenderer>().material = ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, color).colorSwapMaterial;
+            else if (clothingType.DiscardUsesAltPalettes)
+            {
+                if (this.race == Race.Renamon)
+                    sprite.GetComponentInChildren<SpriteRenderer>().material = ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.RenamonSkin, clothingType.AltPaletteColor).colorSwapMaterial;
+                else
+                    sprite.color = ColorMap.GetClothingColor(color);
+            }
             else
                 sprite.color = ColorMap.GetClothingColor(color);
         }

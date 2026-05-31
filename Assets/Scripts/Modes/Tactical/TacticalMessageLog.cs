@@ -119,6 +119,7 @@ public class TacticalMessageLog
         GreatEscapeKeep,
         GreatEscapeFlee,
         ManualRegurgitation,
+        BladderVore,
     }
 
     public void RefreshListing()
@@ -244,6 +245,10 @@ public class TacticalMessageLog
                 msg = GenerateAVSwallowMessage(action);
                 msg = msg += odds;
                 return msg;
+            case MessageLogEvent.BladderVore:
+                msg = GenerateBldrVSwallowMessage(action);
+                msg = msg += odds;
+                return msg;
             case MessageLogEvent.BellyRub:
                 return GenerateBellyRubMessage(action);
             case MessageLogEvent.BreastRub:
@@ -265,6 +270,8 @@ public class TacticalMessageLog
             //Additional fail lines by Tatltuae
                 if (action.Target.Race != Race.Iliijiith && action.Unit.Race == Race.Iliijiith) //Ultra generic Iliijiith VoreSteal Fail line
                 return $"<b>{action.Unit.Name}</b> {GetRandomStringFrom("quickly", "rapidly")} approaches <b>{action.Target.Name}</b> and passes through {GPPHim(action.Target)} seemingly doing nothing, although {GPPHe(action.Target)} feels and odd coldness in {GPPHis(action.Target)} body as though something \"tried\" happening.";
+                if (action.oldLocation == PreyLocation.bladder) //Generic bladder VoreSteal Fail line
+                return $"<b>{action.Unit.Name}</b> {GetRandomStringFrom("squeezes tightly", "presses hard")} on <b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> \"belly\" but no matter how hard {GPPHe(action.Unit)} tries the {ApostrophizeWithOrWithoutS(GetRaceDescSingl(action.Target))} {GetRandomStringFrom("steel ", "tough ", "")}bladder refuses to let <b>{action.Prey.Name}</b> go.";
                 if (action.oldLocation == PreyLocation.breasts || action.oldLocation == PreyLocation.leftBreast || action.oldLocation == PreyLocation.rightBreast)
                 {
                     if (action.Target.Race == Race.Kangaroos)
@@ -363,6 +370,8 @@ public class TacticalMessageLog
                             default:
                                 return $"<b>{action.Unit.Name}</b> {GetRandomStringFrom("headbutts", "bashes")} <b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> crop attempting to release <b>{action.Prey.Name}</b>. After failing <b>{action.Target.Name}</b> simply stares {GetRandomStringFrom("soul-piercingly", "fearlessly", "daggers", "intimidatingly", "blanky")} with {GPPHis(action.Target)} eyes at <b>{action.Unit.Name}</b>.";
                         }
+                    if (action.Target.Race == Race.Tatltuae)
+                        return $"<b>{action.Unit.Name}</b> sticks {GPPHis(action.Unit)} head into <b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> {GetRandomStringFrom("neck feathers", "hackles")}, only to bump into the raven's actual neck, and not the the strange pocket dimension the raven had stuffed <b>{action.Prey.Name}</b> into.";
                     else
                         switch (State.Rand.Next(4))
                         {
@@ -452,7 +461,7 @@ public class TacticalMessageLog
                 return (action.Unit.IsDead ? $"<b>{action.Target.Name}</b> was freed because <b>{action.Unit.Name}</b> died." : $"<b>{action.Target.Name}</b> was freed because <b>{action.Unit.Name}</b> surrendered.");
             //$"<b>{action.Target.Name}</b> sees insides of {action.preyLocation.ToSyn()} around him melting, only to find {GPPHimself(action.Target)} <b>{action.Unit.Name}</b>'s {action.preyLocation.ToSyn()}{odds}"
             case MessageLogEvent.Regurgitated:
-                return $"<b>{action.Unit.Name}</b> hears {GPPHis(action.Unit)} comrade's plea for help and regurgitates <b>{action.Target.Name}</b>.";
+                return $"<b>{action.Unit.Name}</b> hears {GPPHis(action.Unit)} comrade's plea for help and releases <b>{action.Target.Name}</b>.";
             case MessageLogEvent.Heal:
                 if (new[] { "breastfeeding", "cumfeeding" }.Contains(action.Message))
                 {
@@ -613,146 +622,6 @@ public class TacticalMessageLog
     private string GenerateKillMessage(EventLog action)
     {
         List<string> possibleLines = new List<string>();
-        if (action.Unit.Race == Race.Firefly)
-        {
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Delta one, one target down! I repeat- Oh wait... forgot about that...\"");
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Tell the devil of this universe that <b>{action.Unit.Name}</b> sent ya! Does this universe have a devil?\"");
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Gah! Bleh! Got blood on my face! I better not get some stupid infection from this!\"");
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Man, if I had my Wanzer right now. Oh wait... no one here knows what that is.\"");
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Heh. Arrow would have a ball if he was here right now... Dang it, now I'm depressed again.\"");
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"How does the ground taste?!\"");
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"The day I get home, I am so going to tell everyone about all this cool stuff I killed! No one would care or beleive me but it would be worth a shot!\"");
-            possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"If you dare say 'That's gotta hurt!' I'll kill you! ... I'm talking to myself again...\"");
-            if (Config.FourthWallBreakType == FourthWallBreakType.On || Config.FourthWallBreakType == FourthWallBreakType.FriendlyOnly)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"You tried. And you died. #$*&ing dumb- ... %*^#! %&@! %*#^! *%#*$! What?! I can't swear?! What #&@#$%&# is this?!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Bet you are expecting some taunt or joke here. I know you are there... <b>player</b>.\"");
-            }
-            if (action.Target.Race == Race.Cats)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Boy, Ivy wouldn't be happy about this. Or she would.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Your claws may be sharp. But mine are sharper!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Aww, you don't look so happy. What's wrong? Cat got your tongue? HAH! ... Anyone? Come on it was funny in my head!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Looks like the fox wins again! God, you suck at this.\"");
-            }
-            if (action.Target.Race == Race.Dogs)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Man, this is a canine eat canine world! Literally.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Too much yapping and not enough fighting. Dogs are annoying no matter where I go.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"And that's what you get for barking all night!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hey! Good news <b>{action.Target.Name}</b>! You don't have to go to the vet anymore! Because you are dead!\"");
-            }
-            if (action.Target.Race == Race.Foxes || action.Target.Race == Race.FeralFox)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Fox on fox violence! Why did I say that? Sounded coolor in my head.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"You may be a fox. But I am a fire fox! ... Don't stare at me with your lifeless eyes!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"It's illegal to hunt foxes where I'm from. Too bad this isn't my universe!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Go back to your den little fox! I'm the big fox here!\"");
-            }
-            if (action.Target.Race == Race.Wolves || action.Target.Race == Race.FeralWolves)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Bah! There! Now quit your howling! I need to get sleep too you know!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Seems the fox out maneuvered the wolf this time!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hah! You couldn't even blow my house down!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I'm not even going to tell you to shut up.\"");
-            }
-            if (action.Target.Race == Race.Bunnies)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hop around <i>that</i>, you little... runt.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"You are fast. I am faster! You are bunny. I am bunnier!... I think I'm drunk again.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Sage shouldn't care about this. You aren't a rabbit. Are you a rabbit?\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Another <i>bunny</i> bites the <i>dust</i>! I need a joke book...\"");
-            }
-            if (action.Target.Race == Race.Humans)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Great. Humans even plage this universe.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I am very surpised to see you aren't the dominant race here.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Looks like your armor didn't stop that! Should have invented guns again!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"How's that for domination?! I am kinda starting to like it here.\"");
-            }
-            if (action.Target.Race == Race.Umbreon)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Sorry friend. War is war. I'm just following orders...\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Why... Why must this happen again...\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I didn't sign up for this...\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"This is the arena fights all over again...\"");
-            }
-            if (action.Target.Race == Race.Selicia)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Sad to see ya go. I kinda liked you.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I would spare you. But a job is a job. Nothing personal I swear.\"");
-            }
-            if (action.Target.Race == Race.Vision)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Well that was terrfing. Please stay dead.\"");
-                if (Config.FourthWallBreakType == FourthWallBreakType.On || Config.FourthWallBreakType == FourthWallBreakType.FriendlyOnly) possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"How the hell did that thing even see... Wait. I can say 'hell' but not '%#$&'?! AUGH!\"");
-            }
-            if (action.Target.Race == Race.Ki)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Writing that down. 'No matter how small something is. It can still kill you.'\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Aww, you were kinda cute. Probably deadly, but still cute.\"");
-            }
-            if (action.Target.Race == Race.Scorch)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I swear to god that was one of those dragon things Kiran told me about.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Is my tail on fire?! No? Whew...\"");
-            }
-            if (action.Target.Race == Race.Asura)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"You are a scarlet user aren't you. No wait... Forgot... Not my univesrse.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I am both in amazement and fear right now.\"");
-            }
-            if (action.Target.Race == Race.DRACO)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hey you are like the KNines from my universe! But a dragon with a mouth! And huge!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Draco The Robotic Dragon... Real original.\"");
-            }
-            if (action.Target.Race == Race.Zoey)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"What is so special about this shark?! All they do is swing their tail at people... and not wear clothes!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Go back to the ocean! You- uh... uhhh... fish? ... This place is making me more stupid.\"");
-            }
-            if (action.Target.Race == Race.Cierihaka)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"That was a big ^%# dragon!\"");
-                if (Config.FourthWallBreakType == FourthWallBreakType.On || Config.FourthWallBreakType == FourthWallBreakType.FriendlyOnly) possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I just killed the dragon equilvent of a Dark Souls boss...\"");
-            }
-            if (action.Target.Race == Race.Zera)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"How many dragons are there?!\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I AM THE DRAGON SLAYER! HAHAA!\"");
-            }
-            if (action.Target.Race == Race.Auri)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Is that a costume or are those ears and tail real? I hope they are real...\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Did you just try to kill me with a glorified stick? Well now I've seen everything.\"");
-            }
-            if (action.Target.Race == Race.Erin)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I don't know if you are a cat, angel, or demigod. or all three.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hey someone else who doesn't use the strange power of this world!\"");
-            }
-            if (action.Target.Race == Race.Salix)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hey look it's a magic mouse! That was a rhyme not a joke...\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"You do know foxes hunt mice right? This was never going to go your way.\"");
-            }
-            if (action.Target.Race == Race.Abakhanskya)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Ok time out for a second. I don't mean to fat shame you are anything, But you need to take a diet. I am genuinely concerned for your health... Even though I just killed you.\"");
-                if (Config.FourthWallBreakType == FourthWallBreakType.On || Config.FourthWallBreakType == FourthWallBreakType.FriendlyOnly) possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Now THAT is some Attack On Titan shit right there.\"");
-            }
-            if (action.Target.Race == Race.Singularity)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Are...you half human half deer half taur? Never mind. I havn't seen everything.\"");
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"I don't see the use of a sweater. Plus isn't that hard to put on and get off with the horns? Or do you just never...\"");
-            }
-            if (action.Target.Race == Race.Feit)
-            {
-                possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Hey you looked cool. We should talk later at the merc camp.\"");
-                if (Config.FourthWallBreakType == FourthWallBreakType.On || Config.FourthWallBreakType == FourthWallBreakType.FriendlyOnly) possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("killed", "struck down", "finished off", "dealt with")} <b>{action.Target.Name}</b> with his {GetWeaponTrueName(action.Weapon, action.Unit)}, \"Fluffy raptor dragon with feathers. Adding that to my Christmas wishlist!\"");
-            }
-        }
         if (action.Weapon.Range > 1) possibleLines.Add($"<b>{action.Target.Name}</b> was struck down by an accurate hit of <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> {GetWeaponTrueName(action.Weapon, action.Unit)}.");
         else possibleLines.Add($"<b>{action.Unit.Name}</b> struck <b>{action.Target.Name}</b> down with a skilled strike of {GPPHis(action.Unit)} {GetWeaponTrueName(action.Weapon, action.Unit)}.");
         possibleLines.Add($"<b>{action.Target.Name}</b> was slain by <b>{action.Unit.Name}</b> wielding {GPPHis(action.Unit)} {GetWeaponTrueName(action.Weapon, action.Unit)}.");
@@ -832,6 +701,8 @@ public class TacticalMessageLog
         {
             if (action.Target.Race < Race.Vagrants || action.Target.Race >= Race.Selicia) // Prey Humanoid
             {
+                if ((action.Unit.Race == Race.Slimes || action.Unit.Race == Race.FeralSlime) && State.Rand.Next(3) == 1 && (action.Target.Race == Race.Tatltuae))
+                    return $"With a final push, <b>{action.Target.Name}</b> pushes free of the {GetRandomStringFrom("goopy", "amorphous")} pred who'd caught him. He first looks at his feathers, dripping with slime, and then looks at <b>{action.Unit.Name}</b> with barely disguised hatred in his eyes. \"I am going to murder you.\"{odds}";
                 if (action.Unit.Race < Race.Vagrants || action.Unit.Race >= Race.Selicia) // Pred Humanoid
                     return GetRandomStringFrom(
                     $"From within <b>{action.Unit.Name}</b>’s gurgling gut, <b>{action.Target.Name}</b> remembers all the loved ones that would miss {GPPHim(action.Target)} and with this incentive forces {GPPHis(action.Target)} way out.{odds}",
@@ -932,6 +803,16 @@ public class TacticalMessageLog
             }
             if (action.preyLocation == PreyLocation.tail)
             {
+                if (action.Unit.Race == Race.Tatltuae)
+                {
+                    if ((action.Target.Race < Race.Vagrants || action.Target.Race >= Race.Selicia) && State.Rand.Next(2) == 1)
+                        return $"<b>{action.Target.Name}</b> calls out to <b>{action.Unit.Name}</b>. \"Let me out of here and I'll give you something shiny!\" Not expecting this to work, {GPPHeIsAbbr(action.Target)} rather surprised when, moments later, <b>{action.Unit.Name}</b> drags {GPPHim(action.Target)} out of his {GetRandomStringFrom("neck feathers", "hackles")} and looks at {GPPHim(action.Target)} with excitement. \"Really?!\" As the seconds pass by and it becomes clear to the raven that he was tricked and there is no shiny to claim, his face shifts to one of anger.{odds}";
+                    return GetRandomStringFrom(
+                    $"<b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> {GetRandomStringFrom("neck feathers", "hackles")} shake violently for a moment, as though being hit by some powerful wind, before <b>{action.Target.Name}</b> bursts forth from them, landing on the ground as {GPPHe(action.Target)} scramble{SIfSingular(action.Target)} away from the corvid.{odds}",
+                    $"<b>{action.Target.Name}</b> pushes through the dense warm black feathers around {GPPHim(action.Target)} until, with a burst of light and cool air, {GPPHe(action.Target)} find{SIfSingular(action.Target)} {GPPHimself(action.Target)} back outself the {GetRandomStringFrom("neck feathers", "hackles")}{GetRandomStringFrom(".", $", <b>{action.Unit.Name}</b> looking down at {GPPHim(action.Target)} in confusion.", $", <b>{action.Unit.Name}</b> looking down at {GPPHim(action.Target)} in confusion. \"How'd you get out?\"")}{odds}",
+                    $"<b>{action.Target.Name}</b> can feel the feathers closing in around {GPPHim(action.Target)}, threatening to absorb the {GetRaceDescSingl(action.Target)} into them, but {GPPHe(action.Target)} refuse{SIfSingular(action.Target)} to go out like this! With a final burst of effort, {GPPHe(action.Target)} pulls and pushes against the feathers, soon climbing back out of <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> {GetRandomStringFrom("neck feathers", "hackles")}{GetRandomStringFrom(".", $", the raven looking at {GPPHim(action.Target)} with a bit of frustration.", $", the raven looking at {GPPHim(action.Target)} with a bit of frustration. \"Hey! Get back in there!\"")}{odds}"
+                    );
+                }
                 if (action.Unit.Race == Race.Bees)
                 {
                     return GetRandomStringFrom(
@@ -968,6 +849,29 @@ public class TacticalMessageLog
                     );
                 }
             }
+            if (State.Rand.Next(4) != 0 && action.preyLocation == PreyLocation.bladder)
+            {
+                if (action.Unit.HasDick && ActorHumanoid(action.Target) && ActorHumanoid(action.Unit) && State.Rand.Next(3) == 0)
+                    return $"With a kick to {GPPHis(action.Unit)} lower spine, <b>{action.Target.Name}</b> shoots out of <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> {PreyLocStrings.ToCockSyn()}{odds}";
+                if (action.Unit.HasVagina && ActorHumanoid(action.Target) && ActorHumanoid(action.Unit) && State.Rand.Next(3) == 0)
+                    return $"<b>{action.Target.Name}</b> manages to reach {GPPHis(action.Target)} arm out of <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> body, and uses the {ApostrophizeWithOrWithoutS(GetRaceDescSingl(action.Unit))} thighs as handholds whist pulling {GPPHimself(action.Target)} out.{odds}";
+                if (action.Unit.HasDick && State.Rand.Next(2) != 0)
+                    return GetRandomStringFrom(
+                    $"<b>{action.Target.Name}</b> slowly and carefully extracts {GPPHimself(action.Target)} from <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bladder, {GPPHis(action.Target)} head emerging from <b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> {PreyLocStrings.ToCockSyn()}.{odds}",
+                    $"Getting clever, <b>{action.Target.Name}</b> remains perfectly still for a minute. Believing {GPPHimself(action.Unit)} to have won, <b>{action.Unit.Name}</b> casually takes a piss, unwittingly pushing <b>{action.Target.Name}</b> back out {GPPHis(action.Unit)} {PreyLocStrings.ToCockSyn()}.{odds}"
+                    );
+                if (action.Unit.HasVagina && State.Rand.Next(2) != 0)
+                    return GetRandomStringFrom(
+                    $"Within <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bladder, <b>{action.Target.Name}</b> stretches out, and forces {GPPHimself(action.Target)} out from <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> nethers.{odds}",
+                    $"After a particularly vicious struggle, <b>{action.Target.Name}</b> manages to reemerge from <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> slit.{odds}"
+                    );
+                else
+                    return GetRandomStringFrom(
+                    $"<b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> constant movement within <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bladder makes <b>{action.Unit.Name}</b> feel as though {GPPHe(action.Unit)} need{SIfSingular(action.Unit)} to go pee. As <b>{action.Unit.Name}</b> urinates, <b>{action.Target.Name}</b> is pissed out intact.{odds}",
+                    $"<b>{action.Target.Name}</b> aggressively forces {GPPHis(action.Target)} way out through <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> urethra.{odds}",
+                    $"Within <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bladder, <b>{action.Target.Name}</b> orients {GPPHimself(action.Target)} upside down. With one mighty push, <b>{action.Target.Name}</b> goes straight back out the hole {GPPHe(action.Target)} came in through.{odds}"
+                    );
+            }
             return GetRandomStringFrom(
             $"<b>{action.Target.Name}</b> escaped from <b>{action.Unit.Name}</b>'s {action.preyLocation.ToSyn()}.{odds}",
             $"From within <b>{action.Unit.Name}</b>’s {action.preyLocation.ToSyn()}, <b>{action.Target.Name}</b> remembers all the loved ones that would miss {GPPHim(action.Target)}, and with this incentive forces {GPPHis(action.Target)} way out.{odds}",
@@ -1001,7 +905,7 @@ public class TacticalMessageLog
             return GetRandomStringFrom(possibleLines.ToArray());
         }
         possibleLines.Add($"<b>{action.Unit.Name}</b> decides to {GetRandomStringFrom("release", "free", "regurgitate", "eject")} <b>{action.Target.Name}</b>.");//Generic unspecified line
-        if (!(action.preyLocation == PreyLocation.tail && ((action.Unit.Race == Race.Youko) || (action.Unit.Race == Race.Terrorbird))) && !(action.preyLocation == PreyLocation.breasts && (action.Unit.Race == Race.Kangaroos)))//Exclude races that use repurposed vore locations from generic lines that specify the prey location
+        if (!(action.preyLocation == PreyLocation.tail && ((action.Unit.Race == Race.Youko) || (action.Unit.Race == Race.Terrorbird) || (action.Unit.Race == Race.Tatltuae))) && !(action.preyLocation == PreyLocation.breasts && (action.Unit.Race == Race.Kangaroos)))//Exclude races that use repurposed vore locations from generic lines that specify the prey location
         {
         possibleLines.Add($"<b>{action.Unit.Name}</b> {GetRandomStringFrom("regurgitated", "released", "freed", "pushed out")} <b>{action.Target.Name}</b>{GetRandomStringFrom(".", $" from {GPPHis(action.Unit)} {PreyLocStrings.ToSyn(action.preyLocation)}.")}");
         possibleLines.Add($"<b>{action.Unit.Name}</b> decides to eject <b>{action.Target.Name}</b> from {GPPHis(action.Unit)} {PreyLocStrings.ToSyn(action.preyLocation)}.");
@@ -1106,7 +1010,7 @@ public class TacticalMessageLog
         }
         else if (action.preyLocation == PreyLocation.tail)
         {
-            if (!(action.Unit.Race == Race.Youko) && !(action.Unit.Race == Race.Terrorbird))
+            if (!(action.Unit.Race == Race.Youko) && !(action.Unit.Race == Race.Terrorbird) && !(action.Unit.Race == Race.Tatltuae))
             {
                 possibleLines.Add($"No longer able to tolerate the weight of <b>{action.Target.Name}</b> in {GPPHis(action.Unit)} tail, <b>{action.Unit.Name}</b> presses on the bulge {GPPHe(action.Target)} make{SIfSingular(action.Unit)}, and pushes {GPPHim(action.Target)} back out into the world.");
                 possibleLines.Add($"{GetRandomStringFrom("Done with", "No longer wanting to hold onto")} <b>{action.Target.Name}</b>, <b>{action.Unit.Name}</b> starts to swing {GPPHis(action.Unit)} tail back and forth, slowly at first, then faster with each swing until the {GetRaceDescSingl(action.Target)} is forced out of the tail, landing with a wet splat on the ground.");
@@ -1140,6 +1044,33 @@ public class TacticalMessageLog
                     possibleLines.Add($"<b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bunched up tails pull apart, revealing <b>{action.Target.Name}</b>, disappointed that the {ApostrophizeWithOrWithoutS(GetRaceDescSingl(action.Unit))} soft tails are no longer blanketing {GPPHim(action.Target)} on all sides.");
                     possibleLines.Add($"Slowly, the clump of soft fur cradling <b>{action.Target.Name}</b> parts, as <b>{action.Unit.Name}</b> decides {GPPHe(action.Unit)} no longer want{SIfSingular(action.Unit)} to carry {GPPHim(action.Target)}.");
                 }
+            }
+            if (action.Unit.Race == Race.Tatltuae)
+            {
+                possibleLines.Add($"As {GPPHe(action.Target)} sit{SIfSingular(action.Target)} in a void of soft feathers, <b>{action.Target.Name}</b> is startled by the wing-arm of <b>{action.Unit.Name}</b> reaching in and pulling {GPPHim(action.Target)} out of his {GetRandomStringFrom("neck feathers", "hackles")}.");
+                possibleLines.Add($"<b>{action.Unit.Name}</b>, irritated by the struggles of <b>{action.Target.Name}</b>, stops and shakes his head vigorously, the {GetRaceDescSingl(action.Target)} being tossed out of his {GetRandomStringFrom("neck feathers", "hackles")} and onto the ground.");
+                possibleLines.Add($"<b>{action.Target.Name}</b> feels {GPPHimself(action.Target)} suddenly get grabbed by something and yanked out of the raven's {GetRandomStringFrom("neck feathers", "hackles")} as <b>{action.Unit.Name}</b> tosses {GPPHim(action.Target)} out.");
+                if (action.Unit.Side == action.Target.Side && ( action.Unit.HasTrait(Traits.FriendlyStomach) || action.Unit.HasTrait(Traits.Endosoma)))
+                {
+                    possibleLines.Add($"As {GPPHe(action.Target)} sit{SIfSingular(action.Target)} in a void of soft feathers and assorted items, <b>{action.Target.Name}</b> is startled by the wing-arm of <b>{action.Unit.Name}</b> reaching in and pulling {GPPHim(action.Target)} out of his {GetRandomStringFrom("neck feathers", "hackles")}. \"Ok, you've had your stay, time to get out again.\"");
+                    possibleLines.Add($"<b>{action.Unit.Name}</b>, done holding onto <b>{action.Target.Name}</b>, stops and shakes his head vigorously, the {GetRaceDescSingl(action.Target)} being tossed out of his {GetRandomStringFrom("neck feathers", "hackles")} and onto the ground, alongside some assorted items the raven quickly collects and puts back in his feathers.");
+                    possibleLines.Add($"<b>{action.Target.Name}</b> feels {GPPHimself(action.Target)} suddenly get grabbed by something and gently pulled out of the raven's {GetRandomStringFrom("neck feathers", "hackles")} as <b>{action.Unit.Name}</b> sets {GPPHim(action.Target)} on the ground.");
+                }
+            }
+        }
+        else if (action.preyLocation == PreyLocation.bladder)
+        {
+            possibleLines.Add($"<b>{action.Unit.Name}</b> feels as though {GPPHe(action.Unit)} need{SIfSingular(action.Unit)} to go pee. As <b>{action.Unit.Name}</b> urinates, <b>{action.Target.Name}</b> is pissed out intact.");
+            if (action.Unit.HasDick)
+            {
+                possibleLines.Add($"<b>{action.Unit.Name}</b> decides that {GPPHe(action.Unit)} no longer need{SIfSingular(action.Unit)} <b>{action.Target.Name}</b> within {GPPHim(action.Unit)}, and uncerimoniously pees <b>{action.Target.Name}</b> out of {GPPHis(action.Unit)} {PreyLocStrings.ToCockSyn()}.");
+                possibleLines.Add($"<b>{action.Unit.Name}</b> grabs {GPPHis(action.Unit)} {PreyLocStrings.ToCockSyn()} tightly, and pisses out a living {GetRaceDescSingl(action.Target)}.");
+                possibleLines.Add($"<b>{action.Unit.Name}</b> slowly massages <b>{action.Target.Name}</b> out of {GPPHis(action.Unit)} {PreyLocStrings.ToCockSyn()}.");
+            }
+            if (action.Unit.HasVagina && ActorHumanoid(action.Unit))
+            {
+                possibleLines.Add($"<b>{action.Unit.Name}</b> reaches up {GPPHis(action.Unit)} slit, and yanks <b>{action.Target.Name}</b> from {GPPHis(action.Unit)} bladder.");
+                possibleLines.Add($"As <b>{action.Unit.Name}</b> pushes <b>{action.Target.Name}</b> from {GPPHis(action.Unit)} slit, {GPPHe(action.Unit)} say{SIfSingular(action.Unit)} \"Your ride ends here, please get out of my bladder now.\"");
             }
         }
         return GetRandomStringFrom(possibleLines.ToArray());
@@ -1185,6 +1116,13 @@ public class TacticalMessageLog
         return GetStoredMessage(StoredLogTexts.MessageTypes.CockVoreMessages, action);
     }
 
+    private string GenerateBldrVSwallowMessage(EventLog action)
+    {
+        if (SimpleText)
+            return $"<b>{action.Unit.Name}</b> bladder vores <b>{action.Target.Name}</b>.";
+        return GetStoredMessage(StoredLogTexts.MessageTypes.BladderMessages, action);
+    }
+
     private string GenerateRandomDigestionMessage(EventLog action)
     {
         return GetStoredMessage(StoredLogTexts.MessageTypes.RandomDigestionMessages, action);
@@ -1202,7 +1140,7 @@ public class TacticalMessageLog
                 $"<b>{action.Unit.Name}</b> can feel <b>{action.Target.Name}</b>'s struggles getting weaker, kindly reminding {GPPHim(action.Target)} that if {GPPHe(action.Target)} fail{SIfSingular(action.Target)} to escape {GPPHeIs(action.Target)} getting {PreyLocStrings.DigestedVerbSyn()} into {PreyLocStrings.ScatSyn()}.",
                 $"<b>{action.Unit.Name}</b>’s {action.preyLocation.ToSyn()} rumbles ominously while telling <b>{action.Target.Name}</b> that {GPPHe(action.Unit)} will enjoy {GetRandomStringFrom("shitting", "crapping", "dumping", "squeezing", "pooping")} {GPPHim(action.Target)} out later.");
         }
-        if (Config.HardVoreDialog && Random.Range(0, 5) == 0)
+        if (Config.HardVoreDialog && (action.preyLocation == PreyLocation.stomach || action.preyLocation == PreyLocation.stomach2) && Random.Range(0, 5) == 0)
         {
             string loc = action.preyLocation.ToSyn();
             string locs = (loc.EndsWith("s") ? "" : "s");
@@ -1236,6 +1174,23 @@ public class TacticalMessageLog
                     return $"As <b>{action.Target.Name}</b> continues to struggle, {GPPHe(action.Target)} find{SIfSingular(action.Target)} {GPPHimself(action.Target)} less and less able to remember anything about the world beyond <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> {GetRandomStringFrom("breasts", "boobs", "tits")}.";
             }
         }
+        if (action.preyLocation == PreyLocation.bladder && State.Rand.Next(4) != 0)
+        {
+            switch (State.Rand.Next(3))
+            {
+                case 0:
+                    return $"As <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bladder fills with more smelly piss, <b>{action.Target.Name}</b> takes solace in the fact that {GPPHis(action.Target)} odorous existance seems to be drawing to a close.";
+                case 1:
+                    if (ActorHumanoid(action.Target) && ActorHumanoid(action.Unit) && Config.HardVoreDialog && State.Rand.Next(2) != 0)
+                    {return $"As <b>{ApostrophizeWithOrWithoutS(action.Target.Name)}</b> struggles slow, <b>{action.Unit.Name}</b> taunts {GPPHis(action.Unit)} prey. \"{GetRandomStringFrom("Soon, you'll be pure liquid, and I'll leave you behind.", $"You're getting close, soon I'll get to {GetRandomStringFrom("pee", "piss")} you out.", "You know, half the fun of this is your struggling. Get back to it or I'll make your death WAY more painful.")}\"";}
+                    else
+                    {return $"As <b>{ApostrophizeWithOrWithoutS(action.Unit.Name)}</b> bladder fills with more smelly piss, <b>{action.Target.Name}</b> takes solace in the fact that {GPPHis(action.Target)} odorous existance seems to be drawing to a close.";}
+                default:
+                    return $"As the {PreyLocStrings.ToFluid(PreyLocation.bladder)} around <b>{action.Target.Name}</b> fizzes violently, the {GetRaceDescSingl(action.Target)} commits to one last struggle. Either {GPPHe(action.Target)} escape{SIfSingular(action.Target)}, or {GPPHe(action.Target)} become{SIfSingular(action.Target)} {PreyLocStrings.ToFluid(PreyLocation.bladder)}.";
+            }
+        }
+        if (action.preyLocation == PreyLocation.tail && action.Unit.Race == Race.Tatltuae)
+            return $"<b>{action.Target.Name}</b> finds it harder and harder to keep focused as the feathers around {GPPHim(action.Target)} get softer and warmer, and the urge to sleep rises.";
         int ran = Random.Range(0, 9);
         switch (ran)
         {
@@ -1417,7 +1372,20 @@ public class TacticalMessageLog
         UpdateListing();
     }
 
-    public void RegisterBellyRub(Unit rubber, Unit target, Unit prey, float odds)
+    public void RegisterBladderVore(Unit predator, Unit prey, float odds)
+    {
+        events.Add(new EventLog
+        {
+            Type = MessageLogEvent.BladderVore,
+            Unit = predator,
+            Target = prey,
+            Odds = odds,
+            preyLocation = PreyLocation.bladder,
+        });
+        UpdateListing();
+    }
+
+    public void RegisterBellyRub(Unit rubber, Unit target, Unit prey, PreyLocation preyLoc, float odds)
     {
         events.Add(new EventLog
         {
@@ -1426,7 +1394,7 @@ public class TacticalMessageLog
             Target = target,
             Prey = prey ?? defaultPrey,
             Odds = odds,
-            preyLocation = PreyLocation.stomach,
+            preyLocation = preyLoc,
         });
         UpdateListing();
     }

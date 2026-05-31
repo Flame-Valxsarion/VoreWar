@@ -34,6 +34,8 @@ public class AdvancedUnitCommands : MonoBehaviour
             {
                 if (action.Name == "Tail Vore" && actor.Unit.Race == Race.Terrorbird)
                     SetButton("Crop Vore", action.OnClicked, action.ButtonColor);
+                if (action.Name == "Tail Vore" && actor.Unit.Race == Race.Tatltuae)
+                    SetButton("Hackle Vore", action.OnClicked, action.ButtonColor);
                 else if (action.Name == "Breast Vore" && actor.Unit.Race == Race.Kangaroos)
                     SetButton("Pouch Vore", action.OnClicked, action.ButtonColor);
                 else if (action.ManaCost > 0)

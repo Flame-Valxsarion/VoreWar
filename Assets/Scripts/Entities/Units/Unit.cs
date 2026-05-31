@@ -459,6 +459,7 @@ public class Unit
     internal bool CanBreastVore => Config.BreastVore && HasBreasts;
     internal bool CanAnalVore => Config.AnalVore;
     internal bool CanTailVore => Config.TailVore;
+    internal bool CanBladderVore => Config.BladderVore && (HasVagina || HasDick);
 
     public bool CanVore(PreyLocation location)
     {
@@ -474,6 +475,8 @@ public class Unit
                 return CanAnalVore;
             case PreyLocation.tail:
                 return CanTailVore;
+            case PreyLocation.bladder:
+                return CanBladderVore;
             default:
                 return true;
         }
@@ -1019,8 +1022,8 @@ public class Unit
         }
         else if (race == Race.Olivia)
         {
-            FixedGear = true;
-            Items[0] = null;
+            FixedGear = false;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.OliviaWeapon);
         }
         else if (race == Race.Skapa)
         {
@@ -1032,13 +1035,13 @@ public class Unit
             FixedGear = false;
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.TatltuaeWeapon);
         }
-        else if (race == Race.Firefly)
+        else if (race == Race.Seville)
         {
             try
             {
                 FixedGear = true;
-                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.FireflyMelee);
-                Items[1] = State.World.ItemRepository.GetSpecialItem(SpecialItems.FireflyRange);
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SevilleMelee);
+                Items[1] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SevilleArmor);
             }
             catch { }
         }
@@ -1055,7 +1058,7 @@ public class Unit
         else if (race == Race.Konane)
         {
             FixedGear = true;
-            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RyanWeapon);
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.KonaneWeapon);
         }
         else if (race == Race.Cherub || race == Race.SoulSprite)
         {
@@ -1075,6 +1078,11 @@ public class Unit
             }
             catch { }
         }
+        else if (race == Race.Renamon)
+        {
+            FixedGear = false;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RenamonWeapon);
+        }
         else
         {
             FixedGear = false;
@@ -1083,7 +1091,7 @@ public class Unit
                 if (Items[i] != null && State.World.ItemRepository.ItemIsUnique(Items[i]))
                     Items[i] = null;
             }
-            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == false)
+            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == false && RaceParameters.GetRaceTraits(race).CanUseMeleeWeapons == true)
             {
                 for (int i = 0; i < Items.Length; i++)
                 {
@@ -1099,6 +1107,24 @@ public class Unit
                     }
                 }
             }
+            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == true && RaceParameters.GetRaceTraits(race).CanUseMeleeWeapons == false)
+            {
+                for (int i = 0; i < Items.Length; i++)
+                {
+                    if (Items[i] != null && State.World.ItemRepository.ItemIsMeleeWeapon(Items[i]))
+                    {
+                        if (Items[i] is Weapon weapon)
+                        {
+                            if (weapon.Damage > 4)
+                                Items[i] = State.World.ItemRepository.GetItem(ItemType.CompoundBow);
+                            else
+                                Items[i] = State.World.ItemRepository.GetItem(ItemType.Bow);
+                        }
+                    }
+                }
+            }
+            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == false && RaceParameters.GetRaceTraits(race).CanUseMeleeWeapons == false)
+            {}
             if (!skipTraitItems)
                 GiveTraitBooks();
         }
@@ -1869,8 +1895,6 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
     public bool HasTrait(Traits tag)
     {
         if (tag == Traits.TheGreatEscape && Race == Race.Erin)
-            return true;
-        if (tag == Traits.TheGreatEscape && Race == Race.Olivia)
             return true;
         if (Tags != null)
             return Tags.Contains(tag) || (PermanentTraits?.Contains(tag) ?? false);
@@ -3333,7 +3357,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         var ten = GetStatusEffect(StatusEffectType.Tenacious);
         if (ten != null)
         {
-            int reduction = 5 - (HasTrait(Traits.Unflinching) && Health * .1f > ten.Strength? 3 : 0);
+            int reduction = 5 - (HasTrait(Traits.Unflinching) && Health * .1f > ten.Strength? 5 : 0);
             ten.Duration -= reduction;
             ten.Strength -= reduction;
             if (ten.Duration <= 0)

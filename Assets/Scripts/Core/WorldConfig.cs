@@ -242,6 +242,8 @@ public class WorldConfig
     internal int TailWeight = 1;
     [OdinSerialize]
     internal int AnalWeight = 1;
+    [OdinSerialize]
+    internal int BladderWeight = 1;
 
     [OdinSerialize]
     internal float DigestionSpeedMult = 1f;
@@ -444,6 +446,7 @@ public class WorldConfig
             ["CockVoreHidesClothes"] = false,
             ["BreastVore"] = false,
             ["TailVore"] = false,
+            ["BladderVore"] = false,
             ["KuroTenkoEnabled"] = false,
             ["OverhealEXP"] = true,
             ["TransferAllowed"] = true,

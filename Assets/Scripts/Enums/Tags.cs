@@ -624,7 +624,7 @@ public enum Traits
     ViralBiology  = 310,
     /// <summary>If one of an army has this trait, all non-water tiles can be traversed by the army for 1 MP.</summary>
     Cartography  = 311,
-    /// <summary>If one of an army has this trait, all non-water tiles can be traversed by the army for 1 MP.</summary>
+    /// <summary>Unit's weapon damage scales purely with mind stat; ignoring the weapon's main stat in damage calculations.</summary>
     BoundWeapon  = 312,
     /// <summary>Reduced nutrition as prey. Impossible to convert, as well as have a hard time converting other races to its race. (50% convert rate and can only convert).</summary>
     AcellularBody  = 313,
@@ -636,6 +636,10 @@ public enum Traits
     DyingStrike  = 316,
     /// <summary>Provides 1 use of Dimension Shift spell.</summary>
     DimensionalAntilock  = 317,
+    /// <summary>Unit can melee attack twice if they have no weapon equiped.</summary>
+    WildFury  = 318,
+    /// <summary>Unit will be counted as fled with 1 HP if killed, and will not leave a corpse upon dying </summary>
+    CloseCall  = 319,
 
 
     // Growth-related section

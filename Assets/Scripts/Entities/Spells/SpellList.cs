@@ -61,6 +61,7 @@ static class SpellList
     static internal readonly DamageSpell CrossShock;
     static internal readonly DamageSpell ExplosiveHug;
     static internal readonly DamageSpell Explode;
+    static internal readonly DamageSpell DiamondStorm;
     static internal readonly DamageSpell Flamberge;
     static internal readonly DamageSpell ForkLightning;
     //static internal readonly Spell Warp;
@@ -553,6 +554,35 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.Explode] = Explode;
+
+        DiamondStorm = new DamageSpell()
+        {
+            Name = "Diamond Storm",
+            Id = "diamond-storm",
+            SpellType = SpellTypes.DiamondStorm,
+            Description = "Deals damage in a cross pattern with razor sharp leaves",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
+            Range = new Range(6),
+            AOEType = AreaOfEffectType.FixedPattern,
+            Tier = 3,
+            Pattern = new int[3, 3] { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 } },
+            Resistable = true,
+            ResistanceMult = .95f,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 5,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(DiamondStorm, t);
+                TacticalGraphicalEffects.CreateDiamondStorm(a.Position, t.Position, t);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+            },
+            OnExecuteTile = (a, l) =>
+            {
+                a.CastOffensiveSpell(DiamondStorm, null, l);
+                TacticalGraphicalEffects.CreateDiamondStorm(a.Position, l, null);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+            },
+        };
+        SpellDict[SpellTypes.DiamondStorm] = DiamondStorm;
 
         //Warp = new Spell() //Implemented this and forgot it was supposed to be target and then location, only the caster makes it highly situational
         //{

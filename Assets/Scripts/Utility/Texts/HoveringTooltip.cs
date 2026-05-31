@@ -700,7 +700,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.MetamorphicConversion:
                 return "Unit changes Race and side upon digestion";
             case Traits.Perseverance:
-                return "Unit heals after not taking damage for a 3 turns, scaling higer with each turn without damage thereafter.";
+                return "Unit heals after not taking damage for a 3 turns, scaling higher with each turn without damage thereafter.";
             case Traits.ManaAttuned:
                 return "Unit thrives on mana, uses 10% of their max mana every turn. Unit falls asleep for 2 turns if they don't have enough mana, but regenerate 50% max mana every turn they are asleep.";
             case Traits.NightEye:
@@ -726,7 +726,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.ManaBarrier:
                 return "Up to 50% of damage taken by unit instead spends mana, this trait loses 1% effectivity for every 1% missing mana percentage.";
             case Traits.Unflinching:
-                return "Unit's BladeDance, Tenacity, and Focus stack loss is reduced by if stacks are below 10% current HP.";
+                return "Unit's BladeDance, Tenacity, and Focus stack loss is reduced if the stack's total is below 10% of the unit's current HP.";
             case Traits.Annihilation:
                 return "Every time digestion progresses, this unit digests one level from each prey inside them, gaining its experience value. If a unit hits level 0 this way, it dies if it was still alive and cannot be revived.\n(Cheat Trait)";
             case Traits.WeaponChanneler:
@@ -908,6 +908,11 @@ public class HoveringTooltip : MonoBehaviour
                 return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Gloomy(Stm)</b>: This unit inflicts stacking Lethargy on consumed enemies, reducing their offensive stats for 3 turns.";
 
         }
+            case Traits.WildFury:
+                return "Unarmed but not harmless! Unit can melee attack twice if they have no weapon equipped.";
+            case Traits.CloseCall:
+                return "Unit will flee combat upon fatal strikes from weapons or spells with 1 HP rather than dying. (unit will rejoin if the army wins, otherwise sets off for the closest town) ";
+        }  
         return "<b>This trait needs a tooltip!</b>";
     }
 

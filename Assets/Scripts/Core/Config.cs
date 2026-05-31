@@ -287,6 +287,7 @@ static class Config
     internal static bool Unbirth => World.GetValue("Unbirth");
     internal static bool HermsCanUB => World.GetValue("HermsCanUB");
     internal static bool CockVore => World.GetValue("CockVore");
+    internal static bool BladderVore => World.GetValue("BladderVore");
     internal static bool CockVoreHidesClothes => World.GetValue("CockVoreHidesClothes");
     internal static bool KuroTenkoEnabled => World.GetValue("KuroTenkoEnabled");
     internal static bool OverhealEXP => World.GetValue("OverhealEXP");
@@ -300,6 +301,7 @@ static class Config
     internal static int BreastWeight => World.BreastWeight;
     internal static int CockWeight => World.CockWeight;
     internal static int TailWeight => World.TailWeight;
+    internal static int BladderWeight => World.BladderWeight;
 
     internal static bool CanUseStomachRubOnEnemies => World.GetValue("CanUseStomachRubOnEnemies");
     internal static bool BoostedAccuracy => World.GetValue("BoostedAccuracy");

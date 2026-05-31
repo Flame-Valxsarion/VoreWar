@@ -513,7 +513,7 @@ public class Army
 
         if (flying > 0 && flying >= Units.Count / 2)
             movementMode = MovementMode.Flight;
-        if (cartography > 0)
+        else if (cartography > 0)
             movementMode = MovementMode.Flight;
         //else if (aquatic >= Units.Count / 2)
         //    movementMode = MovementMode.Aquatic;
