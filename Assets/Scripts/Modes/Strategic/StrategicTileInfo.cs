@@ -97,8 +97,7 @@ public enum StrategicDoodadType
     SpawnerUtahraptor = 1047,
     SpawnerIliijiith = 1048,
     SpawnerPudding = 1049,
-    SpawnerUtahraptor = 1050,    
-    SpawnerSoulSprite = 1051,
+    SpawnerSoulSprite = 1051,    
 }
 
 public enum MovementType

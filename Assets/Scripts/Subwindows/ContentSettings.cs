@@ -603,8 +603,11 @@ public class ContentSettings : MonoBehaviour
             case Race.Iliijiith:
                 tooltip.value = 346;
                 break;
+            case Race.Pudding:
+                tooltip.value = 347;
+                break;
             case Race.SoulSprite:
-                tooltip.value = 346;
+                tooltip.value = 349;
                 break;
         }
         return spawner;
