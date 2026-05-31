@@ -241,6 +241,10 @@ public class ConditionalTraitConditionChecker
 
     public static bool StrategicTraitConditionActive(Unit unit, ConditionalTraitContainer conditionalTrait)
     {
+        if (unit == null || conditionalTrait == null)
+        {
+            return false;
+        }
         bool condition = false;
         TraitConditionLogicalOperator op = TraitConditionLogicalOperator.none;
         foreach (var item in conditionalTrait.OperationBlocks)
@@ -271,6 +275,14 @@ public class ConditionalTraitConditionChecker
 
     public static bool StrategicCheckConditionBlocks(Unit unit, ConditionalTraitOperationBlock opBlock)
     {
+        if (unit == null || opBlock == null)
+        {
+            return false;
+        }
+        if (opBlock.conditionVariable == null)
+        {
+            return false;
+        }
         TraitCondition leadCondition = opBlock.conditionVariable.First();
         if (leadCondition >= TraitCondition.Male)
         {

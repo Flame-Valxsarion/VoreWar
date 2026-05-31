@@ -144,9 +144,6 @@ class Centaur : TaurHumanHalf
             SecondaryBelly.layer = 6;
         }
 
-        if (!actor.HasBelly)
-            return null;
-
         if ( size >= 31 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
 			AddOffset(SecondaryBelly, -23 * .625f, -7 * .625f);

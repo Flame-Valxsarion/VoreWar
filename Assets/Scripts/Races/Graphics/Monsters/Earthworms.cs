@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 class Earthworms : BlankSlate
@@ -21,14 +25,15 @@ class Earthworms : BlankSlate
         WeightGainDisabled = true;
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EarthwormSkin);
 
-        Body = new SpriteExtraInfo(4, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor));
-        Head = new SpriteExtraInfo(6, HeadSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor));
+        Body = new SpriteExtraInfo(5, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor));
+        Head = new SpriteExtraInfo(7, HeadSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor));
         BodyAccessory = new SpriteExtraInfo(5, AccessorySprite, WhiteColored); // rocks
         BodyAccent = new SpriteExtraInfo(1, BodyAccentSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor)); // belly support
         BodyAccent2 = new SpriteExtraInfo(2, BodyAccentSprite2, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor)); // belly cover
-        BodyAccent3 = new SpriteExtraInfo(4, BodyAccentSprite3, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor)); // tail
-        Mouth = new SpriteExtraInfo(7, MouthSprite, WhiteColored);
-        Belly = new SpriteExtraInfo(3, null, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor));
+        BodyAccent3 = new SpriteExtraInfo(5, BodyAccentSprite3, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor)); // tail
+        BodyAccent4 = new SpriteExtraInfo(3, BodyAccentSprite4, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor)); // tail connector
+        Mouth = new SpriteExtraInfo(8, MouthSprite, WhiteColored);
+        Belly = new SpriteExtraInfo(4, null, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EarthwormSkin, s.Unit.SkinColor));
 
     }
 
@@ -47,10 +52,68 @@ class Earthworms : BlankSlate
             new AnimationController.FrameList(0, 0, false) };  // Index 0.
     }
 
-    internal override void SetBaseOffsets(Actor_Unit actor)
-    {
-        AddOffset(Belly, 0, -48 * .625f);
-    }
+	internal override void SetBaseOffsets(Actor_Unit actor)
+    {  
+        int size = actor.GetStomachSize(50);
+		
+		if (size == 22)
+		{
+			AddOffset(Belly, 0 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 0 * .625f, 0 * .625f);
+		}
+		else if (size == 23)
+		{
+			AddOffset(Belly, 0 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 1 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 1 * .625f, 0 * .625f);
+		}
+		else if (size == 24)
+		{
+			AddOffset(Belly, 0 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 5 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 5 * .625f, 0 * .625f);
+		}
+		else if (size == 25)
+		{
+			AddOffset(Belly, 0 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 10 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 10 * .625f, 0 * .625f);
+		}
+		else if (size == 26)
+		{
+			AddOffset(Belly, 0 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 15 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 15 * .625f, 0 * .625f);
+		}
+		else if (size == 27)
+		{
+			AddOffset(Belly, 0 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 20 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 20 * .625f, 0 * .625f);
+		}
+		else if (size == 28)
+		{
+			AddOffset(Belly, 20 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 26 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 26 * .625f, 0 * .625f);
+		}
+		else if (size == 29)
+		{
+			AddOffset(Belly, 20 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 32 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 32 * .625f, 0 * .625f);
+		}
+		else if (size >= 30)
+		{
+			AddOffset(Belly, 20 * .625f, 0 * .625f);
+			AddOffset(BodyAccent3, 35 * .625f, 0 * .625f);
+			AddOffset(BodyAccent4, 35 * .625f, 0 * .625f);
+		}
+		else
+        {
+            AddOffset(Belly, 0, -48 * .625f);
+        }
+	}
 
     protected override Sprite BodySprite(Actor_Unit actor)
     {
@@ -157,10 +220,27 @@ class Earthworms : BlankSlate
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Tail
     {
-        if (!actor.Targetable) return Sprites[5];
+        if(position == Position.Underground)
+        {
+            return null;
+        }
+        int size = actor.GetStomachSize(50);
 
-        if (position == Position.Aboveground)
-            return Sprites[5];
+		if (size >= 23)
+		{
+            return Sprites[57];
+		}
+        return Sprites[5];
+    }
+
+    protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Tail Connector
+    {
+        int size = actor.GetStomachSize(50);
+		
+		if (size >= 23)
+		{
+            return Sprites[56];
+		}
         return null;
     }
 
@@ -189,18 +269,51 @@ class Earthworms : BlankSlate
             return null;
         if (position == Position.Aboveground)
         {
-            if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach))
-                return Sprites[43];
-            else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach))
-            {
-                if (actor.GetStomachSize(21, .76f) == 21)
-                    return Sprites[42];
-                else if (actor.GetStomachSize(21, .84f) == 21)
-                    return Sprites[41];
-                else if (actor.GetStomachSize(21, .92f) == 21)
-                    return Sprites[40];
-            }
-            return Sprites[18 + actor.GetStomachSize(21)];
+			int size = actor.GetStomachSize(50);
+			
+			if ( size >= 50 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[55];
+			}
+
+			if (size >= 50 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[54];
+			}
+
+			if (size >= 47 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[53];
+			}
+
+			if (size >= 44 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[52];
+			}
+
+			if (size >= 41 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[51];
+			}
+
+			if (size >= 38 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[50];
+			}
+
+			if (size >= 35 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[49];
+			}
+
+			if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
+			{
+				return State.GameManager.SpriteDictionary.Earthworms[48];
+			}
+			
+			if (size > 29) size = 29;
+            
+			return State.GameManager.SpriteDictionary.Earthworms[18 + size];
         }
         return null;
     }

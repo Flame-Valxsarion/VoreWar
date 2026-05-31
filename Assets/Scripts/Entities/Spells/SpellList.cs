@@ -114,6 +114,7 @@ static class SpellList
     static internal readonly StatusSpell ViperPoisonStatus;
     static internal readonly StatusSpell ViralInfection;
     static internal readonly StatusSpell DivinitysEmbrace;
+    static internal readonly DamageSpell DivineNova;
 
     static internal Dictionary<SpellTypes, Spell> SpellDict;
 
@@ -1716,6 +1717,39 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.ForkLightning] = ForkLightning;
+
+        DivineNova = new DamageSpell()
+        {
+            Name = "Divine Nova",
+            Id = "divine-nova",
+            SpellType = SpellTypes.DivineNova,
+            Description = "The user expends all mana to deal damage based on the mana spent to a large area",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
+            Range = new Range(6),
+            Tier = 0,
+            AOEType = AreaOfEffectType.FixedPattern,
+            Pattern = new int[5, 5] { { 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 }},
+            Damage = (a, t) => (a.Unit.Mana / 4) + a.Unit.GetStat(Stat.Mind) / 4,
+            Resistable = true,
+            ResistanceMult = 0.2f,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(DivineNova, t);
+                TacticalGraphicalEffects.CreateDivineNova(t.Position);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
+                a.Unit.SpendMana(a.Unit.Mana);
+            },
+            OnExecuteTile = (a, l) =>
+            {
+                a.CastOffensiveSpell(DivineNova, null, l);
+                TacticalGraphicalEffects.CreateDivineNova(l);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
+                a.Unit.SpendMana(a.Unit.Mana);
+            },
+        };
+        SpellDict[SpellTypes.DivineNova] = DivineNova;
     }
 }
 

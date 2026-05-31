@@ -98,6 +98,13 @@ public class PaletteDictionary : MonoBehaviour
     public Texture2D TrexSkin;
     public Texture2D IliijiithIdleColor;
     public Texture2D IliijiithAttackColor;
+    public Texture2D DemidragonSkin;
+    public Texture2D YordleSkin;
+    public Texture2D YordleEyes;
+    public Texture2D OoviKatMain;
+    public Texture2D OoviKatBright;
+    public Texture2D PuddingSkin;
+    public Texture2D SoulSpriteSkin;
     public Texture2D BadgersSkin;
     public Texture2D RenamonSkin;
 }

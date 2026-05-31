@@ -124,7 +124,7 @@ public class Unit
             if (Stats == null) return 1;
             if (!Config.StatBoostsAffectMaxHP) {
                 _maxHealth = Stats[(int)Stat.Endurance] * 2 + Stats[(int)Stat.Strength];
-                 return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
+                 return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
             }
 
             int oldMax = _maxHealth;
@@ -137,7 +137,7 @@ public class Unit
                 int healthChange = (int)Math.Round((_maxHealth - oldMax) * _healthPct);
                 Health = Math.Min(_maxHealth,Math.Max(lowestHP, Health + healthChange));
             }
-            return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
+            return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
         }
         set => _maxHealth = value;
     }
@@ -317,6 +317,11 @@ public class Unit
 
     [OdinSerialize]
     public List<Unit> ShifterShapes;
+
+    [OdinSerialize]
+    internal Unit TacticalCopy;
+    [OdinSerialize]
+    internal Unit OriginalUnit;
 
     [OdinSerialize]
     public Unit MorphUnit = null;
@@ -635,6 +640,17 @@ public class Unit
         }
         set => _traitBoosts = value;
     }
+    private TempBoosts _tempBoosts;
+    internal TempBoosts TempBoosts
+    {
+        get
+        {
+            if (_tempBoosts == null)
+                _tempBoosts = new TempBoosts();
+            return _tempBoosts;
+        }
+        set => _tempBoosts = value;
+    }
 
     [OdinSerialize]
     protected List<Traits> Tags; //For some reason, renaming this to anything else results in an infinite loop in serialization, so it is staying tags for now
@@ -751,6 +767,8 @@ public class Unit
 
         InnateSpells = new List<SpellTypes>();
         ShifterShapes = new List<Unit>();
+        TacticalCopy = null;
+        OriginalUnit = null;
 
         if (race == Race.Dragon)
         {
@@ -758,6 +776,16 @@ public class Unit
             if (rand == 0) InnateSpells.Add(SpellTypes.IceBlast);
             if (rand == 1) InnateSpells.Add(SpellTypes.Pyre);
             if (rand == 2) InnateSpells.Add(SpellTypes.LightningBolt);
+        }
+
+        if (HasTrait(Traits.NaturalCaster))
+        {
+            int rand = State.Rand.Next(5);
+            if (rand == 0) InnateSpells.Add(SpellTypes.Icicle);
+            if (rand == 1) InnateSpells.Add(SpellTypes.Fireball);
+            if (rand == 2) InnateSpells.Add(SpellTypes.LightningBolt);
+            if (rand == 3) InnateSpells.Add(SpellTypes.PowerBolt);
+            if (rand == 4) InnateSpells.Add(SpellTypes.Poison);
         }
         if (race == Race.Fairies)
         {
@@ -899,6 +927,10 @@ public class Unit
         {
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SuccubusWeapon);
         }
+        else if (race == Race.OoviKat)
+        {
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.OoviKatWeapon);
+        }
         else if (race == Race.Asura)
         {
             Items[0] = State.World.ItemRepository.GetItem(ItemType.Axe);
@@ -1022,6 +1054,29 @@ public class Unit
         {
             FixedGear = true;
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RyanWeapon);
+        }
+        else if (race == Race.Konane)
+        {
+            FixedGear = true;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.KonaneWeapon);
+        }
+        else if (race == Race.Cherub || race == Race.SoulSprite)
+        {
+            try
+            {
+                FixedGear = false;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.CherubWeapon);
+            }
+            catch { }
+        }
+        else if (race == Race.Seraph)
+        {
+            try
+            {
+                FixedGear = false;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SeraphWeapon);
+            }
+            catch { }
         }
         else if (race == Race.Renamon)
         {
@@ -1430,6 +1485,8 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         TimesKilled++;
         if (SavedCopy != null)
             SavedCopy.TimesKilled++;
+        if (OriginalUnit != null)
+            RevertCopiedUnit();          
     }
 
     public void DrainExp(float exp)
@@ -1532,7 +1589,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
             return _manaPct;
         }
     }
-    private float _stamPct = 100f;
+    private float _stamPct = 1f;
     public float StamPct
     {
         get
@@ -1883,7 +1940,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         EquipmentFunctions.CheckEquipment(this, EquipmentActivator.OnHeal, new object[] { this, h, null });
     }
 
-    public int Heal(int amount)
+    public int Heal(int amount, bool mutual = false)
     {
         int diff = MaxHealth - Health;
         int modAmount = amount;
@@ -1900,6 +1957,10 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         int actualHeal = Math.Min(diff, modAmount);
         EquipmentFunctions.CheckEquipment(this, EquipmentActivator.OnHeal, new object[] { this, actualHeal, null });
         State.GameManager.TacticalMode?.TacticalStats?.RegisterHealing(actualHeal, Side);
+        if (State.GameManager.TacticalMode != null && HasTrait(Traits.MutualBiology) && !mutual)
+        {
+            TacticalUtilities.MutuallyHeaUnits(this, amount);
+        }
         return actualHeal;
     }
 
@@ -2022,6 +2083,10 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
         PermanentTraits.Add(traitIdToAdd);
         RecalculateStatBoosts();
+        if (traitIdToAdd == Traits.Resourceful)
+        {
+            SetMaxItems();
+        }
         return true;
     }
 
@@ -2360,6 +2425,7 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                     if (SharedTraits.Contains((Traits)id))
                         SharedTraits.Remove((Traits)id);
                 }
+                AllConditionalTraits.Remove(toRemove);
             }
             RecalculateStatBoosts();
             PreyCheck();
@@ -2637,7 +2703,10 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
 
         if (favored != Stat.None)
             stats[(int)favored] = -1;
-
+        if (HasTrait(Traits.Multifaceted))
+        {
+            favored = (Stat)GetHighestStatIndex();
+        }
         stats = stats.Where(s => s >= 0).ToArray();
 
         for (int i = 0; i < stats.GetUpperBound(0); i++) //Randomize the order
@@ -2823,6 +2892,12 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         }
         return highestType;
     }
+
+    public bool IsHighestStat(Stat stat)
+    {
+        return (Stat)GetHighestStatIndex() == stat;
+    }
+
     public int GetLowestStatIndex()
     {
         int lowestType = 0;
@@ -3545,6 +3620,77 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
         SetMaxItems();
     }
 
+    internal void SetCopyUnit(Unit unit)
+    {
+        TacticalCopy = unit;
+    }
+
+    internal void CopyTacticalUnit()
+    {
+        if (TacticalCopy == null)
+        {
+            return;
+        }
+
+        Unit original = Clone();
+        original.TacticalCopy = null;
+        original.HardCopyUnit(this);
+        OriginalUnit = original;
+
+        HardCopyUnit(TacticalCopy);
+
+        TacticalCopy = null;
+    }
+
+    internal void RevertCopiedUnit()
+    {
+        if (OriginalUnit == null)
+        {
+            return;
+        }
+        HardCopyUnit(OriginalUnit);
+
+        Health = OriginalUnit.Health;
+
+        InitializeTraits();
+        SetMaxItems();
+        OriginalUnit = null;
+    }
+
+    internal void HardCopyUnit(Unit unit)
+    {
+        Race = unit.Race;
+        Name = unit.Name;
+        level = unit.level;
+        Stats = unit.Stats;
+        TempBoosts = unit.TempBoosts;
+        CopyAppearance(unit);
+        ClearAllTraits();
+        PermanentTraits.Clear();
+        RemovedTraits.Clear();
+        ReloadTraits();
+
+        Tags = new List<Traits>(unit.Tags);
+        PermanentTraits = new List<Traits>(unit.PermanentTraits);
+        RemovedTraits = new List<Traits>(unit.RemovedTraits);
+
+        InitializeTraits();
+        SetMaxItems();
+
+        Items = unit.Items;
+        ItemUses = unit.ItemUses;
+        ItemCooldowns = unit.ItemCooldowns;
+        EquippedPotions = new Dictionary<int, int[]>(unit.EquippedPotions);
+        Health = unit.Health;
+        Mana = unit.Mana;
+
+    }
+
+    internal bool IsACopy()
+    {
+        return OriginalUnit != null;
+    }
+
     internal StatusEffect GetLongestStatusEffect(StatusEffectType type)
     {
         return StatusEffects.Where(s => s.Type == type).OrderByDescending(s => s.Duration).FirstOrDefault();
@@ -3630,6 +3776,10 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                         }
 
                     }
+                }
+                if (eff.Type == StatusEffectType.Gorging)
+                {
+                    ApplyStatusEffect(StatusEffectType.Sleeping, eff.Strength, (int)eff.Strength);
                 }
                 if (eff.Type == StatusEffectType.Warping)
                 {

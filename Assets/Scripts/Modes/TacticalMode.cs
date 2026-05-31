@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TacticalDecorations;
+using UnityEditor.Experimental.UIElements.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Experimental.UIElements;
@@ -218,6 +219,7 @@ public class TacticalMode : SceneBase
     List<Unit> retreatedDefenders;
 
     List<Actor_Unit> garrison;
+    Dictionary<Traits, List<Actor_Unit>> linkedUnits;
 
     internal List<ConstructibleBuilding> attackerBuildingsInRange;
     internal List<ConstructibleBuilding> defenderBuildingsInRange;
@@ -564,6 +566,36 @@ public class TacticalMode : SceneBase
 
         IsPlayerTurn = !AIAttacker;
 
+        if (!State.GameManager.PureTactical)//Apply Empire Traits to units that don't have them at the start of combat
+        {
+            foreach (Actor_Unit actor in attackers)
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+            foreach (Actor_Unit actor in defenders)
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+            foreach (Actor_Unit actor in garrison.ToList())
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+        }
+
+        ActivatePreBattleTraits();
+
         GeneralSetup();
 
         if ((armies[1]?.Units.Count ?? 0) <= 0 && garrison.Count <= 0)
@@ -617,37 +649,7 @@ public class TacticalMode : SceneBase
         if (tacticalBattleOverride == TacticalBattleOverride.ForceSkip && AIAttacker && AIDefender)
             skip = true;
         if (units.Any(actor => State.World.AllActiveEmpires != null && State.World.GetEmpireOfSide(actor.Unit.FixedSide)?.StrategicAI == null))
-            skip = false;
-
-        ActivatePreBattleTraits();
-
-        if (!State.GameManager.PureTactical)//Apply Empire Traits to units that don't have them at the start of combat
-        {
-            foreach (Actor_Unit actor in attackers)
-            {
-                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
-                foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
-                {
-                    actor.Unit.AddPermanentTrait(trait);
-                }
-            }
-            foreach (Actor_Unit actor in defenders)
-            {
-                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
-                foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
-                {
-                    actor.Unit.AddPermanentTrait(trait);
-                }
-            }
-            foreach (Actor_Unit actor in garrison.ToList())
-            {
-                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
-                foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
-                {
-                    actor.Unit.AddPermanentTrait(trait);
-                }
-            }
-        }
+            skip = false;       
 
         if (!State.GameManager.PureTactical)
         {
@@ -1715,7 +1717,7 @@ Turns: {currentTurn}
             StatusUI.DefenderText.fontStyle = FontStyle.Bold;
         }
 
-        TacticalUtilities.ResetData(armies, village, units, garrison, tiles, BlockedTile, BlockedClimberTile);
+        TacticalUtilities.ResetData(armies, village, units, garrison, tiles, BlockedTile, BlockedClimberTile, linkedUnits);
     }
 
     void RebuildDecorations()
@@ -1793,6 +1795,8 @@ Turns: {currentTurn}
 
             garrison = garrison,
 
+            linkedUnits = linkedUnits,
+
             selectedUnit = SelectedUnit,
 
             activeEffects = ActiveEffects,
@@ -1846,6 +1850,7 @@ Turns: {currentTurn}
         Buildings = data.buildings;
 
         garrison = data.garrison;
+        linkedUnits = data.linkedUnits;
 
         tiles = data.tiles;
         DecorationStorage = data.decorationStorage;
@@ -2821,6 +2826,10 @@ Turns: {currentTurn}
                 if (TacticalUtilities.SneakAttackCheck(actor.Unit, target.Unit)) // sneakAttack
                 {
                     spellDamage *= 3;
+                }
+                if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) //For correct display of damage
+                {
+                    spellDamage += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.1f);
                 }
             }
              
@@ -3821,10 +3830,7 @@ Turns: {currentTurn}
                             if (actor != null)
                             {
                                 int spellDamage = spell.Damage(SelectedUnit, actor);
-                                if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, actor.Unit)) // sneakAttack
-                                {
-                                    spellDamage *= 3;
-                                }
+                                spellDamage = SpellDamageMod(SelectedUnit, actor, spellDamage);
                                 actor.UnitSprite.ShowDamagedHealthBar(actor, spellDamage);
                                 string str = System.Math.Round(actor.GetMagicChance(SelectedUnit, CurrentSpell) * 100, 1) + "%\n-" + spellDamage;
                                 StatusUI.HitRate.text = str;
@@ -3837,10 +3843,7 @@ Turns: {currentTurn}
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinPattern(mouseLocation, spell.Pattern))
                     {
                         int spellDamage = spell.Damage(SelectedUnit, splashTarget);
-                        if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
-                            spellDamage *= 3;
-                        }
+                        spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
                         splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
                     }
                 }
@@ -3849,10 +3852,7 @@ Turns: {currentTurn}
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinRotatingPattern(mouseLocation, spell.Pattern, TacticalUtilities.GetRotatingOctant(SelectedUnit.Position, mouseLocation)))
                     {
                         int spellDamage = spell.Damage(SelectedUnit, splashTarget);
-                        if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
-                            spellDamage *= 3;
-                        }
+                        spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
                         splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
                     }
                 }
@@ -3861,16 +3861,27 @@ Turns: {currentTurn}
                     foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(mouseLocation, spell.AreaOfEffect))
                     {
                         int spellDamage = spell.Damage(SelectedUnit, splashTarget);
-                        if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, splashTarget.Unit)) // sneakAttack
-                        {
-                            spellDamage *= 3;
-                        }
+                        spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
                         splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
                     }
                 }
 
 
             }
+        }
+
+        int SpellDamageMod(Actor_Unit attacker, Actor_Unit target, int damage)
+        {
+            int damMod = damage;
+            if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, target.Unit)) // sneakAttack
+            {
+                damMod *= 3;
+            }
+            if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) //For correct display of damage
+            {
+                damMod += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.1f);
+            }
+            return damMod;
         }
     }
 
@@ -4682,18 +4693,18 @@ Turns: {currentTurn}
                     foreach (var prey in actor.PredatorComponent.GetDirectPrey().Where(s => s.Unit.Stamina <= 0).ToList())
                     {
                         actor.PredatorComponent.FreeEndoPrey(prey);
-                        if (actor.Unit.HasTrait(Traits.Friendosoma))
+                        if (actor.Unit.HasTrait(Traits.Friendosoma) && prey.Actor.Unit.IsEnemyOfSide(actor.Unit.Side))
                         {
                             SwitchAlignment(prey.Actor);
                             RetreatUnit(prey.Actor, prey.Unit.Side == defenderSide);
                         }
                         else
                         {
-                            if (remainingAttackers > 0 && !prey.Actor.Unit.IsEnemyOfSide(0))
+                            if (remainingAttackers == 0 && prey.Actor.Unit.IsEnemyOfSide(0))
                             {
                                 continue;
                             }
-                            if (remainingDefenders > 0 && prey.Actor.Unit.IsEnemyOfSide(0))
+                            if (remainingDefenders == 0 && !prey.Actor.Unit.IsEnemyOfSide(0))
                             {
                                 continue;
                             }
@@ -4781,6 +4792,7 @@ Turns: {currentTurn}
                 StatusUI.EndTurn.interactable = true;
                 return false;
             }
+            HandlePostBattleTraits();
             ProcessReplaceable(remainingAttackers);
 
             foreach (Actor_Unit actor in units)
@@ -4852,6 +4864,7 @@ Turns: {currentTurn}
                     continue;
                 }
                 actor.Unit.SetSizeToDefault();
+                actor.Unit.TempBoosts.ResetAll();
                 actor.Unit.EnemiesKilledThisBattle = 0;
                 if (actor.Unit.IsDead && actor.Unit.Type != UnitType.Summon &&
                     (actor.Unit.HasTrait(Traits.Eternal) || (actor.Unit.HasTrait(Traits.LuckySurvival) && State.Rand.Next(5) != 0) ||
@@ -5694,8 +5707,73 @@ Turns: {currentTurn}
 
     internal void ActivatePreBattleTraits()
     {
+        int MutualBiologyHealthAttacker = 0;
+        int MutualBiologyHealthDefender = 0;
+
+        // Link up all units with their respecive triat
+        linkedUnits = new Dictionary<Traits, List<Actor_Unit>>
+        {
+            { Traits.MutualBiology, new List<Actor_Unit>() }
+        };
         foreach (var actor in units)
         {
+            if (actor.Unit.HasTrait(Traits.InherentGlamour))
+            {
+                var possible_targets = units.Where(u => !u.Unit.IsEnemyOfSide(actor.Unit.Side) && !u.Unit.HasTrait(Traits.InherentGlamour)).ToList();
+                if (possible_targets.Any())
+                {
+                    actor.Unit.TacticalCopy = possible_targets[State.Rand.Next(0, possible_targets.Count())].Unit;
+                    actor.Unit.CopyTacticalUnit();
+                    actor.UpdateBestWeapons();
+                }
+            }
+
+            if (actor.Unit.HasTrait(Traits.MutualBiology))
+            {
+                linkedUnits[Traits.MutualBiology].Add(actor);
+                if (actor.Unit.Side == attackerSide)
+                {
+                    if (MutualBiologyHealthAttacker == 0)
+                    {
+                        foreach (var unit in armies[0].Units)
+                        {
+                            if (unit.HasTrait(Traits.MutualBiology))
+                            {
+                                MutualBiologyHealthAttacker += unit.Health;
+                                //Debug.Log("Adding: " + MutualBiologyHealthDefender);
+                            }
+                        }
+                    }
+                    actor.Unit.TempBoosts.HealthBoost += MutualBiologyHealthAttacker - actor.Unit.Health; //Gain all health and remove this units contribution from itself.
+                    actor.Unit.Health += MutualBiologyHealthAttacker - actor.Unit.Health;
+                }
+                else
+                {
+                    if (MutualBiologyHealthDefender == 0)
+                    {
+                        if (armies[1] != null)
+                        {
+                            foreach (var unit in armies[1].Units)
+                            {
+                                if (unit.HasTrait(Traits.MutualBiology))
+                                {
+                                    MutualBiologyHealthDefender += unit.Health;
+                                }
+                            }
+                        }
+                        foreach (var unit in garrison)
+                        {
+                            if (unit.Unit.HasTrait(Traits.MutualBiology))
+                            {
+                                MutualBiologyHealthDefender += unit.Unit.Health;
+                            }
+                        }
+                    }
+                    actor.Unit.TempBoosts.HealthBoost += MutualBiologyHealthDefender - actor.Unit.Health; //Gain all health and remove this units contribution from itself.
+                    actor.Unit.Health += MutualBiologyHealthDefender - actor.Unit.Health;
+                }
+            }
+
             if (actor.Unit.HasTrait(Traits.CurseOfCraving))
             {
                 if (actor.Unit.Predator)
@@ -5722,6 +5800,21 @@ Turns: {currentTurn}
                         possible_targets[State.Rand.Next(0, possible_targets.Count())].PredatorComponent.ForceConsumeAuto(actor);
                     }
 
+                }
+            }
+        }
+    }
+
+    internal void HandlePostBattleTraits()
+    {
+        foreach (var actor in units)
+        {
+            // Check if Unit is still a copy of another unit.
+            if (actor.Unit.IsACopy())
+            {
+                if (actor.Unit.OriginalUnit.HasTrait(Traits.InherentGlamour))
+                {
+                    actor.Unit.RevertCopiedUnit(); // Return unit to initial state
                 }
             }
         }

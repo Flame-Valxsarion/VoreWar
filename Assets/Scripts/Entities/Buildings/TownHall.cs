@@ -16,7 +16,7 @@ class TownHall : ConstructibleBuilding
         spriteID = 88;
         buildingType = ConstructibleType.TownHall;
 
-        ApplyConfigStats(Config.BuildConfig.CasterTower);
+        ApplyConfigStats(Config.BuildConfig.TownHall);
         standardUpgrade = AddUpgrade(standardUpgrade, Config.BuildConfig.TownHallManualUpgrade);
         prefabUpgrade = AddUpgrade(prefabUpgrade, Config.BuildConfig.TownHallPrefabUpgrade);
         manaStoneUpgrade = AddUpgrade(manaStoneUpgrade, Config.BuildConfig.TownHallManaStoneUpgrade);
@@ -29,7 +29,7 @@ class TownHall : ConstructibleBuilding
             contstruct.Remove(this);
             State.World.Constructibles = contstruct.ToArray();
             Owner.Buildings.Remove(this);
-
+            int spawned_farms = 0;
             for (int i = -1; i < 2; i++)
             {
                 for (int j = -1; j < 2; j++)
@@ -68,7 +68,7 @@ class TownHall : ConstructibleBuilding
                         {
                             replace = StrategicTileType.fieldSnow;
                         }
-                        
+                        spawned_farms++;
                         State.World.Tiles[Position.x + i, Position.y + j] = replace;
                     }
                     //DestroyVillagesAtTile(new Vec2i(x + i, y + j));
@@ -77,7 +77,9 @@ class TownHall : ConstructibleBuilding
             State.GameManager.StrategyMode.RedrawTiles();
 
             var villages = State.World.Villages.ToList();
-            villages.Add(new Village("New Village", Position, 1, Owner.Race, false));
+            Village created = new Village("New Village", Position, spawned_farms, Owner.Race, false);
+            created.SetPopulation(Config.VillagersPerFarm);
+            villages.Add(created);
             State.World.Villages = villages.ToArray();
         }
     }

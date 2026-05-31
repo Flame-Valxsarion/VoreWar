@@ -60,6 +60,7 @@ public class PotionInv : MonoBehaviour
         foreach (Traits trait in potion.PositiveTraits)
         {
             unit.AddPermanentTrait(trait);
+            unit.AddPermanentTrait(Traits.Resourceful);
         }
         foreach (Traits trait in potion.NegativeTraits)
         {

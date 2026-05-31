@@ -1,0 +1,1295 @@
+RGB Values for demidragonskin pallette: 255, 240, 225, 210, 200, 190, 180, 165, 150, 135, 120, 105, 90, 80, 70, 60, 50, 40, 25, 0
+
+Pallettes/Colors:
+
+DemidragonSkin (new palette):
+- outer skin color
+- inner skin color
+- claw/horns color
+- internals/bits color
+- pattern color
+
+EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.RaijuSkin); (for antrhos only)
+HairColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UniversalHair);
+!!! Skin color for demis is the skin color humans use !!!
+
+!!!
+IMPORTANT: you need throw lines into random unit code that forces initial generation of all the colors
+to be the same, so if you for example assign outer skin color to unit.SkinColor and inner skin color to unit.AccessoryColor
+then:
+
+    internal override void RandomCustom(Unit unit)
+    {
+        base.RandomCustom(unit);
+
+        unit.AccessoryColor = unit.SkinColor;
+	(...)
+	
+plus the same for every assigned color for claw/horns, internals/bits and pattern
+!!!
+plus also add basically the same stuff that was added to Lupines reagrding rags/leader outfits and such
+
+LAYERS:
+dicks, balls, bellies and breasts behave the same as with my other races (look up deers for code) (tits the same layer as brests)
+as for other stuff, layer numbers should be:
+
+27 - upper horns (for demis)	
+26 - hair
+25 - upper horns (for anthros)
+24 - ears outer, ears inner
+23 - lower horns
+22 - head pattern
+21 - outer head, inner head, teeth/nose, mouth, eyes, SecondaryEyes, weapons (attack position)
+6 - weapons (default positions)
+5 - body pattern, limbs (for demis, might maybe use outer body on different layer for this), claws
+4 - inner body, outer body, vagina
+3 - back hair
+2 - outer wings, inner wings, claw wings,
+1 - outer tail, inner tail
+
+Customisation count:
+Wings - 10 (consisting of 3 sprites each: inner wings, outer wings, claw wings)
+Tails - 10 (8 first consist of inner tail and outer tail, last two just outer tail)
+Hairstyles (for anthros) - 32+1 (1 bald, hairstyles 1-17 are female only, 18-23 are mixed, 24-32 are male only; hairstyles 1-26 use back hair sprite, others don't)
+ears - 20+1 (1 no ears option, ears 1-16 have both inner and outer sprites, while 17-20 use only outer sprites)
+horns - 20 (horns a bit weird, first 7 horns are "lower horns - under ears", next 2 have sprites for both lower and upper, while rest have exclusively upper sprites (above ears))
+eyes - 8 (for anthros)
+the numbers for demis  for eyes, hairstyles are very likely different
+
+ExtendedBreastSprites = true;
+FurCapable = true;
+
+OFFSETS:
+for weapons (anthros):
+weapons for male bodies have to move 2 * .625f right in all states
+weapons for weight stage 2 (fattest) bodies have to move 1 * .625f right in all states (so a male weight stage 2 wepon will always move 3 * .625f)
+advanced melee weapon 1 (halberd) also has to move 19 * .625f up in attack state
+advanced melee weapon 2 (longsword) also has to move 10 * .625f right in default state and 10 * .625f up in attack state
+
+offsets for demis should be the same as offsets for humans 
+I think ithey should be this:
+hold 1 female weight stage 2 one pixel (1 * .625f) left
+hold 2 female weight stage 2 one pixel right and one down
+hold 3 female weight stage 2 one pixel down
+hold 1 male weight stage 0 and 1 one pixel down
+hold 1 male weight stage 2 one pixel down and one right
+hold 2 male all weight stages two pixels right three pixels down
+hold 3 male weight stage 0 and 1 three pixels down and three  right
+hold 3 male weight stage 2 four pixels down and three right
+(look below for descriptions which weapons go to which hold btw)
+
+Spritesheets:
+
+INFO:
+hold 0 - (arm down open fist) - refers to not holding weapon at all or surrendered state
+hold 1 - (arm down closed fist) - for all weapons default state other than advanced meelee 1 (halberd)
+hold 2 - (arm middle position) - all weapon default attack state other than advanced meelee 1 plus default state for advanced meelee 1
+hold 3 - (arm upper position) - melee advanced 1 attack state
+*keep in mind that the human spritesheet have bodies in a different order than anthrodragons (goes hold 0->2->1->3)
+
+# DemidragonBodies: (anthros sprites)
+0 - outer body female weight stage 0 hold 0 - outer skin color
+1 - outer body female weight stage 0 hold 1 - outer skin color
+2 - outer body female weight stage 0 hold 2 - outer skin color
+3 - outer body female weight stage 0 hold 3 - outer skin color
+4 - outer body female weight stage 1 hold 0 - outer skin color
+5 - outer body female weight stage 1 hold 1 - outer skin color
+6 - outer body female weight stage 1 hold 2 - outer skin color
+7 - outer body female weight stage 1 hold 3 - outer skin color
+8 - outer body female weight stage 2 hold 0 - outer skin color
+9 - outer body female weight stage 2 hold 1 - outer skin color
+10 - outer body female weight stage 2 hold 2 - outer skin color
+11 - outer body female weight stage 2 hold 3 - outer skin color
+12 - outer body male weight stage 0 hold 0 - outer skin color
+13 - outer body male weight stage 0 hold 1 - outer skin color
+14 - outer body male weight stage 0 hold 2 - outer skin color
+15 - outer body male weight stage 0 hold 3 - outer skin color
+16 - outer body male weight stage 1 hold 0 - outer skin color
+17 - outer body male weight stage 1 hold 1 - outer skin color
+18 - outer body male weight stage 1 hold 2 - outer skin color
+19 - outer body male weight stage 1 hold 3 - outer skin color
+20 - outer body male weight stage 2 hold 0 - outer skin color
+21 - outer body male weight stage 2 hold 1 - outer skin color
+22 - outer body male weight stage 2 hold 2 - outer skin color
+23 - outer body male weight stage 2 hold 3 - outer skin color
+24 - claws female weight stages 0+1 hold 0 - claws/horns color
+25 - claws female weight stages 0+1 hold 1 - claws/horns color
+26 - claws female weight stages 0+1 hold 2 - claws/horns color
+27 - claws female weight stages 0+1 hold 3 - claws/horns color
+28 - claws female weight stage 2 hold 0 - claws/horns color
+29 - claws female weight stage 2 hold 1 - claws/horns color
+30 - claws female weight stage 2 hold 2 - claws/horns color
+31 - claws female weight stage 2 hold 3 - claws/horns color
+32 - claws male weight stages 0+1 hold 0 - claws/horns color
+33 - claws male weight stages 0+1 hold 1 - claws/horns color
+34 - claws male weight stages 0+1 hold 2 - claws/horns color
+35 - claws male weight stages 0+1 hold 3 - claws/horns color
+36 - claws male weight stage 2 hold 0 - claws/horns color
+37 - claws male weight stage 2 hold 1 - claws/horns color
+38 - claws male weight stage 2 hold 2 - claws/horns color
+39 - claws male weight stage 2 hold 3 - claws/horns color
+40 - inner body segmented female weight stage 0 - inner skin color
+41 - inner body segmented female weight stage 1 - inner skin color
+42 - inner body segmented female weight stage 2 - inner skin color
+43 - inner body segmented male weight stage 0 - inner skin color
+44 - inner body segmented male weight stage 1 - inner skin color
+45 - inner body segmented male weight stage 2 - inner skin color
+46 - inner body smooth female weight stage 0 - inner skin color
+47 - inner body smooth female weight stage 1 - inner skin color
+48 - inner body smooth female weight stage 2 - inner skin color
+49 - inner body smooth male weight stage 0 - inner skin color
+50 - inner body smooth male weight stage 1 - inner skin color
+51 - inner body smooth male weight stage 2 - inner skin color
+52 - vagina for females weight stages 0+1 - internals/bits color
+53 - vagina for females weight stages 2 - internals/bits color
+54 - outer head default state - outer skin color
+55 - outer head attack state - outer skin color
+56 - outer head oral vore state - outer skin color
+57 - inner head default state - inner skin color
+58 - inner head attack state - inner skin color
+59 - inner head oral vore state - inner skin color
+60 - teeth/nose default state - no pallette
+61 - teeth/nose attack state - no pallette
+62 - teeth/nose oral vore state - no pallette
+63 - mouth attack state - internals/bits color (no mouth for default state!)
+64 - mouth oral vore state - internals/bits color
+
+# DemidragonBodies2: (demis sprites)
+0 - limbs female weight stage 0 hold 0 - outer skin color
+1 - limbs female weight stage 0 hold 1 - outer skin color
+2 - limbs female weight stage 0 hold 2 - outer skin color
+3 - limbs female weight stage 0 hold 3 - outer skin color
+4 - limbs female weight stage 1 hold 0 - outer skin color
+5 - limbs female weight stage 1 hold 1 - outer skin color
+6 - limbs female weight stage 1 hold 2 - outer skin color
+7 - limbs female weight stage 1 hold 3 - outer skin color
+8 - limbs female weight stage 2 hold 0 - outer skin color
+9 - limbs female weight stage 2 hold 1 - outer skin color
+10 - limbs female weight stage 2 hold 2 - outer skin color
+11 - limbs female weight stage 2 hold 3 - outer skin color
+12 - limbs male weight stage 0 hold 0 - outer skin color
+13 - limbs male weight stage 0 hold 1 - outer skin color
+14 - limbs male weight stage 0 hold 2 - outer skin color
+15 - limbs male weight stage 0 hold 3 - outer skin color
+16 - limbs male weight stage 1 hold 0 - outer skin color
+17 - limbs male weight stage 1 hold 1 - outer skin color
+18 - limbs male weight stage 1 hold 2 - outer skin color
+19 - limbs male weight stage 1 hold 3 - outer skin color
+20 - limbs male weight stage 2 hold 0 - outer skin color
+21 - limbs male weight stage 2 hold 1 - outer skin color
+22 - limbs male weight stage 2 hold 2 - outer skin color
+23 - limbs male weight stage 2 hold 3 - outer skin color
+24 - claws female weight stage 0 hold 0 - claws/horns color
+25 - claws female weight stage 0 hold 1 - claws/horns color
+26 - claws female weight stage 0 hold 2 - claws/horns color
+27 - claws female weight stage 0 hold 3 - claws/horns color
+28 - claws female weight stage 1 hold 0 - claws/horns color
+29 - claws female weight stage 1 hold 1 - claws/horns color
+30 - claws female weight stage 1 hold 2 - claws/horns color
+31 - claws female weight stage 1 hold 3 - claws/horns color
+32 - claws female weight stage 2 hold 0 - claws/horns color
+33 - claws female weight stage 2 hold 1 - claws/horns color
+34 - claws female weight stage 2 hold 2 - claws/horns color
+35 - claws female weight stage 2 hold 3 - claws/horns color
+36 - claws male weight stage 0 hold 0 - claws/horns color
+37 - claws male weight stage 0 hold 1 - claws/horns color
+38 - claws male weight stage 0 hold 2 - claws/horns color
+39 - claws male weight stage 0 hold 3 - claws/horns color
+40 - claws male weight stage 1 hold 0 - claws/horns color
+41 - claws male weight stage 1 hold 1 - claws/horns color
+42 - claws male weight stage 1 hold 2 - claws/horns color
+43 - claws male weight stage 1 hold 3 - claws/horns color
+44 - claws male weight stage 2 hold 0 - claws/horns color
+45 - claws male weight stage 2 hold 1 - claws/horns color
+46 - claws male weight stage 2 hold 2 - claws/horns color
+47 - claws male weight stage 2 hold 3 - claws/horns color
+
+# DemidragonPatterns: (anthros sprites)
+* remember to make a choice to not have a pattern at all, so every sprite null
+* all patterns use pattern color!
+0 - female weight stage 0 hold 0+1 body pattern 1
+1 - female weight stage 0 hold 2 body pattern 1
+2 - female weight stage 0 hold 3 body pattern 1
+3 - female weight stage 1 hold 0+1 body pattern 1
+4 - female weight stage 1 hold 2 body pattern 1
+5 - female weight stage 1 hold 3 body pattern 1
+6 - female weight stage 2 hold 0+1 body pattern 1
+7 - female weight stage 2 hold 2 body pattern 1
+8 - female weight stage 2 hold 3 body pattern 1
+9 - male weight stage 0 hold 0+1 body pattern 1
+10 - male weight stage 0 hold 2 body pattern 1
+11 - male weight stage 0 hold 3 body pattern 1
+12 - male weight stage 1 hold 0+1 body pattern 1
+13 - male weight stage 1 hold 2 body pattern 1
+14 - male weight stage 1 hold 3 body pattern 1
+15 - male weight stage 2 hold 0+1 body pattern 1
+16 - male weight stage 2 hold 2 body pattern 1
+17 - male weight stage 2 hold 3 body pattern 1
+18-35 - the same pattern for pattern 2
+36-53 - the same pattern for pattern 3
+54-71 - the same pattern for pattern 4
+72-89 - the same pattern for pattern 5
+90-107 - the same pattern for pattern 6
+* (just add multiplications of 18 to get numbers of sprites above)
+108 - head pattern for body pattern 1 for head default or attack state
+109 - head pattern for body pattern 1 for head oral vore state
+110 - head pattern for body patterns 2 and 5 for head default or attack state
+111 - head pattern for body patterns 2 and 5 for head oral vore state
+112 - head pattern for body pattern 3 for head default or attack state
+113 - head pattern for body pattern 3 for head oral vore state
+114 - head pattern for body patterns 4 and 6 for head default or attack state
+115 - head pattern for body patterns 4 and 6 for head oral vore state
+
+# DemidragonPatterns2: (demis sprites)
+* remember to make a choice to not have a pattern at all, so every sprite null
+* all patterns for demis use outer skin color, rather than pattern color!
+0 - female weight stage 0 hold 0+1 body pattern 1
+1 - female weight stage 0 hold 2 body pattern 1
+2 - female weight stage 0 hold 3 body pattern 1
+3 - female weight stage 1 hold 0+1 body pattern 1
+4 - female weight stage 1 hold 2 body pattern 1
+5 - female weight stage 1 hold 3 body pattern 1
+6 - female weight stage 2 hold 0+1 body pattern 1
+7 - female weight stage 2 hold 2 body pattern 1
+8 - female weight stage 2 hold 3 body pattern 1
+9 - male weight stage 0 hold 0+1 body pattern 1
+10 - male weight stage 0 hold 2 body pattern 1
+11 - male weight stage 0 hold 3 body pattern 1
+12 - male weight stage 1 hold 0+1 body pattern 1
+13 - male weight stage 1 hold 2 body pattern 1
+14 - male weight stage 1 hold 3 body pattern 1
+15 - male weight stage 2 hold 0+1 body pattern 1
+16 - male weight stage 2 hold 2 body pattern 1
+17 - male weight stage 2 hold 3 body pattern 1
+18 - head pattern for body pattern 1 for male and female weight stages 0 and 1 for head default state
+19 - head pattern for body pattern 1 for male and female weight stages 0 and 1 for head oral vore state
+20 - head pattern for body pattern 1 for female weight stage 2 for head default state
+21 - head pattern for body pattern 1 for female weight stage 2 for head oral vore state
+22 - head pattern for body pattern 1 for male weight stage 2 for head default state
+23 - head pattern for body pattern 1 for male weight stage 2 for head oral vore state
+24-47 - the same pattern for pattern 2
+48-71 - the same pattern for pattern 3
+72-95 - the same pattern for pattern 4
+* (just add multiplications of 24 to get numbers of sprites above)
+
+# DemidragonCustomisation1 (anthros sprites)
+* outer, inner and claw wings are all part of the same wings, just split into different sprites based on colors
+0-9 - outer wings 1-10 - outer skin color
+10-19 - inner wings 1-10 - inner skin color
+20-29 - claw wings 1-10 - claws/horns color
+30-39 - outer tails 1-10 - outer skin color
+* tails number 9 and 10 dont have inner sprite!
+40-47 - inner tails 1-8 for segmented bodies - inner skin color
+48-55 - inner tails 1-8 for smooth bodies - inner skin color
+*remember to have a bald option
+*hairstyles 1-17 are female only, 18-23 are mixed, 24-32 are male only
+*hairstyles 1-26 use back hair sprite, others don't
+56-87 - hair styles 1-32
+88-103 - back hair for hairstyles 1-26
+
+# DemidragonCustomisation2 (anthros sprites)
+*remember to have no ear option
+*ears 1-16 have both inner and outer sprites, while 17-20 use only outer sprites
+0-19 - Outer Ears 1-20 - outer skin color
+20-35 - Inner Ears 1-16 - inner skin color
+*horns a bit weird, first 7 horns are "lower horns - under ears",
+next 2 have sprites for both lower and upper, while rest have exclusively upper sprites
+36-42 - lower horns (horns 1-7) - claws/horns color
+43-44 - lower horns (horns 8-9) - claws/horns color
+45-46 - upper horns (horns 8-9) - claws/horns color
+47-57 - upper horns (horns 10-20) - claws/horns color
+58-65 - sclera (SecondaryEyes) 1-8 for default and attack state head - no pallette
+66-73 - sclera (SecondaryEyes) 1-8 for oral vore state head - no pallette
+74-81 - eyes 1-8 for default and attack state head - eye color
+82-89 - eyes 1-8 for oral vore state head - eye color
+90-97 - erect dicks if no big bellies/breasts - internals/bits color
+98-105 - erect dicks if big bellies/breasts - internals/bits color
+106-113 - cock voring if no big bellies/breasts - internals/bits color
+114-121 - cock voring if big bellies/breasts - internals/bits color
+122 - basic melee weapon 1 default state - no pallette (axe)
+123 - basic melee weapon 1 attack state - no pallette
+124 - advanced melee weapon 1 default state - no pallette (halberd)
+125 - advanced melee weapon 1 attack state - no pallette
+126 - basic melee weapon 2 default state - no pallette (mace)
+127 - basic melee weapon 2 attack state - no pallette
+128 - advanced melee weapon 2 default state - no pallette (longsword)
+129 - advanced melee weapon 2 attack state - no pallette
+130 - basic ranged weapon default state - no pallette (basic crossbow)
+131 - basic ranged weapon attack state - no pallette
+132 - advanced ranged weapon default state - no pallette (fancy crossbow)
+133 - advanced ranged weapon attack state - no pallette
+
+# DemidragonCustomisation3 (demis sprites)
+* outer, inner and claw wings are all part of the same wings, just split into different sprites based on colors
+0-9 - outer wings 1-10 - outer skin color
+10-19 - inner wings 1-10 - inner skin color
+20-29 - claw wings 1-10 - claws/horns color
+30-39 - outer tails 1-10 - outer skin color
+* tails number 9 and 10 dont have inner sprite! Also they have only one version in opposition to anthros
+40-47 - inner tails 1-8 - inner skin color
+*horns a bit weird, first 7 horns are "lower horns - under ears",
+next 2 have sprites for both lower and upper, while rest have exclusively upper sprites
+48-54 - lower horns (horns 1-7) - claws/horns color
+55-56 - lower horns (horns 8-9) - claws/horns color
+57-58 - upper horns (horns 8-9) - claws/horns color
+59-69 - upper horns (horns 10-20) - claws/horns color
+*remember to have no ear option
+*ears 1-16 have both inner and outer sprites, while 17-20 use only outer sprites
+!!! IMPORTANT !!! - for demis alone, due to different head shapes for humans,
+weight stage 2 (maximum) females must use different sprites for ears number 3, 12 and 20
+70-89 - Outer Ears 1-20 - outer skin color
+90-105 - Inner Ears 1-16 - inner skin color
+106 - outer ear number 3 for weight stage 2 females - outer skin color
+107 - outer ear number 12 for weight stage 2 females - outer skin color
+108 - outer ear number 20 for weight stage 2 females - outer skin color
+109 - inner ear number 3 for weight stage 2 females - inner skin color
+110 - inner ear number 12 for weight stage 2 females - inner skin color
+111 - basic melee weapon 1 default state - no pallette (axe)
+112 - basic melee weapon 1 attack state - no pallette
+113 - advanced melee weapon 1 default state - no pallette (halberd)
+114 - advanced melee weapon 1 attack state - no pallette
+115 - basic melee weapon 2 default state - no pallette (mace)
+116 - basic melee weapon 2 attack state - no pallette
+117 - advanced melee weapon 2 default state - no pallette (longsword)
+118 - advanced melee weapon 2 attack state - no pallette
+119 - basic ranged weapon default state - no pallette (basic crossbow)
+120 - basic ranged weapon attack state - no pallette
+121 - advanced ranged weapon default state - no pallette (fancy crossbow)
+122 - advanced ranged weapon attack state - no pallette
+
+# DemidragonBreasts (anthros sprites)
+*tits should follow breasts in the code, probably just copy paste with the 64 number shift
+0-31 - left breast - inner skin color (3 last sprites are for Selicia)
+32-63 - right breast - inner skin color (3 last sprites are for Selicia)
+64-95 - left tit - internals/bits color (3 last sprites are for Selicia)
+96-127 - right tit - internals/bits color (3 last sprites are for Selicia)
+
+# DemidragonBelliesBalls (anthros sprites)
+0-7 - default balls based on dick size (no prey) - inner skin color
+8-39 - ball sprites - inner skin color - inner skin color (3 last sprites are for Selicia)
+40-75 - belly sprites segmented - inner skin color - inner skin color (4 last sprites are for Selicia)
+76-111 - belly sprites smooth - inner skin color - inner skin color (4 last sprites are for Selicia)
+
+# DemidragonClothes2 (anthros sprites)
+*Due to several reasons (Gramzon considering adding jewelry options (which might also change sprite order) and
+ me not knowing how to code arms with different meele weapon variants, you will have to code leader outfit with instructions below
+ no sprites are using pallettes
+ 
+ 0 - boots for weight stages 0 and 1 - above body
+ 1 - boots for weight stage 2 - above body
+ 3-5 - dress for females body weight 0-2, disappears when prey is in balls - above boots and body pattern
+ 6-7 - dress for males body weight 0-2, disappears when prey is in balls - above boots and body pattern
+ 8-10 - belly cover for females body weight 0-2, disappears when prey is in belly - above dress
+ 11-13 - belly cover for males body weight 0-2, for when there is no prey in belly - above dress
+ 14-16 - belly cover for males body weight 0-2, for when there is prey in belly - above dress
+ 17-19 - belt for females body weight 0-2, disappears when prey is in belly - above belly cover
+ 20-22 - belt for males body weight 0-2, disappears when prey is in belly - above belly cover
+ 23 - arms for females weight stages 0 and 1, hold 0 and 1 - above body pattern
+ 24 - arms for females weight stages 0 and 1, hold 2 - above body pattern
+ 25 - arms for females weight stages 0 and 1, hold 3 - above body pattern
+ 26 - arms for females weight stage 2, hold 0 and 1 - above body pattern
+ 27 - arms for females weight stage 2, hold 2 - above body pattern
+ 28 - arms for females weight stage 2, hold 3 - above body pattern
+ 29 - arms for males weight stages 0 and 1, hold 0 and 1 - above body pattern
+ 30 - arms for males weight stages 0 and 1, hold 2 - above body pattern
+ 31 - arms for males weight stages 0 and 1, hold 3 - above body pattern
+ 32 - arms for males weight stage 2, hold 0 and 1 - above body pattern
+ 33 - arms for males weight stage 2, hold 2 - above body pattern
+ 34 - arms for males weight stage 2, hold 3 - above body pattern
+ 35-42 - breast cover for default breasts 1-8, disappears when prey in breasts - above breasts
+ 43 - upper cover for females weight stages 0 and 1 - above breast cover
+ 44 - upper cover for females weight stage 2 - above breast cover
+ 45 - upper cover for males weight stages 0 and 1 - above breast cover
+ 46 - upper cover for males weight stage 2 - above breast cover
+ 47 - crown - above everything
+ 48 - circlet - above everything
+ 49 - free real estate for another head piece
+ 50 - ring for females weight stages 0 and 1 - above body
+ 51 - ring for females weight stage 2 - above body
+ 52 - ring for males weight stages 0 and 1 - above body
+ 53 - ring for males weight stage 2 - above body
+
+
+# DemidragonClothes3 (demis sprites)
+ Leader clothes for demis, with some small changes in number of sprites and code due to different bodies
+ no sprites are using pallettes
+
+ 0 - boots for females weight stages 0 and 1 - above limbs
+ 1 - boots for females weight stage 2 - above limbs
+ 2 - boots for females weight stages 0 and 1 - above limbs
+ 3 - boots for females weight stage 2 - above limbs
+ 5-7 - dress for females body weight 0-2, disappears when prey is in balls - above boots and body pattern
+ 8-9 - dress for males body weight 0-2, disappears when prey is in balls - above boots and body pattern
+ 10-12 - belly cover for females body weight 0-2, disappears when prey is in belly - above dress
+ 13-15 - belly cover for males body weight 0-2, for when there is no prey in belly - above dress
+ 16-18 - belly cover for males body weight 0-2, for when there is prey in belly - above dress
+ 19-21 - belt for females body weight 0-2, disappears when prey is in belly - above belly cover
+ 22-24 - belt for males body weight 0-2, disappears when prey is in belly - above belly cover
+ 25 - arms for females weight stages 0 and 1, hold 0 and 1 - above body pattern
+ 26 - arms for females weight stages 0 and 1, hold 2 - above body pattern
+ 27 - arms for females weight stages 0 and 1, hold 3 - above body pattern
+ 28 - arms for females weight stage 2, hold 0 and 1 - above body pattern
+ 29 - arms for females weight stage 2, hold 2 - above body pattern
+ 30 - arms for females weight stage 2, hold 3 - above body pattern
+ 31 - arms for males weight stages 0 and 1, hold 0 and 1 - above body pattern
+ 32 - arms for males weight stages 0 and 1, hold 2 - above body pattern
+ 33 - arms for males weight stages 0 and 1, hold 3 - above body pattern
+ 34 - arms for males weight stage 2, hold 0 and 1 - above body pattern
+ 35 - arms for males weight stage 2, hold 2 - above body pattern
+ 36 - arms for males weight stage 2, hold 3 - above body pattern
+ 37-44 - breast cover for default breasts 1-8, disappears when prey in breasts - above breasts
+ 45 - upper cover for females weight stages 0 and 1 holds 0+1+2 - above breast cover
+ 46 - upper cover for females weight stages 0 and 1 hold 3 - above breast cover
+ 47 - upper cover for females weight stage 2 holds 0+1+2 - above breast cover
+ 48 - upper cover for females weight stage 2 hold 3 - above breast cover
+ 49 - upper cover for males weight stages 0 and 1 holds 0+1+2 - above breast cover
+ 50 - upper cover for males weight stages 0 and 1 hold 3 - above breast cover
+ 51 - upper cover for males weight stage 2 holds 0+1+2 - above breast cover
+ 52 - upper cover for males weight stage 2 hold 3 - above breast cover
+ 53 - crown - above everything
+ 54 - circlet - above everything
+ 55 - ring for females weight stages 0 and 1 - above body
+ 56 - ring for females weight stage 2 - above body
+ 57 - ring for males weight stages 0 and 1 - above body
+ 58 - ring for males weight stage 2 - above body
+
+ 	
+DICK CODE (at least for the anthro version):
+	
+    protected override Sprite DickSprite(Actor_Unit actor)
+    {
+        if (actor.Unit.HasDick == false)
+            return null;
+
+        if (actor.IsErect())
+        {
+            if ((actor.PredatorComponent?.VisibleFullness < .75f) && ((int)Math.Sqrt((actor.Unit.DefaultBreastSize * actor.Unit.DefaultBreastSize) + actor.GetRightBreastSize(32 * 32, 1f)) < 16) && ((int)Math.Sqrt((actor.Unit.DefaultBreastSize * actor.Unit.DefaultBreastSize) + actor.GetLeftBreastSize(32 * 32, 1f)) < 16))
+            {
+                Dick.layer = 20;
+                if (actor.IsCockVoring)
+                {
+                    return SpritesDemidragonCustomisation2[114 + actor.Unit.DickSize];
+                }
+                else
+                {
+                    return SpritesDemidragonCustomisation2[106 + actor.Unit.DickSize];
+                }
+            }
+            else
+            {
+                Dick.layer = 13;
+                if (actor.IsCockVoring)
+                {
+                    return SpritesDemidragonCustomisation2[98 + actor.Unit.DickSize];
+                }
+                else
+                {
+                    return SpritesDemidragonCustomisation2[90 + actor.Unit.DickSize];
+                }
+            }
+        }
+
+        Dick.layer = 11;
+        return null;
+    }
+
+
+BALLS CODE WITH OFFSETS (at least for the anthro version):
+
+
+
+    protected override Sprite BallsSprite(Actor_Unit actor)
+    {
+        if (actor.Unit.HasDick == false)
+            return null;
+        if (actor.IsErect() && (actor.PredatorComponent?.VisibleFullness < .75f) && ((int)Math.Sqrt((actor.Unit.DefaultBreastSize * actor.Unit.DefaultBreastSize) + actor.GetRightBreastSize(32 * 32, 1f)) < 16) && ((int)Math.Sqrt((actor.Unit.DefaultBreastSize * actor.Unit.DefaultBreastSize) + actor.GetLeftBreastSize(32 * 32, 1f)) < 16))
+        {
+            Balls.layer = 19;
+        }
+        else
+        {
+            Balls.layer = 10;
+        }
+        int size = actor.Unit.DickSize;
+        int offset = actor.GetBallSize(30, .8f);
+        if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false) && offset == 30)
+        {
+            AddOffset(Balls, 0, -38 * .625f);
+            return SpritesBelliesBalls[39];
+        }
+        else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false) && offset == 30)
+        {
+            AddOffset(Balls, 0, -32 * .625f);
+            return SpritesBelliesBalls[38];
+        }
+        else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false) && offset == 29)
+        {
+            AddOffset(Balls, 0, -28 * .625f);
+            return SpritesBelliesBalls[37];
+        }
+        else if (offset >= 28)
+        {
+            AddOffset(Balls, 0, -24 * .625f);
+        }
+        else if (offset == 27)
+        {
+            AddOffset(Balls, 0, -19 * .625f);
+        }
+        else if (offset == 26)
+        {
+            AddOffset(Balls, 0, -14 * .625f);
+        }
+        else if (offset == 25)
+        {
+            AddOffset(Balls, 0, -8 * .625f);
+        }
+        else if (offset == 24)
+        {
+            AddOffset(Balls, 0, -4 * .625f);
+        }
+        else if (offset == 23)
+        {
+            AddOffset(Balls, 0, -2 * .625f);
+        }
+
+        if (offset > 0)
+            return SpritesBelliesBalls[Math.Min(8 + offset, 36)];
+        return SpritesBelliesBalls[size];
+    }
+
+BELLY CODE (for anthros only again, also needs a specification for smooth versus segmented, if smooth add 36 to sprite number)
+
+internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
+    {
+        if (actor.HasBelly)
+        {
+            belly.transform.localScale = new Vector3(1, 1, 1);
+            belly.SetActive(true);
+            int size = actor.GetStomachSize(31, 0.7f);
+            if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && size == 31)
+            {
+                AddOffset(Belly, 0, -29 * .625f);
+                return SpritesBelliesBalls[75];
+            }
+            else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 31)
+            {
+                AddOffset(Belly, 0, -29 * .625f);
+                return SpritesBelliesBalls[74];
+            }
+            else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 30)
+            {
+                AddOffset(Belly, 0, -29 * .625f);
+                return SpritesBelliesBalls[73];
+            }
+            else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 29)
+            {
+                AddOffset(Belly, 0, -29 * .625f);
+                return SpritesBelliesBalls[72];
+            }
+            switch (size)
+            {
+                case 25:
+                    AddOffset(Belly, 0, -1 * .625f);
+                    break;
+                case 26:
+                    AddOffset(Belly, 0, -3 * .625f);
+                    break;
+                case 27:
+                    AddOffset(Belly, 0, -6 * .625f);
+                    break;
+                case 28:
+                    AddOffset(Belly, 0, -10 * .625f);
+                    break;
+                case 29:
+                    AddOffset(Belly, 0, -15 * .625f);
+                    break;
+                case 30:
+                    AddOffset(Belly, 0, -20 * .625f);
+                    break;
+                case 31:
+                    AddOffset(Belly, 0, -25 * .625f);
+                    break;
+            }
+
+            return SpritesBelliesBalls[40 + size];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+CLOTHES CODE (for anthros):
+*demis have to use human clothing aside from leaders outfit
+	{
+        LeaderClothes = new DemidragonLeader();
+        Rags = new DemidragonRags();
+
+        AllowedMainClothingTypes = new List<MainClothing>()
+        {
+            new GenericTop1(),
+            new GenericTop2(),
+            new GenericTop3(),
+            new GenericTop4(),
+            new GenericTop5(),
+            new GenericTop6(),
+            new GenericTop7(),
+            new MaleTop(),
+            new MaleTop2(),
+            new Natural(),
+            Rags,
+            LeaderClothes
+        };
+        AvoidedMainClothingTypes = 2;
+        AvoidedEyeTypes = 0;
+        AllowedWaistTypes = new List<MainClothing>()
+        {
+            new GenericBot1(),
+            new GenericBot2(),
+            new GenericBot3(),
+            new GenericBot4(),
+            new GenericBot5(),
+        };
+
+        clothingColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.AviansSkin);
+    }
+	
+	
+    class GenericTop1 : MainClothing
+    {
+        public GenericTop1()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            femaleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            Type = 1524;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[54];
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[46 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericTop2 : MainClothing
+    {
+        public GenericTop2()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            femaleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            Type = 1534;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[63];
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[55 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericTop3 : MainClothing
+    {
+        public GenericTop3()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            femaleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            Type = 1544;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[72];
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[64 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericTop4 : MainClothing
+    {
+        public GenericTop4()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            femaleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            clothing2 = new SpriteExtraInfo(18, null, WhiteColored);
+            Type = 1555;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[81];
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[73 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+                clothing2.GetSprite = null;
+            }
+
+            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[82];
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericTop5 : MainClothing
+    {
+        public GenericTop5()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            femaleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            clothing2 = new SpriteExtraInfo(18, null, WhiteColored);
+            Type = 1574;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[91];
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[142];
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[83 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[92 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+                clothing2.GetSprite = null;
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericTop6 : MainClothing
+    {
+        public GenericTop6()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            femaleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            Type = 1588;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = null;
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[103 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericTop7 : MainClothing
+    {
+        public GenericTop7()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            femaleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            Type = 1544;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[135];
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[127 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class MaleTop : MainClothing
+    {
+        public MaleTop()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            maleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            Type = 1579;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+
+            if (actor.HasBelly)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[114 + actor.Unit.BodySize];
+            }
+            else
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[111 + actor.Unit.BodySize];
+            }
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class MaleTop2 : MainClothing
+    {
+        public MaleTop2()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            maleOnly = true;
+            coversBreasts = false;
+            blocksDick = false;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            Type = 1579;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[100 + actor.Unit.BodySize];
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class Natural : MainClothing
+    {
+        public Natural()
+        {
+            coversBreasts = false;
+            OccupiesAllSlots = true;
+            clothing1 = new SpriteExtraInfo(18, null, null);
+            clothing2 = new SpriteExtraInfo(7, null, null);
+            FixedColor = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (Races.Demidragon.oversize)
+            {
+                clothing1.GetSprite = null;
+            }
+            else if (actor.Unit.HasBreasts)
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[2 + actor.Unit.BreastSize];
+            }
+            else
+            {
+                breastSprite = null;
+                clothing1.GetSprite = null;
+            }
+
+			if (actor.Unit.BodySize > 1)
+			{
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[1];
+			}
+			else
+			{
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[0];
+			}
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class DemidragonRags : MainClothing
+    {
+        public DemidragonRags()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
+            blocksDick = false;
+            inFrontOfDick = true;
+            coversBreasts = false;
+            Type = 207;
+            OccupiesAllSlots = true;
+            FixedColor = true;
+            clothing1 = new SpriteExtraInfo(18, null, WhiteColored);
+            clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (actor.Unit.HasBreasts)
+            {
+                if (actor.Unit.BreastSize < 3)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[124];
+                else if (actor.Unit.BreastSize < 6)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[125];
+                else
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[126];
+
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[117 + actor.Unit.BodySize];
+            }
+            else
+            {
+                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[123];
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[120 + actor.Unit.BodySize];
+            }
+
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class DemidragonLeader : MainClothing
+    {
+        public DemidragonLeader()
+        {
+		
+		// I'm sorry, but as mentioned long distance above you will have to code it
+		
+		 
+        }
+    }
+
+    class GenericBot1 : MainClothing
+    {
+        public GenericBot1()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            coversBreasts = false;
+            clothing1 = new SpriteExtraInfo(13, null, null);
+            clothing2 = new SpriteExtraInfo(12, null, null);
+            Type = 1521;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (actor.Unit.HasBreasts)
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[10 + actor.Unit.BodySize];
+            }
+            else
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[13 + actor.Unit.BodySize];
+            }
+		
+            if (actor.Unit.DickSize > 0)
+            {
+                if (actor.Unit.DickSize < 3)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[16 + ((actor.Unit.BodySize) * 3)];
+                else if (actor.Unit.DickSize > 5)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[18 + ((actor.Unit.BodySize) * 3)];
+                else
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[17 + ((actor.Unit.BodySize) * 3)];
+            }
+            else clothing1.GetSprite = null;
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericBot2 : MainClothing
+    {
+        public GenericBot2()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            coversBreasts = false;
+            clothing1 = new SpriteExtraInfo(13, null, null);
+            clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
+            Type = 1537;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+
+            if (actor.Unit.DickSize > 0)
+            {
+				if (actor.Unit.BodySize > 1)
+				{
+					clothing1.YOffset = -1 * .625f;
+					if (actor.Unit.DickSize < 3)
+						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[33];
+					else if (actor.Unit.DickSize > 5)
+						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[35];
+					else
+						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[34];
+				}
+				else
+				{
+					clothing1.YOffset = 0 * .625f;
+					if (actor.Unit.DickSize < 3)
+						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[33];
+					else if (actor.Unit.DickSize > 5)
+						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[35];
+					else
+						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[34];
+				}
+            }
+            else 
+			{
+				if (actor.Unit.BodySize > 1)
+				{
+					clothing1.YOffset = 0 * .625f;
+					clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[32];
+				}
+				else
+				{
+					clothing1.YOffset = 0 * .625f;
+					clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[31];
+				}
+			}
+
+            if (actor.Unit.HasBreasts)
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[25 + actor.Unit.BodySize];
+            }
+            else
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[28 + actor.Unit.BodySize];
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericBot3 : MainClothing
+    {
+        public GenericBot3()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            coversBreasts = false;
+            clothing1 = new SpriteExtraInfo(13, null, null);
+            clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
+            Type = 1540;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+            if (actor.Unit.HasBreasts)
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[25 + actor.Unit.BodySize];
+            }
+            else
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[28 + actor.Unit.BodySize];
+            }
+
+			if (actor.Unit.BodySize > 1)
+			{
+				clothing1.YOffset = -1 * .625f;
+				clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[36];
+			}
+			else
+			{
+				clothing1.YOffset = 0 * .625f;
+				clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[36];
+			}
+			
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericBot4 : MainClothing
+    {
+        public GenericBot4()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[14];
+            coversBreasts = false;
+            clothing1 = new SpriteExtraInfo(13, null, null);
+            clothing2 = new SpriteExtraInfo(12, null, null);
+            Type = 1514;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+
+			if (actor.Unit.BodySize > 1)
+			{
+				clothing1.YOffset = -1 * .625f;
+			}
+			else
+			{
+				clothing1.YOffset = 0 * .625f;
+			}
+			
+            if (actor.Unit.DickSize > 0)
+            {
+                if (actor.Unit.DickSize < 3)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[43];
+                else if (actor.Unit.DickSize > 5)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[45];
+                else
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[44];
+            }
+            else clothing1.GetSprite = null;
+
+            if (actor.Unit.HasBreasts)
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[37 + actor.Unit.BodySize];
+            }
+            else
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[40 + actor.Unit.BodySize];
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            base.Configure(sprite, actor);
+        }
+    }
+
+    class GenericBot5 : MainClothing
+    {
+        public GenericBot5()
+        {
+            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[14];
+            coversBreasts = false;
+            clothing1 = new SpriteExtraInfo(13, null, null);
+            clothing2 = new SpriteExtraInfo(12, null, null);
+            Type = 1514;
+            DiscardUsesPalettes = true;
+        }
+
+        public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+        {
+
+			if (actor.Unit.BodySize > 1)
+			{
+				clothing1.YOffset = -1 * .625f;
+			}
+			else
+			{
+				clothing1.YOffset = 0 * .625f;
+			}
+			
+            if (actor.Unit.DickSize > 0)
+            {
+                if (actor.Unit.DickSize < 3)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[43];
+                else if (actor.Unit.DickSize > 5)
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[44];
+                else
+                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[46];
+            }
+            else clothing1.GetSprite = null;
+
+            if (actor.Unit.HasBreasts)
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[136 + actor.Unit.BodySize];
+            }
+            else
+            {
+                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DemidragonClothes[139 + actor.Unit.BodySize];
+            }
+
+            clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
+            base.Configure(sprite, actor);
+        }
+    }
+}

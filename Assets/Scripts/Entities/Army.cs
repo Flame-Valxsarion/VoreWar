@@ -917,7 +917,8 @@ public class Army
         UsedSize = 0;
         foreach (Unit unit in Units)
         {
-            UsedSize += State.RaceSettings.GetDeployCost(unit.Race) * unit.TraitBoosts.DeployCostMult;
+            float unitsize = State.RaceSettings.GetDeployCost(unit.Race);
+            UsedSize += unitsize > 0 ? unitsize * unit.TraitBoosts.DeployCostMult : 1;
         }
     }
 
@@ -926,7 +927,8 @@ public class Army
         float avgDeploy = 0;
         foreach (Unit unit in Units)
         {
-            avgDeploy += State.RaceSettings.GetDeployCost(unit.Race) * unit.TraitBoosts.DeployCostMult;
+            float unitsize = State.RaceSettings.GetDeployCost(unit.Race);
+            avgDeploy += unitsize > 0 ? unitsize * unit.TraitBoosts.DeployCostMult : 1;
         }
         avgDeploy /= Units.Count;
         return avgDeploy;

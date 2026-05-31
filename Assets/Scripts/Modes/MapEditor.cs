@@ -746,6 +746,12 @@ public class MapEditor : SceneBase
             case StrategicDoodadType.SpawnerIliijiith:
                 Tooltip.text = $"Place a monster spawn location for the Iliijiith, they have to spawn within 2 tiles of a spawner if at least one exists";
                 break;
+            case StrategicDoodadType.SpawnerPudding:
+                Tooltip.text = $"Place a monster spawn location for the Pudding, they have to spawn within 2 tiles of a spawner if at least one exists";
+                break;
+            case StrategicDoodadType.SpawnerSoulSprite:
+                Tooltip.text = $"Place a monster spawn location for the Soul Sprites, they have to spawn within 2 tiles of a spawner if at least one exists";
+                break;
             default:
                 Tooltip.text = $"Place {type} tile\n";
                 break;
@@ -1062,10 +1068,72 @@ public class MapEditor : SceneBase
                         TilemapLayers[12].SetTile(new Vector3Int(i, j, 0), tile_base);
                     }
 
+                }
 
+                if (doodads != null)
+                {
+                    if (doodads[i, j] > 0)
+                    {
+                        if (doodads[i, j] < StrategicDoodadType.SpawnerVagrant)
+                        {
+                            if (doodads[i, j] == StrategicDoodadType.wall)
+                            {
+                                bool north = j + 1 <= tiles.GetUpperBound(1) ? doodads[i, j + 1] == StrategicDoodadType.wall : false;
+                                bool east = i + 1 <= tiles.GetUpperBound(0) ? doodads[i + 1, j] == StrategicDoodadType.wall : false;
+                                bool south = j - 1 >= 0 ? doodads[i, j - 1] == StrategicDoodadType.wall : false;
+                                bool west = i - 1 >= 0 ? doodads[i - 1, j] == StrategicDoodadType.wall : false;
+                                int spr = 0;
+
+                                if (north && east && south && west)
+                                    spr = 7;
+                                else if (north && east && south)
+                                    spr = 13;
+                                else if (north && east && west)
+                                    spr = 14;
+                                else if (north && south && west)
+                                    spr = 12;
+                                else if (east && south && west)
+                                    spr = 15;
+                                else if (north && east)
+                                    spr = 11;
+                                else if (north && south)
+                                    spr = 4;
+                                else if (north && west)
+                                    spr = 10;
+                                else if (east && south)
+                                    spr = 9;
+                                else if (south && west)
+                                    spr = 8;
+                                else if (east && west)
+                                    spr = 1;
+                                else if (north)
+                                    spr = 6;
+                                else if (east)
+                                    spr = 2;
+                                else if (south)
+                                    spr = 5;
+                                else if (west)
+                                    spr = 3;
+
+                                GameObject wall = Instantiate(SpriteCategories[2], new Vector3(i, j, 0), new Quaternion(), WallRoadsFolder);
+                                wall.name = "Wall";
+                                wall.GetComponent<SpriteRenderer>().sprite = WallMultiSprites[spr];
+                                wall.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                            }
+                            else
+                            {
+                                TilemapLayers[14].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
+                            }
+                        }
+                        else
+                        {
+                            TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), SpawnerTypes[0]);
+                            TilemapLayers[4].SetTile(new Vector3Int(i, j, 0), SpawnerTypes[-1000 + (int)doodads[i, j]]);
+                        }
+                    }
                 }
             }
-        }
+        }       
 
         int ApplyFloat(int x, int y, int curr_layer)
         {

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 class WarriorAnt : BlankSlate
@@ -7,7 +11,7 @@ class WarriorAnt : BlankSlate
 
     public WarriorAnt()
     {
-        CanBeGender = new List<Gender>() { Gender.None };
+        CanBeGender = new List<Gender>() { Gender.Male, Gender.Female };
         SpecialAccessoryCount = 9; // antennae
         clothingColors = 0;
         GentleAnimation = true;
@@ -34,10 +38,10 @@ class WarriorAnt : BlankSlate
 
     internal override void SetBaseOffsets(Actor_Unit actor)
     {
-        AddOffset(Body, 20 * .625f, 0);
-        AddOffset(Belly, 20 * .625f, 0);
+        AddOffset(Body, 50 * .625f, 0);
+        AddOffset(Belly, 50 * .625f, 0);
     }
-
+    
     protected override Sprite BodySprite(Actor_Unit actor)
     {
         if (actor.HasBelly == false)
@@ -89,18 +93,54 @@ class WarriorAnt : BlankSlate
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
-        if (actor.HasBelly == false)
+        if (!actor.HasBelly)
             return null;
-        if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach))
-            return Sprites[36];
-        if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach))
-        {
-            if (actor.GetStomachSize(16, .8f) == 20)
-                return Sprites[35];
-            else if (actor.GetStomachSize(16, .9f) == 20)
-                return Sprites[34];
-        }
-        return Sprites[17 + actor.GetStomachSize(16)];
-    }
 
+        int size = actor.GetStomachSize(47);
+
+        if (size >= 47 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[49];
+        }
+
+        else if (size >= 47 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[48];
+        }
+
+        else if (size >= 44 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[47];
+        }
+
+        else if (size >= 41 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[46];
+        }
+
+        else if (size >= 38 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[45];
+        }
+
+        else if (size >= 35 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[44];
+        }
+
+        else if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[43];
+        }
+
+        else if (size >= 29 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.WarriorAnt[42];
+        }
+
+        if (size > 24) size = 24;
+
+        return State.GameManager.SpriteDictionary.WarriorAnt[17 + size];
+    }
+    
 }

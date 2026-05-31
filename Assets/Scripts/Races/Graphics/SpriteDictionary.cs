@@ -138,6 +138,8 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Harpies;
     public Sprite[] Crypters;
     public Sprite[] Lamia;
+    public Sprite[] LamiaScales;
+    public Sprite[] LamiaScalesBits;
     public Sprite[] Kangaroos;
     public Sprite[] Cows;
     public Sprite[] Crux;
@@ -229,6 +231,9 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] BadgersVoreBlack;
     public Sprite[] BadgersVoreWhite;
     public Sprite[] Equaleon;
+    public Sprite[] OoviKatFemale;
+    public Sprite[] OoviKatMale;
+    public Sprite[] OoviKatCustomisation;
     public Sprite[] CowsSeliciaBelly;
 
     public Sprite[] PantherBase;
@@ -286,6 +291,27 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Ghosts3;
     public Sprite[] GhostsVoreSprites;
 
+    public Sprite[] DemidragonBodies;
+    public Sprite[] DemidragonBodies2;
+    public Sprite[] DemidragonBreasts;
+    public Sprite[] DemidragonClothes;
+    public Sprite[] DemidragonClothes2;
+    public Sprite[] DemidragonClothes3;
+    public Sprite[] DemidragonCustomisation1;
+    public Sprite[] DemidragonCustomisation2;
+    public Sprite[] DemidragonCustomisation3;
+    public Sprite[] DemidragonPatterns;
+    public Sprite[] DemidragonPatterns2;
+    public Sprite[] DemidragonBelliesBalls;
+
+    public Sprite[] YordlesBodies;
+    public Sprite[] YordlesVoreSkin;
+    public Sprite[] YordlesVoreFur;
+    public Sprite[] YordlesCustomization1;
+    public Sprite[] YordlesCustomization2;
+    public Sprite[] YordleClothes1;
+    public Sprite[] YordleClothes2;
+
     [Header("Unique Mercenaries")]
     public Sprite[] Selicia;
     public Sprite[] Vision;
@@ -332,6 +358,9 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Nectar;
     public Sprite[] Ryan;
     public Sprite[] RyanVore;
+    public Sprite[] Konane;
+    public Sprite[] Cherub;
+    public Sprite[] Seraph;
     
     [Header("Bosses")]
     public Sprite[] Abakhanskya;
@@ -404,6 +433,7 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Utahraptor240B;
     public Sprite[] Trex;
     public Sprite[] Iliijiith;
+    public Sprite[] Pudding;
 
     public Sprite[] DryadSprites1;
     public Sprite[] DryadSprites2;
@@ -412,6 +442,9 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] DryadSprites5;
 
     public Sprite[] Cake;
+
+    public Sprite[] SoulSprite;
+    public Sprite[] AngelProjectile;
 
 
     [Header("Other")]

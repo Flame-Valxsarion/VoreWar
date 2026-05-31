@@ -34,6 +34,15 @@ class ScatV2Discard : MiscDiscard
             scatBack.color = ColorPaletteMap.GetSlimeBaseColor(color);
             scatFront.color = ColorPaletteMap.GetSlimeBaseColor(color);
         }
+        else if (scatInfo.predRace == Race.Cherub || scatInfo.predRace == Race.Seraph || scatInfo.predRace == Race.SoulSprite)
+        {
+            int r = 135 + Random.Range(-20, 20);
+            int g = 135 + Random.Range(-20, 20);
+            int b = 135 + Random.Range(-20, 20);
+            Color defaultColor = new Color(r / 255.0F, g / 255.0F, b / 255.0F);
+            scatBack.color = defaultColor;
+            scatFront.color = defaultColor;
+        }
         else
         {
             int r = 135 + Random.Range(-20, 20);

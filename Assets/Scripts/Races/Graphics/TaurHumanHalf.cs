@@ -16,6 +16,7 @@ class TaurHumanHalf : BlankSlate
         MouthTypes = 12;
         HairColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UniversalHair);
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.RedSkin);
+        EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EyeColor);
         GentleAnimation = true;
         WeightGainDisabled = true;
         BodyAccentTypes1 = 6; // eyebrows
@@ -40,7 +41,7 @@ class TaurHumanHalf : BlankSlate
     internal override void RandomCustom(Unit unit)
     {
         base.RandomCustom(unit);
-        unit.TailType = State.Rand.Next(TailTypes);
+        unit.EyeColor = State.Rand.Next(EyeColors);
     }
 
     internal override void SetBaseOffsets(Actor_Unit actor)

@@ -159,7 +159,8 @@ public static class State
         UnitTagAssociatedTraitDictionary = new Dictionary<Traits, List<int>>();
         UntaggedTraits = new Dictionary<TaggedTrait, bool>();
 
-        TieredTraitsList = ExternalTraitHandler.TaggedTraitParser();
+        TieredTraitsList = ExternalTraitHandler.TaggedTraitParser(); 
+        TieredTraitsList = ExternalTraitHandler.TaggedTraitUpdater();
         TieredTraitsTagsList = new List<string>();
         ExternalTraitHandler.CustomTraitParser();
         ExternalTraitHandler.ConditionalTraitParser();
@@ -211,6 +212,10 @@ public static class State
             {
                 if (TieredTraitsList[trait].tags == null)
                 {
+                    if (UntaggedTraits.ContainsKey(TieredTraitsList[trait]))
+                    {
+                        continue;
+                    }
                     UntaggedTraits.Add(TieredTraitsList[trait], true);
                     continue;
                 }

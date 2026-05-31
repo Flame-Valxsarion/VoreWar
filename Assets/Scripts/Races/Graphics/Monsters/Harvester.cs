@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 class Harvester : BlankSlate
@@ -160,31 +164,83 @@ class Harvester : BlankSlate
         return null;
     }
 
+    internal override void SetBaseOffsets(Actor_Unit actor)
+    {
+        if (actor.HasBelly)
+        {
+            AddOffset(Belly, 0, -80 * .625f);
+        }
+        else
+        {
+            AddOffset(Belly, 0, 0 * .625f);
+        }
+    }
+
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
         if (!actor.HasBelly)
             return null;
 
-        int size = actor.GetStomachSize(26);
+        int size = actor.GetStomachSize(52);
 
-        if (size >= 26 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
+        if (size >= 52 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[49];
+        }
+
+        else if (size >= 49 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[48];
+        }
+
+        else if (size >= 46 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[47];
+        }
+
+        else if (size >= 43 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[46];
+        }
+
+        else if (size >= 40 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[45];
+        }
+
+        else if (size >= 37 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[44];
+        }
+
+        else if (size >= 34 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[43];
+        }
+
+        else if (size >= 30 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[42];
+        }
+
+        else if (size >= 28 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[41];
+        }
+
+        else if (size >= 26 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[40];
+        }
+
+        else if (size >= 24 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
+        {
+            return State.GameManager.SpriteDictionary.Harvester[39];
+        }
+
+        else if (size >= 22 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
             return State.GameManager.SpriteDictionary.Harvester[38];
-        }
-
-        if (size >= 24 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
-        {
-            return State.GameManager.SpriteDictionary.Harvester[37];
-        }
-
-        if (size >= 22 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
-        {
-            return State.GameManager.SpriteDictionary.Harvester[36];
-        }
-
-        if (size >= 20 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
-        {
-            return State.GameManager.SpriteDictionary.Harvester[35];
         }
 
         if (size > 17) size = 17;

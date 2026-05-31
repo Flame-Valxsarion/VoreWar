@@ -623,6 +623,38 @@ public class UnitCustomizer
                 buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Spots Type";
                 buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Lower Mushroom Type";
                 break;
+            case Race.OoviKat:
+                buttons[(int)ButtonTypes.BeardStyle].Label.text = "Thigh Pattern";
+                buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Flower Type";
+                buttons[(int)ButtonTypes.HeadType].Label.text = "Head Pattern";
+                buttons[(int)ButtonTypes.ExtraColor1].Label.text = "Secondary Color";
+                buttons[(int)ButtonTypes.ExtraColor2].Label.text = "Flower Color";
+                buttons[(int)ButtonTypes.ExtraColor4].Label.text = "Shin Pattern";
+                buttons[(int)ButtonTypes.BodyAccessoryColor].Label.text = "Main Pattern Color";
+                buttons[(int)ButtonTypes.FurTypes].Label.text = "Main Pattern Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Eyebrows";
+                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Face Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Shoulder Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Hand Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes5].Label.text = "Shin Bright Pattern";
+                buttons[(int)ButtonTypes.VulvaTypes].Label.text = "Head Accessory";
+                break;
+            case Race.Pudding:
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Cream Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Ear Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Topping Type";
+                break;
+            case Race.Yordles:
+                buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Ear Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Eyebrow Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Moustaches Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes3].Label.text = "Head Fluff Type";
+                buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Body Pattern";
+                buttons[(int)ButtonTypes.BodyAccentTypes4].Label.text = "Face Pattern";
+                buttons[(int)ButtonTypes.Furry].gameObject.SetActive(false);
+                buttons[(int)ButtonTypes.HatType].gameObject.SetActive(false);
+                buttons[(int)ButtonTypes.BodyAccessoryColor].gameObject.SetActive(false);
+                break;
             case Race.Badgers:
                 buttons[(int)ButtonTypes.BodyAccessoryType].Label.text = "Body Pattern Type";
                 buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Ear Shape";

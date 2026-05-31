@@ -831,6 +831,8 @@ Does not retroactively affect already created units.";
             case 346:
                 return "Enables wandering clusters of Iliijiith.";
             case 347:
+                return "Enables wandering groups of Pudding.";
+            case 348:
                 return "Determines how much EXP a single villager provides when devoured by an occupying army.";
             case 348:
                 return @"Enable bladder vore
@@ -840,6 +842,10 @@ The weights affect how often the AI will choose one in comparison to the others.
             case 349:
                 return @"Controls how many ancient teleporters the generator will spawn.
 Places them in a simple manner, unconcerned with things like fairness";
+            case 350:
+                return "Enables wandering hosts of Soul Sprites";
+            case 351:
+                return "When enabled, allows Seraph to spawn alongside the armies of Soul Sprites. (Recommended to set the max armies for Soul Sprites to 1, as to avoid being overwhelmed.)";
             default:
                 return "";
         }

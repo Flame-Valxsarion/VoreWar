@@ -228,7 +228,7 @@ public class Recruit_Mode : SceneBase
             unit = army?.Units[selectedIndex];
         ArmyUI.Rename.interactable = validUnit && unit.Type != UnitType.SpecialMercenary;
         ArmyUI.Shop.interactable = activatingEmpire < ActivatingEmpire.Observer && validUnit && unit != null && (unit.FixedGear == false || unit.HasTrait(Traits.BookEater));
-        ArmyUI.PotionShop.interactable = activatingEmpire < ActivatingEmpire.Observer && validUnit && unit != null && Config.PotionSystemEnabled;
+        ArmyUI.PotionShop.interactable = activatingEmpire < ActivatingEmpire.Observer && validUnit && unit != null && !Config.PotionSystemEnabled;
         var dismissText = ArmyUI.Dismiss.gameObject.GetComponentInChildren(typeof(Text)) as Text;
 
         if (unit != null && unit.FixedSide == empire.Side && unit.IsInfiltratingSide(unit.Side) && activatingEmpire > ActivatingEmpire.Ally)
@@ -525,7 +525,15 @@ public class Recruit_Mode : SceneBase
                 break;
             case 41:
                 BlockerUI.SetActive(true);
+                ShopUI.gameObject.SetActive(false);
+                shop = null;
                 BuildPotionShop();
+                break;
+            case 42:
+                BlockerUI.SetActive(true);
+                PotionUI.gameObject.SetActive(false);
+                potionShop = null;
+                BuildShop();
                 break;
 
             case 50:

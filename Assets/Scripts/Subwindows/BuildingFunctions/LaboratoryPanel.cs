@@ -250,95 +250,95 @@ public class LaboratoryPanel : MonoBehaviour
         switch (ingRoll)
         {
             case PotionIngredient.Grievous:
-                if (randRoll >= .5)
+                if (randRoll <= .5)
                     IncRollValue(0);
-                else if (randRoll >= .25)
+                else if (randRoll <= .25)
                     IncRollValue(1);
                 else
                     IncRollValue(2);
                 break;
             case PotionIngredient.Dangerous:
-                if (randRoll >= .5)
+                if (randRoll <= .5)
                     IncRollValue(1);
-                else if (randRoll >= .25)
+                else if (randRoll <= .25)
                     IncRollValue(0);
                 else
                     IncRollValue(2);
                 break;
             case PotionIngredient.Experimental:
-                if (randRoll >= .25)
+                if (randRoll <= .25)
                     IncRollValue(1);
-                else if (randRoll >= .5)
+                else if (randRoll <= .5)
                     IncRollValue(2);
-                else if (randRoll >= .75)
+                else if (randRoll <= .75)
                     IncRollValue(3);
                 else
                     IncRollValue(4);
                 break;
             case PotionIngredient.Unstable:
-                if (randRoll >= .1)
+                if (randRoll <= .1)
                     IncRollValue(1);
-                else if (randRoll >= .2)
+                else if (randRoll <= .2)
                     IncRollValue(2);
-                else if (randRoll >= .6)
+                else if (randRoll <= .6)
                     IncRollValue(3);
                 else
                     IncRollValue(4);
                 break;
             case PotionIngredient.Stable:
-                if (randRoll >= .1)
+                if (randRoll <= .1)
                     IncRollValue(2);
-                else if (randRoll >= .3)
+                else if (randRoll <= .3)
                     IncRollValue(3);
-                else if (randRoll >= .7)
+                else if (randRoll <= .7)
                     IncRollValue(4);
                 else
                     IncRollValue(5);
                 break;
             case PotionIngredient.Simple:
-                if (randRoll >= .3)
+                if (randRoll <= .3)
                     IncRollValue(3);
-                else if (randRoll >= .6)
+                else if (randRoll <= .6)
                     IncRollValue(4);
                 else
                     IncRollValue(5);
                 break;
             case PotionIngredient.Standard:
-                if (randRoll >= .3)
+                if (randRoll <= .3)
                     IncRollValue(4);
-                else if (randRoll >= .7)
+                else if (randRoll <= .7)
                     IncRollValue(5);
-                else if (randRoll >= .9)
+                else if (randRoll <= .9)
                     IncRollValue(6);
                 else
                     IncRollValue(7);
                 break;
             case PotionIngredient.Premium:
-                if (randRoll >= .2)
+                if (randRoll <= .2)
                     IncRollValue(5);
-                else if (randRoll >= .6)
+                else if (randRoll <= .6)
                     IncRollValue(6);
-                else if (randRoll >= .9)
+                else if (randRoll <= .9)
                     IncRollValue(7);
                 else
                     IncRollValue(8);
                 break;
             case PotionIngredient.Superior:
-                if (randRoll >= .4)
+                if (randRoll <= .4)
                     IncRollValue(6);
-                else if (randRoll >= .7)
+                else if (randRoll <= .7)
                     IncRollValue(7);
                 else
                     IncRollValue(8);
                 break;
             case PotionIngredient.Powerful:
-                if (randRoll >= .5)
+                if (randRoll <= .5)
                     IncRollValue(7);
                 else
                     IncRollValue(8);
                 break;
             case PotionIngredient.Legendary:
-                if (randRoll >= .3)
+                if (randRoll <= .3)
                     IncRollValue(7);
                 else
                     IncRollValue(8);
