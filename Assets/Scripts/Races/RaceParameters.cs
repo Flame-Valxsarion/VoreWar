@@ -1337,7 +1337,7 @@ static class RaceParameters
                 Traits.StrongGullet,
                 Traits.Hoarder,
         },
-            RaceDescription = "Dragon goes brrr",
+            RaceDescription = "",
         };
 
         Yordles = new RaceTraits()
@@ -1354,7 +1354,7 @@ static class RaceParameters
             Traits.Multifaceted,
             Traits.EasyToVore,
         },
-            RaceDescription = "Your honor,League of Legends.",
+            RaceDescription = "These fluffy creatures are commonly mistaken as short mammals. In truth, they are a race of spirits, happening upon this world through their enchanted gateways. Yordles have complex personalities and are attracted to diverse cultures.",
         };
 
         Centaur = new RaceTraits()
@@ -1767,11 +1767,11 @@ static class RaceParameters
             PowerAdjustment = 1.4f,
             RaceStats = new RaceStats()
             {
-                Strength = new RaceStats.StatRange(18, 26),
+                Strength = new RaceStats.StatRange(10, 15),
                 Dexterity = new RaceStats.StatRange(10, 14),
-                Endurance = new RaceStats.StatRange(17, 23),
-                Mind = new RaceStats.StatRange(8, 16),
-                Will = new RaceStats.StatRange(8, 16),
+                Endurance = new RaceStats.StatRange(9, 13),
+                Mind = new RaceStats.StatRange(12, 17),
+                Will = new RaceStats.StatRange(14, 19),
                 Agility = new RaceStats.StatRange(8, 10),
                 Voracity = new RaceStats.StatRange(8, 12),
                 Stomach = new RaceStats.StatRange(12, 18),
@@ -1779,9 +1779,9 @@ static class RaceParameters
             RacialTraits = new List<Traits>()
         {
             Traits.InherentGlamour,
-            Traits.Biter,
+            Traits.EvasiveBattler,
         },
-            RaceDescription = ".",
+            RaceDescription = "OoviKat have the unique ability to touch the soul, the true nature, of living beings. Once identified, they can transform into those they interact with, tapping into their tap into their inner feelings and memorie. Due to this, it is uncertain when the came to this world or how long the've been around in secret.",
         };
 
         RwuMercenaries = new RaceTraits()
@@ -3830,7 +3830,7 @@ static class RaceParameters
                 Traits.GelatinousBody,
 
             },
-            RaceDescription = "Utahraptors are much faster and more powerful thatn the usual raptors you see here and there.  More hungry too."
+            RaceDescription = "After reciving news about a massacre involving oversized bake goods, a wizard decided to create a way to inform the populace of the dangers of voracious food monsters. What better way than to better prepare than to make more voracious, albeit weaker, food monsters?"
         };
 
 

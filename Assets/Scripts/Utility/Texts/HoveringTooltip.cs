@@ -860,7 +860,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.ManaBurn:
                 return "This Unit's spell damage also deals 50% of the damage to the target's mana. If the target has no mana, this damage is dealt to health instead.";
             case Traits.KillingMomentum:
-                return "This Unit restoresrestores 50% of its MP when killing a unit with an attack.";
+                return "This Unit restores 50% of its MP when killing a unit with an attack.";
             case Traits.SedativeStomach:
                 return "This Unit has a chance to inflict the sleep status on its prey for 1 to 4 turns, plus the units level difference.";
             case Traits.MutualBiology:
