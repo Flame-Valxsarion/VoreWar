@@ -448,6 +448,10 @@ static class RaceParameters
                 return Ryan;
             case Race.Konane:
                 return Konane;
+            case Race.Seraph:
+                return Seraph;
+            case Race.Cherub:
+                return Cherub;
             case Race.Otachi:
                 return Otachi;
             case Race.Raiju:
@@ -474,6 +478,10 @@ static class RaceParameters
                 return Trex;
             case Race.Utahraptor:
                 return Utahraptor;
+            case Race.SoulSprite: 
+                return SoulSprite;
+            case Race.Pudding: 
+                return Pudding;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -4576,7 +4584,176 @@ static class RaceParameters
             RaceDescription = "An unnatural Umbreon from a different universe from the others. His body shape seems different than the Umbreons, Having a differently shaped head, digigrade legs, and a fox like appearance. He claims to come from a realm where the world was much more advanced, having been transported with what he calls a \"HND15\" some kind of \"handgun\" similar to the tarous' revolvers. Being from another realm these bullets are in short supply, forcing him to save the magazines and to forge new bullets to load into them. He also carries around a knife for backup, it seems extra sharp compared to the others of it's kind. Although he prefers to stick along side them, He claims to not be related to the Anthro Umbreons that roam around.",
         };
 
+        Nectar = new RaceTraits()
+        {
+            BodySize = 100,
+            StomachSize = 100,
+            FavoredStat = Stat.Mind,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.BreastVore, VoreType.Unbirth },
+            ExpMultiplier = 7f,
+            PowerAdjustment = 15f,
+            DeployCost = 4,
+            Upkeep = 36f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(22, 30),
+                Dexterity = new RaceStats.StatRange(30, 45),
+                Endurance = new RaceStats.StatRange(22, 30),
+                Mind = new RaceStats.StatRange(32, 46),
+                Will = new RaceStats.StatRange(32, 46),
+                Agility = new RaceStats.StatRange(28, 34),
+                Voracity = new RaceStats.StatRange(26, 34),
+                Stomach = new RaceStats.StatRange(30, 45),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.Flight,
+                Traits.Tenacious,
+                Traits.FastCaster,
+                Traits.BookEater,
+                Traits.MagicProwess,
+                Traits.RangedVore,
+        },
+            RaceDescription = "Nectar, one of the eleven sphinxes who created her world, was exiled after consuming too many of the inhabitants. Now, she roams the multiverse, searching for the tastiest snacks and shiniest treasures. Whenever she dies to a stronger foe, you can bet that she'll be back for revenge, sometimes decades or even centuries later. After all, cats are spiteful creatures, and Nectar has far more than 9 lives....",
+        };
 
+        Ryan = new RaceTraits()
+        {
+            BodySize = 20,
+            StomachSize = 20,
+            FavoredStat = Stat.Endurance,
+            HasTail = true,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore },
+            ExpMultiplier = 2f,
+            PowerAdjustment = 5f,
+            DeployCost = 2,
+            Upkeep = 20f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(24, 32),
+                Dexterity = new RaceStats.StatRange(20, 24),
+                Endurance = new RaceStats.StatRange(24, 32),
+                Mind = new RaceStats.StatRange(20, 24),
+                Will = new RaceStats.StatRange(24, 32),
+                Agility = new RaceStats.StatRange(20, 24),
+                Voracity = new RaceStats.StatRange(24, 32),
+                Stomach = new RaceStats.StatRange(24, 32),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.StrongMelee,
+                Traits.Pounce,
+                Traits.DoubleAttack,
+                Traits.Growth,
+                Traits.GiantSlayer,
+        },
+            RaceDescription = "A skilled warrior captain from the same world as the other Sergals. Strangely enough, not only does he look physically different from them, but he seems to hold some sort of resentment for them as well. He's an incredibly deadly frontline fighter, almost like he has been fighting in wars since birth. Many warriors, even whole companies have already fallen to either his polearm, or his voracious appetite. Needless to say: He seems to feel perfectly in his element here.",
+        };
+
+        Konane = new RaceTraits()
+        {
+            BodySize = 15,
+            StomachSize = 40,
+            FavoredStat = Stat.Stomach,
+            HasTail = true,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
+            ExpMultiplier = 2f,
+            PowerAdjustment = 5f,
+            DeployCost = 2,
+            Upkeep = 20f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(20, 24),
+                Dexterity = new RaceStats.StatRange(8, 14),
+                Endurance = new RaceStats.StatRange(18, 26),
+                Mind = new RaceStats.StatRange(10, 13),
+                Will = new RaceStats.StatRange(20, 25),
+                Agility = new RaceStats.StatRange(16, 24),
+                Voracity = new RaceStats.StatRange(18, 24),
+                Stomach = new RaceStats.StatRange(16, 24),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.Flight,
+                Traits.BornToMove,
+                ///Traits., Special move trait goes here. Add two actions to this trait
+        },
+            RaceDescription = "Some kind of black falcon/snow leopard mix. Oh no! He's hot!",
+        };
+        Cherub = new RaceTraits()
+        {
+            BodySize = 20,
+            StomachSize = 35,
+            FavoredStat = Stat.Mind,
+            HasTail = true,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
+            ExpMultiplier = 2f,
+            PowerAdjustment = 9f,
+            DeployCost = 2,
+            Upkeep = 21f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(4, 10),
+                Dexterity = new RaceStats.StatRange(4, 10),
+                Endurance = new RaceStats.StatRange(10, 15),
+                Mind = new RaceStats.StatRange(18, 25),
+                Will = new RaceStats.StatRange(18, 25),
+                Agility = new RaceStats.StatRange(8, 11),
+                Voracity = new RaceStats.StatRange(15, 20),
+                Stomach = new RaceStats.StatRange(12, 15),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.SlowMetabolism,
+                Traits.BoundWeapon,
+                Traits.Flight,
+                Traits.PleasurableTouch,
+                Traits.ManaDrain,
+                Traits.ManaDynamo,
+        },
+            SpawnRace = Race.SoulSprite,
+            InnateSpells = new List<SpellTypes>()
+            { SpellTypes.DivinitysEmbrace, SpellTypes.ForcePulse, },
+            RaceAI = RaceAI.Hedonist,
+            RaceDescription = "A mysterious angelic being that suddenly manifested into the physical plane. They sport powerful magical abilities and an innate sense of the evil and malice which they hunger for. Despite their friendly demeanor, they have a bad habit of devouring mortals in an attempt to cleanse them of impurity.",
+        };
+
+        Seraph = new RaceTraits()
+        {
+            BodySize = 100,
+            StomachSize = 80,
+            FavoredStat = Stat.Mind,
+            HasTail = true,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
+            ExpMultiplier = 20f,
+            PowerAdjustment = 100f,
+            DeployCost = 8,
+            Upkeep = 150f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(30, 35),
+                Dexterity = new RaceStats.StatRange(30, 35),
+                Endurance = new RaceStats.StatRange(30, 35),
+                Mind = new RaceStats.StatRange(45, 50),
+                Will = new RaceStats.StatRange(40, 50),
+                Agility = new RaceStats.StatRange(25, 30),
+                Voracity = new RaceStats.StatRange(20, 25),
+                Stomach = new RaceStats.StatRange(20, 25),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.DestroyingAngel,
+                Traits.Legendary,
+                Traits.ManaAttuned,
+                Traits.ManaBarrier,
+                Traits.Flight,
+                Traits.CreateSpawn,
+        },
+            SpawnRace = Race.SoulSprite,
+            InnateSpells = new List<SpellTypes>()
+            { SpellTypes.DivinitysEmbrace, SpellTypes.DivineNova, },
+            RaceDescription = "The leader of the angelic beings that descended onto this world. Seraph has existed before recorded history and does not take lightly to troublemakers that disrupt the karmic balance of the world. Their arrival usually precedes a grand shift in the dynamics of a region, usually ending up with them leaving much fatter than they came.",
+        };
     }
 
 }
