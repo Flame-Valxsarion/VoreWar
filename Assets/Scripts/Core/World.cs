@@ -274,6 +274,7 @@ public class World
         MonsterEmpires[46] = new MonsterEmpire(new Empire.ConstructionArgs((int)Race.Trex, UnityEngine.Color.white, UnityEngine.Color.white, 74, StrategyAIType.Monster, TacticalAIType.Full, 1040, 32, 0));
         MonsterEmpires[47] = new MonsterEmpire(new Empire.ConstructionArgs((int)Race.Utahraptor, UnityEngine.Color.white, UnityEngine.Color.white, 75, StrategyAIType.Monster, TacticalAIType.Full, 1041, 32, 0));
         MonsterEmpires[48] = new MonsterEmpire(new Empire.ConstructionArgs((int)Race.Iliijiith, UnityEngine.Color.white, UnityEngine.Color.white, 76, StrategyAIType.Monster, TacticalAIType.Full, 1042, 32, 0));
+        MonsterEmpires[49] = new MonsterEmpire(new Empire.ConstructionArgs((int)Race.Pudding, UnityEngine.Color.white, UnityEngine.Color.white, 76, StrategyAIType.Monster, TacticalAIType.Full, 1042, 32, 0));
         foreach (var emp in MonsterEmpires)
         {
             SpawnerInfo spawner = Config.SpawnerInfo(emp.Race);
