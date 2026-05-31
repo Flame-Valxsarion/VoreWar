@@ -310,33 +310,8 @@ class OoviKat : DefaultRaceData
 
     protected override Sprite BodySprite(Actor_Unit actor)
     {
-        if (actor.Unit.HasWeapon == false)
-        {
-            if (actor.IsAttacking) return Sprites[3 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            return Sprites[0 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-        }
-
-        switch (actor.GetWeaponSprite())
-        {
-            case 0:
-                return Sprites[2 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            case 1:
-                return Sprites[3 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            case 2:
-                return Sprites[1 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            case 3:
-                return Sprites[3 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            case 4:
-                return Sprites[2 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            case 5:
-                return Sprites[1 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            case 6:
-                return Sprites[2 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            case 7:
-                return Sprites[1 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-            default:
-                return Sprites[0 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
-        }
+        if (actor.IsAttacking) return Sprites[3 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
+        return Sprites[0 + (actor.Unit.BodySize * 4) + (actor.Unit.HasBreasts ? 0 : 12)];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)
@@ -460,62 +435,11 @@ class OoviKat : DefaultRaceData
     {
         if (actor.Unit.HasBreasts)
         {
-            if (actor.Unit.HasWeapon == false)
-            {
-                if (actor.IsAttacking) return OoviKatFemale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                return OoviKatFemale[0 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            }
-
-            switch (actor.GetWeaponSprite())
-            {
-                case 0:
-                    return OoviKatFemale[2 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                case 1:
-                    return OoviKatFemale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                case 2:
-                    return OoviKatFemale[1 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                case 3:
-                    return OoviKatFemale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                case 4:
-                    return OoviKatFemale[2 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                case 5:
-                    return OoviKatFemale[1 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                case 6:
-                    return OoviKatFemale[2 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                case 7:
-                    return OoviKatFemale[1 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-                default:
-                    return OoviKatFemale[0 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            }
+            if (actor.IsAttacking) return OoviKatFemale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
+            return OoviKatFemale[0 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
         }
-
-        if (actor.Unit.HasWeapon == false)
-        {
-            if (actor.IsAttacking) return OoviKatMale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            return OoviKatMale[0 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-        }
-
-        switch (actor.GetWeaponSprite())
-        {
-            case 0:
-                return OoviKatMale[2 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            case 1:
-                return OoviKatMale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            case 2:
-                return OoviKatMale[1 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            case 3:
-                return OoviKatMale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            case 4:
-                return OoviKatMale[2 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            case 5:
-                return OoviKatMale[1 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            case 6:
-                return OoviKatMale[2 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            case 7:
-                return OoviKatMale[1 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-            default:
-                return OoviKatMale[0 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
-        }
+        if (actor.IsAttacking) return OoviKatMale[3 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
+        return OoviKatMale[0 + (actor.Unit.BodySize * 4) + (actor.Unit.FurType * 16)];
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Shoulder Pattern
@@ -531,62 +455,11 @@ class OoviKat : DefaultRaceData
     {
         if (actor.Unit.HasBreasts)
         {
-            if (actor.Unit.HasWeapon == false)
-            {
-                if (actor.IsAttacking) return OoviKatFemale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                return OoviKatFemale[104 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            }
-
-            switch (actor.GetWeaponSprite())
-            {
-                case 0:
-                    return OoviKatFemale[106 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                case 1:
-                    return OoviKatFemale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                case 2:
-                    return OoviKatFemale[105 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                case 3:
-                    return OoviKatFemale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                case 4:
-                    return OoviKatFemale[106 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                case 5:
-                    return OoviKatFemale[105 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                case 6:
-                    return OoviKatFemale[106 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                case 7:
-                    return OoviKatFemale[105 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-                default:
-                    return OoviKatFemale[104 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            }
+            if (actor.IsAttacking) return OoviKatFemale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
+            return OoviKatFemale[104 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
         }
-
-        if (actor.Unit.HasWeapon == false)
-        {
-            if (actor.IsAttacking) return OoviKatMale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            return OoviKatMale[104 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-        }
-
-        switch (actor.GetWeaponSprite())
-        {
-            case 0:
-                return OoviKatMale[106 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            case 1:
-                return OoviKatMale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            case 2:
-                return OoviKatMale[105 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            case 3:
-                return OoviKatMale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            case 4:
-                return OoviKatMale[106 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            case 5:
-                return OoviKatMale[105 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            case 6:
-                return OoviKatMale[106 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            case 7:
-                return OoviKatMale[105 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-            default:
-                return OoviKatMale[104 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
-        }
+        if (actor.IsAttacking) return OoviKatMale[107 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
+        return OoviKatMale[104 + (actor.Unit.BodySize >= 2 ? 4 : 0)];
     }
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Hand Tertiary Color
@@ -594,62 +467,12 @@ class OoviKat : DefaultRaceData
 
         if (actor.Unit.HasBreasts)
         {
-            if (actor.Unit.HasWeapon == false)
-            {
-                if (actor.IsAttacking) return OoviKatFemale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                return OoviKatFemale[124 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            }
-
-            switch (actor.GetWeaponSprite())
-            {
-                case 0:
-                    return OoviKatFemale[126 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                case 1:
-                    return OoviKatFemale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                case 2:
-                    return OoviKatFemale[125 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                case 3:
-                    return OoviKatFemale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                case 4:
-                    return OoviKatFemale[126 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                case 5:
-                    return OoviKatFemale[125 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                case 6:
-                    return OoviKatFemale[126 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                case 7:
-                    return OoviKatFemale[125 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-                default:
-                    return OoviKatFemale[124 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            }
+            if (actor.IsAttacking) return OoviKatFemale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
+            return OoviKatFemale[124 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
         }
 
-        if (actor.Unit.HasWeapon == false)
-        {
-            if (actor.IsAttacking) return OoviKatMale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            return OoviKatMale[124 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-        }
-
-        switch (actor.GetWeaponSprite())
-        {
-            case 0:
-                return OoviKatMale[126 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            case 1:
-                return OoviKatMale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            case 2:
-                return OoviKatMale[125 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            case 3:
-                return OoviKatMale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            case 4:
-                return OoviKatMale[126 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            case 5:
-                return OoviKatMale[125 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            case 6:
-                return OoviKatMale[126 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            case 7:
-                return OoviKatMale[125 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            default:
-                return OoviKatMale[124 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-        }
+        if (actor.IsAttacking) return OoviKatMale[127 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
+        return OoviKatMale[124 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
     }
 
     protected override Sprite BodyAccentSprite7(Actor_Unit actor) // Hand pattern
@@ -657,62 +480,11 @@ class OoviKat : DefaultRaceData
 
         if (actor.Unit.HasBreasts)
         {
-            if (actor.Unit.HasWeapon == false)
-            {
-                if (actor.IsAttacking) return OoviKatFemale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                return OoviKatFemale[64 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
-            }
-
-            switch (actor.GetWeaponSprite())
-            {
-                case 0:
-                    return OoviKatFemale[66 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                case 1:
-                    return OoviKatFemale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                case 2:
-                    return OoviKatFemale[65 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                case 3:
-                    return OoviKatFemale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                case 4:
-                    return OoviKatFemale[66 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                case 5:
-                    return OoviKatFemale[65 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                case 6:
-                    return OoviKatFemale[66 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                case 7:
-                    return OoviKatFemale[65 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-                default:
-                    return OoviKatFemale[64 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            }
+            if (actor.IsAttacking) return OoviKatFemale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
+            return OoviKatFemale[64 + (actor.Unit.BodySize >= 2 ? 16 : 0)];
         }
-
-        if (actor.Unit.HasWeapon == false)
-        {
-            if (actor.IsAttacking) return OoviKatMale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            return OoviKatMale[64 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-        }
-
-        switch (actor.GetWeaponSprite())
-        {
-            case 0:
-                return OoviKatMale[66 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            case 1:
-                return OoviKatMale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            case 2:
-                return OoviKatMale[65 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            case 3:
-                return OoviKatMale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            case 4:
-                return OoviKatMale[66 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            case 5:
-                return OoviKatMale[65 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            case 6:
-                return OoviKatMale[66 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            case 7:
-                return OoviKatMale[65 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-            default:
-                return OoviKatMale[64 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
-        }
+        if (actor.IsAttacking) return OoviKatMale[67 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
+        return OoviKatMale[64 + (actor.Unit.BodySize >= 2 ? 16 : 0) + actor.Unit.BodyAccentType4 * 4];
     }
 
     protected override Sprite BodyAccentSprite8(Actor_Unit actor) // Feet Secondary Color
@@ -977,34 +749,7 @@ class OoviKat : DefaultRaceData
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
     {
-        if (actor.Unit.HasWeapon && actor.Surrendered == false)
-        {
-            switch (actor.GetWeaponSprite())
-            {
-                case 0:
-                    return Sprites3[132];
-                case 1:
-                    return Sprites3[133];
-                case 2:
-                    return Sprites3[134];
-                case 3:
-                    return Sprites3[135];
-                case 4:
-                    return Sprites3[136];
-                case 5:
-                    return Sprites3[138];
-                case 6:
-                    return Sprites3[139];
-                case 7:
-                    return Sprites3[141];
-                default:
-                    return null;
-            }
-        }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     protected override Sprite BreastsSprite(Actor_Unit actor)
@@ -1848,23 +1593,8 @@ class OoviKat : DefaultRaceData
                 clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[7 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
 
-            if (actor.Unit.HasWeapon == false)
-            {
-                if (actor.IsAttacking) clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[3 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                else clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[0 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
-            }
-            else if (actor.GetWeaponSprite() == 0 || actor.GetWeaponSprite() == 4 || actor.GetWeaponSprite() == 6)
-            {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[2 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
-            }
-            else if (actor.GetWeaponSprite() == 1 || actor.GetWeaponSprite() == 3)
-            {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[3 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
-            }
-            else
-            {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[1 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
-            }
+            if (actor.IsAttacking) clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[3 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
+            else clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[0 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);

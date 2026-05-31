@@ -1137,11 +1137,11 @@ public class PredatorComponent
             {
                 if (preyUnit.Unit.GetStatusEffect(StatusEffectType.Lethargy) == null)
                 {
-                    preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Lethargy, 0.1f, 3);
+                    preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Lethargy, 1f, 3);
                 }
                 else
                 {
-                    preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Lethargy, preyUnit.Unit.GetStatusEffect(StatusEffectType.Lethargy).Strength + 0.1f, 3);
+                    preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Lethargy, preyUnit.Unit.GetStatusEffect(StatusEffectType.Lethargy).Strength + 1f, 3);
                 }
             }
             int preyDamage = CalculateDigestionDamage(preyUnit);
@@ -1933,20 +1933,6 @@ public class PredatorComponent
                     FreePrey(preyUnit, false);
                 }
 
-            }
-            if (preyUnit.Unit.HasTrait(Traits.GreedyStruggles))
-            {
-                // If unit can act, is not surrendered, and is a pred 
-                if (preyUnit.Actor.Surrendered == false && preyUnit.Unit.Predator)
-                {
-                    foreach (var target in PreyRefInLocation(preyUnit.Location).Where(u => u != preyUnit))
-                    {
-                        if (true)
-                        {
-                            preyUnit.Actor.PredatorComponent?.UsePreferredVore(target.Actor);
-                        }
-                    }
-                }
             }
         }
         return totalHeal;

@@ -2822,6 +2822,10 @@ Turns: {currentTurn}
                 {
                     spellDamage *= 3;
                 }
+                if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) //For correct display of damage
+                {
+                    spellDamage += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.1f);
+                }
             }
              
             float magicChance = CurrentSpell.Resistable ? target.GetMagicChance(actor, CurrentSpell) : 1;
@@ -3866,7 +3870,7 @@ Turns: {currentTurn}
             }
             if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) //For correct display of damage
             {
-                damMod += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.2f);
+                damMod += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.1f);
             }
             return damMod;
         }

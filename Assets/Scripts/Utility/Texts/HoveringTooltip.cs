@@ -169,7 +169,7 @@ public class HoveringTooltip : MonoBehaviour
         {            
             if (trait == Traits.Multifaceted)
             {
-                return GetTraitDataWithActorData(trait, actor);
+                return GetTraitDataWithActorData(trait, unit, actor);
             }
             return GetTraitData(trait);
         }
@@ -840,7 +840,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.DimensionalAntilock:
                 return "This unit is not completely fixed to the space around it. \n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
             case Traits.Hoarder:
-                return "Race increase the income of a village by 0.1%.";
+                return "Race increase the income of a village by 0.1% per population.";
             case Traits.NaturalCaster:
                 return "Unit gains Icicle, Fireball, Lightning Bolt, PowerBolt, or Poison as an innate spell.";
             case Traits.Multifaceted:
@@ -876,11 +876,11 @@ public class HoveringTooltip : MonoBehaviour
     }
 
     // For traits that need more informaiton to adjust their tooltip. 
-    public static string GetTraitDataWithActorData(Traits trait, Actor_Unit actor)
+    public static string GetTraitDataWithActorData(Traits trait, Unit unit, Actor_Unit actor)
     {
         switch (trait)
         {
-            case Traits.Multifaceted when actor == null:
+            case Traits.Multifaceted when unit == null || State.GameManager.CurrentScene == State.GameManager.Start_Mode: // Can't be too sure now can we?
                 return "Units highest stat becomes its favored stat and gains the following effect based on their highest stat:\n" +
                     "STR: Bonus damage on a 4 turn cooldown.\n" +
                     "DEX: 1 additional attack per turn, lasting one turn per level.\n" +
@@ -890,22 +890,22 @@ public class HoveringTooltip : MonoBehaviour
                     "MND: Dmg spells deal 20% of target's mnd.\n" +
                     "END: damage over 10% current health, excess is reduced by by 50%.\n" +
                     "STM: Inflicts Lethargy on consumed enemies.";
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 0:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Violent(Str)</b>: Weapon attacks deal 5% of the target's Max HP once every 4 turns.\n" + "Avalible in: " + actor.MultifacetedCooldown + " turn(s).";
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 1:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gans 1 additional attack per turn, lasting one turn per level.\n" + "Remaining Turns: " + actor.MultifacetedCooldown;
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 2:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: A failed vore attempt grants predation to this unit.";
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 3:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gains +2 mov while above 50%hp and +10% Dodge while below 50% HP.";
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 4:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit's Spells that terget allies grant " + (actor.Unit.GetStat(Stat.Will) / 20) + "barrier to them.\n" + "Spells that terget enemies applies marked for 2 turns.";
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 5:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: This unit's damage spells also deal 20% of their target's mind stat as damage.";
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 6:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: When this unit takes dDamage over 10% of its current health, the excess is reduced by by 50%.";
-            case Traits.Multifaceted when actor.Unit.GetHighestStatIndex() == 7:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: This unit inflicts Lethargy on consumed enemies, reducing their offensive stats.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 0:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Violent(Str)</b>: Weapon attacks deal 5% of the target's Max HP once every 4 turns.\n" + (actor == null ? "" : $"Avalible in: {actor.MultifacetedCooldown} turn(s).");
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 1:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gans 1 additional attack per turn, lasting one turn per level.\n" + (actor == null ? "" : actor.Unit.Level - State.GameManager.TacticalMode.currentTurn >= 0 ? ($"Remaining Turns: {actor.Unit.Level - State.GameManager.TacticalMode.currentTurn}") : "<b>Inactive.</b>");
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 2:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Intrepid(Vor)</b>: A failed vore attempt grants predation to this unit.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 3:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Playful(Agi)</b>: Unit gains +2 mov while above 50%hp and +10% Dodge while below 50% HP.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 4:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Whimsical(Will)</b>: Unit's Spells that terget allies grant " + (unit.GetStat(Stat.Will) / 20) + " barrier to them.\n" + "Spells that target enemies applies marked for 2 turns.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 5:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Entropic(Mnd)</b>: This unit's damage spells also deal 10% of their target's mind stat as damage.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 6:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Valient(End)</b>: When this unit takes damage over 10% of its current health, the excess is reduced by by 50%.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 7:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Gloomy(Stm)</b>: This unit inflicts stacking Lethargy on consumed enemies, reducing their offensive stats for 3 turns.";
 
         }
         return "<b>This trait needs a tooltip!</b>";

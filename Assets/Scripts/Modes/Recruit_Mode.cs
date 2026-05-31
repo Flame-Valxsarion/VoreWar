@@ -525,7 +525,15 @@ public class Recruit_Mode : SceneBase
                 break;
             case 41:
                 BlockerUI.SetActive(true);
+                ShopUI.gameObject.SetActive(false);
+                shop = null;
                 BuildPotionShop();
+                break;
+            case 42:
+                BlockerUI.SetActive(true);
+                PotionUI.gameObject.SetActive(false);
+                potionShop = null;
+                BuildShop();
                 break;
 
             case 50:

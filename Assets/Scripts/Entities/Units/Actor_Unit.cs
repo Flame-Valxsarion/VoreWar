@@ -1774,10 +1774,11 @@ public class Actor_Unit
                     target = possibleTargets[State.Rand.Next(0,possibleTargets.Count()-1)];
                 }
 
-                if (Unit.TraitBoosts.RangedAttacks > 1)
+                int rangedattacks = Unit.TraitBoosts.RangedAttacks;
+                rangedattacks += extraAttacks + Unit.TempBoosts.ExtraAttacks;
+                if (rangedattacks > 1)
                 {
-                    int movementFraction = 1 + MaxMovement() / Unit.TraitBoosts.RangedAttacks;
-                    movementFraction += extraAttacks + Unit.TempBoosts.ExtraAttacks;
+                    int movementFraction = 1 + MaxMovement() / rangedattacks;
                     if (Movement > movementFraction)
                         Movement -= movementFraction;
                     else
@@ -2201,7 +2202,7 @@ public class Actor_Unit
             damage = (int)(damage * attacker.Unit.TraitBoosts.Outgoing.MagicDamage * Unit.TraitBoosts.Incoming.MagicDamage * TagConditionChecker.ApplyTagEffect(attacker.Unit, Unit, UnitTagModifierEffect.MagicDamageMult));
             if (attacker.Unit.HasTrait(Traits.Multifaceted) && attacker.Unit.IsHighestStat(Stat.Mind))
             {
-                damage += (int)Math.Round(Unit.GetStat(Stat.Mind) * 0.2f);
+                damage += (int)Math.Round(Unit.GetStat(Stat.Mind) * 0.1f);
             }
             if (attacker.Unit.HasTrait(Traits.ManaBurn))
             {
@@ -2367,6 +2368,12 @@ public class Actor_Unit
         if (State.GameManager.CurrentScene == State.GameManager.TacticalMode && State.GameManager.TacticalMode.IsPlayerInControl == false && State.GameManager.TacticalMode.turboMode == false)
             State.GameManager.CameraCall(Position);
         chance = GetAttackChance(attacker, ranged);
+
+        StatusEffect mark = Unit.GetStatusEffect(StatusEffectType.Marked);
+        if (mark != null)
+        {
+            chance += mark.Strength * 0.01f;
+        }
 
         float r = (float)State.Rand.NextDouble();
         if (r < chance)
@@ -3078,9 +3085,10 @@ public class Actor_Unit
     public int CalculateExtraAttacks()
     {
         int extra = 0;
-        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity) && MultifacetedCooldown > 0)
+        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity))
         {
-            extra++;
+            if (Unit.Level >= State.GameManager.TacticalMode.currentTurn)
+                extra++;
         }
         return extra;
     }
@@ -3860,13 +3868,13 @@ public class Actor_Unit
 
         if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Will))
         {
-            if (target.Unit.IsEnemyOfSide(target.Unit.Side))
+            if (Unit.IsEnemyOfSide(target.Unit.Side))
             {
-                target.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 20, 2);
+                target.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
             }
             else
             {
-                target.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 20);
+                target.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
             }
         }
     }

@@ -43,7 +43,7 @@ static class Config
         Disabled
     }
 
-    public const int NumberOfRaces = 40;
+    public const int NumberOfRaces = 41;
 
     public const int NewItemSlots = 2;
 

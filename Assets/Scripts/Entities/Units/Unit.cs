@@ -924,6 +924,10 @@ public class Unit
         {
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SuccubusWeapon);
         }
+        else if (race == Race.OoviKat)
+        {
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.OoviKatWeapon);
+        }
         else if (race == Race.Asura)
         {
             Items[0] = State.World.ItemRepository.GetItem(ItemType.Axe);
