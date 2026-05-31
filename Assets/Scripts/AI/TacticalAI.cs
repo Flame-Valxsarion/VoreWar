@@ -1113,9 +1113,22 @@ public abstract class TacticalAI : ITacticalAI
         {
             if (targets[0].distance < 2 && (targets[0].actor.InSight || !State.World.IsNight))
             {
+                    if ((State.Rand.Next(5) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.GiantSweep].AppearConditional(actor))
+                        actor.AiSweepAttack(targets[0].actor, actor, true);
+                    if ((State.Rand.Next(5) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.SweepingSwallow].AppearConditional(actor))
+                        actor.AiSweepAttack(targets[0].actor, actor, false);
+                    if ((State.Rand.Next(2) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.TailStrike].AppearConditional(actor))
+                        actor.TailStrike(targets[0].actor);
+                    if ((State.Rand.Next(4) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.AllInVore].AppearConditional(actor))
+                        actor.AllInVore(targets[0].actor, SpecialAction.None, true);
+                    if ((State.Rand.Next(2) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.DireInfection].AppearConditional(actor))
+                        actor.DireInfection(targets[0].actor);
+                    else
+                    {
                 actor.Attack(targets[0].actor, false);
                 didAction = true;
                 return;
+                    }
             }
             else
             {
@@ -1123,6 +1136,16 @@ public abstract class TacticalAI : ITacticalAI
                 {
                     if (actor.Unit.Race == Race.Asura && TacticalActionList.TargetedDictionary[SpecialAction.ShunGokuSatsu].AppearConditional(actor))
                         MoveToAndAction(actor, targets[0].actor.Position, 1, actor.Movement, () => actor.ShunGokuSatsu(targets[0].actor));
+                    if ((State.Rand.Next(2) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.DireInfection].AppearConditional(actor))
+                        MoveToAndAction(actor, targets[0].actor.Position, 1, actor.Movement, () => actor.DireInfection(targets[0].actor));
+                    if ((State.Rand.Next(5) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.GiantSweep].AppearConditional(actor))
+                        MiscUtilities.DelayedInvoke(() => MoveToAndAction(actor, targets[0].actor.Position, 1, actor.Movement, () => actor.AiSweepAttack(targets[0].actor, actor, true)), .06f);
+                    if ((State.Rand.Next(5) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.SweepingSwallow].AppearConditional(actor))
+                        MiscUtilities.DelayedInvoke(() => MoveToAndAction(actor, targets[0].actor.Position, 1, actor.Movement, () => actor.AiSweepAttack(targets[0].actor, actor, false)), .06f);
+                    if ((State.Rand.Next(2) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.TailStrike].AppearConditional(actor))
+                        MiscUtilities.DelayedInvoke(() => MoveToAndAction(actor, targets[0].actor.Position, 1, actor.Movement, () => actor.TailStrike(targets[0].actor)), .06f);
+                    if ((State.Rand.Next(4) == 0) && TacticalActionList.TargetedDictionary[SpecialAction.AllInVore].AppearConditional(actor))
+                        MoveToAndAction(actor, targets[0].actor.Position, 1, actor.Movement, () => actor.AllInVore(targets[0].actor, SpecialAction.None, true));
                     else
                         MoveToAndAction(actor, targets[0].actor.Position, 1, actor.Movement, () => actor.Attack(targets[0].actor, false));
                     if (foundPath && path.Path.Count() < actor.Movement)

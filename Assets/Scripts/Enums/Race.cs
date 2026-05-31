@@ -60,6 +60,8 @@
     Centaur = 65,
     Eevee = 66,
     Equaleon = 67,
+    Badgers = 68,
+    Renamon = 69, //Nice~
 
     Vagrants = 100,
     Serpents = 101,
@@ -145,7 +147,7 @@
     Olivia = 188,
     Skapa = 189,
     Tatltuae = 190,
-    Firefly = 191,
+    Seville = 191,
     Nectar = 192,
     Ryan = 193,
 }

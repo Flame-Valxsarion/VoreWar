@@ -11,11 +11,13 @@ public static class PreyLocStrings
     static readonly List<string> stomachSyn = new List<string>() { "gut", "gut", "stomach", "stomach", "belly", "belly", "tummy", "tummy", "tum", "middle", "midsection", "stomach chamber", "abdomen" };
     static readonly List<string> analSyn = new List<string>() { "butt", "ass", "bottom", "backside", "bum", "rear", "rump", "booty", "tush", "moon", "derriere", "cheeks", "hindquarters" };
     static readonly List<string> cockSyn = new List<string>() { "penis", "tool", "manhood", "rod", "wang", "dick", "cock", "phallus", "member", "shaft", "pecker", "schlong", "erection" };
+    static readonly List<string> bladderSyn = new List<string>() { "bladder", "\"stomach\"", "piss chamber" };
 
     static readonly List<string> wombFluid = new List<string>() { "cum", "ejaculate", "honey", "fem-fluids", "fem-cum", "pussy juice", "girl-cum", "girl-fluids", "hot lube" };
     static readonly List<string> breastFluid = new List<string>() { "milk", "delicious milk", "leaking milk", "lactation", "nourishing fluid" };
     static readonly List<string> ballsFluid = new List<string>() { "cum", "sperm", "semen", "jizz", "spunk", "seed", "nut", "spooge", "batter", "load" };
     static readonly List<string> stomachFluid = new List<string>() { "nutritious paste", "nutritious soup", "mush", "nutritious mush", "chyme", "bubbling mush", "hot slurry", "meaty chunks", "stew", "melting flesh and bones" };
+    static readonly List<string> bladderFluid = new List<string>() { "piss", "urine", "pee", "piddle" };
 
 
     static readonly List<string> wombVerb = new List<string>() { "release", "birth", "ejaculate" };
@@ -80,6 +82,8 @@ public static class PreyLocStrings
                 return genRandom(wombSyn);
             case PreyLocation.anal:
                 return genRandom(analSyn);
+            case PreyLocation.bladder:
+                return genRandom(bladderSyn);
             case PreyLocation.tail:
                 return "tail";
             default:
@@ -137,6 +141,8 @@ public static class PreyLocStrings
                 return genRandom(stomachFluid);
             case PreyLocation.womb:
                 return genRandom(wombFluid);
+            case PreyLocation.bladder:
+                return genRandom(bladderFluid);
             default:
                 return "";
         }

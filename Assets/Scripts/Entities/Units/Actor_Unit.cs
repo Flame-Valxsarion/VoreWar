@@ -19,6 +19,7 @@ public class Actor_Unit
         BreastVore,
         AnalVore,
         Unbirth,
+        BladderVore,
         FrogPouncing,
         VoreSuccess,
         VoreFail,
@@ -307,6 +308,8 @@ public class Actor_Unit
             Unit.ApplyStatusEffect(StatusEffectType.Respawns, 1, 1);
         if (Unit.HasTrait(Traits.RespawnerIII) && (State.GameManager.TacticalMode.currentTurn == 1) && State.GameManager.TacticalMode.attackersTurnCheck == true)
             Unit.ApplyStatusEffect(StatusEffectType.Respawns, 3, 3);
+        if (Unit.Race == Race.Seville && !State.GameManager.TacticalMode.turboMode && TacticalUtilities.IsUnitControlledByPlayer(Unit) && (State.GameManager.TacticalMode.currentTurn == 1) && State.GameManager.TacticalMode.attackersTurnCheck == true && State.Rand.Next(20) == 1)
+            MiscUtilities.DelayedInvoke(() => State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Looking upon the battlefield before her, {LogUtilities.GetRandomStringFrom($"<b>{Unit.Name}</b>", $"the {LogUtilities.GetRaceDescSingl(Unit)}")} {LogUtilities.GetRandomStringFrom("smiles", "laughs", "grins")} {LogUtilities.GetRandomStringFrom("devilishly", "mischievously", "maliciously", "wickedly", "naughtily")}. \"Well, you\'ve got my attention. Now let me reward your curiosssity...\""), .2f); //Delayed to let the game fully load before executing
         int sizePenalty = (int)(PredatorComponent?.Fullness ?? 0);
         sizePenalty = (int)(sizePenalty * Unit.TraitBoosts.SpeedLossFromWeightMultiplier);
         int bonus = 0;
@@ -502,6 +505,9 @@ public class Actor_Unit
                 break;
             case PreyLocation.anal:
                 Mode = DisplayMode.AnalVore;
+                break;
+            case PreyLocation.bladder:
+                Mode = DisplayMode.BladderVore;
                 break;
         }
         animationUpdateTime = 1.5F;
@@ -788,7 +794,7 @@ public class Actor_Unit
     {
         if (Mode == DisplayMode.Attacking)
             return 1;
-        if (Mode == DisplayMode.OralVore || Mode == DisplayMode.BreastVore || Mode == DisplayMode.CockVore || Mode == DisplayMode.Unbirth || Mode == DisplayMode.AnalVore)
+        if (Mode == DisplayMode.OralVore || Mode == DisplayMode.BreastVore || Mode == DisplayMode.CockVore || Mode == DisplayMode.Unbirth || Mode == DisplayMode.AnalVore || Mode == DisplayMode.BladderVore)
             return 2;
         return 0;
     }
@@ -801,15 +807,16 @@ public class Actor_Unit
     /// <summary>
     /// This one Covers all forms of consuming
     /// </summary>
-    public bool IsEating => IsOralVoring || IsCockVoring || IsBreastVoring || IsUnbirthing || IsTailVoring || IsAnalVoring;
+    public bool IsEating => IsOralVoring || IsCockVoring || IsBreastVoring || IsUnbirthing || IsTailVoring || IsAnalVoring || IsBladderVoring;
     public bool IsOralVoring => Mode == DisplayMode.OralVore;
     public bool IsOralVoringHalfOver => Mode == DisplayMode.OralVore && animationUpdateTime < .75f;
 
-    public bool IsCockVoring => Mode == DisplayMode.CockVore;
+    public bool IsCockVoring => Mode == DisplayMode.CockVore || IsBladderVoring;
     public bool IsBreastVoring => Mode == DisplayMode.BreastVore;
-    public bool IsUnbirthing => Mode == DisplayMode.Unbirth;
+    public bool IsUnbirthing => Mode == DisplayMode.Unbirth || IsBladderVoring;
     public bool IsTailVoring => Mode == DisplayMode.TailVore;
     public bool IsAnalVoring => Mode == DisplayMode.AnalVore;
+    public bool IsBladderVoring => Mode == DisplayMode.BladderVore;
     public bool IsPouncingFrog => Mode == DisplayMode.FrogPouncing;
     public bool HasJustVored => Mode == DisplayMode.VoreSuccess;
     public bool HasJustFailedToVore => Mode == DisplayMode.VoreFail;
@@ -1398,6 +1405,9 @@ public class Actor_Unit
                     case SpecialAction.AnalVore:
                         PredatorComponent.AnalVore(target);
                         break;
+                    case SpecialAction.BladderVore:
+                        PredatorComponent.BladderVore(target);
+                        break;
                     default:
                         PredatorComponent.Devour(target);
                         break;
@@ -1516,6 +1526,53 @@ public class Actor_Unit
         }
     }
 
+    public bool AiSweepAttack(Actor_Unit mainTarget, Actor_Unit self, bool attack_ver)
+    {
+        if (Movement < 1 || Unit.HasTrait(Traits.Legendary) == false)
+            return false;
+        if (Unit.Mana >= 40)
+        {
+            Unit.SpendMana(40);
+        }
+        else
+            return false;
+        List<Actor_Unit> targets = TacticalUtilities.UnitsWithinPattern(self.Position, new int[3, 3] { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } });
+        List<AbilityTargets> targetTypes = new List<AbilityTargets>();
+        targetTypes.Add(AbilityTargets.Enemy);
+
+        foreach (var target in targets)
+        {
+            if (!TacticalUtilities.MeetsQualifier(targetTypes, this, target))
+                return false;
+            if (attack_ver)
+                TestAttack(target);
+            else
+                TestSwallow(target);
+        }
+
+        Movement = 0;
+
+        return true;
+
+        void TestAttack(Actor_Unit sideTarget)
+        {
+            if (sideTarget != null && sideTarget.Position.GetNumberOfMovesDistance(Position) == 1)
+            {
+                Movement = 1;
+                Attack(sideTarget, false, damageMultiplier: .66f);
+            }
+        }
+        void TestSwallow(Actor_Unit sideTarget)
+        {
+            if (sideTarget != null && sideTarget.Position.GetNumberOfMovesDistance(Position) == 1)
+            {
+                Movement = 1;
+                PredatorComponent.Devour(sideTarget);
+
+            }
+        }
+    }
+
     public bool SweepAttack(bool attack_ver)
     {
         if (Movement < 1 || Unit.HasTrait(Traits.Legendary) == false)
@@ -1595,6 +1652,9 @@ public class Actor_Unit
                     break;
                 case SpecialAction.AnalVore:
                     succeded_attempt = PredatorComponent.AnalVore(target);
+                    break;
+                case SpecialAction.BladderVore:
+                    succeded_attempt = PredatorComponent.BladderVore(target);
                     break;
                 default:
                     succeded_attempt = PredatorComponent.Devour(target);
@@ -1726,13 +1786,13 @@ public class Actor_Unit
         {
             if ((targetRange >= 2 || (targetRange >= 1 && weapon.Omni)) && targetRange <= weapon.Range)
             {
+                animationUpdateTime = 1.0F;
                 if (Unit.Race == Race.Succubi)
                     TacticalGraphicalEffects.SuccubusSwordEffect(target.Position);
                 if (Unit.Race == Race.Tatltuae)
                     TacticalGraphicalEffects.EntropicChaosEffect(target.Position);
-                animationUpdateTime = 1.0F;
-                if (Unit.Race == Race.Firefly)//Use to specify races that can use differint attacks with the same weapon depending on range
-                    Mode = DisplayMode.RangeAttacking;
+                //if (Unit.Race == Race.Tigers)//Use to specify races that can use differint attacks with the same weapon depending on range (Currently unused)
+                //    Mode = DisplayMode.RangeAttacking;
                 else
                     Mode = DisplayMode.Attacking;
 
@@ -1823,12 +1883,16 @@ public class Actor_Unit
             if (targetRange < 2)
             {
                 animationUpdateTime = 1.0F;
-                if (Unit.Race == Race.Firefly)//Use to specify races that can use differint attacks with the same weapon depending on range
-                    Mode = DisplayMode.MeleeAttacking;
+                if (Unit.Race == Race.Seville)
+                    TacticalGraphicalEffects.VenomBiteEffect(target.Position);
+                //if (Unit.Race == Race.Tigers)//Use to specify races that can use differint attacks with the same weapon depending on range (Currently unused)
+                //    Mode = DisplayMode.MeleeAttacking;
                 else
                     Mode = DisplayMode.Attacking;
                 int meleeAttacks = Unit.TraitBoosts.MeleeAttacks;
                 if (Unit.HasTrait(Traits.LightFrame) && PredatorComponent?.PreyCount == 0)
+                    meleeAttacks++;
+                if (Unit.HasTrait(Traits.WildFury) && Unit.GetBestMelee() == State.World.ItemRepository.Claws)
                     meleeAttacks++;
                 if (meleeAttacks > 1)
                 {
@@ -2413,7 +2477,7 @@ public class Actor_Unit
         {
             possible.Add(1);
         }
-        if (target.PredatorComponent.WombFullness > 0 || target.PredatorComponent.CombinedStomachFullness > 0)
+        if (target.PredatorComponent.CombinedStomachFullness > 0 || target.PredatorComponent.WombFullness > 0 || target.PredatorComponent.BladderFullness > 0)
         {
             possible.Add(0);
         }
@@ -2438,10 +2502,25 @@ public class Actor_Unit
         type = possible[index];
         switch (type)
         {
-            case 0:
-                prey = target.PredatorComponent.GetDirectPrey().FirstOrDefault(p => p.Location.Equals(PreyLocation.stomach) || p.Location.Equals(PreyLocation.stomach2) || p.Location.Equals(PreyLocation.anal) || p.Location.Equals(PreyLocation.womb));
-                if (prey == null) break;
-                TacticalUtilities.Log.RegisterBellyRub(Unit, target.Unit, prey.Unit, 1f);
+            case 0:// Split womb and stomachs (and added bladder) from being grouped up as of post version 44D to fix log issues
+                prey = target.PredatorComponent.GetDirectPrey().FirstOrDefault(p => p.Location.Equals(PreyLocation.bladder));
+                if (prey != null)
+                {
+                    TacticalUtilities.Log.RegisterBellyRub(Unit, target.Unit, prey.Unit, PreyLocation.bladder, 1f);
+                    break;
+                }
+                prey = target.PredatorComponent.GetDirectPrey().FirstOrDefault(p => p.Location.Equals(PreyLocation.womb));
+                if (prey != null)
+                {
+                    TacticalUtilities.Log.RegisterBellyRub(Unit, target.Unit, prey.Unit, PreyLocation.womb, 1f);
+                    break;
+                }
+                prey = target.PredatorComponent.GetDirectPrey().FirstOrDefault(p => p.Location.Equals(PreyLocation.stomach) || p.Location.Equals(PreyLocation.stomach2) || p.Location.Equals(PreyLocation.anal));
+                if (prey != null) 
+                {
+                    TacticalUtilities.Log.RegisterBellyRub(Unit, target.Unit, prey.Unit, PreyLocation.stomach, 1f);
+                    break;
+                }
                 break;
             case 1:
                 prey = target.PredatorComponent.GetDirectPrey().FirstOrDefault(p => p.Location.Equals(PreyLocation.breasts) || p.Location.Equals(PreyLocation.leftBreast) || p.Location.Equals(PreyLocation.rightBreast));
@@ -3133,7 +3212,7 @@ public class Actor_Unit
             State.GameManager.TacticalMode.DirtyPack = true;
             Targetable = false;
             Surrendered = true;
-            if (Config.VisibleCorpses && Unit.Race != Race.Erin && Unit.Race != Race.Iliijiith && Unit.Race != Race.Olivia)
+            if (Config.VisibleCorpses && Unit.Race != Race.Erin && Unit.Race != Race.Iliijiith && !Unit.HasTrait(Traits.CloseCall))
             {
                 float angle = 40 + State.Rand.Next(280);
                 UnitSprite.transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -3142,6 +3221,8 @@ public class Actor_Unit
             else
             {
                 Visible = false;
+                if (Unit.HasTrait(Traits.CloseCall))
+                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Barely hanging on, {Unit.Name} quickly {LogUtilities.GetRandomStringFrom("flees", "bolts", "retreats")} out of combat with {LogUtilities.GPPHis(Unit)} life barely intact");
             }
 
             PredatorComponent?.FreeAnyAlivePrey();

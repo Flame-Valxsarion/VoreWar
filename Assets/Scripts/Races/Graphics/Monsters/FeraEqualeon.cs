@@ -5,15 +5,12 @@ class FeralEqualeon : BlankSlate
 {
     internal FeralEqualeon()
     {
-        CanBeGender = new List<Gender>() { Gender.None };
+        CanBeGender = new List<Gender>() { Gender.Male, Gender.Female };
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
         AccessoryColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
         EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EqualeonEyes);
         GentleAnimation = true;
         HairStyles = 11;
-
-        CanBeGender = new List<Gender>() { Gender.None };
-        GentleAnimation = true;
 
         Body = new SpriteExtraInfo(0, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor));
         BodyAccessory = new SpriteExtraInfo(1, AccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.AccessoryColor)); //Fluff

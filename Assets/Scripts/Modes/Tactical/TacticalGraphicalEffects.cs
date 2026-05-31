@@ -156,8 +156,6 @@ static class TacticalGraphicalEffects
             return State.GameManager.SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.Tatltuae)
             return State.GameManager.SpriteDictionary.Equaleon[37];// intentionally blank sprite
-        else if (actor.Unit.Race == Race.Firefly)
-            return State.GameManager.SpriteDictionary.Firefly[13];
         else if (actor.Unit.Race == Race.Hamsters && (weapon.Graphic == 4 || weapon.Graphic == 6))
             return State.GameManager.SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.Lupine && (weapon.Graphic == 4 || weapon.Graphic == 6))
@@ -220,6 +218,17 @@ static class TacticalGraphicalEffects
         obj.transform.position = location;
         obj.transform.localScale = new Vector3(2, 2, 1);
         obj.AddComponent<Assets.Scripts.Entities.Animations.EntropicChaos>();
+
+    }
+
+    internal static void VenomBiteEffect(Vector2 location)
+    {
+        if (State.GameManager.TacticalMode.turboMode)
+            return;
+        var obj = Object.Instantiate(State.GameManager.SpriteRendererPrefab);
+        obj.transform.position = location;
+        obj.transform.localScale = new Vector3(3, 3, 1);
+        obj.AddComponent<Assets.Scripts.Entities.Animations.VenomBite>();
 
     }
 
@@ -289,6 +298,16 @@ static class TacticalGraphicalEffects
         if (State.GameManager.TacticalMode.turboMode)
             return;
         var prefab = State.GameManager.TacticalEffectPrefabList.Icicle;
+        var effect = Object.Instantiate(prefab, new Vector3(startLocation.x, startLocation.y, 0), new Quaternion()).GetComponent<ArrowEffect>();
+        effect.Setup(startLocation, endLocation, target, null, null);
+
+    }
+
+    internal static void CreateDiamondStorm(Vec2i startLocation, Vec2i endLocation, Actor_Unit target)
+    {
+        if (State.GameManager.TacticalMode.turboMode)
+            return;
+        var prefab = State.GameManager.TacticalEffectPrefabList.DiamondStorm;
         var effect = Object.Instantiate(prefab, new Vector3(startLocation.x, startLocation.y, 0), new Quaternion()).GetComponent<ArrowEffect>();
         effect.Setup(startLocation, endLocation, target, null, null);
 

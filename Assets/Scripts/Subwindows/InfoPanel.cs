@@ -381,6 +381,10 @@ public class InfoPanel
                 return "T-Rex";
             case Race.Utahraptor:
                 return "Utahraptor";
+            case Race.Badgers:
+                return "Badger";
+            case Race.Renamon:
+                return "Renamon";
             case Race.none:
                 return "None";
         }
@@ -621,6 +625,10 @@ public class InfoPanel
                 return "T-Rex";
             case Race.Utahraptor:
                 return "Utahraptor";
+            case Race.Badgers:
+                return "Badger";
+            case Race.Renamon:
+                return "Renamon";
         }
         return empire.ReplacedRace.ToString();
     }
@@ -783,6 +791,8 @@ public class InfoPanel
             if (actor?.Surrendered ?? false)
                 sb.AppendLine("Unit has surrendered!");
             string traits = unit.ListTraits(!(TacticalUtilities.IsUnitControlledByPlayer(unit) && TacticalUtilities.PlayerCanSeeTrueSide(unit)));
+            if (Config.RaceTraitsEnabled == false && (traits == ""))
+                sb.AppendLine("Race Traits disabled");
             if (traits != "")
                 sb.AppendLine("Traits:\n" + traits);
             StringBuilder sbSecond = new StringBuilder();

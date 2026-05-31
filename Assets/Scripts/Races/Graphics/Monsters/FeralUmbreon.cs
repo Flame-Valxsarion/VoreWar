@@ -5,13 +5,10 @@ class FeralUmbreon : BlankSlate
 {
     internal FeralUmbreon()
     {
-        CanBeGender = new List<Gender>() { Gender.None };
+        CanBeGender = new List<Gender>() { Gender.Male, Gender.Female };
         AccessoryColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UmbreonSkin);
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UmbreonSkin);
         EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UmbreonSkin);
-        GentleAnimation = true;
-
-        CanBeGender = new List<Gender>() { Gender.None };
         GentleAnimation = true;
 
         Body = new SpriteExtraInfo(0, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, s.Unit.SkinColor));

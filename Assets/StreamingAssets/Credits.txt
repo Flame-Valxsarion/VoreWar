@@ -41,6 +41,7 @@ Clean Disposal (Diapers) log messages by <b>Mocha</b>
 Goddess' Mercy implemented by <b>Wolfwar106</b>
 Scout Armies implemented by <b>Wolfwar106</b>
 Kiss transfer implemented by <b>Wolfwar106</b>
+Bladder vore implemented by <b>Wolfwar106</b>
 NearbyEnemies variable functionality by <b>CaneSugarCat</b>
 Unit Upkeep code by <b>CaneSugarCat</b>
 Unit Deploy Cost code by <b>CaneSugarCat</b>
@@ -64,7 +65,7 @@ A good percentage of the town names are by <b>Katar</b>
 A significant amount of log messages by <b>HarryS</b>
 Most of the scat tactical log text from <b>InfernoTheDragon</b> or <b>Cattitude</b>
 Additional scat log messages by <b>Ignis Flamescale</b>
-Pouch vore, Tail vore, Cleavage vore, and Condom disposal messages by <b>Tatltuae</b>
+Pouch vore, Tail vore, Cleavage vore, 95% Bladder vore, and Condom disposal messages by <b>Tatltuae</b>
 Fart log messages by <b>Cattitude</b>
 Wide array of synonyms applied throughout the TacLog by <b>Ignis Flamescale</b>
 Deer Log messages by <b>@bane of Fun#6036</b>
@@ -165,9 +166,6 @@ Scat sprites
 Whisp
 Youko
 
-<b><u>Liongaming1:</b></u>
-Firefly
-
 <b><u>Magentasaur:</b></u>
 D.R.A.C.O.
 Scorch
@@ -178,6 +176,7 @@ Alraune
 Ants
 Warrior Ants
 Avians
+Badgers
 Bees
 Cockatrice
 Deer
@@ -198,6 +197,8 @@ Mantis
 Merfolk
 Monitors
 Raiju
+Renamon
+Ryan
 Sharks
 Singularity
 Skapa
@@ -238,10 +239,13 @@ Olivia
 <b><u>Tatltuae:</b></u>
 Aabayx
 Banner updates (w/ Wolfwar)
+Bird scat sprites
+Iliijiith
+Schiwardez OV Belly sprites
 Tatltuae
 Twisted Vine Updates
+Urine sprites
 Virae Ultimae
-Bird scat sprites
 
 <b><u>Wolfwar106:</b></u>
 Boom Bunnies
@@ -250,10 +254,12 @@ Hamsters
 Plate Armor
 RWU Mercenary Corp
 Xelhilde
+Sword alt sprites for maces on "default races"
 
 <b><u>Yonell:</b></u>
 Bears
 Viisels
+Seville
 
 
 [Old Graphics (now removed, but they helped guide the early stages, and were inspirations for their replacements):
@@ -315,12 +321,20 @@ Xelhilde
 <b><u>Supra:</b></u>
 Olivia
 
+<b><u>Legoshi:</b></u>
+Ryan
+
 <b><u>Zezmeril:</b></u>
 Skapa
 
-<b><u>Liongaming1:</b></u>
-Firefly
+<b><u>IronGelatin:</b></u>
+Nectar
 
+<b><u>Yonell:</b></u>
+Seville
+
+<b><u>Bandi Namco/Toei Animation:</b></u>
+Renamon
 <b><u>GAME FREAK/Creatures Inc./Nintendo:</b></u>
 Goodra
 Eevee, Anthro and Feral

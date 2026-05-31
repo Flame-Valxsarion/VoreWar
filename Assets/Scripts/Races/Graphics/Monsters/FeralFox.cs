@@ -62,6 +62,7 @@ class FeralFox : BlankSlate
         {
             unit.EyeType = 4;
         }
+        unit.TailType = State.Rand.Next(10);
     }
 	
 	internal override void SetBaseOffsets(Actor_Unit actor)
