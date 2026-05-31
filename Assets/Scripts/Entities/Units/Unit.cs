@@ -1057,6 +1057,24 @@ public class Unit
             FixedGear = true;
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RyanWeapon);
         }
+        else if (race == Race.Cherub || race == Race.SoulSprite)
+        {
+            try
+            {
+                FixedGear = false;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.CherubWeapon);
+            }
+            catch { }
+        }
+        else if (race == Race.Seraph)
+        {
+            try
+            {
+                FixedGear = false;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SeraphWeapon);
+            }
+            catch { }
+        }
         else
         {
             FixedGear = false;

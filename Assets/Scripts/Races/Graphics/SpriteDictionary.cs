@@ -348,6 +348,8 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] Ryan;
     public Sprite[] RyanVore;
     public Sprite[] Konane;
+    public Sprite[] Cherub;
+    public Sprite[] Seraph;
     
     [Header("Bosses")]
     public Sprite[] Abakhanskya;
@@ -429,6 +431,9 @@ public class SpriteDictionary : MonoBehaviour
     public Sprite[] DryadSprites5;
 
     public Sprite[] Cake;
+
+    public Sprite[] SoulSprite;
+    public Sprite[] AngelProjectile;
 
 
     [Header("Other")]

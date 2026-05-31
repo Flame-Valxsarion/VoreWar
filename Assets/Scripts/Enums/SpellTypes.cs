@@ -76,5 +76,6 @@
     ForkLightning = 117,
     Explode = 118,
     SweepingSwallow = 119,
+    DivineNova = 120,
 }
 

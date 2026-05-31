@@ -152,6 +152,9 @@ static class RaceParameters
     static readonly RaceTraits EarthDryad;
     static readonly RaceTraits RiverDryad;
     static readonly RaceTraits FungalDryad;
+    static readonly RaceTraits Cherub;
+    static readonly RaceTraits Seraph;
+    static readonly RaceTraits SoulSprite;
 
     static Unit tempUnit;
 
@@ -471,8 +474,6 @@ static class RaceParameters
                 return Trex;
             case Race.Utahraptor:
                 return Utahraptor;
-            case Race.Pudding:
-                return Pudding;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -592,7 +593,7 @@ static class RaceParameters
         {
             Traits.PackStrength,
             Traits.PackVoracity,
-			Traits.Tenacious,
+            Traits.Tenacious,
         },
             RaceDescription = "Natives of this realm, the Wolves have a history of hunting in packs extending beyond the crafting of their first weapons. While a lone Wolf can still be a worthy adversary, their true strength comes from working with their kin.",
         };
@@ -708,7 +709,7 @@ static class RaceParameters
             Traits.MagicResistance,
             Traits.AstralCall,
         },
-		RaceStats = new RaceStats()
+            RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 14),
                 Dexterity = new RaceStats.StatRange(6, 14),
@@ -784,7 +785,7 @@ static class RaceParameters
             Traits.Ravenous,
             Traits.Biter,
             Traits.DualStomach,
-			Traits.StrongGullet
+            Traits.StrongGullet
         },
             RaceDescription = "Natives to this realm, these legless beings were once the strongest and largest hunters of the land. The sudden emergence of many new species left the Lamia uncertain at first, but soon their dual stomachs won and they focused on testing the taste of the new arrivals.",
         };
@@ -3828,9 +3829,46 @@ static class RaceParameters
                 Traits.ExtraNutritious,
                 Traits.SoftBody,
                 Traits.GelatinousBody,
+        
 
             },
             RaceDescription = "After reciving news about a massacre involving oversized bake goods, a wizard decided to create a way to inform the populace of the dangers of voracious food monsters. What better way than to better prepare than to make more voracious, albeit weaker, food monsters?"
+        };
+
+
+        SoulSprite = new RaceTraits()
+        {
+            BodySize = 8,
+            StomachSize = 12,
+            FavoredStat = Stat.Mind,
+            HasTail = true,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
+            DeployCost = 1,
+            Upkeep = 3f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(2, 6),
+                Dexterity = new RaceStats.StatRange(4, 8),
+                Endurance = new RaceStats.StatRange(4, 8),
+                Mind = new RaceStats.StatRange(12, 16),
+                Will = new RaceStats.StatRange(10, 15),
+                Agility = new RaceStats.StatRange(6, 8),
+                Voracity = new RaceStats.StatRange(6, 10),
+                Stomach = new RaceStats.StatRange(10, 16),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.SlowMetabolism,
+                Traits.Flight,
+                Traits.ManaRich,
+                Traits.ExtraNutritious,
+                Traits.Charmer,
+                Traits.Temptation,
+        },
+        InnateSpells = new List<SpellTypes>()
+            { SpellTypes.Trance, },
+            RaceAI = RaceAI.ServantRace,
+            RaceDescription = "A relatively weak angelic being, created from the soul of a living creature purified by the higher-ranking angels. Soul Sprites act as the main workforce for the angels, and those who gain enough favor among their peers may ascend to higher ranks or even gain a chance to reincarnate to a new life... And it seems as of late, devouring their opponents on the battlefield is a lucrative means to gather said favor.",
         };
 
 
@@ -4199,7 +4237,7 @@ static class RaceParameters
             RaceDescription = "Erin belongs to a very rare species known as a Nyangel, the lovechild of an angel and a catgirl.  Thanks to this divine heritage they aremostly all incredible healers... But they're also incredibly tasty.  Every Nyangel has a unique trait to set them apart from eachother, and Erin is no exception to this rule.  Her quirk is total acid resistance, the perfect defense against the raveous predators of this realm.  That doesn't stop her from being devoured, however, and that is unfortunately an all-too-common outcome for the girl.  Regardless of how many times she ends up eaten, the loveable Nyangel still tries her best to heal those she can.",
         };
 
-        
+
 
         Salix = new RaceTraits()
         {
@@ -4407,7 +4445,7 @@ static class RaceParameters
             BodySize = 60,
             StomachSize = 40,
             FavoredStat = Stat.Voracity,
-            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore , VoreType.Unbirth },
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore, VoreType.Unbirth },
             ExpMultiplier = 2f,
             PowerAdjustment = 9f,
             DeployCost = 2,
@@ -4538,102 +4576,6 @@ static class RaceParameters
             RaceDescription = "An unnatural Umbreon from a different universe from the others. His body shape seems different than the Umbreons, Having a differently shaped head, digigrade legs, and a fox like appearance. He claims to come from a realm where the world was much more advanced, having been transported with what he calls a \"HND15\" some kind of \"handgun\" similar to the tarous' revolvers. Being from another realm these bullets are in short supply, forcing him to save the magazines and to forge new bullets to load into them. He also carries around a knife for backup, it seems extra sharp compared to the others of it's kind. Although he prefers to stick along side them, He claims to not be related to the Anthro Umbreons that roam around.",
         };
 
-        Nectar = new RaceTraits()
-        {
-            BodySize = 100,
-            StomachSize = 100,
-            FavoredStat = Stat.Mind,
-            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.BreastVore, VoreType.Unbirth },
-            ExpMultiplier = 7f,
-            PowerAdjustment = 15f,
-            DeployCost = 4,
-            Upkeep = 36f,
-            RaceStats = new RaceStats()
-            {
-                Strength = new RaceStats.StatRange(22, 30),
-                Dexterity = new RaceStats.StatRange(30, 45),
-                Endurance = new RaceStats.StatRange(22, 30),
-                Mind = new RaceStats.StatRange(32, 46),
-                Will = new RaceStats.StatRange(32, 46),
-                Agility = new RaceStats.StatRange(28, 34),
-                Voracity = new RaceStats.StatRange(26, 34),
-                Stomach = new RaceStats.StatRange(30, 45),
-            },
-            RacialTraits = new List<Traits>()
-        {
-                Traits.Flight,
-                Traits.Tenacious,
-                Traits.FastCaster,
-                Traits.BookEater,
-                Traits.MagicProwess,
-                Traits.RangedVore,
-        },
-            RaceDescription = "Nectar, one of the eleven sphinxes who created her world, was exiled after consuming too many of the inhabitants. Now, she roams the multiverse, searching for the tastiest snacks and shiniest treasures. Whenever she dies to a stronger foe, you can bet that she'll be back for revenge, sometimes decades or even centuries later. After all, cats are spiteful creatures, and Nectar has far more than 9 lives....",
-        };
-
-        Ryan = new RaceTraits()
-        {
-            BodySize = 20,
-            StomachSize = 20,
-            FavoredStat = Stat.Endurance,
-            HasTail = true,
-            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.CockVore },
-            ExpMultiplier = 2f,
-            PowerAdjustment = 5f,
-            DeployCost = 2,
-            Upkeep = 20f,
-            RaceStats = new RaceStats()
-            {
-                Strength = new RaceStats.StatRange(24, 32),
-                Dexterity = new RaceStats.StatRange(20, 24),
-                Endurance = new RaceStats.StatRange(24, 32),
-                Mind = new RaceStats.StatRange(20, 24),
-                Will = new RaceStats.StatRange(24, 32),
-                Agility = new RaceStats.StatRange(20, 24),
-                Voracity = new RaceStats.StatRange(24, 32),
-                Stomach = new RaceStats.StatRange(24, 32),
-            },
-            RacialTraits = new List<Traits>()
-        {
-                Traits.StrongMelee,
-                Traits.Pounce,
-                Traits.DoubleAttack,
-                Traits.Growth,
-                Traits.GiantSlayer,
-        },
-            RaceDescription = "A skilled warrior captain from the same world as the other Sergals. Strangely enough, not only does he look physically different from them, but he seems to hold some sort of resentment for them as well. He's an incredibly deadly frontline fighter, almost like he has been fighting in wars since birth. Many warriors, even whole companies have already fallen to either his polearm, or his voracious appetite. Needless to say: He seems to feel perfectly in his element here.",
-        };
-
-        Konane = new RaceTraits()
-        {
-            BodySize = 15,
-            StomachSize = 40,
-            FavoredStat = Stat.Stomach,
-            HasTail = true,
-            AllowedVoreTypes = new List<VoreType> { VoreType.Oral},
-            ExpMultiplier = 2f,
-            PowerAdjustment = 5f,
-            DeployCost = 2,
-            Upkeep = 20f,
-            RaceStats = new RaceStats()
-            {
-                Strength = new RaceStats.StatRange(20, 24),
-                Dexterity = new RaceStats.StatRange(8, 14),
-                Endurance = new RaceStats.StatRange(18, 26),
-                Mind = new RaceStats.StatRange(10, 13),
-                Will = new RaceStats.StatRange(20, 25),
-                Agility = new RaceStats.StatRange(16, 24),
-                Voracity = new RaceStats.StatRange(18, 24),
-                Stomach = new RaceStats.StatRange(16, 24),
-            },
-            RacialTraits = new List<Traits>()
-        {
-                Traits.Flight,
-                Traits.BornToMove,
-                ///Traits., Special move trait goes here. Add two actions to this trait
-        },
-            RaceDescription = "Some kind of black falcon/snow leopard mix. Oh no! He's hot!",
-        };
 
     }
 

@@ -382,6 +382,12 @@ static class LogUtilities
                 return GetRandomStringFrom("bare skinned", "pointy-eared", "knife-eared");
             case Race.Tatltuae:
                 return GetRandomStringFrom("black feathered", "rosemary flavored", "purple eyed", "slightly cowardly", "complaining", "hollow boned");
+            case Race.Cherub:
+                return GetRandomStringFrom("pink-furred", "ditzy", "angelic", "marshmallow-flavored");
+            case Race.Seraph:
+                return GetRandomStringFrom("blue-furred", "stoic", "angelic", "marshmallow-flavored", "formerly powerful");
+            case Race.SoulSprite:
+                return GetRandomStringFrom("glowy", "adorably scrumptious", "angelic", "gummi-textured", "marshmallow-flavored");
             default:
                 return "tasty";
         }
@@ -468,6 +474,12 @@ static class LogUtilities
                 return GetRandomStringFrom("humble", "cunning", "resourceful");
             case Race.Tatltuae:
                 return GetRandomStringFrom("black feathered", "chaotic", "purple eyed", "ominous", "unnerving", "omen-bringing");
+            case Race.Cherub:
+                return GetRandomStringFrom("pink-furred", "three eyed", "otherworldly", "divine");
+            case Race.Seraph:
+                return GetRandomStringFrom("blue-furred", "three eyed", "otherworldly", "divine", "aloof", "draconic", "ancient");
+            case Race.SoulSprite:
+                return GetRandomStringFrom("hungry little", "munchy midget", "otherworldly", "three-eyed", "greedily glowing", "unassumingly cute");
             default:
                 return "strong";
         }
@@ -628,6 +640,12 @@ static class LogUtilities
                 return GetRandomStringFrom("sphinx", "deity", "grand cat");
             case Race.Ryan:
                 return GetRandomStringFrom("sergal", "veteran", "captain");
+            case Race.Cherub:
+                return GetRandomStringFrom("angel", "holy beast", "angelic being", "cherubim");
+            case Race.Seraph:
+                return GetRandomStringFrom("angel", "holy dragon", "angelic being", "seraphim", "ancient one");
+            case Race.SoulSprite:
+                return GetRandomStringFrom("lesser-angel", "glowing soul", "angelic being", "sprite", "soul sprite");
             default:
                 return "creature";
         }

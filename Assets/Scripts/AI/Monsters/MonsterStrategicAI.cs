@@ -258,6 +258,24 @@ class MonsterStrategicAI : IStrategicAI
                     for (int i = 0; i < fungalCount; i++)
                         army.Units.Add(new Unit(empire.Side, Race.FungalDryad, RandXp(baseXp), true));
                 }
+                else if (empire.ReplacedRace == Race.SoulSprite)
+                {
+                    if (spawner.AddOnRace)
+                    {
+                        army.Units.Add(new Leader(empire.Side, Race.Seraph, RandXp(baseXp * 2)));
+                        for (int i = 1; i < count; i++)
+                        {
+                            army.Units.Add(new Unit(empire.Side, Race.SoulSprite, RandXp(baseXp), true));
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < count; i++)
+                        {
+                            army.Units.Add(new Unit(empire.Side, Race.SoulSprite, RandXp(baseXp), true));
+                        }
+                    }
+                }
                 else
                 {
                     for (int i = 0; i < count; i++)

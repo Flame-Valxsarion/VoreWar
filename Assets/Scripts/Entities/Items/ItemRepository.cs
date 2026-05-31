@@ -112,6 +112,8 @@ public enum SpecialItems
     RyanWeapon,
     KonaneWeapon,
     OoviKatWeapon,
+    CherubWeapon,
+    SeraphWeapon,
 }
 
 
@@ -303,6 +305,7 @@ public class ItemRepository
             new Weapon(name:"Utahraptor Claws", description:"Utahraptor Claws", cost:4, graphic:0, damage:6, range:1),
             new Weapon(name:"Exomatter Pulse", description:"A destructive pulse of theoretical particles that sit on the border between being real and not. Harmless if you aren't the target... Very harmful if you are.", cost:4, graphic:0, damage:5, range:1),
             new Weapon(name:"Pudding Jaws", description:"Slimy and Sweet", cost:4, graphic:0, damage:3, range:1),
+            new Weapon(name:"Soul Spark", description:"Magical energy drawn from the soul, capable of being fired at range in relatively weak bursts.", cost:4, graphic:0, damage:5, range:5, omniWeapon:true, magicWeapon: true, lockedItem:true),
         };
 
         specialItems = new List<Item>()
@@ -339,6 +342,9 @@ public class ItemRepository
             new Weapon(name:"Captain's Polearm", description:"A trusty polearm that has seen many battles, and slain many more.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
             new Weapon(name:"Focused Fist", description:"The earliest of weapons. Nothing beats a good punch to the face.", cost:4, graphic:0, damage:8, range:1, accuracyModifier: 2.1f, lockedItem:true),
             new Weapon(name:"Magic Blossom", description:"A magic seed that pops violently on impact.", cost:4, graphic:0, damage:4, range:3, omniWeapon:true, lockedItem:true),
+            new Weapon(name:"Cherubic Light", description:"The magical energy that forms Cherub's halo can be compressed into powerful beams of light.", cost:4, graphic:0, damage:7, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
+            new Weapon(name:"Seraphim Soulflame", description:"Seraph is capable of shaping magical energy into a flame that burns both body and soul.", cost:4, graphic:0, damage:9, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
+
         };
 
 

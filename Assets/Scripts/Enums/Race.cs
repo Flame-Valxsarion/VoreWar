@@ -39,7 +39,7 @@
     Bears = 34,
     Umbreon = 35,
     Lupine = 36,
-    Jackals  = 37,
+    Jackals = 37,
     Ghosts = 38,
     DemiDragons = 39,
     Yordles = 40,
@@ -127,6 +127,7 @@
     Utahraptor = 160,
     Iliijiith = 161,
     Pudding = 162,
+    SoulSprite = 163,
 
     Selicia = 170,
     Vision = 171,
@@ -153,4 +154,6 @@
     Nectar = 192,
     Ryan = 193,
     Konane = 194,
+    Cherub = 195,
+    Seraph = 196,
 }

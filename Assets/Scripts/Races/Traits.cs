@@ -361,6 +361,13 @@ static class TraitList
         [Traits.SlowerMetabolism] = new Booster("Unit digests and absorbs prey very slowly. (25%)", (s) => { s.Outgoing.AbsorptionRate *= 0.25f; s.Outgoing.DigestionRate *= 0.25f; }),
         [Traits.QueenOfFrost] = new Booster("<b>This unit is a fierce dragon of ice, possessing abilities and traits reflecting that status.</b> \n\n\nTakes <b>20%</b> less damage from Ice attacks. \nMay attempt <b>2</b> Vore actions per turn.  \nMay attempt <b>2</b> Normal attacks. \nCarries prey with no penalty to speed. \nPrey has a tough time escaping this predator's insides. (<b>50%</b> of normal odds)", (s) => { s.VoreAttacks += 1; s.MeleeAttacks += 1; s.Outgoing.ChanceToEscape *= 0.5f; s.SpeedLossFromWeightMultiplier = 0; s.DodgeLossFromWeightMultiplier = 0.2f; s.IceDamageTaken *= .8f; }),
         [Traits.AcellularBody] = new Booster("This unit has a non-cellular makeup causing them to provide less sustenance as prey and be impossible to convert by races without the same trait. Also has a hard time converting other races to its race. (50% convert rate and can only switch the prey's side unless they have the same trait)", (s) => { s.Outgoing.Nutrition *= 0.25f; }),
+        [Traits.DestroyingAngel] = new Booster("<b>This unit is an ancient, otherworldy being, who's magic permeates every aspect of their form. Their body processes and circulates magical energies perfectly, but has trouble handling physical matter.</b> \n\nMay cast <b>2</b> spells per turn, with each spell being <b>20%</b> more accurate. \nDrains MP from absorbing prey, sacrificing <b>50%</b> of absorption healing, as well as digesting and absorbing prey <b>5 times slower</b>. \n Their ancient nature also makes learning new things more troublesome, requiring <b>50%</b> more experience to level up. \n(Cheat Trait)", (s) =>
+        {
+            s.SpellAttacks += 1; s.Outgoing.MagicShift -= 0.2f;
+            s.Incoming.ManaAbsorbHundreths += 50; s.Incoming.Nutrition *= .5f;
+            s.Outgoing.AbsorptionRate *= 0.2f; s.Outgoing.DigestionRate *= 0.2f;
+            s.ExpRequired *= 1.5f;
+        }),
     };
 
 }

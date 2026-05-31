@@ -441,6 +441,8 @@ public class ContentSettings : MonoBehaviour
                     spawner.AddonRace.GetComponent<DisplayTooltip>().value = 209;
                 else if (race == Race.Monitors)
                     spawner.AddonRace.GetComponent<DisplayTooltip>().value = 232;
+                else if (race == Race.SoulSprite)
+                    spawner.AddonRace.GetComponent<DisplayTooltip>().value = 347;
                 else
                     spawner.AddonRace.gameObject.SetActive(false);
             }
@@ -599,6 +601,9 @@ public class ContentSettings : MonoBehaviour
                 tooltip.value = 343;
                 break;
             case Race.Iliijiith:
+                tooltip.value = 346;
+                break;
+            case Race.SoulSprite:
                 tooltip.value = 346;
                 break;
         }

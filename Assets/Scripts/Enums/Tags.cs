@@ -392,6 +392,8 @@ public enum Traits
     Competitive = 197,
     /// <summary></summary>
     QueenOfFrost = 198,
+    /// <summary>Seraph's Unique trait, made to adjust stats and reduce clutter.</summary>
+    DestroyingAngel = 199,
 
     /// <summary>Melee damage is increased by 100%. Damage is divided by the amount of adjacent enemy units.</summary>
     Duelist = 500,

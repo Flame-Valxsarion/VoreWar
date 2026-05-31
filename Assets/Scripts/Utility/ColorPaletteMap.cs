@@ -141,6 +141,7 @@ public static class ColorPaletteMap
         OoviKatMain,
         OoviKatBright,
         PuddingSkin,
+        SoulSpriteSkin,
     }
 
     static Dictionary<SwapType, List<ColorSwapPalette>> Swaps;
@@ -328,6 +329,7 @@ public static class ColorPaletteMap
         List<ColorSwapPalette> OoviKatMainSwaps = WireUp(SwapType.OoviKatMain);
         List<ColorSwapPalette> OoviKatBrightSwaps = WireUp(SwapType.OoviKatBright);
         List<ColorSwapPalette> PuddingSkinSwaps = WireUp(SwapType.PuddingSkin);
+        List<ColorSwapPalette> SoulSpriteSkinSwaps = WireUp(SwapType.SoulSpriteSkin);
 
         int[] NormalIndexes = { 81, 153, 198, 229, 255 };
         Texture2D map = State.GameManager.PaletteDictionary.SimpleHair;
@@ -2799,6 +2801,22 @@ public static class ColorPaletteMap
             };
             ColorSwapPalette swap = new ColorSwapPalette(swapDict);
             IliijiithAttackColorSwaps.Add(swap);
+        }
+        map = State.GameManager.PaletteDictionary.SoulSpriteSkin;
+        for (int pixelY = 0; pixelY < map.height; pixelY++)
+        {
+            Dictionary<int, Color> swapDict = new Dictionary<int, Color>
+            {
+                [16] = map.GetPixel(6, pixelY),
+                [24] = map.GetPixel(5, pixelY),
+                [56] = map.GetPixel(4, pixelY),
+                [104] = map.GetPixel(3, pixelY),
+                [151] = map.GetPixel(2, pixelY),
+                [215] = map.GetPixel(1, pixelY),
+                [249] = map.GetPixel(0, pixelY)
+            };
+            ColorSwapPalette swap = new ColorSwapPalette(swapDict);
+            SoulSpriteSkinSwaps.Add(swap);
         }
     }
 

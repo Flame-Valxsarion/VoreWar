@@ -105,4 +105,5 @@ public class PaletteDictionary : MonoBehaviour
     public Texture2D OoviKatMain;
     public Texture2D OoviKatBright;
     public Texture2D PuddingSkin;
+    public Texture2D SoulSpriteSkin;
 }

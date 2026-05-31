@@ -123,6 +123,7 @@
     static internal Utahraptor Utahraptor = new Utahraptor();
     static internal Iliijiith Iliijiith = new Iliijiith();
     static internal Pudding Pudding = new Pudding();
+    static internal SoulSprite SoulSprite = new SoulSprite();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();
@@ -155,6 +156,8 @@
     static internal Nectar Nectar = new Nectar();
     static internal Ryan Ryan = new Ryan();
     static internal Konane Konane = new Konane();
+    static internal Cherub Cherub = new Cherub();
+    static internal Seraph Seraph = new Seraph();
 
 
     static internal DefaultRaceData GetRace(Unit unit)
@@ -474,6 +477,12 @@
                 return Iliijiith;
             case Race.Pudding:
                 return Pudding;
+            case Race.SoulSprite:
+                return SoulSprite;
+            case Race.Cherub:
+                return Cherub;
+            case Race.Seraph:
+                return Seraph;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;
