@@ -871,10 +871,6 @@ public class HoveringTooltip : MonoBehaviour
                 return "Unit's melee attacks also make an attack on units adjacent to the target at 33% damage.";
             case Traits.InvigoratingEscape:
                 return "Unit does not suffer AP reduction when escaping.";
-            case Traits.WildFury:
-                return "Unarmed but not harmless! Unit can melee attack twice if they have no weapon equipped.";
-            case Traits.CloseCall:
-                return "Unit will flee combat upon fatal strikes from weapons or spells with 1 HP rather than dying. (unit will rejoin if the army wins, otherwise sets off for the closest town) ";
         }  
         return "<b>This trait needs a tooltip!</b>";
     }
@@ -910,6 +906,12 @@ public class HoveringTooltip : MonoBehaviour
                 return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Valient(End)</b>: When this unit takes damage over 10% of its current health, the excess is reduced by by 50%.";
             case Traits.Multifaceted when unit.GetHighestStatIndex() == 7:
                 return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Gloomy(Stm)</b>: This unit inflicts stacking Lethargy on consumed enemies, reducing their offensive stats for 3 turns.";
+
+        }
+            case Traits.WildFury:
+                return "Unarmed but not harmless! Unit can melee attack twice if they have no weapon equipped.";
+            case Traits.CloseCall:
+                return "Unit will flee combat upon fatal strikes from weapons or spells with 1 HP rather than dying. (unit will rejoin if the army wins, otherwise sets off for the closest town) ";
         }  
         return "<b>This trait needs a tooltip!</b>";
     }

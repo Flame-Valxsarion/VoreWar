@@ -10,7 +10,7 @@ using UnityEngine;
 public static class State
 {
     static int saveErrors = 0;
-    public const string Version = "44E";
+    public const string Version = "44D";
     public static World World;
     public static Rand Rand = new Rand();
     public static NameGenerator NameGen;
@@ -914,7 +914,6 @@ public static class State
                 Config.World.TailWeight = 40;
                 Config.World.UnbirthWeight = 40;
                 Config.World.AnalWeight = 40;
-                Config.World.BladderWeight = 40;
             }
 
             if (version < 28 + 1)

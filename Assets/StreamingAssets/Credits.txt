@@ -84,8 +84,6 @@ Feral Slime
 Jackal
 Mainland Elves
 Mice
-Oovikat
-Pudding!
 Salix
 Volcanic Tileset
 
@@ -183,7 +181,6 @@ Bees
 Cockatrice
 Deer
 Demi Bats
-Demi Dragons
 Driders
 Earthworms
 Feral Foxes
@@ -195,7 +192,6 @@ Gnolls
 Gryphons
 Hippos
 Komodos
-Konane
 Lupine
 Mantis
 Merfolk
@@ -216,19 +212,13 @@ T-Rex
 Utahraptors
 Vargul
 Vipers
-Yordles
 
 <b><u>Novoyetelo:</b></u>
 Abakhanskya
 Cierihaka
 
-<b><u>NemoTheAxolotl:</b></u>
-Cherub
-Soul Sprites
-Seraph
-
 <b><u>Operation Omneon:</b></u>
-<i>Tatltuae</i>
+<i>Lion/Tatltuae</i>
 Eevee
 Umbreon
 Equaleon
@@ -297,7 +287,6 @@ Zera
 Zoey
 Feit
 Taraluxia
-Konane
 
 <b><u>Magentasaur:</b></u>
 Scorch
@@ -344,10 +333,6 @@ Nectar
 <b><u>Yonell:</b></u>
 Seville
 
-<b><u>NemoTheAxolotl</b></u>
-Cherub
-Seraph
-
 <b><u>Bandi Namco/Toei Animation:</b></u>
 Renamon
 <b><u>GAME FREAK/Creatures Inc./Nintendo:</b></u>
@@ -359,7 +344,7 @@ Umbreon, Anthro and Feral
 
 <b><u><i>Note from Ignis</b></u></i> 
 I know I'm missing a bunch of stuff 
-as this game is eight years old now and I can 
+as this game is seven years old now and I can 
 only recall so much information on my own.
 I'm especially unclear on who wrote what log messages
 Or who wrote the events for that matter.
