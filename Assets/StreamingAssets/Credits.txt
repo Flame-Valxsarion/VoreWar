@@ -84,6 +84,8 @@ Feral Slime
 Jackal
 Mainland Elves
 Mice
+OoviKat
+Pudding
 Salix
 Volcanic Tileset
 
@@ -181,6 +183,7 @@ Bees
 Cockatrice
 Deer
 Demi Bats
+Demi Dragons
 Driders
 Earthworms
 Feral Foxes
@@ -192,6 +195,7 @@ Gnolls
 Gryphons
 Hippos
 Komodos
+Konane
 Lupine
 Mantis
 Merfolk
@@ -212,10 +216,16 @@ T-Rex
 Utahraptors
 Vargul
 Vipers
+Yordel
 
 <b><u>Novoyetelo:</b></u>
 Abakhanskya
 Cierihaka
+
+<b><u>NemoTheAxolotl:</b></u>
+Cherub
+Soul Sprites
+Seraph
 
 <b><u>Operation Omneon:</b></u>
 <i>Lion/Tatltuae</i>
@@ -333,8 +343,13 @@ Nectar
 <b><u>Yonell:</b></u>
 Seville
 
+<b><u>NemoTheAxolotl:</b></u>
+Cherub
+Seraph
+
 <b><u>Bandi Namco/Toei Animation:</b></u>
 Renamon
+
 <b><u>GAME FREAK/Creatures Inc./Nintendo:</b></u>
 Goodra
 Eevee, Anthro and Feral

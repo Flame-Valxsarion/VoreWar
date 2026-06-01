@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
 
 public static class State
 {
     static int saveErrors = 0;
-    public const string Version = "44D";
+    public const string Version = "44E";
     public static World World;
     public static Rand Rand = new Rand();
     public static NameGenerator NameGen;
@@ -914,6 +915,7 @@ public static class State
                 Config.World.TailWeight = 40;
                 Config.World.UnbirthWeight = 40;
                 Config.World.AnalWeight = 40;
+                Config.World.BladderWeight = 40;
             }
 
             if (version < 28 + 1)
