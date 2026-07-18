@@ -69438,7 +69438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30.000244}
+  m_AnchoredPosition: {x: 0, y: -30.000275}
   m_SizeDelta: {x: 0, y: -60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &343006846
@@ -234812,8 +234812,8 @@ MonoBehaviour:
     Matrons\r\n\r\n<u><b>Ignis Flamescale</b></u>\r\nLizard outfits\r\nLizard UB/AV
     pose\r\nSergals\r\n\r\n<b><u>Inferno The Dragon:</b></u>\r\nFeral Orcas\r\n\r\n<b><u>Komaru:</b></u>\r\nScat
     sprites\r\n\r\n<b><u>KuroTenko:</b></u>\r\nWhisp\r\nYouko\r\n\r\n<b><u>Magentasaur:</b></u>\r\nD.R.A.C.O.\r\nScorch\r\nVision\r\n\r\n<b><u>Micadi:</b></u>\r\nAlraune\r\nAnts\r\nWarrior
-    Ants\r\nAvians\r\nBadgers\r\nBees\r\nCockatrice\r\nDeer\r\nDemi Bats\r\nDemi Dragons\r\nDriders\r\nEarthworms\r\nFeral
-    Foxes\r\nFeral Lizards\r\nFeit\r\nFrogs\r\nGazelle\r\nGnolls\r\nGryphons\r\nHippos\r\nKomodos\r\nKonane\r\nLupine\r\nMantis\r\nMerfolk\r\nMonitors\r\nRaiju\r\nRenamon\r\nRyan\r\nSharks\r\nSingularity\r\nSkapa\r\nSlugs\r\nSmudger\r\nSpaceRoach\r\nTaraluxia\r\nTerminids\r\nTerrorbirds\r\nT-Rex\r\nUtahraptors\r\nVargul\r\nVipers\r\nYordel\r\n\r\n<b><u>Novoyetelo:</b></u>\r\nAbakhanskya\r\nCierihaka\r\n\r\n<b><u>NemoTheAxolotl:</b></u>\r\nCherub\r\nSoul
+    Ants\r\nAvians\r\nBadgers\r\nBees\r\nBlack Widows\r\nCockatrice\r\nDeer\r\nDemi
+    Bats\r\nDemi Dragons\r\nDriders\r\nEarthworms\r\nFeral Foxes\r\nFeral Lizards\r\nFeit\r\nFrogs\r\nGazelle\r\nGnolls\r\nGryphons\r\nHippos\r\nKomodos\r\nKonane\r\nLupine\r\nMantis\r\nMerfolk\r\nMonitors\r\nRaiju\r\nRenamon\r\nRyan\r\nSharks\r\nSingularity\r\nSkapa\r\nSlugs\r\nSmudger\r\nSpaceRoach\r\nTaraluxia\r\nTerminids\r\nTerrorbirds\r\nT-Rex\r\nUtahraptors\r\nVargul\r\nVipers\r\nYordel\r\n\r\n<b><u>Novoyetelo:</b></u>\r\nAbakhanskya\r\nCierihaka\r\n\r\n<b><u>NemoTheAxolotl:</b></u>\r\nCherub\r\nSoul
     Sprites\r\nSeraph\r\n\r\n<b><u>Operation Omneon:</b></u>\r\n<i>Tatltuae</i>\r\nEevee\r\nUmbreon\r\nEqualeon\r\nFeral
     Eevee\r\nFeral Umbreon\r\nFeral Equaleon \r\n\r\n<b><u>PotatoFarmer:</b></u>\r\nDew
     Sprites\r\nFeral Frogs\r\n\r\n<b><u>Sheights:</b></u>\r\nGoodra\r\n\r\n<b><u>Supra:</b></u>\r\nOlivia\r\n\r\n<b><u>Tatltuae:</b></u>\r\nAabayx\r\nBanner

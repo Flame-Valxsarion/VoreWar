@@ -856,7 +856,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.FocusedDodge:
                 return "Unit gains 20% increased dodge. This bonus is disabled for 3 turns after taking damage.";
             case Traits.BlessingOfNature:
-                return "This unit heals any unit that buffs it, equal to 5% of Endurance every turn while the buff persists. This unit gives 'Mendinig' to an ally within 2 spaces every 4th turn, duration scaling with level.";
+                return "This unit heals any unit that buffs it, equal to 5% of Endurance every turn while the buff persists. This unit gives 'Mending' to an ally within 2 spaces every 4th turn, duration scaling with level.";
             case Traits.BlessingOfEarth:
                 return "This unit grants barrier to any unit that buffs it, equal to 10% of Will every turn while the buff persists. This unit gives 'Shield' to an ally within 2 spaces every other turn, duration scaling with level.";
             case Traits.BlessingOfWater:
