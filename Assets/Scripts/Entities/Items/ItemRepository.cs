@@ -258,7 +258,7 @@ public class ItemRepository
             new Weapon(name:"Voilin Jaws", description:"Jaws", cost:4, graphic:0, damage:3, range:1),
             new Weapon(name:"Bat Jaws", description:"Jaws", cost:4, graphic:0, damage:3, range:1),
             new Weapon(name:"Frog Tongue", description:"Tongue", cost:4, graphic:0, damage:6, range:1),
-            new Weapon(name:"Dragon Claws", description:"Claws", cost:4, graphic:0, damage:6, range:1),
+            new Weapon(name:"Dragon Claws", description:"Claws", cost:4, graphic:0, damage:8, range:1),
             new Weapon(name:"Dragonfly Mandibles", description:"Mandibles", cost:4, graphic:0, damage:3, range:1),
             new Weapon(name:"Plant Bite", description:"Bite", cost:4, graphic:0, damage:5, range:1),
             new Weapon(name:"Fairy Spark", description:"Magical Attack", cost:4, graphic:0, damage:5, range:5, omniWeapon: true, magicWeapon: true),

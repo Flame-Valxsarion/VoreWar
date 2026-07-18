@@ -613,11 +613,12 @@ static class SpellList
             Description = "Deals damage over time, can not kill targets",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy },
             Range = new Range(8),
-            Duration = (a, t) => 4 + a.Unit.GetStat(Stat.Mind) / 5,
-            Effect = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 20,
+            Duration = (a, t) => 3 + a.Unit.GetStat(Stat.Mind) / 15,
+            Effect = (a, t) => 3 + a.Unit.GetStat(Stat.Mind) / 9,
             Type = StatusEffectType.Poisoned,
             Tier = 2,
             Resistable = true,
+            ResistanceMult = .85f,
             OnExecute = (a, t) =>
             {
                 if (a.CastStatusSpell(Poison, t))

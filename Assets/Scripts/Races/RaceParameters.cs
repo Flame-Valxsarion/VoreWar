@@ -2356,6 +2356,7 @@ static class RaceParameters
         {
                 Traits.Flight,
                 Traits.Maul,
+                Traits.StrongGullet,
                 Traits.Greedy,
                 Traits.Cruel,
                 Traits.AdeptLearner,
@@ -4744,7 +4745,7 @@ static class RaceParameters
         {
             BodySize = 15,
             StomachSize = 50,
-            FavoredStat = Stat.Stomach,
+            FavoredStat = Stat.Agility,
             HasTail = true,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
             ExpMultiplier = 2f,
@@ -4772,7 +4773,7 @@ static class RaceParameters
                 Traits.StunningStrike,
                 ///Traits., Special move trait goes here. Add two actions to this trait
         },
-            RaceDescription = "Some kind of black falcon/snow leopard mix. Oh no! He's hot!",
+            RaceDescription = "A tall, purple, intense looking griffin. He seems to be a falcon and snow leopard mix. According to himself, Konane is a monk, having trained for years with a vore martial art monastery. After learning all he could he would duel everyone at said monastery, eventually consuming them all. Now he is a terrifyingly fast anthro griffin with immense capacity and powerful stunning punches. Now he is available to hire for a price, as long as there are numerous or large prey for Konane to match himself against. He seems to get uncomfortable and his stomach growls around draconic critters.  The author of these notes would also like to convey how attractive he is, in no uncertain terms!",
         };
         Cherub = new RaceTraits()
         {

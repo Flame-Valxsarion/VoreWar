@@ -173,7 +173,7 @@ class MonsterStrategicAI : IStrategicAI
                 }
                 else if (empire.ReplacedRace == Race.Dragon)
                 {
-                    army.Units.Add(new Unit(empire.Side, Race.Dragon, RandXp(baseXp), true));
+                    army.Units.Add(new Leader(empire.Side, Race.Dragon, RandXp(baseXp * 2)));
                     for (int i = 1; i < count; i++)
                     {
                         Unit unit = new Unit(empire.Side, Race.Kobolds, RandXp(baseXp), true);

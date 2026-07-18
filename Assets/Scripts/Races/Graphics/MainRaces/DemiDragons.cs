@@ -86,7 +86,7 @@ class DemiDragons : DefaultRaceData
         SecondaryBreasts = new SpriteExtraInfo(17, SecondaryBreastsSprite, null, (s) => FurryColorInner(s));
         BreastShadow = null;
         Dick = new SpriteExtraInfo(11, DickSprite, null, (s) => FurryColorInner(s, true));
-        Balls = new SpriteExtraInfo(10, BallsSprite, null, (s) => FurryColorInner(s, true));
+        Balls = new SpriteExtraInfo(10, BallsSprite, null, (s) => FurryColorInner(s, false));
         Pussy = new SpriteExtraInfo(4, PussySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.ExtraColor3));
 
 
@@ -1741,11 +1741,11 @@ class DemiDragons : DefaultRaceData
                     Dick.layer = 20;
                     if (actor.IsCockVoring)
                     {
-                        return SpritesCustomisation2[114 + actor.Unit.DickSize];
+                        return SpritesCustomisation2[106 + actor.Unit.DickSize];
                     }
                     else
                     {
-                        return SpritesCustomisation2[98 + actor.Unit.DickSize];
+                        return SpritesCustomisation2[90 + actor.Unit.DickSize];
                     }
                 }
                 else
@@ -1753,11 +1753,11 @@ class DemiDragons : DefaultRaceData
                     Dick.layer = 13;
                     if (actor.IsCockVoring)
                     {
-                        return SpritesCustomisation2[106 + actor.Unit.DickSize];
+                        return SpritesCustomisation2[114 + actor.Unit.DickSize];
                     }
                     else
                     {
-                        return SpritesCustomisation2[90 + actor.Unit.DickSize];
+                        return SpritesCustomisation2[98 + actor.Unit.DickSize];
                     }
                 }
             }
