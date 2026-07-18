@@ -165370,6 +165370,7 @@ MonoBehaviour:
   - {fileID: 21300152, guid: 1f0fc73ddeacd2b4ca7d8ddcb1265b68, type: 3}
   - {fileID: 21300154, guid: 1f0fc73ddeacd2b4ca7d8ddcb1265b68, type: 3}
   - {fileID: 21300156, guid: 1f0fc73ddeacd2b4ca7d8ddcb1265b68, type: 3}
+  - {fileID: 21300158, guid: 1f0fc73ddeacd2b4ca7d8ddcb1265b68, type: 3}
   Buildings:
   - {fileID: 21300004, guid: 6d87858f95d3cfd4cbd74ca5230c4475, type: 3}
   - {fileID: 21300006, guid: 6d87858f95d3cfd4cbd74ca5230c4475, type: 3}

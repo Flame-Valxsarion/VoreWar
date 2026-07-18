@@ -876,7 +876,8 @@ public class InfoPanel
                     }
                 }
             }
-
+            if (Config.CheatUnitEditorEnabled)
+                sb.AppendLine("<color=#AB5200ff>UnitEditor</color>");
             if (actor != null)
             {
                 if (actor.Unit.EquippedPotions != null)
@@ -896,8 +897,8 @@ public class InfoPanel
                     UnitInfoPanel.UnitTagHoverImage.gameObject.SetActive(true);
                 else
                     UnitInfoPanel.UnitTagHoverImage.gameObject.SetActive(false);
-                if (Config.CheatUnitEditorEnabled)
-                    sb.AppendLine("<color=#AB5200ff>UnitEditor</color>");
+                //if (Config.CheatUnitEditorEnabled)
+                    //sb.AppendLine("<color=#AB5200ff>UnitEditor</color>");
             }
             else
             {
