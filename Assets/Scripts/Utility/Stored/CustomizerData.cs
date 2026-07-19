@@ -79,6 +79,8 @@ class CustomizerData
     [OdinSerialize]
     public int EarType;
     [OdinSerialize]
+    public int BeardStyle;
+    [OdinSerialize]
     public int BodyAccentType1;
     [OdinSerialize]
     public int BodyAccentType2;
@@ -145,6 +147,8 @@ class CustomizerData
         TailType = unit.TailType;
         FurType = unit.FurType;
         EarType = unit.EarType;
+        BeardStyle = unit.BeardStyle;
+
         BodyAccentType1 = unit.BodyAccentType1;
         BodyAccentType2 = unit.BodyAccentType2;
         BodyAccentType3 = unit.BodyAccentType3;
@@ -201,6 +205,8 @@ class CustomizerData
         unit.TailType = TailType;
         unit.FurType = FurType;
         unit.EarType = EarType;
+        unit.BeardStyle = BeardStyle;
+
         unit.BodyAccentType1 = BodyAccentType1;
         unit.BodyAccentType2 = BodyAccentType2;
         unit.BodyAccentType3 = BodyAccentType3;

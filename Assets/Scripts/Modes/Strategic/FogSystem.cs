@@ -58,6 +58,8 @@ class FogSystem
         }
         foreach (ConstructibleBuilding building in State.World.Constructibles)
         {
+            if (building == null || building.Owner == null)
+                continue;
             if (building.Owner.IsAlly(playerEmpire) || (State.World.IsNight && Config.DayNightCosmetic && !Config.FogOfWar))
             {
                 if (building.enabled)

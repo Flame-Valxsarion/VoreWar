@@ -383,12 +383,31 @@ static class LogUtilities
                 return GetRandomStringFrom("bare skinned", "pointy-eared", "knife-eared");
             case Race.Tatltuae:
                 return GetRandomStringFrom("black feathered", "rosemary flavored", "purple eyed", "slightly cowardly", "complaining", "hollow boned");
+            case Race.Yordles:
+                string personality_based1 = "";
+                string personality_based2 = "";
+                string personality_based3 = "";
+                switch (unit.GetHighestStatIndex())
+                {
+                    case 0: personality_based1 = "violent"; personality_based2 = "aggressive"; personality_based3 = "yelling"; break; // Violent
+                    case 1: personality_based1 = "excitable"; personality_based2 = "fast talking"; personality_based3 = "optimistic"; break; // Excitable
+                    case 2: personality_based1 = "intrepid"; personality_based2 = "convoluted"; personality_based3 = "yapping"; break; // Intrepid
+                    case 3: personality_based1 = "playful"; personality_based2 = "giggling"; personality_based3 = "tricky"; break; // Playful
+                    case 4: personality_based1 = "whimsical"; personality_based2 = "strange"; personality_based3 = "purple tasting"; break; // Whimsical
+                    case 5: personality_based1 = "entropic"; personality_based2 = "potentially evil"; personality_based3 = "mysterious"; break; // Entropic
+                    case 6: personality_based1 = "valient"; personality_based2 = "heroic"; personality_based3 = "durable"; break; // Valient
+                    case 7: personality_based1 = "gloomy"; personality_based2 = "aloof"; personality_based3 = "bored"; break; // Gloomy
+                    default: personality_based1 = ""; personality_based2 = ""; personality_based3 = ""; break;
+                }
+                return GetRandomStringFrom("small", "fluffy", personality_based1, personality_based2, personality_based3);
             case Race.Cherub:
                 return GetRandomStringFrom("pink-furred", "ditzy", "angelic", "marshmallow-flavored");
             case Race.Seraph:
                 return GetRandomStringFrom("blue-furred", "stoic", "angelic", "marshmallow-flavored", "formerly powerful");
             case Race.SoulSprite:
                 return GetRandomStringFrom("glowy", "adorably scrumptious", "angelic", "gummi-textured", "marshmallow-flavored");
+            case Race.Pudding:
+                return GetRandomStringFrom("jiggly", "wobbling", "sweet", "calorie-dense", "delicious");
             default:
                 return "tasty";
         }
@@ -653,6 +672,10 @@ static class LogUtilities
                 return GetRandomStringFrom("badger", GetGenderString(unit, "sow", "boar", "badger"), "mustelid");
             case Race.Draconians:
                 return GetRandomStringFrom("draconian", GetGenderString(unit, "dragoness", "dragon", "draconian"), "draconic", "demi-dragon");
+            case Race.Yordles:
+                return GetRandomStringFrom("yordle", "fluff ball", "spirit", "fluff");
+            case Race.Pudding:
+                return GetRandomStringFrom("pudding", "animated dessert", "flan", "creature");
             default:
                 return "creature";
         }

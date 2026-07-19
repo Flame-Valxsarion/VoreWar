@@ -2911,17 +2911,6 @@ public class PredatorComponent
         {
             return false;
         }
-        if (unit.HasTrait(Traits.SerialSwallower))
-        {
-            if (unit.GetStatusEffect(StatusEffectType.Gorging) != null)
-            {
-                unit.ApplyStatusEffect(StatusEffectType.Gorging, unit.GetStatusEffect(StatusEffectType.Gorging).Strength + 1, 2);
-            }
-            else
-            {
-                unit.ApplyStatusEffect(StatusEffectType.Gorging, 1, 2);
-            }
-        }
         if (target.Unit == unit)
             return false;
         if (unit.CanVore(preyType) != CanVore(preyType, target))
@@ -2982,6 +2971,17 @@ public class PredatorComponent
                     foreach (Actor_Unit victim in TacticalUtilities.UnitsWithinTiles(actor.Position, 3).Where(s => s.Unit.IsEnemyOfSide(unit.Side)))
                     {
                         victim.Unit.ApplyStatusEffect(StatusEffectType.Shaken, 0.2f, 3);
+                    }
+                }
+                if (unit.HasTrait(Traits.SerialSwallower))
+                {
+                    if (unit.GetStatusEffect(StatusEffectType.Gorging) != null)
+                    {
+                        unit.ApplyStatusEffect(StatusEffectType.Gorging, unit.GetStatusEffect(StatusEffectType.Gorging).Strength + 1, 2);
+                    }
+                    else
+                    {
+                        unit.ApplyStatusEffect(StatusEffectType.Gorging, 1, 2);
                     }
                 }
             }
