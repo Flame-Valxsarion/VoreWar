@@ -1763,12 +1763,12 @@ static class RaceParameters
 
         OoviKat = new RaceTraits()
         {
-            BodySize = 15,
-            StomachSize = 20,
+            BodySize = 12,
+            StomachSize = 15,
             HasTail = true,
             FavoredStat = Stat.Strength,
             DeployCost = 1,
-            Upkeep = 15f,
+            Upkeep = 10f,
             PowerAdjustment = 1.4f,
             RaceStats = new RaceStats()
             {
@@ -3942,7 +3942,7 @@ static class RaceParameters
         SoulSprite = new RaceTraits()
         {
             BodySize = 8,
-            StomachSize = 12,
+            StomachSize = 20,
             FavoredStat = Stat.Mind,
             HasTail = true,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
@@ -3957,7 +3957,7 @@ static class RaceParameters
                 Will = new RaceStats.StatRange(10, 15),
                 Agility = new RaceStats.StatRange(6, 8),
                 Voracity = new RaceStats.StatRange(6, 10),
-                Stomach = new RaceStats.StatRange(20, 26),
+                Stomach = new RaceStats.StatRange(12, 16),
             },
             RacialTraits = new List<Traits>()
         {
