@@ -342,12 +342,12 @@ public class ItemRepository
             new Weapon(name:"Witch's fangs", description:"Imbued with malice, coursing with vile venom, would make for great daggers~", cost:4, graphic:0, damage:8, range:1, lockedItem:true),
             new Accessory(name:"Pendant of vicious spirit", description:"Imbued with resentment, coursing with visceral curses bound over years of careful weaving and knotting.", cost:6, changedStat:(int)Stat.Voracity, statBonus:10 ),
             new Weapon(name:"Nectar's Claws", description:"Large razor sharp sphinx claws, more than capable of leaving deep gashes in most foes.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
-            new Weapon(name:"Captain's Polearm", description:"A trusty polearm that has seen many battles, and slain many more.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
+            new Weapon(name:"Captain's Polearm", description:"A trusty polearm that has seen many battles, and slain many more.", cost:4, graphic:0, damage:7, range:1, accuracyModifier: 1.1f, lockedItem:true),
             new Weapon(name:"Konane's Talons", description:"Strong enough to sunder armor.", cost:4, graphic:0, damage:6, range:1, accuracyModifier: 1.1f, lockedItem:true),
             new Weapon(name:"Magic Blossom", description:"A magic seed that pops violently on impact.", cost:4, graphic:0, damage:4, range:3, omniWeapon:true, lockedItem:true),
             new Weapon(name:"Cherubic Light", description:"The magical energy that forms Cherub's halo can be compressed into powerful beams of light.", cost:4, graphic:0, damage:7, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
             new Weapon(name:"Seraphim Soulflame", description:"Seraph is capable of shaping magical energy into a flame that burns both body and soul.", cost:4, graphic:0, damage:9, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
-            new Weapon(name:"Digi-Palm", description:"Palms capable of delivering deadly strikes when empowered with spiritual energy.", cost:4, graphic:0, damage:4, range:1, lockedItem:true),
+            new Weapon(name:"Digi-Palm", description:"Palms capable of delivering deadly strikes when empowered with spiritual energy.", cost:4, graphic:0, damage:6, range:1, lockedItem:true),
             new Weapon(name:"Electro Saber", description:"An unique electricity weapon summoned by the user that scales off of mind instead of strength.", cost:4, graphic:0, damage:5, range:1, lockedItem:true),
         };
 
