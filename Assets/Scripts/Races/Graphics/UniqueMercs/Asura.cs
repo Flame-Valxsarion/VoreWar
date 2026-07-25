@@ -5,7 +5,7 @@ using UnityEngine;
 class Asura : BlankSlate
 {
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Asura;
+    readonly Sprite[] Sprites = SpriteDictionary.Asura;
     RaceFrameList[] frameList = new RaceFrameList[]
     {
         new RaceFrameList(new int[7] { 74, 75, 76, 77, 78, 79, 80 }, new float[7] { .15f, .15f, .15f, .15f, .15f, .15f, .15f }),
@@ -105,7 +105,7 @@ class Asura : BlankSlate
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
                 AddOffset(Belly, 0, -24 * .625f);
-                return State.GameManager.SpriteDictionary.Asura[104];
+                return SpriteDictionary.Asura[104];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb))
             {
@@ -113,13 +113,13 @@ class Asura : BlankSlate
                 {
                     belly.transform.localScale = new Vector3(1, 1, 1);
                     AddOffset(Belly, 0, -24 * .625f);
-                    return State.GameManager.SpriteDictionary.Asura[103];
+                    return SpriteDictionary.Asura[103];
                 }
                 else if (actor.GetStomachSize(15, 1.05f) == 15)
                 {
                     belly.transform.localScale = new Vector3(1, 1, 1);
                     AddOffset(Belly, 0, -16 * .625f);
-                    return State.GameManager.SpriteDictionary.Asura[102];
+                    return SpriteDictionary.Asura[102];
                 }
             }
             return Sprites[48 + actor.GetStomachSize()];
@@ -284,7 +284,7 @@ class Asura : BlankSlate
                 return null;
             }
         }
-        return State.GameManager.SpriteDictionary.Asura[frameList[list].frames[actor.AnimationController.frameLists[list].currentFrame]];
+        return SpriteDictionary.Asura[frameList[list].frames[actor.AnimationController.frameLists[list].currentFrame]];
     }
 
     protected override Sprite HairSprite2(Actor_Unit actor) => ProcessAnimation(actor, 1);
@@ -308,16 +308,16 @@ class Asura : BlankSlate
             clothing4 = new SpriteExtraInfo(0, null, null);
             clothing5 = new SpriteExtraInfo(0, null, null);
 
-            DiscardSprite = State.GameManager.SpriteDictionary.Asura[39];
+            DiscardSprite = SpriteDictionary.Asura[39];
 
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Asura[s.IsAttacking ? 4 : 3];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Asura[s.HasBelly ? 32 : 26];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Asura[8];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Asura[s.IsAttacking ? 25 : 24];
+            clothing1.GetSprite = (s) => SpriteDictionary.Asura[s.IsAttacking ? 4 : 3];
+            clothing2.GetSprite = (s) => SpriteDictionary.Asura[s.HasBelly ? 32 : 26];
+            clothing3.GetSprite = (s) => SpriteDictionary.Asura[8];
+            clothing4.GetSprite = (s) => SpriteDictionary.Asura[s.IsAttacking ? 25 : 24];
             clothing5.GetSprite = (s) =>
             {
                 if (timeDuplicate != Time.time)
@@ -328,11 +328,11 @@ class Asura : BlankSlate
                 if (time > .45f)
                     return null;
                 if (time > .3f)
-                    return State.GameManager.SpriteDictionary.Asura[45];
+                    return SpriteDictionary.Asura[45];
                 if (time > .15f)
-                    return State.GameManager.SpriteDictionary.Asura[46];
+                    return SpriteDictionary.Asura[46];
                 else
-                    return State.GameManager.SpriteDictionary.Asura[47];
+                    return SpriteDictionary.Asura[47];
 
             };
 
@@ -352,10 +352,10 @@ class Asura : BlankSlate
         {
             if (actor.Unit.ClothingType == 0)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AsuraHoliday[0];
+                clothing1.GetSprite = (s) => SpriteDictionary.AsuraHoliday[0];
             }
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AsuraHoliday[1];
+                clothing1.GetSprite = (s) => SpriteDictionary.AsuraHoliday[1];
             base.Configure(sprite, actor);
         }
     }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 class Olivia : DefaultRaceData
 {
-    readonly Sprite[] Sprite1 = State.GameManager.SpriteDictionary.Olivia;
-    readonly Sprite[] Sprite2 = State.GameManager.SpriteDictionary.OliviaVoreSprites;
+    readonly Sprite[] Sprite1 = SpriteDictionary.Olivia;
+    readonly Sprite[] Sprite2 = SpriteDictionary.OliviaVoreSprites;
 
     internal Olivia()//Character by Supra on Discord
     {

@@ -23,13 +23,13 @@ class DRACO : BlankSlate
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
         if (actor.IsAttacking || actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.DRACO[3];
-        return State.GameManager.SpriteDictionary.DRACO[2];
+            return SpriteDictionary.DRACO[3];
+        return SpriteDictionary.DRACO[2];
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.DRACO[0];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.DRACO[0];
 
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.DRACO[1];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.DRACO[1];
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -38,10 +38,10 @@ class DRACO : BlankSlate
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
         {
             if (actor.PredatorComponent.VisibleFullness > 3)
-                return State.GameManager.SpriteDictionary.DRACO[10];
+                return SpriteDictionary.DRACO[10];
         }
 
-        return actor.HasBelly ? State.GameManager.SpriteDictionary.DRACO[5 + actor.GetStomachSize(4)] : null;
+        return actor.HasBelly ? SpriteDictionary.DRACO[5 + actor.GetStomachSize(4)] : null;
     }
 }
 

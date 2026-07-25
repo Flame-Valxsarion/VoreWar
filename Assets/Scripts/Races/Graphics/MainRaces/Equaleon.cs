@@ -87,16 +87,16 @@ class Equaleon : DefaultRaceData
     {
         int sprite = actor.IsAttacking ? 21 : 20;
 
-        return State.GameManager.SpriteDictionary.Equaleon[sprite];
+        return SpriteDictionary.Equaleon[sprite];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
         AddOffset(BodyAccent, 0, -3 * .625f);
-        return actor.IsBeingRubbed ? State.GameManager.SpriteDictionary.Eevee[26] : null;
+        return actor.IsBeingRubbed ? SpriteDictionary.Eevee[26] : null;
     }
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Equaleon[0 + actor.Unit.EarType];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Equaleon[0 + actor.Unit.EarType];
 
     protected override Sprite BreastsSprite(Actor_Unit actor)
     {
@@ -108,25 +108,25 @@ class Equaleon : DefaultRaceData
 
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.leftBreast) && leftSize >= 32)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[31];
+                return SpriteDictionary.HumansVoreSprites[31];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.leftBreast) && leftSize >= 30)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[30];
+                return SpriteDictionary.HumansVoreSprites[30];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.leftBreast) && leftSize >= 28)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[29];
+                return SpriteDictionary.HumansVoreSprites[29];
             }
 
             if (leftSize > 28)
                 leftSize = 28;
 
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[0 + leftSize];
+            return SpriteDictionary.HumansVoreSprites[0 + leftSize];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+            return SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
         }
     }
 
@@ -139,25 +139,25 @@ class Equaleon : DefaultRaceData
             int rightSize = (int)Math.Sqrt((actor.Unit.DefaultBreastSize * actor.Unit.DefaultBreastSize) + actor.GetRightBreastSize(32 * 32, 1f));
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.rightBreast) && rightSize >= 32)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[63];
+                return SpriteDictionary.HumansVoreSprites[63];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.rightBreast) && rightSize >= 30)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[62];
+                return SpriteDictionary.HumansVoreSprites[62];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.rightBreast) && rightSize >= 28)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[61];
+                return SpriteDictionary.HumansVoreSprites[61];
             }
 
             if (rightSize > 28)
                 rightSize = 28;
 
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[32 + rightSize];
+            return SpriteDictionary.HumansVoreSprites[32 + rightSize];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+            return SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
         }
     }
 
@@ -171,26 +171,26 @@ class Equaleon : DefaultRaceData
             if (actor.PredatorComponent?.VisibleFullness < .30f)
             {
                 Dick.layer = 21;
-                return State.GameManager.SpriteDictionary.Umbreon2[35 + (actor.Unit.DickSize * 2)];
+                return SpriteDictionary.Umbreon2[35 + (actor.Unit.DickSize * 2)];
             }
             else
             {
                 Dick.layer = 14;
-                return State.GameManager.SpriteDictionary.Umbreon2[36 + (actor.Unit.DickSize * 2)];
+                return SpriteDictionary.Umbreon2[36 + (actor.Unit.DickSize * 2)];
             }
         }
 
         return null;
     }
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Equaleon[22 + actor.Unit.EarType];
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.Equaleon[actor.IsAttacking ? 34 : 33];
-    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => State.GameManager.SpriteDictionary.Equaleon[actor.IsAttacking ? 36 : 35];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Equaleon[22 + actor.Unit.EarType];
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => SpriteDictionary.Equaleon[actor.IsAttacking ? 34 : 33];
+    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => SpriteDictionary.Equaleon[actor.IsAttacking ? 36 : 35];
     protected override Sprite BodyAccentSprite5(Actor_Unit actor) => null;
 
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
         int sprite = 36;
-        return State.GameManager.SpriteDictionary.Equaleon[sprite];
+        return SpriteDictionary.Equaleon[sprite];
 
     }
 
@@ -201,21 +201,21 @@ class Equaleon : DefaultRaceData
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Eevee[124];
+                    return SpriteDictionary.Eevee[124];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Eevee[125];
+                    return SpriteDictionary.Eevee[125];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Eevee[126];
+                    return SpriteDictionary.Eevee[126];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Eevee[127];
+                    return SpriteDictionary.Eevee[127];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Eevee[128];
+                    return SpriteDictionary.Eevee[128];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Eevee[129];
+                    return SpriteDictionary.Eevee[129];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Eevee[130];
+                    return SpriteDictionary.Eevee[130];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Eevee[131];
+                    return SpriteDictionary.Eevee[131];
                 default:
                     return null;
             }
@@ -226,8 +226,8 @@ class Equaleon : DefaultRaceData
         }
     }
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Equaleon[31];
-    protected override Sprite EyesSecondarySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Equaleon[32];
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Equaleon[31];
+    protected override Sprite EyesSecondarySprite(Actor_Unit actor) => SpriteDictionary.Equaleon[32];
 
     protected override Sprite BeardSprite(Actor_Unit actor) => null;
 
@@ -235,14 +235,14 @@ class Equaleon : DefaultRaceData
     {
         if (actor.IsEating)
         {
-            return State.GameManager.SpriteDictionary.Equaleon[9];
+            return SpriteDictionary.Equaleon[9];
         }
         return null;
     }
 
     protected override Sprite HairSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Equaleon[10 + actor.Unit.HairStyle];
+        return SpriteDictionary.Equaleon[10 + actor.Unit.HairStyle];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -255,22 +255,22 @@ class Equaleon : DefaultRaceData
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && size == 27)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.Eevee[67];
+                return SpriteDictionary.Eevee[67];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 27)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.Eevee[66];
+                return SpriteDictionary.Eevee[66];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 26)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.Eevee[65];
+                return SpriteDictionary.Eevee[65];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 25)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.Eevee[64];
+                return SpriteDictionary.Eevee[64];
             }
             switch (size)
             {
@@ -293,7 +293,7 @@ class Equaleon : DefaultRaceData
                     AddOffset(Belly, 0, -32 * .625f);
                     break;
             }
-            return State.GameManager.SpriteDictionary.Eevee[36 + size];
+            return SpriteDictionary.Eevee[36 + size];
         }
         else
         {
@@ -310,8 +310,8 @@ class Equaleon : DefaultRaceData
         //    int size = actor.Unit.DickSize;
         //    int offset = (int)((actor.PredatorComponent?.BallsFullness ?? 0) * 3);
         //    if (offset > 0)
-        //        return State.GameManager.SpriteDictionary.FurryDicks[Math.Min(12 + offset, 23)];
-        //    return State.GameManager.SpriteDictionary.FurryDicks[size];
+        //        return SpriteDictionary.FurryDicks[Math.Min(12 + offset, 23)];
+        //    return SpriteDictionary.FurryDicks[size];
         //}
 
         int baseSize = actor.Unit.DickSize;
@@ -319,22 +319,22 @@ class Equaleon : DefaultRaceData
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .8f) == 21)
         {
             AddOffset(Balls, 0, -18 * .625f);
-            return State.GameManager.SpriteDictionary.Umbreon2[30];
+            return SpriteDictionary.Umbreon2[30];
         }
         else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .8f) == 21)
         {
             AddOffset(Balls, 0, -18 * .625f);
-            return State.GameManager.SpriteDictionary.Umbreon2[29];
+            return SpriteDictionary.Umbreon2[29];
         }
         else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .8f) == 20)
         {
             AddOffset(Balls, 0, -15 * .625f);
-            return State.GameManager.SpriteDictionary.Umbreon2[28];
+            return SpriteDictionary.Umbreon2[28];
         }
         else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .8f) == 19)
         {
             AddOffset(Balls, 0, -14 * .625f);
-            return State.GameManager.SpriteDictionary.Umbreon2[27];
+            return SpriteDictionary.Umbreon2[27];
         }
         int combined = Math.Min(baseSize + ballOffset, 26);
         if (combined == 26)
@@ -347,10 +347,10 @@ class Equaleon : DefaultRaceData
             AddOffset(Balls, 0, -6 * .625f);
         if (ballOffset > 0)
         {
-            return State.GameManager.SpriteDictionary.Umbreon2[combined];
+            return SpriteDictionary.Umbreon2[combined];
         }
 
-        return State.GameManager.SpriteDictionary.Umbreon2[baseSize];
+        return SpriteDictionary.Umbreon2[baseSize];
     }
 
     static ColorSwapPalette EyeColorADJ(Actor_Unit actor)
@@ -372,8 +372,8 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[30];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[31];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[30];
+            clothing2.GetSprite = (s) => SpriteDictionary.Eevee[31];
             base.Configure(sprite, actor);
         }
     }
@@ -389,7 +389,7 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[30];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[30];
             base.Configure(sprite, actor);
         }
     }
@@ -406,8 +406,8 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[33];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[34];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[33];
+            clothing2.GetSprite = (s) => SpriteDictionary.Eevee[34];
             base.Configure(sprite, actor);
         }
     }
@@ -423,7 +423,7 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[33];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[33];
             base.Configure(sprite, actor);
         }
     }
@@ -441,7 +441,7 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[32];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[32];
             base.Configure(sprite, actor);
         }
     }
@@ -458,7 +458,7 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[35];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[35];
             base.Configure(sprite, actor);
         }
     }
@@ -476,8 +476,8 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[actor.IsAttacking ? 69 : 68];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[70];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[actor.IsAttacking ? 69 : 68];
+            clothing2.GetSprite = (s) => SpriteDictionary.Eevee[70];
             base.Configure(sprite, actor);
         }
     }
@@ -495,8 +495,8 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[actor.IsAttacking ? 74 : 73];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[actor.IsAttacking ? 76 : 75];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[actor.IsAttacking ? 74 : 73];
+            clothing2.GetSprite = (s) => SpriteDictionary.Eevee[actor.IsAttacking ? 76 : 75];
             base.Configure(sprite, actor);
         }
     }
@@ -504,7 +504,7 @@ class Equaleon : DefaultRaceData
     {
         public Loincloth()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Eevee[79];
+            DiscardSprite = SpriteDictionary.Eevee[79];
             coversBreasts = false;
             blocksDick = false;
             Type = 860037;
@@ -514,7 +514,7 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[78];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[78];
             base.Configure(sprite, actor);
         }
     }
@@ -523,7 +523,7 @@ class Equaleon : DefaultRaceData
     {
         public Shorts()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Eevee[83];
+            DiscardSprite = SpriteDictionary.Eevee[83];
             blocksDick = true;
             coversBreasts = false;
             Type = 860040;
@@ -533,13 +533,13 @@ class Equaleon : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[80];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[80];
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[81];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Eevee[81];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[82];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Eevee[82];
             }
             else clothing2.GetSprite = null;
             base.Configure(sprite, actor);
@@ -549,7 +549,7 @@ class Equaleon : DefaultRaceData
     {
         public Belt()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Eevee[93];
+            DiscardSprite = SpriteDictionary.Eevee[93];
             Type = 860041;
             femaleOnly = true;
             coversBreasts = false;
@@ -561,7 +561,7 @@ class Equaleon : DefaultRaceData
             if (actor.PredatorComponent?.LeftBreastFullness > 0 || actor.PredatorComponent?.RightBreastFullness > 0)
                 clothing1.GetSprite = (s) => null;
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[84 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Eevee[84 + actor.Unit.BreastSize];
             base.Configure(sprite, actor);
         }
     }
@@ -569,7 +569,7 @@ class Equaleon : DefaultRaceData
     {
         public Strap()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Eevee[103];
+            DiscardSprite = SpriteDictionary.Eevee[103];
             Type = 860042;
             femaleOnly = true;
             coversBreasts = false;
@@ -581,7 +581,7 @@ class Equaleon : DefaultRaceData
             if (actor.PredatorComponent?.LeftBreastFullness > 0 || actor.PredatorComponent?.RightBreastFullness > 0)
                 clothing1.GetSprite = (s) => null;
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[94 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Eevee[94 + actor.Unit.BreastSize];
             base.Configure(sprite, actor);
         }
     }
@@ -606,15 +606,15 @@ class Equaleon : DefaultRaceData
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[107 + actor.Unit.BreastSize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Eevee[107 + actor.Unit.BreastSize];
             }
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[104];
+            clothing1.GetSprite = (s) => SpriteDictionary.Eevee[104];
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[105];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Eevee[105];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[106];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Eevee[106];
             }
             else clothing2.GetSprite = null;
             base.Configure(sprite, actor);
@@ -624,9 +624,9 @@ class Equaleon : DefaultRaceData
     {
         public EeveeRags()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Eevee[123];
+            DiscardSprite = SpriteDictionary.Eevee[123];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             OccupiesAllSlots = true;
             coversBreasts = false;
             Type = 860045;
@@ -642,13 +642,13 @@ class Equaleon : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts == false || actor.Unit.BreastSize <= 2)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[117];
+                clothing1.GetSprite = (s) => SpriteDictionary.Eevee[117];
             }
             else 
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[117 + actor.Unit.BreastSize - 2];
+                clothing1.GetSprite = (s) => SpriteDictionary.Eevee[117 + actor.Unit.BreastSize - 2];
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Eevee[116];
+            clothing2.GetSprite = (s) => SpriteDictionary.Eevee[116];
             base.Configure(sprite, actor);
         }
     }

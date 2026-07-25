@@ -19,7 +19,7 @@ TextureImporter:
     21300028: Scorch_6
     21300030: Scorch_7
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -271,5 +271,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: specialmerc
   assetBundleVariant: 

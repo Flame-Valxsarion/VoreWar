@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,6 +19,8 @@ public class UnitInfoPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Slider HealthBar;
     public Slider BarrierBar;
     public Slider ManaBar;
+    public Image PotionHoverImage;
+    public Image UnitTagHoverImage;
     internal Unit Unit;
     internal Actor_Unit Actor;
 
@@ -64,7 +68,17 @@ public class UnitInfoPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
 
+        if (PotionHoverImage != null)
+        {
+            if (IsMousingOver(PotionHoverImage.gameObject))            
+                State.GameManager.HoveringTooltip.UpdateInformationPotion(Unit);
+        }
 
+        if (UnitTagHoverImage != null)
+        {
+            if (IsMousingOver(UnitTagHoverImage.gameObject))
+                State.GameManager.HoveringTooltip.UpdateInformationTags(Unit);
+        }
 
         int wordIndex = TMP_TextUtilities.FindIntersectingWord(HoverBox, Input.mousePosition, null);
         //if (wordIndex <= -1 && BasicInfo)

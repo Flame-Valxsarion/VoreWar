@@ -28,7 +28,7 @@ TextureImporter:
     21300046: Cake_15
     21300048: Cake_16
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -460,5 +460,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: monster
   assetBundleVariant: 

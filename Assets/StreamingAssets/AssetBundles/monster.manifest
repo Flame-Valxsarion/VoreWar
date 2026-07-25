@@ -1,0 +1,111 @@
+ManifestFileVersion: 0
+CRC: 444437677
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 58017d0fabbea300054be55ea0995c7b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Sprites/Units/Eeveelution/FeralEqualeon.png
+- Assets/Sprites/Units/goblins/gobboverbottoms.png
+- Assets/Sprites/Units/Mantis.png
+- Assets/Sprites/Units/Raiju240.png
+- Assets/Sprites/Units/Komodos2.png
+- Assets/Sprites/Units/Spacecroach.png
+- Assets/Sprites/Units/SpringSlug.png
+- Assets/Sprites/Units/Dryad/Dryad5.png
+- Assets/Sprites/Units/Griffin.png
+- Assets/Sprites/Units/SpitterSlug.png
+- Assets/Sprites/Units/kobold.png
+- Assets/Sprites/Units/Dragonfly.png
+- Assets/Sprites/Units/Iliijiith.png
+- Assets/Sprites/Units/fairy_addsheet.png
+- Assets/Sprites/Units/Otachi.png
+- Assets/Sprites/Units/Whisp.png
+- Assets/Sprites/Units/fairySmall.png
+- Assets/Sprites/Units/CoralSlug.png
+- Assets/Sprites/Units/feralWolves.png
+- Assets/Sprites/Units/Utahraptor200.png
+- Assets/Sprites/Units/goblins/gobundertops.png
+- Assets/Sprites/Units/FeralLions.png
+- Assets/Sprites/Units/Dryad/Dryad2.png
+- Assets/Sprites/Units/Catfish.png
+- Assets/Sprites/Units/Bat.png
+- Assets/Sprites/Units/Dryad/Dryad1.png
+- Assets/Sprites/Units/Komodos1.png
+- Assets/Sprites/Units/Cake.png
+- Assets/Sprites/Units/PlantRace.png
+- Assets/Sprites/Units/vagrants3.png
+- Assets/Sprites/Units/Boom_Bunnies.png
+- Assets/Sprites/Units/Harvester.png
+- Assets/Sprites/Units/Feral_Orcas.png
+- Assets/Sprites/Units/Collector.png
+- Assets/Sprites/Units/goblins/gobbglove.png
+- Assets/Sprites/Units/Komodos4.png
+- Assets/Sprites/Units/Utahraptor240B.png
+- Assets/Sprites/Units/fairy240.png
+- Assets/Sprites/Units/SkyShark.png
+- Assets/Sprites/Units/vagrants2.png
+- Assets/Sprites/Units/Dryad/Dryad4.png
+- Assets/Sprites/Units/Gazelle2.png
+- Assets/Sprites/Units/Terrorbird.png
+- Assets/Sprites/Units/Viisels.png
+- Assets/Sprites/Units/Vagrants.png
+- Assets/Sprites/Units/ViraeUltimae.png
+- Assets/Sprites/Units/kobold_Sel.png
+- Assets/Sprites/Units/Earthworms.png
+- Assets/Sprites/Units/Komodos3.png
+- Assets/Sprites/Units/RaptorSprites.png
+- Assets/Sprites/Units/goblins/gobbo.png
+- Assets/Sprites/Units/Raiju.png
+- Assets/Sprites/Units/Terminid.png
+- Assets/Sprites/Units/Voilin.png
+- Assets/Sprites/Units/Gazelle1.png
+- Assets/Sprites/Units/FeralFox.png
+- Assets/Sprites/Units/Serpents.png
+- Assets/Sprites/Units/Pudding.png
+- Assets/Sprites/Units/Smudger.png
+- Assets/Sprites/Units/RockSlug.png
+- Assets/Sprites/Units/goblins/gobleggo.png
+- Assets/Sprites/Units/DarkSwallower.png
+- Assets/Sprites/Units/Eeveelution/FeralEevee.png
+- Assets/Sprites/Units/Schiwardez.png
+- Assets/Sprites/Units/goblins/gobboveronepieces.png
+- Assets/Sprites/Units/Dragon.png
+- Assets/Sprites/Units/Ant.png
+- Assets/Sprites/Units/Dryad/SmoothVoreSprites.png
+- Assets/Sprites/Units/Monitors.png
+- Assets/Sprites/Units/Eeveelution/FeralUmbreon.png
+- Assets/Sprites/Units/goblins/gobbunderonepieces.png
+- Assets/Sprites/Units/goblins/gobbohat.png
+- Assets/Sprites/Units/SoulSprite/AngelProjectile.png
+- Assets/Sprites/Units/goblins/gobbovertops.png
+- Assets/Sprites/Units/goblins/gobbovore.png
+- Assets/Sprites/Units/Trex.png
+- Assets/Sprites/Units/BlackWidow.png
+- Assets/Sprites/Units/Salamanders.png
+- Assets/Sprites/Units/FeralLizards.png
+- Assets/Sprites/Units/FeralSlime.png
+- Assets/Sprites/Units/Wyvern.png
+- Assets/Sprites/Units/goblins/gobbunderbottoms.png
+- Assets/Sprites/Units/Frog.png
+- Assets/Sprites/Units/Dratopyr.png
+- Assets/Sprites/Units/Gryphon.png
+- Assets/Sprites/Units/Utahraptor240A.png
+- Assets/Sprites/Units/LungDragon.png
+- Assets/Sprites/Units/SoulSprite/SoulSprite.png
+- Assets/Sprites/Units/Goodra/Goodra.png
+- Assets/Sprites/Units/WarriorAnt.png
+- Assets/Sprites/Units/FeralHorses.png
+- Assets/Sprites/Units/Compy.png
+- Assets/Sprites/Units/Dryad/Dryad3.png
+- Assets/Sprites/Units/WyvernMatron.png
+Dependencies: []

@@ -7,9 +7,9 @@ using UnityEngine;
 
 class Utahraptor : BlankSlate
 {
-    readonly Sprite[] Utahraptor200Sprites = State.GameManager.SpriteDictionary.Utahraptor200;
-    readonly Sprite[] Utahraptor240ASprites = State.GameManager.SpriteDictionary.Utahraptor240A;
-    readonly Sprite[] Utahraptor240BSprites = State.GameManager.SpriteDictionary.Utahraptor240B;
+    readonly Sprite[] Utahraptor200Sprites = SpriteDictionary.Utahraptor200;
+    readonly Sprite[] Utahraptor240ASprites = SpriteDictionary.Utahraptor240A;
+    readonly Sprite[] Utahraptor240BSprites = SpriteDictionary.Utahraptor240B;
     bool SkapaFrontSide;
     bool SkapaFrontDirect;
 

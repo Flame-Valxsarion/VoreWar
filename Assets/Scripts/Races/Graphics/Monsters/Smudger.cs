@@ -55,14 +55,14 @@ class Smudger : BlankSlate
 
     protected override Sprite BodySprite(Actor_Unit actor) // Body
     {
-        return State.GameManager.SpriteDictionary.Smudger[0];
+        return SpriteDictionary.Smudger[0];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor) // Body Patterns
     {
         if (actor.Unit.BodyAccentType1 == 0) return null;
 
-        return State.GameManager.SpriteDictionary.Smudger[22 + actor.Unit.BodyAccentType1];
+        return SpriteDictionary.Smudger[22 + actor.Unit.BodyAccentType1];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Slit Outline
@@ -72,14 +72,14 @@ class Smudger : BlankSlate
         if (actor.Unit.HasDick == false)
         {
             if (actor.IsUnbirthing)
-                return State.GameManager.SpriteDictionary.Smudger[81];
-            return State.GameManager.SpriteDictionary.Smudger[79];
+                return SpriteDictionary.Smudger[81];
+            return SpriteDictionary.Smudger[79];
         }
         else
         {
             if (actor.IsErect() || actor.IsCockVoring)
-                return State.GameManager.SpriteDictionary.Smudger[80];
-            return State.GameManager.SpriteDictionary.Smudger[79];
+                return SpriteDictionary.Smudger[80];
+            return SpriteDictionary.Smudger[79];
         }
     }
 
@@ -90,13 +90,13 @@ class Smudger : BlankSlate
         if (actor.Unit.HasDick == false)
         {
             if (actor.IsUnbirthing)
-                return State.GameManager.SpriteDictionary.Smudger[83];
+                return SpriteDictionary.Smudger[83];
             return null;
         }
         else
         {
             if (actor.IsErect() || actor.IsCockVoring)
-                return State.GameManager.SpriteDictionary.Smudger[82];
+                return SpriteDictionary.Smudger[82];
             return null;
         }
     }
@@ -109,37 +109,37 @@ class Smudger : BlankSlate
 
         if (size >= 40 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[143];
+            return SpriteDictionary.Smudger[143];
         }
 
         else if (size >= 38 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[142];
+            return SpriteDictionary.Smudger[142];
         }
 
         else if (size >= 36 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[141];
+            return SpriteDictionary.Smudger[141];
         }
 
         else if (size >= 34 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[140];
+            return SpriteDictionary.Smudger[140];
         }
 
         else if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[139];
+            return SpriteDictionary.Smudger[139];
         }
 
         else if (size >= 30 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[138];
+            return SpriteDictionary.Smudger[138];
         }
 
         if (size > 29) size = 29;
 
-        return State.GameManager.SpriteDictionary.Smudger[108 + size];
+        return SpriteDictionary.Smudger[108 + size];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor) // Dick
@@ -154,11 +154,11 @@ class Smudger : BlankSlate
                 Dick.layer = 12;
                 if (actor.IsCockVoring) 
                 {
-                    return State.GameManager.SpriteDictionary.Smudger[90 + actor.Unit.DickSize];              
+                    return SpriteDictionary.Smudger[90 + actor.Unit.DickSize];              
                 }
                 else
                 {
-                    return State.GameManager.SpriteDictionary.Smudger[84 + actor.Unit.DickSize];
+                    return SpriteDictionary.Smudger[84 + actor.Unit.DickSize];
                 }
             }
             else
@@ -166,11 +166,11 @@ class Smudger : BlankSlate
                 Dick.layer = 5;
                 if (actor.IsCockVoring)
                 {
-                    return State.GameManager.SpriteDictionary.Smudger[102 + actor.Unit.DickSize];
+                    return SpriteDictionary.Smudger[102 + actor.Unit.DickSize];
                 }
                 else
                 {
-                    return State.GameManager.SpriteDictionary.Smudger[96 + actor.Unit.DickSize];
+                    return SpriteDictionary.Smudger[96 + actor.Unit.DickSize];
                 }
             }
         }
@@ -191,52 +191,52 @@ class Smudger : BlankSlate
 
         if (size >= 40 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[179];
+            return SpriteDictionary.Smudger[179];
         }
 
         if (size >= 38 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[178];
+            return SpriteDictionary.Smudger[178];
         }
 
         if (size >= 36 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[177];
+            return SpriteDictionary.Smudger[177];
         }
 
         if (size >= 34 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[176];
+            return SpriteDictionary.Smudger[176];
         }
 
         if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[175];
+            return SpriteDictionary.Smudger[175];
         }
 
         if (size >= 30 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[174];
+            return SpriteDictionary.Smudger[174];
         }
 
         if (size > 29) size = 29;
-        return State.GameManager.SpriteDictionary.Smudger[144 + size];
+        return SpriteDictionary.Smudger[144 + size];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Arms
     {
-        if (actor.IsEating) return State.GameManager.SpriteDictionary.Smudger[8];
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Smudger[7];
-        return State.GameManager.SpriteDictionary.Smudger[6];
+        if (actor.IsEating) return SpriteDictionary.Smudger[8];
+        if (actor.IsAttacking) return SpriteDictionary.Smudger[7];
+        return SpriteDictionary.Smudger[6];
     }
 
     protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) // Arm Patterns
     {
         if (actor.Unit.BodyAccentType1 == 0) return null;
         
-        if (actor.IsEating) return State.GameManager.SpriteDictionary.Smudger[58 + actor.Unit.BodyAccentType1];
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Smudger[49 + actor.Unit.BodyAccentType1];
-        return State.GameManager.SpriteDictionary.Smudger[40 + actor.Unit.BodyAccentType1];
+        if (actor.IsEating) return SpriteDictionary.Smudger[58 + actor.Unit.BodyAccentType1];
+        if (actor.IsAttacking) return SpriteDictionary.Smudger[49 + actor.Unit.BodyAccentType1];
+        return SpriteDictionary.Smudger[40 + actor.Unit.BodyAccentType1];
     }
 
     protected override Sprite BreastsShadowSprite(Actor_Unit actor) // Male Chest
@@ -245,14 +245,14 @@ class Smudger : BlankSlate
 
         int size = actor.GetStomachSize(40);
 
-        if (size == 0) return State.GameManager.SpriteDictionary.Smudger[68];
-        if (size <= 9) return State.GameManager.SpriteDictionary.Smudger[69];
-        if (size <= 17) return State.GameManager.SpriteDictionary.Smudger[70];
-        if (size <= 23) return State.GameManager.SpriteDictionary.Smudger[71];
-        if (size <= 29) return State.GameManager.SpriteDictionary.Smudger[72];
+        if (size == 0) return SpriteDictionary.Smudger[68];
+        if (size <= 9) return SpriteDictionary.Smudger[69];
+        if (size <= 17) return SpriteDictionary.Smudger[70];
+        if (size <= 23) return SpriteDictionary.Smudger[71];
+        if (size <= 29) return SpriteDictionary.Smudger[72];
         if (size >= 30 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Smudger[73];
+            return SpriteDictionary.Smudger[73];
         }
 
         return null;
@@ -263,42 +263,42 @@ class Smudger : BlankSlate
         if (actor.Unit.HasBreasts == false)
             return null;
 
-        return State.GameManager.SpriteDictionary.Smudger[74 + actor.Unit.BreastSize];
+        return SpriteDictionary.Smudger[74 + actor.Unit.BreastSize];
     }
 
     protected override Sprite HairSprite(Actor_Unit actor) // Head Frills - Head Shape
     {
-        return State.GameManager.SpriteDictionary.Smudger[17 + actor.Unit.SpecialAccessoryType];
+        return SpriteDictionary.Smudger[17 + actor.Unit.SpecialAccessoryType];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor) // Head
     {
-        if (actor.IsEating) return State.GameManager.SpriteDictionary.Smudger[3];
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Smudger[2];
-        return State.GameManager.SpriteDictionary.Smudger[1];
+        if (actor.IsEating) return SpriteDictionary.Smudger[3];
+        if (actor.IsAttacking) return SpriteDictionary.Smudger[2];
+        return SpriteDictionary.Smudger[1];
     }
 
     protected override Sprite HairSprite2(Actor_Unit actor) // Head Patterns
     {
         if (actor.Unit.BodyAccentType1 == 0) return null;
 
-        return State.GameManager.SpriteDictionary.Smudger[31 + actor.Unit.BodyAccentType1];
+        return SpriteDictionary.Smudger[31 + actor.Unit.BodyAccentType1];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor) // Mouth
     {
-        if (actor.IsEating) return State.GameManager.SpriteDictionary.Smudger[5];
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Smudger[4];
+        if (actor.IsEating) return SpriteDictionary.Smudger[5];
+        if (actor.IsAttacking) return SpriteDictionary.Smudger[4];
         return null;
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
-       return State.GameManager.SpriteDictionary.Smudger[9 + actor.Unit.EyeType];
+       return SpriteDictionary.Smudger[9 + actor.Unit.EyeType];
     }
 
     protected override Sprite EyesSecondarySprite(Actor_Unit actor)
     {
-       return State.GameManager.SpriteDictionary.Smudger[13 + actor.Unit.EyeType];
+       return SpriteDictionary.Smudger[13 + actor.Unit.EyeType];
     }
 }

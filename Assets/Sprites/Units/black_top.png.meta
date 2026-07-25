@@ -37,7 +37,7 @@ TextureImporter:
     21300064: black_top_16
     21300066: black_top_17
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -489,5 +489,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: empire
   assetBundleVariant: 

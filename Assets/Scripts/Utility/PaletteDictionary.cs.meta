@@ -29,6 +29,7 @@ MonoImporter:
   - AlrauneFoliage: {instanceID: 0}
   - DemibatSkin: {instanceID: 0}
   - Puca: {instanceID: 0}
+  - Hamsters: {instanceID: 0}
   - HippoSkin: {instanceID: 0}
   - Harvester: {instanceID: 0}
   - Bats: {instanceID: 0}
@@ -63,6 +64,42 @@ MonoImporter:
   - FeralLionsEyes: {fileID: 2800000, guid: e2c7d51d621e65e4993ea642f33c8543, type: 3}
   - FeralLionsMane: {fileID: 2800000, guid: 3724e12438cff1346983a8f3e06db79a, type: 3}
   - GoodraSkin: {fileID: 2800000, guid: fbb146a363cdde746a9ff02b9d91876f, type: 3}
+  - AabayxSkin: {instanceID: 0}
+  - MiceSkin: {instanceID: 0}
+  - MiceHumanSkin: {instanceID: 0}
+  - LupineSkin: {instanceID: 0}
+  - LupineReverse: {instanceID: 0}
+  - JackalSkin: {instanceID: 0}
+  - DryadTrunk: {instanceID: 0}
+  - DryadLeaves: {instanceID: 0}
+  - DryadMud: {instanceID: 0}
+  - DryadMudPattern: {instanceID: 0}
+  - DryadRiver: {instanceID: 0}
+  - DryadMushroom: {instanceID: 0}
+  - GhostSkin: {instanceID: 0}
+  - FeralHorseSkin: {instanceID: 0}
+  - WyvernMatron: {instanceID: 0}
+  - FeralFoxSkin: {instanceID: 0}
+  - TerminidSkin: {instanceID: 0}
+  - FeralOrcaSkin: {instanceID: 0}
+  - OtachiSkin: {instanceID: 0}
+  - GnollSkin: {instanceID: 0}
+  - UmbreonSkin: {instanceID: 0}
+  - UmbreonExt: {instanceID: 0}
+  - UmbreonClothes: {instanceID: 0}
+  - UmbreonArmor: {instanceID: 0}
+  - EeveeEqualeonSkin: {instanceID: 0}
+  - EeveeEqualeonExt: {instanceID: 0}
+  - EeveeEqualeonClothing: {instanceID: 0}
+  - EqualeonEyes: {instanceID: 0}
+  - PlantSkin: {instanceID: 0}
+  - ViiselSkin: {instanceID: 0}
+  - FireflyColor: {instanceID: 0}
+  - SmudgerSkin: {instanceID: 0}
+  - SpaceCroachSkin: {instanceID: 0}
+  - RaijuSkin: {instanceID: 0}
+  - TrexSkin: {instanceID: 0}
+  - SoulSpriteSkin: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

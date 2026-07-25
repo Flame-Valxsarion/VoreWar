@@ -52,6 +52,8 @@ public class NameGenerator
     List<string> umbreonTownNames;
     List<string> lupineTownNames;
     List<string> jackalTownNames;
+    List<string> demiDragonTownNames;
+    List<string> yordleTownNames;
 
     List<string> compyNames;
     List<string> vagrantNames;
@@ -999,6 +1001,34 @@ public class NameGenerator
             "The Tomb",
             "Spectroplasm",
         };
+        demiDragonTownNames = new List<string>
+        {
+            "Drakinia",
+            "Nogard",
+            "Stonescale",
+            "Flamewesk",
+            "Escale",
+            "Sahrot Sahsun",
+            "Vedviing",
+            "Drakinheim",
+            "Kapceasiin",
+            "Drunyol",
+            "Whetstane",
+        };
+        yordleTownNames = new List<string>
+        {
+            "Anbandle",
+            "Linsily",
+            "Open Creek",
+            "Gnormandle",
+            "Vanazy",
+            "Healthy Wood",
+            "Zalzoca",
+            "Unlandle",
+            "Pretty Bush",
+            "Toylo Amny",
+            "Caztaraz",
+        };
 
         Encoding encoding = Encoding.GetEncoding("iso-8859-1");
 
@@ -1437,6 +1467,16 @@ public class NameGenerator
         {
             if (i >= 0 && i < ghostTownNames.Count)
                 return ghostTownNames[i];
+        }
+        else if (race == Race.Draconians)
+        {
+            if (i >= 0 && i < demiDragonTownNames.Count)
+                return demiDragonTownNames[i];
+        }
+        else if (race == Race.Yordles)
+        {
+            if (i >= 0 && i < yordleTownNames.Count)
+                return yordleTownNames[i];
         }
 
 

@@ -74,7 +74,7 @@ TextureImporter:
     21300138: Wyvern_53
     21300140: Wyvern_54
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -1266,5 +1266,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: monster
   assetBundleVariant: 

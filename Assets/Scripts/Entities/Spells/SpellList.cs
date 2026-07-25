@@ -61,6 +61,7 @@ static class SpellList
     static internal readonly DamageSpell CrossShock;
     static internal readonly DamageSpell ExplosiveHug;
     static internal readonly DamageSpell Explode;
+    static internal readonly DamageSpell DiamondStorm;
     static internal readonly DamageSpell Flamberge;
     static internal readonly DamageSpell ForkLightning;
     //static internal readonly Spell Warp;
@@ -113,6 +114,7 @@ static class SpellList
     static internal readonly StatusSpell ViperPoisonStatus;
     static internal readonly StatusSpell ViralInfection;
     static internal readonly StatusSpell DivinitysEmbrace;
+    static internal readonly DamageSpell DivineNova;
 
     static internal Dictionary<SpellTypes, Spell> SpellDict;
 
@@ -552,6 +554,35 @@ static class SpellList
         };
         SpellDict[SpellTypes.Explode] = Explode;
 
+        DiamondStorm = new DamageSpell()
+        {
+            Name = "Diamond Storm",
+            Id = "diamond-storm",
+            SpellType = SpellTypes.DiamondStorm,
+            Description = "Deals damage in a cross pattern with razor sharp leaves",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
+            Range = new Range(6),
+            AOEType = AreaOfEffectType.FixedPattern,
+            Tier = 3,
+            Pattern = new int[3, 3] { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 } },
+            Resistable = true,
+            ResistanceMult = .95f,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 5,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(DiamondStorm, t);
+                TacticalGraphicalEffects.CreateDiamondStorm(a.Position, t.Position, t);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+            },
+            OnExecuteTile = (a, l) =>
+            {
+                a.CastOffensiveSpell(DiamondStorm, null, l);
+                TacticalGraphicalEffects.CreateDiamondStorm(a.Position, l, null);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+            },
+        };
+        SpellDict[SpellTypes.DiamondStorm] = DiamondStorm;
+
         //Warp = new Spell() //Implemented this and forgot it was supposed to be target and then location, only the caster makes it highly situational
         //{
         //    Name = "Warp",
@@ -581,11 +612,12 @@ static class SpellList
             Description = "Deals damage over time, can not kill targets",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy },
             Range = new Range(8),
-            Duration = (a, t) => 4 + a.Unit.GetStat(Stat.Mind) / 5,
-            Effect = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 20,
+            Duration = (a, t) => 3 + a.Unit.GetStat(Stat.Mind) / 15,
+            Effect = (a, t) => 3 + a.Unit.GetStat(Stat.Mind) / 9,
             Type = StatusEffectType.Poisoned,
             Tier = 2,
             Resistable = true,
+            ResistanceMult = .85f,
             OnExecute = (a, t) =>
             {
                 if (a.CastStatusSpell(Poison, t))
@@ -1668,6 +1700,39 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.ForkLightning] = ForkLightning;
+
+        DivineNova = new DamageSpell()
+        {
+            Name = "Divine Nova",
+            Id = "divine-nova",
+            SpellType = SpellTypes.DivineNova,
+            Description = "The user expends all mana to deal damage based on the mana spent to a large area",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
+            Range = new Range(6),
+            Tier = 0,
+            AOEType = AreaOfEffectType.FixedPattern,
+            Pattern = new int[5, 5] { { 0, 1, 1, 1, 0 }, { 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1 }, { 0, 1, 1, 1, 0 }},
+            Damage = (a, t) => (a.Unit.Mana / 4) + a.Unit.GetStat(Stat.Mind) / 4,
+            Resistable = true,
+            ResistanceMult = 0.2f,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(DivineNova, t);
+                TacticalGraphicalEffects.CreateDivineNova(t.Position);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
+                a.Unit.SpendMana(a.Unit.Mana);
+            },
+            OnExecuteTile = (a, l) =>
+            {
+                a.CastOffensiveSpell(DivineNova, null, l);
+                TacticalGraphicalEffects.CreateDivineNova(l);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
+                a.Unit.SpendMana(a.Unit.Mana);
+            },
+        };
+        SpellDict[SpellTypes.DivineNova] = DivineNova;
     }
 }
 

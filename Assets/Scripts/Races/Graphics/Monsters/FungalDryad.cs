@@ -4,11 +4,11 @@ using UnityEngine;
 
 class FungalDryad : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.DryadSprites1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.DryadSprites2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.DryadSprites3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.DryadSprites4;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.DryadSprites5;
+    readonly Sprite[] Sprites = SpriteDictionary.DryadSprites1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.DryadSprites2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.DryadSprites3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.DryadSprites4;
+    readonly Sprite[] Sprites5 = SpriteDictionary.DryadSprites5;
     readonly Sprite[] Sprites6 = State.GameManager.SpriteDictionary.NiplessVoreSprites;
 
     bool oversize = false;
@@ -244,7 +244,7 @@ class FungalDryad : DefaultRaceData
 
     protected override Sprite HairSprite3(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.HumansBodySprites3[120 + actor.Unit.BodyAccentType3];
+        return SpriteDictionary.HumansBodySprites3[120 + actor.Unit.BodyAccentType3];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
@@ -255,7 +255,7 @@ class FungalDryad : DefaultRaceData
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[24 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
+            return SpriteDictionary.HumansBodySprites3[24 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
         }
     }
 
@@ -267,7 +267,7 @@ class FungalDryad : DefaultRaceData
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[25 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
+            return SpriteDictionary.HumansBodySprites3[25 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
         }
     }
 

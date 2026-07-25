@@ -5,15 +5,12 @@ class FeralEqualeon : BlankSlate
 {
     internal FeralEqualeon()
     {
-        CanBeGender = new List<Gender>() { Gender.None };
+        CanBeGender = new List<Gender>() { Gender.Male, Gender.Female };
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
         AccessoryColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
         EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EqualeonEyes);
         GentleAnimation = true;
         HairStyles = 11;
-
-        CanBeGender = new List<Gender>() { Gender.None };
-        GentleAnimation = true;
 
         Body = new SpriteExtraInfo(0, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor));
         BodyAccessory = new SpriteExtraInfo(1, AccessorySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.AccessoryColor)); //Fluff
@@ -88,8 +85,8 @@ class FeralEqualeon : BlankSlate
     protected override Sprite BodySprite(Actor_Unit actor)
     {
         if (!actor.HasBelly)
-            return State.GameManager.SpriteDictionary.FeralEqualeon[0];
-        return State.GameManager.SpriteDictionary.FeralEqualeon[22];
+            return SpriteDictionary.FeralEqualeon[0];
+        return SpriteDictionary.FeralEqualeon[22];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
@@ -97,7 +94,7 @@ class FeralEqualeon : BlankSlate
         if (!actor.HasBelly)
             return null;
 
-        return State.GameManager.SpriteDictionary.FeralEqualeon[24];
+        return SpriteDictionary.FeralEqualeon[24];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
@@ -105,17 +102,17 @@ class FeralEqualeon : BlankSlate
         if (!actor.HasBelly)
             return null;
 
-        return State.GameManager.SpriteDictionary.FeralEqualeon[25];
+        return SpriteDictionary.FeralEqualeon[25];
     }
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
     {
         if (actor.IsBeingRubbed)
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[5];
+            return SpriteDictionary.FeralEqualeon[5];
         }
         if (actor.Unit.IsDead)
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[4];
+            return SpriteDictionary.FeralEqualeon[4];
         }
         return null;
     }
@@ -123,7 +120,7 @@ class FeralEqualeon : BlankSlate
     {
         if (actor.IsBeingRubbed)
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[7];
+            return SpriteDictionary.FeralEqualeon[7];
         }
 
         return null;
@@ -133,16 +130,16 @@ class FeralEqualeon : BlankSlate
     {
         if (actor.IsEating)
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[9];
+            return SpriteDictionary.FeralEqualeon[9];
         }
         else 
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[8];
+            return SpriteDictionary.FeralEqualeon[8];
         }
     }
 
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralEqualeon[(actor.IsAttacking || actor.IsEating) ? 1 : 0];
-    protected override Sprite HairSprite(Actor_Unit actor) => actor.Unit.HairStyle == 12 ? null : State.GameManager.SpriteDictionary.FeralEqualeon[11 + actor.Unit.HairStyle];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.FeralEqualeon[(actor.IsAttacking || actor.IsEating) ? 1 : 0];
+    protected override Sprite HairSprite(Actor_Unit actor) => actor.Unit.HairStyle == 12 ? null : SpriteDictionary.FeralEqualeon[11 + actor.Unit.HairStyle];
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
         if (actor.IsBeingRubbed)
@@ -153,17 +150,17 @@ class FeralEqualeon : BlankSlate
         {
             return null;
         }
-        return State.GameManager.SpriteDictionary.FeralEqualeon[2];
+        return SpriteDictionary.FeralEqualeon[2];
     }
     protected override Sprite EyesSecondarySprite(Actor_Unit actor)
     {
         if (actor.IsBeingRubbed)
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[6];
+            return SpriteDictionary.FeralEqualeon[6];
         }
         if (actor.Unit.IsDead)
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[3];
+            return SpriteDictionary.FeralEqualeon[3];
         }
         return null;
     }
@@ -176,29 +173,29 @@ class FeralEqualeon : BlankSlate
 
         if (size >= 27 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[52];
+            return SpriteDictionary.FeralEqualeon[52];
         }
 
         if (size >= 26 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[51];
+            return SpriteDictionary.FeralEqualeon[51];
         }
 
         if (size >= 25 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralEqualeon[50];
+            return SpriteDictionary.FeralEqualeon[50];
         }
 
         if (size > 23) size = 23;
 
-        return State.GameManager.SpriteDictionary.FeralEqualeon[26 + size];
+        return SpriteDictionary.FeralEqualeon[26 + size];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor)
     {
         if (!actor.HasBelly)
-            return State.GameManager.SpriteDictionary.FeralEqualeon[1];
-        return State.GameManager.SpriteDictionary.FeralEqualeon[23];
+            return SpriteDictionary.FeralEqualeon[1];
+        return SpriteDictionary.FeralEqualeon[23];
     }
 
     static ColorSwapPalette EyeColorADJ(Actor_Unit actor)

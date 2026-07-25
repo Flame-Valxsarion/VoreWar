@@ -24,8 +24,8 @@ class Serpents : BlankSlate
     }
 
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Serpents[(actor.IsAttacking || actor.IsEating) ? 2 : 0];
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Serpents[(actor.IsAttacking || actor.IsEating) ? 3 : 1];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Serpents[(actor.IsAttacking || actor.IsEating) ? 2 : 0];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Serpents[(actor.IsAttacking || actor.IsEating) ? 3 : 1];
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
@@ -36,21 +36,21 @@ class Serpents : BlankSlate
         }
         int animationFrame = actor.CheckAnimationFrame();
         if (animationFrame == 2)
-            return State.GameManager.SpriteDictionary.Serpents[6];
+            return SpriteDictionary.Serpents[6];
         else if (animationFrame == 1)
-            return State.GameManager.SpriteDictionary.Serpents[7];
-        return actor.IsEating ? State.GameManager.SpriteDictionary.Serpents[5] : null;
+            return SpriteDictionary.Serpents[7];
+        return actor.IsEating ? SpriteDictionary.Serpents[5] : null;
     }
     protected override Sprite AccessorySprite(Actor_Unit actor)
     {
-        return actor.IsEating ? State.GameManager.SpriteDictionary.Serpents[4] : null;
+        return actor.IsEating ? SpriteDictionary.Serpents[4] : null;
     }
 
     protected override Sprite BodySizeSprite(Actor_Unit actor)
     {
         if (actor.HasBelly == false)
             return null;
-        return State.GameManager.SpriteDictionary.Serpents[8 + actor.GetStomachSize(3, 3)];
+        return SpriteDictionary.Serpents[8 + actor.GetStomachSize(3, 3)];
 
     }
 
@@ -58,11 +58,11 @@ class Serpents : BlankSlate
     {
         if (actor.HasBelly == false)
             return null;
-        return State.GameManager.SpriteDictionary.Serpents[12 + actor.GetStomachSize(3, 3)];
+        return SpriteDictionary.Serpents[12 + actor.GetStomachSize(3, 3)];
     }
 
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Serpents[Math.Min(16 + actor.Unit.EyeType, 19)];
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Serpents[Math.Min(16 + actor.Unit.EyeType, 19)];
 
 }
 

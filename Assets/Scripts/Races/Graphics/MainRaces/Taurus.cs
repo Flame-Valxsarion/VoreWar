@@ -139,7 +139,7 @@ class Taurus : DefaultRaceData
         if (actor.Unit.HasBreasts == false)
             sprite += 9;
 
-        return State.GameManager.SpriteDictionary.Cows[sprite];
+        return SpriteDictionary.Cows[sprite];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
@@ -147,15 +147,15 @@ class Taurus : DefaultRaceData
         if (actor.GetWeaponSprite() == 2)
         {
             if ((Config.FurryHandsAndFeet || actor.Unit.Furry) == false)
-                return State.GameManager.SpriteDictionary.Cows[20];
-            return State.GameManager.SpriteDictionary.Cows[actor.Unit.HasBreasts ? 21 : 22];
+                return SpriteDictionary.Cows[20];
+            return SpriteDictionary.Cows[actor.Unit.HasBreasts ? 21 : 22];
         }
         if ((Config.FurryHandsAndFeet || actor.Unit.Furry) == false)
             return null;
         int sprite = actor.IsAttacking ? 5 : 4;
         if (actor.Unit.HasBreasts == false)
             sprite += 9;
-        return State.GameManager.SpriteDictionary.Cows[sprite];
+        return SpriteDictionary.Cows[sprite];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
@@ -163,31 +163,31 @@ class Taurus : DefaultRaceData
         if ((Config.FurryHandsAndFeet || actor.Unit.Furry) == false || Config.FurryFluff == false)
             return null;
         if (actor.GetWeaponSprite() == 2)
-            return State.GameManager.SpriteDictionary.Cows[actor.Unit.HasBreasts ? 23 : 24];
+            return SpriteDictionary.Cows[actor.Unit.HasBreasts ? 23 : 24];
         int sprite = actor.IsAttacking ? 7 : 6;
         if (actor.Unit.HasBreasts == false)
             sprite += 9;
-        return State.GameManager.SpriteDictionary.Cows[sprite];
+        return SpriteDictionary.Cows[sprite];
     }
 
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cows[18];
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => SpriteDictionary.Cows[18];
 
-    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cows[12];
+    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => SpriteDictionary.Cows[12];
 
-    protected override Sprite BodyAccentSprite5(Actor_Unit actor) => (Config.FurryHandsAndFeet || actor.Unit.Furry || Config.FurryFluff == false) ? State.GameManager.SpriteDictionary.Cows[19] : null;
+    protected override Sprite BodyAccentSprite5(Actor_Unit actor) => (Config.FurryHandsAndFeet || actor.Unit.Furry || Config.FurryFluff == false) ? SpriteDictionary.Cows[19] : null;
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cows[3];
-    protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cows[25];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Cows[3];
+    protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) => SpriteDictionary.Cows[25];
 
-    protected override Sprite BodySizeSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cows[actor.Unit.HasBreasts ? 8 : 17];
+    protected override Sprite BodySizeSprite(Actor_Unit actor) => SpriteDictionary.Cows[actor.Unit.HasBreasts ? 8 : 17];
 
     protected override Sprite BreastsSprite(Actor_Unit actor)
     {
         if (actor.Unit.HasBreasts == false)
             return null;
         if (actor.SquishedBreasts)
-            return State.GameManager.SpriteDictionary.Cows[Math.Max(114 + actor.Unit.BreastSize, 115)];
-        return State.GameManager.SpriteDictionary.Cows[110 + actor.Unit.BreastSize];
+            return SpriteDictionary.Cows[Math.Max(114 + actor.Unit.BreastSize, 115)];
+        return SpriteDictionary.Cows[110 + actor.Unit.BreastSize];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
@@ -201,28 +201,28 @@ class Taurus : DefaultRaceData
             {
                 Dick.layer = 18;
                 if (actor.Unit.DickSize == 4)
-                    return State.GameManager.SpriteDictionary.Cows[123];
+                    return SpriteDictionary.Cows[123];
                 else if (actor.Unit.DickSize == 3)
-                    return State.GameManager.SpriteDictionary.Cows[121];
-                return State.GameManager.SpriteDictionary.Cows[29 + actor.Unit.DickSize];
+                    return SpriteDictionary.Cows[121];
+                return SpriteDictionary.Cows[29 + actor.Unit.DickSize];
             }
             else
             {
                 Dick.layer = 12;
                 if (actor.Unit.DickSize == 4)
-                    return State.GameManager.SpriteDictionary.Cows[122];
+                    return SpriteDictionary.Cows[122];
                 else if (actor.Unit.DickSize == 3)
-                    return State.GameManager.SpriteDictionary.Cows[120];
-                return State.GameManager.SpriteDictionary.Cows[26 + actor.Unit.DickSize];
+                    return SpriteDictionary.Cows[120];
+                return SpriteDictionary.Cows[26 + actor.Unit.DickSize];
             }
         }
 
         Dick.layer = 9;
         if (actor.Unit.DickSize == 4)
-            return State.GameManager.SpriteDictionary.Cows[122];
+            return SpriteDictionary.Cows[122];
         else if (actor.Unit.DickSize == 3)
-            return State.GameManager.SpriteDictionary.Cows[119];
-        return State.GameManager.SpriteDictionary.Cows[26 + actor.Unit.DickSize];
+            return SpriteDictionary.Cows[119];
+        return SpriteDictionary.Cows[26 + actor.Unit.DickSize];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)
@@ -234,7 +234,7 @@ class Taurus : DefaultRaceData
             sprite += 2;
         if (actor.IsOralVoring)
             sprite += 1;
-        return State.GameManager.SpriteDictionary.Cows[sprite];
+        return SpriteDictionary.Cows[sprite];
 
     }
 
@@ -268,7 +268,7 @@ class Taurus : DefaultRaceData
                     break;
             }
 
-            return State.GameManager.SpriteDictionary.Cows[40 + actor.GetWeaponSprite()];
+            return SpriteDictionary.Cows[40 + actor.GetWeaponSprite()];
         }
         else
         {
@@ -281,8 +281,8 @@ class Taurus : DefaultRaceData
         if (actor.Unit.Furry)
         {
             if (actor.Unit.HasBreasts)
-                return State.GameManager.SpriteDictionary.Cows[63];
-            return State.GameManager.SpriteDictionary.Cows[76];
+                return SpriteDictionary.Cows[63];
+            return SpriteDictionary.Cows[76];
         }
         int sprite = 48;
         sprite += 3 * actor.Unit.EyeType;
@@ -293,7 +293,7 @@ class Taurus : DefaultRaceData
                 sprite = 80;
         }
 
-        return State.GameManager.SpriteDictionary.Cows[sprite];
+        return SpriteDictionary.Cows[sprite];
     }
 
     protected override Sprite EyesSecondarySprite(Actor_Unit actor)
@@ -311,7 +311,7 @@ class Taurus : DefaultRaceData
                 sprite = 82;
         }
 
-        return State.GameManager.SpriteDictionary.Cows[sprite];
+        return SpriteDictionary.Cows[sprite];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
@@ -329,7 +329,7 @@ class Taurus : DefaultRaceData
                 sprite = 81;
         }
 
-        return State.GameManager.SpriteDictionary.Cows[sprite];
+        return SpriteDictionary.Cows[sprite];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -341,12 +341,12 @@ class Taurus : DefaultRaceData
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(11, .95f) == 11)
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.CowsSeliciaBelly[1];
+                return SpriteDictionary.CowsSeliciaBelly[1];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(11, .95f) == 11)
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.CowsSeliciaBelly[0];
+                return SpriteDictionary.CowsSeliciaBelly[0];
             }
 
             if (actor.PredatorComponent.VisibleFullness > 4)
@@ -358,7 +358,7 @@ class Taurus : DefaultRaceData
             }
             else
                 belly.transform.localScale = new Vector3(1, 1, 1);
-            return State.GameManager.SpriteDictionary.Cows[98 + actor.GetStomachSize(11, .95f)];
+            return SpriteDictionary.Cows[98 + actor.GetStomachSize(11, .95f)];
         }
         else
         {
@@ -366,17 +366,17 @@ class Taurus : DefaultRaceData
         }
     }
 
-    protected override Sprite HairSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cows[77 + actor.Unit.HairStyle];
+    protected override Sprite HairSprite(Actor_Unit actor) => SpriteDictionary.Cows[77 + actor.Unit.HairStyle];
     protected override Sprite HairSprite2(Actor_Unit actor)
     {
         if (actor.Unit.HairStyle <= 6)
-            return State.GameManager.SpriteDictionary.Cows[90 + actor.Unit.HairStyle];
+            return SpriteDictionary.Cows[90 + actor.Unit.HairStyle];
         return null;
     }
     protected override Sprite HairSprite3(Actor_Unit actor)
     {
         if (actor.Unit.HairStyle == 6)
-            return State.GameManager.SpriteDictionary.Cows[97];
+            return SpriteDictionary.Cows[97];
         return null;
     }
 
@@ -389,8 +389,8 @@ class Taurus : DefaultRaceData
         //    int size = actor.Unit.DickSize;
         //    int offset = (int)((actor.PredatorComponent?.BallsFullness ?? 0) * 3);
         //    if (offset > 0)
-        //        return State.GameManager.SpriteDictionary.FurryDicks[Math.Min(12 + offset, 23)];
-        //    return State.GameManager.SpriteDictionary.FurryDicks[size];
+        //        return SpriteDictionary.FurryDicks[Math.Min(12 + offset, 23)];
+        //    return SpriteDictionary.FurryDicks[size];
         //}
 
         int baseSize = 2;
@@ -438,7 +438,7 @@ class Taurus : DefaultRaceData
         if (actor.Unit.Furry)
             return null;
         if (actor.Unit.BeardStyle > 0)
-            return State.GameManager.SpriteDictionary.Cows[87 + actor.Unit.BeardStyle];
+            return SpriteDictionary.Cows[87 + actor.Unit.BeardStyle];
         return null;
     }
 

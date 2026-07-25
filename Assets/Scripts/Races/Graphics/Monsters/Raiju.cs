@@ -86,31 +86,31 @@ class Raiju : BlankSlate
             }
         }
 
-        if (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame] == 0) return State.GameManager.SpriteDictionary.Raiju[13];
+        if (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame] == 0) return SpriteDictionary.Raiju[13];
         else if (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame] == 1) return null;
-        else if (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame] == 2) return State.GameManager.SpriteDictionary.Raiju[92];
+        else if (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame] == 2) return SpriteDictionary.Raiju[92];
 
         return null;
     }
 
     protected override Sprite BodySprite(Actor_Unit actor) // Lower Body
     {
-        return State.GameManager.SpriteDictionary.Raiju[0];
+        return SpriteDictionary.Raiju[0];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Slit
     {
         if (actor.Unit.BreastSize < 0) return null;
 
-        if (actor.IsUnbirthing) return State.GameManager.SpriteDictionary.Raiju[15];
-        return State.GameManager.SpriteDictionary.Raiju[14];
+        if (actor.IsUnbirthing) return SpriteDictionary.Raiju[15];
+        return SpriteDictionary.Raiju[14];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Slit Insides
     {
         if (actor.Unit.BreastSize < 0) return null;
 
-        if (actor.IsUnbirthing) return State.GameManager.SpriteDictionary.Raiju[16];
+        if (actor.IsUnbirthing) return SpriteDictionary.Raiju[16];
         return null;
     }
 
@@ -118,55 +118,55 @@ class Raiju : BlankSlate
     {
         if (Config.HideCocks || actor.Unit.DickSize < 0) return null;
 
-        if (actor.GetBallSize(45) == 0) return State.GameManager.SpriteDictionary.Raiju[36 + actor.Unit.DickSize];
+        if (actor.GetBallSize(45) == 0) return SpriteDictionary.Raiju[36 + actor.Unit.DickSize];
 
         int size = actor.GetBallSize(45);
 
         if (size >= 44 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[23];
+            return SpriteDictionary.Raiju240[23];
         }
 
         else if (size >= 42 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[22];
+            return SpriteDictionary.Raiju240[22];
         }
 
         else if (size >= 40 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[21];
+            return SpriteDictionary.Raiju240[21];
         }
 
         else if (size >= 38 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[20];
+            return SpriteDictionary.Raiju240[20];
         }
 
         else if (size >= 36 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[19];
+            return SpriteDictionary.Raiju240[19];
         }
 
         else if (size >= 34 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[18];
+            return SpriteDictionary.Raiju240[18];
         }
 
         else if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[17];
+            return SpriteDictionary.Raiju240[17];
         }
 
         else if (size >= 30 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[16];
+            return SpriteDictionary.Raiju240[16];
         }
 
         if (size > 29) size = 29;
 
-        if (size >= 26) return State.GameManager.SpriteDictionary.Raiju240[12 + size - 26];
+        if (size >= 26) return SpriteDictionary.Raiju240[12 + size - 26];
 
-        return State.GameManager.SpriteDictionary.Raiju[40 + size];
+        return SpriteDictionary.Raiju[40 + size];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor) // Penis
@@ -176,22 +176,22 @@ class Raiju : BlankSlate
         if (actor.PredatorComponent?.VisibleFullness < .4f)
         {
             Dick.layer = 10;
-            if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raiju[24 + actor.Unit.DickSize];
-            if (actor.IsErect()) return State.GameManager.SpriteDictionary.Raiju[20 + actor.Unit.DickSize];
+            if (actor.IsCockVoring) return SpriteDictionary.Raiju[24 + actor.Unit.DickSize];
+            if (actor.IsErect()) return SpriteDictionary.Raiju[20 + actor.Unit.DickSize];
             return null;
         }
 
         Dick.layer = 5;
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raiju[32 + actor.Unit.DickSize];
-        if (actor.IsErect()) return State.GameManager.SpriteDictionary.Raiju[28 + actor.Unit.DickSize];
+        if (actor.IsCockVoring) return SpriteDictionary.Raiju[32 + actor.Unit.DickSize];
+        if (actor.IsErect()) return SpriteDictionary.Raiju[28 + actor.Unit.DickSize];
         return null;
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Arms
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Raiju[3];
-        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raiju[4];
-        return State.GameManager.SpriteDictionary.Raiju[2];
+        if (actor.IsAttacking) return SpriteDictionary.Raiju[3];
+        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return SpriteDictionary.Raiju[4];
+        return SpriteDictionary.Raiju[2];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly) // Belly
@@ -203,81 +203,81 @@ class Raiju : BlankSlate
 
         if (size >= 44 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[11];
+            return SpriteDictionary.Raiju240[11];
         }
 
         else if (size >= 42 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[10];
+            return SpriteDictionary.Raiju240[10];
         }
 
         else if (size >= 40 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[9];
+            return SpriteDictionary.Raiju240[9];
         }
 
         else if (size >= 38 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[8];
+            return SpriteDictionary.Raiju240[8];
         }
 
         else if (size >= 36 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[7];
+            return SpriteDictionary.Raiju240[7];
         }
 
         else if (size >= 34 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[6];
+            return SpriteDictionary.Raiju240[6];
         }
 
         else if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[5];
+            return SpriteDictionary.Raiju240[5];
         }
 
         else if (size >= 30 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raiju240[4];
+            return SpriteDictionary.Raiju240[4];
         }
 
         if (size > 29) size = 29;
 
-        if (size >= 26) return State.GameManager.SpriteDictionary.Raiju240[0 + size - 26];
+        if (size >= 26) return SpriteDictionary.Raiju240[0 + size - 26];
 
-        return State.GameManager.SpriteDictionary.Raiju[66 + size];
+        return SpriteDictionary.Raiju[66 + size];
     }
 
     protected override Sprite BodyAccentSprite5(Actor_Unit actor) // Upper Body
     {
-        return State.GameManager.SpriteDictionary.Raiju[1];
+        return SpriteDictionary.Raiju[1];
     }
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Pattern
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Raiju[18];
-        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raiju[19];
-        return State.GameManager.SpriteDictionary.Raiju[17];
+        if (actor.IsAttacking) return SpriteDictionary.Raiju[18];
+        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return SpriteDictionary.Raiju[19];
+        return SpriteDictionary.Raiju[17];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor) // Head
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Raiju[6];
-        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raiju[7];
-        return State.GameManager.SpriteDictionary.Raiju[5];
+        if (actor.IsAttacking) return SpriteDictionary.Raiju[6];
+        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return SpriteDictionary.Raiju[7];
+        return SpriteDictionary.Raiju[5];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor) // Mouth
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Raiju[8];
-        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raiju[9];
+        if (actor.IsAttacking) return SpriteDictionary.Raiju[8];
+        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return SpriteDictionary.Raiju[9];
         return null;
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor) // Eyes
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Raiju[11];
-        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raiju[12];
-        return State.GameManager.SpriteDictionary.Raiju[10];
+        if (actor.IsAttacking) return SpriteDictionary.Raiju[11];
+        if (actor.IsUnbirthing || actor.IsOralVoring || actor.IsCockVoring) return SpriteDictionary.Raiju[12];
+        return SpriteDictionary.Raiju[10];
     }
 }

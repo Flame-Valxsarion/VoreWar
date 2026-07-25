@@ -12,7 +12,7 @@ class Mantis : BlankSlate
         Eating
     }
     Position position;
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Mantis;
+    readonly Sprite[] Sprites = SpriteDictionary.Mantis;
 
     public Mantis()
     {

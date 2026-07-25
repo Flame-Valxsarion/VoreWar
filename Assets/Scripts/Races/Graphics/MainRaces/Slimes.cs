@@ -90,11 +90,11 @@ class Slimes : DefaultRaceData
     {
         return ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.SlimeSub, 3 * actor.Unit.AccessoryColor + actor.Unit.HairColor).colorSwapMaterial;
     }
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Slimes[18];
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Slimes[actor.GetSimpleBodySprite()];
-    protected override Sprite BodySizeSprite(Actor_Unit actor) => actor.GetBodyWeight() == 1 ? State.GameManager.SpriteDictionary.Slimes[3] : null;
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Slimes[4 + actor.GetBodyWeight()];
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Slimes[6 + (actor.IsAttacking ? 1 : 0)];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Slimes[18];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Slimes[actor.GetSimpleBodySprite()];
+    protected override Sprite BodySizeSprite(Actor_Unit actor) => actor.GetBodyWeight() == 1 ? SpriteDictionary.Slimes[3] : null;
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Slimes[4 + actor.GetBodyWeight()];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Slimes[6 + (actor.IsAttacking ? 1 : 0)];
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
     {
@@ -111,7 +111,7 @@ class Slimes : DefaultRaceData
 
         if (actor.Unit.HasWeapon && actor.Surrendered == false)
         {
-            return State.GameManager.SpriteDictionary.Slimes[8 + actor.GetWeaponSprite()];
+            return SpriteDictionary.Slimes[8 + actor.GetWeaponSprite()];
         }
         else
         {
@@ -123,22 +123,22 @@ class Slimes : DefaultRaceData
         return actor.GetWeaponSprite() > 1 && actor.GetWeaponSprite() < 6;
     }
 
-    protected override Sprite HairSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Slimes[20 + actor.Unit.HairStyle];
+    protected override Sprite HairSprite(Actor_Unit actor) => SpriteDictionary.Slimes[20 + actor.Unit.HairStyle];
 
     protected override Sprite HairSprite2(Actor_Unit actor)
     {
         if (actor.Unit.HairStyle == 1)
-            return State.GameManager.SpriteDictionary.Slimes[32];
+            return SpriteDictionary.Slimes[32];
         if (actor.Unit.HairStyle == 3)
-            return State.GameManager.SpriteDictionary.Slimes[33];
+            return SpriteDictionary.Slimes[33];
         if (actor.Unit.HairStyle == 2 || actor.Unit.HairStyle == 4 || actor.Unit.HairStyle == 7)
-            return State.GameManager.SpriteDictionary.Slimes[34];
+            return SpriteDictionary.Slimes[34];
         return null;
     }
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Slimes[35 + actor.Unit.EyeType];
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Slimes[35 + actor.Unit.EyeType];
 
-    protected override Sprite BreastsSprite(Actor_Unit actor) => actor.Unit.HasBreasts ? State.GameManager.SpriteDictionary.Slimes[38 + actor.Unit.BreastSize] : null;
+    protected override Sprite BreastsSprite(Actor_Unit actor) => actor.Unit.HasBreasts ? SpriteDictionary.Slimes[38 + actor.Unit.BreastSize] : null;
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -150,7 +150,7 @@ class Slimes : DefaultRaceData
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
                 AddOffset(Belly, 0, -25 * .625f);
-                return State.GameManager.SpriteDictionary.Slimes[69];
+                return SpriteDictionary.Slimes[69];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb))
             {
@@ -158,13 +158,13 @@ class Slimes : DefaultRaceData
                 {
                     belly.transform.localScale = new Vector3(1, 1, 1);
                     AddOffset(Belly, 0, -25 * .625f);
-                    return State.GameManager.SpriteDictionary.Slimes[68];
+                    return SpriteDictionary.Slimes[68];
                 }
                 else if (actor.GetStomachSize(15, .875f) == 15)
                 {
                     belly.transform.localScale = new Vector3(1, 1, 1);
                     AddOffset(Belly, 0, -25 * .625f);
-                    return State.GameManager.SpriteDictionary.Slimes[67];
+                    return SpriteDictionary.Slimes[67];
                 }
 
 
@@ -180,7 +180,7 @@ class Slimes : DefaultRaceData
             }
             else
                 belly.transform.localScale = new Vector3(1, 1, 1);
-            return State.GameManager.SpriteDictionary.Slimes[51 + actor.GetStomachSize()];
+            return SpriteDictionary.Slimes[51 + actor.GetStomachSize()];
         }
         else
         {

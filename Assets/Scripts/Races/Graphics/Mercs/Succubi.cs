@@ -79,14 +79,14 @@ class Succubi : DefaultRaceData
     {
         if (actor.IsUnbirthing || actor.IsAnalVoring)
         {
-            return State.GameManager.SpriteDictionary.Succubi[4];
+            return SpriteDictionary.Succubi[4];
         }
         else
         {
             //int sizeOffset = actor.PredatorComponent?.VisibleFullness > .25f ? 1 : 0;
             int sizeOffset = 1;
             int attackingOffset = actor.IsAttacking ? 2 : 0;
-            return State.GameManager.SpriteDictionary.Succubi[sizeOffset + attackingOffset];
+            return SpriteDictionary.Succubi[sizeOffset + attackingOffset];
         }
     }
 
@@ -94,37 +94,37 @@ class Succubi : DefaultRaceData
     {
         if (actor.IsUnbirthing || actor.IsAnalVoring)
         {
-            return State.GameManager.SpriteDictionary.Succubi[9];
+            return SpriteDictionary.Succubi[9];
         }
         else
         {
             //int sizeOffset = actor.PredatorComponent?.VisibleFullness > .25f ? 1 : 0;
             int sizeOffset = 1;
             int attackingOffset = actor.IsAttacking ? 2 : 0;
-            return State.GameManager.SpriteDictionary.Succubi[5 + sizeOffset + attackingOffset];
+            return SpriteDictionary.Succubi[5 + sizeOffset + attackingOffset];
         }
     }
 
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[actor.IsOralVoring ? 21 : 20];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.Succubi[actor.IsOralVoring ? 21 : 20];
 
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[22];
-    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[23];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Succubi[22];
+    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => SpriteDictionary.Succubi[23];
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[24 + actor.Unit.SpecialAccessoryType];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Succubi[24 + actor.Unit.SpecialAccessoryType];
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[27 + actor.Unit.EyeType];
-    protected override Sprite MouthSprite(Actor_Unit actor) => actor.IsOralVoring ? null : State.GameManager.SpriteDictionary.Succubi[30 + actor.Unit.MouthType];
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Succubi[27 + actor.Unit.EyeType];
+    protected override Sprite MouthSprite(Actor_Unit actor) => actor.IsOralVoring ? null : SpriteDictionary.Succubi[30 + actor.Unit.MouthType];
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
     {
         int sizeOffset = actor.PredatorComponent?.TailFullness > 0 ? (1 + actor.GetTailSize(2, 1)) : 0;
         if (actor.IsTailVoring)
         {
-            return State.GameManager.SpriteDictionary.Succubi[37 + sizeOffset];
+            return SpriteDictionary.Succubi[37 + sizeOffset];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.Succubi[33 + sizeOffset];
+            return SpriteDictionary.Succubi[33 + sizeOffset];
         }
     }
 
@@ -133,7 +133,7 @@ class Succubi : DefaultRaceData
         int sizeOffset = actor.PredatorComponent?.TailFullness > 0 ? 1 : 0;
         if (actor.IsTailVoring)
         {
-            return State.GameManager.SpriteDictionary.Succubi[41 + sizeOffset];
+            return SpriteDictionary.Succubi[41 + sizeOffset];
         }
         return null;
     }
@@ -147,17 +147,17 @@ class Succubi : DefaultRaceData
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(15, 1) == 15)
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.Succubi[88];
+                return SpriteDictionary.Succubi[88];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(15, 1) == 15)
             {
 
                 if (actor.GetStomachSize(15, 0.7f) == 15)
-                    return State.GameManager.SpriteDictionary.Succubi[91];
+                    return SpriteDictionary.Succubi[91];
                 else if (actor.GetStomachSize(15, 0.8f) == 15)
-                    return State.GameManager.SpriteDictionary.Succubi[90];
+                    return SpriteDictionary.Succubi[90];
                 else if (actor.GetStomachSize(15, 0.9f) == 15)
-                    return State.GameManager.SpriteDictionary.Succubi[89];
+                    return SpriteDictionary.Succubi[89];
             }
 
             if (actor.PredatorComponent.VisibleFullness > 4)
@@ -169,7 +169,7 @@ class Succubi : DefaultRaceData
             }
             else
                 belly.transform.localScale = new Vector3(1, 1, 1);
-            return State.GameManager.SpriteDictionary.Succubi[43 + actor.GetStomachSize()];
+            return SpriteDictionary.Succubi[43 + actor.GetStomachSize()];
         }
         else
         {
@@ -182,8 +182,8 @@ class Succubi : DefaultRaceData
         if (actor.Unit.HasBreasts == false)
             return null;
         if (actor.SquishedBreasts)
-            return State.GameManager.SpriteDictionary.Succubi[59 + actor.Unit.BreastSize];
-        return State.GameManager.SpriteDictionary.Succubi[63 + actor.Unit.BreastSize];
+            return SpriteDictionary.Succubi[59 + actor.Unit.BreastSize];
+        return SpriteDictionary.Succubi[63 + actor.Unit.BreastSize];
     }
 
     protected override Sprite BreastsShadowSprite(Actor_Unit actor)
@@ -191,8 +191,8 @@ class Succubi : DefaultRaceData
         if (actor.Unit.HasBreasts == false)
             return null;
         if (actor.SquishedBreasts)
-            return State.GameManager.SpriteDictionary.Succubi[67 + actor.Unit.BreastSize];
-        return State.GameManager.SpriteDictionary.Succubi[71 + actor.Unit.BreastSize];
+            return SpriteDictionary.Succubi[67 + actor.Unit.BreastSize];
+        return SpriteDictionary.Succubi[71 + actor.Unit.BreastSize];
     }
 
     protected override Sprite BallsSprite(Actor_Unit actor)
@@ -240,9 +240,9 @@ class Succubi : DefaultRaceData
 
     }
 
-    protected override Sprite HairSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[Math.Min(75 + actor.Unit.HairStyle, 78)];
-    protected override Sprite HairSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[Math.Min(79 + actor.Unit.HairStyle, 82)];
-    protected override Sprite HairSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.Succubi[Math.Min(83 + actor.Unit.HairStyle, 88)];
+    protected override Sprite HairSprite(Actor_Unit actor) => SpriteDictionary.Succubi[Math.Min(75 + actor.Unit.HairStyle, 78)];
+    protected override Sprite HairSprite2(Actor_Unit actor) => SpriteDictionary.Succubi[Math.Min(79 + actor.Unit.HairStyle, 82)];
+    protected override Sprite HairSprite3(Actor_Unit actor) => SpriteDictionary.Succubi[Math.Min(83 + actor.Unit.HairStyle, 88)];
 
 
 

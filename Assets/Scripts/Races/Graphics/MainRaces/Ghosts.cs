@@ -4,11 +4,11 @@ using UnityEngine;
 
 class Ghosts : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Ghosts1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Ghosts2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Ghosts3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.GhostsVoreSprites;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.HumansBodySprites4;
+    readonly Sprite[] Sprites = SpriteDictionary.Ghosts1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Ghosts2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Ghosts3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.GhostsVoreSprites;
+    readonly Sprite[] Sprites5 = SpriteDictionary.HumansBodySprites4;
 
     bool oversize = false;
 

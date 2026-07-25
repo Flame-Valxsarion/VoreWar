@@ -3,15 +3,15 @@ using UnityEngine;
 
 class RwuMercenaries : BlankSlate
 {
-    readonly Sprite[] Sprites1 = State.GameManager.SpriteDictionary.RwuMercenaries1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.RwuMercenaries2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.RwuMercenaries3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.RwuMercenaries4;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.RwuMercenaries5;
-    readonly Sprite[] Sprites6 = State.GameManager.SpriteDictionary.RwuMercenaries6;
-    readonly Sprite[] Sprites7 = State.GameManager.SpriteDictionary.RwuMercenaries7;
-    readonly Sprite[] Sprites8a = State.GameManager.SpriteDictionary.RwuMercenaries8a;
-    readonly Sprite[] Sprites8b = State.GameManager.SpriteDictionary.RwuMercenaries8b;
+    readonly Sprite[] Sprites1 = SpriteDictionary.RwuMercenaries1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.RwuMercenaries2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.RwuMercenaries3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.RwuMercenaries4;
+    readonly Sprite[] Sprites5 = SpriteDictionary.RwuMercenaries5;
+    readonly Sprite[] Sprites6 = SpriteDictionary.RwuMercenaries6;
+    readonly Sprite[] Sprites7 = SpriteDictionary.RwuMercenaries7;
+    readonly Sprite[] Sprites8a = SpriteDictionary.RwuMercenaries8a;
+    readonly Sprite[] Sprites8b = SpriteDictionary.RwuMercenaries8b;
 
     internal RwuMercenaries()
     {
@@ -341,19 +341,19 @@ class RwuMercenaries : BlankSlate
             switch (actor.Unit.EyeType)
             {
                 case 0:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries2[6];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries2[6];
                     break;
                 case 1:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries4[6];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries4[6];
                     break;
                 case 2:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries6[6];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries6[6];
                     break;
                 case 3:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries8a[6];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries8a[6];
                     break;
                 default:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries2[6];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries2[6];
                     break;
             }
             base.Configure(sprite, actor);
@@ -379,19 +379,19 @@ class RwuMercenaries : BlankSlate
             switch (actor.Unit.EyeType)
             {
                 case 0:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries2[13];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries2[13];
                     break;
                 case 1:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries4[13];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries4[13];
                     break;
                 case 2:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries6[13];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries6[13];
                     break;
                 case 3:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries8a[13];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries8a[13];
                     break;
                 default:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RwuMercenaries2[13];
+                    clothing1.GetSprite = (s) => SpriteDictionary.RwuMercenaries2[13];
                     break;
             }
             base.Configure(sprite, actor);

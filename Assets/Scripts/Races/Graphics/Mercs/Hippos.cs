@@ -4,9 +4,9 @@ using UnityEngine;
 
 class Hippos : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Hippos;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Hippos2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Hippos3;
+    readonly Sprite[] Sprites = SpriteDictionary.Hippos;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Hippos2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Hippos3;
 
     bool oversize = false;
 
@@ -381,7 +381,7 @@ class Hippos : DefaultRaceData
     {
         public HipposTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Hippos2[60];
+            DiscardSprite = SpriteDictionary.Hippos2[60];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -397,7 +397,7 @@ class Hippos : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[52 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[52 + actor.Unit.BreastSize];
             }
             else
             {
@@ -412,7 +412,7 @@ class Hippos : DefaultRaceData
     {
         public HipposTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Hippos2[87];
+            DiscardSprite = SpriteDictionary.Hippos2[87];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -427,11 +427,11 @@ class Hippos : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[79 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[79 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[103];
+                clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[103];
             }
             base.Configure(sprite, actor);
         }
@@ -441,7 +441,7 @@ class Hippos : DefaultRaceData
     {
         public HipposTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Hippos2[96];
+            DiscardSprite = SpriteDictionary.Hippos2[96];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -456,11 +456,11 @@ class Hippos : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[88 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[88 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[104];
+                clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[104];
             }
             base.Configure(sprite, actor);
         }
@@ -485,8 +485,8 @@ class Hippos : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos3[96 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos3[95];
+                clothing1.GetSprite = (s) => SpriteDictionary.Hippos3[96 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Hippos3[95];
             }
             else
             {
@@ -506,7 +506,7 @@ class Hippos : DefaultRaceData
     {
         public HipposBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Hippos2[66];
+            DiscardSprite = SpriteDictionary.Hippos2[66];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
             Type = 84266;
@@ -514,7 +514,7 @@ class Hippos : DefaultRaceData
         }
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[61 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[61 + actor.Unit.BodySize];
             base.Configure(sprite, actor);
         }
     }
@@ -523,7 +523,7 @@ class Hippos : DefaultRaceData
     {
         public HipposBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Hippos2[72];
+            DiscardSprite = SpriteDictionary.Hippos2[72];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
             Type = 84272;
@@ -531,7 +531,7 @@ class Hippos : DefaultRaceData
         }
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[67 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[67 + actor.Unit.BodySize];
             base.Configure(sprite, actor);
         }
     }
@@ -540,7 +540,7 @@ class Hippos : DefaultRaceData
     {
         public HipposBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Hippos2[78];
+            DiscardSprite = SpriteDictionary.Hippos2[78];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
             Type = 84278;
@@ -548,7 +548,7 @@ class Hippos : DefaultRaceData
         }
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[73 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[73 + actor.Unit.BodySize];
             base.Configure(sprite, actor);
         }
     }
@@ -557,7 +557,7 @@ class Hippos : DefaultRaceData
     {
         public HipposBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Hippos2[102];
+            DiscardSprite = SpriteDictionary.Hippos2[102];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
             Type = 84302;
@@ -565,7 +565,7 @@ class Hippos : DefaultRaceData
         }
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[97 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[97 + actor.Unit.BodySize];
             base.Configure(sprite, actor);
         }
     }
@@ -579,7 +579,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[44];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[44];
             base.Configure(sprite, actor);
         }
     }
@@ -593,7 +593,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[45];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[45];
             base.Configure(sprite, actor);
         }
     }
@@ -607,7 +607,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[46];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[46];
             base.Configure(sprite, actor);
         }
     }
@@ -621,7 +621,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[47];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[47];
             base.Configure(sprite, actor);
         }
     }
@@ -635,7 +635,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[48];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[48];
             base.Configure(sprite, actor);
         }
     }
@@ -649,7 +649,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[49];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[49];
             base.Configure(sprite, actor);
         }
     }
@@ -663,7 +663,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[50];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[50];
             base.Configure(sprite, actor);
         }
     }
@@ -677,7 +677,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[51];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[51];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.HippoSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
         }
@@ -693,7 +693,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[36];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[36];
             base.Configure(sprite, actor);
         }
     }
@@ -707,7 +707,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[37];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[37];
             base.Configure(sprite, actor);
         }
     }
@@ -721,7 +721,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[38];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[38];
             base.Configure(sprite, actor);
         }
     }
@@ -735,7 +735,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[39];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[39];
             base.Configure(sprite, actor);
         }
     }
@@ -749,7 +749,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[40];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[40];
             base.Configure(sprite, actor);
         }
     }
@@ -763,7 +763,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[41];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[41];
             base.Configure(sprite, actor);
         }
     }
@@ -777,7 +777,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[42];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[42];
             base.Configure(sprite, actor);
         }
     }
@@ -791,7 +791,7 @@ class Hippos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Hippos2[43];
+            clothing1.GetSprite = (s) => SpriteDictionary.Hippos2[43];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.HippoSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
         }

@@ -39,8 +39,10 @@
     Bears = 34,
     Umbreon = 35,
     Lupine = 36,
-    Jackals  = 37,
+    Jackals = 37,
     Ghosts = 38,
+    Draconians = 39,
+    Yordles = 40,
 
     Succubi = 50,
     Tigers = 51,
@@ -60,6 +62,9 @@
     Centaur = 65,
     Eevee = 66,
     Equaleon = 67,
+    Badgers = 68,
+    Renamon = 69, //Nice~
+    OoviKat = 70,
 
     Vagrants = 100,
     Serpents = 101,
@@ -123,6 +128,9 @@
     Trex = 159,
     Utahraptor = 160,
     Iliijiith = 161,
+    Pudding = 162,
+    SoulSprite = 163,
+    BlackWidow = 164,
 
     Selicia = 170,
     Vision = 171,
@@ -145,7 +153,10 @@
     Olivia = 188,
     Skapa = 189,
     Tatltuae = 190,
-    Firefly = 191,
+    Seville = 191,
     Nectar = 192,
     Ryan = 193,
+    Konane = 194,
+    Cherub = 195,
+    Seraph = 196,
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 
 class Panthers : BlankSlate
 {
-    Sprite[] SpritesBase = State.GameManager.SpriteDictionary.PantherBase;
-    Sprite[] SpritesVore = State.GameManager.SpriteDictionary.PantherVoreParts;
+    Sprite[] SpritesBase = SpriteDictionary.PantherBase;
+    Sprite[] SpritesVore = SpriteDictionary.PantherVoreParts;
 
 
     enum ColorStyle
@@ -63,18 +63,18 @@ class Panthers : BlankSlate
 
         AllowedMainClothingTypes = new List<MainClothing>()
         {
-            new GenericFemaleTop(0, 10, 20, State.GameManager.SpriteDictionary.PantherFTops, 801, ColorStyle.InnerWear),
+            new GenericFemaleTop(0, 10, 20, SpriteDictionary.PantherFTops, 801, ColorStyle.InnerWear),
             new BeltTop(20),
-            new GenericFemaleTop(19, 29, 20, State.GameManager.SpriteDictionary.PantherFTops, 803, ColorStyle.InnerWear),
-            new GenericFemaleTop(24, 34, 20, State.GameManager.SpriteDictionary.PantherFTops, 804, ColorStyle.None),
-            new GenericFemaleTop(39, 49, 20, State.GameManager.SpriteDictionary.PantherFTops, 805, ColorStyle.InnerWear),
-            new GenericFemaleTop(44, 54, 20, State.GameManager.SpriteDictionary.PantherFTops, 806, ColorStyle.None),
-            new GenericFemaleTop(59, 64, 20, State.GameManager.SpriteDictionary.PantherFTops, 807, ColorStyle.InnerWear),
-            new Simple(0, 5, 20, State.GameManager.SpriteDictionary.PantherMTops, 808, ColorStyle.None, maleOnly: true),
-            new Simple(1, 6, 20, State.GameManager.SpriteDictionary.PantherMTops, 809, ColorStyle.InnerWear, maleOnly: true),
-            new Simple(2, 7, 20, State.GameManager.SpriteDictionary.PantherMTops, 810, ColorStyle.InnerWear, maleOnly: true),
-            new Simple(3, 8, 20, State.GameManager.SpriteDictionary.PantherMTops, 811, ColorStyle.None, maleOnly: true),
-            new Simple(4, 9, 20, State.GameManager.SpriteDictionary.PantherMTops, 812, ColorStyle.None, maleOnly: true),
+            new GenericFemaleTop(19, 29, 20, SpriteDictionary.PantherFTops, 803, ColorStyle.InnerWear),
+            new GenericFemaleTop(24, 34, 20, SpriteDictionary.PantherFTops, 804, ColorStyle.None),
+            new GenericFemaleTop(39, 49, 20, SpriteDictionary.PantherFTops, 805, ColorStyle.InnerWear),
+            new GenericFemaleTop(44, 54, 20, SpriteDictionary.PantherFTops, 806, ColorStyle.None),
+            new GenericFemaleTop(59, 64, 20, SpriteDictionary.PantherFTops, 807, ColorStyle.InnerWear),
+            new Simple(0, 5, 20, SpriteDictionary.PantherMTops, 808, ColorStyle.None, maleOnly: true),
+            new Simple(1, 6, 20, SpriteDictionary.PantherMTops, 809, ColorStyle.InnerWear, maleOnly: true),
+            new Simple(2, 7, 20, SpriteDictionary.PantherMTops, 810, ColorStyle.InnerWear, maleOnly: true),
+            new Simple(3, 8, 20, SpriteDictionary.PantherMTops, 811, ColorStyle.None, maleOnly: true),
+            new Simple(4, 9, 20, SpriteDictionary.PantherMTops, 812, ColorStyle.None, maleOnly: true),
             new GenericOnepiece(0,5, 18, false),
             new GenericOnepiece(9,14, 18, false),
             new GenericOnepiece(52,57, 69, true),
@@ -83,42 +83,42 @@ class Panthers : BlankSlate
 
         AllowedWaistTypes = new List<MainClothing>() //Bottoms
         {
-            new GenericBottom(0, 0, 12, 6, 8, State.GameManager.SpriteDictionary.PantherBottoms, 840, true),
-            new GenericBottom(1, 1, 12, 7, 8, State.GameManager.SpriteDictionary.PantherBottoms, 841, true),
-            new GenericBottom(2, 2, -2, 8, 8, State.GameManager.SpriteDictionary.PantherBottoms, 842, true),
-            new GenericBottom(3, 17, 14, 9, 8, State.GameManager.SpriteDictionary.PantherBottoms, 843, false),
-            new GenericBottom(16, 4, 12, 10, 8, State.GameManager.SpriteDictionary.PantherBottoms, 844, true),
-            new GenericBottom(5, 5, 12, 11, 8, State.GameManager.SpriteDictionary.PantherBottoms, 845, true),
+            new GenericBottom(0, 0, 12, 6, 8, SpriteDictionary.PantherBottoms, 840, true),
+            new GenericBottom(1, 1, 12, 7, 8, SpriteDictionary.PantherBottoms, 841, true),
+            new GenericBottom(2, 2, -2, 8, 8, SpriteDictionary.PantherBottoms, 842, true),
+            new GenericBottom(3, 17, 14, 9, 8, SpriteDictionary.PantherBottoms, 843, false),
+            new GenericBottom(16, 4, 12, 10, 8, SpriteDictionary.PantherBottoms, 844, true),
+            new GenericBottom(5, 5, 12, 11, 8, SpriteDictionary.PantherBottoms, 845, true),
         };
 
         ExtraMainClothing1Types = new List<MainClothing>() //Overtops
         {
-            new GenericFemaleTop(0, 5, 21, State.GameManager.SpriteDictionary.PantherFOvertops, 830, ColorStyle.OuterWear),
-            new SimpleAttack(20, 21, 22, 21, State.GameManager.SpriteDictionary.PantherFOvertops, 831, ColorStyle.OuterWear, femaleOnly: true),
-            new GenericFemaleTop(10, 15, 21, State.GameManager.SpriteDictionary.PantherFOvertops, 832, ColorStyle.OuterWear),
+            new GenericFemaleTop(0, 5, 21, SpriteDictionary.PantherFOvertops, 830, ColorStyle.OuterWear),
+            new SimpleAttack(20, 21, 22, 21, SpriteDictionary.PantherFOvertops, 831, ColorStyle.OuterWear, femaleOnly: true),
+            new GenericFemaleTop(10, 15, 21, SpriteDictionary.PantherFOvertops, 832, ColorStyle.OuterWear),
             new BoneTop(21),
-            new Simple(0, 6, 21, State.GameManager.SpriteDictionary.PantherMOvertops, 834, ColorStyle.None, maleOnly: true),
-            new Simple(1, 7, 21, State.GameManager.SpriteDictionary.PantherMOvertops, 835, ColorStyle.OuterWear, maleOnly: true),
-            new SimpleAttack(2, 4, 8, 21, State.GameManager.SpriteDictionary.PantherMOvertops, 836, ColorStyle.OuterWear, maleOnly: true),
-            new SimpleAttack(3, 5, 9, 21, State.GameManager.SpriteDictionary.PantherMOvertops, 837, ColorStyle.OuterWear, maleOnly: true),
+            new Simple(0, 6, 21, SpriteDictionary.PantherMOvertops, 834, ColorStyle.None, maleOnly: true),
+            new Simple(1, 7, 21, SpriteDictionary.PantherMOvertops, 835, ColorStyle.OuterWear, maleOnly: true),
+            new SimpleAttack(2, 4, 8, 21, SpriteDictionary.PantherMOvertops, 836, ColorStyle.OuterWear, maleOnly: true),
+            new SimpleAttack(3, 5, 9, 21, SpriteDictionary.PantherMOvertops, 837, ColorStyle.OuterWear, maleOnly: true),
 
         };
 
         ExtraMainClothing2Types = new List<MainClothing>() //Overbottoms
         {
-            new Simple(0, 10, 11, State.GameManager.SpriteDictionary.PantherOverBottoms, 860, ColorStyle.OuterWear, blocksDick: true),
+            new Simple(0, 10, 11, SpriteDictionary.PantherOverBottoms, 860, ColorStyle.OuterWear, blocksDick: true),
             new OverbottomTwoTone(1, 2, 3, 11, 11, 861),
-            new Simple(4, 12, 11, State.GameManager.SpriteDictionary.PantherOverBottoms, 862, ColorStyle.OuterWear, blocksDick: true),
+            new Simple(4, 12, 11, SpriteDictionary.PantherOverBottoms, 862, ColorStyle.OuterWear, blocksDick: true),
             new OverbottomTwoTone(5, 5, 6, 13, 11, 863, blocksDick: true),
-            new Simple(7, 14, 15, State.GameManager.SpriteDictionary.PantherOverBottoms, 864, ColorStyle.None, blocksDick: false),
-            new Simple(8, 15, 11, State.GameManager.SpriteDictionary.PantherOverBottoms, 865, ColorStyle.None, femaleOnly: true, blocksDick: true),
-            new Simple(9, 16, 11, State.GameManager.SpriteDictionary.PantherOverBottoms, 866, ColorStyle.None, maleOnly: true, blocksDick: true),
+            new Simple(7, 14, 15, SpriteDictionary.PantherOverBottoms, 864, ColorStyle.None, blocksDick: false),
+            new Simple(8, 15, 11, SpriteDictionary.PantherOverBottoms, 865, ColorStyle.None, femaleOnly: true, blocksDick: true),
+            new Simple(9, 16, 11, SpriteDictionary.PantherOverBottoms, 866, ColorStyle.None, maleOnly: true, blocksDick: true),
         };
 
         ExtraMainClothing3Types = new List<MainClothing>() //Hats
         {
-            new GenericItem(0, 2, 4, 28, State.GameManager.SpriteDictionary.PantherHats, 888, ColorStyle.None),
-            new GenericItem(1, 3, 5, 28, State.GameManager.SpriteDictionary.PantherHats, 889, ColorStyle.Other),
+            new GenericItem(0, 2, 4, 28, SpriteDictionary.PantherHats, 888, ColorStyle.None),
+            new GenericItem(1, 3, 5, 28, SpriteDictionary.PantherHats, 889, ColorStyle.Other),
             new SantaHat()
         };
 
@@ -135,11 +135,11 @@ class Panthers : BlankSlate
 
         ExtraMainClothing5Types = new List<MainClothing>() //Legs
         {
-            new GenericItem(0, 1, 2, 9, State.GameManager.SpriteDictionary.PantherLegs, 901, ColorStyle.None),
-            new GenericItem(3, 4, 5, 9, State.GameManager.SpriteDictionary.PantherLegs, 902, ColorStyle.None),
-            new GenericItem(6, 7, 8, 9, State.GameManager.SpriteDictionary.PantherLegs, 903, ColorStyle.None),
-            new GenericItem(9, 10, 11, 9, State.GameManager.SpriteDictionary.PantherLegs, 904, ColorStyle.None),
-            new GenericItem(12, 13, 14, 9, State.GameManager.SpriteDictionary.PantherLegs, 905, ColorStyle.None),
+            new GenericItem(0, 1, 2, 9, SpriteDictionary.PantherLegs, 901, ColorStyle.None),
+            new GenericItem(3, 4, 5, 9, SpriteDictionary.PantherLegs, 902, ColorStyle.None),
+            new GenericItem(6, 7, 8, 9, SpriteDictionary.PantherLegs, 903, ColorStyle.None),
+            new GenericItem(9, 10, 11, 9, SpriteDictionary.PantherLegs, 904, ColorStyle.None),
+            new GenericItem(12, 13, 14, 9, SpriteDictionary.PantherLegs, 905, ColorStyle.None),
         };
 
         AllClothing = new List<MainClothing>();
@@ -776,7 +776,7 @@ class Panthers : BlankSlate
 
     class BoneTop : MainClothing
     {
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherFOvertops;
+        Sprite[] sheet = SpriteDictionary.PantherFOvertops;
         public BoneTop(int layer)
         {
             coversBreasts = false;
@@ -822,7 +822,7 @@ class Panthers : BlankSlate
 
     class BeltTop : MainClothing
     {
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherFTops;
+        Sprite[] sheet = SpriteDictionary.PantherFTops;
         public BeltTop(int layer)
         {
             coversBreasts = false;
@@ -865,7 +865,7 @@ class Panthers : BlankSlate
     {
         int sprM;
         int sprF;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherHats;
+        Sprite[] sheet = SpriteDictionary.PantherHats;
 
         public GenericItem(int femaleSprite, int maleSprite, int discard, int layer, Sprite[] sheet, int type, ColorStyle color)
         {
@@ -894,7 +894,7 @@ class Panthers : BlankSlate
 
     class SantaHat : MainClothing
     {
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherHats;
+        Sprite[] sheet = SpriteDictionary.PantherHats;
 
         public SantaHat()
         {
@@ -920,7 +920,7 @@ class Panthers : BlankSlate
     {
         int spr;
         int sprB;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherOverBottoms;
+        Sprite[] sheet = SpriteDictionary.PantherOverBottoms;
 
         public OverbottomTwoTone(int sprite, int bellySprite, int secondSprite, int discard, int layer, int type, bool blocksDick = false)
         {
@@ -952,7 +952,7 @@ class Panthers : BlankSlate
     class GenericGloves : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherGloves;
+        Sprite[] sheet = SpriteDictionary.PantherGloves;
 
         public GenericGloves(int start, int type)
         {
@@ -990,7 +990,7 @@ class Panthers : BlankSlate
     class GenericGlovesPlusSecond : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherGloves;
+        Sprite[] sheet = SpriteDictionary.PantherGloves;
 
         public GenericGlovesPlusSecond(int start, int type)
         {
@@ -1044,7 +1044,7 @@ class Panthers : BlankSlate
         int secondRowStart;
         int finalStart;
         bool noPlusBreast;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherOnePiece;
+        Sprite[] sheet = SpriteDictionary.PantherOnePiece;
 
         public GenericOnepiece(int firstRowStart, int secondRowStart, int finalStart, bool noPlusBreast)
         {

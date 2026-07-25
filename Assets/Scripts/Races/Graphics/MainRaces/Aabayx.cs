@@ -4,8 +4,8 @@ using UnityEngine;
 
 class Aabayx : DefaultRaceData
 {
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.HumansBodySprites4;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.HumansVoreSprites;
+    readonly Sprite[] Sprites5 = SpriteDictionary.HumansBodySprites4;
+    readonly Sprite[] Sprites4 = SpriteDictionary.HumansVoreSprites;
 
     readonly AabayxRags Rags;
 
@@ -127,33 +127,33 @@ class Aabayx : DefaultRaceData
     protected override Sprite BodySprite(Actor_Unit actor) 
     {
         if (actor.Unit.BodySize == 0)
-            return State.GameManager.SpriteDictionary.Aabayx[0 + (actor.IsAttacking ? 1 : 0)];
+            return SpriteDictionary.Aabayx[0 + (actor.IsAttacking ? 1 : 0)];
         if (actor.Unit.BodySize == 1)
-            return State.GameManager.SpriteDictionary.Aabayx[4 + (actor.IsAttacking ? 1 : 0)];
+            return SpriteDictionary.Aabayx[4 + (actor.IsAttacking ? 1 : 0)];
         if (actor.Unit.BodySize == 2)
-            return State.GameManager.SpriteDictionary.Aabayx[6 + (actor.IsAttacking ? 1 : 0)];
+            return SpriteDictionary.Aabayx[6 + (actor.IsAttacking ? 1 : 0)];
         if (actor.Unit.BodySize == 3)
-            return State.GameManager.SpriteDictionary.Aabayx[8 + (actor.IsAttacking ? 1 : 0)];
+            return SpriteDictionary.Aabayx[8 + (actor.IsAttacking ? 1 : 0)];
         if (actor.Unit.BodySize == 4)
-            return State.GameManager.SpriteDictionary.Aabayx[10 + (actor.IsAttacking ? 1 : 0)];
+            return SpriteDictionary.Aabayx[10 + (actor.IsAttacking ? 1 : 0)];
         else return null;
     }
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Aabayx[2];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.Aabayx[2];
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Aabayx[3];
+            return SpriteDictionary.Aabayx[3];
         else return null;
     }
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
             return null;
-        else return State.GameManager.SpriteDictionary.Aabayx[12 + actor.Unit.EyeType];
+        else return SpriteDictionary.Aabayx[12 + actor.Unit.EyeType];
     }
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Aabayx[71 + actor.Unit.TailType];
+        return SpriteDictionary.Aabayx[71 + actor.Unit.TailType];
     }
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -162,17 +162,17 @@ class Aabayx : DefaultRaceData
         int size = actor.GetStomachSize(21); // Credits to Yonell for Selicia sprites
         if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && size == 21)
         {
-            return State.GameManager.SpriteDictionary.Aabayx[57];
+            return SpriteDictionary.Aabayx[57];
         }
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 21)
         {
-            return State.GameManager.SpriteDictionary.Aabayx[56];
+            return SpriteDictionary.Aabayx[56];
         }
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 20 || size == 19 )
         {
-            return State.GameManager.SpriteDictionary.Aabayx[55];
+            return SpriteDictionary.Aabayx[55];
         }
-        return actor.HasBelly ? State.GameManager.SpriteDictionary.Aabayx[33 + actor.GetStomachSize(21)] : null;
+        return actor.HasBelly ? SpriteDictionary.Aabayx[33 + actor.GetStomachSize(21)] : null;
     }
     internal override int DickSizes => 6;
     protected override Sprite DickSprite(Actor_Unit actor)
@@ -269,8 +269,8 @@ class Aabayx : DefaultRaceData
         if (actor.Unit.HasWeapon && actor.Surrendered == false)
         {
             if (actor.Unit.Type == UnitType.Leader)
-                return State.GameManager.SpriteDictionary.AabayxLeader[5 + actor.GetWeaponSprite()];
-            return State.GameManager.SpriteDictionary.Aabayx[99 + actor.GetWeaponSprite()];
+                return SpriteDictionary.AabayxLeader[5 + actor.GetWeaponSprite()];
+            return SpriteDictionary.Aabayx[99 + actor.GetWeaponSprite()];
         }
         else
         {
@@ -286,7 +286,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[65];
+            DiscardSprite = SpriteDictionary.Aabayx[65];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -296,7 +296,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[107 + (actor.IsAttacking ? 1 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[107 + (actor.IsAttacking ? 1 : 0)];
             base.Configure(sprite, actor);
         }
     }
@@ -304,7 +304,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[123];
+            DiscardSprite = SpriteDictionary.Aabayx[123];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -314,7 +314,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[109 + (actor.IsAttacking ? 1 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[109 + (actor.IsAttacking ? 1 : 0)];
             base.Configure(sprite, actor);
         }
     }
@@ -322,7 +322,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[124];
+            DiscardSprite = SpriteDictionary.Aabayx[124];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -332,7 +332,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[111 + (actor.IsAttacking ? 1 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[111 + (actor.IsAttacking ? 1 : 0)];
             base.Configure(sprite, actor);
         }
     }
@@ -340,7 +340,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[125];
+            DiscardSprite = SpriteDictionary.Aabayx[125];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -350,7 +350,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[113 + (actor.IsAttacking ? 1 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[113 + (actor.IsAttacking ? 1 : 0)];
             base.Configure(sprite, actor);
         }
     }
@@ -358,7 +358,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[126];
+            DiscardSprite = SpriteDictionary.Aabayx[126];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -368,7 +368,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[115 + (actor.IsAttacking ? 1 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[115 + (actor.IsAttacking ? 1 : 0)];
             base.Configure(sprite, actor);
         }
     }
@@ -376,7 +376,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[127];
+            DiscardSprite = SpriteDictionary.Aabayx[127];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -386,7 +386,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[117 + (actor.IsAttacking ? 1 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[117 + (actor.IsAttacking ? 1 : 0)];
             base.Configure(sprite, actor);
         }
     }
@@ -394,7 +394,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[128];
+            DiscardSprite = SpriteDictionary.Aabayx[128];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -404,7 +404,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[119 + (actor.IsAttacking ? 1 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[119 + (actor.IsAttacking ? 1 : 0)];
             base.Configure(sprite, actor);
         }
     }
@@ -412,7 +412,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxRags()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[64];
+            DiscardSprite = SpriteDictionary.Aabayx[64];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -424,8 +424,8 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[122];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[121];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[122];
+            clothing2.GetSprite = (s) => SpriteDictionary.Aabayx[121];
             base.Configure(sprite, actor);
         }
     }
@@ -433,7 +433,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxPants1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[58];
+            DiscardSprite = SpriteDictionary.Aabayx[58];
             coversBreasts = false;
             blocksDick = true;
             FixedColor = true;
@@ -443,7 +443,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[66];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[66];
             base.Configure(sprite, actor);
         }
     }
@@ -451,7 +451,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxPants2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[59];
+            DiscardSprite = SpriteDictionary.Aabayx[59];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -461,7 +461,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[67];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[67];
             base.Configure(sprite, actor);
         }
     }
@@ -469,7 +469,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxPants3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[60];
+            DiscardSprite = SpriteDictionary.Aabayx[60];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -479,7 +479,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[68];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[68];
             base.Configure(sprite, actor);
         }
     }
@@ -487,7 +487,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxPants4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[61];
+            DiscardSprite = SpriteDictionary.Aabayx[61];
             coversBreasts = false;
             blocksDick = true;
             FixedColor = true;
@@ -497,7 +497,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[69];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[69];
             base.Configure(sprite, actor);
         }
     }
@@ -505,7 +505,7 @@ class Aabayx : DefaultRaceData
     {
         public AabayxPants5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Aabayx[62];
+            DiscardSprite = SpriteDictionary.Aabayx[62];
             coversBreasts = false;
             blocksDick = true;
             FixedColor = true;
@@ -515,7 +515,7 @@ class Aabayx : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Aabayx[70];
+            clothing1.GetSprite = (s) => SpriteDictionary.Aabayx[70];
             base.Configure(sprite, actor);
         }
     }
@@ -535,9 +535,9 @@ class Aabayx : DefaultRaceData
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[7];
+                    return SpriteDictionary.AabayxFacePaint[7];
                 else 
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[0];
+                    return SpriteDictionary.AabayxFacePaint[0];
             };
             base.Configure(sprite, actor);
         }
@@ -558,9 +558,9 @@ class Aabayx : DefaultRaceData
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[8];
+                    return SpriteDictionary.AabayxFacePaint[8];
                 else 
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[1];
+                    return SpriteDictionary.AabayxFacePaint[1];
             };
             base.Configure(sprite, actor);
         }
@@ -581,9 +581,9 @@ class Aabayx : DefaultRaceData
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[9];
+                    return SpriteDictionary.AabayxFacePaint[9];
                 else 
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[2];
+                    return SpriteDictionary.AabayxFacePaint[2];
             };
             base.Configure(sprite, actor);
         }
@@ -604,9 +604,9 @@ class Aabayx : DefaultRaceData
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[10];
+                    return SpriteDictionary.AabayxFacePaint[10];
                 else 
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[3];
+                    return SpriteDictionary.AabayxFacePaint[3];
             };
             base.Configure(sprite, actor);
         }
@@ -627,9 +627,9 @@ class Aabayx : DefaultRaceData
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[11];
+                    return SpriteDictionary.AabayxFacePaint[11];
                 else 
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[4];
+                    return SpriteDictionary.AabayxFacePaint[4];
             };
             base.Configure(sprite, actor);
         }
@@ -650,9 +650,9 @@ class Aabayx : DefaultRaceData
             clothing1.GetSprite = (s) =>
             {
                 if (actor.IsOralVoring)
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[12];
+                    return SpriteDictionary.AabayxFacePaint[12];
                 else 
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[5];
+                    return SpriteDictionary.AabayxFacePaint[5];
             };
             base.Configure(sprite, actor);
         }
@@ -675,7 +675,7 @@ class Aabayx : DefaultRaceData
                 if (actor.IsOralVoring)
                     return null;
                 else 
-                    return State.GameManager.SpriteDictionary.AabayxFacePaint[6];
+                    return SpriteDictionary.AabayxFacePaint[6];
             };
             base.Configure(sprite, actor);
         }

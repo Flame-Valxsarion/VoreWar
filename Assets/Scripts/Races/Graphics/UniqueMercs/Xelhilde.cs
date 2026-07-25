@@ -5,7 +5,7 @@ class Xelhilde : DefaultRaceData
 {
     RaceFrameList frameListMelm = new RaceFrameList(new int[2] { 0, 1 }, new float[2] { .25f, .25f });
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Xelhilde;
+    readonly Sprite[] Sprites = SpriteDictionary.Xelhilde;
     internal Xelhilde()
     {
         CanBeGender = new List<Gender>() { Gender.Female };

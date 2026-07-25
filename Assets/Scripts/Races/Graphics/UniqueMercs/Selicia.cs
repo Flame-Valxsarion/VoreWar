@@ -77,16 +77,16 @@ class Selicia : BlankSlate
         if (size >= 12)
         {
             Belly.layer = 3;
-            return State.GameManager.SpriteDictionary.Selicia[5];
+            return SpriteDictionary.Selicia[5];
         }
         if (size >= 5)
         {
-            return State.GameManager.SpriteDictionary.Selicia[2];
+            return SpriteDictionary.Selicia[2];
         }
 
         if (actor.IsAttacking || actor.IsEating)
-            return State.GameManager.SpriteDictionary.Selicia[2];
-        return State.GameManager.SpriteDictionary.Selicia[1];
+            return SpriteDictionary.Selicia[2];
+        return SpriteDictionary.Selicia[1];
 
 
     }
@@ -99,20 +99,20 @@ class Selicia : BlankSlate
             if (actor.IsAttacking || actor.IsEating)
             {
                 BodyAccent.layer = 7;
-                return State.GameManager.SpriteDictionary.Selicia[3];
+                return SpriteDictionary.Selicia[3];
             }
             BodyAccent.layer = 1;
-            return State.GameManager.SpriteDictionary.Selicia[0];
+            return SpriteDictionary.Selicia[0];
         }
         if (size < 9)
         {
             BodyAccent.layer = 7;
-            return State.GameManager.SpriteDictionary.Selicia[3];
+            return SpriteDictionary.Selicia[3];
         }
         if (size < 12)
         {
             BodyAccent.layer = 7;
-            return State.GameManager.SpriteDictionary.Selicia[4];
+            return SpriteDictionary.Selicia[4];
         }
 
 
@@ -125,7 +125,7 @@ class Selicia : BlankSlate
         {
             if (actor.IsAttacking || actor.IsEating || actor.GetStomachSize(14, BellyScale) >= 5)
                 return null;
-            return State.GameManager.SpriteDictionary.Selicia[40 + actor.GetStomachSize(14, BellyScale)];
+            return SpriteDictionary.Selicia[40 + actor.GetStomachSize(14, BellyScale)];
         }
 
 
@@ -135,18 +135,18 @@ class Selicia : BlankSlate
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
         if (actor.IsAttacking || actor.IsUnbirthing)
-            return State.GameManager.SpriteDictionary.Selicia[7];
+            return SpriteDictionary.Selicia[7];
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Selicia[8];
+            return SpriteDictionary.Selicia[8];
         if (actor.GetStomachSize(14, BellyScale) < 5)
-            return State.GameManager.SpriteDictionary.Selicia[6];
+            return SpriteDictionary.Selicia[6];
 
         if (State.Rand.Next(450) == 0) actor.SetAnimationMode(1, .75f);
         int specialMode = actor.CheckAnimationFrame();
         if (specialMode == 1)
-            return State.GameManager.SpriteDictionary.Selicia[9];
+            return SpriteDictionary.Selicia[9];
 
-        return State.GameManager.SpriteDictionary.Selicia[7];
+        return SpriteDictionary.Selicia[7];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -154,19 +154,19 @@ class Selicia : BlankSlate
         if (actor.HasBelly)
         {
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb))
-                return State.GameManager.SpriteDictionary.Selicia[33];
+                return SpriteDictionary.Selicia[33];
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb))
             {
                 if (actor.GetStomachSize(14, BellyScale * 0.7f) == 14)
-                    return State.GameManager.SpriteDictionary.Selicia[32];
+                    return SpriteDictionary.Selicia[32];
                 else if (actor.GetStomachSize(14, BellyScale * 0.8f) == 14)
-                    return State.GameManager.SpriteDictionary.Selicia[31];
+                    return SpriteDictionary.Selicia[31];
                 else if (actor.GetStomachSize(14, BellyScale * 0.9f) == 14)
-                    return State.GameManager.SpriteDictionary.Selicia[30];
+                    return SpriteDictionary.Selicia[30];
             }
             if (actor.IsAttacking || actor.IsEating || actor.GetStomachSize(14, BellyScale) >= 5)
-                return State.GameManager.SpriteDictionary.Selicia[15 + actor.GetStomachSize(14, BellyScale)];
-            return State.GameManager.SpriteDictionary.Selicia[10 + actor.GetStomachSize(14, BellyScale)];
+                return SpriteDictionary.Selicia[15 + actor.GetStomachSize(14, BellyScale)];
+            return SpriteDictionary.Selicia[10 + actor.GetStomachSize(14, BellyScale)];
         }
 
         return null;
@@ -175,14 +175,14 @@ class Selicia : BlankSlate
     protected override Sprite BreastsShadowSprite(Actor_Unit actor)
     {
         if (actor.GetStomachSize(14, BellyScale) >= 12)
-            return State.GameManager.SpriteDictionary.Selicia[34];
+            return SpriteDictionary.Selicia[34];
         return null;
     }
 
     protected override Sprite BodySizeSprite(Actor_Unit actor)
     {
         if (actor.GetStomachSize(14, BellyScale) < 5)
-            return State.GameManager.SpriteDictionary.Selicia[45];
+            return SpriteDictionary.Selicia[45];
         return null;
     }
 

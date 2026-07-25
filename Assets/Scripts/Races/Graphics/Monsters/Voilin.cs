@@ -28,14 +28,14 @@ class Voilin : BlankSlate
 
         if (size > 11)
         {
-            return State.GameManager.SpriteDictionary.Voilin[6];
+            return SpriteDictionary.Voilin[6];
         }
         if (size > 8)
         {
-            return State.GameManager.SpriteDictionary.Voilin[3];
+            return SpriteDictionary.Voilin[3];
         }
 
-        return State.GameManager.SpriteDictionary.Voilin[0];
+        return SpriteDictionary.Voilin[0];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
@@ -44,17 +44,17 @@ class Voilin : BlankSlate
 
         if (size > 11)
         {
-            if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Voilin[8];
-            return State.GameManager.SpriteDictionary.Voilin[7];
+            if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Voilin[8];
+            return SpriteDictionary.Voilin[7];
         }
         if (size > 8)
         {
-            if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Voilin[5];
-            return State.GameManager.SpriteDictionary.Voilin[4];
+            if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Voilin[5];
+            return SpriteDictionary.Voilin[4];
         }
 
-        if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Voilin[2];
-        return State.GameManager.SpriteDictionary.Voilin[1];
+        if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Voilin[2];
+        return SpriteDictionary.Voilin[1];
 
     }
 
@@ -106,7 +106,7 @@ class Voilin : BlankSlate
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Voilin[14];
+        return SpriteDictionary.Voilin[14];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
@@ -115,29 +115,29 @@ class Voilin : BlankSlate
 
         if (size > 11)
         {
-            if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Voilin[21];
-            return State.GameManager.SpriteDictionary.Voilin[20];
+            if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Voilin[21];
+            return SpriteDictionary.Voilin[20];
         }
         if (size > 8)
         {
-            if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Voilin[19];
-            return State.GameManager.SpriteDictionary.Voilin[18];
+            if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Voilin[19];
+            return SpriteDictionary.Voilin[18];
         }
 
-        if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Voilin[16];
-        return State.GameManager.SpriteDictionary.Voilin[15];
+        if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Voilin[16];
+        return SpriteDictionary.Voilin[15];
 
     }
 
     protected override Sprite HairSprite(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Voilin[13];
-        return State.GameManager.SpriteDictionary.Voilin[12];
+        if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Voilin[13];
+        return SpriteDictionary.Voilin[12];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Voilin[9 + actor.Unit.EyeType];
+        return SpriteDictionary.Voilin[9 + actor.Unit.EyeType];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -147,17 +147,17 @@ class Voilin : BlankSlate
         if (size == 0) return null;
 
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false) && size >= 22)
-            return State.GameManager.SpriteDictionary.Voilin[40];
+            return SpriteDictionary.Voilin[40];
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false) && size >= 20)
-            return State.GameManager.SpriteDictionary.Voilin[39];
+            return SpriteDictionary.Voilin[39];
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false) && size >= 18)
-            return State.GameManager.SpriteDictionary.Voilin[38];
+            return SpriteDictionary.Voilin[38];
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false) && size >= 16)
-            return State.GameManager.SpriteDictionary.Voilin[37];
+            return SpriteDictionary.Voilin[37];
 
         if (size > 15) size = 15;
 
-        return State.GameManager.SpriteDictionary.Voilin[21 + size];
+        return SpriteDictionary.Voilin[21 + size];
 
     }
 

@@ -18,9 +18,9 @@ class Vision : BlankSlate
         unit.Name = "Vision";
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Vision[actor.IsOralVoring ? 1 : 0];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Vision[actor.IsOralVoring ? 1 : 0];
 
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Vision[2];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Vision[2];
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -29,10 +29,10 @@ class Vision : BlankSlate
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
         {
             if (actor.PredatorComponent.VisibleFullness > 3)
-                return State.GameManager.SpriteDictionary.Vision[9];
+                return SpriteDictionary.Vision[9];
         }
 
-        return actor.HasBelly ? State.GameManager.SpriteDictionary.Vision[3 + actor.GetStomachSize(5)] : null;
+        return actor.HasBelly ? SpriteDictionary.Vision[3 + actor.GetStomachSize(5)] : null;
     }
 }
 

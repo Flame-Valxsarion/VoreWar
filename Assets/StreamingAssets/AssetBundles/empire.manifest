@@ -1,0 +1,201 @@
+ManifestFileVersion: 0
+CRC: 2238019364
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 63addd48cb7ea918c5e2a63662e8309d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Sprites/Units/Deer1.png
+- Assets/Sprites/Units/Sharks1.png
+- Assets/Sprites/Units/Scylla.png
+- Assets/Sprites/Units/Panther/panther F overtops.png
+- Assets/Sprites/Units/LizardCloth.png
+- Assets/Sprites/Units/LizardBone.png
+- Assets/Sprites/Units/cows.png
+- Assets/Sprites/Units/Demidragons/DemidragonBodies2.png
+- Assets/Sprites/Units/Demidragons/DemidragonCustomisation3.png
+- Assets/Sprites/Units/AabayxFacePaint.png
+- Assets/Sprites/Units/Demidragons/DemidragonCustomisation2.png
+- Assets/Sprites/Units/Panther/Panther M tops.png
+- Assets/Sprites/Units/Panther/panther gloves.png
+- Assets/Sprites/Units/Mice/MiceFTops.png
+- Assets/Sprites/Units/FurryGenitals.png
+- Assets/Sprites/Units/humanrework/humansBodySprites1.png
+- Assets/Sprites/Units/LizardLeather.png
+- Assets/Sprites/Units/Mice/MiceMBottoms.png
+- Assets/Sprites/Units/Panther/panther overbottoms.png
+- Assets/Sprites/Units/Bees3.png
+- Assets/Sprites/Units/Sergal.png
+- Assets/Sprites/Units/AntQueen1.png
+- Assets/Sprites/Units/Sharks4.png
+- Assets/Sprites/Units/Mermen.png
+- Assets/Sprites/Units/black_top.png
+- Assets/Sprites/Units/CruxBodySprites2.png
+- Assets/Sprites/Units/Demifrogs2.png
+- Assets/Sprites/Units/Lupine/LupineVoreParts.png
+- Assets/Sprites/Units/humanrework/hu_men_pants.png
+- Assets/Sprites/Units/Demifrogs3alt.png
+- Assets/Sprites/Units/Sprites.png
+- Assets/Sprites/Units/Panther/Panther bottoms.png
+- Assets/Sprites/Units/LizardsBooty.png
+- Assets/Sprites/Units/Sharks2.png
+- Assets/Sprites/Units/SlimeQueen.png
+- Assets/Sprites/Units/Panther/Panther F tops.png
+- Assets/Sprites/Units/Demidragons/DemidragonBreasts.png
+- Assets/Sprites/Units/Lizards.png
+- Assets/Sprites/Units/Panther/panther vore parts.png
+- Assets/Sprites/Units/Demiants3.png
+- Assets/Sprites/Units/CruxBodySprites1.png
+- Assets/Sprites/Units/imps/impoveronepiece.png
+- Assets/Sprites/Units/horses_base.png
+- Assets/Sprites/Units/Mice/MiceVore1.png
+- Assets/Sprites/Units/Lupine/Lupine2.png
+- Assets/Sprites/Units/crypters.png
+- Assets/Sprites/Units/imps/Impfinished.png
+- Assets/Sprites/Units/manplatearmor.png
+- Assets/Sprites/Units/manpeasant.png
+- Assets/Sprites/Units/Yordles/YordleClothes1.png
+- Assets/Sprites/Units/catLeader.png
+- Assets/Sprites/Units/privates.png
+- Assets/Sprites/Units/imps/impovertops.png
+- Assets/Sprites/Units/Avians3.png
+- Assets/Sprites/Units/Eeveelution/AnthroUmbreon.png
+- Assets/Sprites/Units/SergalClothes.png
+- Assets/Sprites/Units/Demifrogs5.png
+- Assets/Sprites/Units/imps/impundertops.png
+- Assets/Sprites/Units/Demibats4.png
+- Assets/Sprites/Units/LizardLeader.png
+- Assets/Sprites/Units/LizardPeasant.png
+- Assets/Sprites/Units/Demidragons/DemidragonClothes2.png
+- Assets/Sprites/Units/Bears.png
+- Assets/Sprites/Units/humanrework/humansBodySprites4.png
+- Assets/Sprites/Units/Lupine/LupineClothes2.png
+- Assets/Sprites/Units/JackalsClothes.png
+- Assets/Sprites/Units/eyebrows.png
+- Assets/Sprites/Units/impgob.png
+- Assets/Sprites/Units/imps/impunderonepieces.png
+- Assets/Sprites/Units/Panther/panther legs.png
+- Assets/Sprites/Units/Deer2.png
+- Assets/Sprites/Units/LizardBlackTop.png
+- Assets/Sprites/Units/Avians1.png
+- Assets/Sprites/Units/Mice/MiceMTops.png
+- Assets/Sprites/Units/Kangaroos.png
+- Assets/Sprites/Units/imps/impunderbottoms.png
+- Assets/Sprites/Units/Sharks7.png
+- Assets/Sprites/Units/Demidragons/DemidragonBelliesBalls.png
+- Assets/Sprites/Units/imps/impfinishedvore.png
+- Assets/Sprites/Units/Demidragons/DemidragonClothes.png
+- Assets/Sprites/Units/imps/impgloves.png
+- Assets/Sprites/Units/harpies.png
+- Assets/Sprites/Units/Demifrogs3.png
+- Assets/Sprites/Units/LizardBikiniTop.png
+- Assets/Sprites/Units/ghostvorebits.png
+- Assets/Sprites/Units/ghosts1.png
+- Assets/Sprites/Units/cowsbak.png
+- Assets/Sprites/Units/DeerLeaderClothes.png
+- Assets/Sprites/Units/GnollsBodyParts.png
+- Assets/Sprites/Units/humanrework/Hu_men_uniform_1.png
+- Assets/Sprites/Units/femaleplatearmor.png
+- Assets/Sprites/Units/female_villager.png
+- Assets/Sprites/Units/Yordles/YordleVoreSkin.png
+- Assets/Sprites/Units/Mice/MiceVore1Dark.png
+- Assets/Sprites/Units/Mermen2.png
+- Assets/Sprites/Units/Mice/MiceVore3.png
+- Assets/Sprites/Units/Mice/MiceFBottoms.png
+- Assets/Sprites/Units/JackalsMain.png
+- Assets/Sprites/Units/humanrework/hu_men_bigloin.png
+- Assets/Sprites/Units/Demibats3.png
+- Assets/Sprites/Units/Drider.png
+- Assets/Sprites/Units/Demidragons/DemidragonPatterns.png
+- Assets/Sprites/Units/Elves/elven_armor.png
+- Assets/Sprites/Units/santahat.png
+- Assets/Sprites/Units/horse_clothes.png
+- Assets/Sprites/Units/Demidragons/DemidragonBodies.png
+- Assets/Sprites/Units/Demidragons/DemidragonClothes3.png
+- Assets/Sprites/Units/Aabayx.png
+- Assets/Sprites/Units/humanrework/humansBodySprites5.png
+- Assets/Sprites/Units/GnollsVoreParts.png
+- Assets/Sprites/Units/Bees1.png
+- Assets/Sprites/Units/Yordles/YordleVoreFur.png
+- Assets/Sprites/Units/toga.png
+- Assets/Sprites/Units/Demiants1.png
+- Assets/Sprites/Units/YoukoTails.png
+- Assets/Sprites/Units/cowclothes.png
+- Assets/Sprites/Units/AabayxHighPriest.png
+- Assets/Sprites/Units/CruxMisc.png
+- Assets/Sprites/Units/CruxGear.png
+- Assets/Sprites/Units/Lupine/LupineClothes.png
+- Assets/Sprites/Units/NewClothes1.png
+- Assets/Sprites/Units/imps/imphood.png
+- Assets/Sprites/Units/MainlandElves.png
+- Assets/Sprites/Units/LamiaNaga.png
+- Assets/Sprites/Units/Avians4.png
+- Assets/Sprites/Units/Mice/Mice1.png
+- Assets/Sprites/Units/humanrework/hu_men_underbottoms.png
+- Assets/Sprites/Units/Lamia.png
+- Assets/Sprites/Units/ghosts2.png
+- Assets/Sprites/Units/Demibats2.png
+- Assets/Sprites/Units/cowhristmas.png
+- Assets/Sprites/Units/Yordles/YordleClothes2.png
+- Assets/Sprites/Units/Panther/panther one piece.png
+- Assets/Sprites/Units/ghosts3.png
+- Assets/Sprites/Units/humanrework/hu_men_one_pieces.png
+- Assets/Sprites/Units/Lupine/Lupine1.png
+- Assets/Sprites/Units/humanrework/hu_men_M_undertops.png
+- Assets/Sprites/Units/JackalsJewel.png
+- Assets/Sprites/Units/Demifrogs4.png
+- Assets/Sprites/Units/Sharks5.png
+- Assets/Sprites/Units/Panther/panther base.png
+- Assets/Sprites/Units/Deer4.png
+- Assets/Sprites/Units/Demiants2.png
+- Assets/Sprites/Units/Avians2.png
+- Assets/Sprites/Units/humanrework/humansBodySprites2.png
+- Assets/Sprites/Units/alraunechristmas.png
+- Assets/Sprites/Units/Mice/MiceVore2.png
+- Assets/Sprites/Units/GnollClothes.png
+- Assets/Sprites/Units/Slimes.png
+- Assets/Sprites/Units/Alraune.png
+- Assets/Sprites/Units/Deer3.png
+- Assets/Sprites/Units/imps/impoverbottoms.png
+- Assets/Sprites/Units/Eeveelution/AnthroUmbreon3.png
+- Assets/Sprites/Units/Eeveelution/AnthroUmbreon2.png
+- Assets/Sprites/Units/raincoats.png
+- Assets/Sprites/Units/humanrework/HumanRags.png
+- Assets/Sprites/Units/LizardsBootyArmor.png
+- Assets/Sprites/Units/humanrework/hu_men_uniform_2.png
+- Assets/Sprites/Units/Mice/Mice2.png
+- Assets/Sprites/Units/Demibats1.png
+- Assets/Sprites/Units/Demidragons/DemidragonCustomisation1.png
+- Assets/Sprites/Units/Sharks3.png
+- Assets/Sprites/Units/hatbat.png
+- Assets/Sprites/Units/humanrework/humansVoreSprites.png
+- Assets/Sprites/Units/SmoothBellies.png
+- Assets/Sprites/Units/imps/implegg.png
+- Assets/Sprites/Units/horseaddsheet1.png
+- Assets/Sprites/Units/Demidragons/DemidragonPatterns2.png
+- Assets/Sprites/Units/Mice/MiceRags.png
+- Assets/Sprites/Units/Sharks6.png
+- Assets/Sprites/Units/humanrework/hu_men_F_undertops.png
+- Assets/Sprites/Units/BearsClothes.png
+- Assets/Sprites/Units/Demifrogs1.png
+- Assets/Sprites/Units/Yordles/YordleCustomization1.png
+- Assets/Sprites/Units/Yordles/YordleCustomization2.png
+- Assets/Sprites/Units/Yordles/YordleBodies.png
+- Assets/Sprites/Units/Panther/panther hats.png
+- Assets/Sprites/Units/Panther/panther M overtops.png
+- Assets/Sprites/Units/Bees2.png
+- Assets/Sprites/Units/humanrework/hu_men_skirt.png
+- Assets/Sprites/Units/LizardCrossTop.png
+- Assets/Sprites/Units/LamiaNagaBits.png
+- Assets/Sprites/Units/AntQueen2.png
+- Assets/Sprites/Units/humanrework/humansBodySprites3.png
+Dependencies: []

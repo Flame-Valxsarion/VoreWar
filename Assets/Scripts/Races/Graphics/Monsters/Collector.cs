@@ -25,47 +25,47 @@ class Collector : BlankSlate
 
     protected override Sprite BodySprite(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Collector[1];
-        return State.GameManager.SpriteDictionary.Collector[0];
+        if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Collector[1];
+        return SpriteDictionary.Collector[0];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Collector[5];
-        return State.GameManager.SpriteDictionary.Collector[4];
+        if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Collector[5];
+        return SpriteDictionary.Collector[4];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Collector[2];
+        return SpriteDictionary.Collector[2];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Collector[3];
+        return SpriteDictionary.Collector[3];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Collector[7];
+        if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Collector[7];
         return null;
     }
 
     protected override Sprite HairSprite(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsEating) return State.GameManager.SpriteDictionary.Collector[8];
+        if (actor.IsAttacking || actor.IsEating) return SpriteDictionary.Collector[8];
         return null;
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
         if (actor.IsAttacking || actor.IsEating) return null;
-        return State.GameManager.SpriteDictionary.Collector[6];
+        return SpriteDictionary.Collector[6];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
     {
-        if (Config.ErectionsFromVore && actor.HasBelly) return State.GameManager.SpriteDictionary.Collector[20];
+        if (Config.ErectionsFromVore && actor.HasBelly) return SpriteDictionary.Collector[20];
         return null;
     }
 
@@ -74,11 +74,11 @@ class Collector : BlankSlate
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
         {
             if (actor.PredatorComponent.VisibleFullness > 4)
-                return State.GameManager.SpriteDictionary.Collector[19];
+                return SpriteDictionary.Collector[19];
         }
         if (actor.HasBelly == false)
             return null;
-        return State.GameManager.SpriteDictionary.Collector[9 + actor.GetStomachSize(9, .8f)];
+        return SpriteDictionary.Collector[9 + actor.GetStomachSize(9, .8f)];
     }
 
     internal override void RandomCustom(Unit unit)

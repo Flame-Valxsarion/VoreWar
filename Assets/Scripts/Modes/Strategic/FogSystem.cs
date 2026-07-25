@@ -17,7 +17,7 @@ class FogSystem
         FogOfWar = fogOfWar;
     }
 
-    internal void UpdateFog(Empire playerEmpire, Village[] villages, Army[] armies, List<GameObject> currentVillageTiles, List<GameObject> currentClaimableTiles)
+    internal void UpdateFog(Empire playerEmpire, Village[] villages, Army[] armies, List<GameObject> currentVillageTiles, List<GameObject> currentClaimableTiles, List<GameObject> currentBuildingTiles)
     {
         FogOfWar.ClearAllTiles();
         if (State.World.Relations == null)
@@ -54,6 +54,16 @@ class FogSystem
             if (army.Empire.IsAlly(playerEmpire) || (State.World.IsNight && Config.DayNightCosmetic && !Config.FogOfWar))
             {
                 ClearWithinXTilesOf(army.Position, army.Empire);
+            }
+        }
+        foreach (ConstructibleBuilding building in State.World.Constructibles)
+        {
+            if (building.Owner.IsAlly(playerEmpire) || (State.World.IsNight && Config.DayNightCosmetic && !Config.FogOfWar))
+            {
+                if (building.enabled)
+                {
+                    ClearWithinXTilesOf(building.Position, building.Owner, -1);
+                }
             }
         }
 
@@ -111,13 +121,28 @@ class FogSystem
                     currentClaimableTiles[4 * i + 3].GetComponent<SpriteRenderer>().enabled = true;
                 }
             }
+            for (int i = 0; i < State.World.Constructibles.Length; i++)
+            {
+                if (FoggedTile[State.World.Constructibles[i].Position.x, State.World.Constructibles[i].Position.y])
+                {
+                    currentBuildingTiles[2 * i].GetComponent<SpriteRenderer>().enabled = false;
+                    currentBuildingTiles[2 * i + 1].GetComponent<SpriteRenderer>().enabled = false;
+                }
+                else
+                {
+                    currentBuildingTiles[2 * i].GetComponent<SpriteRenderer>().enabled = true;
+                    currentBuildingTiles[2 * i + 1].GetComponent<SpriteRenderer>().enabled = true;
+                }
+            }
         }
 
     }
 
-    void ClearWithinXTilesOf(Vec2i pos, Empire empire)
+    void ClearWithinXTilesOf(Vec2i pos, Empire empire, int mod = 0)
     {
-        int dist = Config.FogDistance - ((State.World.IsNight && Config.FogOfWar) ? Config.NightStrategicSightReduction : 0) + (int)Math.Floor(AcademyResearch.GetValueFromEmpire(empire, AcademyResearchType.FOWSightRange));
+        int dist = Config.FogDistance + mod - ((State.World.IsNight && Config.FogOfWar) ? Config.NightStrategicSightReduction : 0) + (int)Math.Floor(AcademyResearch.GetValueFromEmpire(empire, AcademyResearchType.FOWSightRange));
+        if (dist < 0) 
+            dist = 0;
         for (int x = pos.x - dist; x <= pos.x + dist; x++)
         {
             for (int y = pos.y - dist; y <= pos.y + dist; y++)

@@ -7,7 +7,7 @@ using UnityEngine;
 
 class Terminid : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Terminid;
+    readonly Sprite[] Sprites = SpriteDictionary.Terminid;
 
     public Terminid()
     {
@@ -34,12 +34,12 @@ class Terminid : BlankSlate
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // HeadPlates
     {
-        return State.GameManager.SpriteDictionary.Terminid[4 + actor.Unit.BodyAccentType1];
+        return SpriteDictionary.Terminid[4 + actor.Unit.BodyAccentType1];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Rightside appendages
     {
-        return State.GameManager.SpriteDictionary.Terminid[9];
+        return SpriteDictionary.Terminid[9];
     }
 
     protected override Sprite BodySprite(Actor_Unit actor) // Belly Cover
@@ -47,7 +47,7 @@ class Terminid : BlankSlate
         if (actor.HasBelly)
             return null;
         else
-            return State.GameManager.SpriteDictionary.Terminid[0];
+            return SpriteDictionary.Terminid[0];
     }
 
     internal override void SetBaseOffsets(Actor_Unit actor)
@@ -66,18 +66,18 @@ class Terminid : BlankSlate
     protected override Sprite HeadSprite(Actor_Unit actor) // Head
     {
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.Terminid[2];
+            return SpriteDictionary.Terminid[2];
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Terminid[3];
+            return SpriteDictionary.Terminid[3];
         else
-            return State.GameManager.SpriteDictionary.Terminid[1];
+            return SpriteDictionary.Terminid[1];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Leftside appendages
     {
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.Terminid[11];
-        return State.GameManager.SpriteDictionary.Terminid[10]; 
+            return SpriteDictionary.Terminid[11];
+        return SpriteDictionary.Terminid[10]; 
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -89,35 +89,35 @@ class Terminid : BlankSlate
 
         if ( size >= 37 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Terminid[37];
+            return SpriteDictionary.Terminid[37];
         }
 
         if (size >= 35 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Terminid[36];
+            return SpriteDictionary.Terminid[36];
         }
 
         if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Terminid[35];
+            return SpriteDictionary.Terminid[35];
         }
 
         if (size >= 29 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Terminid[34];
+            return SpriteDictionary.Terminid[34];
         }
 
         if (size >= 26 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Terminid[33];
+            return SpriteDictionary.Terminid[33];
         }
 
         if (size >= 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Terminid[32];
+            return SpriteDictionary.Terminid[32];
         }
 
         if (size > 19) size = 19;
-        return State.GameManager.SpriteDictionary.Terminid[12 + size];
+        return SpriteDictionary.Terminid[12 + size];
     }
 }

@@ -8,8 +8,8 @@ class Gryphon : BlankSlate
         Sitting
     }
     Position position;
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Gryphon;
-    readonly Sprite[] SpritesAlt = State.GameManager.SpriteDictionary.Griffin;
+    readonly Sprite[] Sprites = SpriteDictionary.Gryphon;
+    readonly Sprite[] SpritesAlt = SpriteDictionary.Griffin;
 
     public Gryphon()
     {

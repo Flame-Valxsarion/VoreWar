@@ -73,6 +73,7 @@ public class SoundManager : MonoBehaviour
         dict[PreyLocation.leftBreast] = dict[PreyLocation.breasts];
         dict[PreyLocation.rightBreast] = dict[PreyLocation.breasts];
         dict[PreyLocation.womb] = Resources.LoadAll<AudioClip>($"audio{sep}vore{sep}{name}{sep}unbirth");
+        dict[PreyLocation.bladder] = dict[PreyLocation.womb];
     }
 
     private void PopulateClips(ref AudioClip[] array, string name)

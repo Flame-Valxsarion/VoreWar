@@ -120,7 +120,7 @@ class Crux : DefaultRaceData
     {
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
-        return State.GameManager.SpriteDictionary.Crux[actor.Unit.BodySize];
+        return SpriteDictionary.Crux[actor.Unit.BodySize];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor) // First item spriting.
@@ -137,69 +137,69 @@ class Crux : DefaultRaceData
         if (acc == State.World.ItemRepository.GetItem(ItemType.Helmet))
         {
             if (actor.Unit.EarType >= 7)
-                return State.GameManager.SpriteDictionary.Crux[374];
-            return State.GameManager.SpriteDictionary.Crux[373];
+                return SpriteDictionary.Crux[374];
+            return SpriteDictionary.Crux[373];
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.BodyArmor))
         {
             BodyAccessory.layer = 21;
-            return State.GameManager.SpriteDictionary.Crux[375];
+            return SpriteDictionary.Crux[375];
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Shoes))
         {
             BodyAccessory.layer = 11;
-            return State.GameManager.SpriteDictionary.Crux[386];
+            return SpriteDictionary.Crux[386];
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Gloves))
         {
             if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                return State.GameManager.SpriteDictionary.Crux[376];
+                return SpriteDictionary.Crux[376];
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Crux[377];
+                    return SpriteDictionary.Crux[377];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Crux[379];
+                    return SpriteDictionary.Crux[379];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Crux[377];
+                    return SpriteDictionary.Crux[377];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Crux[379];
+                    return SpriteDictionary.Crux[379];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Crux[377];
+                    return SpriteDictionary.Crux[377];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Crux[380];
+                    return SpriteDictionary.Crux[380];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Crux[378];
+                    return SpriteDictionary.Crux[378];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Crux[380];
+                    return SpriteDictionary.Crux[380];
                 default:
-                    return State.GameManager.SpriteDictionary.Crux[376];
+                    return SpriteDictionary.Crux[376];
             }
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Gauntlet))
         {
             if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                return State.GameManager.SpriteDictionary.Crux[381];
+                return SpriteDictionary.Crux[381];
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Crux[382];
+                    return SpriteDictionary.Crux[382];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Crux[384];
+                    return SpriteDictionary.Crux[384];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Crux[382];
+                    return SpriteDictionary.Crux[382];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Crux[384];
+                    return SpriteDictionary.Crux[384];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Crux[382];
+                    return SpriteDictionary.Crux[382];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Crux[385];
+                    return SpriteDictionary.Crux[385];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Crux[383];
+                    return SpriteDictionary.Crux[383];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Crux[385];
+                    return SpriteDictionary.Crux[385];
                 default:
-                    return State.GameManager.SpriteDictionary.Crux[381];
+                    return SpriteDictionary.Crux[381];
             }
         }
         return null;
@@ -219,75 +219,75 @@ class Crux : DefaultRaceData
         if (acc == State.World.ItemRepository.GetItem(ItemType.Helmet))
         {
             if (actor.Unit.EarType >= 7)
-                return State.GameManager.SpriteDictionary.Crux[374];
-            return State.GameManager.SpriteDictionary.Crux[373];
+                return SpriteDictionary.Crux[374];
+            return SpriteDictionary.Crux[373];
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.BodyArmor))
         {
             BodyAccessory.layer = 21;
-            return State.GameManager.SpriteDictionary.Crux[375];
+            return SpriteDictionary.Crux[375];
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Shoes))
         {
             BodyAccessory.layer = 11;
-            return State.GameManager.SpriteDictionary.Crux[386];
+            return SpriteDictionary.Crux[386];
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Gloves))
         {
             if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                return State.GameManager.SpriteDictionary.Crux[376];
+                return SpriteDictionary.Crux[376];
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Crux[377];
+                    return SpriteDictionary.Crux[377];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Crux[379];
+                    return SpriteDictionary.Crux[379];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Crux[377];
+                    return SpriteDictionary.Crux[377];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Crux[379];
+                    return SpriteDictionary.Crux[379];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Crux[377];
+                    return SpriteDictionary.Crux[377];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Crux[380];
+                    return SpriteDictionary.Crux[380];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Crux[378];
+                    return SpriteDictionary.Crux[378];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Crux[380];
+                    return SpriteDictionary.Crux[380];
                 default:
-                    return State.GameManager.SpriteDictionary.Crux[376];
+                    return SpriteDictionary.Crux[376];
             }
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Gauntlet))
         {
             if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                return State.GameManager.SpriteDictionary.Crux[381];
+                return SpriteDictionary.Crux[381];
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Crux[382];
+                    return SpriteDictionary.Crux[382];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Crux[384];
+                    return SpriteDictionary.Crux[384];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Crux[382];
+                    return SpriteDictionary.Crux[382];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Crux[384];
+                    return SpriteDictionary.Crux[384];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Crux[382];
+                    return SpriteDictionary.Crux[382];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Crux[385];
+                    return SpriteDictionary.Crux[385];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Crux[383];
+                    return SpriteDictionary.Crux[383];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Crux[385];
+                    return SpriteDictionary.Crux[385];
                 default:
-                    return State.GameManager.SpriteDictionary.Crux[381];
+                    return SpriteDictionary.Crux[381];
             }
         }
         return null;
     }
 
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crux[6 + actor.Unit.HeadType];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.Crux[6 + actor.Unit.HeadType];
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Checks if the crux has a thin body and if so applies thin arms, otherwise applies thick arms, then checks the correct position for them.
     {
@@ -296,27 +296,27 @@ class Crux : DefaultRaceData
             if (actor.Unit.HasWeapon == false)
             {
                 if (actor.IsAttacking)
-                    return State.GameManager.SpriteDictionary.Crux[351];
-                else return State.GameManager.SpriteDictionary.Crux[4];
+                    return SpriteDictionary.Crux[351];
+                else return SpriteDictionary.Crux[4];
             }
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Crux[351];
+                    return SpriteDictionary.Crux[351];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Crux[355];
+                    return SpriteDictionary.Crux[355];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Crux[351];
+                    return SpriteDictionary.Crux[351];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Crux[355];
+                    return SpriteDictionary.Crux[355];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Crux[351];
+                    return SpriteDictionary.Crux[351];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Crux[357];
+                    return SpriteDictionary.Crux[357];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Crux[353];
+                    return SpriteDictionary.Crux[353];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Crux[357];
+                    return SpriteDictionary.Crux[357];
                 default:
                     return null;
             }
@@ -324,27 +324,27 @@ class Crux : DefaultRaceData
         if (actor.Unit.HasWeapon == false)
         {
             if (actor.IsAttacking)
-                return State.GameManager.SpriteDictionary.Crux[352];
-            else return State.GameManager.SpriteDictionary.Crux[5];
+                return SpriteDictionary.Crux[352];
+            else return SpriteDictionary.Crux[5];
         }
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.Crux[352];
+                return SpriteDictionary.Crux[352];
             case 1:
-                return State.GameManager.SpriteDictionary.Crux[356];
+                return SpriteDictionary.Crux[356];
             case 2:
-                return State.GameManager.SpriteDictionary.Crux[352];
+                return SpriteDictionary.Crux[352];
             case 3:
-                return State.GameManager.SpriteDictionary.Crux[356];
+                return SpriteDictionary.Crux[356];
             case 4:
-                return State.GameManager.SpriteDictionary.Crux[352];
+                return SpriteDictionary.Crux[352];
             case 5:
-                return State.GameManager.SpriteDictionary.Crux[358];
+                return SpriteDictionary.Crux[358];
             case 6:
-                return State.GameManager.SpriteDictionary.Crux[354];
+                return SpriteDictionary.Crux[354];
             case 7:
-                return State.GameManager.SpriteDictionary.Crux[358];
+                return SpriteDictionary.Crux[358];
             default:
                 return null;
         }
@@ -357,27 +357,27 @@ class Crux : DefaultRaceData
             if (actor.Unit.HasWeapon == false)
             {
                 if (actor.IsAttacking)
-                    return State.GameManager.SpriteDictionary.Crux[401];
+                    return SpriteDictionary.Crux[401];
                 else return null;
             }
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Crux[401];
+                    return SpriteDictionary.Crux[401];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Crux[405];
+                    return SpriteDictionary.Crux[405];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Crux[401];
+                    return SpriteDictionary.Crux[401];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Crux[405];
+                    return SpriteDictionary.Crux[405];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Crux[401];
+                    return SpriteDictionary.Crux[401];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Crux[407];
+                    return SpriteDictionary.Crux[407];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Crux[403];
+                    return SpriteDictionary.Crux[403];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Crux[407];
+                    return SpriteDictionary.Crux[407];
                 default:
                     return null;
             }
@@ -385,27 +385,27 @@ class Crux : DefaultRaceData
         if (actor.Unit.HasWeapon == false)
         {
             if (actor.IsAttacking)
-                return State.GameManager.SpriteDictionary.Crux[402];
+                return SpriteDictionary.Crux[402];
             else return null;
         }
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.Crux[402];
+                return SpriteDictionary.Crux[402];
             case 1:
-                return State.GameManager.SpriteDictionary.Crux[406];
+                return SpriteDictionary.Crux[406];
             case 2:
-                return State.GameManager.SpriteDictionary.Crux[402];
+                return SpriteDictionary.Crux[402];
             case 3:
-                return State.GameManager.SpriteDictionary.Crux[406];
+                return SpriteDictionary.Crux[406];
             case 4:
-                return State.GameManager.SpriteDictionary.Crux[402];
+                return SpriteDictionary.Crux[402];
             case 5:
-                return State.GameManager.SpriteDictionary.Crux[408];
+                return SpriteDictionary.Crux[408];
             case 6:
-                return State.GameManager.SpriteDictionary.Crux[404];
+                return SpriteDictionary.Crux[404];
             case 7:
-                return State.GameManager.SpriteDictionary.Crux[408];
+                return SpriteDictionary.Crux[408];
             default:
                 return null;
         }
@@ -414,7 +414,7 @@ class Crux : DefaultRaceData
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Leg stripes.
     {
         if (actor.Unit.BodyAccentType2 == 0) return null;
-        return State.GameManager.SpriteDictionary.Crux[271 + actor.Unit.BodyAccentType2];
+        return SpriteDictionary.Crux[271 + actor.Unit.BodyAccentType2];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Arm stripes.
@@ -425,105 +425,105 @@ class Crux : DefaultRaceData
             case 1:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[278];
+                        return SpriteDictionary.Crux[278];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[278];
+                            return SpriteDictionary.Crux[278];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[283];
+                            return SpriteDictionary.Crux[283];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[278];
+                            return SpriteDictionary.Crux[278];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[283];
+                            return SpriteDictionary.Crux[283];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[278];
+                            return SpriteDictionary.Crux[278];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[284];
+                            return SpriteDictionary.Crux[284];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[278];
+                            return SpriteDictionary.Crux[278];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[284];
+                            return SpriteDictionary.Crux[284];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[278];
+                            return SpriteDictionary.Crux[278];
                     }
                 }
             case 2:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[279];
+                        return SpriteDictionary.Crux[279];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[279];
+                            return SpriteDictionary.Crux[279];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[285];
+                            return SpriteDictionary.Crux[285];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[279];
+                            return SpriteDictionary.Crux[279];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[285];
+                            return SpriteDictionary.Crux[285];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[279];
+                            return SpriteDictionary.Crux[279];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[286];
+                            return SpriteDictionary.Crux[286];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[378];
+                            return SpriteDictionary.Crux[378];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[286];
+                            return SpriteDictionary.Crux[286];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[279];
+                            return SpriteDictionary.Crux[279];
                     }
                 }
             case 3:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[280];
+                        return SpriteDictionary.Crux[280];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[282];
+                            return SpriteDictionary.Crux[282];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[287];
+                            return SpriteDictionary.Crux[287];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[282];
+                            return SpriteDictionary.Crux[282];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[287];
+                            return SpriteDictionary.Crux[287];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[282];
+                            return SpriteDictionary.Crux[282];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[288];
+                            return SpriteDictionary.Crux[288];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[282];
+                            return SpriteDictionary.Crux[282];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[288];
+                            return SpriteDictionary.Crux[288];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[280];
+                            return SpriteDictionary.Crux[280];
                     }
                 }
             case 4:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[281];
+                        return SpriteDictionary.Crux[281];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[281];
+                            return SpriteDictionary.Crux[281];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[289];
+                            return SpriteDictionary.Crux[289];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[281];
+                            return SpriteDictionary.Crux[281];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[289];
+                            return SpriteDictionary.Crux[289];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[281];
+                            return SpriteDictionary.Crux[281];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[290];
+                            return SpriteDictionary.Crux[290];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[281];
+                            return SpriteDictionary.Crux[281];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[290];
+                            return SpriteDictionary.Crux[290];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[281];
+                            return SpriteDictionary.Crux[281];
                     }
                 }
             default: return null;
@@ -538,105 +538,105 @@ class Crux : DefaultRaceData
             case 1:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[409];
+                        return SpriteDictionary.Crux[409];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[409];
+                            return SpriteDictionary.Crux[409];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[414];
+                            return SpriteDictionary.Crux[414];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[409];
+                            return SpriteDictionary.Crux[409];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[414];
+                            return SpriteDictionary.Crux[414];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[409];
+                            return SpriteDictionary.Crux[409];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[415];
+                            return SpriteDictionary.Crux[415];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[409];
+                            return SpriteDictionary.Crux[409];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[284];
+                            return SpriteDictionary.Crux[284];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[409];
+                            return SpriteDictionary.Crux[409];
                     }
                 }
             case 2:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[410];
+                        return SpriteDictionary.Crux[410];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[410];
+                            return SpriteDictionary.Crux[410];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[416];
+                            return SpriteDictionary.Crux[416];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[410];
+                            return SpriteDictionary.Crux[410];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[416];
+                            return SpriteDictionary.Crux[416];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[410];
+                            return SpriteDictionary.Crux[410];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[417];
+                            return SpriteDictionary.Crux[417];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[410];
+                            return SpriteDictionary.Crux[410];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[419];
+                            return SpriteDictionary.Crux[419];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[410];
+                            return SpriteDictionary.Crux[410];
                     }
                 }
             case 3:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[411];
+                        return SpriteDictionary.Crux[411];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[413];
+                            return SpriteDictionary.Crux[413];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[418];
+                            return SpriteDictionary.Crux[418];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[413];
+                            return SpriteDictionary.Crux[413];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[418];
+                            return SpriteDictionary.Crux[418];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[413];
+                            return SpriteDictionary.Crux[413];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[419];
+                            return SpriteDictionary.Crux[419];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[413];
+                            return SpriteDictionary.Crux[413];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[419];
+                            return SpriteDictionary.Crux[419];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[411];
+                            return SpriteDictionary.Crux[411];
                     }
                 }
             case 4:
                 {
                     if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                        return State.GameManager.SpriteDictionary.Crux[412];
+                        return SpriteDictionary.Crux[412];
                     switch (actor.GetWeaponSprite())
                     {
                         case 0:
-                            return State.GameManager.SpriteDictionary.Crux[412];
+                            return SpriteDictionary.Crux[412];
                         case 1:
-                            return State.GameManager.SpriteDictionary.Crux[420];
+                            return SpriteDictionary.Crux[420];
                         case 2:
-                            return State.GameManager.SpriteDictionary.Crux[412];
+                            return SpriteDictionary.Crux[412];
                         case 3:
-                            return State.GameManager.SpriteDictionary.Crux[420];
+                            return SpriteDictionary.Crux[420];
                         case 4:
-                            return State.GameManager.SpriteDictionary.Crux[412];
+                            return SpriteDictionary.Crux[412];
                         case 5:
-                            return State.GameManager.SpriteDictionary.Crux[421];
+                            return SpriteDictionary.Crux[421];
                         case 6:
-                            return State.GameManager.SpriteDictionary.Crux[412];
+                            return SpriteDictionary.Crux[412];
                         case 7:
-                            return State.GameManager.SpriteDictionary.Crux[421];
+                            return SpriteDictionary.Crux[421];
                         default:
-                            return State.GameManager.SpriteDictionary.Crux[412];
+                            return SpriteDictionary.Crux[412];
                     }
                 }
             default: return null;
@@ -653,40 +653,40 @@ class Crux : DefaultRaceData
             {
                 if (actor.PredatorComponent.VisibleFullness > 3)
                 {
-                    if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2) return State.GameManager.SpriteDictionary.Crux[194];
-                    else return State.GameManager.SpriteDictionary.Crux[219];
+                    if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2) return SpriteDictionary.Crux[194];
+                    else return SpriteDictionary.Crux[219];
                 }
             }
-            if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2) return State.GameManager.SpriteDictionary.Crux[170 + actor.GetStomachSize(23)];
-            else return State.GameManager.SpriteDictionary.Crux[195 + actor.GetStomachSize(23)];
+            if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2) return SpriteDictionary.Crux[170 + actor.GetStomachSize(23)];
+            else return SpriteDictionary.Crux[195 + actor.GetStomachSize(23)];
         }
         return null;
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Crux[30 + actor.Unit.EyeType];
+        return SpriteDictionary.Crux[30 + actor.Unit.EyeType];
     }
 
     protected override Sprite HairSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Crux[76 + actor.Unit.HairStyle];
+        return SpriteDictionary.Crux[76 + actor.Unit.HairStyle];
     }
 
     protected override Sprite HairSprite2(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Crux[13 + actor.Unit.EarType];
+        return SpriteDictionary.Crux[13 + actor.Unit.EarType];
     }
 
     protected override Sprite HairSprite3(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Crux[60 + actor.Unit.TailType];
+        return SpriteDictionary.Crux[60 + actor.Unit.TailType];
     }
 
     protected override Sprite BeardSprite(Actor_Unit actor)
     {
         if (actor.Unit.FurType == 0) return null;
-        return State.GameManager.SpriteDictionary.Crux[49 + actor.Unit.FurType];
+        return SpriteDictionary.Crux[49 + actor.Unit.FurType];
     }
 
     protected override Sprite BallsSprite(Actor_Unit actor)
@@ -698,8 +698,8 @@ class Crux : DefaultRaceData
         {
             if (actor.PredatorComponent.BallsFullness > 3)
             {
-                if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2) return State.GameManager.SpriteDictionary.Crux[245];
-                else return State.GameManager.SpriteDictionary.Crux[271];
+                if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2) return SpriteDictionary.Crux[245];
+                else return SpriteDictionary.Crux[271];
             }
 
         }
@@ -707,17 +707,17 @@ class Crux : DefaultRaceData
         if (actor.PredatorComponent?.BallsFullness > 0)
             switch (actor.Unit.BodySize)
             {
-                case 0: return State.GameManager.SpriteDictionary.Crux[231 + actor.GetBallSize(13)];
-                case 1: return State.GameManager.SpriteDictionary.Crux[257 + actor.GetBallSize(13)];
-                case 2: return State.GameManager.SpriteDictionary.Crux[231 + actor.GetBallSize(13)];
-                case 3: return State.GameManager.SpriteDictionary.Crux[257 + actor.GetBallSize(13)];
+                case 0: return SpriteDictionary.Crux[231 + actor.GetBallSize(13)];
+                case 1: return SpriteDictionary.Crux[257 + actor.GetBallSize(13)];
+                case 2: return SpriteDictionary.Crux[231 + actor.GetBallSize(13)];
+                case 3: return SpriteDictionary.Crux[257 + actor.GetBallSize(13)];
             }
         switch (actor.Unit.BodySize)
         {
-            case 0: return State.GameManager.SpriteDictionary.Crux[220 + actor.Unit.BallsSize + actor.Unit.DickSize];
-            case 1: return State.GameManager.SpriteDictionary.Crux[246 + actor.Unit.BallsSize + actor.Unit.DickSize];
-            case 2: return State.GameManager.SpriteDictionary.Crux[220 + actor.Unit.BallsSize + actor.Unit.DickSize];
-            case 3: return State.GameManager.SpriteDictionary.Crux[246 + actor.Unit.BallsSize + actor.Unit.DickSize];
+            case 0: return SpriteDictionary.Crux[220 + actor.Unit.BallsSize + actor.Unit.DickSize];
+            case 1: return SpriteDictionary.Crux[246 + actor.Unit.BallsSize + actor.Unit.DickSize];
+            case 2: return SpriteDictionary.Crux[220 + actor.Unit.BallsSize + actor.Unit.DickSize];
+            case 3: return SpriteDictionary.Crux[246 + actor.Unit.BallsSize + actor.Unit.DickSize];
         }
         return null;
     }
@@ -727,8 +727,8 @@ class Crux : DefaultRaceData
         if (actor.IsOralVoring)
         {
             if (actor.Unit.HeadType == 0 || actor.Unit.HeadType == 2)
-                return State.GameManager.SpriteDictionary.Crux[10];
-            return State.GameManager.SpriteDictionary.Crux[11];
+                return SpriteDictionary.Crux[10];
+            return SpriteDictionary.Crux[11];
         }
         return null;
     }
@@ -736,7 +736,7 @@ class Crux : DefaultRaceData
     protected override Sprite BodyAccentSprite4(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Crux[12];
+            return SpriteDictionary.Crux[12];
         return null;
     }
 
@@ -746,11 +746,11 @@ class Crux : DefaultRaceData
         {
             if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2)
             {
-                if (actor.Unit.BodyAccentType1 == 0) return State.GameManager.SpriteDictionary.Crux[90 + actor.Unit.BreastSize];
-                return State.GameManager.SpriteDictionary.Crux[97 + actor.Unit.BreastSize];
+                if (actor.Unit.BodyAccentType1 == 0) return SpriteDictionary.Crux[90 + actor.Unit.BreastSize];
+                return SpriteDictionary.Crux[97 + actor.Unit.BreastSize];
             }
-            if (actor.Unit.BodyAccentType1 == 0) return State.GameManager.SpriteDictionary.Crux[104 + actor.Unit.BreastSize];
-            return State.GameManager.SpriteDictionary.Crux[111 + actor.Unit.BreastSize];
+            if (actor.Unit.BodyAccentType1 == 0) return SpriteDictionary.Crux[104 + actor.Unit.BreastSize];
+            return SpriteDictionary.Crux[111 + actor.Unit.BreastSize];
         }
         return null;
     }
@@ -768,25 +768,25 @@ class Crux : DefaultRaceData
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.Crux[359 + actor.Unit.BasicMeleeWeaponType];
+                return SpriteDictionary.Crux[359 + actor.Unit.BasicMeleeWeaponType];
             case 1:
-                return State.GameManager.SpriteDictionary.Crux[362 + actor.Unit.BasicMeleeWeaponType];
+                return SpriteDictionary.Crux[362 + actor.Unit.BasicMeleeWeaponType];
             case 2:
-                return State.GameManager.SpriteDictionary.Crux[365 + actor.Unit.AdvancedMeleeWeaponType];
+                return SpriteDictionary.Crux[365 + actor.Unit.AdvancedMeleeWeaponType];
             case 3:
-                return State.GameManager.SpriteDictionary.Crux[367 + actor.Unit.AdvancedMeleeWeaponType];
+                return SpriteDictionary.Crux[367 + actor.Unit.AdvancedMeleeWeaponType];
             case 4:
-                if (actor.Unit.BasicRangedWeaponType == 1) return State.GameManager.SpriteDictionary.Crux[422];
-                else return State.GameManager.SpriteDictionary.Crux[369];
+                if (actor.Unit.BasicRangedWeaponType == 1) return SpriteDictionary.Crux[422];
+                else return SpriteDictionary.Crux[369];
             case 5:
-                if (actor.Unit.BasicRangedWeaponType == 1) return State.GameManager.SpriteDictionary.Crux[424];
-                else return State.GameManager.SpriteDictionary.Crux[371];
+                if (actor.Unit.BasicRangedWeaponType == 1) return SpriteDictionary.Crux[424];
+                else return SpriteDictionary.Crux[371];
             case 6:
-                if (actor.Unit.AdvancedRangedWeaponType == 1) return State.GameManager.SpriteDictionary.Crux[423];
-                else return State.GameManager.SpriteDictionary.Crux[370];
+                if (actor.Unit.AdvancedRangedWeaponType == 1) return SpriteDictionary.Crux[423];
+                else return SpriteDictionary.Crux[370];
             case 7:
-                if (actor.Unit.AdvancedRangedWeaponType == 1) return State.GameManager.SpriteDictionary.Crux[425];
-                else return State.GameManager.SpriteDictionary.Crux[372];
+                if (actor.Unit.AdvancedRangedWeaponType == 1) return SpriteDictionary.Crux[425];
+                else return SpriteDictionary.Crux[372];
             default:
                 return null;
         }
@@ -801,10 +801,10 @@ class Crux : DefaultRaceData
                 if (actor.GetStomachSize(24) <= 6)
                 {
                     Dick.layer = 17;
-                    return State.GameManager.SpriteDictionary.Crux[168];
+                    return SpriteDictionary.Crux[168];
                 }
                 Dick.layer = 6;
-                return State.GameManager.SpriteDictionary.Crux[169];
+                return SpriteDictionary.Crux[169];
             }
 
             if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2)
@@ -816,33 +816,33 @@ class Crux : DefaultRaceData
                         Dick.layer = 17;
                         switch (actor.Unit.DickSize)
                         {
-                            case 0: return State.GameManager.SpriteDictionary.Crux[127];
-                            case 1: return State.GameManager.SpriteDictionary.Crux[128];
-                            case 2: return State.GameManager.SpriteDictionary.Crux[129];
-                            case 3: return State.GameManager.SpriteDictionary.Crux[131];
-                            case 4: return State.GameManager.SpriteDictionary.Crux[132];
-                            case 5: return State.GameManager.SpriteDictionary.Crux[133];
-                            case 6: return State.GameManager.SpriteDictionary.Crux[135];
-                            case 7: return State.GameManager.SpriteDictionary.Crux[136];
-                            case 8: return State.GameManager.SpriteDictionary.Crux[137];
+                            case 0: return SpriteDictionary.Crux[127];
+                            case 1: return SpriteDictionary.Crux[128];
+                            case 2: return SpriteDictionary.Crux[129];
+                            case 3: return SpriteDictionary.Crux[131];
+                            case 4: return SpriteDictionary.Crux[132];
+                            case 5: return SpriteDictionary.Crux[133];
+                            case 6: return SpriteDictionary.Crux[135];
+                            case 7: return SpriteDictionary.Crux[136];
+                            case 8: return SpriteDictionary.Crux[137];
                         }
                     }
                     Dick.layer = 6;
-                    return State.GameManager.SpriteDictionary.Crux[150 + actor.Unit.DickSize];
+                    return SpriteDictionary.Crux[150 + actor.Unit.DickSize];
                 }
 
                 Dick.layer = 6;
                 switch (actor.Unit.DickSize)
                 {
-                    case 0: return State.GameManager.SpriteDictionary.Crux[126];
-                    case 1: return State.GameManager.SpriteDictionary.Crux[126];
-                    case 2: return State.GameManager.SpriteDictionary.Crux[126];
-                    case 3: return State.GameManager.SpriteDictionary.Crux[130];
-                    case 4: return State.GameManager.SpriteDictionary.Crux[130];
-                    case 5: return State.GameManager.SpriteDictionary.Crux[130];
-                    case 6: return State.GameManager.SpriteDictionary.Crux[134];
-                    case 7: return State.GameManager.SpriteDictionary.Crux[134];
-                    case 8: return State.GameManager.SpriteDictionary.Crux[134];
+                    case 0: return SpriteDictionary.Crux[126];
+                    case 1: return SpriteDictionary.Crux[126];
+                    case 2: return SpriteDictionary.Crux[126];
+                    case 3: return SpriteDictionary.Crux[130];
+                    case 4: return SpriteDictionary.Crux[130];
+                    case 5: return SpriteDictionary.Crux[130];
+                    case 6: return SpriteDictionary.Crux[134];
+                    case 7: return SpriteDictionary.Crux[134];
+                    case 8: return SpriteDictionary.Crux[134];
                 }
             }
             // For the secondary colour belly bodies.
@@ -853,33 +853,33 @@ class Crux : DefaultRaceData
                     Dick.layer = 17;
                     switch (actor.Unit.DickSize)
                     {
-                        case 0: return State.GameManager.SpriteDictionary.Crux[139];
-                        case 1: return State.GameManager.SpriteDictionary.Crux[140];
-                        case 2: return State.GameManager.SpriteDictionary.Crux[141];
-                        case 3: return State.GameManager.SpriteDictionary.Crux[143];
-                        case 4: return State.GameManager.SpriteDictionary.Crux[144];
-                        case 5: return State.GameManager.SpriteDictionary.Crux[145];
-                        case 6: return State.GameManager.SpriteDictionary.Crux[147];
-                        case 7: return State.GameManager.SpriteDictionary.Crux[148];
-                        case 8: return State.GameManager.SpriteDictionary.Crux[149];
+                        case 0: return SpriteDictionary.Crux[139];
+                        case 1: return SpriteDictionary.Crux[140];
+                        case 2: return SpriteDictionary.Crux[141];
+                        case 3: return SpriteDictionary.Crux[143];
+                        case 4: return SpriteDictionary.Crux[144];
+                        case 5: return SpriteDictionary.Crux[145];
+                        case 6: return SpriteDictionary.Crux[147];
+                        case 7: return SpriteDictionary.Crux[148];
+                        case 8: return SpriteDictionary.Crux[149];
                     }
                 }
                 Dick.layer = 6;
-                return State.GameManager.SpriteDictionary.Crux[159 + actor.Unit.DickSize];
+                return SpriteDictionary.Crux[159 + actor.Unit.DickSize];
             }
 
             Dick.layer = 6;
             switch (actor.Unit.DickSize)
             {
-                case 0: return State.GameManager.SpriteDictionary.Crux[138];
-                case 1: return State.GameManager.SpriteDictionary.Crux[138];
-                case 2: return State.GameManager.SpriteDictionary.Crux[138];
-                case 3: return State.GameManager.SpriteDictionary.Crux[142];
-                case 4: return State.GameManager.SpriteDictionary.Crux[142];
-                case 5: return State.GameManager.SpriteDictionary.Crux[142];
-                case 6: return State.GameManager.SpriteDictionary.Crux[146];
-                case 7: return State.GameManager.SpriteDictionary.Crux[146];
-                case 8: return State.GameManager.SpriteDictionary.Crux[146];
+                case 0: return SpriteDictionary.Crux[138];
+                case 1: return SpriteDictionary.Crux[138];
+                case 2: return SpriteDictionary.Crux[138];
+                case 3: return SpriteDictionary.Crux[142];
+                case 4: return SpriteDictionary.Crux[142];
+                case 5: return SpriteDictionary.Crux[142];
+                case 6: return SpriteDictionary.Crux[146];
+                case 7: return SpriteDictionary.Crux[146];
+                case 8: return SpriteDictionary.Crux[146];
             }
 
             return null;
@@ -892,24 +892,24 @@ class Crux : DefaultRaceData
             if (actor.IsUnbirthing)
             {
                 if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2)
-                    return State.GameManager.SpriteDictionary.Crux[124];
-                return State.GameManager.SpriteDictionary.Crux[125];
+                    return SpriteDictionary.Crux[124];
+                return SpriteDictionary.Crux[125];
             }
 
             if (actor.Unit.BodySize == 0 || actor.Unit.BodySize == 2)
             {
                 switch (actor.Unit.VulvaType)
                 {
-                    case 0: return State.GameManager.SpriteDictionary.Crux[118];
-                    case 1: return State.GameManager.SpriteDictionary.Crux[120];
-                    case 2: return State.GameManager.SpriteDictionary.Crux[122];
+                    case 0: return SpriteDictionary.Crux[118];
+                    case 1: return SpriteDictionary.Crux[120];
+                    case 2: return SpriteDictionary.Crux[122];
                 }
             }
             switch (actor.Unit.VulvaType)
             {
-                case 0: return State.GameManager.SpriteDictionary.Crux[119];
-                case 1: return State.GameManager.SpriteDictionary.Crux[121];
-                case 2: return State.GameManager.SpriteDictionary.Crux[123];
+                case 0: return SpriteDictionary.Crux[119];
+                case 1: return SpriteDictionary.Crux[121];
+                case 2: return SpriteDictionary.Crux[123];
             }
         }
 
@@ -943,7 +943,7 @@ class Crux : DefaultRaceData
                 }
             }
 
-            return State.GameManager.SpriteDictionary.Crux[291 + frameListDrool.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.Crux[291 + frameListDrool.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
         if (actor.PredatorComponent?.VisibleFullness > 0 && State.Rand.Next(600) == 0)
@@ -981,7 +981,7 @@ class Crux : DefaultRaceData
                 }
             }
 
-            return State.GameManager.SpriteDictionary.Crux[300 + frameListWet.frames[actor.AnimationController.frameLists[1].currentFrame]];
+            return SpriteDictionary.Crux[300 + frameListWet.frames[actor.AnimationController.frameLists[1].currentFrame]];
         }
 
         if (actor.Unit.DickSize == -1 && actor.PredatorComponent?.Fullness > 0 && Config.ErectionsFromVore && State.Rand.Next(600) == 0)

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2326906175
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: merc
+      Dependencies: {}
+    Info_1:
+      Name: empire
+      Dependencies: {}
+    Info_2:
+      Name: monster
+      Dependencies: {}
+    Info_3:
+      Name: specialmerc
+      Dependencies: {}

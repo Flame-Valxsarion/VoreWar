@@ -1,0 +1,67 @@
+ManifestFileVersion: 0
+CRC: 1638576018
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 7d3ff2dd25368988231eb627dd8b1dde
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Sprites/Units/Eeveelution/AnthroEqualeon.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesMiceArmor1.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesSharkArmor2.png
+- Assets/Sprites/Units/BadgersClothes.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesSharkArmor1.png
+- Assets/Sprites/Units/RenamonClothes2.png
+- Assets/Sprites/Units/succubus.png
+- Assets/Sprites/Units/Cockatrice2.png
+- Assets/Sprites/Units/BadgersBodies.png
+- Assets/Sprites/Units/OoviKatFemale.png
+- Assets/Sprites/Units/RenamonBodies.png
+- Assets/Sprites/Units/Vipers4.png
+- Assets/Sprites/Units/Vargul1.png
+- Assets/Sprites/Units/Vargul4.png
+- Assets/Sprites/Units/RenamonVore.png
+- Assets/Sprites/Units/succubus_dress.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesMice.png
+- Assets/Sprites/Units/Hippos3.png
+- Assets/Sprites/Units/Vipers3.png
+- Assets/Sprites/Units/BadgersVoreWhite.png
+- Assets/Sprites/Units/dew.png
+- Assets/Sprites/Units/RenamonClothes1.png
+- Assets/Sprites/Units/Vipers2.png
+- Assets/Sprites/Units/CentaurParts.png
+- Assets/Sprites/Units/Cockatrice1.png
+- Assets/Sprites/Units/Eeveelution/AnthroEevee.png
+- Assets/Sprites/Units/TaurTorso.png
+- Assets/Sprites/Units/Hippos.png
+- Assets/Sprites/Units/RenamonClothes3.png
+- Assets/Sprites/Units/OoviKatCustom.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesLizard.png
+- Assets/Sprites/Units/tigeroutfit.png
+- Assets/Sprites/Units/Cockatrice3.png
+- Assets/Sprites/Units/Hippos2.png
+- Assets/Sprites/Units/Hamsters.png
+- Assets/Sprites/Units/Vargul2.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesStandard.png
+- Assets/Sprites/Units/BadgersVoreBlack.png
+- Assets/Sprites/Units/OoviKatMale.png
+- Assets/Sprites/Units/puca.png
+- Assets/Sprites/Units/succ_sel.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesStandardArmor1.png
+- Assets/Sprites/Units/Vipers1.png
+- Assets/Sprites/Units/succubusLeotard.png
+- Assets/Sprites/Units/CentaurTorsoAddOns.png
+- Assets/Sprites/Units/Vargul5.png
+- Assets/Sprites/Units/AlligatorSprites.png
+- Assets/Sprites/Units/Vargul3.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesShark.png
+- Assets/Sprites/Units/RwuMercenaries/RwuMercenariesLizardArmor1.png
+Dependencies: []

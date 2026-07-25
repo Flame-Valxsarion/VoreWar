@@ -5,7 +5,7 @@ using UnityEngine;
 
 class Driders : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Driders;
+    readonly Sprite[] Sprites = SpriteDictionary.Driders;
     readonly float yOffset = 30 * .625f;
     readonly DriderLeader LeaderClothes;
     public Driders()
@@ -219,13 +219,13 @@ namespace DriderClothing
             leaderOnly = true;
             FixedColor = true;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 1;
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(17, null, WhiteColored);
             clothing3 = new SpriteExtraInfo(11, null, WhiteColored);
             OccupiesAllSlots = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Driders[96];
+            DiscardSprite = SpriteDictionary.Driders[96];
             Type = 236;
         }
 
@@ -234,17 +234,17 @@ namespace DriderClothing
 
             if (actor.Unit.HasBreasts)
             {
-                DiscardSprite = State.GameManager.SpriteDictionary.Driders[97];
+                DiscardSprite = SpriteDictionary.Driders[97];
                 Type = 237;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Driders[76];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Driders[87 + actor.Unit.BreastSize];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Driders[82 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Driders[76];
+                clothing2.GetSprite = (s) => SpriteDictionary.Driders[87 + actor.Unit.BreastSize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Driders[82 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Driders[95];
+                clothing1.GetSprite = (s) => SpriteDictionary.Driders[95];
                 clothing2.GetSprite = null;
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Driders[77 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Driders[77 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);

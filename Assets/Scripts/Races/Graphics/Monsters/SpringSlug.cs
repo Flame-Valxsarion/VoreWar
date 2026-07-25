@@ -3,7 +3,7 @@ using UnityEngine;
 
 class SpringSlug : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.SpringSlug;
+    readonly Sprite[] Sprites = SpriteDictionary.SpringSlug;
 
     public SpringSlug()
     {

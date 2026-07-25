@@ -3,7 +3,7 @@ using UnityEngine;
 
 class Erin : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Erin;
+    readonly Sprite[] Sprites = SpriteDictionary.Erin;
     internal Erin()
     {
 
@@ -168,13 +168,13 @@ class ErinTop : MainClothing
     {
         if (actor.IsAttacking)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Erin[15];
+            clothing1.GetSprite = (s) => SpriteDictionary.Erin[15];
         }
         else
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Erin[14];
+            clothing1.GetSprite = (s) => SpriteDictionary.Erin[14];
         }
-        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Erin[16];
+        clothing2.GetSprite = (s) => SpriteDictionary.Erin[16];
 
         base.Configure(sprite, actor);
     }
@@ -191,7 +191,7 @@ class ErinPantie : MainClothing
     }
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Erin[13];
+        clothing1.GetSprite = (s) => SpriteDictionary.Erin[13];
         base.Configure(sprite, actor);
 
 
@@ -210,7 +210,7 @@ class ErinSkirt : MainClothing
     }
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Erin[12];
+        clothing1.GetSprite = (s) => SpriteDictionary.Erin[12];
         base.Configure(sprite, actor);
 
 
@@ -229,7 +229,7 @@ class ErinStocking : MainClothing
     }
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Erin[11];
+        clothing1.GetSprite = (s) => SpriteDictionary.Erin[11];
         base.Configure(sprite, actor);
 
 
@@ -248,7 +248,7 @@ class ErinShoes : MainClothing
     }
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Erin[10];
+        clothing1.GetSprite = (s) => SpriteDictionary.Erin[10];
         base.Configure(sprite, actor);
 
 

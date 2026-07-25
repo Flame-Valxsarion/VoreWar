@@ -4,7 +4,7 @@ using UnityEngine;
 
 class Mermen : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Mermen;
+    readonly Sprite[] Sprites = SpriteDictionary.Mermen;
     readonly MermenLeader LeaderClothes;
     readonly MermenRags Rags;
 
@@ -275,7 +275,7 @@ namespace MermenClothing
     {
         public MermenTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[137];
+            DiscardSprite = SpriteDictionary.Mermen2[137];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -288,7 +288,7 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[24 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[24 + actor.Unit.BreastSize];
             }
             else
             {
@@ -304,7 +304,7 @@ namespace MermenClothing
     {
         public MermenTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[138];
+            DiscardSprite = SpriteDictionary.Mermen2[138];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -317,7 +317,7 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[40 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[40 + actor.Unit.BreastSize];
             }
             else
             {
@@ -333,7 +333,7 @@ namespace MermenClothing
     {
         public MermenTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[140];
+            DiscardSprite = SpriteDictionary.Mermen2[140];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -346,7 +346,7 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[52 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[52 + actor.Unit.BreastSize];
             }
             else
             {
@@ -373,15 +373,15 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[60 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[60 + actor.Unit.BreastSize];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MermenSkin, actor.Unit.ExtraColor1);
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[68 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[68 + actor.Unit.BodySize];
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MermenSkin, actor.Unit.ExtraColor1);
             }
             else
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[132 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[132 + actor.Unit.BodySize];
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MermenSkin, actor.Unit.ExtraColor1);
             }
             base.Configure(sprite, actor);
@@ -393,11 +393,11 @@ namespace MermenClothing
     {
         public MermenArmour()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[142];
+            DiscardSprite = SpriteDictionary.Mermen2[142];
             coversBreasts = false;
             OccupiesAllSlots = true;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             clothing1 = new SpriteExtraInfo(18, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(11, null, WhiteColored);
             Type = 683;
@@ -408,13 +408,13 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[98 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[90 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[98 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[90 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[106];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[94 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[106];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[94 + actor.Unit.BodySize];
             }
             base.Configure(sprite, actor);
         }
@@ -425,11 +425,11 @@ namespace MermenClothing
     {
         public MermenRags()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[143];
+            DiscardSprite = SpriteDictionary.Mermen2[143];
             coversBreasts = false;
             OccupiesAllSlots = true;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             clothing1 = new SpriteExtraInfo(18, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(11, null, WhiteColored);
             Type = 685;
@@ -441,18 +441,18 @@ namespace MermenClothing
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[129];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[129];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[130];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[130];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[131];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[131];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[120 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[120 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[128];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[124 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[128];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[124 + actor.Unit.BodySize];
             }
             base.Configure(sprite, actor);
         }
@@ -463,11 +463,11 @@ namespace MermenClothing
         public MermenLeader()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[141];
+            DiscardSprite = SpriteDictionary.Mermen2[141];
             coversBreasts = false;
             OccupiesAllSlots = true;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             clothing1 = new SpriteExtraInfo(18, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(11, null, WhiteColored);
             clothing3 = new SpriteExtraInfo(10, null, WhiteColored);
@@ -479,15 +479,15 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[80 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[72 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[80 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[72 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[89];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[76 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[89];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mermen2[76 + actor.Unit.BodySize];
             }
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[88];
+            clothing3.GetSprite = (s) => SpriteDictionary.Mermen2[88];
             base.Configure(sprite, actor);
         }
     }
@@ -505,11 +505,11 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[0 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[0 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[4 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[4 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MermenSkin, actor.Unit.ExtraColor1);
@@ -530,11 +530,11 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[8 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[8 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[12 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[12 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MermenSkin, actor.Unit.ExtraColor1);
@@ -555,11 +555,11 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[32 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[32 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[36 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[36 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MermenSkin, actor.Unit.ExtraColor1);
@@ -571,10 +571,10 @@ namespace MermenClothing
     {
         public MermenLoincloth()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[136];
+            DiscardSprite = SpriteDictionary.Mermen2[136];
             coversBreasts = false;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 1;
             clothing1 = new SpriteExtraInfo(11, null, WhiteColored);
             Type = 687;
             FixedColor = true;
@@ -584,11 +584,11 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[16 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[16 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[20 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[20 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);
@@ -599,7 +599,7 @@ namespace MermenClothing
     {
         public MermenBot()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Mermen2[139];
+            DiscardSprite = SpriteDictionary.Mermen2[139];
             femaleOnly = true;
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(11, null, WhiteColored);
@@ -611,7 +611,7 @@ namespace MermenClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[48 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[48 + actor.Unit.BodySize];
             }
             else
             {
@@ -632,7 +632,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[107];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[107];
             base.Configure(sprite, actor);
         }
     }
@@ -647,7 +647,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[108];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[108];
             base.Configure(sprite, actor);
         }
     }
@@ -662,7 +662,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[109];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[109];
             base.Configure(sprite, actor);
         }
     }
@@ -677,7 +677,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[110];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[110];
             base.Configure(sprite, actor);
         }
     }
@@ -692,7 +692,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[111];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[111];
             base.Configure(sprite, actor);
         }
     }
@@ -707,7 +707,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[112];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[112];
             base.Configure(sprite, actor);
         }
     }
@@ -722,7 +722,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[113];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[113];
             base.Configure(sprite, actor);
         }
     }
@@ -737,7 +737,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[114];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[114];
             base.Configure(sprite, actor);
         }
     }
@@ -752,7 +752,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[115];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[115];
             base.Configure(sprite, actor);
         }
     }
@@ -767,7 +767,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[116];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[116];
             base.Configure(sprite, actor);
         }
     }
@@ -782,7 +782,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[117];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[117];
             base.Configure(sprite, actor);
         }
     }
@@ -797,7 +797,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[118];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[118];
             base.Configure(sprite, actor);
         }
     }
@@ -812,7 +812,7 @@ namespace MermenClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mermen2[119];
+            clothing1.GetSprite = (s) => SpriteDictionary.Mermen2[119];
             base.Configure(sprite, actor);
         }
     }

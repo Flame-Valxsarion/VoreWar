@@ -6,7 +6,7 @@ namespace TaurusClothes
     {
         public Overall()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.CowClothing[12];
+            DiscardSprite = SpriteDictionary.CowClothing[12];
             Type = 81;
             OccupiesAllSlots = true;
             clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
@@ -18,7 +18,7 @@ namespace TaurusClothes
             {
                 coversBreasts = false;
                 breastSprite = null;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[10];
                 base.Configure(sprite, actor);
                 return;
             }
@@ -31,12 +31,12 @@ namespace TaurusClothes
             if (actor.Unit.HasBreasts)
             {
                 spriteNum = actor.Unit.BreastSize;
-                breastSprite = State.GameManager.SpriteDictionary.CowClothing[5 + spriteNum];
+                breastSprite = SpriteDictionary.CowClothing[5 + spriteNum];
             }
             else
                 spriteNum = 11;
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[spriteNum];
+            clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[spriteNum];
             base.Configure(sprite, actor);
         }
     }
@@ -45,7 +45,7 @@ namespace TaurusClothes
     {
         public OverallBottom()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.CowClothing[12];
+            DiscardSprite = SpriteDictionary.CowClothing[12];
             coversBreasts = false;
             Type = 80;
             clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
@@ -53,7 +53,7 @@ namespace TaurusClothes
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[10];
+            clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[10];
             base.Configure(sprite, actor);
         }
     }
@@ -76,7 +76,7 @@ namespace TaurusClothes
 
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[16 + actor.Unit.BreastSize];
+            clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[16 + actor.Unit.BreastSize];
             actor.SquishedBreasts = true;
             base.Configure(sprite, actor);
         }
@@ -99,16 +99,16 @@ namespace TaurusClothes
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[36];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[37];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[38 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[36];
+                clothing2.GetSprite = (s) => SpriteDictionary.CowClothing[37];
+                clothing3.GetSprite = (s) => SpriteDictionary.CowClothing[38 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[31 + (actor.IsAttacking ? 1 : 0)];
+                clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[31 + (actor.IsAttacking ? 1 : 0)];
                 clothing2.GetColor = WhiteColored;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[35];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[33 + (actor.IsAttacking ? 1 : 0)];
+                clothing2.GetSprite = (s) => SpriteDictionary.CowClothing[35];
+                clothing3.GetSprite = (s) => SpriteDictionary.CowClothing[33 + (actor.IsAttacking ? 1 : 0)];
             }
 
             base.Configure(sprite, actor);
@@ -141,10 +141,10 @@ namespace TaurusClothes
 
             if (actor.Unit.HasBreasts == false && actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[45];
+                clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[45];
             }
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[23 + spriteNum];
+                clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[23 + spriteNum];
             base.Configure(sprite, actor);
         }
     }
@@ -163,9 +163,9 @@ namespace TaurusClothes
             if (actor.Unit.HasDick)
             {
                 if (actor.Unit.HasBreasts)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[44];
+                    clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[44];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[15];
+                    clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[15];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
 
             }
@@ -175,7 +175,7 @@ namespace TaurusClothes
             }
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[13 + (actor.Unit.HasBreasts ? 0 : 1)];
+            clothing2.GetSprite = (s) => SpriteDictionary.CowClothing[13 + (actor.Unit.HasBreasts ? 0 : 1)];
             base.Configure(sprite, actor);
         }
 
@@ -194,7 +194,7 @@ namespace TaurusClothes
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[21 + (actor.Unit.HasBreasts ? 0 : 1)];
+            clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[21 + (actor.Unit.HasBreasts ? 0 : 1)];
             base.Configure(sprite, actor);
         }
     }
@@ -210,7 +210,7 @@ namespace TaurusClothes
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[29 + (actor.Unit.HasBreasts ? 0 : 1)];
+            clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[29 + (actor.Unit.HasBreasts ? 0 : 1)];
             base.Configure(sprite, actor);
         }
     }
@@ -224,7 +224,7 @@ namespace TaurusClothes
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[43];
+            clothing1.GetSprite = (s) => SpriteDictionary.CowClothing[43];
             base.Configure(sprite, actor);
         }
     }
@@ -239,7 +239,7 @@ namespace TaurusClothes
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowHoliday[0];
+            clothing1.GetSprite = (s) => SpriteDictionary.CowHoliday[0];
             base.Configure(sprite, actor);
         }
     }
@@ -261,15 +261,15 @@ namespace TaurusClothes
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowHoliday[7];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.CowHoliday[1 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.CowHoliday[7];
+                clothing2.GetSprite = (s) => SpriteDictionary.CowHoliday[1 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CowHoliday[8 + (actor.IsAttacking ? 1 : 0)];
+                clothing1.GetSprite = (s) => SpriteDictionary.CowHoliday[8 + (actor.IsAttacking ? 1 : 0)];
                 //clothing2.GetColor = WhiteColored;
-                //clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.CowClothing[6];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.CowHoliday[10 + (actor.IsAttacking ? 1 : 0)];
+                //clothing2.GetSprite = (s) => SpriteDictionary.CowClothing[6];
+                clothing2.GetSprite = (s) => SpriteDictionary.CowHoliday[10 + (actor.IsAttacking ? 1 : 0)];
             }
 
             base.Configure(sprite, actor);

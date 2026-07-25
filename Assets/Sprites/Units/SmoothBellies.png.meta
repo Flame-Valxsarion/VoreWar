@@ -35,7 +35,7 @@ TextureImporter:
     21300060: SmoothBellies_14
     21300062: SmoothBellies_15
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -447,5 +447,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: empire
   assetBundleVariant: 

@@ -27,6 +27,8 @@ class BoneInfo
             case BoneTypes.CrypterBonePile:
             case BoneTypes.DisposedCondom:
             case BoneTypes.CumPuddle:
+            case BoneTypes.HoneyPuddle:
+            case BoneTypes.UrinePuddle:
                 rtn = new Vector3(0.65f, 0.65f);
                 break;
             case BoneTypes.CrypterSkull:

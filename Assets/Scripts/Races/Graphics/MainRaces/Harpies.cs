@@ -119,25 +119,25 @@ class Harpies : DefaultRaceData
         }
     }
 
-    protected override Sprite BodyAccentSprite5(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[24 + actor.GetSimpleBodySprite()]; //Feathers 2
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[actor.GetSimpleBodySprite()]; //Torsos
+    protected override Sprite BodyAccentSprite5(Actor_Unit actor) => SpriteDictionary.Harpies[24 + actor.GetSimpleBodySprite()]; //Feathers 2
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Harpies[actor.GetSimpleBodySprite()]; //Torsos
 
-    protected override Sprite BodySizeSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[actor.Unit.BodyAccentType1 == 1 ? 38 + actor.GetSimpleBodySprite() : 29 + actor.GetSimpleBodySprite()]; //Feathers 3
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[32 + actor.Unit.SpecialAccessoryType]; //Head Accessory
-    protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[6 + actor.GetSimpleBodySprite()]; //Leg Scales
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[3 + actor.GetSimpleBodySprite()]; //Base Claws
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[21 + actor.GetSimpleBodySprite()]; //Feathers 1
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.Harpies[35 + actor.GetSimpleBodySprite()]; //Fluff
+    protected override Sprite BodySizeSprite(Actor_Unit actor) => SpriteDictionary.Harpies[actor.Unit.BodyAccentType1 == 1 ? 38 + actor.GetSimpleBodySprite() : 29 + actor.GetSimpleBodySprite()]; //Feathers 3
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Harpies[32 + actor.Unit.SpecialAccessoryType]; //Head Accessory
+    protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) => SpriteDictionary.Harpies[6 + actor.GetSimpleBodySprite()]; //Leg Scales
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Harpies[3 + actor.GetSimpleBodySprite()]; //Base Claws
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Harpies[21 + actor.GetSimpleBodySprite()]; //Feathers 1
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => SpriteDictionary.Harpies[35 + actor.GetSimpleBodySprite()]; //Fluff
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
     {
         if (actor.Unit.HasWeapon)
         {
-            return State.GameManager.SpriteDictionary.Harpies[9 + actor.GetSimpleBodySprite() + (3 * (actor.GetWeaponSprite() / 2))];
+            return SpriteDictionary.Harpies[9 + actor.GetSimpleBodySprite() + (3 * (actor.GetWeaponSprite() / 2))];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.Harpies[3 + actor.GetSimpleBodySprite()];
+            return SpriteDictionary.Harpies[3 + actor.GetSimpleBodySprite()];
         }
     }
 }

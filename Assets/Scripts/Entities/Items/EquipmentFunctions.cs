@@ -107,6 +107,10 @@
     }
     internal static bool UseEquipmentGoddessPendantStart(Army army)
     {
+        if (army == null)
+        {
+            return false;
+        }
         foreach (var unit in army.Units)
         {
             unit.AddBolster(10);

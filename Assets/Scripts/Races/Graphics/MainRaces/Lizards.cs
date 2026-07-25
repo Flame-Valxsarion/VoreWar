@@ -149,37 +149,37 @@ class Lizards : DefaultRaceData
         if (facingFront)
             {
             Body.layer = 2;
-            return State.GameManager.SpriteDictionary.Lizards[actor.GetSimpleBodySprite()];
+            return SpriteDictionary.Lizards[actor.GetSimpleBodySprite()];
         }
-        Body.layer = 16; return State.GameManager.SpriteDictionary.LizardsBooty[1];
+        Body.layer = 16; return SpriteDictionary.LizardsBooty[1];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
         if (facingFront)
         { return null;}
-        else return State.GameManager.SpriteDictionary.LizardsBooty[0];
+        else return SpriteDictionary.LizardsBooty[0];
     }
     //protected override Sprite HairSprite(Actor_Unit actor) => State.GameManager.OldSpriteDictionary.LizardHorns[actor.Unit.HairStyle];
     protected override Sprite AccessorySprite(Actor_Unit actor)
     {
         if (facingFront)
-        { return State.GameManager.SpriteDictionary.Lizards[7 + actor.Unit.HairStyle];}
-        return State.GameManager.SpriteDictionary.LizardsBooty[68 + actor.Unit.HairStyle];
+        { return SpriteDictionary.Lizards[7 + actor.Unit.HairStyle];}
+        return SpriteDictionary.LizardsBooty[68 + actor.Unit.HairStyle];
     } 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
         if (facingFront)
-        { BodyAccent.layer = 7; return State.GameManager.SpriteDictionary.Lizards[5 + (actor.IsOralVoring ? 1 : 0)];}
+        { BodyAccent.layer = 7; return SpriteDictionary.Lizards[5 + (actor.IsOralVoring ? 1 : 0)];}
         BodyAccent.layer = 17;
-        return State.GameManager.SpriteDictionary.LizardsBooty[76];
+        return SpriteDictionary.LizardsBooty[76];
     }
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
     {
         if (facingFront) 
         { 
             BodyAccent2.layer = 7; 
-            return State.GameManager.SpriteDictionary.Lizards[3 + (actor.IsAttacking ? 1 : 0)];
+            return SpriteDictionary.Lizards[3 + (actor.IsAttacking ? 1 : 0)];
 		}
         else 
         {
@@ -189,7 +189,7 @@ class Lizards : DefaultRaceData
             {
 				if (actor.Unit.HasDick && actor.PredatorComponent.BallsFullness >= 2.5)
 				{
-					return State.GameManager.SpriteDictionary.LizardsBooty[75];
+					return SpriteDictionary.LizardsBooty[75];
 				}
 			}
 			catch (NullReferenceException e)
@@ -198,9 +198,9 @@ class Lizards : DefaultRaceData
 			}
 			if (actor.GetStomachSize(16, 1.0f) >= 16)
 			{ 
-				return State.GameManager.SpriteDictionary.LizardsBooty[74];
+				return SpriteDictionary.LizardsBooty[74];
 			}
-			else return State.GameManager.SpriteDictionary.LizardsBooty[6];
+			else return SpriteDictionary.LizardsBooty[6];
         }
     }
 
@@ -208,34 +208,34 @@ class Lizards : DefaultRaceData
     {
         if (facingFront)
         { return null;}
-        else return State.GameManager.SpriteDictionary.LizardsBooty[2];
+        else return SpriteDictionary.LizardsBooty[2];
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor)
     {
         if (facingFront)
         { return null;}
-        else return State.GameManager.SpriteDictionary.LizardsBooty[3];
+        else return SpriteDictionary.LizardsBooty[3];
     }
 
     protected override Sprite BodyAccentSprite5(Actor_Unit actor)
     {
         if (facingFront)
         { return null;}
-        else return State.GameManager.SpriteDictionary.LizardsBooty[4];
+        else return SpriteDictionary.LizardsBooty[4];
     }
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor)
     {
         if (facingFront)
         { return null;}
-        else return State.GameManager.SpriteDictionary.LizardsBooty[5];
+        else return SpriteDictionary.LizardsBooty[5];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
         if (facingFront)
-        { return State.GameManager.SpriteDictionary.Lizards[13 + actor.Unit.EyeType];}
+        { return SpriteDictionary.Lizards[13 + actor.Unit.EyeType];}
         else return null;
     }
 
@@ -250,7 +250,7 @@ class Lizards : DefaultRaceData
                 {return null;}
             if (actor.SquishedBreasts && actor.Unit.BreastSize >= 3 && actor.Unit.BreastSize <= 6)
                 {return State.GameManager.SpriteDictionary.SquishedBreasts[actor.Unit.BreastSize - 3];}
-            return State.GameManager.SpriteDictionary.Lizards[18 + actor.Unit.BreastSize];
+            return SpriteDictionary.Lizards[18 + actor.Unit.BreastSize];
         }
         else
         {
@@ -262,7 +262,7 @@ class Lizards : DefaultRaceData
             if (actor.Unit.BreastSize <= 2)
                 {return null;}
             if (actor.Unit.BreastSize >= 3)
-                {return State.GameManager.SpriteDictionary.LizardsBooty[46 + actor.Unit.BreastSize - 3];}
+                {return SpriteDictionary.LizardsBooty[46 + actor.Unit.BreastSize - 3];}
             return null; //Does this work?  I don't know anymore
         }
     }
@@ -323,7 +323,7 @@ class Lizards : DefaultRaceData
                 }
                 else
                     belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.LizardsBooty[52 + actor.GetStomachSize()];
+                return SpriteDictionary.LizardsBooty[52 + actor.GetStomachSize()];
             }
             else {return null;}
         }
@@ -338,25 +338,25 @@ class Lizards : DefaultRaceData
         if (actor.IsUnbirthing)
             { 
             if (actor.Unit.HasDick == false && actor.Unit.HasBreasts == true) // Visible for Females
-                { return State.GameManager.SpriteDictionary.LizardsBooty[12];}
+                { return SpriteDictionary.LizardsBooty[12];}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == false) // Hide for Males
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == false) // Hide for Herms (Didn't work)
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == true) // Visible for Herms
-                { return State.GameManager.SpriteDictionary.LizardsBooty[12];}
+                { return SpriteDictionary.LizardsBooty[12];}
             return null; // ????
             }
         if (actor.IsAnalVoring)
             { 
             if (actor.Unit.HasDick == false && actor.Unit.HasBreasts == true) // Visible for Females
-                { return State.GameManager.SpriteDictionary.LizardsBooty[10];}
+                { return SpriteDictionary.LizardsBooty[10];}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == false) // Hide for Males
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == false) // Hide for Herms (Didn't work)
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == true) // Visible for Herms
-                { return State.GameManager.SpriteDictionary.LizardsBooty[10];}
+                { return SpriteDictionary.LizardsBooty[10];}
             return null; // uhhh
             }
         else return null;
@@ -369,25 +369,25 @@ class Lizards : DefaultRaceData
         if (actor.IsUnbirthing)
             { 
             if (actor.Unit.HasDick == false && actor.Unit.HasBreasts == true) // Visible for Females
-                { return State.GameManager.SpriteDictionary.LizardsBooty[13];}
+                { return SpriteDictionary.LizardsBooty[13];}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == false) // Hide for Males
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == false) // Hide for Herms (Didn't work)
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == true) // Visible for Herms
-                { return State.GameManager.SpriteDictionary.LizardsBooty[13];}
+                { return SpriteDictionary.LizardsBooty[13];}
             return null; // i dunno what's going on
             }
         if (actor.IsAnalVoring)
             { 
             if (actor.Unit.HasDick == false && actor.Unit.HasBreasts == true) // Visible for Females
-                { return State.GameManager.SpriteDictionary.LizardsBooty[11];}
+                { return SpriteDictionary.LizardsBooty[11];}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == false) // Hide for Males
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == false) // Hide for Herms (Didn't work)
                 { return null;}
             if (actor.Unit.HasDick == true && actor.Unit.HasBreasts == true && Config.HermsCanUB == true) // Visible for Herms
-                { return State.GameManager.SpriteDictionary.LizardsBooty[11];}
+                { return SpriteDictionary.LizardsBooty[11];}
             return null; // pls help
             }
         else return null;
@@ -398,9 +398,9 @@ class Lizards : DefaultRaceData
         if (facingFront)
         { return null;}
         if (actor.IsUnbirthing)
-        { return State.GameManager.SpriteDictionary.LizardsBooty[7];}
+        { return SpriteDictionary.LizardsBooty[7];}
         if (actor.IsAnalVoring)
-        { return State.GameManager.SpriteDictionary.LizardsBooty[8];}
+        { return SpriteDictionary.LizardsBooty[8];}
         else return null;
     
     }
@@ -412,7 +412,7 @@ class Lizards : DefaultRaceData
         if (actor.IsUnbirthing)
         { return null;}
         if (actor.IsAnalVoring)
-        { return State.GameManager.SpriteDictionary.LizardsBooty[9];}
+        { return SpriteDictionary.LizardsBooty[9];}
         else return null;
     }
 
@@ -423,7 +423,7 @@ class Lizards : DefaultRaceData
         {
             if (actor.GetWeaponSprite() == 7)
                 return null;
-            return State.GameManager.SpriteDictionary.Lizards[46 + actor.GetWeaponSprite()];
+            return SpriteDictionary.Lizards[46 + actor.GetWeaponSprite()];
         }
         else
         {
@@ -455,7 +455,7 @@ protected override Sprite DickSprite(Actor_Unit actor)
             if (actor.Unit.HasDick == false)
                 return null;
             Dick.layer = 19;
-            return State.GameManager.SpriteDictionary.LizardsBooty[14 + actor.Unit.DickSize];
+            return SpriteDictionary.LizardsBooty[14 + actor.Unit.DickSize];
         }
     }
 
@@ -517,22 +517,22 @@ protected override Sprite DickSprite(Actor_Unit actor)
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .9f) == 21)
         {
             AddOffset(Balls, 0, -18 * .625f);
-            return State.GameManager.SpriteDictionary.LizardsBooty[42];
+            return SpriteDictionary.LizardsBooty[42];
         }
         else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .9f) == 21)
         {
             AddOffset(Balls, 0, -18 * .625f);
-            return State.GameManager.SpriteDictionary.LizardsBooty[41];
+            return SpriteDictionary.LizardsBooty[41];
         }
         else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .9f) == 20)
         {
             AddOffset(Balls, 0, -15 * .625f);
-            return State.GameManager.SpriteDictionary.LizardsBooty[40];
+            return SpriteDictionary.LizardsBooty[40];
         }
         else if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, PreyLocation.balls) ?? false) && actor.GetBallSize(21, .9f) == 19)
         {
             AddOffset(Balls, 0, -14 * .625f);
-            return State.GameManager.SpriteDictionary.LizardsBooty[39];
+            return SpriteDictionary.LizardsBooty[39];
         }
         int combined = Math.Min(baseSize + ballOffset + 3, 20);
         if (combined == 21)
@@ -543,9 +543,9 @@ protected override Sprite DickSprite(Actor_Unit actor)
             AddOffset(Balls, 0, -8 * .625f);
         if (ballOffset > 0)
         {
-            return State.GameManager.SpriteDictionary.LizardsBooty[23 + combined];
+            return SpriteDictionary.LizardsBooty[23 + combined];
         }
-        return State.GameManager.SpriteDictionary.LizardsBooty[23 + baseSize];
+        return SpriteDictionary.LizardsBooty[23 + baseSize];
         }
     }
 

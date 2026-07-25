@@ -34,7 +34,7 @@ TextureImporter:
     21300058: succubus_dress_21
     21300060: succubus_dress_22
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -586,5 +586,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: merc
   assetBundleVariant: 

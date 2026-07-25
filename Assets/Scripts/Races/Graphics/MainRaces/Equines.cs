@@ -4,9 +4,9 @@ using UnityEngine;
 
 class Equines : DefaultRaceData
 {
-    Sprite[] SpritesBase = State.GameManager.SpriteDictionary.Horse;
-    Sprite[] SpritesClothes = State.GameManager.SpriteDictionary.HorseClothing;
-    Sprite[] SpritesAdd1 = State.GameManager.SpriteDictionary.HorseExtras1;
+    Sprite[] SpritesBase = SpriteDictionary.Horse;
+    Sprite[] SpritesClothes = SpriteDictionary.HorseClothing;
+    Sprite[] SpritesAdd1 = SpriteDictionary.HorseExtras1;
 
     bool oversize = false;
 
@@ -53,11 +53,11 @@ class Equines : DefaultRaceData
 
         AllowedWaistTypes = new List<MainClothing>() //underbottoms
         {
-            new HorseUBottom(2, 0, 30, 5, 9, State.GameManager.SpriteDictionary.HorseClothing, 76105, true),
-            new HorseUBottom(7, 5, 30, 9, 9, State.GameManager.SpriteDictionary.HorseClothing, 76109, true),
-            new HorseUBottom(17, 15, 30, 19, 9, State.GameManager.SpriteDictionary.HorseClothing, 76119, true),
-            new HorseUBottom(22, 20, 30, 24, 9, State.GameManager.SpriteDictionary.HorseClothing, 76124, true),
-            new HorseUBottom(27, 25, 14, 29, 9, State.GameManager.SpriteDictionary.HorseClothing, 76129, true, true),
+            new HorseUBottom(2, 0, 30, 5, 9, SpriteDictionary.HorseClothing, 76105, true),
+            new HorseUBottom(7, 5, 30, 9, 9, SpriteDictionary.HorseClothing, 76109, true),
+            new HorseUBottom(17, 15, 30, 19, 9, SpriteDictionary.HorseClothing, 76119, true),
+            new HorseUBottom(22, 20, 30, 24, 9, SpriteDictionary.HorseClothing, 76124, true),
+            new HorseUBottom(27, 25, 14, 29, 9, SpriteDictionary.HorseClothing, 76129, true, true),
         };
 
         ExtraMainClothing1Types = new List<MainClothing>() //Overtops
@@ -555,7 +555,7 @@ class Equines : DefaultRaceData
     {
         public HorseUndertop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[47];
+            DiscardSprite = SpriteDictionary.HorseClothing[47];
             Type = 76147;
             femaleOnly = true;
             coversBreasts = false;
@@ -568,11 +568,11 @@ class Equines : DefaultRaceData
         {
             if (Races.Equines.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[47];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[47];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[40 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[40 + actor.Unit.BreastSize];
             }
             else
             {
@@ -590,7 +590,7 @@ class Equines : DefaultRaceData
     {
         public HorseUndertop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[48];
+            DiscardSprite = SpriteDictionary.HorseClothing[48];
             Type = 76148;
             femaleOnly = true;
             coversBreasts = false;
@@ -607,7 +607,7 @@ class Equines : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[48 + actor.Unit.BreastSize];
             }
             else
             {
@@ -624,7 +624,7 @@ class Equines : DefaultRaceData
     {
         public HorseUndertop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[56];
+            DiscardSprite = SpriteDictionary.HorseClothing[56];
             Type = 76156;
             femaleOnly = true;
             coversBreasts = false;
@@ -641,7 +641,7 @@ class Equines : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[56 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[56 + actor.Unit.BreastSize];
             }
             else
             {
@@ -659,7 +659,7 @@ class Equines : DefaultRaceData
     {
         public HorseUndertop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseExtras1[8];
+            DiscardSprite = SpriteDictionary.HorseExtras1[8];
             Type = 76208;
             femaleOnly = true;
             coversBreasts = false;
@@ -672,11 +672,11 @@ class Equines : DefaultRaceData
         {
             if (Races.Equines.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseExtras1[7];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseExtras1[7];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseExtras1[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseExtras1[0 + actor.Unit.BreastSize];
             }
             else
             {
@@ -693,7 +693,7 @@ class Equines : DefaultRaceData
     {
         public HorseUndertopM1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[36];
+            DiscardSprite = SpriteDictionary.HorseClothing[36];
             Type = 76136;
             maleOnly = true;
             coversBreasts = false;
@@ -706,9 +706,9 @@ class Equines : DefaultRaceData
         {
             int size = actor.GetStomachSize(32, 1.2f);
             if (size >= 6)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseExtras1[17];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseExtras1[17];
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[36];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[36];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -718,7 +718,7 @@ class Equines : DefaultRaceData
     {
         public HorseUndertopM2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[37];
+            DiscardSprite = SpriteDictionary.HorseClothing[37];
             Type = 76137;
             maleOnly = true;
             coversBreasts = false;
@@ -731,9 +731,9 @@ class Equines : DefaultRaceData
         {
             int size = actor.GetStomachSize(32, 1.2f);
             if (size >= 6)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseExtras1[18];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseExtras1[18];
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[37];
+                clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[37];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -743,7 +743,7 @@ class Equines : DefaultRaceData
     {
         public HorseUndertopM3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[38];
+            DiscardSprite = SpriteDictionary.HorseClothing[38];
             Type = 76138;
             maleOnly = true;
             coversBreasts = false;
@@ -758,7 +758,7 @@ class Equines : DefaultRaceData
             int size = actor.GetStomachSize(32, 1.2f);
             int weightMod = size > 6 ? 1 : 0;
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[38 + weightMod];
+            clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[38 + weightMod];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -768,7 +768,7 @@ class Equines : DefaultRaceData
     {
         public HorsePoncho()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[33];
+            DiscardSprite = SpriteDictionary.HorseClothing[33];
             Type = 76133;
             coversBreasts = false;
             blocksDick = false;
@@ -782,8 +782,8 @@ class Equines : DefaultRaceData
             int weightMod = actor.Unit.BodySize;
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[33];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[34];
+            clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[33];
+            clothing2.GetSprite = (s) => SpriteDictionary.HorseClothing[34];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -794,7 +794,7 @@ class Equines : DefaultRaceData
     {
         public HorseNecklace()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[35];
+            DiscardSprite = SpriteDictionary.HorseClothing[35];
             Type = 76135;
             coversBreasts = false;
             blocksDick = false;
@@ -807,7 +807,7 @@ class Equines : DefaultRaceData
             int weightMod = actor.Unit.BodySize;
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[35];
+            clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[35];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -849,9 +849,9 @@ class Equines : DefaultRaceData
                     if (blocksDick == true)
                     {
                         if (black == true)
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseExtras1[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.HorseExtras1[bulge + actor.Unit.DickSize];
                         else
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.HorseClothing[bulge + actor.Unit.DickSize];
                     }
                     else
                         clothing2.GetSprite = null;
@@ -870,9 +870,9 @@ class Equines : DefaultRaceData
                     if (blocksDick == true)
                     {
                         if (black == true)
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseExtras1[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.HorseExtras1[bulge + actor.Unit.DickSize];
                         else
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.HorseClothing[bulge + actor.Unit.DickSize];
                     }
                     else
                         clothing2.GetSprite = null;
@@ -900,7 +900,7 @@ class Equines : DefaultRaceData
             coversBreasts = false;
             blocksDick = true;
             clothing1 = new SpriteExtraInfo(15, null, WhiteColored);
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[14];
+            DiscardSprite = SpriteDictionary.HorseClothing[14];
             Type = 76114;
             DiscardUsesPalettes = true;
         }
@@ -911,16 +911,16 @@ class Equines : DefaultRaceData
             if (actor.HasBelly)
             {
                 if (actor.Unit.HasBreasts)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[13];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[13];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[11];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[11];
             }
             else
             {
                 if (actor.Unit.HasBreasts)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[12];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[12];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[10];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[10];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -941,7 +941,7 @@ class Equines : DefaultRaceData
             blocksDick = true;
             clothing1 = new SpriteExtraInfo(15, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(16, null, WhiteColored);
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[68];
+            DiscardSprite = SpriteDictionary.HorseClothing[68];
             Type = 76168;
             DiscardUsesPalettes = true;
         }
@@ -952,21 +952,21 @@ class Equines : DefaultRaceData
                 if (actor.HasBelly)
                 {
                     if (actor.Unit.HasBreasts)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[67];
+                        clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[67];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[65];
+                        clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[65];
                 }
                 else
                 {
                     if (actor.Unit.HasBreasts)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[66];
+                        clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[66];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[64];
+                        clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[64];
                 }
             }
             if (actor.Unit.HasDick)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseExtras1[Math.Min(14 + actor.Unit.DickSize, 17)];
+                clothing2.GetSprite = (s) => SpriteDictionary.HorseExtras1[Math.Min(14 + actor.Unit.DickSize, 17)];
             }
             else
                 clothing2.GetSprite = null;
@@ -989,7 +989,7 @@ class Equines : DefaultRaceData
             coversBreasts = false;
             blocksDick = true;
             clothing1 = new SpriteExtraInfo(15, null, WhiteColored);
-            DiscardSprite = State.GameManager.SpriteDictionary.HorseClothing[73];
+            DiscardSprite = SpriteDictionary.HorseClothing[73];
             Type = 76173;
             DiscardUsesPalettes = true;
         }
@@ -1000,16 +1000,16 @@ class Equines : DefaultRaceData
             if (actor.HasBelly)
             {
                 if (actor.Unit.HasBreasts)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[72];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[72];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[70];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[70];
             }
             else
             {
                 if (actor.Unit.HasBreasts)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[71];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[71];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HorseClothing[69];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HorseClothing[69];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);

@@ -5,7 +5,7 @@ using UnityEngine;
 class Kobolds : BlankSlate
 {
     bool facingFront = true;
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Kobolds;
+    readonly Sprite[] Sprites = SpriteDictionary.Kobolds;
 
     public Kobolds()
     {
@@ -299,16 +299,16 @@ class Kobolds : BlankSlate
             if (facingFront)
             {
                 blocksDick = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[105];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[105];
                 if (actor.Unit.HasDick)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[106];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Kobolds[106];
                 else
                     clothing2.GetSprite = null;
             }
             else
             {
                 blocksDick = false;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[107];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[107];
                 clothing2.GetSprite = null;
             }
             base.Configure(sprite, actor);
@@ -338,16 +338,16 @@ class Kobolds : BlankSlate
             {
                 clothing1.layer = 20;
                 if (actor.Unit.BreastSize > 1)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[88];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[88];
                 else if (actor.Unit.BreastSize == 0)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[87];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[87];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[85];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[85];
             }
             else
             {
                 clothing1.layer = -1;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[86];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[86];
             }
             base.Configure(sprite, actor);
         }
@@ -375,13 +375,13 @@ class Kobolds : BlankSlate
             {
                 clothing1.layer = 10;
                 blocksDick = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[68];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[68];
             }
             else
             {
                 clothing1.layer = 1;
                 blocksDick = false;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[70];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[70];
             }
             base.Configure(sprite, actor);
         }
@@ -407,12 +407,12 @@ class Kobolds : BlankSlate
                 facingFront = false;
             if (facingFront)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[63];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[66];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[63];
+                clothing2.GetSprite = (s) => SpriteDictionary.Kobolds[66];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[65];
                 clothing2.GetSprite = null;
             }
             base.Configure(sprite, actor);
@@ -440,12 +440,12 @@ class Kobolds : BlankSlate
             if (facingFront)
             {
                 clothing1.layer = 10;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[103];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[103];
             }
             else
             {
                 clothing1.layer = 1;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kobolds[104];
+                clothing1.GetSprite = (s) => SpriteDictionary.Kobolds[104];
             }
             base.Configure(sprite, actor);
         }

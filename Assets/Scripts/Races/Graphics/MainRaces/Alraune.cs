@@ -5,7 +5,7 @@ using UnityEngine;
 
 class Alraune : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Alraune;
+    readonly Sprite[] Sprites = SpriteDictionary.Alraune;
     readonly float yOffset = 10 * .625f;
     readonly AlrauneLeader LeaderClothes;
     AlrauneRags Rags;
@@ -201,7 +201,7 @@ class Alraune : DefaultRaceData
     {
         if (actor.Unit.ClothingType == 5)
         {
-            return State.GameManager.SpriteDictionary.AlrauneChristmas[12];
+            return SpriteDictionary.AlrauneChristmas[12];
         }
         else
         {
@@ -213,7 +213,7 @@ class Alraune : DefaultRaceData
     {
         if (actor.Unit.ClothingType == 5)
         {
-            return State.GameManager.SpriteDictionary.AlrauneChristmas[1];
+            return SpriteDictionary.AlrauneChristmas[1];
         }
         else
         {
@@ -225,7 +225,7 @@ class Alraune : DefaultRaceData
     {
         if (actor.Unit.ClothingType == 5)
         {
-            return State.GameManager.SpriteDictionary.AlrauneChristmas[0];
+            return SpriteDictionary.AlrauneChristmas[0];
         }
         else
         {
@@ -265,7 +265,7 @@ namespace AlrauneClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[84 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[84 + actor.Unit.BreastSize];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
             }
             else
@@ -277,13 +277,13 @@ namespace AlrauneClothing
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[80];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[80];
                 else if (actor.Unit.DickSize > 5)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[82];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[82];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[81];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[81];
             }
-            else clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[83];
+            else clothing2.GetSprite = (s) => SpriteDictionary.Alraune[83];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
 
@@ -299,7 +299,7 @@ namespace AlrauneClothing
             DiscardSprite = null;
             coversBreasts = false;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             OccupiesAllSlots = true;
             clothing1 = new SpriteExtraInfo(17, null, null);
             clothing2 = new SpriteExtraInfo(10, null, null);
@@ -309,7 +309,7 @@ namespace AlrauneClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[96 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[96 + actor.Unit.BreastSize];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
             }
             else
@@ -321,13 +321,13 @@ namespace AlrauneClothing
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[92];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[92];
                 else if (actor.Unit.DickSize > 5)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[94];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[94];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[93];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[93];
             }
-            else clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[95];
+            else clothing2.GetSprite = (s) => SpriteDictionary.Alraune[95];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
 
@@ -343,7 +343,7 @@ namespace AlrauneClothing
             DiscardSprite = null;
             coversBreasts = false;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             OccupiesAllSlots = true;
             clothing1 = new SpriteExtraInfo(17, null, null);
             clothing2 = new SpriteExtraInfo(10, null, null);
@@ -353,7 +353,7 @@ namespace AlrauneClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[108 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[108 + actor.Unit.BreastSize];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
             }
             else
@@ -365,13 +365,13 @@ namespace AlrauneClothing
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[104];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[104];
                 else if (actor.Unit.DickSize > 5)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[106];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[106];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[105];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[105];
             }
-            else clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[107];
+            else clothing2.GetSprite = (s) => SpriteDictionary.Alraune[107];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
 
@@ -394,11 +394,11 @@ namespace AlrauneClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[120 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[120 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[120];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[120];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
@@ -406,13 +406,13 @@ namespace AlrauneClothing
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[116];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[116];
                 else if (actor.Unit.DickSize > 5)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[118];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[118];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[117];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[117];
             }
-            else clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[119];
+            else clothing2.GetSprite = (s) => SpriteDictionary.Alraune[119];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
 
@@ -438,16 +438,16 @@ namespace AlrauneClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AlrauneChristmas[2 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.AlrauneChristmas[2 + actor.Unit.BreastSize];
             }
             else
             {
                 clothing1.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.AlrauneChristmas[10];
+            clothing2.GetSprite = (s) => SpriteDictionary.AlrauneChristmas[10];
 
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.AlrauneChristmas[11];
+            clothing3.GetSprite = (s) => SpriteDictionary.AlrauneChristmas[11];
 
             base.Configure(sprite, actor);
         }
@@ -471,7 +471,7 @@ namespace AlrauneClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[144 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[144 + actor.Unit.BreastSize];
             }
             else
             {
@@ -481,15 +481,15 @@ namespace AlrauneClothing
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[140];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[140];
                 else if (actor.Unit.DickSize > 5)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[142];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[142];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[141];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[141];
             }
-            else clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[143];
+            else clothing2.GetSprite = (s) => SpriteDictionary.Alraune[143];
 
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[152];
+            clothing3.GetSprite = (s) => SpriteDictionary.Alraune[152];
 
             base.Configure(sprite, actor);
         }
@@ -512,11 +512,11 @@ namespace AlrauneClothing
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[132 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[132 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[132];
+                clothing1.GetSprite = (s) => SpriteDictionary.Alraune[132];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
@@ -524,13 +524,13 @@ namespace AlrauneClothing
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[128];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[128];
                 else if (actor.Unit.DickSize > 5)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[130];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[130];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[129];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Alraune[129];
             }
-            else clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Alraune[131];
+            else clothing2.GetSprite = (s) => SpriteDictionary.Alraune[131];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AlrauneFoliage, actor.Unit.ClothingColor);
 

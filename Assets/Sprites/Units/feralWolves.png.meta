@@ -28,7 +28,7 @@ TextureImporter:
     21300046: feralWolves_15
     21300048: feralWolves_16
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -460,5 +460,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: monster
   assetBundleVariant: 

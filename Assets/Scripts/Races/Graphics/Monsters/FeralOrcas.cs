@@ -7,7 +7,7 @@ using UnityEngine;
 
 class FeralOrcas : BlankSlate
 {
-	readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.FeralOrcas;
+	readonly Sprite[] Sprites = SpriteDictionary.FeralOrcas;
 
     public FeralOrcas()
     {
@@ -82,37 +82,37 @@ class FeralOrcas : BlankSlate
 
         if (size >= 25 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralOrcas[33];
+            return SpriteDictionary.FeralOrcas[33];
         }
 
         if (size >= 24 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralOrcas[32];
+            return SpriteDictionary.FeralOrcas[32];
         }
 
         if (size >= 22 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralOrcas[31];
+            return SpriteDictionary.FeralOrcas[31];
         }
 
         if (size >= 20 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralOrcas[30];
+            return SpriteDictionary.FeralOrcas[30];
         }
 
         if (size >= 18 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralOrcas[29];
+            return SpriteDictionary.FeralOrcas[29];
         }
 
         if (size >= 16 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralOrcas[28];
+            return SpriteDictionary.FeralOrcas[28];
         }
 
         if (size > 14) size = 14;
 
-        return State.GameManager.SpriteDictionary.FeralOrcas[14 + size];
+        return SpriteDictionary.FeralOrcas[14 + size];
     }
 
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class InfoPanel
 {
@@ -71,6 +72,7 @@ public class InfoPanel
             UnitInfoPanel.Sprite?.ResetBellyScale(actor);
             UnitInfoPanel.Sprite?.UpdateSprites(actor, false);
         }
+
     }
 
     private void UpdateBars(Unit actor, bool showNextText = false)
@@ -379,6 +381,12 @@ public class InfoPanel
                 return "T-Rex";
             case Race.Utahraptor:
                 return "Utahraptor";
+            case Race.Badgers:
+                return "Badger";
+            case Race.Renamon:
+                return "Renamon";
+            case Race.Draconians:
+                return "Draconian";
             case Race.none:
                 return "None";
         }
@@ -619,6 +627,12 @@ public class InfoPanel
                 return "T-Rex";
             case Race.Utahraptor:
                 return "Utahraptor";
+            case Race.Badgers:
+                return "Badger";
+            case Race.Renamon:
+                return "Renamon";
+            case Race.Draconians:
+                return "Draconian";
         }
         return empire.ReplacedRace.ToString();
     }
@@ -781,6 +795,8 @@ public class InfoPanel
             if (actor?.Surrendered ?? false)
                 sb.AppendLine("Unit has surrendered!");
             string traits = unit.ListTraits(!(TacticalUtilities.IsUnitControlledByPlayer(unit) && TacticalUtilities.PlayerCanSeeTrueSide(unit)));
+            if (Config.RaceTraitsEnabled == false && (traits == ""))
+                sb.AppendLine("Race Traits disabled");
             if (traits != "")
                 sb.AppendLine("Traits:\n" + traits);
             StringBuilder sbSecond = new StringBuilder();
@@ -860,6 +876,33 @@ public class InfoPanel
             }
             if (Config.CheatUnitEditorEnabled)
                 sb.AppendLine("<color=#AB5200ff>UnitEditor</color>");
+            if (actor != null)
+            {
+                if (actor.Unit.EquippedPotions != null)
+                {
+                    if (!actor.Unit.EquippedPotions.Any(p => p.Value[0] > 0) == false)
+                        UnitInfoPanel.PotionHoverImage.gameObject.SetActive(true);
+                    else
+                        UnitInfoPanel.PotionHoverImage.gameObject.SetActive(false);
+                }
+                else
+                {
+                    UnitInfoPanel.PotionHoverImage.gameObject.SetActive(false);
+                }
+
+                List<UnitTag> Tags = TagConditionChecker.GetCombinedUnitTags(actor.Unit);
+                if (Tags.Count > 0)
+                    UnitInfoPanel.UnitTagHoverImage.gameObject.SetActive(true);
+                else
+                    UnitInfoPanel.UnitTagHoverImage.gameObject.SetActive(false);
+                //if (Config.CheatUnitEditorEnabled)
+                    //sb.AppendLine("<color=#AB5200ff>UnitEditor</color>");
+            }
+            else
+            {
+                UnitInfoPanel.PotionHoverImage.gameObject.SetActive(false);
+                UnitInfoPanel.UnitTagHoverImage.gameObject.SetActive(false);
+            }
         }
     }
 

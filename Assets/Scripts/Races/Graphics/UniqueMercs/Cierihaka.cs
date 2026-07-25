@@ -3,7 +3,7 @@ using UnityEngine;
 
 class Cierihaka : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Cierihaka;
+    readonly Sprite[] Sprites = SpriteDictionary.Cierihaka;
 
     public Cierihaka()
     {

@@ -245,7 +245,7 @@ public class ConditionalTraitArithmeticPanel : MonoBehaviour
         if (current_mode != VariableMode.None)
         {
             currentPrefab.associetedBlock.compareOp = (TraitConditionCompareOperator)conditionOp.value;
-            currentPrefab.associetedBlock.compareValue = int.TryParse(conditionValue.text, out int cv) ? cv : -1;
+            currentPrefab.associetedBlock.compareValue = float.TryParse(conditionValue.text, out float cv) ? cv : -1;
             currentPrefab.associetedBlock.conditionVariable.Clear();
             foreach (var item in conditionVariable)
             {

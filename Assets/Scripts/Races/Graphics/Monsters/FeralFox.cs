@@ -62,6 +62,7 @@ class FeralFox : BlankSlate
         {
             unit.EyeType = 4;
         }
+        unit.TailType = State.Rand.Next(10);
     }
 	
 	internal override void SetBaseOffsets(Actor_Unit actor)
@@ -243,46 +244,46 @@ class FeralFox : BlankSlate
 	protected override Sprite BodySprite(Actor_Unit actor) // Body
     {
         if (actor.GetStomachSize(52) >= 20)
-            return State.GameManager.SpriteDictionary.FeralFox[3];
+            return SpriteDictionary.FeralFox[3];
         else if (actor.GetStomachSize(52) >= 4)
-            return State.GameManager.SpriteDictionary.FeralFox[2];
+            return SpriteDictionary.FeralFox[2];
         else if (actor.GetStomachSize(52) >= 1)
-            return State.GameManager.SpriteDictionary.FeralFox[1];
+            return SpriteDictionary.FeralFox[1];
         else
-            return State.GameManager.SpriteDictionary.FeralFox[0];
+            return SpriteDictionary.FeralFox[0];
     }
 	
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Right Hind Leg
     {
-		if (actor.GetStomachSize(52) >= 20) return State.GameManager.SpriteDictionary.FeralFox[5];
-        else return State.GameManager.SpriteDictionary.FeralFox[4];
+		if (actor.GetStomachSize(52) >= 20) return SpriteDictionary.FeralFox[5];
+        else return SpriteDictionary.FeralFox[4];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Left Hind leg
     {
-        return State.GameManager.SpriteDictionary.FeralFox[6];
+        return SpriteDictionary.FeralFox[6];
     }
 	
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Tail
     { 
-        return State.GameManager.SpriteDictionary.FeralFox[50 + actor.Unit.TailType];
+        return SpriteDictionary.FeralFox[50 + actor.Unit.TailType];
     }
 	
 	protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Head
     { 
-        if (actor.IsOralVoring || actor.IsAttacking) return State.GameManager.SpriteDictionary.FeralFox[25 + actor.Unit.HairStyle];
-		else return State.GameManager.SpriteDictionary.FeralFox[20 + actor.Unit.HairStyle];    
+        if (actor.IsOralVoring || actor.IsAttacking) return SpriteDictionary.FeralFox[25 + actor.Unit.HairStyle];
+		else return SpriteDictionary.FeralFox[20 + actor.Unit.HairStyle];    
     }
 	
 	protected override Sprite BodyAccentSprite5(Actor_Unit actor) // Ears
     { 
-        return State.GameManager.SpriteDictionary.FeralFox[30 + actor.Unit.MouthType];
+        return SpriteDictionary.FeralFox[30 + actor.Unit.MouthType];
     }
 	
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Mouth
     {
-		if (actor.IsOralVoring || actor.IsAttacking) return State.GameManager.SpriteDictionary.FeralFox[9];
-		else return State.GameManager.SpriteDictionary.FeralFox[8];        
+		if (actor.IsOralVoring || actor.IsAttacking) return SpriteDictionary.FeralFox[9];
+		else return SpriteDictionary.FeralFox[8];        
     }
 	
 	protected override Sprite BodyAccentSprite7(Actor_Unit actor) // Sheath
@@ -290,13 +291,13 @@ class FeralFox : BlankSlate
 		if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 
-		else return State.GameManager.SpriteDictionary.FeralFox[7];
+		else return SpriteDictionary.FeralFox[7];
     }
 	
 	protected override Sprite EyesSprite(Actor_Unit actor) // Eyes
 	{
-        if (actor.IsOralVoring || actor.IsAttacking) return State.GameManager.SpriteDictionary.FeralFox[15 + actor.Unit.EyeType];
-		else return State.GameManager.SpriteDictionary.FeralFox[10 + actor.Unit.EyeType]; 
+        if (actor.IsOralVoring || actor.IsAttacking) return SpriteDictionary.FeralFox[15 + actor.Unit.EyeType];
+		else return SpriteDictionary.FeralFox[10 + actor.Unit.EyeType]; 
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -317,42 +318,42 @@ class FeralFox : BlankSlate
 
         if ( size >= 52 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[96];
+            return SpriteDictionary.FeralFox[96];
         }
 
         if (size >= 49 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[95];
+            return SpriteDictionary.FeralFox[95];
         }
 
         if (size >= 46 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[94];
+            return SpriteDictionary.FeralFox[94];
         }
 
         if (size >= 43 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[93];
+            return SpriteDictionary.FeralFox[93];
         }
 
         if (size >= 40 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[92];
+            return SpriteDictionary.FeralFox[92];
         }
 		
 		if (size >= 37 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[91];
+            return SpriteDictionary.FeralFox[91];
         }
 		
 		if (size >= 34 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[90];
+            return SpriteDictionary.FeralFox[90];
         }
 
         if (size > 29) size = 29;
 
-        return State.GameManager.SpriteDictionary.FeralFox[60 + size];
+        return SpriteDictionary.FeralFox[60 + size];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
@@ -360,7 +361,7 @@ class FeralFox : BlankSlate
         if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 
-		if (actor.IsErect()) return State.GameManager.SpriteDictionary.FeralFox[97 + actor.Unit.DickSize];
+		if (actor.IsErect()) return SpriteDictionary.FeralFox[97 + actor.Unit.DickSize];
 
         return null;
     }
@@ -369,49 +370,49 @@ class FeralFox : BlankSlate
     {
 		if (actor.Unit.HasDick == false || Config.HideCocks) return null;
 		
-        if (actor.Unit.HasDick == false || Config.HideCocks || actor.PredatorComponent?.BallsFullness == 0)
+        if (actor.Unit.HasDick == true || !Config.HideCocks || actor.PredatorComponent?.BallsFullness == 0)
 		{
-			return null;
+			return SpriteDictionary.FeralFox[103];
         }
 
         int size = actor.GetBallSize(52);
 
         if (size >= 52 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[139];
+            return SpriteDictionary.FeralFox[139];
         }
 
         if (size >= 49 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[138];
+            return SpriteDictionary.FeralFox[138];
         }
 
         if (size >= 46 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[137];
+            return SpriteDictionary.FeralFox[137];
         }
 
         if (size >= 43 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[136];
+            return SpriteDictionary.FeralFox[136];
         }
 
         if (size >= 40 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[135];
+            return SpriteDictionary.FeralFox[135];
         }
 
         if (size >= 37 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[134];
+            return SpriteDictionary.FeralFox[134];
         }
 		
 		if (size >= 34 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralFox[133];
+            return SpriteDictionary.FeralFox[133];
         }
 
         if (size > 29) size = 29;
-        return State.GameManager.SpriteDictionary.FeralFox[103 + size];
+        return SpriteDictionary.FeralFox[103 + size];
     }
 }

@@ -49,43 +49,43 @@ class Wyvern : BlankSlate
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Wyvern[2];
+            return SpriteDictionary.Wyvern[2];
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.Wyvern[1];
+            return SpriteDictionary.Wyvern[1];
         if (actor.PredatorComponent?.VisibleFullness > 0)
-            return State.GameManager.SpriteDictionary.Wyvern[3];
-        return State.GameManager.SpriteDictionary.Wyvern[0];
+            return SpriteDictionary.Wyvern[3];
+        return SpriteDictionary.Wyvern[0];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Wyvern[9];
+            return SpriteDictionary.Wyvern[9];
         return null;
     }
 
     protected override Sprite HairSprite2(Actor_Unit actor) // The body overlay. Needed so the belly can't get where it isn't supposed to.
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Wyvern[5];
-        return State.GameManager.SpriteDictionary.Wyvern[4];
+        if (actor.IsAttacking) return SpriteDictionary.Wyvern[5];
+        return SpriteDictionary.Wyvern[4];
     }
 
     protected override Sprite HairSprite(Actor_Unit actor) // The footpads during attack.
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Wyvern[8];
+        if (actor.IsAttacking) return SpriteDictionary.Wyvern[8];
         return null;
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Wing membranes.
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Wyvern[19];
-        return State.GameManager.SpriteDictionary.Wyvern[18];
+        if (actor.IsAttacking) return SpriteDictionary.Wyvern[19];
+        return SpriteDictionary.Wyvern[18];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor) // Talons & claws.
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Wyvern[21];
-        return State.GameManager.SpriteDictionary.Wyvern[20];
+        if (actor.IsAttacking) return SpriteDictionary.Wyvern[21];
+        return SpriteDictionary.Wyvern[20];
     }
 
     protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) // Tongue
@@ -115,7 +115,7 @@ class Wyvern : BlankSlate
                 }
             }
 
-            return State.GameManager.SpriteDictionary.Wyvern[34 + frameListTongue.frames[actor.AnimationController.frameLists[1].currentFrame]];
+            return SpriteDictionary.Wyvern[34 + frameListTongue.frames[actor.AnimationController.frameLists[1].currentFrame]];
         }
 
         if (actor.PredatorComponent?.VisibleFullness > 0 && State.Rand.Next(600) == 0)
@@ -128,20 +128,20 @@ class Wyvern : BlankSlate
 
     protected override Sprite DickSprite(Actor_Unit actor) // Dick + CV and UB.
     {
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Wyvern[53];
-        if (actor.IsUnbirthing) return State.GameManager.SpriteDictionary.Wyvern[51];
-        if (actor.IsAnalVoring) return State.GameManager.SpriteDictionary.Wyvern[51];
-        if (actor.IsErect()) return State.GameManager.SpriteDictionary.Wyvern[52];
+        if (actor.IsCockVoring) return SpriteDictionary.Wyvern[53];
+        if (actor.IsUnbirthing) return SpriteDictionary.Wyvern[51];
+        if (actor.IsAnalVoring) return SpriteDictionary.Wyvern[51];
+        if (actor.IsErect()) return SpriteDictionary.Wyvern[52];
         return null;
     }
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Wyvern[10 + actor.Unit.EyeType]; // One of four eye options.
-    protected override Sprite BodySizeSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Wyvern[14 + actor.Unit.BodySize]; // One of four horn options.
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Wyvern[54]; // A piece to cover the lower belly.
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Wyvern[10 + actor.Unit.EyeType]; // One of four eye options.
+    protected override Sprite BodySizeSprite(Actor_Unit actor) => SpriteDictionary.Wyvern[14 + actor.Unit.BodySize]; // One of four horn options.
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.Wyvern[54]; // A piece to cover the lower belly.
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Tail sprites.
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Wyvern[24];
+        if (!actor.Targetable) return SpriteDictionary.Wyvern[24];
 
         if (actor.IsAttacking)
         {
@@ -166,7 +166,7 @@ class Wyvern : BlankSlate
                 }
             }
 
-            return State.GameManager.SpriteDictionary.Wyvern[22 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.Wyvern[22 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
         if (State.Rand.Next(400) == 0)
@@ -174,25 +174,25 @@ class Wyvern : BlankSlate
             actor.AnimationController.frameLists[0].currentlyActive = true;
         }
 
-        return State.GameManager.SpriteDictionary.Wyvern[24];
+        return SpriteDictionary.Wyvern[24];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Tail under side sprites. Frame list functions handled by the BodyAccentSprite method.
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Wyvern[30];
+        if (!actor.Targetable) return SpriteDictionary.Wyvern[30];
 
         if (actor.IsAttacking)
         {
             actor.AnimationController.frameLists[0].currentlyActive = false;
-            return State.GameManager.SpriteDictionary.Wyvern[6];
+            return SpriteDictionary.Wyvern[6];
         }
 
         if (actor.AnimationController.frameLists[0].currentlyActive)
         {
-            return State.GameManager.SpriteDictionary.Wyvern[28 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.Wyvern[28 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
-        return State.GameManager.SpriteDictionary.Wyvern[30];
+        return SpriteDictionary.Wyvern[30];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly) // Belly, both empty and filled.
@@ -200,12 +200,12 @@ class Wyvern : BlankSlate
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
         {
             if (actor.PredatorComponent.VisibleFullness > 3)
-                return State.GameManager.SpriteDictionary.Wyvern[50];
+                return SpriteDictionary.Wyvern[50];
         }
 
         if (actor.GetUniversalSize(1) == 0)
-            return State.GameManager.SpriteDictionary.Wyvern[7];
-        return State.GameManager.SpriteDictionary.Wyvern[40 + actor.GetUniversalSize(9, .8f)];
+            return SpriteDictionary.Wyvern[7];
+        return SpriteDictionary.Wyvern[40 + actor.GetUniversalSize(9, .8f)];
     }
 
     // Wyvern colours: Flame, Crimson, Blue, Sky, Black, Deep Green, Purple, Yellow(Main wyvern palette only), Rose Red, Pale Green,

@@ -30,12 +30,12 @@ class Dragonfly : BlankSlate
         if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach))
         {
             if (actor.PredatorComponent.VisibleFullness > 3)
-                return State.GameManager.SpriteDictionary.Dragonfly[27];
+                return SpriteDictionary.Dragonfly[27];
         }
 
         if (!actor.HasBelly)
-            return State.GameManager.SpriteDictionary.Dragonfly[6];
-        return State.GameManager.SpriteDictionary.Dragonfly[7 + actor.GetStomachSize(19)];
+            return SpriteDictionary.Dragonfly[6];
+        return SpriteDictionary.Dragonfly[7 + actor.GetStomachSize(19)];
     }
 
     protected override Sprite BodySprite(Actor_Unit actor) // Body
@@ -43,15 +43,15 @@ class Dragonfly : BlankSlate
 
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
-        return State.GameManager.SpriteDictionary.Dragonfly[2];
+        return SpriteDictionary.Dragonfly[2];
 
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor) // Head
     {
-        if (actor.IsOralVoring || actor.IsAttacking) return State.GameManager.SpriteDictionary.Dragonfly[1];
+        if (actor.IsOralVoring || actor.IsAttacking) return SpriteDictionary.Dragonfly[1];
 
-        return State.GameManager.SpriteDictionary.Dragonfly[0];
+        return SpriteDictionary.Dragonfly[0];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Wings
@@ -68,6 +68,6 @@ class Dragonfly : BlankSlate
             }
         }
 
-        return State.GameManager.SpriteDictionary.Dragonfly[3 + frameListWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
+        return SpriteDictionary.Dragonfly[3 + frameListWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
     }
 }

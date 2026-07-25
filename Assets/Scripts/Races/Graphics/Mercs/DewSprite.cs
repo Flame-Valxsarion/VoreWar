@@ -3,7 +3,7 @@ using UnityEngine;
 
 class DewSprite : BlankSlate
 {
-    Sprite[] Sprites = State.GameManager.SpriteDictionary.DewSprite;
+    Sprite[] Sprites = SpriteDictionary.DewSprite;
     public DewSprite()
     {
         BodySizes = 3;
@@ -134,11 +134,11 @@ class DewSprite : BlankSlate
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.Unit.BodySize == 0)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[53];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[53];
             else if (actor.Unit.BodySize == 1)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[22];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[22];
             else
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[58];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[58];
             base.Configure(sprite, actor);
         }
     }
@@ -155,11 +155,11 @@ class DewSprite : BlankSlate
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.Unit.BodySize == 0)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[54];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[54];
             else if (actor.Unit.BodySize == 1)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[23];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[23];
             else
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[59];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[59];
             base.Configure(sprite, actor);
         }
     }
@@ -176,11 +176,11 @@ class DewSprite : BlankSlate
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.Unit.BodySize == 0)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[55];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[55];
             else if (actor.Unit.BodySize == 1)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[24];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[24];
             else
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[60];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[60];
             base.Configure(sprite, actor);
         }
     }
@@ -197,11 +197,11 @@ class DewSprite : BlankSlate
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.Unit.BodySize == 0)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[56];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[56];
             else if (actor.Unit.BodySize == 1)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[25];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[25];
             else
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[61];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[61];
             base.Configure(sprite, actor);
         }
     }
@@ -218,9 +218,9 @@ class DewSprite : BlankSlate
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.Unit.HasBreasts)
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[63 + actor.Unit.BreastSize];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[63 + actor.Unit.BreastSize];
             else
-                clothing1.GetSprite = s => State.GameManager.SpriteDictionary.DewSprite[62];
+                clothing1.GetSprite = s => SpriteDictionary.DewSprite[62];
             base.Configure(sprite, actor);
         }
     }

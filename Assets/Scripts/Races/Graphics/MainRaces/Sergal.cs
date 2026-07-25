@@ -4,7 +4,7 @@ using UnityEngine;
 
 class Sergal : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Sergal;
+    readonly Sprite[] Sprites = SpriteDictionary.Sergal;
     public Sergal()
     {
         EyeTypes = 4;
@@ -135,7 +135,7 @@ class Sergal : DefaultRaceData
             clothing4 = new SpriteExtraInfo(6, null, null);
             clothing5 = new SpriteExtraInfo(0, null, null);
 
-            DiscardSprite = State.GameManager.SpriteDictionary.Asura[39];
+            DiscardSprite = SpriteDictionary.Asura[39];
 
         }
 
@@ -148,22 +148,22 @@ class Sergal : DefaultRaceData
                 clothing1.layer = 13;
                 coversBreasts = true;
                 if (actor.Unit.BreastSize <= 2)
-                    return State.GameManager.SpriteDictionary.Sergal[59];
+                    return SpriteDictionary.Sergal[59];
                 else if (actor.Unit.BreastSize >= 7)
                 {
                     coversBreasts = false;
                     sprite.ChangeLayer(SpriteType.Breasts, 16);
-                    return State.GameManager.SpriteDictionary.Sergal[64];
+                    return SpriteDictionary.Sergal[64];
                 }
                 clothing1.layer = 17;
-                return State.GameManager.SpriteDictionary.Sergal[57 + actor.Unit.BreastSize];
+                return SpriteDictionary.Sergal[57 + actor.Unit.BreastSize];
             };
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sergal[54];
+            clothing2.GetSprite = (s) => SpriteDictionary.Sergal[54];
             clothing3.GetSprite = (s) =>
             {
                 if (actor.IsErect())
                     return null;
-                return State.GameManager.SpriteDictionary.Sergal[55];
+                return SpriteDictionary.Sergal[55];
 
             };
 
@@ -171,9 +171,9 @@ class Sergal : DefaultRaceData
             {
                 if (actor.IsAttacking)
                     if (actor.BestRanged != null)
-                        return State.GameManager.SpriteDictionary.Sergal[58];
-                    else return State.GameManager.SpriteDictionary.Sergal[57];
-                return State.GameManager.SpriteDictionary.Sergal[56];
+                        return SpriteDictionary.Sergal[58];
+                    else return SpriteDictionary.Sergal[57];
+                return SpriteDictionary.Sergal[56];
             };
 
             base.Configure(sprite, actor);
@@ -198,7 +198,7 @@ class Sergal : DefaultRaceData
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[10 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[10 + actor.Unit.BreastSize];
                 actor.SquishedBreasts = true;
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
             }
@@ -229,11 +229,11 @@ class Sergal : DefaultRaceData
 
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[0];
+                clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[0];
             }
             base.Configure(sprite, actor);
         }
@@ -259,11 +259,11 @@ class Sergal : DefaultRaceData
             {
                 int spr = actor.Unit.BreastSize;
                 if (actor.Unit.BreastSize < 2)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[20];
+                    clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[20];
                 else if (actor.Unit.BreastSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[21];
+                    clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[21];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[18 + actor.Unit.BreastSize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[18 + actor.Unit.BreastSize];
 
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
                 actor.SquishedBreasts = true;
@@ -292,9 +292,9 @@ class Sergal : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.Unit.DickSize > 3)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[29];
+                clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[29];
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[28];
+                clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[28];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
         }
@@ -317,11 +317,11 @@ class Sergal : DefaultRaceData
             if (actor.Unit.DickSize > 2)
             {
                 if (actor.Unit.DickSize > 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[39];
+                    clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[39];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[38];
+                    clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[38];
             }
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[37];
+            clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[37];
 
             base.Configure(sprite, actor);
         }
@@ -333,7 +333,7 @@ class Sergal : DefaultRaceData
             DiscardSprite = State.GameManager.SpriteDictionary.Loincloths[10];
             Type = 200;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 1;
             DiscardUsesPalettes = true;
             clothing1 = new SpriteExtraInfo(10, null, null);
             coversBreasts = false;
@@ -343,7 +343,7 @@ class Sergal : DefaultRaceData
         {
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[36];
+            clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[36];
             base.Configure(sprite, actor);
         }
     }
@@ -353,7 +353,7 @@ class Sergal : DefaultRaceData
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -365,7 +365,7 @@ class Sergal : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[34];
+            clothing1.GetSprite = (s) => SpriteDictionary.SergalClothing[34];
 
             clothing2.layer = 10;
 
@@ -373,9 +373,9 @@ class Sergal : DefaultRaceData
             {
                 clothing2.YOffset = 0;
                 if (actor.Unit.BreastSize < 2)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[30];
+                    clothing2.GetSprite = (s) => SpriteDictionary.SergalClothing[30];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.SergalClothing[Math.Min(29 + actor.Unit.BreastSize, 33)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.SergalClothing[Math.Min(29 + actor.Unit.BreastSize, 33)];
                 clothing2.layer = 18;
             }
             else

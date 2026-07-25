@@ -106,7 +106,7 @@ class MapVillagePopulator
 
     internal void PopulateConstructibles(Map map, ref ConstructibleBuilding[] claimables)
     {
-        if (map.claimables == null)
+        if (map.constructibles == null)
         {
             claimables = new ConstructibleBuilding[0];
             return;

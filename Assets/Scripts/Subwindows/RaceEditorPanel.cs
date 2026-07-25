@@ -40,6 +40,7 @@ public class RaceEditorPanel : MonoBehaviour
     public Toggle BreastVoreDisabled;
     public Toggle TailVoreDisabled;
     public Toggle AnalVoreDisabled;
+    public Toggle BladderVoreDisabled;
 
     public InputField MinStrength;
     public InputField MaxStrength;
@@ -505,6 +506,7 @@ public class RaceEditorPanel : MonoBehaviour
                 if (AnalVoreDisabled.isOn) newtypes.Remove(VoreType.Anal);
                 if (BreastVoreDisabled.isOn) newtypes.Remove(VoreType.BreastVore);
                 if (TailVoreDisabled.isOn) newtypes.Remove(VoreType.TailVore);
+                if (BladderVoreDisabled.isOn) newtypes.Remove(VoreType.BladderVore);
                 item.AllowedVoreTypes = newtypes;
 
 
@@ -737,6 +739,8 @@ public class RaceEditorPanel : MonoBehaviour
             BreastVoreDisabled.interactable = racePar.AllowedVoreTypes.Contains(VoreType.BreastVore);
             TailVoreDisabled.isOn = !item.AllowedVoreTypes.Contains(VoreType.TailVore);
             TailVoreDisabled.interactable = racePar.AllowedVoreTypes.Contains(VoreType.TailVore);
+            BladderVoreDisabled.isOn = !item.AllowedVoreTypes.Contains(VoreType.BladderVore);
+            BladderVoreDisabled.interactable = racePar.AllowedVoreTypes.Contains(VoreType.BladderVore);
 
             MinStrength.text = item.Stats.Strength.Minimum.ToString();
             MaxStrength.text = (item.Stats.Strength.Minimum + item.Stats.Strength.Roll - 1).ToString();

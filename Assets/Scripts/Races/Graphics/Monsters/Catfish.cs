@@ -6,7 +6,7 @@ class Catfish : BlankSlate
     RaceFrameList frameListMouth = new RaceFrameList(new int[9] { 0, 1, 2, 1, 0, 1, 2, 1, 0 }, new float[9] { 1.2f, .6f, 1.2f, .6f, 1.2f, .6f, 1.2f, .6f, 1.2f });
     RaceFrameList frameListTail = new RaceFrameList(new int[9] { 0, 1, 2, 1, 0, 1, 2, 1, 0 }, new float[9] { .5f, .3f, .5f, .3f, .5f, .3f, .5f, .3f, .5f });
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Catfish;
+    readonly Sprite[] Sprites = SpriteDictionary.Catfish;
 
     public Catfish()
     {

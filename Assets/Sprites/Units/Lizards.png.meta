@@ -75,7 +75,7 @@ TextureImporter:
     21300140: Lizards_54
     21300142: Lizards_55
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -1287,5 +1287,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: empire
   assetBundleVariant: 

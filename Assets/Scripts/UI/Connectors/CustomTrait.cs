@@ -264,7 +264,7 @@ public class CustomTrait : MonoBehaviour
                 ToolTipDesc.text = "The capacity of a unit, independent of the stomach stat.";
                 break;
             case CustomTraitComp.OutgoingChanceToEscape:
-                ToolTipName.text = "Chance to Excape Multiplier (Outgoing)";
+                ToolTipName.text = "Chance to Escape Multiplier (Outgoing)";
                 ToolTipDesc.text = "The chance a unit escapes from a unit.";
                 break;
             case CustomTraitComp.OutgoingMeleeDamage:
@@ -332,7 +332,7 @@ public class CustomTrait : MonoBehaviour
                 ToolTipDesc.text = "The graze damage a unit deals by the value set in content settings.";
                 break;
             case CustomTraitComp.IncomingChanceToEscape:
-                ToolTipName.text = "Chance to Excape Multiplier (Incoming)";
+                ToolTipName.text = "Chance to Escape Multiplier (Incoming)";
                 ToolTipDesc.text = "The chance to a unit escapes another.";
                 break;
             case CustomTraitComp.IncomingMeleeDamage:

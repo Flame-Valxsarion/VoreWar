@@ -5,7 +5,7 @@ class Monitors : BlankSlate
 {
     RaceFrameList frameListTongue = new RaceFrameList(new int[7] { 0, 1, 2, 1, 2, 1, 0 }, new float[7] { 0.1f, 0.2f, 0.2f, 0.2f, 0.2f, 0.2f, 0.3f });
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Monitors;
+    readonly Sprite[] Sprites = SpriteDictionary.Monitors;
 
     public Monitors()
     {

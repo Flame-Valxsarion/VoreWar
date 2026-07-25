@@ -28,8 +28,8 @@ class Taraluxia : BlankSlate
     RaceFrameList TaraDigestSelBack = new RaceFrameList(new int[7] { 98, 97, 96, 95, 94, 93, 92 }, new float[7] { 1f, .95f, .9f, .85f, .8f, .75f, .7f, });
 
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Taraluxia;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.TaraTailStrikes;
+    readonly Sprite[] Sprites = SpriteDictionary.Taraluxia;
+    readonly Sprite[] Sprites2 = SpriteDictionary.TaraTailStrikes;
 
 
     public Taraluxia()

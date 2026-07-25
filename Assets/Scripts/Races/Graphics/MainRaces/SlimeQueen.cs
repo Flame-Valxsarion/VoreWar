@@ -90,20 +90,20 @@ class SlimeQueen : Slimes
     internal override int BreastSizes => 4;
     internal override int DickSizes => 1;
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.SlimeQueen[actor.GetSimpleBodySprite()];
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.SlimeQueen[3 + (actor.IsAttacking ? 1 : 0)];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.SlimeQueen[actor.GetSimpleBodySprite()];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.SlimeQueen[3 + (actor.IsAttacking ? 1 : 0)];
 
-    protected override Sprite BreastsSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.SlimeQueen[5 + actor.Unit.BreastSize];
-    protected override Sprite DickSprite(Actor_Unit actor) => actor.Unit.HasDick ? State.GameManager.SpriteDictionary.SlimeQueen[9] : null;
+    protected override Sprite BreastsSprite(Actor_Unit actor) => SpriteDictionary.SlimeQueen[5 + actor.Unit.BreastSize];
+    protected override Sprite DickSprite(Actor_Unit actor) => actor.Unit.HasDick ? SpriteDictionary.SlimeQueen[9] : null;
 
-    protected override Sprite HairSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.SlimeQueen[10 + actor.Unit.HairStyle];
-    protected override Sprite HairSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.SlimeQueen[12];
+    protected override Sprite HairSprite(Actor_Unit actor) => SpriteDictionary.SlimeQueen[10 + actor.Unit.HairStyle];
+    protected override Sprite HairSprite2(Actor_Unit actor) => SpriteDictionary.SlimeQueen[12];
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.SlimeQueen[27];
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.SlimeQueen[27];
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.SlimeQueen[23 + (actor.IsAttacking ? 1 : 0)];
+        return SpriteDictionary.SlimeQueen[23 + (actor.IsAttacking ? 1 : 0)];
 
     }
 
@@ -128,16 +128,16 @@ namespace SlimeQueenClothes
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => s.Unit.ExtraColor1 == 0 ? null : State.GameManager.SpriteDictionary.SlimeQueen[17 + s.Unit.BreastSize];
+            clothing1.GetSprite = (s) => s.Unit.ExtraColor1 == 0 ? null : SpriteDictionary.SlimeQueen[17 + s.Unit.BreastSize];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, s.Unit.ClothingColor2);
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.SlimeQueen[13];
+            clothing2.GetSprite = (s) => SpriteDictionary.SlimeQueen[13];
             clothing2.GetColor = (s) => Color.white;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.SlimeQueen[14];
+            clothing3.GetSprite = (s) => SpriteDictionary.SlimeQueen[14];
             clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, s.Unit.ClothingColor);
-            clothing4.GetSprite = (s) => s.Unit.ExtraColor2 == 0 ? null : State.GameManager.SpriteDictionary.SlimeQueen[15];
+            clothing4.GetSprite = (s) => s.Unit.ExtraColor2 == 0 ? null : SpriteDictionary.SlimeQueen[15];
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, s.Unit.ClothingColor);
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.SlimeQueen[21 + (actor.IsAttacking ? 1 : 0)];
-            clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.SlimeQueen[25 + (s.IsAttacking ? 1 : 0)];
+            clothing5.GetSprite = (s) => SpriteDictionary.SlimeQueen[21 + (actor.IsAttacking ? 1 : 0)];
+            clothing6.GetSprite = (s) => SpriteDictionary.SlimeQueen[25 + (s.IsAttacking ? 1 : 0)];
             clothing6.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, s.Unit.ClothingColor3);
 
 

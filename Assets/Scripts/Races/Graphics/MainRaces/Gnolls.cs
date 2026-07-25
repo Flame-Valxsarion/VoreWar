@@ -5,9 +5,9 @@ using UnityEngine;
 
 class Gnolls : DefaultRaceData
 {
-    readonly Sprite[] BodySprites = State.GameManager.SpriteDictionary.GnollsBodyParts;
-    readonly Sprite[] VoreSprites = State.GameManager.SpriteDictionary.GnollsVoreParts;
-    readonly Sprite[] ClothingSprites = State.GameManager.SpriteDictionary.GnollClothes;
+    readonly Sprite[] BodySprites = SpriteDictionary.GnollsBodyParts;
+    readonly Sprite[] VoreSprites = SpriteDictionary.GnollsVoreParts;
+    readonly Sprite[] ClothingSprites = SpriteDictionary.GnollClothes;
     readonly GnollLeader LeaderClothes;
     readonly GnollRags Rags;
 
@@ -910,7 +910,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -923,11 +923,11 @@ class Gnolls : DefaultRaceData
         {
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[8];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[8];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[0 + actor.Unit.BreastSize];
             }
             else
             {
@@ -945,7 +945,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -958,11 +958,11 @@ class Gnolls : DefaultRaceData
         {
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[17];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[17];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[9 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[9 + actor.Unit.BreastSize];
             }
             else
             {
@@ -980,7 +980,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -993,11 +993,11 @@ class Gnolls : DefaultRaceData
         {
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[26];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[26];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[18 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[18 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1015,7 +1015,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1030,11 +1030,11 @@ class Gnolls : DefaultRaceData
 
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[35];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[35];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[27 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[27 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1043,7 +1043,7 @@ class Gnolls : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[36];
+            clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[36];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -1054,7 +1054,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1069,13 +1069,13 @@ class Gnolls : DefaultRaceData
 
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[45];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[54];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[45];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[54];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[37 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[46 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[37 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[46 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1094,7 +1094,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1112,7 +1112,7 @@ class Gnolls : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[55 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[55 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1130,7 +1130,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1143,11 +1143,11 @@ class Gnolls : DefaultRaceData
         {
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[71];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[71];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[63 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[63 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1165,7 +1165,7 @@ class Gnolls : DefaultRaceData
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1179,11 +1179,11 @@ class Gnolls : DefaultRaceData
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[72];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[72];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[73];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[73];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
@@ -1195,7 +1195,7 @@ class Gnolls : DefaultRaceData
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1206,7 +1206,7 @@ class Gnolls : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[74];
+            clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[74];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -1229,18 +1229,18 @@ class Gnolls : DefaultRaceData
             if (Races.Gnolls.oversize)
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[75];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[75];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[77 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[75];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[77 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[75];
             }
             else
             {
                 breastSprite = null;
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[76];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[76];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.GnollSkin, actor.Unit.SkinColor);
@@ -1266,71 +1266,71 @@ class Gnolls : DefaultRaceData
         {
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[129];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[114];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[129];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[114];
 				
 				if (actor.Unit.HasWeapon == false)
 				{
-					if (actor.IsAttacking) clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[120];
-					else clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[118];
+					if (actor.IsAttacking) clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[120];
+					else clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[118];
 				}
 				else if (actor.GetWeaponSprite() == 6)
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[118];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[118];
 				}
 				else if (actor.GetWeaponSprite() == 1 || actor.GetWeaponSprite() == 3 || actor.GetWeaponSprite() == 5 )
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[120];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[120];
 				}
 				else
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[119];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[119];
 				}
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[121 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[114];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[121 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[114];
 				
 				if (actor.Unit.HasWeapon == false)
 				{
-					if (actor.IsAttacking) clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[120];
-					else clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[118];
+					if (actor.IsAttacking) clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[120];
+					else clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[118];
 				}
 				else if (actor.GetWeaponSprite() == 6)
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[118];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[118];
 				}
 				else if (actor.GetWeaponSprite() == 1 || actor.GetWeaponSprite() == 3 || actor.GetWeaponSprite() == 5 )
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[120];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[120];
 				}
 				else
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[119];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[119];
 				}
             }
             else
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[113];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[113];
 				
 				if (actor.Unit.HasWeapon == false)
 				{
-					if (actor.IsAttacking) clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[117];
-					else clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[115];
+					if (actor.IsAttacking) clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[117];
+					else clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[115];
 				}
 				else if (actor.GetWeaponSprite() == 6)
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[115];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[115];
 				}
 				else if (actor.GetWeaponSprite() == 1 || actor.GetWeaponSprite() == 3 || actor.GetWeaponSprite() == 5 )
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[117];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[117];
 				}
 				else
 				{
-					clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[116];
+					clothing3.GetSprite = (s) => SpriteDictionary.GnollClothes[116];
 				}
             }
 
@@ -1344,7 +1344,7 @@ class Gnolls : DefaultRaceData
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = true;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -1358,18 +1358,18 @@ class Gnolls : DefaultRaceData
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[87];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[87];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[88];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[88];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[89];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[89];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[85];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[85];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[90];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[86];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[90];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[86];
             }
 
             base.Configure(sprite, actor);
@@ -1392,45 +1392,45 @@ class Gnolls : DefaultRaceData
         {
             if (Races.Gnolls.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[140];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[131];
+                clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[140];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[131];
 			}
             else if (actor.Unit.HasBreasts)
             {
                 if (actor.HasBelly)
                 {
 					if (actor.Unit.BreastSize < 2)
-						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[135];
+						clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[135];
 					else if (actor.Unit.BreastSize < 5)
-						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[137];
+						clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[137];
 					else
-						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[139];
+						clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[139];
 
-					clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[131];
+					clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[131];
 				}
 				else
 				{
 					if (actor.Unit.BreastSize < 3)
-						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[134];
+						clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[134];
 					else if (actor.Unit.BreastSize < 6)
-						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[136];
+						clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[136];
 					else
-						clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[138];
+						clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[138];
 
-					clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[131];
+					clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[131];
 				}
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[130];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[130];
 				
                 if (actor.HasBelly)
                 {
-					clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[133];
+					clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[133];
 				}
 				else
 				{
-					clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[132];
+					clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[132];
 				}
             }
 
@@ -1442,7 +1442,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(7, null, null);
             clothing2 = new SpriteExtraInfo(6, null, null);
@@ -1455,22 +1455,22 @@ class Gnolls : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[93];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[93];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[95];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[95];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[94];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[94];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
 				clothing1.YOffset = 1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[91];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[91];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[92];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[92];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1483,7 +1483,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(7, null, null);
             clothing2 = new SpriteExtraInfo(6, null, WhiteColored);
@@ -1497,22 +1497,22 @@ class Gnolls : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[99];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[99];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[101];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[101];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[100];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[100];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[98];
+            else clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[98];
 
             if (actor.Unit.HasBreasts)
             {
 				clothing1.YOffset = 1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[96];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[96];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[97];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[97];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1524,7 +1524,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(7, null, null);
             clothing2 = new SpriteExtraInfo(6, null, WhiteColored);
@@ -1534,16 +1534,16 @@ class Gnolls : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[102];
+            clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[102];
 
             if (actor.Unit.HasBreasts)
             {
 				clothing1.YOffset = 1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[96];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[96];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[97];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[97];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1555,7 +1555,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Cockatrice3[47];
+            DiscardSprite = SpriteDictionary.Cockatrice3[47];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(7, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(6, null, WhiteColored);
@@ -1569,22 +1569,22 @@ class Gnolls : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[105];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[105];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[107];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[107];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[106];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[106];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
 				clothing1.YOffset = 1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[103];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[103];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[104];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[104];
             }
             base.Configure(sprite, actor);
         }
@@ -1594,7 +1594,7 @@ class Gnolls : DefaultRaceData
     {
         public GenericBot5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(7, null, null);
             clothing2 = new SpriteExtraInfo(6, null, null);
@@ -1608,22 +1608,22 @@ class Gnolls : DefaultRaceData
             {
                 clothing1.YOffset = -1 * .625f;
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[110];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[110];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[112];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[112];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[111];
+                    clothing1.GetSprite = (s) => SpriteDictionary.GnollClothes[111];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
 				clothing1.YOffset = 1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[108];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[108];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.GnollClothes[109];
+                clothing2.GetSprite = (s) => SpriteDictionary.GnollClothes[109];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);

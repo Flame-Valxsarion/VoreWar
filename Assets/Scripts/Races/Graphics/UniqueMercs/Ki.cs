@@ -100,7 +100,7 @@ class Ki : BlankSlate
 
         if (actor.GetBallSize(9, 0.48f) > 0)
         {
-            if (!actor.Targetable) return State.GameManager.SpriteDictionary.Ki[31];
+            if (!actor.Targetable) return SpriteDictionary.Ki[31];
 
             if (actor.AnimationController.frameLists[1].currentlyActive)
             {
@@ -117,7 +117,7 @@ class Ki : BlankSlate
                     }
                 }
 
-                return State.GameManager.SpriteDictionary.Ki[31 + frameListFap.frames[actor.AnimationController.frameLists[1].currentFrame]];
+                return SpriteDictionary.Ki[31 + frameListFap.frames[actor.AnimationController.frameLists[1].currentFrame]];
             }
 
             if (actor.PredatorComponent?.BallsFullness > 0 && State.Rand.Next(800) == 0)
@@ -125,26 +125,26 @@ class Ki : BlankSlate
                 actor.AnimationController.frameLists[1].currentlyActive = true;
             }
 
-            return State.GameManager.SpriteDictionary.Ki[31];
+            return SpriteDictionary.Ki[31];
         }
 
         int bellySize = BellySize(actor);
         if (bellySize > 13)
         {
-            if (actor.IsOralVoring) return State.GameManager.SpriteDictionary.Ki[7];
-            return State.GameManager.SpriteDictionary.Ki[6];
+            if (actor.IsOralVoring) return SpriteDictionary.Ki[7];
+            return SpriteDictionary.Ki[6];
         }
 
-        if (actor.IsOralVoring) return State.GameManager.SpriteDictionary.Ki[1];
-        return State.GameManager.SpriteDictionary.Ki[0];
+        if (actor.IsOralVoring) return SpriteDictionary.Ki[1];
+        return SpriteDictionary.Ki[0];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
         int bellySize = BellySize(actor);
         if (bellySize > 13) return null;
-        if (bellySize > 9) return State.GameManager.SpriteDictionary.Ki[4];
-        if (bellySize > 0) return State.GameManager.SpriteDictionary.Ki[2];
+        if (bellySize > 9) return SpriteDictionary.Ki[4];
+        if (bellySize > 0) return SpriteDictionary.Ki[2];
         return null;
     }
 
@@ -152,7 +152,7 @@ class Ki : BlankSlate
     {
         if (actor.GetBallSize(9, 0.48f) > 0)
         {
-            if (!actor.Targetable) return State.GameManager.SpriteDictionary.Ki[35];
+            if (!actor.Targetable) return SpriteDictionary.Ki[35];
 
             if (actor.AnimationController.frameLists[0].currentlyActive)
             {
@@ -172,7 +172,7 @@ class Ki : BlankSlate
                 switch (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame])
                 {
                     case 0: return null;
-                    default: return State.GameManager.SpriteDictionary.Ki[34 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    default: return SpriteDictionary.Ki[34 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
                 }
             }
 
@@ -181,20 +181,20 @@ class Ki : BlankSlate
                 actor.AnimationController.frameLists[0].currentlyActive = true;
             }
 
-            return State.GameManager.SpriteDictionary.Ki[35];
+            return SpriteDictionary.Ki[35];
         }
 
         int bellySize = BellySize(actor);
-        if (bellySize > 13) return State.GameManager.SpriteDictionary.Ki[5];
+        if (bellySize > 13) return SpriteDictionary.Ki[5];
         return null;
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
     {
         if (actor.GetBallSize(9, 0.48f) >= 1) return null;
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Ki[30];
+        if (actor.IsCockVoring) return SpriteDictionary.Ki[30];
         if (actor.HasBelly) return null;
-        if (!Config.HideCocks && (actor.PredatorComponent?.VisibleFullness ?? 0) == 0) return State.GameManager.SpriteDictionary.Ki[3];
+        if (!Config.HideCocks && (actor.PredatorComponent?.VisibleFullness ?? 0) == 0) return SpriteDictionary.Ki[3];
         return null;
     }
 
@@ -219,28 +219,28 @@ class Ki : BlankSlate
 
         switch (bellySize)
         {
-            case 0: return State.GameManager.SpriteDictionary.Ki[8];
-            case 1: return State.GameManager.SpriteDictionary.Ki[9];
-            case 2: return State.GameManager.SpriteDictionary.Ki[10];
-            case 3: return State.GameManager.SpriteDictionary.Ki[11];
-            case 4: return State.GameManager.SpriteDictionary.Ki[12];
-            case 5: return State.GameManager.SpriteDictionary.Ki[13];
-            case 6: return State.GameManager.SpriteDictionary.Ki[14];
-            case 7: return State.GameManager.SpriteDictionary.Ki[15];
-            case 8: return State.GameManager.SpriteDictionary.Ki[16];
-            case 9: return State.GameManager.SpriteDictionary.Ki[17];
-            case 10: return State.GameManager.SpriteDictionary.Ki[18];
-            case 11: return State.GameManager.SpriteDictionary.Ki[19];
-            case 12: return State.GameManager.SpriteDictionary.Ki[20];
-            case 13: return State.GameManager.SpriteDictionary.Ki[21];
-            case 14: return State.GameManager.SpriteDictionary.Ki[22];
-            case 15: return State.GameManager.SpriteDictionary.Ki[23];
-            case 16: return State.GameManager.SpriteDictionary.Ki[24];
-            case 17: return State.GameManager.SpriteDictionary.Ki[25];
-            case 18: return State.GameManager.SpriteDictionary.Ki[26];
-            case 19: return State.GameManager.SpriteDictionary.Ki[27];
-            case 20: return State.GameManager.SpriteDictionary.Ki[28];
-            case 21: return State.GameManager.SpriteDictionary.Ki[29];
+            case 0: return SpriteDictionary.Ki[8];
+            case 1: return SpriteDictionary.Ki[9];
+            case 2: return SpriteDictionary.Ki[10];
+            case 3: return SpriteDictionary.Ki[11];
+            case 4: return SpriteDictionary.Ki[12];
+            case 5: return SpriteDictionary.Ki[13];
+            case 6: return SpriteDictionary.Ki[14];
+            case 7: return SpriteDictionary.Ki[15];
+            case 8: return SpriteDictionary.Ki[16];
+            case 9: return SpriteDictionary.Ki[17];
+            case 10: return SpriteDictionary.Ki[18];
+            case 11: return SpriteDictionary.Ki[19];
+            case 12: return SpriteDictionary.Ki[20];
+            case 13: return SpriteDictionary.Ki[21];
+            case 14: return SpriteDictionary.Ki[22];
+            case 15: return SpriteDictionary.Ki[23];
+            case 16: return SpriteDictionary.Ki[24];
+            case 17: return SpriteDictionary.Ki[25];
+            case 18: return SpriteDictionary.Ki[26];
+            case 19: return SpriteDictionary.Ki[27];
+            case 20: return SpriteDictionary.Ki[28];
+            case 21: return SpriteDictionary.Ki[29];
             default: return null;
         }
     }
@@ -250,18 +250,18 @@ class Ki : BlankSlate
         if (actor.GetBallSize(9, 0.48f) <= 0) return null;
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) && actor.GetBallSize(9, .48f) == 9)
         {
-            return State.GameManager.SpriteDictionary.Ki[47];
+            return SpriteDictionary.Ki[47];
         }
         else switch (actor.GetBallSize(9, 0.48f))
             {
-                case 1: return State.GameManager.SpriteDictionary.Ki[39];
-                case 2: return State.GameManager.SpriteDictionary.Ki[40];
-                case 3: return State.GameManager.SpriteDictionary.Ki[41];
-                case 4: return State.GameManager.SpriteDictionary.Ki[42];
-                case 5: return State.GameManager.SpriteDictionary.Ki[43];
-                case 6: return State.GameManager.SpriteDictionary.Ki[44];
-                case 7: return State.GameManager.SpriteDictionary.Ki[45];
-                default: return State.GameManager.SpriteDictionary.Ki[46];
+                case 1: return SpriteDictionary.Ki[39];
+                case 2: return SpriteDictionary.Ki[40];
+                case 3: return SpriteDictionary.Ki[41];
+                case 4: return SpriteDictionary.Ki[42];
+                case 5: return SpriteDictionary.Ki[43];
+                case 6: return SpriteDictionary.Ki[44];
+                case 7: return SpriteDictionary.Ki[45];
+                default: return SpriteDictionary.Ki[46];
             }
     }
 

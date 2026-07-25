@@ -1,0 +1,72 @@
+ManifestFileVersion: 0
+CRC: 2452810628
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a0ce5ecfc7c514fd57b213a4a03caee0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Sprites/Units/AuriXmasAddSheet.png
+- Assets/Sprites/Units/Scorch.png
+- Assets/Sprites/Units/TatltuaeHackleVore.png
+- Assets/Sprites/Units/zera/Front Belly 3x2.png
+- Assets/Sprites/Units/Xelhilde1.png
+- Assets/Sprites/Units/AsuraHoliday.png
+- Assets/Sprites/Units/Erin.png
+- Assets/Sprites/Units/zera/1x1_bols.png
+- Assets/Sprites/Units/Bella/BellaArm2.png
+- Assets/Sprites/Units/Bella/BellaRobes2.png
+- Assets/Sprites/Units/zera/zerabel.png
+- Assets/Sprites/Units/Feit.png
+- Assets/Sprites/Units/RyanVore.png
+- Assets/Sprites/Units/zera/2x3_bols.png
+- Assets/Sprites/Units/Salix.png
+- Assets/Sprites/Units/Ryan.png
+- Assets/Sprites/Units/Seraph/Seraph.png
+- Assets/Sprites/Units/Singularity1.png
+- Assets/Sprites/Units/Taraluxia.png
+- Assets/Sprites/Units/Tatltuae.png
+- Assets/Sprites/Units/Ki.png
+- Assets/Sprites/Units/TaraTailStrikes.png
+- Assets/Sprites/Units/Vision.png
+- Assets/Sprites/Units/Nectar.png
+- Assets/Sprites/Units/zoey_addsheet.png
+- Assets/Sprites/Units/zoey.png
+- Assets/Sprites/Units/Auri.png
+- Assets/Sprites/Units/zera/zera240.png
+- Assets/Sprites/Units/zera/1x2_bols.png
+- Assets/Sprites/Units/zoey_sel.png
+- Assets/Sprites/Units/Bella/BellaRobes1.png
+- Assets/Sprites/Units/selicia_in_taurus.png
+- Assets/Sprites/Units/Skapa.png
+- Assets/Sprites/Units/Bella/BellaBody1.png
+- Assets/Sprites/Units/zera/2x2_bols.png
+- Assets/Sprites/Units/Seville_VenomBite.png
+- Assets/Sprites/Units/Seville.png
+- Assets/Sprites/Units/zera/Front Belly 2x1.png
+- Assets/Sprites/Units/SalixGen.png
+- Assets/Sprites/Units/Singularity2.png
+- Assets/Sprites/Units/Olivia.png
+- Assets/Sprites/Units/Selicia.png
+- Assets/Sprites/Units/Bella/BellaBody2.png
+- Assets/Sprites/Units/Cierihaka.png
+- Assets/Sprites/Units/SalixVore.png
+- Assets/Sprites/Units/Cherub/Cherub.png
+- Assets/Sprites/Units/Bella/BellaHead1.png
+- Assets/Sprites/Units/Asura.png
+- Assets/Sprites/Units/Bella/BellaHead2.png
+- Assets/Sprites/Units/Abakhanskya.png
+- Assets/Sprites/Units/Konane.png
+- Assets/Sprites/Units/OliviaVoreSprites.png
+- Assets/Sprites/Units/Bella/BellaArm1.png
+- Assets/Sprites/Units/DRACO.png
+- Assets/Sprites/Units/AuriVore.png
+Dependencies: []

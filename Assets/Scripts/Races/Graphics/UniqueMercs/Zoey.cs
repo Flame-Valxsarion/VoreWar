@@ -5,7 +5,7 @@ using UnityEngine;
 
 class Zoey : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Zoey;
+    readonly Sprite[] Sprites = SpriteDictionary.Zoey;
 
     internal BodyState bodyState = BodyState.Normal;
 
@@ -310,18 +310,18 @@ class Zoey : BlankSlate
             {
                 case BodyState.SpinAttack:
                     if (actor.Unit.BreastSize == 4 | actor.GetStomachSize(19, 1) >= 4)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[6];
+                        clothing1.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[6];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[4];
+                        clothing1.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[4];
                     break;
                 case BodyState.SideBelly:
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[5];
+                    clothing1.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[5];
                     break;
                 default:
                     if (actor.Unit.BreastSize == 4 | actor.GetStomachSize(19, 1) >= 4)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[24 + (actor.IsAttacking ? 1 : 0)];
+                        clothing1.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[24 + (actor.IsAttacking ? 1 : 0)];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[22 + (actor.IsAttacking ? 1 : 0)];
+                        clothing1.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[22 + (actor.IsAttacking ? 1 : 0)];
                     break;
             }
 
@@ -335,34 +335,34 @@ class Zoey : BlankSlate
                 case BodyState.SpinAttack:
                 case BodyState.SideBelly:
                     if (actor.PredatorComponent?.VisibleFullness > 1)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[15 + Math.Min(actor.Unit.BreastSize, 3)];
+                        clothing2.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[15 + Math.Min(actor.Unit.BreastSize, 3)];
                     else
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[11 + Math.Min(actor.Unit.BreastSize, 3)];
+                        clothing2.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[11 + Math.Min(actor.Unit.BreastSize, 3)];
                     break;
                 default:
                     if (actor.Unit.BreastSize == 4 | actor.GetStomachSize(19, 1) >= 4)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[24];
+                        clothing2.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[24];
                     else
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[7 + Math.Min(actor.Unit.BreastSize, 3)];
+                        clothing2.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[7 + Math.Min(actor.Unit.BreastSize, 3)];
                     break;
             }
 
             switch (state)
             {
                 case BodyState.SpinAttack:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[20];
+                    clothing3.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[20];
                     break;
                 case BodyState.SideBelly:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[21];
+                    clothing3.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[21];
                     break;
                 default:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[19];
+                    clothing3.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[19];
                     break;
             }
             switch (state)
             {
                 case BodyState.HighBelly:
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[2 + (actor.IsAttacking ? 1 : 0)];
+                    clothing4.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[2 + (actor.IsAttacking ? 1 : 0)];
                     break;
                 case BodyState.SideBelly:
                     clothing4.GetSprite = null;
@@ -371,7 +371,7 @@ class Zoey : BlankSlate
                     clothing4.GetSprite = null;
                     break;
                 default:
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.ZoeyHoliday[0 + (actor.IsAttacking ? 1 : 0)];
+                    clothing4.GetSprite = (s) => SpriteDictionary.ZoeyHoliday[0 + (actor.IsAttacking ? 1 : 0)];
                     break;
             }
             base.Configure(sprite, actor);

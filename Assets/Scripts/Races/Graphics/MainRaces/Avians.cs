@@ -4,10 +4,10 @@ using UnityEngine;
 
 class Avians : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Avians1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Avians2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Avians3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.Avians4;
+    readonly Sprite[] Sprites = SpriteDictionary.Avians1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Avians2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Avians3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.Avians4;
     readonly AvianLeader LeaderClothes;
     readonly AvianRags Rags;
 
@@ -548,7 +548,7 @@ class Avians : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -561,11 +561,11 @@ class Avians : DefaultRaceData
         {
             if (Races.Avians.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[23];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[23];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[15 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[15 + actor.Unit.BreastSize];
             }
             else
             {
@@ -583,7 +583,7 @@ class Avians : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -596,11 +596,11 @@ class Avians : DefaultRaceData
         {
             if (Races.Avians.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[33];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[33];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[25 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[25 + actor.Unit.BreastSize];
             }
             else
             {
@@ -618,7 +618,7 @@ class Avians : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -631,11 +631,11 @@ class Avians : DefaultRaceData
         {
             if (Races.Avians.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[43];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[43];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[35 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[35 + actor.Unit.BreastSize];
             }
             else
             {
@@ -653,7 +653,7 @@ class Avians : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -667,11 +667,11 @@ class Avians : DefaultRaceData
         {
             if (Races.Avians.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[53];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[53];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[45 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[45 + actor.Unit.BreastSize];
             }
             else
             {
@@ -680,7 +680,7 @@ class Avians : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[54];
+            clothing2.GetSprite = (s) => SpriteDictionary.Avians4[54];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -691,7 +691,7 @@ class Avians : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -705,13 +705,13 @@ class Avians : DefaultRaceData
         {
             if (Races.Avians.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[64];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[73];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[64];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[73];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[56 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[65 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[56 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[65 + actor.Unit.BreastSize];
             }
             else
             {
@@ -730,7 +730,7 @@ class Avians : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -747,7 +747,7 @@ class Avians : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[80 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[80 + actor.Unit.BreastSize];
             }
             else
             {
@@ -765,7 +765,7 @@ class Avians : DefaultRaceData
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -776,7 +776,7 @@ class Avians : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[75 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Avians4[75 + actor.Unit.BodySize];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -799,18 +799,18 @@ class Avians : DefaultRaceData
             if (Races.Avians.oversize)
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[105];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[105];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[97 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[105];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians3[97 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[105];
             }
             else
             {
                 breastSprite = null;
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[106];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[106];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ExtraColor1);
@@ -826,7 +826,7 @@ class Avians : DefaultRaceData
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -841,20 +841,20 @@ class Avians : DefaultRaceData
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[100];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[100];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[101];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[101];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[102];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[102];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[89 + actor.Unit.BodySize];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[99];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[89 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Avians4[99];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[97];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[93 + actor.Unit.BodySize];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[98];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[97];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[93 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Avians4[98];
             }
             base.Configure(sprite, actor);
         }
@@ -865,7 +865,7 @@ class Avians : DefaultRaceData
         public AvianLeader()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[139];
+            DiscardSprite = SpriteDictionary.Avians4[139];
             coversBreasts = false;
             OccupiesAllSlots = true;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
@@ -882,27 +882,27 @@ class Avians : DefaultRaceData
             {
                 if (Races.Avians.oversize)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[111];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[111];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[103 + actor.Unit.BreastSize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[103 + actor.Unit.BreastSize];
                 }
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[112 + actor.Unit.BodySize];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[120 + actor.Unit.HairStyle];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[112 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Avians4[120 + actor.Unit.HairStyle];
                 clothing4.GetSprite = null;
             }
             else
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[136];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Avians4[136];
                 else if (actor.Unit.DickSize > 5)
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[138];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Avians4[138];
                 else
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[137];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Avians4[137];
 
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[132 + actor.Unit.BodySize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[116 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians4[132 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[116 + actor.Unit.BodySize];
                 clothing3.GetSprite = null;
             }
             base.Configure(sprite, actor);
@@ -913,7 +913,7 @@ class Avians : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, null);
             clothing2 = new SpriteExtraInfo(9, null, null);
@@ -929,26 +929,26 @@ class Avians : DefaultRaceData
                 if (actor.Unit.DickSize > 0)
                 {
                     if (actor.Unit.DickSize < 3)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[115];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians3[115];
                     else if (actor.Unit.DickSize > 5)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[117];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians3[117];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[116];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians3[116];
                 }
                 else clothing1.GetSprite = null;
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[107 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[107 + actor.Unit.BodySize];
             }
             else
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[118];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians3[118];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[120];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians3[120];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[119];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians3[119];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[111 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[111 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -961,7 +961,7 @@ class Avians : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, null);
             clothing2 = new SpriteExtraInfo(9, null, WhiteColored);
@@ -976,26 +976,26 @@ class Avians : DefaultRaceData
                 if (actor.Unit.DickSize > 0)
                 {
                     if (actor.Unit.DickSize < 3)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[131];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians3[131];
                     else if (actor.Unit.DickSize > 5)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[133];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians3[133];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[132];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians3[132];
                 }
-                else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[130];
+                else clothing1.GetSprite = (s) => SpriteDictionary.Avians3[130];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[122 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[122 + actor.Unit.BodySize];
             }
             else
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[134];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians3[134];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[136];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians3[136];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[135];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians3[135];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[126 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[126 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1007,10 +1007,10 @@ class Avians : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 1;
             clothing1 = new SpriteExtraInfo(10, null, null);
             clothing2 = new SpriteExtraInfo(9, null, WhiteColored);
             Type = 1540;
@@ -1022,13 +1022,13 @@ class Avians : DefaultRaceData
 
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[138];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[122 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians3[138];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[122 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[139];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians3[126 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Avians3[139];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians3[126 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1040,7 +1040,7 @@ class Avians : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[14];
+            DiscardSprite = SpriteDictionary.Avians4[14];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(10, null, null);
             clothing2 = new SpriteExtraInfo(9, null, null);
@@ -1056,26 +1056,26 @@ class Avians : DefaultRaceData
                 if (actor.Unit.DickSize > 0)
                 {
                     if (actor.Unit.DickSize < 3)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[8];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians4[8];
                     else if (actor.Unit.DickSize > 5)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[10];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians4[10];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[9];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Avians4[9];
                 }
                 else clothing1.GetSprite = null;
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[0 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[0 + actor.Unit.BodySize];
             }
             else
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[11];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[11];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[13];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[13];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[12];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Avians4[12];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Avians4[4 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Avians4[4 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);

@@ -140,6 +140,7 @@ static class LogUtilities
             case PreyLocation.womb:
             case PreyLocation.tail:
             case PreyLocation.anal:
+            case PreyLocation.bladder:
                 return "s";
         }
         return "";
@@ -382,6 +383,12 @@ static class LogUtilities
                 return GetRandomStringFrom("bare skinned", "pointy-eared", "knife-eared");
             case Race.Tatltuae:
                 return GetRandomStringFrom("black feathered", "rosemary flavored", "purple eyed", "slightly cowardly", "complaining", "hollow boned");
+            case Race.Cherub:
+                return GetRandomStringFrom("pink-furred", "ditzy", "angelic", "marshmallow-flavored");
+            case Race.Seraph:
+                return GetRandomStringFrom("blue-furred", "stoic", "angelic", "marshmallow-flavored", "formerly powerful");
+            case Race.SoulSprite:
+                return GetRandomStringFrom("glowy", "adorably scrumptious", "angelic", "gummi-textured", "marshmallow-flavored");
             default:
                 return "tasty";
         }
@@ -468,6 +475,14 @@ static class LogUtilities
                 return GetRandomStringFrom("humble", "cunning", "resourceful");
             case Race.Tatltuae:
                 return GetRandomStringFrom("black feathered", "chaotic", "purple eyed", "ominous", "unnerving", "omen-bringing");
+            case Race.Cherub:
+                return GetRandomStringFrom("pink-furred", "three eyed", "otherworldly", "divine");
+            case Race.Seraph:
+                return GetRandomStringFrom("blue-furred", "three eyed", "otherworldly", "divine", "aloof", "draconic", "ancient");
+            case Race.SoulSprite:
+                return GetRandomStringFrom("hungry little", "munchy midget", "otherworldly", "three-eyed", "greedily glowing", "unassumingly cute");
+            case Race.Badgers:
+                return GetRandomStringFrom("fierce", "fearless", "vicious");
             default:
                 return "strong";
         }
@@ -491,11 +506,11 @@ static class LogUtilities
             case Race.Foxes:
                 return GetRandomStringFrom("fox", GetGenderString(unit, "vixen", "tod", "fox"), "vulpine", "canid");
             case Race.Wolves:
-                return GetRandomStringFrom("feral", GetGenderString(unit, "wolfess", "wolf", "wolf"), "canine"); ////I changed "wolfen" to "wolfess" 
+                return GetRandomStringFrom("wolf", GetGenderString(unit, "wolfess", "wolf", "wolf"), "canine"); ////I changed "wolfen" to "wolfess" 
             case Race.Bunnies:
                 return GetRandomStringFrom("bunny", GetGenderString(unit, "doe", "buck", "lagomorph"), "rabbit");
             case Race.Deer:
-                return GetRandomStringFrom(GetGenderString(unit, GetRandomStringFrom("doe", "roe"), GetRandomStringFrom("buck", "stag", "hart"), "cervid"), "faun", "deer");
+                return GetRandomStringFrom(GetGenderString(unit, GetRandomStringFrom("doe", "roe"), GetRandomStringFrom("buck", "stag"), "cervid"), "deer");
             case Race.Lizards:
                 return GetRandomStringFrom("lizard", "reptile", "reptilian");
             case Race.Slimes:
@@ -616,8 +631,8 @@ static class LogUtilities
                 return GetRandomStringFrom("elf", GetGenderString(unit, "woman", "man", "elf"), "humanoid");
             case Race.Tatltuae:
                 return GetRandomStringFrom("cartograher", "raven", "chaos mage", "corvid", State.Rand.Next(42) == 1 ? "bird" : "birb");
-            case Race.Firefly:
-                return GetRandomStringFrom("umbreon", "mon", "pilot", "merc", "mercenary");
+            case Race.Seville:
+                return GetRandomStringFrom("grand serpent", "witch", "mistress");
             case Race.Terrorbird:
                 return GetRandomStringFrom("bird", "long-necked avian", "flightless bird", "anger bird");
             case Race.Iliijiith:
@@ -628,6 +643,16 @@ static class LogUtilities
                 return GetRandomStringFrom("sphinx", "deity", "grand cat");
             case Race.Ryan:
                 return GetRandomStringFrom("sergal", "veteran", "captain");
+            case Race.Cherub:
+                return GetRandomStringFrom("angel", "holy beast", "angelic being", "cherubim");
+            case Race.Seraph:
+                return GetRandomStringFrom("angel", "holy dragon", "angelic being", "seraphim", "ancient one");
+            case Race.SoulSprite:
+                return GetRandomStringFrom("lesser-angel", "glowing soul", "angelic being", "sprite", "soul sprite");
+            case Race.Badgers:
+                return GetRandomStringFrom("badger", GetGenderString(unit, "sow", "boar", "badger"), "mustelid");
+            case Race.Draconians:
+                return GetRandomStringFrom("draconian", GetGenderString(unit, "dragoness", "dragon", "draconian"), "draconic", "demi-dragon");
             default:
                 return "creature";
         }
@@ -655,6 +680,7 @@ static class LogUtilities
         else if (unit.Race == Race.Xelhilde) return "Zweihänder";
         else if (unit.Race == Race.Olivia) return "Static Fist";
         else if (unit.Race == Race.Nectar) return "Claws";
+        else if (unit.Race == Race.Renamon) return "Palm Strike";
 
         else if (unit.Race == Race.Kangaroos)
         {
@@ -735,6 +761,18 @@ static class LogUtilities
         {
             if (weapon.Name == "Mace") return "Turtle Club";
             else if (weapon.Name == "Axe") return "Flint Spear";
+            else if (weapon.Name == "Claw") return "Claws";
+        }
+        else if (unit.Race == Race.Badgers)
+        {
+            if (weapon.Name == "Mace") return "Hand Axe";
+            else if (weapon.Name == "Axe") return "Glaive";
+            else if (weapon.Name == "Claw") return "Claws";
+        }
+        else if (unit.Race == Race.Komodos)
+        {
+            if (weapon.Name == "Mace") return "Hunting Knife";
+            else if (weapon.Name == "Axe") return "War Scythe";
             else if (weapon.Name == "Claw") return "Claws";
         }
         else if (unit.Race == Race.Puca)

@@ -3,7 +3,7 @@ using UnityEngine;
 
 class RockSlug : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.RockSlug;
+    readonly Sprite[] Sprites = SpriteDictionary.RockSlug;
 
     public RockSlug()
     {

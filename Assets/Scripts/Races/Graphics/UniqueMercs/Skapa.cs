@@ -7,7 +7,7 @@ using UnityEngine;
 
 class Skapa : BlankSlate
 {
-    readonly Sprite[] SkapaSprites = State.GameManager.SpriteDictionary.Skapa;
+    readonly Sprite[] SkapaSprites = SpriteDictionary.Skapa;
     bool SkapaFrontSide;
     bool SkapaFrontDirect;
 

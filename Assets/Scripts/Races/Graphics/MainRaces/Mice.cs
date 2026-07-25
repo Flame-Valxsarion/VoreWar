@@ -5,15 +5,15 @@ using static UnityEngine.UI.CanvasScaler;
 
 class Mice : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Mice1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Mice2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.MiceFBottoms;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.MiceFTops;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.MiceMBottoms;
-    readonly Sprite[] Sprites6 = State.GameManager.SpriteDictionary.MiceMTops;
-    readonly Sprite[] Sprites7 = State.GameManager.SpriteDictionary.MiceVore1;
-    readonly Sprite[] Sprites8 = State.GameManager.SpriteDictionary.MiceVore2;
-    readonly Sprite[] Sprites9 = State.GameManager.SpriteDictionary.MiceVore3;
+    readonly Sprite[] Sprites = SpriteDictionary.Mice1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Mice2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.MiceFBottoms;
+    readonly Sprite[] Sprites4 = SpriteDictionary.MiceFTops;
+    readonly Sprite[] Sprites5 = SpriteDictionary.MiceMBottoms;
+    readonly Sprite[] Sprites6 = SpriteDictionary.MiceMTops;
+    readonly Sprite[] Sprites7 = SpriteDictionary.MiceVore1;
+    readonly Sprite[] Sprites8 = SpriteDictionary.MiceVore2;
+    readonly Sprite[] Sprites9 = SpriteDictionary.MiceVore3;
 
     readonly MiceRags Rags;
 
@@ -393,7 +393,7 @@ class Mice : DefaultRaceData
         if (actor.IsEating)
             return null;
         else
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[108 + actor.Unit.MouthType];
+            return SpriteDictionary.HumansBodySprites3[108 + actor.Unit.MouthType];
     }
 
     protected override Sprite HairSprite(Actor_Unit actor)
@@ -810,7 +810,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -823,11 +823,11 @@ protected override Sprite EyesSprite(Actor_Unit actor)
         {
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[56];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[48 + actor.Unit.BreastSize];
                 clothing1.YOffset = -1 * .625f;
             }
             else
@@ -846,7 +846,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -859,11 +859,11 @@ protected override Sprite EyesSprite(Actor_Unit actor)
         {
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[65];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[57 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[57 + actor.Unit.BreastSize];
                 clothing1.YOffset = -1 * .625f;
             }
             else
@@ -882,7 +882,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -895,11 +895,11 @@ protected override Sprite EyesSprite(Actor_Unit actor)
         {
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[74];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[74];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[66 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[66 + actor.Unit.BreastSize];
                 clothing1.YOffset = -1 * .625f;
             }
             else
@@ -918,7 +918,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -935,11 +935,11 @@ protected override Sprite EyesSprite(Actor_Unit actor)
 
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[80];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[80];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[72 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[72 + actor.Unit.BreastSize];
             }
             else
             {
@@ -948,7 +948,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[81];
+            clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[81];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -959,7 +959,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -976,13 +976,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
 
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[90];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[99];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[90];
+                clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[99];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[82 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[91 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[82 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[91 + actor.Unit.BreastSize];
 
             }
             else
@@ -1002,7 +1002,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1021,7 +1021,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[104 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[104 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1039,7 +1039,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1052,11 +1052,11 @@ protected override Sprite EyesSprite(Actor_Unit actor)
         {
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[95];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[95];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[87 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[87 + actor.Unit.BreastSize];
                 clothing1.YOffset = -1 * .625f;
             }
             else
@@ -1075,7 +1075,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public MaleLowClass()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -1097,68 +1097,68 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[17];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[17];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[16];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[16];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[3 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[3 + (actor.Unit.BodySize * 4)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[2 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[2 + (actor.Unit.BodySize * 4)];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[1 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[1 + (actor.Unit.BodySize * 4)];
                 }
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[0 + (actor.Unit.BodySize * 4)];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[0 + (actor.Unit.BodySize * 4)];
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[11 + (actor.Unit.BodySize)];
+            clothing2.GetSprite = (s) => SpriteDictionary.MiceMBottoms[11 + (actor.Unit.BodySize)];
             if (actor.Unit.Furry)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[19 + (actor.Unit.BodySize > 2 ? 1: 0)];
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[29];
+                clothing3.GetSprite = (s) => SpriteDictionary.MiceMBottoms[19 + (actor.Unit.BodySize > 2 ? 1: 0)];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[29];
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[15 + (actor.Unit.BodySize)];
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[21 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.MiceMBottoms[15 + (actor.Unit.BodySize)];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[21 + (actor.Unit.BodySize > 2 ? 1 : 0)];
             }
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[90];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[90];
                     break;
                 case 1:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[92];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[92];
                     break;
                 case 2:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[91];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[91];
                     break;
                 case 3:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[92];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[92];
                     break;
                 case 4:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[90];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[90];
                     break;
                 case 5:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[91];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[91];
                     break;
                 case 6:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[90];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[90];
                     break;
                 case 7:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[91];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[91];
                     break;
                 default:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[90];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[90];
                     break;
             }
 
@@ -1170,7 +1170,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public MaleHighClass()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -1193,71 +1193,71 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[35];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[35];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[34];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[34];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[21 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[21 + (actor.Unit.BodySize * 4)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[20 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[20 + (actor.Unit.BodySize * 4)];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[19 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[19 + (actor.Unit.BodySize * 4)];
                 }
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[18 + (actor.Unit.BodySize * 4)];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[18 + (actor.Unit.BodySize * 4)];
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[96];
-            clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[106];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[11 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.MiceMTops[96];
+            clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[106];
+            clothing3.GetSprite = (s) => SpriteDictionary.MiceMBottoms[11 + actor.Unit.BodySize];
             if (actor.Unit.Furry)
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[19 + (actor.Unit.BodySize > 2 ? 1 : 0)];
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[30];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[19 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing5.GetSprite = (s) => SpriteDictionary.MiceMBottoms[30];
             }
             else
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[15 + (actor.Unit.BodySize)];
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[33 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[15 + (actor.Unit.BodySize)];
+                clothing5.GetSprite = (s) => SpriteDictionary.MiceMBottoms[33 + (actor.Unit.BodySize > 2 ? 1 : 0)];
             }
 
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[93];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[93];
                     break;
                 case 1:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[94];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[94];
                     break;
                 case 2:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[94];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[94];
                     break;
                 case 3:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[94];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[94];
                     break;
                 case 4:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[93];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[93];
                     break;
                 case 5:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[94];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[94];
                     break;
                 case 6:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[93];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[93];
                     break;
                 case 7:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[94];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[94];
                     break;
                 default:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[93];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[93];
                     break;
             }
 
@@ -1270,7 +1270,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public MaleLightArmor()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -1290,67 +1290,67 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[89];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceMTops[89];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[88];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceMTops[88];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[75 + (actor.Unit.BodySize * 4)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceMTops[75 + (actor.Unit.BodySize * 4)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[74 + (actor.Unit.BodySize * 4)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceMTops[74 + (actor.Unit.BodySize * 4)];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[73 + (actor.Unit.BodySize * 4)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceMTops[73 + (actor.Unit.BodySize * 4)];
                 }
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[72 + (actor.Unit.BodySize * 4)];
+                clothing2.GetSprite = (s) => SpriteDictionary.MiceMTops[72 + (actor.Unit.BodySize * 4)];
             }
             if (actor.Unit.Furry)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[27];
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[28];
+                clothing3.GetSprite = (s) => SpriteDictionary.MiceMBottoms[27];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[28];
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[23 + actor.Unit.BodySize];
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[21 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.MiceMBottoms[23 + actor.Unit.BodySize];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[21 + (actor.Unit.BodySize > 2 ? 1 : 0)];
             }
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[103];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[103];
                     break;
                 case 1:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[105]; 
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[105]; 
                     break;
                 case 2:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[104];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[104];
                     break;
                 case 3:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[105];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[105];
                     break;
                 case 4:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[103];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[103];
                     break;
                 case 5:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[104];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[104];
                     break;
                 case 6:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[103];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[103];
                     break;
                 case 7:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[104];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[104];
                     break;
                 default:
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[103];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[103];
                     break;
             }
             base.Configure(sprite, actor);
@@ -1361,7 +1361,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public MaleHeavyArmor()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -1387,84 +1387,84 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[53];
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[71];
+                    clothing8.GetSprite = (s) => SpriteDictionary.MiceMTops[53];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[71];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[52];
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[70];
+                    clothing8.GetSprite = (s) => SpriteDictionary.MiceMTops[52];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[70];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[39 + (actor.Unit.BodySize * 4)];
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[57 + (actor.Unit.BodySize * 4)];
+                    clothing8.GetSprite = (s) => SpriteDictionary.MiceMTops[39 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[57 + (actor.Unit.BodySize * 4)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[38 + (actor.Unit.BodySize * 4)];
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[56 + (actor.Unit.BodySize * 4)];
+                    clothing8.GetSprite = (s) => SpriteDictionary.MiceMTops[38 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[56 + (actor.Unit.BodySize * 4)];
                 }
                 else
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[37 + (actor.Unit.BodySize * 4)];
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[55 + (actor.Unit.BodySize * 4)];
+                    clothing8.GetSprite = (s) => SpriteDictionary.MiceMTops[37 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[55 + (actor.Unit.BodySize * 4)];
                 }
             }
             else
             {
-                clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[36 + (actor.Unit.BodySize * 4)];
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[54 + (actor.Unit.BodySize * 4)];
+                clothing8.GetSprite = (s) => SpriteDictionary.MiceMTops[36 + (actor.Unit.BodySize * 4)];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceMTops[54 + (actor.Unit.BodySize * 4)];
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[0 + (actor.Unit.BodySize)];
+            clothing2.GetSprite = (s) => SpriteDictionary.MiceMBottoms[0 + (actor.Unit.BodySize)];
             if (actor.Unit.Furry)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[8 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.MiceMBottoms[8 + (actor.Unit.BodySize > 2 ? 1 : 0)];
                 clothing4.GetSprite = null;
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[4 + (actor.Unit.BodySize)];
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[10];
+                clothing3.GetSprite = (s) => SpriteDictionary.MiceMBottoms[4 + (actor.Unit.BodySize)];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[10];
             }
-            clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[35 + (actor.Unit.BodySize)];
+            clothing9.GetSprite = (s) => SpriteDictionary.MiceMBottoms[35 + (actor.Unit.BodySize)];
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[97];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[100];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[97];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[100];
                     break;
                 case 1:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[99];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[102];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[99];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[102];
                     break;
                 case 2:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[98];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[101];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[98];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[101];
                     break;
                 case 3:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[99];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[102];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[99];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[102];
                     break;
                 case 4:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[97];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[100];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[97];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[100];
                     break;
                 case 5:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[98];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[101];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[98];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[101];
                     break;
                 case 6:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[97];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[100];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[97];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[100];
                     break;
                 case 7:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[98];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[101];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[98];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[101];
                     break;
                 default:
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[97];
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMTops[100];
+                    clothing7.GetSprite = (s) => SpriteDictionary.MiceMTops[97];
+                    clothing6.GetSprite = (s) => SpriteDictionary.MiceMTops[100];
                     break;
             }
 
@@ -1476,7 +1476,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public FemaleTunic()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -1502,32 +1502,32 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[17];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[17];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[16];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[16];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[3 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[3 + (actor.Unit.BodySize * 4)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[2 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[2 + (actor.Unit.BodySize * 4)];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[1 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[1 + (actor.Unit.BodySize * 4)];
                 }
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[0 + (actor.Unit.BodySize * 4)];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[0 + (actor.Unit.BodySize * 4)];
             }
             if (Races.Mice.oversize)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[8];
+                clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[8];
                 blocksBreasts = false;
                 clothing7.GetSprite = null;
                 clothing8.GetSprite = null;
@@ -1536,18 +1536,18 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[Math.Min(0 + actor.Unit.BreastSize, 7)];
+                clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[Math.Min(0 + actor.Unit.BreastSize, 7)];
                 if (actor.Unit.BreastSize == 3)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[64];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[67];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore2[64];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore2[67];
                     }
                     else
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[64];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[67];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore3[64];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore3[67];
                     }
                     
                 }
@@ -1555,13 +1555,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[65];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[68];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore2[65];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore2[68];
                     }
                     else
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[65];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[68];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore3[65];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore3[68];
                     }
                     
                 }
@@ -1569,13 +1569,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[66];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[69];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore2[66];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore2[69];
                     }
                     else
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[66];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[69];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore3[66];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore3[69];
                     }
                     
                 }
@@ -1583,13 +1583,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
                     }
                     else
                     {
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
-                        clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
+                        clothing7.GetSprite = (s) => SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
+                        clothing8.GetSprite = (s) => SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
                     }
                     
                 }
@@ -1602,62 +1602,62 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
             }
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[96 + actor.Unit.BodySize];
+            clothing4.GetSprite = (s) => SpriteDictionary.MiceFBottoms[96 + actor.Unit.BodySize];
             if (actor.Unit.Furry)
             {
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[104 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing5.GetSprite = (s) => SpriteDictionary.MiceFBottoms[104 + (actor.Unit.BodySize > 2 ? 1 : 0)];
             }
             else
             {
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[100 + actor.Unit.BodySize];
+                clothing5.GetSprite = (s) => SpriteDictionary.MiceFBottoms[100 + actor.Unit.BodySize];
             }
 
             if (actor.Unit.HasWeapon == false)
             {
                 if (actor.IsAttacking)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[10];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[10];
 
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize,21)];
-                    clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[21];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize,21)];
+                    clothing9.GetSprite = (s) => SpriteDictionary.MiceFTops[21];
                 }
             }
 
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
-                    clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[22];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
+                    clothing9.GetSprite = (s) => SpriteDictionary.MiceFTops[22];
                     break;
                 case 1:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[10];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[10];
                     break;
                 case 2:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[9];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[9];
                     break;
                 case 3:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[10];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[10];
                     break;
                 case 4:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
-                    clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[22]; 
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
+                    clothing9.GetSprite = (s) => SpriteDictionary.MiceFTops[22]; 
                     break;
                 case 5:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[9];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[9];
                     break;
                 case 6:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
-                    clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[22]; 
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
+                    clothing9.GetSprite = (s) => SpriteDictionary.MiceFTops[22]; 
                     break;
                 case 7:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[9];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[9];
                     break;
                 default:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
-                    clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[22];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[Math.Min(12 + actor.Unit.BreastSize, 21)];
+                    clothing9.GetSprite = (s) => SpriteDictionary.MiceFTops[22];
                     break;
             }
             if (actor.Unit.Furry)
@@ -1668,7 +1668,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             }
             else
             {
-                clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[21 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing6.GetSprite = (s) => SpriteDictionary.MiceMBottoms[21 + (actor.Unit.BodySize > 2 ? 1 : 0)];
                 clothing7.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MiceHumanSkin, actor.Unit.SkinColor);
                 clothing8.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.MiceHumanSkin, actor.Unit.SkinColor);
             }
@@ -1681,7 +1681,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public FemaleDress()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -1702,33 +1702,33 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[35];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[35];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[34];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[34];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[21 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[21 + (actor.Unit.BodySize * 4)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[20 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[20 + (actor.Unit.BodySize * 4)];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[19 + (actor.Unit.BodySize * 4)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[19 + (actor.Unit.BodySize * 4)];
                 }
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[18 + (actor.Unit.BodySize * 4)];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceFBottoms[18 + (actor.Unit.BodySize * 4)];
             }          
             if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[24 + (actor.Unit.BreastSize > 2 ? actor.Unit.BreastSize - 1 : 0)];
+                clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[24 + (actor.Unit.BreastSize > 2 ? actor.Unit.BreastSize - 1 : 0)];
             }
             else
             {
@@ -1744,50 +1744,50 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             }
             else
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[95];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceFBottoms[95];
             }
 
             if (actor.Unit.HasWeapon == false)
             {
                 if (actor.IsAttacking)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[34];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[34];
 
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[31];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[31];
                 }
             }
 
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[33]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[33]; // grip down
                     break;
                 case 1:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[34]; // arm up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[34]; // arm up
                     break;
                 case 2:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[32]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[32]; // grip up
                     break;
                 case 3:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[34]; // arm up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[34]; // arm up
                     break;
                 case 4:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[33]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[33]; // grip down
                     break;
                 case 5:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[32]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[32]; // grip up
                     break;
                 case 6:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[33]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[33]; // grip down
                     break;
                 case 7:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[32]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[32]; // grip up
                     break;
                 default:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[31]; // arm down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[31]; // arm down
                     break;
             }
             if (Races.Mice.oversize)
@@ -1804,7 +1804,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public FemaleLightArmor()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -1828,7 +1828,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
 
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[44];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceFTops[44];
                 blocksBreasts = false;
                 clothing5.GetSprite = null;
                 clothing6.GetSprite = null;
@@ -1836,18 +1836,18 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[36 + actor.Unit.BreastSize + (actor.Unit.BodySize == 3  && actor.Unit.BreastSize <= 2 ? 12 : 0)];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceFTops[36 + actor.Unit.BreastSize + (actor.Unit.BodySize == 3  && actor.Unit.BreastSize <= 2 ? 12 : 0)];
                 if (actor.Unit.BreastSize == 3)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[64];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[67];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[64];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[67];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[64];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[67];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[64];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[67];
                     }
 
                 }
@@ -1855,13 +1855,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[65];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[68];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[65];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[68];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[65];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[68];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[65];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[68];
                     }
 
                 }
@@ -1869,13 +1869,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[66];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[69];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[66];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[69];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[66];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[69];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[66];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[69];
                     }
 
                 }
@@ -1883,13 +1883,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
                     }
 
                 }
@@ -1904,66 +1904,66 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             }
             if (actor.HasBelly)
             {
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[94];
+                clothing7.GetSprite = (s) => SpriteDictionary.MiceFBottoms[94];
             }
             else
             {
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[90 + actor.Unit.BodySize];
+                clothing7.GetSprite = (s) => SpriteDictionary.MiceFBottoms[90 + actor.Unit.BodySize];
             }
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[96 + actor.Unit.BodySize];
-            clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[86 + actor.Unit.BodySize];
+            clothing3.GetSprite = (s) => SpriteDictionary.MiceFBottoms[96 + actor.Unit.BodySize];
+            clothing9.GetSprite = (s) => SpriteDictionary.MiceFBottoms[86 + actor.Unit.BodySize];
             if (actor.Unit.Furry)
             {
                 clothing4.GetSprite = null;
-                clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[104 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing8.GetSprite = (s) => SpriteDictionary.MiceFBottoms[104 + (actor.Unit.BodySize > 2 ? 1 : 0)];
             }
             else
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceMBottoms[31];
-                clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[100 + actor.Unit.BodySize];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceMBottoms[31];
+                clothing8.GetSprite = (s) => SpriteDictionary.MiceFBottoms[100 + actor.Unit.BodySize];
             }
 
             if (actor.Unit.HasWeapon == false)
             {
                 if (actor.IsAttacking)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[54];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[54];
 
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[51];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[51];
                 }
             }
 
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[53]; // grip down
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[53]; // grip down
                     break;
                 case 1:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[54]; // arm up
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[54]; // arm up
                     break;
                 case 2:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[52]; // grip up
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[52]; // grip up
                     break;
                 case 3:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[54]; // arm up
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[54]; // arm up
                     break;
                 case 4:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[53]; // grip down
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[53]; // grip down
                     break;
                 case 5:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[52]; // grip up
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[52]; // grip up
                     break;
                 case 6:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[53]; // grip down
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[53]; // grip down
                     break;
                 case 7:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[52]; // grip up
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[52]; // grip up
                     break;
                 default:
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[51]; // arm down
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFTops[51]; // arm down
                     break;
             }
             if (actor.Unit.Furry)
@@ -1984,7 +1984,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public FemaleHeavyArmor()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -2005,7 +2005,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[58 + Math.Min(actor.GetStomachSize(31, 0.7f), 66)];
+            clothing8.GetSprite = (s) => SpriteDictionary.MiceFBottoms[58 + Math.Min(actor.GetStomachSize(31, 0.7f), 66)];
             if (actor.HasBelly)
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
@@ -2015,51 +2015,51 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[52];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFBottoms[52];
                     clothing8.layer = 15;
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[39 + (actor.Unit.BodySize * 4)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFBottoms[39 + (actor.Unit.BodySize * 4)];
                     clothing8.layer = 15;
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[38 + (actor.Unit.BodySize * 4)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFBottoms[38 + (actor.Unit.BodySize * 4)];
                     clothing8.layer = 15;
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[37 + (actor.Unit.BodySize * 4)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.MiceFBottoms[37 + (actor.Unit.BodySize * 4)];
                 }
             }
             else
             {
                 clothing8.layer = 5;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[36 + (actor.Unit.BodySize * 4)];
+                clothing2.GetSprite = (s) => SpriteDictionary.MiceFBottoms[36 + (actor.Unit.BodySize * 4)];
             }
             if (Races.Mice.oversize)
             {
                 clothing1.GetSprite = null;
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[66];
+                clothing7.GetSprite = (s) => SpriteDictionary.MiceFTops[66];
                 blocksBreasts = false;
             }
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[72 + (actor.Unit.BreastSize > 2 ? actor.Unit.BreastSize - 1 : 0)];
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[60 + (actor.Unit.BreastSize > 2 ? actor.Unit.BreastSize - 1 : 0)];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceFTops[72 + (actor.Unit.BreastSize > 2 ? actor.Unit.BreastSize - 1 : 0)];
+                clothing7.GetSprite = (s) => SpriteDictionary.MiceFTops[60 + (actor.Unit.BreastSize > 2 ? actor.Unit.BreastSize - 1 : 0)];
                 if (actor.Unit.BreastSize == 3)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[64];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[67];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[64];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[67];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[64];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[67];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[64];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[67];
                     }
 
                 }
@@ -2067,13 +2067,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[65];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[68];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[65];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[68];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[65];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[68];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[65];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[68];
                     }
 
                 }
@@ -2081,13 +2081,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[66];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[69];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[66];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[69];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[66];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[69];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[66];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[69];
                     }
 
                 }
@@ -2095,13 +2095,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
                     }
 
                 }
@@ -2113,57 +2113,57 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 clothing1.GetSprite = null;
                 clothing2.GetSprite = null;
             }
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[54 + actor.Unit.BodySize];
+            clothing4.GetSprite = (s) => SpriteDictionary.MiceFBottoms[54 + actor.Unit.BodySize];
             if (actor.Unit.Furry)
             {
                 clothing9.GetSprite = null;
             }
             else
             {
-                clothing9.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[53];
+                clothing9.GetSprite = (s) => SpriteDictionary.MiceFBottoms[53];
             }
 
             if (actor.Unit.HasWeapon == false)
             {
                 if (actor.IsAttacking)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[70];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[70];
 
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[67];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[67];
                 }
             }
 
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[69]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[69]; // grip down
                     break;
                 case 1:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[70]; // arm up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[70]; // arm up
                     break;
                 case 2:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[68]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[68]; // grip up
                     break;
                 case 3:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[70]; // arm up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[70]; // arm up
                     break;
                 case 4:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[69]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[69]; // grip down
                     break;
                 case 5:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[68]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[68]; // grip up
                     break;
                 case 6:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[69]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[69]; // grip down
                     break;
                 case 7:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[68]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[68]; // grip up
                     break;
                 default:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[67]; // arm down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[67]; // arm down
                     break;
             }
             if (actor.Unit.Furry)
@@ -2184,7 +2184,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public FemalePriestess()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = true;
@@ -2207,15 +2207,15 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             clothing7.layer = 17;
             if (actor.HasBelly)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[72 + Math.Min(actor.GetStomachSize(31, 0.7f), 11)];
+                clothing2.GetSprite = (s) => SpriteDictionary.MiceFBottoms[72 + Math.Min(actor.GetStomachSize(31, 0.7f), 11)];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[72 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.MiceFBottoms[72 + actor.Unit.BodySize];
             }
             if (Races.Mice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[92];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceFTops[92];
                 clothing7.GetSprite = null;
                 blocksBreasts = false;
                 clothing7.layer = 15;
@@ -2223,19 +2223,19 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[84 + actor.Unit.BreastSize];
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[96 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.MiceFTops[84 + actor.Unit.BreastSize];
+                clothing7.GetSprite = (s) => SpriteDictionary.MiceFTops[96 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[64];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[67];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[64];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[67];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[64];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[67];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[64];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[67];
                     }
 
                 }
@@ -2243,13 +2243,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[65];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[68];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[65];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[68];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[65];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[68];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[65];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[68];
                     }
 
                 }
@@ -2257,13 +2257,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[66];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[69];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[66];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[69];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[66];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[69];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[66];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[69];
                     }
 
                 }
@@ -2271,13 +2271,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 {
                     if (actor.Unit.BodyAccentType2 == 1 || !actor.Unit.Furry)
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore2[0 + actor.Unit.BreastSize];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore2[32 + actor.Unit.BreastSize];
                     }
                     else
                     {
-                        clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
+                        clothing5.GetSprite = (s) => SpriteDictionary.MiceVore3[0 + actor.Unit.BreastSize];
+                        clothing6.GetSprite = (s) => SpriteDictionary.MiceVore3[32 + actor.Unit.BreastSize];
                     }
 
                 }
@@ -2291,54 +2291,54 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             }
             if (actor.Unit.Furry)
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[67];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceFBottoms[67];
             }
             else
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[84 + (actor.Unit.BodySize > 2 ? 1 : 0)];
+                clothing4.GetSprite = (s) => SpriteDictionary.MiceFBottoms[84 + (actor.Unit.BodySize > 2 ? 1 : 0)];
             }
 
             if (actor.Unit.HasWeapon == false)
             {
                 if (actor.IsAttacking)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[111];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[111];
 
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[108];
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[108];
                 }
             }
-            clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFBottoms[68 + actor.Unit.BodySize];
+            clothing8.GetSprite = (s) => SpriteDictionary.MiceFBottoms[68 + actor.Unit.BodySize];
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[110]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[110]; // grip down
                     break;
                 case 1:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[111]; // arm up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[111]; // arm up
                     break;
                 case 2:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[109]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[109]; // grip up
                     break;
                 case 3:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[111]; // arm up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[111]; // arm up
                     break;
                 case 4:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[110]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[110]; // grip down
                     break;
                 case 5:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[109]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[109]; // grip up
                     break;
                 case 6:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[110]; // grip down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[110]; // grip down
                     break;
                 case 7:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[109]; // grip up
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[109]; // grip up
                     break;
                 default:
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.MiceFTops[108]; // arm down
+                    clothing3.GetSprite = (s) => SpriteDictionary.MiceFTops[108]; // arm down
                     break;
             }
             if (actor.Unit.Furry)
@@ -2373,13 +2373,13 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             if (Races.Mice.oversize)
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[0];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[0];
                 clothing2.YOffset = 0;
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[2 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[0];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[2 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[0];
                 clothing2.YOffset = 0;
                 clothing1.YOffset = -1;
             }
@@ -2387,7 +2387,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 breastSprite = null;
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[1];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[1];
             }
             if (!actor.Unit.Furry)
             {
@@ -2418,7 +2418,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -2433,20 +2433,20 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mice1[113];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Mice1[113];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mice1[114];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Mice1[114];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mice1[115];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Mice1[115];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mice1[104 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mice1[104 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Mice1[112];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Mice1[108 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Mice1[112];
+                clothing2.GetSprite = (s) => SpriteDictionary.Mice1[108 + actor.Unit.BodySize];
             }
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Mice1[116 + (actor.Unit.Furry ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Mice1[116 + (actor.Unit.Furry ? 1 : 0)];
 
             base.Configure(sprite, actor);
         }
@@ -2456,7 +2456,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2469,21 +2469,21 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[20];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[20];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[22];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[22];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[21];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[21];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[12 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[12 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[16 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[16 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -2496,7 +2496,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -2510,21 +2510,21 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[32];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[32];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[34];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[34];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[33];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[33];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[31];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[31];
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -2536,7 +2536,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -2546,15 +2546,15 @@ protected override Sprite EyesSprite(Actor_Unit actor)
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[35];
+            clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[35];
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -2566,7 +2566,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Cockatrice3[47];
+            DiscardSprite = SpriteDictionary.Cockatrice3[47];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -2580,21 +2580,21 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[44];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[44];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[46];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[46];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[45];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[45];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[28 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[28 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[32 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[32 + actor.Unit.BodySize];
             }
             base.Configure(sprite, actor);
         }
@@ -2604,7 +2604,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public GenericBot5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2618,22 +2618,22 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 clothing1.YOffset = -1 * .625f;
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[44];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[44];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[46];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[46];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[45];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[45];
             }
             else clothing1.GetSprite = null;
             clothing1.YOffset = 0;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[36 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[36 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[40 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[40 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -2646,7 +2646,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
     {
         public Loincloth()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.DeerLeaderClothes[66];
+            DiscardSprite = SpriteDictionary.DeerLeaderClothes[66];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(12, null, null);
             Type = 61705;
@@ -2659,22 +2659,22 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.HasBelly)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
                 }
             }
             else
             {
                 if (actor.HasBelly)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
                 }
             }
 
@@ -2689,7 +2689,7 @@ protected override Sprite EyesSprite(Actor_Unit actor)
         public DeerLeader3()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.DeerLeaderClothes[48];
+            DiscardSprite = SpriteDictionary.DeerLeaderClothes[48];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(15, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2703,12 +2703,12 @@ protected override Sprite EyesSprite(Actor_Unit actor)
             {
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
 
                     if (actor.GetStomachSize(31, 0.7f) < 4)
                     {
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[17 + 2 * actor.Unit.BodySize];
-                        clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[33 + 2 * actor.Unit.BodySize];
+                        clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[17 + 2 * actor.Unit.BodySize];
+                        clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[33 + 2 * actor.Unit.BodySize];
                     }
                     else
                     {
@@ -2718,21 +2718,21 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[16 + 2 * actor.Unit.BodySize];
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[32 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[16 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[32 + 2 * actor.Unit.BodySize];
                 }
             }
             else
             {
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
 
                     if (actor.GetStomachSize(31, 0.7f) < 4)
                     {
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[25 + 2 * actor.Unit.BodySize];
-                        clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[41 + 2 * actor.Unit.BodySize];
+                        clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[25 + 2 * actor.Unit.BodySize];
+                        clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[41 + 2 * actor.Unit.BodySize];
                     }
                     else
                     {
@@ -2742,9 +2742,9 @@ protected override Sprite EyesSprite(Actor_Unit actor)
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[24 + 2 * actor.Unit.BodySize];
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[40 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[24 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[40 + 2 * actor.Unit.BodySize];
                 }
             }
 

@@ -181,7 +181,7 @@ TextureImporter:
     21300352: CruxBodySprites1_168
     21300354: CruxBodySprites1_169
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -3673,5 +3673,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: empire
   assetBundleVariant: 

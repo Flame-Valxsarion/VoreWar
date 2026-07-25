@@ -230,7 +230,7 @@ class Loincloth : MainClothing
         DiscardSprite = State.GameManager.SpriteDictionary.Loincloths[10];
         Type = 200;
         blocksDick = false;
-        inFrontOfDick = true;
+        inFrontOfDick = 1;
         DiscardUsesPalettes = true;
         clothing1 = new SpriteExtraInfo(10, null, null);
         coversBreasts = false;
@@ -345,7 +345,7 @@ class Rags : MainClothing
     {
         DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
         blocksDick = false;
-        inFrontOfDick = true;
+        inFrontOfDick = 1;
         coversBreasts = false;
         Type = 207;
         OccupiesAllSlots = true;
@@ -376,7 +376,7 @@ class Rags : MainClothing
                 spr = 7;
         }
 
-        if ((blocksDick || inFrontOfDick) && Config.CockVoreHidesClothes && actor.PredatorComponent?.BallsFullness > 0)       
+        if ((blocksDick || inFrontOfDick > 0) && Config.CockVoreHidesClothes && actor.PredatorComponent?.BallsFullness > 0)       
             clothing1.GetSprite = null;        
         else
             clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Rags[spr];
@@ -479,11 +479,11 @@ class FemaleVillager : MainClothing
         clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.FemaleVillager[actor.IsAttacking ? 1 : 0];
-        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.FemaleVillager[2];
-        clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.FemaleVillager[3 + actor.GetBodyWeight()];
+        clothing1.GetSprite = (s) => SpriteDictionary.FemaleVillager[actor.IsAttacking ? 1 : 0];
+        clothing2.GetSprite = (s) => SpriteDictionary.FemaleVillager[2];
+        clothing3.GetSprite = (s) => SpriteDictionary.FemaleVillager[3 + actor.GetBodyWeight()];
         if (actor.Unit.HasBreasts)
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.FemaleVillager[8 + actor.Unit.BreastSize];
+            clothing4.GetSprite = (s) => SpriteDictionary.FemaleVillager[8 + actor.Unit.BreastSize];
         else
             clothing4.GetSprite = null;
         base.Configure(sprite, actor);
@@ -509,9 +509,9 @@ class MaleVillager : MainClothing
     {
         int attackFactor = actor.IsAttacking ? 0 : 4;
         clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MaleVillager[Mathf.Min(actor.GetBodyWeight(), 3) + attackFactor];
+        clothing1.GetSprite = (s) => SpriteDictionary.MaleVillager[Mathf.Min(actor.GetBodyWeight(), 3) + attackFactor];
         if (actor.Unit.DickSize >= 2)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MaleVillager[8];
+            clothing2.GetSprite = (s) => SpriteDictionary.MaleVillager[8];
         else
             clothing2.GetSprite = null;
         base.Configure(sprite, actor);
@@ -537,9 +537,9 @@ class MalePlate : MainClothing
     {
         int attackFactor = actor.IsAttacking ? 0 : 4;
         clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.MalePlate[Mathf.Min(actor.GetBodyWeight(), 3) + attackFactor];
+        clothing1.GetSprite = (s) => SpriteDictionary.MalePlate[Mathf.Min(actor.GetBodyWeight(), 3) + attackFactor];
         if (actor.Unit.DickSize >= 2)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.MalePlate[8];
+            clothing2.GetSprite = (s) => SpriteDictionary.MalePlate[8];
         else
             clothing2.GetSprite = null;
         base.Configure(sprite, actor);
@@ -569,11 +569,11 @@ class FemalePlate : MainClothing
         clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.FemalePlate[actor.IsAttacking ? 1 : 0];
-        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.FemalePlate[2];
-        clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.FemalePlate[3 + actor.GetBodyWeight()];
+        clothing1.GetSprite = (s) => SpriteDictionary.FemalePlate[actor.IsAttacking ? 1 : 0];
+        clothing2.GetSprite = (s) => SpriteDictionary.FemalePlate[2];
+        clothing3.GetSprite = (s) => SpriteDictionary.FemalePlate[3 + actor.GetBodyWeight()];
         if (actor.Unit.HasBreasts)
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.FemalePlate[8 + actor.Unit.BreastSize];
+            clothing4.GetSprite = (s) => SpriteDictionary.FemalePlate[8 + actor.Unit.BreastSize];
         else
             clothing4.GetSprite = null;
         base.Configure(sprite, actor);

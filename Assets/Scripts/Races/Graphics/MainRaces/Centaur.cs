@@ -7,7 +7,7 @@ using UnityEngine;
 
 class Centaur : TaurHumanHalf
 {
-    //readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.CentaurParts;
+    //readonly Sprite[] Sprites = SpriteDictionary.CentaurParts;
     int HumanBodyOffsetX = 25;
     int HumanBodyOffsetY = 49;
     public Centaur()
@@ -65,21 +65,21 @@ class Centaur : TaurHumanHalf
     protected override Sprite AccessorySprite(Actor_Unit actor) // Mane
     {
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.CentaurParts[1];
+            return SpriteDictionary.CentaurParts[1];
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.CentaurParts[1];
+            return SpriteDictionary.CentaurParts[1];
         else
-            return State.GameManager.SpriteDictionary.CentaurParts[0];
+            return SpriteDictionary.CentaurParts[0];
     }
 
     protected override Sprite BodyAccentSprite5(Actor_Unit actor) // Left Hind leg
     {
-        return State.GameManager.SpriteDictionary.CentaurParts[5];
+        return SpriteDictionary.CentaurParts[5];
     }
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Right Hind Hoof
     {
-        return State.GameManager.SpriteDictionary.CentaurParts[6];
+        return SpriteDictionary.CentaurParts[6];
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Belly Cover
@@ -87,7 +87,7 @@ class Centaur : TaurHumanHalf
         if (actor.HasBelly)
             return null;
         else
-            return State.GameManager.SpriteDictionary.CentaurParts[8];
+            return SpriteDictionary.CentaurParts[8];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) //Sheath
@@ -95,45 +95,45 @@ class Centaur : TaurHumanHalf
         if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 		
-		if (actor.IsErect()) return State.GameManager.SpriteDictionary.CentaurParts[28];
+		if (actor.IsErect()) return SpriteDictionary.CentaurParts[28];
 
-		else return State.GameManager.SpriteDictionary.CentaurParts[29];
+		else return SpriteDictionary.CentaurParts[29];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Tail
     { 
-        return State.GameManager.SpriteDictionary.CentaurParts[22 + actor.Unit.TailType];
+        return SpriteDictionary.CentaurParts[22 + actor.Unit.TailType];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Right Hind Leg
     {
-        return State.GameManager.SpriteDictionary.CentaurParts[4];
+        return SpriteDictionary.CentaurParts[4];
     }
 
     protected override Sprite BodyAccentSprite7(Actor_Unit actor) // Left Hind Hoof
     {
-        return State.GameManager.SpriteDictionary.CentaurParts[7];
+        return SpriteDictionary.CentaurParts[7];
     }
 
     protected override Sprite BodyAccentSprite8(Actor_Unit actor) // Face
     {
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.CentaurParts[3]; 
+            return SpriteDictionary.CentaurParts[3]; 
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.CentaurParts[3]; 
-        return State.GameManager.SpriteDictionary.CentaurParts[2]; 
+            return SpriteDictionary.CentaurParts[3]; 
+        return SpriteDictionary.CentaurParts[2]; 
     }
     protected override Sprite BodyAccentSprite9(Actor_Unit actor) // Face
     {
         if (actor.Unit.EarType == 3)
             return null; 
-        return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[8 + actor.Unit.EarType];
+        return SpriteDictionary.CentaurTorsoAddOns[8 + actor.Unit.EarType];
     }
 
     protected override Sprite SecondaryBellySprite(Actor_Unit actor) // Second Stomach
     {
         int size = actor.GetStomach2Size(31, 0.7f) + actor.GetWombSize(31, 0.7f);
-        if (size < 1) return State.GameManager.SpriteDictionary.CentaurParts[8];
+        if (size < 1) return SpriteDictionary.CentaurParts[8];
 
         if (size > 4)
         {
@@ -144,42 +144,39 @@ class Centaur : TaurHumanHalf
             SecondaryBelly.layer = 6;
         }
 
-        if (!actor.HasBelly)
-            return null;
-
         if ( size >= 31 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
 			AddOffset(SecondaryBelly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.CentaurParts[54];
+            return SpriteDictionary.CentaurParts[54];
         }
 
         if (size >= 29 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(SecondaryBelly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.CentaurParts[53];
+            return SpriteDictionary.CentaurParts[53];
         }
 
         if (size >= 27 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(SecondaryBelly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.CentaurParts[52];
+            return SpriteDictionary.CentaurParts[52];
         }
 
         if (size >= 25 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(SecondaryBelly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.CentaurParts[51];
+            return SpriteDictionary.CentaurParts[51];
         }
 
         if (size >= 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(SecondaryBelly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.CentaurParts[50];
+            return SpriteDictionary.CentaurParts[50];
         }
 
         if (size > 19) size = 19;
 
-        return State.GameManager.SpriteDictionary.CentaurParts[30 + size];
+        return SpriteDictionary.CentaurParts[30 + size];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
@@ -187,8 +184,8 @@ class Centaur : TaurHumanHalf
         if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.CentaurParts[9];
-		if (actor.IsErect()) return State.GameManager.SpriteDictionary.CentaurParts[9];
+        if (actor.IsCockVoring) return SpriteDictionary.CentaurParts[9];
+		if (actor.IsErect()) return SpriteDictionary.CentaurParts[9];
 
         return null;
     }
@@ -205,36 +202,36 @@ class Centaur : TaurHumanHalf
 
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false)
         {
-            return State.GameManager.SpriteDictionary.CentaurParts[79];
+            return SpriteDictionary.CentaurParts[79];
         }
 
         else if (size >= 29 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.CentaurParts[78];
+            return SpriteDictionary.CentaurParts[78];
         }
 
         else if (size >= 27 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.CentaurParts[77];
+            return SpriteDictionary.CentaurParts[77];
         }
 
         else if (size >= 25 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.CentaurParts[76];
+            return SpriteDictionary.CentaurParts[76];
         }
 
         else if (size >= 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.CentaurParts[75];
+            return SpriteDictionary.CentaurParts[75];
         }
 
         else if (size >= 21 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.CentaurParts[74];
+            return SpriteDictionary.CentaurParts[74];
         }
 
         if (size > 19) size = 19;
-        return State.GameManager.SpriteDictionary.CentaurParts[55 + size];
+        return SpriteDictionary.CentaurParts[55 + size];
     }
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
@@ -244,21 +241,21 @@ class Centaur : TaurHumanHalf
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[0];
+                    return SpriteDictionary.CentaurTorsoAddOns[0];
                 case 1:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[1];
+                    return SpriteDictionary.CentaurTorsoAddOns[1];
                 case 2:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[4];
+                    return SpriteDictionary.CentaurTorsoAddOns[4];
                 case 3:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[5];
+                    return SpriteDictionary.CentaurTorsoAddOns[5];
                 case 4:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[2];
+                    return SpriteDictionary.CentaurTorsoAddOns[2];
                 case 5:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[3];
+                    return SpriteDictionary.CentaurTorsoAddOns[3];
                 case 6:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[6];
+                    return SpriteDictionary.CentaurTorsoAddOns[6];
                 case 7:
-                    return State.GameManager.SpriteDictionary.CentaurTorsoAddOns[7];
+                    return SpriteDictionary.CentaurTorsoAddOns[7];
                 default:
                     return null;
             }
@@ -274,30 +271,30 @@ class Centaur : TaurHumanHalf
 
         if (actor.Unit.HasWeapon == false)
         {
-            if (actor.IsAttacking) return State.GameManager.SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
-            return State.GameManager.SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
+            if (actor.IsAttacking) return SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
+            return SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
         }
 
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 1:
-                return State.GameManager.SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 2:
-                return State.GameManager.SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 3:
-                return State.GameManager.SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 4:
-                return State.GameManager.SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 5:
-                return State.GameManager.SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 6:
-                return State.GameManager.SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 7:
-                return State.GameManager.SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
             default:
-                return State.GameManager.SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
         }
     }
     protected override Sprite BreastsSprite(Actor_Unit actor)
@@ -312,25 +309,25 @@ class Centaur : TaurHumanHalf
                 oversize = true;
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.leftBreast) && leftSize >= 32)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[31];
+                return SpriteDictionary.HumansVoreSprites[31];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.leftBreast) && leftSize >= 30)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[30];
+                return SpriteDictionary.HumansVoreSprites[30];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.leftBreast) && leftSize >= 28)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[29];
+                return SpriteDictionary.HumansVoreSprites[29];
             }
 
             if (leftSize > 28)
                 leftSize = 28;
 
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[0 + leftSize];
+            return SpriteDictionary.HumansVoreSprites[0 + leftSize];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+            return SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
         }
     }
 
@@ -345,25 +342,25 @@ class Centaur : TaurHumanHalf
                 oversize = true;
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.rightBreast) && rightSize >= 32)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[63];
+                return SpriteDictionary.HumansVoreSprites[63];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.rightBreast) && rightSize >= 30)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[62];
+                return SpriteDictionary.HumansVoreSprites[62];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.rightBreast) && rightSize >= 28)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[61];
+                return SpriteDictionary.HumansVoreSprites[61];
             }
 
             if (rightSize > 28)
                 rightSize = 28;
 
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[32 + rightSize];
+            return SpriteDictionary.HumansVoreSprites[32 + rightSize];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+            return SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
         }
     }
 
@@ -373,7 +370,7 @@ class Centaur : TaurHumanHalf
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[57];
+            DiscardSprite = SpriteDictionary.HumenFundertops[57];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -389,7 +386,7 @@ class Centaur : TaurHumanHalf
         {
             if (Races.Centaur.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[56];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -397,26 +394,26 @@ class Centaur : TaurHumanHalf
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[0 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -446,7 +443,7 @@ class Centaur : TaurHumanHalf
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[58];
+            DiscardSprite = SpriteDictionary.HumenFundertops[58];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -469,26 +466,26 @@ class Centaur : TaurHumanHalf
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[8 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[8 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -517,7 +514,7 @@ class Centaur : TaurHumanHalf
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[60];
+            DiscardSprite = SpriteDictionary.HumenFundertops[60];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -533,7 +530,7 @@ class Centaur : TaurHumanHalf
         {
             if (Races.Centaur.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[59];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[59];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -541,26 +538,26 @@ class Centaur : TaurHumanHalf
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[16 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[16 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -590,7 +587,7 @@ class Centaur : TaurHumanHalf
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[62];
+            DiscardSprite = SpriteDictionary.HumenFundertops[62];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -605,7 +602,7 @@ class Centaur : TaurHumanHalf
         {
             if (Races.Centaur.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[61];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[61];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -613,26 +610,26 @@ class Centaur : TaurHumanHalf
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[24 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[24 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -661,7 +658,7 @@ class Centaur : TaurHumanHalf
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[64];
+            DiscardSprite = SpriteDictionary.HumenFundertops[64];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -677,7 +674,7 @@ class Centaur : TaurHumanHalf
         {
             if (Races.Centaur.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[63];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[63];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -685,26 +682,26 @@ class Centaur : TaurHumanHalf
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[32 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[32 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -734,7 +731,7 @@ class Centaur : TaurHumanHalf
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[66];
+            DiscardSprite = SpriteDictionary.HumenFundertops[66];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -750,7 +747,7 @@ class Centaur : TaurHumanHalf
         {
             if (Races.Centaur.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[65];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -758,26 +755,26 @@ class Centaur : TaurHumanHalf
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[40 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[40 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -807,7 +804,7 @@ class Centaur : TaurHumanHalf
     {
         public GenericTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[68];
+            DiscardSprite = SpriteDictionary.HumenFundertops[68];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -822,7 +819,7 @@ class Centaur : TaurHumanHalf
         {
             if (Races.Centaur.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[67];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[67];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -830,26 +827,26 @@ class Centaur : TaurHumanHalf
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[48 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -879,7 +876,7 @@ class Centaur : TaurHumanHalf
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[5];
+            DiscardSprite = SpriteDictionary.HumenMundertops[5];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -890,7 +887,7 @@ class Centaur : TaurHumanHalf
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[0];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[0];
 
             clothing1.XOffset = (Races.Centaur.HumanBodyOffsetX) * .625f;
             clothing1.YOffset = (Races.Centaur.HumanBodyOffsetY - 1) * .625f;
@@ -903,7 +900,7 @@ class Centaur : TaurHumanHalf
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[5];
+            DiscardSprite = SpriteDictionary.HumenMundertops[5];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -916,11 +913,11 @@ class Centaur : TaurHumanHalf
         {
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[4];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[4];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[1 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[1 + actor.Unit.BodySize];
             }
 
             clothing1.XOffset = (Races.Centaur.HumanBodyOffsetX) * .625f;
@@ -934,7 +931,7 @@ class Centaur : TaurHumanHalf
     {
         public MaleTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[11];
+            DiscardSprite = SpriteDictionary.HumenMundertops[11];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -945,7 +942,7 @@ class Centaur : TaurHumanHalf
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[6];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[6];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
             clothing1.XOffset = (Races.Centaur.HumanBodyOffsetX) * .625f;
@@ -959,7 +956,7 @@ class Centaur : TaurHumanHalf
     {
         public MaleTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[11];
+            DiscardSprite = SpriteDictionary.HumenMundertops[11];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -972,11 +969,11 @@ class Centaur : TaurHumanHalf
         {
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[10];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[7 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[7 + actor.Unit.BodySize];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
@@ -991,7 +988,7 @@ class Centaur : TaurHumanHalf
     {
         public MaleTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[14];
+            DiscardSprite = SpriteDictionary.HumenMundertops[14];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1004,11 +1001,11 @@ class Centaur : TaurHumanHalf
         {
             if (actor.Unit.BodySize == 2)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[13];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[13];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[12];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[12];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
@@ -1023,7 +1020,7 @@ class Centaur : TaurHumanHalf
     {
         public MaleTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[16];
+            DiscardSprite = SpriteDictionary.HumenMundertops[16];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1034,7 +1031,7 @@ class Centaur : TaurHumanHalf
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[15];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[15];
 
             clothing1.XOffset = (Races.Centaur.HumanBodyOffsetX) * .625f;
             clothing1.YOffset = (Races.Centaur.HumanBodyOffsetY - 1) * .625f;

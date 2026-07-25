@@ -6,9 +6,9 @@ class Bees : DefaultRaceData
 {
     RaceFrameList frameListWings = new RaceFrameList(new int[6] { 0, 1, 2, 3, 2, 1 }, new float[6] { .05f, .05f, .05f, .05f, .05f, .05f });
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Bees1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Bees2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Bees3;
+    readonly Sprite[] Sprites = SpriteDictionary.Bees1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Bees2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Bees3;
 
     readonly BeeLeader LeaderClothes;
     readonly BeeRags Rags;
@@ -545,7 +545,7 @@ class Bees : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -558,11 +558,11 @@ class Bees : DefaultRaceData
         {
             if (Races.Bees.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[32];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[32];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[24 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[24 + actor.Unit.BreastSize];
             }
             else
             {
@@ -580,7 +580,7 @@ class Bees : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -593,11 +593,11 @@ class Bees : DefaultRaceData
         {
             if (Races.Bees.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[41];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[41];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[33 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[33 + actor.Unit.BreastSize];
             }
             else
             {
@@ -615,7 +615,7 @@ class Bees : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -628,11 +628,11 @@ class Bees : DefaultRaceData
         {
             if (Races.Bees.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[50];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[50];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[42 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[42 + actor.Unit.BreastSize];
             }
             else
             {
@@ -650,7 +650,7 @@ class Bees : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -663,11 +663,11 @@ class Bees : DefaultRaceData
         {
             if (Races.Bees.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[59];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[59];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[51 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[51 + actor.Unit.BreastSize];
             }
             else
             {
@@ -685,7 +685,7 @@ class Bees : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -699,13 +699,13 @@ class Bees : DefaultRaceData
         {
             if (Races.Bees.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[68];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[77];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[68];
+                clothing2.GetSprite = (s) => SpriteDictionary.Bees3[77];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[60 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[69 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[60 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Bees3[69 + actor.Unit.BreastSize];
             }
             else
             {
@@ -724,7 +724,7 @@ class Bees : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -741,7 +741,7 @@ class Bees : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[79 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[79 + actor.Unit.BreastSize];
             }
             else
             {
@@ -759,7 +759,7 @@ class Bees : DefaultRaceData
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -773,11 +773,11 @@ class Bees : DefaultRaceData
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[113];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[113];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[112];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[112];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
@@ -789,7 +789,7 @@ class Bees : DefaultRaceData
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -800,7 +800,7 @@ class Bees : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[78];
+            clothing1.GetSprite = (s) => SpriteDictionary.Bees3[78];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -826,7 +826,7 @@ class Bees : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[0 + actor.Unit.BreastSize];
             }
             else
             {
@@ -834,7 +834,7 @@ class Bees : DefaultRaceData
                 clothing1.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[8];
+            clothing2.GetSprite = (s) => SpriteDictionary.Bees3[8];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.BeeNewSkin, actor.Unit.SkinColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.BeeNewSkin, actor.Unit.SkinColor);
 
@@ -846,7 +846,7 @@ class Bees : DefaultRaceData
     {
         public Cuirass()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Bees3[133];
+            DiscardSprite = SpriteDictionary.Bees3[133];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -862,11 +862,11 @@ class Bees : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[115 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[115 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[123];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[123];
             }
 
             base.Configure(sprite, actor);
@@ -877,7 +877,7 @@ class Bees : DefaultRaceData
     {
         public Cuirass2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Bees3[133];
+            DiscardSprite = SpriteDictionary.Bees3[133];
             coversBreasts = false;
             blocksDick = false;
             FixedColor = true;
@@ -893,11 +893,11 @@ class Bees : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[124 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[124 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[132];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[132];
             }
 
             base.Configure(sprite, actor);
@@ -910,7 +910,7 @@ class Bees : DefaultRaceData
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 3;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -925,11 +925,11 @@ class Bees : DefaultRaceData
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[90];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[90];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[91];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[91];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[92];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[92];
             }
             else
             {
@@ -938,14 +938,14 @@ class Bees : DefaultRaceData
 
             if (actor.IsTailVoring)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[88];
+                clothing2.GetSprite = (s) => SpriteDictionary.Bees3[88];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[87];
+                clothing2.GetSprite = (s) => SpriteDictionary.Bees3[87];
             }
 
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[89];
+            clothing3.GetSprite = (s) => SpriteDictionary.Bees3[89];
 
             base.Configure(sprite, actor);
         }
@@ -956,7 +956,7 @@ class Bees : DefaultRaceData
         public BeeLeader()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Bees3[114];
+            DiscardSprite = SpriteDictionary.Bees3[114];
             coversBreasts = false;
             OccupiesAllSlots = true;
             clothing1 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -973,54 +973,54 @@ class Bees : DefaultRaceData
             {
                 if (Races.Bees.oversize)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[104];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Bees3[104];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[96 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Bees3[96 + actor.Unit.BreastSize];
                 }
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[93];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[93];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[94];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[95];
+                clothing1.GetSprite = (s) => SpriteDictionary.Bees3[94];
+                clothing2.GetSprite = (s) => SpriteDictionary.Bees3[95];
             }
 
             if (actor.GetWeaponSprite() == 3)
             {
                 if (Races.Bees.oversize)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[110];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Bees3[110];
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[107];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Bees3[107];
                 }
             }
             else if (actor.GetWeaponSprite() == 7)
             {
                 if (Races.Bees.oversize)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[109];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Bees3[109];
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[106];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Bees3[106];
                 }
             }
             else
             {
                 if (Races.Bees.oversize)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[108];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Bees3[108];
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[105];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Bees3[105];
                 }
             }
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[111];
+            clothing4.GetSprite = (s) => SpriteDictionary.Bees3[111];
 
             base.Configure(sprite, actor);
         }
@@ -1030,7 +1030,7 @@ class Bees : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1044,15 +1044,15 @@ class Bees : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[10];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[10];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[12];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[12];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[11];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[11];
             }
             else clothing1.GetSprite = null;
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[9];
+            clothing2.GetSprite = (s) => SpriteDictionary.Bees3[9];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1064,7 +1064,7 @@ class Bees : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1078,15 +1078,15 @@ class Bees : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[15];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[15];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[17];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[17];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[16];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[16];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[14];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Bees3[14];
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[13];
+            clothing2.GetSprite = (s) => SpriteDictionary.Bees3[13];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -1097,7 +1097,7 @@ class Bees : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1107,8 +1107,8 @@ class Bees : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[18];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[13];
+            clothing1.GetSprite = (s) => SpriteDictionary.Bees3[18];
+            clothing2.GetSprite = (s) => SpriteDictionary.Bees3[13];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -1119,7 +1119,7 @@ class Bees : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[14];
+            DiscardSprite = SpriteDictionary.Avians4[14];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1133,21 +1133,21 @@ class Bees : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[21];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[21];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[23];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[23];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[22];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Bees3[22];
             }
             else clothing1.GetSprite = null;
 
             if (actor.IsTailVoring)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[20];
+                clothing2.GetSprite = (s) => SpriteDictionary.Bees3[20];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Bees3[19];
+                clothing2.GetSprite = (s) => SpriteDictionary.Bees3[19];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);

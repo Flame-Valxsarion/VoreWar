@@ -43,6 +43,8 @@
     static internal Lupine Lupine = new Lupine();
     static internal Jackals Jackals = new Jackals();
     static internal Ghosts Ghosts = new Ghosts();
+    static internal DemiDragons DemiDragons = new DemiDragons();
+    static internal Yordles Yordles = new Yordles();
 
 
     static internal Tigers Tigers = new Tigers();
@@ -61,6 +63,9 @@
     static internal Centaur Centaur = new Centaur();
     static internal Eevee Eevee = new Eevee();
     static internal Equaleon Equaleon = new Equaleon();
+    static internal OoviKat OoviKat = new OoviKat();
+    static internal Badgers Badgers = new Badgers();
+    static internal Renamon Renamon = new Renamon();
 
     static internal Vagrants Vagrants = new Vagrants();
     static internal Serpents Serpents = new Serpents();
@@ -119,6 +124,8 @@
     static internal Trex Trex = new Trex();
     static internal Utahraptor Utahraptor = new Utahraptor();
     static internal Iliijiith Iliijiith = new Iliijiith();
+    static internal Pudding Pudding = new Pudding();
+    static internal SoulSprite SoulSprite = new SoulSprite();
 
     static internal Selicia Selicia = new Selicia();
     static internal Vision Vision = new Vision();
@@ -147,9 +154,13 @@
     static internal Olivia Olivia = new Olivia();
     static internal Skapa Skapa = new Skapa();
     static internal Tatltuae Tatltuae = new Tatltuae();
-    static internal Firefly Firefly = new Firefly();
+    static internal Seville Seville = new Seville();
     static internal Nectar Nectar = new Nectar();
     static internal Ryan Ryan = new Ryan();
+    static internal Konane Konane = new Konane();
+    static internal Cherub Cherub = new Cherub();
+    static internal Seraph Seraph = new Seraph();
+    static internal BlackWidow BlackWidow = new BlackWidow();
 
 
     static internal DefaultRaceData GetRace(Unit unit)
@@ -415,6 +426,8 @@
                 return Lupine;
             case Race.Equaleon:
                 return Equaleon;
+            case Race.OoviKat:
+                return OoviKat;
             case Race.Viisels:
                 return Viisels;
             case Race.FeralEevee:
@@ -429,12 +442,14 @@
                 return Tatltuae;
             case Race.Jackals:
                 return Jackals;
-            case Race.Firefly:
-                return Firefly;
+            case Race.Seville:
+                return Seville;
             case Race.Nectar:
                 return Nectar;
             case Race.Ryan:
                 return Ryan;
+            case Race.Konane:
+                return Konane;
             case Race.Otachi:
                 return Otachi;
             case Race.Raiju:
@@ -445,6 +460,10 @@
                return SpaceCroach;
             case Race.Ghosts:
                 return Ghosts;
+            case Race.Draconians:
+                return DemiDragons;
+            case Race.Yordles:
+                return Yordles;
             case Race.WoodDryad:
                 return WoodDryad;
             case Race.EarthDryad:
@@ -459,6 +478,20 @@
                 return Utahraptor;
             case Race.Iliijiith:
                 return Iliijiith;
+            case Race.Pudding:
+                return Pudding;
+            case Race.SoulSprite:
+                return SoulSprite;
+            case Race.Cherub:
+                return Cherub;
+            case Race.Seraph:
+                return Seraph;
+            case Race.Badgers:
+                return Badgers;
+            case Race.Renamon:
+                return Renamon;
+            case Race.BlackWidow:
+                return BlackWidow;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

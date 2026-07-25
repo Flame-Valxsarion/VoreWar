@@ -41,18 +41,18 @@ class Bat : BlankSlate
             }
         }
 
-        return State.GameManager.SpriteDictionary.Bat[5 + frameListWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
+        return SpriteDictionary.Bat[5 + frameListWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Privates
     {
         if (!actor.Unit.HasDick)
         {
-            if (actor.IsAnalVoring) return State.GameManager.SpriteDictionary.Bat[7];
+            if (actor.IsAnalVoring) return SpriteDictionary.Bat[7];
 
-            if (actor.IsUnbirthing) return State.GameManager.SpriteDictionary.Bat[9];
+            if (actor.IsUnbirthing) return SpriteDictionary.Bat[9];
 
-            return State.GameManager.SpriteDictionary.Bat[8];
+            return SpriteDictionary.Bat[8];
         }
         return null;
     }
@@ -61,18 +61,18 @@ class Bat : BlankSlate
     {
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
-        if (actor.IsUnbirthing || actor.IsAnalVoring) return State.GameManager.SpriteDictionary.Bat[1];
+        if (actor.IsUnbirthing || actor.IsAnalVoring) return SpriteDictionary.Bat[1];
 
-        return State.GameManager.SpriteDictionary.Bat[0];
+        return SpriteDictionary.Bat[0];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor) // Head
     {
-        if (actor.IsOralVoring || actor.IsAttacking) return State.GameManager.SpriteDictionary.Bat[4];
+        if (actor.IsOralVoring || actor.IsAttacking) return SpriteDictionary.Bat[4];
 
-        if (actor.HasBelly) return State.GameManager.SpriteDictionary.Bat[3];
+        if (actor.HasBelly) return SpriteDictionary.Bat[3];
 
-        return State.GameManager.SpriteDictionary.Bat[2];
+        return SpriteDictionary.Bat[2];
     }
 
     protected override Sprite BallsSprite(Actor_Unit actor)
@@ -80,27 +80,27 @@ class Bat : BlankSlate
         if (actor.Unit.HasDick)
         {
             if (actor.Unit.Predator == false)
-                return State.GameManager.SpriteDictionary.Bat[31];
+                return SpriteDictionary.Bat[31];
 
-            if (actor.PredatorComponent.BallsFullness <= 0) return State.GameManager.SpriteDictionary.Bat[28];
+            if (actor.PredatorComponent.BallsFullness <= 0) return SpriteDictionary.Bat[28];
 
             int sprite = actor.GetBallSize(21);
 
             if (sprite >= 20 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false))
             {
-                return State.GameManager.SpriteDictionary.Bat[49];
+                return SpriteDictionary.Bat[49];
             }
             else if (sprite >= 18 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
             {
-                return State.GameManager.SpriteDictionary.Bat[48];
+                return SpriteDictionary.Bat[48];
             }
             else if (sprite >= 16 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
             {
-                return State.GameManager.SpriteDictionary.Bat[47];
+                return SpriteDictionary.Bat[47];
             }
             if (sprite >= 15)
-                return State.GameManager.SpriteDictionary.Bat[46];
-            return State.GameManager.SpriteDictionary.Bat[31 + sprite];
+                return SpriteDictionary.Bat[46];
+            return SpriteDictionary.Bat[31 + sprite];
         }
 
         return null;
@@ -110,11 +110,11 @@ class Bat : BlankSlate
     {
         if (actor.Unit.HasDick)
         {
-            if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Bat[29];
+            if (actor.IsCockVoring) return SpriteDictionary.Bat[29];
 
-            if (actor.IsErect()) return State.GameManager.SpriteDictionary.Bat[30];
+            if (actor.IsErect()) return SpriteDictionary.Bat[30];
 
-            return State.GameManager.SpriteDictionary.Bat[28];
+            return SpriteDictionary.Bat[28];
         }
 
         return null;
@@ -133,7 +133,7 @@ class Bat : BlankSlate
             {
                 if (sprite >= 21)
                 {
-                    return State.GameManager.SpriteDictionary.Bat[27];
+                    return SpriteDictionary.Bat[27];
                 }
             }
 
@@ -141,21 +141,21 @@ class Bat : BlankSlate
             {
                 if (sprite >= 19)
                 {
-                    return State.GameManager.SpriteDictionary.Bat[26];
+                    return SpriteDictionary.Bat[26];
                 }
                 else if (sprite >= 17)
                 {
-                    return State.GameManager.SpriteDictionary.Bat[25];
+                    return SpriteDictionary.Bat[25];
                 }
                 else if (sprite >= 15)
                 {
-                    return State.GameManager.SpriteDictionary.Bat[24];
+                    return SpriteDictionary.Bat[24];
                 }
             }
 
             if (sprite >= 15)
-                return State.GameManager.SpriteDictionary.Bat[23];
-            return State.GameManager.SpriteDictionary.Bat[9 + sprite];
+                return SpriteDictionary.Bat[23];
+            return SpriteDictionary.Bat[9 + sprite];
         }
         return null;
     }

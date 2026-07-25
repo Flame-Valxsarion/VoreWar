@@ -29,22 +29,22 @@ class LizardPeasant : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring)
                 {
                 clothing1.layer = 20;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[43];
+                return SpriteDictionary.LizardsBootyArmor[43];
                 }
             else if (actor.PredatorComponent.BallsFullness >= 2)
                 {
                 clothing1.layer = 8;
-                return State.GameManager.SpriteDictionary.LizardPeasant[1];
+                return SpriteDictionary.LizardPeasant[1];
                 }
             else if (actor.IsErect())
                 {
                 clothing1.layer = 10;
-                return State.GameManager.SpriteDictionary.LizardPeasant[1];
+                return SpriteDictionary.LizardPeasant[1];
                 }
             else
                 {
                 clothing1.layer = 13;
-                return State.GameManager.SpriteDictionary.LizardPeasant[0];
+                return SpriteDictionary.LizardPeasant[0];
                 }
             };
         clothing2.GetSprite = (s) =>
@@ -57,7 +57,7 @@ class LizardPeasant : MainClothing
             else if (actor.Unit.HasBreasts)
                 {
                 clothing2.layer = 12;
-                return State.GameManager.SpriteDictionary.LizardPeasant[actor.IsAttacking ? 3 : 2];
+                return SpriteDictionary.LizardPeasant[actor.IsAttacking ? 3 : 2];
                 }
             else
                 {
@@ -70,18 +70,18 @@ class LizardPeasant : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring)
                 {
                 clothing3.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[44];
+                return SpriteDictionary.LizardsBootyArmor[44];
                 }
             else if (actor.HasBelly)
                 {
                 clothing3.layer = 17;
                 if (actor.Unit.HasBreasts && bellySize >= 12)
                 {
-                    return State.GameManager.SpriteDictionary.LizardPeasant[20];
+                    return SpriteDictionary.LizardPeasant[20];
                 }
                 else if (actor.Unit.HasBreasts && bellySize <= 11)
                 {
-                    return State.GameManager.SpriteDictionary.LizardPeasant[9 + bellySize];
+                    return SpriteDictionary.LizardPeasant[9 + bellySize];
                 }
                 else return null;
                 }
@@ -100,9 +100,9 @@ class LizardPeasant : MainClothing
                 {
                 clothing4.layer = 18;
                 if (actor.Unit.BreastSize >= 7)
-                return State.GameManager.SpriteDictionary.LizardPeasant[8];
+                return SpriteDictionary.LizardPeasant[8];
                 else if (actor.Unit.BreastSize <= 6)
-                return State.GameManager.SpriteDictionary.LizardPeasant[5 + actor.Unit.BreastSize / 2];
+                return SpriteDictionary.LizardPeasant[5 + actor.Unit.BreastSize / 2];
                 else return null;
                 }
             else
@@ -126,9 +126,9 @@ class LizardLeaderCrown : ClothingAccessory
         clothing1.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[36];
+                return SpriteDictionary.LizardsBootyArmor[36];
             else 
-                return State.GameManager.SpriteDictionary.LizardLeader[2];
+                return SpriteDictionary.LizardLeader[2];
         };
         base.Configure(sprite, actor);
     }
@@ -143,7 +143,7 @@ class LizardLeaderTop : MainClothing
         blocksDick = false;
         leaderOnly = true;
         FixedColor = true;
-        DiscardSprite = State.GameManager.SpriteDictionary.LizardLeader[5];
+        DiscardSprite = SpriteDictionary.LizardLeader[5];
         clothing1 = new SpriteExtraInfo(16, null, WhiteColored);
         OccupiesAllSlots = false;
     }
@@ -157,11 +157,16 @@ class LizardLeaderTop : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring)
                 { 
                     clothing1.layer = 15;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[37];
+                    return SpriteDictionary.LizardsBootyArmor[37];
                 }
-            else 
-            sprite.ChangeLayer(SpriteType.Breasts, 15);
-            return State.GameManager.SpriteDictionary.LizardLeader[0 + (attacking ? 1 : 0)];
+            else if (actor.Unit.HasBreasts)
+                {
+                    clothing1.layer = 17;
+                    coversBreasts = false;
+                }
+            else
+            coversBreasts = true;
+            return SpriteDictionary.LizardLeader[0 + (attacking ? 1 : 0)];
         };
         base.Configure(sprite, actor);
     }
@@ -190,19 +195,19 @@ class LizardLeaderSkirt : MainClothing
             {
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
                     {clothing1.layer = 20;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[40];}
+                    return SpriteDictionary.LizardsBootyArmor[40];}
                 else if (actor.IsErect())
                     {clothing1.layer = 11;
                     return null;}
                 else 
                 clothing1.layer = 11;
-                return State.GameManager.SpriteDictionary.LizardLeader[3];
+                return SpriteDictionary.LizardLeader[3];
             };
         clothing2.GetSprite = (s) =>
             {
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
                     {clothing2.layer = 17;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[41];}
+                    return SpriteDictionary.LizardsBootyArmor[41];}
                 else clothing2.layer = 12; return null;
             };
         base.Configure(sprite, actor);
@@ -232,7 +237,7 @@ class LizardLeaderLegguards : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring) 
             {
                 clothing1.layer = 19;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[42];
+                return SpriteDictionary.LizardsBootyArmor[42];
             }
             if (actor.IsErect())
             {
@@ -242,19 +247,19 @@ class LizardLeaderLegguards : MainClothing
                     sprite.ChangeLayer(SpriteType.Belly, 14);
                     sprite.ChangeLayer(SpriteType.Dick, 13);
                     sprite.ChangeLayer(SpriteType.Balls, 12);
-                    return State.GameManager.SpriteDictionary.LizardLeader[4];
+                    return SpriteDictionary.LizardLeader[4];
                 }
                 else if (bellySize < 3)
                 {
                     sprite.ChangeLayer(SpriteType.Dick, 21);
                     sprite.ChangeLayer(SpriteType.Balls, 20);
-                    return State.GameManager.SpriteDictionary.LizardLeader[4];
+                    return SpriteDictionary.LizardLeader[4];
                 }
-                return State.GameManager.SpriteDictionary.LizardLeader[4];
+                return SpriteDictionary.LizardLeader[4];
             }
             else 
             clothing1.layer = 11;
-            return State.GameManager.SpriteDictionary.LizardLeader[4];
+            return SpriteDictionary.LizardLeader[4];
         };
         base.Configure(sprite, actor);
     }
@@ -283,9 +288,9 @@ class LizardLeaderArmbands : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing1.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[38];}
+                return SpriteDictionary.LizardsBootyArmor[38];}
             else 
-                return State.GameManager.SpriteDictionary.LizardLeader[6 + (actor.IsAttacking ? 1 : 0)];
+                return SpriteDictionary.LizardLeader[6 + (actor.IsAttacking ? 1 : 0)];
         };
         base.Configure(sprite, actor);
     }
@@ -304,9 +309,9 @@ class LizardBoneCrown : ClothingAccessory
         clothing1.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[24];
+                return SpriteDictionary.LizardsBootyArmor[24];
             else 
-                return State.GameManager.SpriteDictionary.LizardBone[14];
+                return SpriteDictionary.LizardBone[14];
         };
         base.Configure(sprite, actor);
     }
@@ -320,7 +325,7 @@ class LizardBoneTop : MainClothing
         blocksDick = false;
         leaderOnly = false;
         FixedColor = true;
-        DiscardSprite = State.GameManager.SpriteDictionary.LizardBone[15];
+        DiscardSprite = SpriteDictionary.LizardBone[15];
         clothing1 = new SpriteExtraInfo(10, null, null);
         clothing2 = new SpriteExtraInfo(11, null, null);
         OccupiesAllSlots = false;
@@ -333,7 +338,7 @@ class LizardBoneTop : MainClothing
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
                 { 
                     clothing1.layer = 15;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[25];
+                    return SpriteDictionary.LizardsBootyArmor[25];
                 }
                 else if (actor.Unit.HasBreasts)
                 {
@@ -341,15 +346,15 @@ class LizardBoneTop : MainClothing
                     if (actor.Unit.BreastSize >= 7)
                     {
                         coversBreasts = false;
-                        return State.GameManager.SpriteDictionary.LizardBone[15];
+                        return SpriteDictionary.LizardBone[15];
                     }
                     coversBreasts = false;
-                    return State.GameManager.SpriteDictionary.LizardBone[8];
+                    return SpriteDictionary.LizardBone[8];
                 }
                 else
                 clothing1.layer = 17;
                 coversBreasts = true;
-                return State.GameManager.SpriteDictionary.LizardBone[0];
+                return SpriteDictionary.LizardBone[0];
             };
         clothing2.GetSprite = (s) =>
             {
@@ -363,7 +368,7 @@ class LizardBoneTop : MainClothing
                     if (actor.Unit.BreastSize <= 2)
                         {return null;}
                     if (actor.Unit.BreastSize >= 3)
-                        {return State.GameManager.SpriteDictionary.LizardsBootyArmor[30 + actor.Unit.BreastSize - 3];}
+                        {return SpriteDictionary.LizardsBootyArmor[30 + actor.Unit.BreastSize - 3];}
                     return null; //Does this work?  I don't know anymore
                 }
                 else if (actor.Unit.BreastSize >= 0)
@@ -377,15 +382,15 @@ class LizardBoneTop : MainClothing
                         {
                             coversBreasts = false;
                             //sprite.ChangeLayer(SpriteType.Breasts, 16);
-                            return State.GameManager.SpriteDictionary.LizardBone[15];
+                            return SpriteDictionary.LizardBone[15];
                         }
                         else //sprite.ChangeLayer(SpriteType.Breasts, 16); 
-                        return State.GameManager.SpriteDictionary.LizardBone[1 + actor.Unit.BreastSize];
+                        return SpriteDictionary.LizardBone[1 + actor.Unit.BreastSize];
                     }
                     else
                     {
                         clothing2.layer = 17;
-                        return State.GameManager.SpriteDictionary.LizardBone[1 + actor.Unit.BreastSize];
+                        return SpriteDictionary.LizardBone[1 + actor.Unit.BreastSize];
                     }
                 }
                 else return null;
@@ -401,9 +406,10 @@ class LizardBoneLoins : MainClothing
         Type = 6001;
         coversBreasts = false;
         blocksDick = false;
+        inFrontOfDick = 1;
         leaderOnly = false;
         FixedColor = true;
-        DiscardSprite = State.GameManager.SpriteDictionary.LizardBone[10];
+        DiscardSprite = SpriteDictionary.LizardBone[10];
         clothing1 = new SpriteExtraInfo(12, null, WhiteColored);
         OccupiesAllSlots = false;
     }
@@ -416,10 +422,10 @@ class LizardBoneLoins : MainClothing
             {
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
                     {clothing1.layer = 17;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[28];}
+                    return SpriteDictionary.LizardsBootyArmor[28];}
                 else if (actor.IsErect())
                     {return null;}
-                else return State.GameManager.SpriteDictionary.LizardBone[10];
+                else return SpriteDictionary.LizardBone[10];
             };
         base.Configure(sprite, actor);
     }
@@ -448,7 +454,7 @@ class LizardBoneLegguards : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring) 
             {
                 clothing1.layer = 19;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[29];
+                return SpriteDictionary.LizardsBootyArmor[29];
             }
             if (actor.IsErect())
             {
@@ -458,19 +464,19 @@ class LizardBoneLegguards : MainClothing
                     sprite.ChangeLayer(SpriteType.Belly, 14);
                     sprite.ChangeLayer(SpriteType.Dick, 13);
                     sprite.ChangeLayer(SpriteType.Balls, 12);
-                    return State.GameManager.SpriteDictionary.LizardBone[9];
+                    return SpriteDictionary.LizardBone[9];
                 }
                 else if (bellySize < 3)
                 {
                     sprite.ChangeLayer(SpriteType.Dick, 21);
                     sprite.ChangeLayer(SpriteType.Balls, 20);
-                    return State.GameManager.SpriteDictionary.LizardBone[9];
+                    return SpriteDictionary.LizardBone[9];
                 }
-                return State.GameManager.SpriteDictionary.LizardBone[9];
+                return SpriteDictionary.LizardBone[9];
             }
             else 
             clothing1.layer = 11;
-            return State.GameManager.SpriteDictionary.LizardBone[9];
+            return SpriteDictionary.LizardBone[9];
         };
         base.Configure(sprite, actor);
     }
@@ -501,20 +507,20 @@ class LizardBoneArmbands : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing1.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[26];}
+                return SpriteDictionary.LizardsBootyArmor[26];}
             else 
                 clothing1.layer = 2;
-                return State.GameManager.SpriteDictionary.LizardBone[11];
+                return SpriteDictionary.LizardBone[11];
         };
         clothing2.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing2.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[27];}
+                return SpriteDictionary.LizardsBootyArmor[27];}
             else 
                 clothing2.layer = 3;
-                return State.GameManager.SpriteDictionary.LizardBone[12 + (actor.IsAttacking ? 1 : 0)];
+                return SpriteDictionary.LizardBone[12 + (actor.IsAttacking ? 1 : 0)];
         };
         base.Configure(sprite, actor);
     }
@@ -533,9 +539,9 @@ class LizardLeatherCrown : ClothingAccessory
         clothing1.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[0];
+                return SpriteDictionary.LizardsBootyArmor[0];
             else 
-                return State.GameManager.SpriteDictionary.LizardLeather[23];
+                return SpriteDictionary.LizardLeather[23];
         };
         base.Configure(sprite, actor);
     }
@@ -550,7 +556,7 @@ class LizardLeatherTop : MainClothing
         blocksDick = false;
         leaderOnly = false;
         FixedColor = false;
-        DiscardSprite = State.GameManager.SpriteDictionary.LizardLeather[14];
+        DiscardSprite = SpriteDictionary.LizardLeather[14];
         clothing1 = new SpriteExtraInfo(16, null, null);
         clothing2 = new SpriteExtraInfo(17, null, null);
         OccupiesAllSlots = false;
@@ -564,17 +570,17 @@ class LizardLeatherTop : MainClothing
         if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing1.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[1];
+                return SpriteDictionary.LizardsBootyArmor[1];
             }
         else 
             {
                 clothing1.layer = 16;
             if (bellySize >= 7)
-                return State.GameManager.SpriteDictionary.LizardLeather[7];
+                return SpriteDictionary.LizardLeather[7];
             else if (actor.HasBelly)
-                return State.GameManager.SpriteDictionary.LizardLeather[0 + bellySize];
+                return SpriteDictionary.LizardLeather[0 + bellySize];
             else
-                return State.GameManager.SpriteDictionary.LizardLeather[0];
+                return SpriteDictionary.LizardLeather[0];
             }
         };
 
@@ -588,7 +594,7 @@ class LizardLeatherTop : MainClothing
                 if (actor.Unit.BreastSize <= 2)
                     {return null;}
                 if (actor.Unit.BreastSize >= 3)
-                    {return State.GameManager.SpriteDictionary.LizardsBootyArmor[6 + actor.Unit.BreastSize - 3];}
+                    {return SpriteDictionary.LizardsBootyArmor[6 + actor.Unit.BreastSize - 3];}
                 return null; //Does this work?  I don't know anymore
             }
         else
@@ -601,9 +607,9 @@ class LizardLeatherTop : MainClothing
                 {
                     coversBreasts = false;
                     sprite.ChangeLayer(SpriteType.Breasts, 16);
-                    return State.GameManager.SpriteDictionary.LizardLeather[15];
+                    return SpriteDictionary.LizardLeather[15];
                 }
-                return State.GameManager.SpriteDictionary.LizardLeather[8 + actor.Unit.BreastSize];
+                return SpriteDictionary.LizardLeather[8 + actor.Unit.BreastSize];
             }
         };
         base.Configure(sprite, actor);
@@ -617,9 +623,10 @@ class LizardLeatherLoins : MainClothing
         Type = 6001;
         coversBreasts = false;
         blocksDick = false;
+        inFrontOfDick = 1;
         leaderOnly = false;
         FixedColor = false;
-        DiscardSprite = State.GameManager.SpriteDictionary.LizardLeather[17];
+        DiscardSprite = SpriteDictionary.LizardLeather[17];
         clothing1 = new SpriteExtraInfo(12, null, null);
         OccupiesAllSlots = false;
     }
@@ -631,10 +638,10 @@ class LizardLeatherLoins : MainClothing
             {
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
                     {clothing1.layer = 17;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[4];}
+                    return SpriteDictionary.LizardsBootyArmor[4];}
                 else if (actor.IsErect())
                     {clothing1.layer = 12; return null;}
-                else clothing1.layer = 12; return State.GameManager.SpriteDictionary.LizardLeather[17];
+                else clothing1.layer = 12; return SpriteDictionary.LizardLeather[17];
             };
         base.Configure(sprite, actor);
     }
@@ -663,7 +670,7 @@ class LizardLeatherLegguards : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring) 
             {
                 clothing1.layer = 19;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[5];
+                return SpriteDictionary.LizardsBootyArmor[5];
             }
             if (actor.IsErect())
             {
@@ -673,19 +680,19 @@ class LizardLeatherLegguards : MainClothing
                     sprite.ChangeLayer(SpriteType.Belly, 14);
                     sprite.ChangeLayer(SpriteType.Dick, 13);
                     sprite.ChangeLayer(SpriteType.Balls, 12);
-                    return State.GameManager.SpriteDictionary.LizardLeather[16];
+                    return SpriteDictionary.LizardLeather[16];
                 }
                 else if (bellySize < 3)
                 {
                     sprite.ChangeLayer(SpriteType.Dick, 21);
                     sprite.ChangeLayer(SpriteType.Balls, 20);
-                    return State.GameManager.SpriteDictionary.LizardLeather[16];
+                    return SpriteDictionary.LizardLeather[16];
                 }
-                return State.GameManager.SpriteDictionary.LizardLeather[16];
+                return SpriteDictionary.LizardLeather[16];
             }
             else 
             clothing1.layer = 11;
-            return State.GameManager.SpriteDictionary.LizardLeather[16];
+            return SpriteDictionary.LizardLeather[16];
         };
         base.Configure(sprite, actor);
     }
@@ -715,17 +722,17 @@ class LizardLeatherArmbands : MainClothing
             if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing1.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[2];}
+                return SpriteDictionary.LizardsBootyArmor[2];}
             else 
                 clothing1.layer = 2;
-                return State.GameManager.SpriteDictionary.LizardLeather[18 + (attacking ? 1 : 0)];
+                return SpriteDictionary.LizardLeather[18 + (attacking ? 1 : 0)];
         };
         clothing2.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing2.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[3];}
+                return SpriteDictionary.LizardsBootyArmor[3];}
             else 
                 clothing2.layer = 3;
                 return null;
@@ -748,9 +755,9 @@ class LizardClothCrown : ClothingAccessory
         clothing1.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[12];
+                return SpriteDictionary.LizardsBootyArmor[12];
             else 
-                return State.GameManager.SpriteDictionary.LizardCloth[15];
+                return SpriteDictionary.LizardCloth[15];
         };
         base.Configure(sprite, actor);
     }
@@ -764,7 +771,7 @@ class LizardClothTop : MainClothing
         blocksDick = false;
         leaderOnly = false;
         FixedColor = true;
-        DiscardSprite = State.GameManager.SpriteDictionary.LizardCloth[14];
+        DiscardSprite = SpriteDictionary.LizardCloth[14];
         clothing1 = new SpriteExtraInfo(16, null, null);
         clothing2 = new SpriteExtraInfo(17, null, null);
         OccupiesAllSlots = false;
@@ -778,22 +785,22 @@ class LizardClothTop : MainClothing
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
                 { 
                     clothing1.layer = 15;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[13];
+                    return SpriteDictionary.LizardsBootyArmor[13];
                 }
                 else if (actor.Unit.BreastSize <= 1)
                 {
                     clothing1.layer = 16;
-                    return State.GameManager.SpriteDictionary.LizardCloth[1];
+                    return SpriteDictionary.LizardCloth[1];
                 }
                 else if (actor.Unit.BreastSize >= 8)
                 {
                     clothing1.layer = 16;
-                    return State.GameManager.SpriteDictionary.LizardCloth[7];
+                    return SpriteDictionary.LizardCloth[7];
                 }
                 else
                 {
                 clothing1.layer = 16;
-                return State.GameManager.SpriteDictionary.LizardCloth[0 + actor.Unit.BreastSize];
+                return SpriteDictionary.LizardCloth[0 + actor.Unit.BreastSize];
                 }
             };
             clothing2.GetSprite = (s) =>
@@ -807,7 +814,7 @@ class LizardClothTop : MainClothing
                     if (actor.Unit.BreastSize <= 2)
                         {return null;}
                     if (actor.Unit.BreastSize >= 3)
-                        {return State.GameManager.SpriteDictionary.LizardsBootyArmor[30 + actor.Unit.BreastSize - 3];}
+                        {return SpriteDictionary.LizardsBootyArmor[30 + actor.Unit.BreastSize - 3];}
                     return null; //Does this work?  I don't know anymore
                 }
                 else return null;
@@ -823,9 +830,10 @@ class LizardClothLoins : MainClothing
         Type = 6001;
         coversBreasts = false;
         blocksDick = false;
+        inFrontOfDick = 1;
         leaderOnly = false;
         FixedColor = true;
-        DiscardSprite = State.GameManager.SpriteDictionary.LizardCloth[11];
+        DiscardSprite = SpriteDictionary.LizardCloth[11];
         clothing1 = new SpriteExtraInfo(12, null, WhiteColored);
         OccupiesAllSlots = false;
     }
@@ -838,10 +846,10 @@ class LizardClothLoins : MainClothing
             {
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
                     {clothing1.layer = 17;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[16];}
+                    return SpriteDictionary.LizardsBootyArmor[16];}
                 else if (actor.IsErect())
                     {return null;}
-                else return State.GameManager.SpriteDictionary.LizardCloth[11];
+                else return SpriteDictionary.LizardCloth[11];
             };
         base.Configure(sprite, actor);
     }
@@ -869,7 +877,7 @@ class LizardClothShorts : MainClothing
                 if (actor.IsUnbirthing || actor.IsAnalVoring) 
                 {
                     clothing1.layer = 19;
-                    return State.GameManager.SpriteDictionary.LizardsBootyArmor[17];
+                    return SpriteDictionary.LizardsBootyArmor[17];
                 }
                 if (actor.IsErect())
                 {
@@ -885,12 +893,12 @@ class LizardClothShorts : MainClothing
                         sprite.ChangeLayer(SpriteType.Dick, 21);
                         sprite.ChangeLayer(SpriteType.Balls, 20);
                     }
-                    return State.GameManager.SpriteDictionary.LizardCloth[9];
+                    return SpriteDictionary.LizardCloth[9];
                 }
                 else
                 {
                     clothing1.layer = 11;
-                    return State.GameManager.SpriteDictionary.LizardCloth[9];
+                    return SpriteDictionary.LizardCloth[9];
                 }
             };
         base.Configure(sprite, actor);
@@ -917,27 +925,27 @@ class LizardClothArmbands : MainClothing
         blocksDick = false;
         clothing1.layer = 2;
         clothing2.layer = 3;
-        //clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LizardCloth[12];
-        //clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LizardCloth[13 + (attacking ? 1 : 0)];
+        //clothing1.GetSprite = (s) => SpriteDictionary.LizardCloth[12];
+        //clothing2.GetSprite = (s) => SpriteDictionary.LizardCloth[13 + (attacking ? 1 : 0)];
         clothing1.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing1.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[14];}
+                return SpriteDictionary.LizardsBootyArmor[14];}
             else 
                 clothing1.layer = 2;
-                return State.GameManager.SpriteDictionary.LizardCloth[12];
+                return SpriteDictionary.LizardCloth[12];
         };
         clothing2.GetSprite = (s) =>
         {
             if (actor.IsUnbirthing || actor.IsAnalVoring)
             { 
                 clothing2.layer = 15;
-                return State.GameManager.SpriteDictionary.LizardsBootyArmor[15];}
+                return SpriteDictionary.LizardsBootyArmor[15];}
             else 
                 clothing2.layer = 3;
-                return State.GameManager.SpriteDictionary.LizardCloth[13 + (attacking ? 1 : 0)];
+                return SpriteDictionary.LizardCloth[13 + (attacking ? 1 : 0)];
         };
         base.Configure(sprite, actor);
     }
@@ -976,37 +984,37 @@ class RainCoat : MainClothing
         clothing3 = new SpriteExtraInfo(21, null, null);
         clothing4 = new SpriteExtraInfo(0, null, null);
         Type = 79;
-        DiscardSprite = State.GameManager.SpriteDictionary.RainCoats[4];
+        DiscardSprite = SpriteDictionary.RainCoats[4];
         FixedColor = true;
     }
 
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
         bool heavyWeight = actor.GetBodyWeight() == 1;
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[0 + (actor.IsAttacking ? 1 : 0) + (heavyWeight ? 2 : 0)];
+        clothing1.GetSprite = (s) => SpriteDictionary.RainCoats[0 + (actor.IsAttacking ? 1 : 0) + (heavyWeight ? 2 : 0)];
 
         int bellySize = actor.GetStomachSize();
-        sprite.ChangeSprite(SpriteType.Hair, State.GameManager.SpriteDictionary.RainCoats[19 + (actor.Unit.HairStyle % 4)]);
+        sprite.ChangeSprite(SpriteType.Hair, SpriteDictionary.RainCoats[19 + (actor.Unit.HairStyle % 4)]);
         sprite.HideSprite(SpriteType.Hair2);
         if (bellySize < 3)
         {
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[heavyWeight ? 7 : 6];
+            clothing2.GetSprite = (s) => SpriteDictionary.RainCoats[heavyWeight ? 7 : 6];
         }
         else if (bellySize < 8)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[8];
+            clothing2.GetSprite = (s) => SpriteDictionary.RainCoats[8];
         else if (bellySize < 11)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[9];
+            clothing2.GetSprite = (s) => SpriteDictionary.RainCoats[9];
         else if (bellySize < 14)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[10];
+            clothing2.GetSprite = (s) => SpriteDictionary.RainCoats[10];
         else if (bellySize < 16)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[11];
+            clothing2.GetSprite = (s) => SpriteDictionary.RainCoats[11];
         if (actor.Unit.HasBreasts == false || actor.Unit.BreastSize == 0)
             clothing3.GetSprite = null;
         else
         {
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[11 + actor.Unit.BreastSize];
+            clothing3.GetSprite = (s) => SpriteDictionary.RainCoats[11 + actor.Unit.BreastSize];
         }
-        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.RainCoats[4];
+        clothing4.GetSprite = (s) => SpriteDictionary.RainCoats[4];
 
 
         base.Configure(sprite, actor);
@@ -1025,36 +1033,36 @@ class TigerSpecial : MainClothing
         clothing2 = new SpriteExtraInfo(18, null, null);
         clothing3 = new SpriteExtraInfo(12, null, null);
         clothing4 = new SpriteExtraInfo(8, null, null);
-        DiscardSprite = State.GameManager.SpriteDictionary.TigerSpecial[22];
+        DiscardSprite = SpriteDictionary.TigerSpecial[22];
         DiscardUsesPalettes = true;
     }
 
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.TigerSpecial[3 + actor.Unit.BodySize];
+        clothing1.GetSprite = (s) => SpriteDictionary.TigerSpecial[3 + actor.Unit.BodySize];
         clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
 
         clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         if (actor.Unit.BreastSize >= 0)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.TigerSpecial[11 + actor.Unit.BreastSize];
+            clothing2.GetSprite = (s) => SpriteDictionary.TigerSpecial[11 + actor.Unit.BreastSize];
         else
             clothing2.GetSprite = null;
 
         if (Config.FurryHandsAndFeet || actor.Unit.Furry)
             clothing3.GetSprite = null;
         else
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.TigerSpecial[2];
+            clothing3.GetSprite = (s) => SpriteDictionary.TigerSpecial[2];
 
         if (actor.Unit.BreastSize > 4)
         {
-            breastSprite = State.GameManager.SpriteDictionary.TigerSpecial[14 + actor.Unit.BreastSize];
+            breastSprite = SpriteDictionary.TigerSpecial[14 + actor.Unit.BreastSize];
             blocksBreasts = false;
         }
         else
         {
             blocksBreasts = true;
         }
-        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.TigerSpecial[actor.IsAttacking ? 1 : 0];
+        clothing4.GetSprite = (s) => SpriteDictionary.TigerSpecial[actor.IsAttacking ? 1 : 0];
         clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         sprite.HideSprite(SpriteType.Weapon);
 
@@ -1077,7 +1085,7 @@ class CatLeader : MainClothing
         clothing5 = new SpriteExtraInfo(9, null, null);
         clothing6 = new SpriteExtraInfo(9, null, null);
         Type = 91;
-        DiscardSprite = State.GameManager.SpriteDictionary.CatLeader[4];
+        DiscardSprite = SpriteDictionary.CatLeader[4];
         HidesFluff = true;
     }
 
@@ -1090,21 +1098,21 @@ class CatLeader : MainClothing
         if (bodyMod > 7)
             bodyMod = 7;
         bool furryArms = actor.Unit.Furry || Config.FurryHandsAndFeet;
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.CatLeader[(furryArms ? 0 : 2) + (actor.IsAttacking ? 1 : 0)];
+        clothing1.GetSprite = (s) => SpriteDictionary.CatLeader[(furryArms ? 0 : 2) + (actor.IsAttacking ? 1 : 0)];
         clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.CatLeader[6 + bodyMod];
+        clothing2.GetSprite = (s) => SpriteDictionary.CatLeader[6 + bodyMod];
         clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         if (actor.Unit.BreastSize < 1)
             clothing3.GetSprite = null;
         else
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.CatLeader[13 + actor.Unit.BreastSize];
+            clothing3.GetSprite = (s) => SpriteDictionary.CatLeader[13 + actor.Unit.BreastSize];
 
         actor.SquishedBreasts = true;
 
         if (actor.Unit.BreastSize < 6)
         {
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.CatLeader[21 + bodyMod];
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.CatLeader[29 + bodyMod];
+            clothing4.GetSprite = (s) => SpriteDictionary.CatLeader[21 + bodyMod];
+            clothing5.GetSprite = (s) => SpriteDictionary.CatLeader[29 + bodyMod];
         }
         else
         {
@@ -1116,7 +1124,7 @@ class CatLeader : MainClothing
         if (furryArms)
             clothing6.GetSprite = null;
         else
-            clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.CatLeader[4];
+            clothing6.GetSprite = (s) => SpriteDictionary.CatLeader[4];
 
 
         base.Configure(sprite, actor);
@@ -1130,7 +1138,7 @@ class Toga : MainClothing
     {
         clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
         clothing2 = new SpriteExtraInfo(10, null, WhiteColored);
-        DiscardSprite = State.GameManager.SpriteDictionary.Togas[10];
+        DiscardSprite = SpriteDictionary.Togas[10];
         DiscardUsesPalettes = true;
         Type = 230;
         OccupiesAllSlots = true;
@@ -1146,8 +1154,8 @@ class Toga : MainClothing
     {
         //clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
         //clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Togas[actor.Unit.HasBreasts ? (1 + actor.Unit.BreastSize) : 9];
-        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Togas[0];
+        clothing1.GetSprite = (s) => SpriteDictionary.Togas[actor.Unit.HasBreasts ? (1 + actor.Unit.BreastSize) : 9];
+        clothing2.GetSprite = (s) => SpriteDictionary.Togas[0];
         base.Configure(sprite, actor);
     }
 }
@@ -1160,7 +1168,7 @@ class SuccubusDress : MainClothing
         clothing2 = new SpriteExtraInfo(17, null, WhiteColored);
         blocksDick = false;
         coversBreasts = false;
-        DiscardSprite = State.GameManager.SpriteDictionary.SuccubusDress[22];
+        DiscardSprite = SpriteDictionary.SuccubusDress[22];
         DiscardUsesPalettes = true;
         Type = 233;
         OccupiesAllSlots = true;
@@ -1181,9 +1189,9 @@ class SuccubusDress : MainClothing
             if (actor.HasBelly)
                 spriteNum = 2 + actor.GetStomachSize();
         }
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusDress[spriteNum];
+        clothing1.GetSprite = (s) => SpriteDictionary.SuccubusDress[spriteNum];
         if (actor.Unit.HasBreasts)
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusDress[18 + actor.Unit.BreastSize];
+            clothing2.GetSprite = (s) => SpriteDictionary.SuccubusDress[18 + actor.Unit.BreastSize];
         else
             clothing2.GetSprite = null;
         if (spriteNum < 7)
@@ -1205,7 +1213,7 @@ class SuccubusLeotard : MainClothing
         clothing4 = new SpriteExtraInfo(14, null, WhiteColored);
         clothing5 = new SpriteExtraInfo(17, null, WhiteColored);
         coversBreasts = false;
-        DiscardSprite = State.GameManager.SpriteDictionary.SuccubusLeotard[36];
+        DiscardSprite = SpriteDictionary.SuccubusLeotard[36];
         DiscardUsesPalettes = true;
         Type = 234;
         OccupiesAllSlots = true;
@@ -1227,35 +1235,35 @@ class SuccubusLeotard : MainClothing
         int spriteNum = actor.GetStomachSize();
         if (actor.IsUnbirthing || actor.IsAnalVoring)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[1];
+            clothing1.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[1];
             if (spriteNum < 10)
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[25 + spriteNum];
+                clothing2.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[25 + spriteNum];
             else
                 clothing2.GetSprite = null;
             clothing3.GetSprite = null;
             if (actor.HasBelly)
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[4 + spriteNum];
+                clothing4.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[4 + spriteNum];
         }
         else
         {
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[actor.IsAttacking ? 3 : 2];
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[0];
+            clothing3.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[actor.IsAttacking ? 3 : 2];
+            clothing1.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[0];
             if (actor.HasBelly)
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[4 + spriteNum];
+                clothing4.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[4 + spriteNum];
                 if (spriteNum < 10)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[25 + spriteNum];
+                    clothing2.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[25 + spriteNum];
                 else
                     clothing2.GetSprite = null;
             }
             else
             {
                 clothing2.GetSprite = null;
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[4];
+                clothing4.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[4];
             }
         }
         if (actor.Unit.HasBreasts)
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.SuccubusLeotard[21 + actor.Unit.BreastSize];
+            clothing5.GetSprite = (s) => SpriteDictionary.SuccubusLeotard[21 + actor.Unit.BreastSize];
         else
             clothing5.GetSprite = null;
         base.Configure(sprite, actor);
@@ -1283,11 +1291,11 @@ class LizardBlackTop : MainClothing
             }
         else if (actor.Unit.HasBreasts)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LizardBlackTop[actor.Unit.BreastSize];
+            clothing1.GetSprite = (s) => SpriteDictionary.LizardBlackTop[actor.Unit.BreastSize];
         }
         else
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LizardBlackTop[0];
+            clothing1.GetSprite = (s) => SpriteDictionary.LizardBlackTop[0];
         }
 
         base.Configure(sprite, actor);
@@ -1317,7 +1325,7 @@ class LizardBikiniTop : MainClothing
             }
         else if (actor.Unit.HasBreasts)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LizardBikiniTop[actor.Unit.BreastSize];
+            clothing1.GetSprite = (s) => SpriteDictionary.LizardBikiniTop[actor.Unit.BreastSize];
             actor.SquishedBreasts = true;
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
         }
@@ -1352,7 +1360,7 @@ class LizardStrapTop : MainClothing
             }
         else if (actor.Unit.HasBreasts)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LizardCrossTop[actor.Unit.BreastSize];
+            clothing1.GetSprite = (s) => SpriteDictionary.LizardCrossTop[actor.Unit.BreastSize];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
             actor.SquishedBreasts = true;
         }
@@ -1370,7 +1378,7 @@ class AabayxTopHighPriest : MainClothing
     public AabayxTopHighPriest()
     {
         leaderOnly = true;
-        DiscardSprite = State.GameManager.SpriteDictionary.AabayxLeader[3];
+        DiscardSprite = SpriteDictionary.AabayxLeader[3];
         coversBreasts = false;
         blocksDick = false;
         FixedColor = true;
@@ -1380,7 +1388,7 @@ class AabayxTopHighPriest : MainClothing
 
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AabayxLeader[0 + (actor.IsAttacking ? 1 : 0)];
+        clothing1.GetSprite = (s) => SpriteDictionary.AabayxLeader[0 + (actor.IsAttacking ? 1 : 0)];
         base.Configure(sprite, actor);
     }
 }
@@ -1390,7 +1398,7 @@ class AabayxPantsHighPriest : MainClothing
     public AabayxPantsHighPriest()
     {
         leaderOnly = true;
-        DiscardSprite = State.GameManager.SpriteDictionary.AabayxLeader[4];
+        DiscardSprite = SpriteDictionary.AabayxLeader[4];
         coversBreasts = false;
         blocksDick = true;
         FixedColor = true;
@@ -1400,7 +1408,7 @@ class AabayxPantsHighPriest : MainClothing
 
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AabayxLeader[2];
+        clothing1.GetSprite = (s) => SpriteDictionary.AabayxLeader[2];
         base.Configure(sprite, actor);
     }
 }

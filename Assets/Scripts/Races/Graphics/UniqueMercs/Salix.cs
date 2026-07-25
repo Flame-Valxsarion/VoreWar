@@ -7,9 +7,9 @@ using UnityEngine;
 
 class Salix : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Salix;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.SalixVore;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.SalixGen;
+    readonly Sprite[] Sprites = SpriteDictionary.Salix;
+    readonly Sprite[] Sprites2 = SpriteDictionary.SalixVore;
+    readonly Sprite[] Sprites3 = SpriteDictionary.SalixGen;
 
     bool oversize = false;
 
@@ -418,7 +418,7 @@ class Salix : DefaultRaceData
     {
         public SalixTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Salix[64];
+            DiscardSprite = SpriteDictionary.Salix[64];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -433,16 +433,16 @@ class Salix : DefaultRaceData
             }
             else if (actor.Unit.BreastSize < 2)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[29];
+                clothing1.GetSprite = (s) => SpriteDictionary.Salix[29];
             }
             else if (actor.Unit.HasBreasts)
             {
                 actor.SquishedBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[29 + actor.Unit.BreastSize-1];
+                clothing1.GetSprite = (s) => SpriteDictionary.Salix[29 + actor.Unit.BreastSize-1];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[29];
+                clothing1.GetSprite = (s) => SpriteDictionary.Salix[29];
             }
 
 
@@ -489,7 +489,7 @@ class Salix : DefaultRaceData
             clothing3 = new SpriteExtraInfo(3, null, WhiteColored); //BackCloak 
             blocksDick = false;
             coversBreasts = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Salix[65 + (whole ? 1 : 0)];
+            DiscardSprite = SpriteDictionary.Salix[65 + (whole ? 1 : 0)];
             DiscardUsesPalettes = false;
             Type = 1302;
             OccupiesAllSlots = true;
@@ -505,15 +505,15 @@ class Salix : DefaultRaceData
             if (Whole) // Full cloak sleeves
             {
                 if (Races.Salix.oversize) // Cloak Shirt
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[59];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Salix[59];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[52 + mod];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Salix[52 + mod];
 
                 if (actor.IsAttacking)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[51];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Salix[51];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[50];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[60 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Salix[50];
+                clothing3.GetSprite = (s) => SpriteDictionary.Salix[60 + actor.Unit.BodySize];
             }
             else // Shoulderless sleeves
             {
@@ -524,9 +524,9 @@ class Salix : DefaultRaceData
                 if (0 > sleeveMod)
                     sleeveMod = 0;
                 if (actor.IsAttacking)
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[39 + sleeveMod];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Salix[39 + sleeveMod];
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[38 + sleeveMod];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Salix[38 + sleeveMod];
                 clothing3.GetSprite = null;
 
             }
@@ -546,9 +546,9 @@ class Salix : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.Unit.BodySize >= 2)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[25];
+                clothing1.GetSprite = (s) => SpriteDictionary.Salix[25];
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Salix[24];
+                clothing1.GetSprite = (s) => SpriteDictionary.Salix[24];
 
             base.Configure(sprite, actor);
 

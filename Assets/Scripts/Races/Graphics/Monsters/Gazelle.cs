@@ -3,8 +3,8 @@
 class Gazelle : BlankSlate
 {
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Gazelle1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Gazelle2;
+    readonly Sprite[] Sprites = SpriteDictionary.Gazelle1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Gazelle2;
 
     public Gazelle()
     {

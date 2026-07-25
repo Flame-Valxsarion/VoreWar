@@ -83,19 +83,19 @@ class Crypters : DefaultRaceData
     internal override int BreastSizes => 1;
 
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crypters[0];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Crypters[0];
 
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crypters[2];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.Crypters[2];
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crypters[28];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Crypters[28];
 
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crypters[4];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Crypters[4];
 
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crypters[5];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Crypters[5];
 
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crypters[6 + (actor.IsEating ? 1 : 0)];
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => SpriteDictionary.Crypters[6 + (actor.IsEating ? 1 : 0)];
 
-    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => State.GameManager.SpriteDictionary.Crypters[36];
+    protected override Sprite BodyAccentSprite4(Actor_Unit actor) => SpriteDictionary.Crypters[36];
 
     protected override Sprite HairSprite(Actor_Unit actor)
     {
@@ -108,7 +108,7 @@ class Crypters : DefaultRaceData
 
         AddOffset(Hair, 0, 0);
         AddOffset(Hair2, 0, 0);
-        return State.GameManager.SpriteDictionary.Crypters[12 + actor.Unit.HairStyle - 15];
+        return SpriteDictionary.Crypters[12 + actor.Unit.HairStyle - 15];
     }
 
     protected override Sprite HairSprite2(Actor_Unit actor)
@@ -126,36 +126,36 @@ class Crypters : DefaultRaceData
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Crypters[8 + actor.Unit.EyeType];
+        return SpriteDictionary.Crypters[8 + actor.Unit.EyeType];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.Unit.MouthType > 3) //Defending against a weird exception.
             actor.Unit.MouthType = 3;
-        return State.GameManager.SpriteDictionary.Crypters[37 + (2 * actor.Unit.MouthType) + (actor.IsEating ? 1 : 0)];
+        return SpriteDictionary.Crypters[37 + (2 * actor.Unit.MouthType) + (actor.IsEating ? 1 : 0)];
     }
 
     protected override Sprite SecondaryAccessorySprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Crypters[3];
+        return SpriteDictionary.Crypters[3];
     }
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
     {
         if (actor.Unit.HasWeapon && actor.Surrendered == false)
         {
-            return State.GameManager.SpriteDictionary.Crypters[19 + actor.GetWeaponSprite()];
+            return SpriteDictionary.Crypters[19 + actor.GetWeaponSprite()];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.Crypters[17 + (actor.IsAttacking ? 1 : 0)];
+            return SpriteDictionary.Crypters[17 + (actor.IsAttacking ? 1 : 0)];
         }
     }
 
     protected override Sprite BodySizeSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Crypters[29 + actor.Unit.BodySize];
+        return SpriteDictionary.Crypters[29 + actor.Unit.BodySize];
     }
 }
 

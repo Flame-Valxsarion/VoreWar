@@ -80,7 +80,7 @@ class Bears : DefaultRaceData
         if (actor.Unit.HasBreasts == false)
             sprite += 3;
 
-        return State.GameManager.SpriteDictionary.Bears[sprite];
+        return SpriteDictionary.Bears[sprite];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
@@ -93,14 +93,14 @@ class Bears : DefaultRaceData
         if (actor.GetWeaponSprite() == 0 || actor.GetWeaponSprite() == 2)
             sprite = 8;
 
-        return State.GameManager.SpriteDictionary.Bears[sprite];
+        return SpriteDictionary.Bears[sprite];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
     {
         if (actor.Unit.BodyAccentType1 == 1)
         {
-            return State.GameManager.SpriteDictionary.Bears[65 + actor.Unit.EarType];
+            return SpriteDictionary.Bears[65 + actor.Unit.EarType];
         }
         return null;
     }
@@ -109,20 +109,20 @@ class Bears : DefaultRaceData
     {
         if(actor.Unit.HasWeapon && actor.Surrendered == false && actor.GetWeaponSprite() == 2)
         {
-            return State.GameManager.SpriteDictionary.Bears[67];
+            return SpriteDictionary.Bears[67];
         }
         return null;
     }
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Bears[11 + actor.Unit.EarType];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Bears[11 + actor.Unit.EarType];
 
     protected override Sprite BreastsSprite(Actor_Unit actor)
     {
         if (actor.Unit.HasBreasts == false)
             return null;
         if (actor.SquishedBreasts)
-            return State.GameManager.SpriteDictionary.Bears[Math.Min(60 + actor.Unit.BreastSize, 64)];
-        return State.GameManager.SpriteDictionary.Bears[55 + actor.Unit.BreastSize];
+            return SpriteDictionary.Bears[Math.Min(60 + actor.Unit.BreastSize, 64)];
+        return SpriteDictionary.Bears[55 + actor.Unit.BreastSize];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
@@ -135,17 +135,17 @@ class Bears : DefaultRaceData
             if (actor.PredatorComponent?.VisibleFullness < .5f)
             {
                 Dick.layer = 18;
-                return State.GameManager.SpriteDictionary.Bears[38 + actor.Unit.DickSize];
+                return SpriteDictionary.Bears[38 + actor.Unit.DickSize];
             }
             else
             {
                 Dick.layer = 12;
-                return State.GameManager.SpriteDictionary.Bears[16 + actor.Unit.DickSize];
+                return SpriteDictionary.Bears[16 + actor.Unit.DickSize];
             }
         }
 
         Dick.layer = 9;
-        return State.GameManager.SpriteDictionary.Bears[16 + actor.Unit.DickSize];
+        return SpriteDictionary.Bears[16 + actor.Unit.DickSize];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)
@@ -153,7 +153,7 @@ class Bears : DefaultRaceData
         int sprite = 9;
         if (actor.IsOralVoring)
             sprite += 1;
-        return State.GameManager.SpriteDictionary.Bears[sprite];
+        return SpriteDictionary.Bears[sprite];
 
     }
 
@@ -165,7 +165,7 @@ class Bears : DefaultRaceData
         }
         if (actor.Unit.HasWeapon && actor.Surrendered == false)
         {
-            return State.GameManager.SpriteDictionary.Bears[29 + actor.GetWeaponSprite()];
+            return SpriteDictionary.Bears[29 + actor.GetWeaponSprite()];
         }
         else
         {
@@ -175,13 +175,13 @@ class Bears : DefaultRaceData
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Bears[22 + actor.Unit.EyeType];
+        return SpriteDictionary.Bears[22 + actor.Unit.EyeType];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
 
-        return State.GameManager.SpriteDictionary.Bears[13 + actor.Unit.MouthType];
+        return SpriteDictionary.Bears[13 + actor.Unit.MouthType];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -193,12 +193,12 @@ class Bears : DefaultRaceData
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(11, .95f) == 11)
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.CowsSeliciaBelly[1];
+                return SpriteDictionary.CowsSeliciaBelly[1];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(11, .95f) == 11)
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.CowsSeliciaBelly[0];
+                return SpriteDictionary.CowsSeliciaBelly[0];
             }
 
             if (actor.PredatorComponent.VisibleFullness > 4)
@@ -210,7 +210,7 @@ class Bears : DefaultRaceData
             }
             else
                 belly.transform.localScale = new Vector3(1, 1, 1);
-            return State.GameManager.SpriteDictionary.Bears[43 + actor.GetStomachSize(11, .95f)];
+            return SpriteDictionary.Bears[43 + actor.GetStomachSize(11, .95f)];
         }
         else
         {
@@ -227,8 +227,8 @@ class Bears : DefaultRaceData
         //    int size = actor.Unit.DickSize;
         //    int offset = (int)((actor.PredatorComponent?.BallsFullness ?? 0) * 3);
         //    if (offset > 0)
-        //        return State.GameManager.SpriteDictionary.FurryDicks[Math.Min(12 + offset, 23)];
-        //    return State.GameManager.SpriteDictionary.FurryDicks[size];
+        //        return SpriteDictionary.FurryDicks[Math.Min(12 + offset, 23)];
+        //    return SpriteDictionary.FurryDicks[size];
         //}
 
         int baseSize = 2;
@@ -297,8 +297,8 @@ class Bears : DefaultRaceData
             }
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.BearsClothes[spr];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.BearsClothes[12];
+            clothing1.GetSprite = (s) => SpriteDictionary.BearsClothes[spr];
+            clothing2.GetSprite = (s) => SpriteDictionary.BearsClothes[12];
             base.Configure(sprite, actor);
         }
     }
@@ -321,7 +321,7 @@ class Bears : DefaultRaceData
 
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.BearsClothes[15 + actor.Unit.BreastSize];
+            clothing1.GetSprite = (s) => SpriteDictionary.BearsClothes[15 + actor.Unit.BreastSize];
             actor.SquishedBreasts = true;
             base.Configure(sprite, actor);
         }
@@ -336,7 +336,7 @@ class Bears : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.BearsClothes[13];
+            clothing1.GetSprite = (s) => SpriteDictionary.BearsClothes[13];
 
             base.Configure(sprite, actor);
         }

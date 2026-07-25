@@ -4,11 +4,11 @@ using UnityEngine;
 
 class Deer : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Deer1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Deer2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Deer3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.Cockatrice2;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.Deer4;
+    readonly Sprite[] Sprites = SpriteDictionary.Deer1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Deer2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Deer3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.Cockatrice2;
+    readonly Sprite[] Sprites5 = SpriteDictionary.Deer4;
 
     readonly DeerLeader1 LeaderClothes1;
     readonly DeerLeader2 LeaderClothes2;
@@ -788,7 +788,7 @@ class Deer : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -801,11 +801,11 @@ class Deer : DefaultRaceData
         {
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[56];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[48 + actor.Unit.BreastSize];
             }
             else
             {
@@ -823,7 +823,7 @@ class Deer : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -836,11 +836,11 @@ class Deer : DefaultRaceData
         {
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[65];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[57 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[57 + actor.Unit.BreastSize];
             }
             else
             {
@@ -858,7 +858,7 @@ class Deer : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -871,11 +871,11 @@ class Deer : DefaultRaceData
         {
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[74];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[74];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[66 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[66 + actor.Unit.BreastSize];
             }
             else
             {
@@ -893,7 +893,7 @@ class Deer : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -910,11 +910,11 @@ class Deer : DefaultRaceData
 
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[80];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[80];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[72 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[72 + actor.Unit.BreastSize];
             }
             else
             {
@@ -923,7 +923,7 @@ class Deer : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[81];
+            clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[81];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -934,7 +934,7 @@ class Deer : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -951,13 +951,13 @@ class Deer : DefaultRaceData
 
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[90];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[99];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[90];
+                clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[99];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[82 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[91 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[82 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[91 + actor.Unit.BreastSize];
             }
             else
             {
@@ -976,7 +976,7 @@ class Deer : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -995,7 +995,7 @@ class Deer : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[104 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[104 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1013,7 +1013,7 @@ class Deer : DefaultRaceData
     {
         public GenericTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1026,11 +1026,11 @@ class Deer : DefaultRaceData
         {
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[95];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[95];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[87 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[87 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1048,7 +1048,7 @@ class Deer : DefaultRaceData
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1062,11 +1062,11 @@ class Deer : DefaultRaceData
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[83 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[83 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[84 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[84 + actor.Unit.BodySize];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
@@ -1078,7 +1078,7 @@ class Deer : DefaultRaceData
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1089,7 +1089,7 @@ class Deer : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[75 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[75 + actor.Unit.BodySize];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -1112,20 +1112,20 @@ class Deer : DefaultRaceData
             if (Races.Deer.oversize)
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[0];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[0];
                 clothing2.YOffset = 0;
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[2 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[0];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[2 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[0];
                 clothing2.YOffset = 0;
             }
             else
             {
                 breastSprite = null;
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[1];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[1];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DeerSkin, actor.Unit.SkinColor);
@@ -1139,7 +1139,7 @@ class Deer : DefaultRaceData
     {
         public Cuirass()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Deer4[47];
+            DiscardSprite = SpriteDictionary.Deer4[47];
             coversBreasts = false;
             OccupiesAllSlots = true;
             FixedColor = true;
@@ -1154,34 +1154,34 @@ class Deer : DefaultRaceData
         {
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[64];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[64];
             }
             else if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 2)
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[60];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[60];
                 }
                 else if (actor.Unit.BreastSize < 4)
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[61];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[61];
                 }
                 else if (actor.Unit.BreastSize < 6)
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[62];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[62];
                 }
                 else
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[63];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[63];
                 }
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[83];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[83];
             }
 
             if (actor.HasBelly)
@@ -1192,30 +1192,30 @@ class Deer : DefaultRaceData
             {
                 if (actor.Unit.HasBreasts)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[73 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Deer4[73 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[77 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Deer4[77 + actor.Unit.BodySize];
                 }
             }
 
             if (actor.Unit.HasBreasts)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[65 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Deer4[65 + actor.Unit.BodySize];
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[69 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Deer4[69 + actor.Unit.BodySize];
             }
 
             if (actor.GetWeaponSprite() == 1)
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[82];
+                clothing4.GetSprite = (s) => SpriteDictionary.Deer4[82];
             }
             else
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[81];
+                clothing4.GetSprite = (s) => SpriteDictionary.Deer4[81];
             }
 
             base.Configure(sprite, actor);
@@ -1226,7 +1226,7 @@ class Deer : DefaultRaceData
     {
         public Special1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Deer4[104];
+            DiscardSprite = SpriteDictionary.Deer4[104];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1241,7 +1241,7 @@ class Deer : DefaultRaceData
         {
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[103];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[103];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1249,26 +1249,26 @@ class Deer : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[96 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[96 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[50];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[51];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[50];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[51];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[52];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[53];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[52];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[53];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[54];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[55];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[54];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[55];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice2[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice2[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice2[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Cockatrice2[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1291,7 +1291,7 @@ class Deer : DefaultRaceData
     {
         public Special2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Deer4[107];
+            DiscardSprite = SpriteDictionary.Deer4[107];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1301,7 +1301,7 @@ class Deer : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[108 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Deer4[108 + actor.Unit.BodySize];
 
             base.Configure(sprite, actor);
         }
@@ -1313,7 +1313,7 @@ class Deer : DefaultRaceData
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -1327,18 +1327,18 @@ class Deer : DefaultRaceData
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[57];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[57];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[58];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[58];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[59];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[59];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[48 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[48 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[56];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[52 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Deer4[56];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[52 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);
@@ -1350,7 +1350,7 @@ class Deer : DefaultRaceData
         public DeerLeader1()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.DeerLeaderClothes[49];
+            DiscardSprite = SpriteDictionary.DeerLeaderClothes[49];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1366,7 +1366,7 @@ class Deer : DefaultRaceData
         {
             if (Races.Deer.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[63];
+                clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[63];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1374,26 +1374,26 @@ class Deer : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[Math.Min(56 + actor.Unit.BreastSize, 66)];
+                clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[Math.Min(56 + actor.Unit.BreastSize, 66)];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[50];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[51];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[50];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[51];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[52];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[53];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[52];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[53];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[54];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[55];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[54];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[55];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice2[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice2[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice2[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Cockatrice2[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1417,7 +1417,7 @@ class Deer : DefaultRaceData
         public DeerLeader2()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.DeerLeaderClothes[65];
+            DiscardSprite = SpriteDictionary.DeerLeaderClothes[65];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1428,7 +1428,7 @@ class Deer : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[64];
+            clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[64];
 
             base.Configure(sprite, actor);
         }
@@ -1438,7 +1438,7 @@ class Deer : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1451,21 +1451,21 @@ class Deer : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[20];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[20];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[22];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[22];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[21];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[21];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[12 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[12 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[16 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[16 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1478,7 +1478,7 @@ class Deer : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1492,21 +1492,21 @@ class Deer : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[32];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[32];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[34];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[34];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[33];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[33];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[31];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[31];
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1518,7 +1518,7 @@ class Deer : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1528,15 +1528,15 @@ class Deer : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[35];
+            clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[35];
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[20 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[24 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1548,7 +1548,7 @@ class Deer : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Cockatrice3[47];
+            DiscardSprite = SpriteDictionary.Cockatrice3[47];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1562,21 +1562,21 @@ class Deer : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[44];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[44];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[46];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[46];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[45];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[45];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[28 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[28 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[32 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[32 + actor.Unit.BodySize];
             }
             base.Configure(sprite, actor);
         }
@@ -1586,7 +1586,7 @@ class Deer : DefaultRaceData
     {
         public GenericBot5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1600,22 +1600,22 @@ class Deer : DefaultRaceData
             {
                 clothing1.YOffset = -1 * .625f;
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[44];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[44];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[46];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[46];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[45];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Deer4[45];
             }
             else clothing1.GetSprite = null;
             clothing1.YOffset = 0;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[36 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[36 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[40 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Deer4[40 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1628,7 +1628,7 @@ class Deer : DefaultRaceData
     {
         public Loincloth()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.DeerLeaderClothes[66];
+            DiscardSprite = SpriteDictionary.DeerLeaderClothes[66];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(12, null, null);
             Type = 61705;
@@ -1641,22 +1641,22 @@ class Deer : DefaultRaceData
             {
                 if (actor.HasBelly)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
                 }
             }
             else
             {
                 if (actor.HasBelly)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
                 }
             }
 
@@ -1671,7 +1671,7 @@ class Deer : DefaultRaceData
         public DeerLeader3()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.DeerLeaderClothes[48];
+            DiscardSprite = SpriteDictionary.DeerLeaderClothes[48];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(15, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1685,12 +1685,12 @@ class Deer : DefaultRaceData
             {
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[1 + 2 * actor.Unit.BodySize];
 
                     if (actor.GetStomachSize(31, 0.7f) < 4)
                     {
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[17 + 2 * actor.Unit.BodySize];
-                        clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[33 + 2 * actor.Unit.BodySize];
+                        clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[17 + 2 * actor.Unit.BodySize];
+                        clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[33 + 2 * actor.Unit.BodySize];
                     }
                     else
                     {
@@ -1700,21 +1700,21 @@ class Deer : DefaultRaceData
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[16 + 2 * actor.Unit.BodySize];
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[32 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[16 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[0 + 2 * actor.Unit.BodySize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[32 + 2 * actor.Unit.BodySize];
                 }
             }
             else
             {
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[9 + 2 * actor.Unit.BodySize];
 
                     if (actor.GetStomachSize(31, 0.7f) < 4)
                     {
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[25 + 2 * actor.Unit.BodySize];
-                        clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[41 + 2 * actor.Unit.BodySize];
+                        clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[25 + 2 * actor.Unit.BodySize];
+                        clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[41 + 2 * actor.Unit.BodySize];
                     }
                     else
                     {
@@ -1724,9 +1724,9 @@ class Deer : DefaultRaceData
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[24 + 2 * actor.Unit.BodySize];
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.DeerLeaderClothes[40 + 2 * actor.Unit.BodySize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[24 + 2 * actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[8 + 2 * actor.Unit.BodySize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.DeerLeaderClothes[40 + 2 * actor.Unit.BodySize];
                 }
             }
 
@@ -1741,7 +1741,7 @@ class Deer : DefaultRaceData
     {
         public Scarf()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Deer4[106];
+            DiscardSprite = SpriteDictionary.Deer4[106];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(19, null, null);
@@ -1751,7 +1751,7 @@ class Deer : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[105];
+            clothing1.GetSprite = (s) => SpriteDictionary.Deer4[105];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
         }
@@ -1761,7 +1761,7 @@ class Deer : DefaultRaceData
     {
         public Necklace()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Deer4[11];
+            DiscardSprite = SpriteDictionary.Deer4[11];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(19, null, WhiteColored);
@@ -1770,7 +1770,7 @@ class Deer : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Deer4[10];
+            clothing1.GetSprite = (s) => SpriteDictionary.Deer4[10];
             base.Configure(sprite, actor);
         }
     }

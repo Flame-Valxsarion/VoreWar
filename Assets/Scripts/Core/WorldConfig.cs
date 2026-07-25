@@ -242,6 +242,8 @@ public class WorldConfig
     internal int TailWeight = 1;
     [OdinSerialize]
     internal int AnalWeight = 1;
+    [OdinSerialize]
+    internal int BladderWeight = 1;
 
     [OdinSerialize]
     internal float DigestionSpeedMult = 1f;
@@ -390,6 +392,9 @@ public class WorldConfig
 			case Race.SpaceCroach:
                 ret_value = new SpawnerInfo(false, 4, .15f, 40, 900 + (int)race, 1, true, 6f, 4, 8, 40, false);
                 break;
+			case Race.BlackWidow:
+                ret_value = new SpawnerInfo(false, 4, .15f, 40, 900 + (int)race, 1, true, 6f, 4, 8, 40, false);
+                break;
             default:
                 ret_value = new SpawnerInfo(false, 4, .15f, 40, 900 + (int)race, 1, true, 6f, 8, 12, 40, false);
                 break;
@@ -444,6 +449,7 @@ public class WorldConfig
             ["CockVoreHidesClothes"] = false,
             ["BreastVore"] = false,
             ["TailVore"] = false,
+            ["BladderVore"] = false,
             ["KuroTenkoEnabled"] = false,
             ["OverhealEXP"] = true,
             ["TransferAllowed"] = true,

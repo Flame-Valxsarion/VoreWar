@@ -8,17 +8,17 @@ using UnityEngine;
 
 class Imps : DefaultRaceData
 {
-    Sprite[] SpritesBase = State.GameManager.SpriteDictionary.NewimpBase;
-    Sprite[] SpritesVore = State.GameManager.SpriteDictionary.NewimpVore;
-    Sprite[] SpritesGloves = State.GameManager.SpriteDictionary.NewimpGloves;
-    Sprite[] SpritesLegs = State.GameManager.SpriteDictionary.NewimpLegs;
-    Sprite[] SpritesUBottoms = State.GameManager.SpriteDictionary.NewimpUBottoms;
-    Sprite[] SpritesUTops = State.GameManager.SpriteDictionary.NewimpUTops;
-    Sprite[] SpritesOBottoms = State.GameManager.SpriteDictionary.NewimpOBottoms;
-    Sprite[] SpritesOTops = State.GameManager.SpriteDictionary.NewImpOTops;
-    Sprite[] SpritesOnePieces = State.GameManager.SpriteDictionary.NewimpOnePieces;
-    Sprite[] SpritesOverOnePieces = State.GameManager.SpriteDictionary.NewImpOverOnePieces;
-    Sprite[] SpritesHats = State.GameManager.SpriteDictionary.NewimpHats;
+    Sprite[] SpritesBase = SpriteDictionary.NewimpBase;
+    Sprite[] SpritesVore = SpriteDictionary.NewimpVore;
+    Sprite[] SpritesGloves = SpriteDictionary.NewimpGloves;
+    Sprite[] SpritesLegs = SpriteDictionary.NewimpLegs;
+    Sprite[] SpritesUBottoms = SpriteDictionary.NewimpUBottoms;
+    Sprite[] SpritesUTops = SpriteDictionary.NewimpUTops;
+    Sprite[] SpritesOBottoms = SpriteDictionary.NewimpOBottoms;
+    Sprite[] SpritesOTops = SpriteDictionary.NewImpOTops;
+    Sprite[] SpritesOnePieces = SpriteDictionary.NewimpOnePieces;
+    Sprite[] SpritesOverOnePieces = SpriteDictionary.NewImpOverOnePieces;
+    Sprite[] SpritesHats = SpriteDictionary.NewimpHats;
 
 
     internal List<MainClothing> AllClothing;
@@ -68,21 +68,21 @@ class Imps : DefaultRaceData
 
         AllowedWaistTypes = new List<MainClothing>() //underbottoms
         {
-            new ImpUBottom(0, 2, 45, 8, 9, State.GameManager.SpriteDictionary.NewimpUBottoms, 8808, true),
-            new ImpUBottom(9, 11, 45, 17, 9, State.GameManager.SpriteDictionary.NewimpUBottoms, 8817, true),
-            new ImpUBottom(18, 20, 45, 26, 9, State.GameManager.SpriteDictionary.NewimpUBottoms, 8826, false, black: true),
-            new ImpUBottom(27, 29, 45, 35, 9, State.GameManager.SpriteDictionary.NewimpUBottoms, 8835, true),
-            new ImpUBottom(36, 38, 45, 44, 9, State.GameManager.SpriteDictionary.NewimpUBottoms, 8844, true),
+            new ImpUBottom(0, 2, 45, 8, 9, SpriteDictionary.NewimpUBottoms, 8808, true),
+            new ImpUBottom(9, 11, 45, 17, 9, SpriteDictionary.NewimpUBottoms, 8817, true),
+            new ImpUBottom(18, 20, 45, 26, 9, SpriteDictionary.NewimpUBottoms, 8826, false, black: true),
+            new ImpUBottom(27, 29, 45, 35, 9, SpriteDictionary.NewimpUBottoms, 8835, true),
+            new ImpUBottom(36, 38, 45, 44, 9, SpriteDictionary.NewimpUBottoms, 8844, true),
         };
 
         ExtraMainClothing1Types = new List<MainClothing>() //Overbottoms
         {
-            new ImpOBottom(0, 2, false, 45, 8, 15, State.GameManager.SpriteDictionary.NewimpOBottoms, 8908, true),
-            new ImpOBottom(9, 11, false, 45, 17, 15, State.GameManager.SpriteDictionary.NewimpOBottoms, 8917, true),
-            new ImpOBottom(18, 20, true, 45, 26, 15, State.GameManager.SpriteDictionary.NewimpOBottoms, 8926, true),
-            new ImpOBottom(27, 29, true, 49, 35, 15, State.GameManager.SpriteDictionary.NewimpOBottoms, 8935, true),
-            new ImpOBottomAlt(27, 29, true, 49, 35, 15, State.GameManager.SpriteDictionary.NewimpOBottoms, 8935, true),
-            new ImpOBottom(36, 38, false, 45, 44, 15, State.GameManager.SpriteDictionary.NewimpOBottoms, 8944, true),
+            new ImpOBottom(0, 2, false, 45, 8, 15, SpriteDictionary.NewimpOBottoms, 8908, true),
+            new ImpOBottom(9, 11, false, 45, 17, 15, SpriteDictionary.NewimpOBottoms, 8917, true),
+            new ImpOBottom(18, 20, true, 45, 26, 15, SpriteDictionary.NewimpOBottoms, 8926, true),
+            new ImpOBottom(27, 29, true, 49, 35, 15, SpriteDictionary.NewimpOBottoms, 8935, true),
+            new ImpOBottomAlt(27, 29, true, 49, 35, 15, SpriteDictionary.NewimpOBottoms, 8935, true),
+            new ImpOBottom(36, 38, false, 45, 44, 15, SpriteDictionary.NewimpOBottoms, 8944, true),
         };
 
         ExtraMainClothing2Types = new List<MainClothing>() //Special clothing
@@ -127,8 +127,8 @@ class Imps : DefaultRaceData
 
         ExtraMainClothing5Types = new List<MainClothing>() //Hats
         {
-            new Hat(0, 0, State.GameManager.SpriteDictionary.NewimpHats, 666),
-            new Hat(34, 0, State.GameManager.SpriteDictionary.NewimpHats, 666),
+            new Hat(0, 0, SpriteDictionary.NewimpHats, 666),
+            new Hat(34, 0, SpriteDictionary.NewimpHats, 666),
             new HolidayHat(),
         };
 
@@ -676,7 +676,7 @@ class Imps : DefaultRaceData
     class GenericGloves : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.NewimpGloves;
+        Sprite[] sheet = SpriteDictionary.NewimpGloves;
 
         public GenericGloves(int start, int discard, int type)//int type
         {
@@ -723,7 +723,7 @@ class Imps : DefaultRaceData
     class GenericGlovesPlusSecond : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.NewimpGloves;
+        Sprite[] sheet = SpriteDictionary.NewimpGloves;
 
         public GenericGlovesPlusSecond(int start, int discard, int type) //int type
         {
@@ -772,7 +772,7 @@ class Imps : DefaultRaceData
     class GenericGlovesPlusSecondAlt : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.NewimpGloves;
+        Sprite[] sheet = SpriteDictionary.NewimpGloves;
 
         public GenericGlovesPlusSecondAlt(int start, int discard, int type) //int type
         {
@@ -822,7 +822,7 @@ class Imps : DefaultRaceData
         int start;
         int bulge;
         bool black;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.NewimpLegs;
+        Sprite[] sheet = SpriteDictionary.NewimpLegs;
 
         public GenericLegs(int start, int discard, int bulge, int type, bool maleOnly = false, bool femaleOnly = false, bool blocksDick = false, bool black = false)
         {
@@ -853,9 +853,9 @@ class Imps : DefaultRaceData
                 if (blocksDick == true)
                 {
                     if (black == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
                     else
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
                 }
                 else
                     clothing2.GetSprite = null;
@@ -874,7 +874,7 @@ class Imps : DefaultRaceData
         int start;
         int bulge;
         bool black;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.NewimpLegs;
+        Sprite[] sheet = SpriteDictionary.NewimpLegs;
 
         public GenericLegsAlt(int start, int discard, int bulge, int type, bool maleOnly = false, bool femaleOnly = false, bool blocksDick = false, bool black = false)
         {
@@ -905,9 +905,9 @@ class Imps : DefaultRaceData
                 if (blocksDick == true)
                 {
                     if (black == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
                     else
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
                 }
                 else
                     clothing2.GetSprite = null;
@@ -957,9 +957,9 @@ class Imps : DefaultRaceData
                     if (blocksDick == true)
                     {
                         if (black == true)
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
                         else
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
                     }
                     else
                         clothing2.GetSprite = null;
@@ -978,9 +978,9 @@ class Imps : DefaultRaceData
                     if (blocksDick == true)
                     {
                         if (black == true)
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + 4 + actor.Unit.DickSize];
                         else
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[bulge + actor.Unit.DickSize];
                     }
                     else
                         clothing2.GetSprite = null;
@@ -999,7 +999,7 @@ class Imps : DefaultRaceData
     {
         public NewImpLeotard()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewimpOnePieces[74];
+            DiscardSprite = SpriteDictionary.NewimpOnePieces[74];
             Type = 11001;
             colorsBelly = false;
             blocksDick = true;
@@ -1025,13 +1025,13 @@ class Imps : DefaultRaceData
             {
                 if (actor.Unit.HasDick)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
                 }
                 else clothing3.GetSprite = null;
 
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpOnePieces[33 + bobs];
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpOnePieces[41 + size + 8 * weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.NewimpOnePieces[33 + bobs];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpOnePieces[41 + size + 8 * weightMod];
 
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1043,11 +1043,11 @@ class Imps : DefaultRaceData
             {
                 if (actor.Unit.HasDick)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
                 }
                 else clothing3.GetSprite = null;
                 clothing2.GetSprite = null;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpOnePieces[58 + size + 8 * weightMod];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpOnePieces[58 + size + 8 * weightMod];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1060,7 +1060,7 @@ class Imps : DefaultRaceData
     {
         public NewImpCasinoBunny()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewimpOnePieces[74];
+            DiscardSprite = SpriteDictionary.NewimpOnePieces[74];
             Type = 11011;
             colorsBelly = false;
             blocksDick = true;
@@ -1086,13 +1086,13 @@ class Imps : DefaultRaceData
             {
                 if (actor.Unit.HasDick)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
                 }
                 else clothing3.GetSprite = null;
 
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpOnePieces[0 + bobs];
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpOnePieces[8 + size + 6 * weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.NewimpOnePieces[0 + bobs];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpOnePieces[8 + size + 6 * weightMod];
 
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1103,9 +1103,9 @@ class Imps : DefaultRaceData
             else
             {
 
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
+                clothing3.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[45 + actor.Unit.DickSize];
                 clothing2.GetSprite = null;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpOnePieces[20 + size + 6 * weightMod];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpOnePieces[20 + size + 6 * weightMod];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1149,7 +1149,7 @@ class Imps : DefaultRaceData
                 if (actor.Unit.HasDick && showbulge == true)
                 {
                     if (blocksDick == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
                     else
                         clothing2.GetSprite = null;
                 }
@@ -1165,7 +1165,7 @@ class Imps : DefaultRaceData
                 if (actor.Unit.HasDick)
                 {
                     if (blocksDick == true && showbulge == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
                     else
                         clothing2.GetSprite = null;
                 }
@@ -1214,7 +1214,7 @@ class Imps : DefaultRaceData
                 if (actor.Unit.HasDick && showbulge == true)
                 {
                     if (blocksDick == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
                     else
                         clothing2.GetSprite = null;
                 }
@@ -1230,7 +1230,7 @@ class Imps : DefaultRaceData
                 if (actor.Unit.HasDick)
                 {
                     if (blocksDick == true && showbulge == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
+                        clothing2.GetSprite = (s) => SpriteDictionary.NewimpUBottoms[Math.Min(bulge + actor.Unit.DickSize, 52)];
                     else
                         clothing2.GetSprite = null;
                 }
@@ -1247,7 +1247,7 @@ class Imps : DefaultRaceData
     class Hat : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.NewimpHats;
+        Sprite[] sheet = SpriteDictionary.NewimpHats;
 
         public Hat(int start, int discard, Sprite[] sheet, int type)
         {
@@ -1277,7 +1277,7 @@ class Imps : DefaultRaceData
     {
         public NewImpUndertop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewimpUTops[8];
+            DiscardSprite = SpriteDictionary.NewimpUTops[8];
             Type = 11012;
             femaleOnly = true;
             coversBreasts = false;
@@ -1290,11 +1290,11 @@ class Imps : DefaultRaceData
         {
             if (Races.Imps.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[7];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[7];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[0 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1312,7 +1312,7 @@ class Imps : DefaultRaceData
     {
         public NewImpUndertop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewimpUTops[17];
+            DiscardSprite = SpriteDictionary.NewimpUTops[17];
             Type = 11013;
             femaleOnly = true;
             coversBreasts = false;
@@ -1325,11 +1325,11 @@ class Imps : DefaultRaceData
         {
             if (Races.Imps.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[16];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[16];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[9 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[9 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1347,7 +1347,7 @@ class Imps : DefaultRaceData
     {
         public NewImpUndertop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewimpUTops[26];
+            DiscardSprite = SpriteDictionary.NewimpUTops[26];
             Type = 11014;
             femaleOnly = true;
             coversBreasts = false;
@@ -1360,11 +1360,11 @@ class Imps : DefaultRaceData
         {
             if (Races.Imps.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[25];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[25];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[18 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[18 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1382,7 +1382,7 @@ class Imps : DefaultRaceData
     {
         public NewImpUndertop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewimpUTops[35];
+            DiscardSprite = SpriteDictionary.NewimpUTops[35];
             Type = 11015;
             femaleOnly = true;
             coversBreasts = false;
@@ -1395,11 +1395,11 @@ class Imps : DefaultRaceData
         {
             if (Races.Imps.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[34];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[34];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[27 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[27 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1417,7 +1417,7 @@ class Imps : DefaultRaceData
     {
         public NewImpUndertop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewimpUTops[75];
+            DiscardSprite = SpriteDictionary.NewimpUTops[75];
             Type = 11016;
             femaleOnly = false;
             coversBreasts = false;
@@ -1435,11 +1435,11 @@ class Imps : DefaultRaceData
                 size = 5;
             if (Races.Imps.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[48 + (13 * weightMod)];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[48 + (13 * weightMod)];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[42 + actor.Unit.BreastSize + (13 * weightMod)];
+                clothing1.GetSprite = (s) => SpriteDictionary.NewimpUTops[42 + actor.Unit.BreastSize + (13 * weightMod)];
             }
             else
             {
@@ -1448,11 +1448,11 @@ class Imps : DefaultRaceData
             }
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[36 + size + (13 * weightMod)];
+                clothing2.GetSprite = (s) => SpriteDictionary.NewimpUTops[36 + size + (13 * weightMod)];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewimpUTops[62 + size + (6 * weightMod)];
+                clothing2.GetSprite = (s) => SpriteDictionary.NewimpUTops[62 + size + (6 * weightMod)];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1464,7 +1464,7 @@ class Imps : DefaultRaceData
     {
         public NewImpOverOPFem()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewImpOverOnePieces[23];
+            DiscardSprite = SpriteDictionary.NewImpOverOnePieces[23];
             Type = 11017;
             femaleOnly = true;
             coversBreasts = false;
@@ -1489,9 +1489,9 @@ class Imps : DefaultRaceData
                     clothing1.GetSprite = (s) => null;
                 }
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOverOnePieces[bobs];
+                    clothing1.GetSprite = (s) => SpriteDictionary.NewImpOverOnePieces[bobs];
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOverOnePieces[7 + size + (8 * weightMod)];
+            clothing2.GetSprite = (s) => SpriteDictionary.NewImpOverOnePieces[7 + size + (8 * weightMod)];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1502,7 +1502,7 @@ class Imps : DefaultRaceData
     {
         public NewImpOverOPM()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewImpOverOnePieces[40];
+            DiscardSprite = SpriteDictionary.NewImpOverOnePieces[40];
             Type = 11018;
             maleOnly = true;
             coversBreasts = false;
@@ -1520,12 +1520,12 @@ class Imps : DefaultRaceData
                 size = 6;
 
             if (actor.IsAttacking)
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOverOnePieces[25];
+                clothing2.GetSprite = (s) => SpriteDictionary.NewImpOverOnePieces[25];
             else
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOverOnePieces[24];
+                clothing2.GetSprite = (s) => SpriteDictionary.NewImpOverOnePieces[24];
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOverOnePieces[26 + size + (7 * weightMod)];
+            clothing1.GetSprite = (s) => SpriteDictionary.NewImpOverOnePieces[26 + size + (7 * weightMod)];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1536,7 +1536,7 @@ class Imps : DefaultRaceData
     {
         public NewImpOverTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewImpOTops[3];
+            DiscardSprite = SpriteDictionary.NewImpOTops[3];
             Type = 11019;
             coversBreasts = false;
             blocksDick = false;
@@ -1550,8 +1550,8 @@ class Imps : DefaultRaceData
             int weightMod = actor.Unit.BodySize;
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[0 + weightMod];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[2];
+            clothing1.GetSprite = (s) => SpriteDictionary.NewImpOTops[0 + weightMod];
+            clothing2.GetSprite = (s) => SpriteDictionary.NewImpOTops[2];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1562,7 +1562,7 @@ class Imps : DefaultRaceData
     {
         public NewImpOverTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewImpOTops[7];
+            DiscardSprite = SpriteDictionary.NewImpOTops[7];
             Type = 11020;
             coversBreasts = false;
             blocksDick = false;
@@ -1576,8 +1576,8 @@ class Imps : DefaultRaceData
             int weightMod = actor.Unit.BodySize;
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[4 + weightMod];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[6];
+            clothing1.GetSprite = (s) => SpriteDictionary.NewImpOTops[4 + weightMod];
+            clothing2.GetSprite = (s) => SpriteDictionary.NewImpOTops[6];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1588,7 +1588,7 @@ class Imps : DefaultRaceData
     {
         public NewImpOverTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewImpOTops[11];
+            DiscardSprite = SpriteDictionary.NewImpOTops[11];
             Type = 11021;
             coversBreasts = false;
             blocksDick = false;
@@ -1602,8 +1602,8 @@ class Imps : DefaultRaceData
             int weightMod = actor.Unit.BodySize;
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[8 + weightMod];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[10];
+            clothing1.GetSprite = (s) => SpriteDictionary.NewImpOTops[8 + weightMod];
+            clothing2.GetSprite = (s) => SpriteDictionary.NewImpOTops[10];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1614,7 +1614,7 @@ class Imps : DefaultRaceData
     {
         public NewImpOverTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.NewImpOTops[15];
+            DiscardSprite = SpriteDictionary.NewImpOTops[15];
             Type = 11022;
             coversBreasts = false;
             blocksDick = false;
@@ -1628,8 +1628,8 @@ class Imps : DefaultRaceData
             int weightMod = actor.Unit.BodySize;
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[12 + weightMod];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.NewImpOTops[14];
+            clothing1.GetSprite = (s) => SpriteDictionary.NewImpOTops[12 + weightMod];
+            clothing2.GetSprite = (s) => SpriteDictionary.NewImpOTops[14];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1652,7 +1652,7 @@ class Imps : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.ImpGobHat[0];
+            clothing1.GetSprite = (s) => SpriteDictionary.ImpGobHat[0];
 
             base.Configure(sprite, actor);
         }

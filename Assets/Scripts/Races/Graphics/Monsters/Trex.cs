@@ -72,161 +72,161 @@ class Trex : BlankSlate
     {
         int size = actor.GetBallSize(54);
 
-		if (actor.Unit.BallsSize >= 24) return State.GameManager.SpriteDictionary.Trex[26];
+		if (actor.Unit.BallsSize >= 24) return SpriteDictionary.Trex[26];
 		
-		else if (actor.Unit.BallsSize >= 15) return State.GameManager.SpriteDictionary.Trex[25];
+		else if (actor.Unit.BallsSize >= 15) return SpriteDictionary.Trex[25];
        
- 	    else return State.GameManager.SpriteDictionary.Trex[24];
+ 	    else return SpriteDictionary.Trex[24];
     }
 	
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Tail Bottom
     {
         int size = actor.GetBallSize(54);
 
-		if (actor.Unit.BallsSize >= 24) return State.GameManager.SpriteDictionary.Trex[29];
+		if (actor.Unit.BallsSize >= 24) return SpriteDictionary.Trex[29];
 		
-		else if (actor.Unit.BallsSize >= 15) return State.GameManager.SpriteDictionary.Trex[28];
+		else if (actor.Unit.BallsSize >= 15) return SpriteDictionary.Trex[28];
         
-		else return State.GameManager.SpriteDictionary.Trex[27];
+		else return SpriteDictionary.Trex[27];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor) // Head
     {
-        if (actor.IsOralVoring) return State.GameManager.SpriteDictionary.Trex[14];
-		if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Trex[13];
-		return State.GameManager.SpriteDictionary.Trex[12];
+        if (actor.IsOralVoring) return SpriteDictionary.Trex[14];
+		if (actor.IsAttacking) return SpriteDictionary.Trex[13];
+		return SpriteDictionary.Trex[12];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor) // Mouth
     {
-        if (actor.IsOralVoring) return State.GameManager.SpriteDictionary.Trex[17];
-		if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Trex[16];
-		return State.GameManager.SpriteDictionary.Trex[15];
+        if (actor.IsOralVoring) return SpriteDictionary.Trex[17];
+		if (actor.IsAttacking) return SpriteDictionary.Trex[16];
+		return SpriteDictionary.Trex[15];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor) // Eyes
     {
-        if (actor.IsOralVoring) return State.GameManager.SpriteDictionary.Trex[109];
-		if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Trex[108];
-		return State.GameManager.SpriteDictionary.Trex[107];
+        if (actor.IsOralVoring) return SpriteDictionary.Trex[109];
+		if (actor.IsAttacking) return SpriteDictionary.Trex[108];
+		return SpriteDictionary.Trex[107];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor) // Dick
     {
         if (actor.Unit.DickSize < 0 || Config.HideCocks) return null;
 
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Trex[19];
-        if (actor.IsErect()) return State.GameManager.SpriteDictionary.Trex[18];
+        if (actor.IsCockVoring) return SpriteDictionary.Trex[19];
+        if (actor.IsErect()) return SpriteDictionary.Trex[18];
         return null;
     }
 
     protected override Sprite BodySprite(Actor_Unit actor) // Chest
     {
-        return State.GameManager.SpriteDictionary.Trex[1];
+        return SpriteDictionary.Trex[1];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Right Leg
     {
-        return State.GameManager.SpriteDictionary.Trex[0];
+        return SpriteDictionary.Trex[0];
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Right Leg Claws
     {
-        return State.GameManager.SpriteDictionary.Trex[2];
+        return SpriteDictionary.Trex[2];
     }
 
     protected override Sprite BodyAccentSprite5(Actor_Unit actor) // Right Arm
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Trex[4];
-		return State.GameManager.SpriteDictionary.Trex[3];
+        if (actor.IsAttacking) return SpriteDictionary.Trex[4];
+		return SpriteDictionary.Trex[3];
     }
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Right Arm Claws
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Trex[6];
-		return State.GameManager.SpriteDictionary.Trex[5];
+        if (actor.IsAttacking) return SpriteDictionary.Trex[6];
+		return SpriteDictionary.Trex[5];
     }
 
     protected override Sprite BodyAccentSprite7(Actor_Unit actor) // Belly Cover
     {
-        if (actor.HasBelly == false) return State.GameManager.SpriteDictionary.Trex[7];
+        if (actor.HasBelly == false) return SpriteDictionary.Trex[7];
 		return null;
     }
 
     protected override Sprite BodyAccentSprite8(Actor_Unit actor) // Left Side
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Trex[9];
-		return State.GameManager.SpriteDictionary.Trex[8];
+        if (actor.IsAttacking) return SpriteDictionary.Trex[9];
+		return SpriteDictionary.Trex[8];
     }
 
     protected override Sprite BodyAccentSprite9(Actor_Unit actor) // Left Side Claws
     {
-        if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Trex[11];
-		return State.GameManager.SpriteDictionary.Trex[10];
+        if (actor.IsAttacking) return SpriteDictionary.Trex[11];
+		return SpriteDictionary.Trex[10];
     }
 
     protected override Sprite BodyAccentSprite10(Actor_Unit actor) // Sheath
     {
-        if (actor.Unit.BreastSize < 0) return State.GameManager.SpriteDictionary.Trex[20];
-		return State.GameManager.SpriteDictionary.Trex[22];
+        if (actor.Unit.BreastSize < 0) return SpriteDictionary.Trex[20];
+		return SpriteDictionary.Trex[22];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor) // Sheath Insides
     {
-        if (actor.Unit.BreastSize < 0) return State.GameManager.SpriteDictionary.Trex[21];
-		return State.GameManager.SpriteDictionary.Trex[23];
+        if (actor.Unit.BreastSize < 0) return SpriteDictionary.Trex[21];
+		return SpriteDictionary.Trex[23];
     }
 
     protected override Sprite BallsSprite(Actor_Unit actor) // Balls
     {
         if (Config.HideCocks || actor.Unit.DickSize < 0) return null;
 
-        if (actor.GetBallSize(54) == 0) return State.GameManager.SpriteDictionary.Trex[68];
+        if (actor.GetBallSize(54) == 0) return SpriteDictionary.Trex[68];
 
         int size = actor.GetBallSize(54);
 
         if (size >= 54 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[106];
+            return SpriteDictionary.Trex[106];
         }
 
         else if (size >= 51 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[105];
+            return SpriteDictionary.Trex[105];
         }
 
         else if (size >= 48 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[104];
+            return SpriteDictionary.Trex[104];
         }
 
         else if (size >= 45 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[103];
+            return SpriteDictionary.Trex[103];
         }
 
         else if (size >= 42 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[102];
+            return SpriteDictionary.Trex[102];
         }
 
         else if (size >= 39 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[101];
+            return SpriteDictionary.Trex[101];
         }
 
         else if (size >= 36 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[100];
+            return SpriteDictionary.Trex[100];
         }
 
         else if (size >= 33 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[99];
+            return SpriteDictionary.Trex[99];
         }
 
         if (size > 29) size = 29;
-        return State.GameManager.SpriteDictionary.Trex[69 + size];
+        return SpriteDictionary.Trex[69 + size];
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly) // Belly
@@ -238,45 +238,45 @@ class Trex : BlankSlate
 
         if (size >= 54 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[67];
+            return SpriteDictionary.Trex[67];
         }
 
         else if (size >= 51 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[66];
+            return SpriteDictionary.Trex[66];
         }
 
         else if (size >= 48 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[65];
+            return SpriteDictionary.Trex[65];
         }
 
         else if (size >= 45 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[64];
+            return SpriteDictionary.Trex[64];
         }
 
         else if (size >= 42 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[63];
+            return SpriteDictionary.Trex[63];
         }
 
         else if (size >= 39 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[62];
+            return SpriteDictionary.Trex[62];
         }
 
         else if (size >= 36 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[61];
+            return SpriteDictionary.Trex[61];
         }
 
         else if (size >= 33 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Trex[60];
+            return SpriteDictionary.Trex[60];
         }
 
         if (size > 29) size = 29;
-        return State.GameManager.SpriteDictionary.Trex[30 + size];
+        return SpriteDictionary.Trex[30 + size];
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 class Cockatrice : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Cockatrice1;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Sharks3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.Cockatrice2;
+    readonly Sprite[] Sprites = SpriteDictionary.Cockatrice1;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Sharks3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.Cockatrice2;
 
     bool oversize = false;
 
@@ -551,7 +551,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -564,11 +564,11 @@ class Cockatrice : DefaultRaceData
         {
             if (Races.Cockatrice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[56];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[48 + actor.Unit.BreastSize];
             }
             else
             {
@@ -586,7 +586,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -599,11 +599,11 @@ class Cockatrice : DefaultRaceData
         {
             if (Races.Cockatrice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[65];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[57 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[57 + actor.Unit.BreastSize];
             }
             else
             {
@@ -621,7 +621,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -634,11 +634,11 @@ class Cockatrice : DefaultRaceData
         {
             if (Races.Cockatrice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[74];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[74];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[66 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[66 + actor.Unit.BreastSize];
             }
             else
             {
@@ -656,7 +656,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -673,11 +673,11 @@ class Cockatrice : DefaultRaceData
 
             if (Races.Cockatrice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[80];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[80];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[72 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[72 + actor.Unit.BreastSize];
             }
             else
             {
@@ -686,7 +686,7 @@ class Cockatrice : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[81];
+            clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[81];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -697,7 +697,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -714,13 +714,13 @@ class Cockatrice : DefaultRaceData
 
             if (Races.Cockatrice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[90];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[99];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[90];
+                clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[99];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[82 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[91 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[82 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Sharks5[91 + actor.Unit.BreastSize];
             }
             else
             {
@@ -739,7 +739,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -758,7 +758,7 @@ class Cockatrice : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Sharks5[104 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Sharks5[104 + actor.Unit.BreastSize];
             }
             else
             {
@@ -776,7 +776,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -789,11 +789,11 @@ class Cockatrice : DefaultRaceData
         {
             if (Races.Cockatrice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[95];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[95];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[87 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[87 + actor.Unit.BreastSize];
             }
             else
             {
@@ -811,7 +811,7 @@ class Cockatrice : DefaultRaceData
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -825,11 +825,11 @@ class Cockatrice : DefaultRaceData
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[83 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[83 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[79 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[79 + actor.Unit.BodySize];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
@@ -841,7 +841,7 @@ class Cockatrice : DefaultRaceData
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -852,7 +852,7 @@ class Cockatrice : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[75 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[75 + actor.Unit.BodySize];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -879,7 +879,7 @@ class Cockatrice : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[4 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[4 + actor.Unit.BreastSize];
                 clothing2.YOffset = 0;
             }
             else
@@ -890,7 +890,7 @@ class Cockatrice : DefaultRaceData
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.CockatriceSkin, actor.Unit.SkinColor);
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[0 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[0 + actor.Unit.BodySize];
 
             base.Configure(sprite, actor);
         }
@@ -900,7 +900,7 @@ class Cockatrice : DefaultRaceData
     {
         public Cuirass()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Cockatrice3[120];
+            DiscardSprite = SpriteDictionary.Cockatrice3[120];
             coversBreasts = false;
             OccupiesAllSlots = true;
             FixedColor = true;
@@ -915,34 +915,34 @@ class Cockatrice : DefaultRaceData
         {
             if (Races.Cockatrice.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[100];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[100];
             }
             else if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 2)
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[96];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[96];
                 }
                 else if (actor.Unit.BreastSize < 4)
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[97];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[97];
                 }
                 else if (actor.Unit.BreastSize < 6)
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[98];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[98];
                 }
                 else
                 {
                     breastSprite = null;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[99];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[99];
                 }
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[119];
+                clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[119];
             }
 
             if (actor.HasBelly)
@@ -953,30 +953,30 @@ class Cockatrice : DefaultRaceData
             {
                 if (actor.Unit.HasBreasts)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[109 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[109 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[113 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[113 + actor.Unit.BodySize];
                 }
             }
 
             if (actor.Unit.HasBreasts)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[101 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Cockatrice3[101 + actor.Unit.BodySize];
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[105 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Cockatrice3[105 + actor.Unit.BodySize];
             }
 
             if (actor.GetWeaponSprite() == 1)
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[118];
+                clothing4.GetSprite = (s) => SpriteDictionary.Cockatrice3[118];
             }
             else
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[117];
+                clothing4.GetSprite = (s) => SpriteDictionary.Cockatrice3[117];
             }
 
             base.Configure(sprite, actor);
@@ -987,7 +987,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1000,21 +1000,21 @@ class Cockatrice : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[20];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[20];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[22];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[22];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[21];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[21];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[12 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[12 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[16 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[16 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1027,7 +1027,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1041,21 +1041,21 @@ class Cockatrice : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[32];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[32];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[34];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[34];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[33];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[33];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[31];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[31];
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[23 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[23 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[27 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[27 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1067,7 +1067,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1077,15 +1077,15 @@ class Cockatrice : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[35];
+            clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[35];
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[23 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[23 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[27 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[27 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1097,7 +1097,7 @@ class Cockatrice : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Cockatrice3[47];
+            DiscardSprite = SpriteDictionary.Cockatrice3[47];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1111,21 +1111,21 @@ class Cockatrice : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[44];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[44];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[46];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[46];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[45];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Cockatrice3[45];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[36 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[36 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Cockatrice3[40 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Cockatrice3[40 + actor.Unit.BodySize];
             }
             base.Configure(sprite, actor);
         }

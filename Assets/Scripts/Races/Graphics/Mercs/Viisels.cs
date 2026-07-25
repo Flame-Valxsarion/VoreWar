@@ -69,7 +69,7 @@ class Viisels : BlankSlate
         actor.UnitSprite.GraphicsFolder.transform.localScale = new Vector3(scaleMod, scaleMod, 1); // Smolness activated!
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Viisels[0];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Viisels[0];
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -77,28 +77,28 @@ class Viisels : BlankSlate
             return null;
         int size = actor.GetStomachSize(6);
         if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && size == 6)
-            return State.GameManager.SpriteDictionary.Viisels[35];
+            return SpriteDictionary.Viisels[35];
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 6)
-            return State.GameManager.SpriteDictionary.Viisels[34];
+            return SpriteDictionary.Viisels[34];
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 5)
-            return State.GameManager.SpriteDictionary.Viisels[33];
-        return State.GameManager.SpriteDictionary.Viisels[26 + actor.GetStomachSize(6)];
+            return SpriteDictionary.Viisels[33];
+        return SpriteDictionary.Viisels[26 + actor.GetStomachSize(6)];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor)
     {
         if (actor.Unit.SpecialAccessoryType == 0)
             return null;
-        return State.GameManager.SpriteDictionary.Viisels[10 + (actor.Unit.SpecialAccessoryType)]; // Pattern
+        return SpriteDictionary.Viisels[10 + (actor.Unit.SpecialAccessoryType)]; // Pattern
     }
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Viisels[1 + (actor.IsAttacking ? 1 : 0)]; // Paw
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Viisels[1 + (actor.IsAttacking ? 1 : 0)]; // Paw
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Tongue
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Viisels[17];
+            return SpriteDictionary.Viisels[17];
         return null;
     }
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.Viisels[7 + actor.Unit.TailType]; // Tail
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => SpriteDictionary.Viisels[7 + actor.Unit.TailType]; // Tail
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor)
     {
@@ -106,11 +106,11 @@ class Viisels : BlankSlate
             return null;
         if (actor.IsErect())
         {
-            return State.GameManager.SpriteDictionary.Viisels[5];
+            return SpriteDictionary.Viisels[5];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.Viisels[3];
+            return SpriteDictionary.Viisels[3];
         }
     }
 
@@ -120,11 +120,11 @@ class Viisels : BlankSlate
             return null;
         if (actor.IsErect())
         {
-            return State.GameManager.SpriteDictionary.Viisels[6];
+            return SpriteDictionary.Viisels[6];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.Viisels[4];
+            return SpriteDictionary.Viisels[4];
         }
     }
     protected override Sprite BallsSprite(Actor_Unit actor)
@@ -133,18 +133,18 @@ class Viisels : BlankSlate
         if (actor.Unit.HasDick == false || actor.GetBallSize(6) == 0)
             return null;
         if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) && offset == 6)
-            return State.GameManager.SpriteDictionary.Viisels[45];
+            return SpriteDictionary.Viisels[45];
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) && offset == 6)
-            return State.GameManager.SpriteDictionary.Viisels[44];
+            return SpriteDictionary.Viisels[44];
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) && offset == 5)
-            return State.GameManager.SpriteDictionary.Viisels[43];
-        return State.GameManager.SpriteDictionary.Viisels[36 + actor.GetBallSize(6)];
+            return SpriteDictionary.Viisels[43];
+        return SpriteDictionary.Viisels[36 + actor.GetBallSize(6)];
     }
 
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Viisels[15 + (actor.IsOralVoring ? 1 : 0)];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.Viisels[15 + (actor.IsOralVoring ? 1 : 0)];
 
-    protected override Sprite EyesSecondarySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Viisels[19 + (actor.Unit.EyeType * 2)]; // Eye color
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Viisels[18 + (actor.Unit.EyeType * 2)]; // Eyes
+    protected override Sprite EyesSecondarySprite(Actor_Unit actor) => SpriteDictionary.Viisels[19 + (actor.Unit.EyeType * 2)]; // Eye color
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Viisels[18 + (actor.Unit.EyeType * 2)]; // Eyes
 
     protected override Sprite BackWeaponSprite(Actor_Unit actor) => null;
     protected override Sprite SecondaryBellySprite(Actor_Unit actor) => null;

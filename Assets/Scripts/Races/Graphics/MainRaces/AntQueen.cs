@@ -4,8 +4,8 @@ using UnityEngine;
 
 class AntQueen : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.AntQueen1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.AntQueen2;
+    readonly Sprite[] Sprites = SpriteDictionary.AntQueen1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.AntQueen2;
 
     readonly AntLeader LeaderClothes;
 
@@ -386,7 +386,7 @@ class AntQueen : DefaultRaceData
     {
         public AntLeader()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.AntQueen1[104];
+            DiscardSprite = SpriteDictionary.AntQueen1[104];
             coversBreasts = false;
             OccupiesAllSlots = true;
             FixedColor = true;
@@ -401,28 +401,28 @@ class AntQueen : DefaultRaceData
         {
             if (Races.AntQueen.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AntQueen1[96];
+                clothing1.GetSprite = (s) => SpriteDictionary.AntQueen1[96];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AntQueen1[Mathf.Min(88 + actor.Unit.BreastSize, 96)];
+                clothing1.GetSprite = (s) => SpriteDictionary.AntQueen1[Mathf.Min(88 + actor.Unit.BreastSize, 96)];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.AntQueen1[97 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.AntQueen1[97 + actor.Unit.BodySize];
 
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.AntQueen1[100];
+            clothing3.GetSprite = (s) => SpriteDictionary.AntQueen1[100];
 
             if (actor.GetWeaponSprite() == 1 || actor.GetWeaponSprite() == 3)
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.AntQueen1[102];
+                clothing4.GetSprite = (s) => SpriteDictionary.AntQueen1[102];
             }
             else if (actor.GetWeaponSprite() == 5 || actor.GetWeaponSprite() == 7)
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.AntQueen1[103];
+                clothing4.GetSprite = (s) => SpriteDictionary.AntQueen1[103];
             }
             else
             {
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.AntQueen1[101];
+                clothing4.GetSprite = (s) => SpriteDictionary.AntQueen1[101];
             }
 
             base.Configure(sprite, actor);

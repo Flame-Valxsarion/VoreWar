@@ -3,7 +3,7 @@ using UnityEngine;
 
 class CoralSlug : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.CoralSlug;
+    readonly Sprite[] Sprites = SpriteDictionary.CoralSlug;
 
     public CoralSlug()
     {

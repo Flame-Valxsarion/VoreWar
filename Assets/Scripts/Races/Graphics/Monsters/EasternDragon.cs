@@ -56,20 +56,20 @@ class EasternDragon : BlankSlate
         if (!Config.HideCocks && (actor.PredatorComponent?.BallsFullness > 0 || actor.IsErect()))
         {
             AddOffset(BodyAccent, 128 * .3125f, 0);
-            return State.GameManager.SpriteDictionary.EasternDragon[38];
+            return SpriteDictionary.EasternDragon[38];
         }
         if (actor.PredatorComponent?.WombFullness > 0)
         {
             AddOffset(BodyAccent, 128 * .3125f, 0);
-            return State.GameManager.SpriteDictionary.EasternDragon[38];
+            return SpriteDictionary.EasternDragon[38];
         }
         if (actor.IsCockVoring || actor.IsUnbirthing)
         {
             AddOffset(BodyAccent, 128 * .3125f, 0);
-            return State.GameManager.SpriteDictionary.EasternDragon[38];
+            return SpriteDictionary.EasternDragon[38];
         }
         AddOffset(BodyAccent, 0, 0);
-        return State.GameManager.SpriteDictionary.EasternDragon[18];
+        return SpriteDictionary.EasternDragon[18];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Sheath/SnatchBase
@@ -80,14 +80,14 @@ class EasternDragon : BlankSlate
             if (Config.HideCocks) return null;
             if (actor.PredatorComponent?.BallsFullness > 0 || actor.IsCockVoring || actor.IsErect())
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[39];
+                return SpriteDictionary.EasternDragon[39];
             }
         }
         else
         {
             if (actor.PredatorComponent?.WombFullness > 0 || actor.IsUnbirthing)
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[67];
+                return SpriteDictionary.EasternDragon[67];
             }
         }
         return null;
@@ -95,7 +95,7 @@ class EasternDragon : BlankSlate
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Snatch
     {
-        if (actor.IsUnbirthing) return State.GameManager.SpriteDictionary.EasternDragon[68];
+        if (actor.IsUnbirthing) return SpriteDictionary.EasternDragon[68];
         return null;
     }
 
@@ -107,20 +107,20 @@ class EasternDragon : BlankSlate
 
             if (sprite == 17 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.womb) ?? false))
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[86];
+                return SpriteDictionary.EasternDragon[86];
             }
 
             if (sprite == 17 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.womb) ?? false))
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[85];
+                return SpriteDictionary.EasternDragon[85];
             }
 
             if (sprite == 16 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.womb) ?? false))
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[84];
+                return SpriteDictionary.EasternDragon[84];
             }
 
-            return State.GameManager.SpriteDictionary.EasternDragon[68 + sprite];
+            return SpriteDictionary.EasternDragon[68 + sprite];
         }
         return null;
     }
@@ -129,26 +129,26 @@ class EasternDragon : BlankSlate
     {
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
-        return State.GameManager.SpriteDictionary.EasternDragon[0];
+        return SpriteDictionary.EasternDragon[0];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.EasternDragon[5];
+            return SpriteDictionary.EasternDragon[5];
         return null;
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor) // Head
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.EasternDragon[3];
+        if (!actor.Targetable) return SpriteDictionary.EasternDragon[3];
 
         if (actor.IsOralVoring)
         {
             actor.AnimationController.frameLists[0].currentlyActive = false;
             actor.AnimationController.frameLists[0].currentFrame = 0;
             actor.AnimationController.frameLists[0].currentTime = 0f;
-            return State.GameManager.SpriteDictionary.EasternDragon[4];
+            return SpriteDictionary.EasternDragon[4];
         }
 
         if (actor.AnimationController.frameLists[0].currentlyActive)
@@ -166,7 +166,7 @@ class EasternDragon : BlankSlate
                 }
             }
 
-            return State.GameManager.SpriteDictionary.EasternDragon[1 + frameListEyes.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.EasternDragon[1 + frameListEyes.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
         if (State.Rand.Next(750) == 0)
@@ -174,7 +174,7 @@ class EasternDragon : BlankSlate
             actor.AnimationController.frameLists[0].currentlyActive = true;
         }
 
-        return State.GameManager.SpriteDictionary.EasternDragon[1];
+        return SpriteDictionary.EasternDragon[1];
     }
 
     protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) // Tongue
@@ -204,7 +204,7 @@ class EasternDragon : BlankSlate
                 }
             }
 
-            return State.GameManager.SpriteDictionary.EasternDragon[10 + frameListTongue.frames[actor.AnimationController.frameLists[1].currentFrame]];
+            return SpriteDictionary.EasternDragon[10 + frameListTongue.frames[actor.AnimationController.frameLists[1].currentFrame]];
         }
 
         if (actor.PredatorComponent?.VisibleFullness > 0 && State.Rand.Next(1200) == 0)
@@ -215,7 +215,7 @@ class EasternDragon : BlankSlate
         return null;
     }
 
-    protected override Sprite BodySizeSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.EasternDragon[6 + actor.Unit.BodySize]; // One of four horn options.
+    protected override Sprite BodySizeSprite(Actor_Unit actor) => SpriteDictionary.EasternDragon[6 + actor.Unit.BodySize]; // One of four horn options.
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -227,27 +227,27 @@ class EasternDragon : BlankSlate
             if (sprite == 16 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false))
             {
                 AddOffset(Belly, 0, 0 * .625f);
-                return State.GameManager.SpriteDictionary.EasternDragon[37];
+                return SpriteDictionary.EasternDragon[37];
             }
             else if (sprite == 16 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
             {
                 AddOffset(Belly, 0, 0 * .625f);
-                return State.GameManager.SpriteDictionary.EasternDragon[36];
+                return SpriteDictionary.EasternDragon[36];
             }
             else if (sprite == 15 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
             {
                 AddOffset(Belly, 0, 0 * .625f);
-                return State.GameManager.SpriteDictionary.EasternDragon[35];
+                return SpriteDictionary.EasternDragon[35];
             }
             if (sprite >= 14)
-                return State.GameManager.SpriteDictionary.EasternDragon[34];
-            return State.GameManager.SpriteDictionary.EasternDragon[20 + sprite];
+                return SpriteDictionary.EasternDragon[34];
+            return SpriteDictionary.EasternDragon[20 + sprite];
         }
         else
         {
             if (actor.GetExclusiveStomachSize(1) == 0)
-                return State.GameManager.SpriteDictionary.EasternDragon[19];
-            return State.GameManager.SpriteDictionary.EasternDragon[20 + actor.GetExclusiveStomachSize(14, 0.8f)];
+                return SpriteDictionary.EasternDragon[19];
+            return SpriteDictionary.EasternDragon[20 + actor.GetExclusiveStomachSize(14, 0.8f)];
         }
     }
 
@@ -256,25 +256,29 @@ class EasternDragon : BlankSlate
         if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 
+        if (actor.PredatorComponent?.BallsFullness == 0)
+            return null;
         if (actor.PredatorComponent?.BallsFullness > 0 || actor.IsCockVoring)
         {
             int sprite = actor.GetBallSize(24, 0.8f);
 
             if (sprite == 24 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false))
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[66];
+                return SpriteDictionary.EasternDragon[66];
             }
             else if (sprite == 24 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[65];
+                return SpriteDictionary.EasternDragon[65];
             }
             else if (sprite == 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
             {
-                return State.GameManager.SpriteDictionary.EasternDragon[64];
+                return SpriteDictionary.EasternDragon[64];
             }
             if (sprite >= 22)
-                return State.GameManager.SpriteDictionary.EasternDragon[63];
-            return State.GameManager.SpriteDictionary.EasternDragon[41 + sprite];
+                return SpriteDictionary.EasternDragon[63];
+            if (sprite <= 1)
+                return SpriteDictionary.EasternDragon[42];
+            return SpriteDictionary.EasternDragon[41 + sprite];
         }
         return null;
     }
@@ -284,8 +288,8 @@ class EasternDragon : BlankSlate
         if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.EasternDragon[41];
-        if (actor.IsErect()) return State.GameManager.SpriteDictionary.EasternDragon[40];
+        if (actor.IsCockVoring) return SpriteDictionary.EasternDragon[41];
+        if (actor.IsErect()) return SpriteDictionary.EasternDragon[40];
 
         return null;
     }

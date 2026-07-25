@@ -7,14 +7,14 @@ using UnityEngine;
 
 class Bella : BlankSlate
 {
-    readonly Sprite[] Body1 = State.GameManager.SpriteDictionary.BellaBody1;
-    readonly Sprite[] Head1 = State.GameManager.SpriteDictionary.BellaHead1;
-    readonly Sprite[] Arm1 = State.GameManager.SpriteDictionary.BellaArm1;
-    readonly Sprite[] Body2 = State.GameManager.SpriteDictionary.BellaBody2;
-    readonly Sprite[] Head2 = State.GameManager.SpriteDictionary.BellaHead2;
-    readonly Sprite[] Arm2 = State.GameManager.SpriteDictionary.BellaArm2;
-    readonly Sprite[] Robe1 = State.GameManager.SpriteDictionary.BellaRobe1;
-    readonly Sprite[] Robe2 = State.GameManager.SpriteDictionary.BellaRobe2;
+    readonly Sprite[] Body1 = SpriteDictionary.BellaBody1;
+    readonly Sprite[] Head1 = SpriteDictionary.BellaHead1;
+    readonly Sprite[] Arm1 = SpriteDictionary.BellaArm1;
+    readonly Sprite[] Body2 = SpriteDictionary.BellaBody2;
+    readonly Sprite[] Head2 = SpriteDictionary.BellaHead2;
+    readonly Sprite[] Arm2 = SpriteDictionary.BellaArm2;
+    readonly Sprite[] Robe1 = SpriteDictionary.BellaRobe1;
+    readonly Sprite[] Robe2 = SpriteDictionary.BellaRobe2;
 
     public Bella()
     {

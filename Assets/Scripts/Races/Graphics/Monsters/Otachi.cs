@@ -8,7 +8,7 @@ using UnityEngine;
 class Otachi : BlankSlate
 {
 
-    readonly Sprite[] OtachiSprites = State.GameManager.SpriteDictionary.Otachi;
+    readonly Sprite[] OtachiSprites = SpriteDictionary.Otachi;
     bool standing = false;
 
     public Otachi()

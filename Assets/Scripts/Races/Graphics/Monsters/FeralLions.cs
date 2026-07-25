@@ -4,7 +4,7 @@ using UnityEngine;
 class FeralLions : BlankSlate
 {
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.FeralLions;
+    readonly Sprite[] Sprites = SpriteDictionary.FeralLions;
     bool hindView = false;
     RaceFrameList frameListRumpVore = new RaceFrameList(new int[2] { 0, 1 }, new float[2] { .75f, .5f });
     public FeralLions()

@@ -4,10 +4,10 @@ using UnityEngine;
 
 class Zera : BlankSlate
 {
-    readonly Sprite[] SpritesMain = State.GameManager.SpriteDictionary.Zera240;
-    readonly Sprite[] SpritesFrontBelly = State.GameManager.SpriteDictionary.ZeraFrontBelly;
-    readonly Sprite[] SpritesBelly = State.GameManager.SpriteDictionary.ZeraBelly;
-    readonly Sprite[] SpritesBalls = State.GameManager.SpriteDictionary.ZeraBalls;
+    readonly Sprite[] SpritesMain = SpriteDictionary.Zera240;
+    readonly Sprite[] SpritesFrontBelly = SpriteDictionary.ZeraFrontBelly;
+    readonly Sprite[] SpritesBelly = SpriteDictionary.ZeraBelly;
+    readonly Sprite[] SpritesBalls = SpriteDictionary.ZeraBalls;
 
     int[] BallsLow = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 17, 18, 19, 20, 21, 22, 35, 34, 33, 32 }; //8 is cut out so the lengths match
     int[] BallsMedium = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 13, 14, 15, 16, 23, 24, 25, 20, 21, 22, 35, 34, 33, 32 };

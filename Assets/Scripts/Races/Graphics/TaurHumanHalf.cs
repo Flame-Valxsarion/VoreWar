@@ -7,7 +7,7 @@ using UnityEngine;
 
 class TaurHumanHalf : BlankSlate
 {
-    //readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.CentaurParts;
+    //readonly Sprite[] Sprites = SpriteDictionary.CentaurParts;
     internal bool oversize = false;
     public TaurHumanHalf()
     {
@@ -16,6 +16,7 @@ class TaurHumanHalf : BlankSlate
         MouthTypes = 12;
         HairColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UniversalHair);
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.RedSkin);
+        EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EyeColor);
         GentleAnimation = true;
         WeightGainDisabled = true;
         BodyAccentTypes1 = 6; // eyebrows
@@ -40,7 +41,7 @@ class TaurHumanHalf : BlankSlate
     internal override void RandomCustom(Unit unit)
     {
         base.RandomCustom(unit);
-        unit.TailType = State.Rand.Next(TailTypes);
+        unit.EyeColor = State.Rand.Next(EyeColors);
     }
 
     internal override void SetBaseOffsets(Actor_Unit actor)
@@ -182,16 +183,16 @@ class TaurHumanHalf : BlankSlate
             {
                 if (actor.Unit.BodySize > 1)
                 {
-                    return State.GameManager.SpriteDictionary.HumansBodySprites2[4];
+                    return SpriteDictionary.HumansBodySprites2[4];
                 }
                 else
                 {
-                    return State.GameManager.SpriteDictionary.HumansBodySprites2[1];
+                    return SpriteDictionary.HumansBodySprites2[1];
                 }
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[7];
+                return SpriteDictionary.HumansBodySprites2[7];
             }
         }
         else if (actor.IsAttacking)
@@ -200,16 +201,16 @@ class TaurHumanHalf : BlankSlate
             {
                 if (actor.Unit.BodySize > 1)
                 {
-                    return State.GameManager.SpriteDictionary.HumansBodySprites2[5];
+                    return SpriteDictionary.HumansBodySprites2[5];
                 }
                 else
                 {
-                    return State.GameManager.SpriteDictionary.HumansBodySprites2[2];
+                    return SpriteDictionary.HumansBodySprites2[2];
                 }
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[8];
+                return SpriteDictionary.HumansBodySprites2[8];
             }
         }
         else
@@ -218,16 +219,16 @@ class TaurHumanHalf : BlankSlate
             {
                 if (actor.Unit.BodySize > 1)
                 {
-                    return State.GameManager.SpriteDictionary.HumansBodySprites2[3];
+                    return SpriteDictionary.HumansBodySprites2[3];
                 }
                 else
                 {
-                    return State.GameManager.SpriteDictionary.HumansBodySprites2[0];
+                    return SpriteDictionary.HumansBodySprites2[0];
                 }
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[6];
+                return SpriteDictionary.HumansBodySprites2[6];
             }
 
         }
@@ -237,33 +238,33 @@ class TaurHumanHalf : BlankSlate
         if (actor.IsEating || actor.IsAttacking)
             return null;
         else
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[108 + actor.Unit.MouthType];
+            return SpriteDictionary.HumansBodySprites3[108 + actor.Unit.MouthType];
     }
 
     protected override Sprite HairSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.HumansBodySprites2[71 + 2 * actor.Unit.HairStyle];
+        return SpriteDictionary.HumansBodySprites2[71 + 2 * actor.Unit.HairStyle];
     }
 
     protected override Sprite HairSprite2(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.HumansBodySprites2[72 + 2 * actor.Unit.HairStyle];
+        return SpriteDictionary.HumansBodySprites2[72 + 2 * actor.Unit.HairStyle];
     }
 
     protected override Sprite HairSprite3(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.HumansBodySprites3[120 + actor.Unit.BodyAccentType1];
+        return SpriteDictionary.HumansBodySprites3[120 + actor.Unit.BodyAccentType1];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
         if (actor.Unit.IsDead && actor.Unit.Items != null)
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites2[69];
+            return SpriteDictionary.HumansBodySprites2[69];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[24 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
+            return SpriteDictionary.HumansBodySprites3[24 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
         }
     }
 
@@ -275,7 +276,7 @@ class TaurHumanHalf : BlankSlate
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[25 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
+            return SpriteDictionary.HumansBodySprites3[25 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
         }
     }
 
@@ -284,30 +285,30 @@ class TaurHumanHalf : BlankSlate
 
         if (actor.Unit.HasWeapon == false)
         {
-            if (actor.IsAttacking) return State.GameManager.SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
-            return State.GameManager.SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
+            if (actor.IsAttacking) return SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
+            return SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
         }
 
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 1:
-                return State.GameManager.SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 2:
-                return State.GameManager.SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 3:
-                return State.GameManager.SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[3 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 4:
-                return State.GameManager.SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 5:
-                return State.GameManager.SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 6:
-                return State.GameManager.SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[2 + (actor.Unit.HasBreasts ? 0 : 4)];
             case 7:
-                return State.GameManager.SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[1 + (actor.Unit.HasBreasts ? 0 : 4)];
             default:
-                return State.GameManager.SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
+                return SpriteDictionary.TaurTorso[0 + (actor.Unit.HasBreasts ? 0 : 4)];
         }
     }
 
@@ -322,22 +323,22 @@ class TaurHumanHalf : BlankSlate
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && size == 31)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[105];
+                return SpriteDictionary.HumansVoreSprites[105];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 31)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[104];
+                return SpriteDictionary.HumansVoreSprites[104];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 30)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[103];
+                return SpriteDictionary.HumansVoreSprites[103];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 29)
             {
                 AddOffset(Belly, 0, -33 * .625f);
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[102];
+                return SpriteDictionary.HumansVoreSprites[102];
             }
             switch (size)
             {
@@ -361,7 +362,7 @@ class TaurHumanHalf : BlankSlate
                     break;
             }
 
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[70 + size];
+            return SpriteDictionary.HumansVoreSprites[70 + size];
         }
         else
         {
@@ -381,25 +382,25 @@ class TaurHumanHalf : BlankSlate
                 oversize = true;
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.leftBreast) && leftSize >= 32)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[31];
+                return SpriteDictionary.HumansVoreSprites[31];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.leftBreast) && leftSize >= 30)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[30];
+                return SpriteDictionary.HumansVoreSprites[30];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.leftBreast) && leftSize >= 28)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[29];
+                return SpriteDictionary.HumansVoreSprites[29];
             }
 
             if (leftSize > 28)
                 leftSize = 28;
 
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[0 + leftSize];
+            return SpriteDictionary.HumansVoreSprites[0 + leftSize];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+            return SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
         }
     }
 
@@ -414,25 +415,25 @@ class TaurHumanHalf : BlankSlate
                 oversize = true;
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.rightBreast) && rightSize >= 32)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[63];
+                return SpriteDictionary.HumansVoreSprites[63];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.rightBreast) && rightSize >= 30)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[62];
+                return SpriteDictionary.HumansVoreSprites[62];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.rightBreast) && rightSize >= 28)
             {
-                return State.GameManager.SpriteDictionary.HumansVoreSprites[61];
+                return SpriteDictionary.HumansVoreSprites[61];
             }
 
             if (rightSize > 28)
                 rightSize = 28;
 
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[32 + rightSize];
+            return SpriteDictionary.HumansVoreSprites[32 + rightSize];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+            return SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
         }
     }
     internal static ColorSwapPalette FurryColor(Actor_Unit actor)

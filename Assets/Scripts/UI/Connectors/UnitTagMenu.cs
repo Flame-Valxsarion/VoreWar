@@ -341,14 +341,26 @@ public class UnitTagMenu : MonoBehaviour
                     foreach (RandomizeList rl in State.RandomizeLists)
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(rl.name.ToString()));
+                        if (rl.id == item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
                     }
                     foreach (CustomTraitBoost ct in State.CustomTraitList)
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(ct.name.ToString()));
+                        if (ct.id == item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
                     }
                     foreach (ConditionalTraitContainer cdt in State.ConditionalTraitList)
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(cdt.name.ToString()));
+                        if (cdt.id == item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
                     }
                     foreach (Traits traitId in ((Traits[])Enum.GetValues(typeof(Traits))).OrderBy(s =>
                     {
@@ -356,6 +368,11 @@ public class UnitTagMenu : MonoBehaviour
                     }))
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(traitId.ToString()));
+                        if (traitId == (Traits)item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
+
                     }
                     loadMod.targetValue.RefreshShownValue();
                     break;
@@ -366,6 +383,10 @@ public class UnitTagMenu : MonoBehaviour
                     foreach (UnitTag uTag in State.UnitTagList)
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(uTag.name.ToString()));
+                        if (uTag.id == item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
                     }
                     loadMod.targetValue.RefreshShownValue();
                     break;
@@ -376,6 +397,10 @@ public class UnitTagMenu : MonoBehaviour
                     foreach (Gender targetGender in ((Gender[])Enum.GetValues(typeof(Gender))))
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(targetGender.ToString()));
+                        if (targetGender == (Gender)item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
                     }
                     loadMod.targetValue.RefreshShownValue();
                     break;
@@ -386,6 +411,10 @@ public class UnitTagMenu : MonoBehaviour
                     foreach (StatusEffectType statusEffectType in ((StatusEffectType[])Enum.GetValues(typeof(StatusEffectType))))
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(statusEffectType.ToString()));
+                        if (statusEffectType == (StatusEffectType)item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
                     }
                     loadMod.targetValue.RefreshShownValue();
                     break;
@@ -396,6 +425,10 @@ public class UnitTagMenu : MonoBehaviour
                     foreach (UnitType unitType in ((UnitType[])Enum.GetValues(typeof(UnitType))))
                     {
                         loadMod.targetValue.options.Add(new TMP_Dropdown.OptionData(unitType.ToString()));
+                        if (unitType == (UnitType)item.targetValue)
+                        {
+                            loadMod.targetValue.value = loadMod.targetValue.options.Count();
+                        }
                     }
                     loadMod.targetValue.RefreshShownValue();
                     break;

@@ -5,13 +5,10 @@ class FeralUmbreon : BlankSlate
 {
     internal FeralUmbreon()
     {
-        CanBeGender = new List<Gender>() { Gender.None };
+        CanBeGender = new List<Gender>() { Gender.Male, Gender.Female };
         AccessoryColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UmbreonSkin);
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UmbreonSkin);
         EyeColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.UmbreonSkin);
-        GentleAnimation = true;
-
-        CanBeGender = new List<Gender>() { Gender.None };
         GentleAnimation = true;
 
         Body = new SpriteExtraInfo(0, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.UmbreonSkin, s.Unit.SkinColor));
@@ -43,18 +40,18 @@ class FeralUmbreon : BlankSlate
     protected override Sprite BodySprite(Actor_Unit actor)
     {
         if (!actor.HasBelly)
-            return State.GameManager.SpriteDictionary.FeralUmbreon[0];
+            return SpriteDictionary.FeralUmbreon[0];
 
-        return State.GameManager.SpriteDictionary.FeralUmbreon[1];
+        return SpriteDictionary.FeralUmbreon[1];
     }
 
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => actor.HasBelly? State.GameManager.SpriteDictionary.FeralUmbreon[2] : null;
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => actor.HasBelly? State.GameManager.SpriteDictionary.FeralUmbreon[3] : null;  
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => actor.IsBeingRubbed? State.GameManager.SpriteDictionary.FeralUmbreon[7] : null;  
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => actor.HasBelly? SpriteDictionary.FeralUmbreon[2] : null;
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => actor.HasBelly? SpriteDictionary.FeralUmbreon[3] : null;  
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => actor.IsBeingRubbed? SpriteDictionary.FeralUmbreon[7] : null;  
 
-    protected override Sprite MouthSprite(Actor_Unit actor) => (actor.IsAttacking || actor.IsEating) ? State.GameManager.SpriteDictionary.FeralUmbreon[5] : null;
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralUmbreon[(actor.Unit.IsDead ? 10 : (actor.IsBeingRubbed ? 11 : 9))];
-    protected override Sprite EyesSecondarySprite(Actor_Unit actor) => (actor.Unit.IsDead ? null : (actor.IsBeingRubbed ? null : State.GameManager.SpriteDictionary.FeralUmbreon[6]));
+    protected override Sprite MouthSprite(Actor_Unit actor) => (actor.IsAttacking || actor.IsEating) ? SpriteDictionary.FeralUmbreon[5] : null;
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.FeralUmbreon[(actor.Unit.IsDead ? 10 : (actor.IsBeingRubbed ? 11 : 9))];
+    protected override Sprite EyesSecondarySprite(Actor_Unit actor) => (actor.Unit.IsDead ? null : (actor.IsBeingRubbed ? null : SpriteDictionary.FeralUmbreon[6]));
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
         int size = actor.GetStomachSize(8);
@@ -64,24 +61,24 @@ class FeralUmbreon : BlankSlate
 
         if (size >= 8 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralUmbreon[19];
+            return SpriteDictionary.FeralUmbreon[19];
         }
 
         if (size >= 7 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralUmbreon[18];
+            return SpriteDictionary.FeralUmbreon[18];
         }
 
         if (size >= 6 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralUmbreon[17];
+            return SpriteDictionary.FeralUmbreon[17];
         }
 
         if (size > 4) size = 4;
 
-        return State.GameManager.SpriteDictionary.FeralUmbreon[12 + size];
+        return SpriteDictionary.FeralUmbreon[12 + size];
     }
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralUmbreon[4];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.FeralUmbreon[4];
 }
 

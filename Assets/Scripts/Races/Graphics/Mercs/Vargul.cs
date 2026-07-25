@@ -4,9 +4,9 @@ using UnityEngine;
 
 class Vargul : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Vargul1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Vargul2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Vargul3;
+    readonly Sprite[] Sprites = SpriteDictionary.Vargul1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Vargul2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Vargul3;
 
     bool oversize = false;
 
@@ -532,7 +532,7 @@ class Vargul : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[48];
+            DiscardSprite = SpriteDictionary.Komodos4[48];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -545,11 +545,11 @@ class Vargul : DefaultRaceData
         {
             if (Races.Vargul.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[61];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[61];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[53 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[53 + actor.Unit.BreastSize];
             }
             else
             {
@@ -567,7 +567,7 @@ class Vargul : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[58];
+            DiscardSprite = SpriteDictionary.Komodos4[58];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -580,11 +580,11 @@ class Vargul : DefaultRaceData
         {
             if (Races.Vargul.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[70];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[70];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[62 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[62 + actor.Unit.BreastSize];
             }
             else
             {
@@ -602,7 +602,7 @@ class Vargul : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[68];
+            DiscardSprite = SpriteDictionary.Komodos4[68];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -616,11 +616,11 @@ class Vargul : DefaultRaceData
         {
             if (Races.Vargul.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[79];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[79];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[71 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[71 + actor.Unit.BreastSize];
             }
             else
             {
@@ -629,7 +629,7 @@ class Vargul : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[80];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[80];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -640,7 +640,7 @@ class Vargul : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[79];
+            DiscardSprite = SpriteDictionary.Komodos4[79];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -654,12 +654,12 @@ class Vargul : DefaultRaceData
             if (Races.Vargul.oversize)
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[89];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[89];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[90 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[81 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[90 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[81 + actor.Unit.BreastSize];
             }
             else
             {
@@ -678,7 +678,7 @@ class Vargul : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[97];
+            DiscardSprite = SpriteDictionary.Komodos4[97];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -691,11 +691,11 @@ class Vargul : DefaultRaceData
         {
             if (Races.Vargul.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[106];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[106];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[98 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[98 + actor.Unit.BreastSize];
             }
             else
             {
@@ -728,7 +728,7 @@ class Vargul : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[2 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[2 + actor.Unit.BreastSize];
             }
             else
             {
@@ -738,11 +738,11 @@ class Vargul : DefaultRaceData
 
             if (actor.Unit.BodySize < 3)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[0];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[0];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[1];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[1];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.VargulSkin, actor.Unit.SkinColor);
@@ -756,7 +756,7 @@ class Vargul : DefaultRaceData
     {
         public Tribal()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[38];
+            DiscardSprite = SpriteDictionary.Komodos4[38];
             coversBreasts = false;
             Type = 61406;
             OccupiesAllSlots = true;
@@ -769,19 +769,19 @@ class Vargul : DefaultRaceData
         {
             if (Races.Vargul.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[52];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[36 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[52];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[36 + actor.Unit.BodySize];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[44 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[36 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[44 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[36 + actor.Unit.BodySize];
             }
             else
             {
                 breastSprite = null;
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[40 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[40 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);
@@ -792,7 +792,7 @@ class Vargul : DefaultRaceData
     {
         public LightArmour()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vargul5[38];
+            DiscardSprite = SpriteDictionary.Vargul5[38];
             coversBreasts = false;
             Type = 61802;
             FixedColor = true;
@@ -811,21 +811,21 @@ class Vargul : DefaultRaceData
         {
             if (actor.Unit.BodyAccentType3 == 0)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[2];
+                clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[2];
             }
             else
             {
                 if (actor.IsOralVoring)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[5];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[5];
                 }
                 else if (actor.IsAttacking || actor.IsEating)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[4];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[4];
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[3];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[3];
                 }
             }
 
@@ -833,21 +833,21 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[6];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[10];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[6];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[10];
                 }
                 else if (actor.Unit.BodySize > 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[7];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[11];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[7];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[11];
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[7];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[10];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[7];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[10];
                 }
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[1];
-                clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[14 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[1];
+                clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[14 + actor.Unit.BodySize];
                 clothing7.GetSprite = null;
                 clothing8.GetSprite = null;
             }
@@ -855,44 +855,44 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[6];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[10];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[6];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[10];
                 }
                 else if (actor.Unit.BodySize > 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[7];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[11];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[7];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[11];
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[7];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[10];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[7];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[10];
                 }
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[1];
-                clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[14 + actor.Unit.BodySize];
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[22 + actor.Unit.BreastSize];
-                clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[30 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[1];
+                clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[14 + actor.Unit.BodySize];
+                clothing7.GetSprite = (s) => SpriteDictionary.Vargul5[22 + actor.Unit.BreastSize];
+                clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[30 + actor.Unit.BodySize];
             }
             else
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[8];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[12];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[8];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[12];
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[9];
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[13];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[9];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[13];
                 }
                 breastSprite = null;
                 clothing2.GetSprite = null;
-                clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[18 + actor.Unit.BodySize];
+                clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[18 + actor.Unit.BodySize];
                 clothing7.GetSprite = null;
-                clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[34 + actor.Unit.BodySize];
+                clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[34 + actor.Unit.BodySize];
             }
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[0];
+            clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[0];
 
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);
             clothing5.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);
@@ -907,7 +907,7 @@ class Vargul : DefaultRaceData
     {
         public MediumArmour()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vargul5[39];
+            DiscardSprite = SpriteDictionary.Vargul5[39];
             coversBreasts = false;
             Type = 61803;
             FixedColor = true;
@@ -928,11 +928,11 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.HasBreasts)
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[82];
+                    clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[82];
                 }
                 else
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[83];
+                    clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[83];
                 }
                 clothing6.layer = 13;
             }
@@ -940,11 +940,11 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.HasBreasts)
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[74 + actor.Unit.BodySize];
+                    clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[74 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[78 + actor.Unit.BodySize];
+                    clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[78 + actor.Unit.BodySize];
                 }
                 clothing6.layer = 15;
             }
@@ -952,11 +952,11 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.HasBreasts)
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[66 + actor.Unit.BodySize];
+                    clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[66 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[70 + actor.Unit.BodySize];
+                    clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[70 + actor.Unit.BodySize];
                 }
                 clothing6.layer = 15;
             }
@@ -965,146 +965,146 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[54];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[54];
                 }
                 else if (actor.Unit.BodySize > 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[55];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[55];
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[54];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[54];
                 }
 
                 if (actor.HasBelly)
                 {
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[107];
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[88 + actor.Unit.BodySize];
+                    clothing7.GetSprite = (s) => SpriteDictionary.Vargul5[107];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[88 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[107];
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[84 + actor.Unit.BodySize];
+                    clothing7.GetSprite = (s) => SpriteDictionary.Vargul5[107];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[84 + actor.Unit.BodySize];
                 }
 
                 if (actor.Unit.BodyAccentType3 == 0)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[42];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[42];
                 }
                 else
                 {
                     if (actor.IsOralVoring)
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[45];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[45];
                     }
                     else if (actor.IsAttacking || actor.IsEating)
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[44];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[44];
                     }
                     else
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[43];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[43];
                     }
                 }
 
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[56 + actor.Unit.BodySize];
+                clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[56 + actor.Unit.BodySize];
             }
             else if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[54];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[54];
                 }
                 else if (actor.Unit.BodySize > 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[55];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[55];
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[54];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[54];
                 }
 
                 if (actor.HasBelly)
                 {
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[100 + actor.Unit.BreastSize];
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[88 + actor.Unit.BodySize];
+                    clothing7.GetSprite = (s) => SpriteDictionary.Vargul5[100 + actor.Unit.BreastSize];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[88 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[92 + actor.Unit.BreastSize];
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[84 + actor.Unit.BodySize];
+                    clothing7.GetSprite = (s) => SpriteDictionary.Vargul5[92 + actor.Unit.BreastSize];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[84 + actor.Unit.BodySize];
                 }
 
                 if (actor.Unit.BodyAccentType3 == 0)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[42];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[42];
                 }
                 else
                 {
                     if (actor.IsOralVoring)
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[45];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[45];
                     }
                     else if (actor.IsAttacking || actor.IsEating)
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[44];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[44];
                     }
                     else
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[43];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[43];
                     }
                 }
 
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[56 + actor.Unit.BodySize];
+                clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[56 + actor.Unit.BodySize];
             }
             else
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[54];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[54];
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[55];
+                    clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[55];
                 }
 
                 if (actor.HasBelly)
                 {
                     clothing7.GetSprite = null;
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[112 + actor.Unit.BodySize];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[112 + actor.Unit.BodySize];
                 }
                 else
                 {
                     clothing7.GetSprite = null;
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[108 + actor.Unit.BodySize];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[108 + actor.Unit.BodySize];
                 }
 
                 if (actor.Unit.BodyAccentType3 == 0)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[151];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[151];
                 }
                 else
                 {
                     if (actor.IsOralVoring)
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[154];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[154];
                     }
                     else if (actor.IsAttacking || actor.IsEating)
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[153];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[153];
                     }
                     else
                     {
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[152];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[152];
                     }
                 }
 
                 breastSprite = null;
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[60 + actor.Unit.BodySize];
+                clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[60 + actor.Unit.BodySize];
             }
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[40];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[46 + (actor.Unit.BodySize > 1 ? 1 : 0) + (!actor.Unit.HasBreasts ? 2 : 0) + (actor.IsAttacking ? 4 : 0)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[40];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[46 + (actor.Unit.BodySize > 1 ? 1 : 0) + (!actor.Unit.HasBreasts ? 2 : 0) + (actor.IsAttacking ? 4 : 0)];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);
@@ -1122,7 +1122,7 @@ class Vargul : DefaultRaceData
     {
         public HeavyArmour()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vargul5[159];
+            DiscardSprite = SpriteDictionary.Vargul5[159];
             coversBreasts = false;
             Type = 61804;
             FixedColor = true;
@@ -1148,15 +1148,15 @@ class Vargul : DefaultRaceData
             {
                 if (actor.IsOralVoring)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[122];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[122];
                 }
                 else if (actor.IsAttacking || actor.IsEating)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[121];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[121];
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[120];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Vargul5[120];
                 }
             }
 
@@ -1164,15 +1164,15 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[123];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[123];
                 }
                 else if (actor.Unit.BodySize > 2)
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[124];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[124];
                 }
                 else
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[123];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[123];
                 }
 
                 if (actor.HasBelly || (actor.GetBallSize(27, .8f) > 0) || actor.HasPreyInBreasts)
@@ -1181,28 +1181,28 @@ class Vargul : DefaultRaceData
                 }
                 else
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[127 + actor.Unit.BodySize];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[127 + actor.Unit.BodySize];
                 }
 
                 clothing7.layer = 21;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[117];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[116];
-                clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[135 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[117];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[116];
+                clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[135 + actor.Unit.BodySize];
                 clothing7.GetSprite = null;
             }
             else if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[123];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[123];
                 }
                 else if (actor.Unit.BodySize > 2)
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[124];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[124];
                 }
                 else
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[123];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[123];
                 }
 
                 if (actor.HasBelly || (actor.GetBallSize(27, .8f) > 0) || actor.HasPreyInBreasts)
@@ -1211,24 +1211,24 @@ class Vargul : DefaultRaceData
                 }
                 else
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[127 + actor.Unit.BodySize];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[127 + actor.Unit.BodySize];
                 }
 
                 clothing7.layer = 21;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[117];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[116];
-                clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[135 + actor.Unit.BodySize];
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[143 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[117];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[116];
+                clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[135 + actor.Unit.BodySize];
+                clothing7.GetSprite = (s) => SpriteDictionary.Vargul5[143 + actor.Unit.BreastSize];
             }
             else
             {
                 if (actor.Unit.BodySize < 2)
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[125];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[125];
                 }
                 else
                 {
-                    clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[126];
+                    clothing5.GetSprite = (s) => SpriteDictionary.Vargul5[126];
                 }
 
                 if (actor.HasBelly || (actor.GetBallSize(27, .8f) > 0) || actor.HasPreyInBreasts)
@@ -1237,18 +1237,18 @@ class Vargul : DefaultRaceData
                 }
                 else
                 {
-                    clothing8.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[131 + actor.Unit.BodySize];
+                    clothing8.GetSprite = (s) => SpriteDictionary.Vargul5[131 + actor.Unit.BodySize];
                 }
 
                 clothing7.layer = 19;
                 breastSprite = null;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[119];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[118];
-                clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[139 + actor.Unit.BodySize];
-                clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[155 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[119];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[118];
+                clothing6.GetSprite = (s) => SpriteDictionary.Vargul5[139 + actor.Unit.BodySize];
+                clothing7.GetSprite = (s) => SpriteDictionary.Vargul5[155 + actor.Unit.BodySize];
             }
 
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[46 + (actor.Unit.BodySize > 1 ? 1 : 0) + (!actor.Unit.HasBreasts ? 2 : 0) + (actor.IsAttacking ? 4 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vargul5[46 + (actor.Unit.BodySize > 1 ? 1 : 0) + (!actor.Unit.HasBreasts ? 2 : 0) + (actor.IsAttacking ? 4 : 0)];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);
             clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);
@@ -1266,7 +1266,7 @@ class Vargul : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[9];
+            DiscardSprite = SpriteDictionary.Komodos4[9];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1281,35 +1281,35 @@ class Vargul : DefaultRaceData
                 if (actor.Unit.DickSize > 0)
                 {
                     if (actor.Unit.DickSize < 3)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[19];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[19];
                     else if (actor.Unit.DickSize > 5)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[21];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[21];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[20];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[20];
                 }
-                else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[18];
+                else clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[18];
             }
             else
             {
                 if (actor.Unit.DickSize > 0)
                 {
                     if (actor.Unit.DickSize < 3)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[23];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[23];
                     else if (actor.Unit.DickSize > 5)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[25];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[25];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[24];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[24];
                 }
-                else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[22];
+                else clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[22];
             }
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[10 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[10 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[14 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[14 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1321,7 +1321,7 @@ class Vargul : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[19];
+            DiscardSprite = SpriteDictionary.Komodos4[19];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1334,20 +1334,20 @@ class Vargul : DefaultRaceData
 
             if (actor.Unit.BodySize < 3)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[26];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[26];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[27];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[27];
             }
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[10 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[10 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[14 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul4[14 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1359,7 +1359,7 @@ class Vargul : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[24];
+            DiscardSprite = SpriteDictionary.Komodos4[24];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(12, null, WhiteColored);
             Type = 61409;
@@ -1371,11 +1371,11 @@ class Vargul : DefaultRaceData
 
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[28 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[28 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul4[32 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vargul4[32 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);
@@ -1386,7 +1386,7 @@ class Vargul : DefaultRaceData
     {
         public ArmourBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vargul5[41];
+            DiscardSprite = SpriteDictionary.Vargul5[41];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1401,11 +1401,11 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.BodySize < 3)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[64];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[64];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[65];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[65];
                 }
             }
             else
@@ -1415,11 +1415,11 @@ class Vargul : DefaultRaceData
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[56 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[56 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[60 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[60 + actor.Unit.BodySize];
             }
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);
@@ -1432,7 +1432,7 @@ class Vargul : DefaultRaceData
     {
         public ArmourBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vargul5[41];
+            DiscardSprite = SpriteDictionary.Vargul5[41];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1447,11 +1447,11 @@ class Vargul : DefaultRaceData
             {
                 if (actor.Unit.BodySize < 3)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[64];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[64];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[65];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Vargul5[65];
                 }
             }
             else
@@ -1461,11 +1461,11 @@ class Vargul : DefaultRaceData
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[135 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[135 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vargul5[139 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vargul5[139 + actor.Unit.BodySize];
             }
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ExtraColor1);

@@ -5,12 +5,9 @@ class FeralEevee : BlankSlate
 {
     internal FeralEevee()
     {
-        CanBeGender = new List<Gender>() { Gender.None };
+        CanBeGender = new List<Gender>() { Gender.Male, Gender.Female };
         SkinColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
         AccessoryColors = ColorPaletteMap.GetPaletteCount(ColorPaletteMap.SwapType.EeveeEqualeonSkin);
-        GentleAnimation = true;
-
-        CanBeGender = new List<Gender>() { Gender.None };
         GentleAnimation = true;
 
         Body = new SpriteExtraInfo(0, BodySprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EeveeEqualeonSkin, s.Unit.SkinColor));
@@ -47,17 +44,17 @@ class FeralEevee : BlankSlate
     protected override Sprite BodySprite(Actor_Unit actor)
     {
         if (!actor.HasBelly)
-            return State.GameManager.SpriteDictionary.FeralEevee[0];
+            return SpriteDictionary.FeralEevee[0];
         int size = actor.GetStomachSize(33);
         if (size >= 24)
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[47];
+            return SpriteDictionary.FeralEevee[47];
         }
         if (size >= 6)
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[12];
+            return SpriteDictionary.FeralEevee[12];
         }
-        return State.GameManager.SpriteDictionary.FeralEevee[10];
+        return SpriteDictionary.FeralEevee[10];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
@@ -68,24 +65,24 @@ class FeralEevee : BlankSlate
         int size = actor.GetStomachSize(33);
         if (size >= 24)
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[48];
+            return SpriteDictionary.FeralEevee[48];
         }
         if (size >= 6)
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[13];
+            return SpriteDictionary.FeralEevee[13];
         }
-        return State.GameManager.SpriteDictionary.FeralEevee[11];
+        return SpriteDictionary.FeralEevee[11];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.IsEating)
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[4];
+            return SpriteDictionary.FeralEevee[4];
         }
         else 
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[3];
+            return SpriteDictionary.FeralEevee[3];
         }
     }
 
@@ -93,13 +90,13 @@ class FeralEevee : BlankSlate
     {
         if (actor.IsBeingRubbed)
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[7];
+            return SpriteDictionary.FeralEevee[7];
         }
         if (actor.Unit.IsDead)
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[8];
+            return SpriteDictionary.FeralEevee[8];
         }
-        return State.GameManager.SpriteDictionary.FeralEevee[2];
+        return SpriteDictionary.FeralEevee[2];
     }
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -110,24 +107,24 @@ class FeralEevee : BlankSlate
 
         if (size >= 33 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[46];
+            return SpriteDictionary.FeralEevee[46];
         }
 
         if (size >= 32 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[45];
+            return SpriteDictionary.FeralEevee[45];
         }
 
         if (size >= 31 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralEevee[44];
+            return SpriteDictionary.FeralEevee[44];
         }
 
         if (size > 29) size = 29;
 
-        return State.GameManager.SpriteDictionary.FeralEevee[14 + size];
+        return SpriteDictionary.FeralEevee[14 + size];
     }
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralEevee[1];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.FeralEevee[1];
 }
 

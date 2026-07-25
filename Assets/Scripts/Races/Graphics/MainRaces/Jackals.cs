@@ -4,12 +4,12 @@ using UnityEngine;
 
 class Jackals : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.HumansBodySprites1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.HumansBodySprites2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.HumansBodySprites3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.HumansVoreSprites;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.HumansBodySprites4;
-    readonly Sprite[] Sprites6 = State.GameManager.SpriteDictionary.HumansBodySprites5;
+    readonly Sprite[] Sprites = SpriteDictionary.HumansBodySprites1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.HumansBodySprites2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.HumansBodySprites3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.HumansVoreSprites;
+    readonly Sprite[] Sprites5 = SpriteDictionary.HumansBodySprites4;
+    readonly Sprite[] Sprites6 = SpriteDictionary.HumansBodySprites5;
 
     bool oversize = false;
 
@@ -336,15 +336,15 @@ class Jackals : DefaultRaceData
         {
             if (actor.IsEating)
             {
-                return State.GameManager.SpriteDictionary.JackalMain[22];
+                return SpriteDictionary.JackalMain[22];
             }
             else if (actor.IsAttacking)
             {
-                return State.GameManager.SpriteDictionary.JackalMain[23];
+                return SpriteDictionary.JackalMain[23];
             }
             else 
             {
-                return State.GameManager.SpriteDictionary.JackalMain[21];
+                return SpriteDictionary.JackalMain[21];
             }
 
         }
@@ -405,16 +405,16 @@ class Jackals : DefaultRaceData
         }
     }
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.JackalMain[0 + actor.Unit.EarType]; //ears
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.JackalMain[0 + actor.Unit.EarType]; //ears
 
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.JackalMain[4 + actor.Unit.EarType];
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.JackalMain[8 + actor.Unit.TailType];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.JackalMain[4 + actor.Unit.EarType];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.JackalMain[8 + actor.Unit.TailType];
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Ears
     {
         if (actor.Unit.BodyAccentType3 == 0)
             return null;
-        return State.GameManager.SpriteDictionary.JackalJewel[31 + actor.Unit.EarType];
+        return SpriteDictionary.JackalJewel[31 + actor.Unit.EarType];
     }
     protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Ears
     {
@@ -422,11 +422,11 @@ class Jackals : DefaultRaceData
             return null;
         else if (actor.Unit.BodyAccentType4 == 1)
         {
-            return State.GameManager.SpriteDictionary.JackalJewel[35];
+            return SpriteDictionary.JackalJewel[35];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.JackalJewel[47];
+            return SpriteDictionary.JackalJewel[47];
         }
     }
 
@@ -454,7 +454,7 @@ class Jackals : DefaultRaceData
             case 5:
                 return null;
             case 6:
-                return State.GameManager.SpriteDictionary.JackalMain[20];
+                return SpriteDictionary.JackalMain[20];
             case 7:
                 return null;
             default:
@@ -475,7 +475,7 @@ class Jackals : DefaultRaceData
             case 1:
                 return null;
             case 2:
-                return State.GameManager.SpriteDictionary.JackalMain[35];
+                return SpriteDictionary.JackalMain[35];
             case 3:
                 return null;
             case 4:
@@ -602,21 +602,21 @@ class Jackals : DefaultRaceData
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.JackalMain[12];
+                    return SpriteDictionary.JackalMain[12];
                 case 1:
-                    return State.GameManager.SpriteDictionary.JackalMain[13];
+                    return SpriteDictionary.JackalMain[13];
                 case 2:
-                    return State.GameManager.SpriteDictionary.JackalMain[14];
+                    return SpriteDictionary.JackalMain[14];
                 case 3:
-                    return State.GameManager.SpriteDictionary.JackalMain[15];
+                    return SpriteDictionary.JackalMain[15];
                 case 4:
-                    return State.GameManager.SpriteDictionary.JackalMain[16];
+                    return SpriteDictionary.JackalMain[16];
                 case 5:
-                    return State.GameManager.SpriteDictionary.JackalMain[17];
+                    return SpriteDictionary.JackalMain[17];
                 case 6:
-                    return State.GameManager.SpriteDictionary.JackalMain[18];
+                    return SpriteDictionary.JackalMain[18];
                 case 7:
-                    return State.GameManager.SpriteDictionary.JackalMain[19];
+                    return SpriteDictionary.JackalMain[19];
                 default:
                     return null;
             }
@@ -806,7 +806,7 @@ class Jackals : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[57];
+            DiscardSprite = SpriteDictionary.HumenFundertops[57];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -822,7 +822,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[56];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -830,26 +830,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[0 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -872,7 +872,7 @@ class Jackals : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[58];
+            DiscardSprite = SpriteDictionary.HumenFundertops[58];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -895,26 +895,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[8 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[8 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -936,7 +936,7 @@ class Jackals : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[60];
+            DiscardSprite = SpriteDictionary.HumenFundertops[60];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -952,7 +952,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[59];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[59];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -960,26 +960,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[16 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[16 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1002,7 +1002,7 @@ class Jackals : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[64];
+            DiscardSprite = SpriteDictionary.HumenFundertops[64];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1018,7 +1018,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[63];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[63];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1026,26 +1026,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[32 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[32 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1070,7 +1070,7 @@ class Jackals : DefaultRaceData
     {
         public TightGenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[64];
+            DiscardSprite = SpriteDictionary.HumenFundertops[64];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1086,7 +1086,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[63];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[63];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1094,36 +1094,36 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[36 + Math.Min(5,actor.Unit.BreastSize)];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[36 + Math.Min(5,actor.Unit.BreastSize)];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[24];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[29];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[24];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[29];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[25];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[30];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[25];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[30];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[26];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[31];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[26];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[31];
                 }
                 else if (actor.Unit.BreastSize == 6)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[27];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[32];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[27];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[32];
                 }
                 else if (actor.Unit.BreastSize == 7)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[28];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[33];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[28];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[33];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1146,7 +1146,7 @@ class Jackals : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[66];
+            DiscardSprite = SpriteDictionary.HumenFundertops[66];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1162,7 +1162,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[65];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1170,26 +1170,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[40 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[40 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1214,7 +1214,7 @@ class Jackals : DefaultRaceData
     {
         public PlainClothTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalClothes[86];
+            DiscardSprite = SpriteDictionary.JackalClothes[86];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1238,26 +1238,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[72 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[72 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1281,7 +1281,7 @@ class Jackals : DefaultRaceData
     {
         public WrapTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[64];
+            DiscardSprite = SpriteDictionary.HumenFundertops[64];
             blocksBreasts = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1296,7 +1296,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[63];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[63];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1304,33 +1304,33 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[48 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
             {
                 blocksBreasts = true;
                 breastSprite = null;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[56];
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
             }
@@ -1347,7 +1347,7 @@ class Jackals : DefaultRaceData
     {
         public BronzeBikini()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalClothes[69];
+            DiscardSprite = SpriteDictionary.JackalClothes[69];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1366,9 +1366,9 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[24 + Math.Min(5, actor.Unit.BreastSize)];
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[30 + Math.Min(5, actor.Unit.BreastSize)];
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[94 + (actor.Unit.BodySize > 1 ? 1 : 0)];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[24 + Math.Min(5, actor.Unit.BreastSize)];
+                clothing4.GetSprite = (s) => SpriteDictionary.JackalClothes[30 + Math.Min(5, actor.Unit.BreastSize)];
+                clothing5.GetSprite = (s) => SpriteDictionary.JackalClothes[94 + (actor.Unit.BodySize > 1 ? 1 : 0)];
                 if (actor.GetLeftBreastSize() > 1)
                 {
                     clothing1.GetSprite = null;
@@ -1384,38 +1384,38 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[24 + Math.Min(5, actor.Unit.BreastSize)];
-                clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[30 + Math.Min(5, actor.Unit.BreastSize)];
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[94 + (actor.Unit.BodySize > 1 ? 1 : 0)];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[24 + Math.Min(5, actor.Unit.BreastSize)];
+                clothing4.GetSprite = (s) => SpriteDictionary.JackalClothes[30 + Math.Min(5, actor.Unit.BreastSize)];
+                clothing5.GetSprite = (s) => SpriteDictionary.JackalClothes[94 + (actor.Unit.BodySize > 1 ? 1 : 0)];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[24];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[29];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[24];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[29];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[25];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[30];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[25];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[30];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[26];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[31];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[26];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[31];
                 }
                 else if (actor.Unit.BreastSize == 6)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[27];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[32];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[27];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[32];
                 }
                 else if (actor.Unit.BreastSize == 7)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[28];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalMain[33];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalMain[28];
+                    clothing3.GetSprite = (s) => SpriteDictionary.JackalMain[33];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1440,7 +1440,7 @@ class Jackals : DefaultRaceData
     {
         public MaleTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[16];
+            DiscardSprite = SpriteDictionary.HumenMundertops[16];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1452,7 +1452,7 @@ class Jackals : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[15];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[15];
 
             base.Configure(sprite, actor);
         }
@@ -1462,7 +1462,7 @@ class Jackals : DefaultRaceData
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[16];
+            DiscardSprite = SpriteDictionary.HumenMundertops[16];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -1474,7 +1474,7 @@ class Jackals : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[15];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[15];
 
             base.Configure(sprite, actor);
         }
@@ -1485,7 +1485,7 @@ class Jackals : DefaultRaceData
     {
         public FemaleOnePiece1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[81];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[81];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1502,7 +1502,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[51];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[51];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1510,26 +1510,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[43 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[43 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1546,28 +1546,28 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[42];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[42];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[41];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[41];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[40];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[40];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[39];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[39];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[38];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[38];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[37];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[37];
                 }
             }
             else
@@ -1576,32 +1576,32 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[21];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[21];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[20];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[20];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[19];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[19];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[18];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[18];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[17];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[17];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[16];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[16];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[15];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[15];
                 }
             }
 
@@ -1618,7 +1618,7 @@ class Jackals : DefaultRaceData
     {
         public FemaleOnePiece2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[80];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[80];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1643,26 +1643,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[52 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[52 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1679,64 +1679,64 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[36];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[36];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[35];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[35];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[34];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[34];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[33];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[33];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[32];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[32];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[31];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[31];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[30];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[30];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[29];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[29];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[28];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[28];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[27];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[27];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[26];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[26];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[25];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[25];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[24];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[24];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[23];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[23];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[22];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[22];
                 }
             }
             else
@@ -1745,64 +1745,64 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[14];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[14];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[13];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[13];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[12];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[12];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[11];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[11];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[10];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[10];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[9];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[9];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[8];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[8];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[7];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[7];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[6];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[6];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[5];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[5];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[4];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[4];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[3];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[3];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[2];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[2];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[1];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[1];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[0];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[0];
                 }
             }
 
@@ -1819,7 +1819,7 @@ class Jackals : DefaultRaceData
     {
         public FemaleOnePiece3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[79];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[79];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1836,7 +1836,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[69];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[69];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1844,26 +1844,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[61 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[61 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1880,64 +1880,64 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[36];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[36];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[35];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[35];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[34];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[34];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[33];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[33];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[32];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[32];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[31];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[31];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[30];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[30];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[29];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[29];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[28];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[28];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[27];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[27];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[26];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[26];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[25];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[25];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[24];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[24];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[23];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[23];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[22];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[22];
                 }
             }
             else
@@ -1946,64 +1946,64 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[14];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[14];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[13];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[13];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[12];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[12];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[11];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[11];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[10];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[10];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[9];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[9];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[8];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[8];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[7];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[7];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[6];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[6];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[5];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[5];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[4];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[4];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[3];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[3];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[2];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[2];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[1];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[1];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[0];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[0];
                 }
             }
 
@@ -2020,7 +2020,7 @@ class Jackals : DefaultRaceData
     {
         public FemaleOnePiece4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[82];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[82];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -2037,7 +2037,7 @@ class Jackals : DefaultRaceData
         {
             if (Races.Jackals.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[78];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[78];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -2045,26 +2045,26 @@ class Jackals : DefaultRaceData
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[70 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[70 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -2081,28 +2081,28 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[42];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[42];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[41];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[41];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[40];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[40];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[39];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[39];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[38];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[38];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[37];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[37];
                 }
             }
             else
@@ -2111,32 +2111,32 @@ class Jackals : DefaultRaceData
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[21];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[21];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[20];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[20];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[19];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[19];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[18];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[18];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[17];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[17];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[16];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[16];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[15];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[15];
                 }
             }
 
@@ -2153,7 +2153,7 @@ class Jackals : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUnderbottoms[6];
+            DiscardSprite = SpriteDictionary.HumenUnderbottoms[6];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2166,19 +2166,19 @@ class Jackals : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[60];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[60];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[61];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[61];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[0 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[0 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[3 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[3 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -2191,7 +2191,7 @@ class Jackals : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUnderbottoms[13];
+            DiscardSprite = SpriteDictionary.HumenUnderbottoms[13];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2204,19 +2204,19 @@ class Jackals : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[60];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[60];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[61];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[61];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[7 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[7 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[10 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[10 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -2229,7 +2229,7 @@ class Jackals : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUnderbottoms[26];
+            DiscardSprite = SpriteDictionary.HumenUnderbottoms[26];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -2242,19 +2242,19 @@ class Jackals : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[62];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[62];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[63];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[63];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[20 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[20 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[23 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[23 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);
@@ -2265,7 +2265,7 @@ class Jackals : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUnderbottoms[39];
+            DiscardSprite = SpriteDictionary.HumenUnderbottoms[39];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2278,19 +2278,19 @@ class Jackals : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[60];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[60];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[61];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[61];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[33 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[33 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[36 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[36 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -2302,7 +2302,7 @@ class Jackals : DefaultRaceData
     {
         public GildedLoin()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUnderbottoms[39];
+            DiscardSprite = SpriteDictionary.HumenUnderbottoms[39];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2316,20 +2316,20 @@ class Jackals : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[60];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[60];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[61];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[61];
             }
             else clothing1.GetSprite = null;
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[0 + actor.Unit.BodySize];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[6 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.JackalClothes[0 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.JackalClothes[6 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[3 + actor.Unit.BodySize];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[9 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.JackalClothes[3 + actor.Unit.BodySize];
+                clothing3.GetSprite = (s) => SpriteDictionary.JackalClothes[9 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -2342,7 +2342,7 @@ class Jackals : DefaultRaceData
     {
         public GenericBot5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUnderbottoms[52];
+            DiscardSprite = SpriteDictionary.HumenUnderbottoms[52];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2355,19 +2355,19 @@ class Jackals : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[60];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[60];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[61];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[61];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[46 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[46 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[49 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[49 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -2380,7 +2380,7 @@ class Jackals : DefaultRaceData
     {
         public GenericBot6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUnderbottoms[59];
+            DiscardSprite = SpriteDictionary.HumenUnderbottoms[59];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -2393,19 +2393,19 @@ class Jackals : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[60];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[60];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[61];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[61];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[53 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[53 + actor.Unit.BodySize];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUnderbottoms[56 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUnderbottoms[56 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -2418,7 +2418,7 @@ class Jackals : DefaultRaceData
     {
         public ClothSkirt()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalClothes[87];
+            DiscardSprite = SpriteDictionary.JackalClothes[87];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(15, null, WhiteColored); // main
@@ -2435,31 +2435,31 @@ class Jackals : DefaultRaceData
             {
                 if (actor.HasBelly)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[57 + Math.Min(8, actor.GetStomachSize(31, 0.7f))];
+                    clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[57 + Math.Min(8, actor.GetStomachSize(31, 0.7f))];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[42 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
+                    clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[42 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
                 }
                 if (actor.Unit.Furry)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[44 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[90 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalClothes[44 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
+                    clothing4.GetSprite = (s) => SpriteDictionary.JackalClothes[90 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[46 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[92 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.JackalClothes[46 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
+                    clothing4.GetSprite = (s) => SpriteDictionary.JackalClothes[92 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
                 }
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[88 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.JackalClothes[88 + ((actor.Unit.BodySize > 1) ? 1 : 0)];
 
             }
             else
             {
                 int spr = 18 + ((actor.Unit.BodySize > 1) ? 2 : 0) + (actor.GetStomachSize(31, 0.7f) > 3 ? 1 : 0);
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[spr];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[spr];
                 clothing2.GetSprite = null;
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[spr - 4];
+                clothing3.GetSprite = (s) => SpriteDictionary.JackalClothes[spr - 4];
                 clothing4.GetSprite = null;
             }
             clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -2472,7 +2472,7 @@ class Jackals : DefaultRaceData
     {
         public PlainClothSkirt()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalClothes[87];
+            DiscardSprite = SpriteDictionary.JackalClothes[87];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
@@ -2491,7 +2491,7 @@ class Jackals : DefaultRaceData
             {
                 spr = 22 + (((actor.Unit.Furry || actor.Unit.BodySize > 1)) ? 1 : 0);
             }
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalClothes[spr];
+            clothing1.GetSprite = (s) => SpriteDictionary.JackalClothes[spr];
 
             base.Configure(sprite, actor);
         }
@@ -2501,7 +2501,7 @@ class Jackals : DefaultRaceData
     {
         public WristRings()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[48];
+            DiscardSprite = SpriteDictionary.JackalJewel[48];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
@@ -2520,7 +2520,7 @@ class Jackals : DefaultRaceData
             {
                 sprmod = (actor.Unit.BodySize > 1 ? 12 : 0) + (actor.IsAttacking ? 1 : 0) + (actor.Unit.HasBreasts ? 0 : 6);
             }
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[sprmod];
+            clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[sprmod];
 
             base.Configure(sprite, actor);
         }
@@ -2529,7 +2529,7 @@ class Jackals : DefaultRaceData
     {
         public ArmRings()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[48];
+            DiscardSprite = SpriteDictionary.JackalJewel[48];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
@@ -2542,11 +2542,11 @@ class Jackals : DefaultRaceData
             int sprmod = (actor.Unit.BodySize > 1 ? 12 : 0) + (actor.IsAttacking ? 1 : 0);
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[2 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[2 + sprmod];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[4 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[4 + sprmod];
             }
             base.Configure(sprite, actor);
         }
@@ -2556,7 +2556,7 @@ class Jackals : DefaultRaceData
     {
         public NeckRing()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[50];
+            DiscardSprite = SpriteDictionary.JackalJewel[50];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(5, null, WhiteColored);
@@ -2567,7 +2567,7 @@ class Jackals : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             int sprmod = (actor.Unit.HasBreasts ? 12 : 0);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[24 + sprmod];
+            clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[24 + sprmod];
             base.Configure(sprite, actor);
         }
     }
@@ -2575,7 +2575,7 @@ class Jackals : DefaultRaceData
     {
         public GoldNecklaceWithColor()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[52];
+            DiscardSprite = SpriteDictionary.JackalJewel[52];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(5, null, WhiteColored);
@@ -2587,8 +2587,8 @@ class Jackals : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             int sprmod = (actor.Unit.HasBreasts ? 12 : 0);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[9 + sprmod];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[8 + sprmod];
+            clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[9 + sprmod];
+            clothing2.GetSprite = (s) => SpriteDictionary.JackalJewel[8 + sprmod];
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
         }
@@ -2597,7 +2597,7 @@ class Jackals : DefaultRaceData
     {
         public GoldNecklace()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[51];
+            DiscardSprite = SpriteDictionary.JackalJewel[51];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(20, null, WhiteColored);
@@ -2608,7 +2608,7 @@ class Jackals : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             int sprmod = (actor.Unit.HasBreasts ? 12 : 0);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[10 + sprmod];
+            clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[10 + sprmod];
             base.Configure(sprite, actor);
         }
     }
@@ -2616,7 +2616,7 @@ class Jackals : DefaultRaceData
     {
         public ColorNecklace ()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[52];
+            DiscardSprite = SpriteDictionary.JackalJewel[52];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(20, null, null);
@@ -2627,7 +2627,7 @@ class Jackals : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             int sprmod = (actor.Unit.HasBreasts ? 12 : 0);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[11 + sprmod];
+            clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[11 + sprmod];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
         }
@@ -2637,7 +2637,7 @@ class Jackals : DefaultRaceData
     {
         public LegRings()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[48];
+            DiscardSprite = SpriteDictionary.JackalJewel[48];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(5, null, WhiteColored);
@@ -2650,15 +2650,15 @@ class Jackals : DefaultRaceData
             int sprmod = (actor.Unit.BodySize > 1 ? 1 : 0);
             if (actor.Unit.Furry)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[43 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[43 + sprmod];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[25 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[25 + sprmod];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[37 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[37 + sprmod];
             }
             base.Configure(sprite, actor);
         }
@@ -2667,7 +2667,7 @@ class Jackals : DefaultRaceData
     {
         public LegRings2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[48];
+            DiscardSprite = SpriteDictionary.JackalJewel[48];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(5, null, WhiteColored);
@@ -2680,15 +2680,15 @@ class Jackals : DefaultRaceData
             int sprmod = (actor.Unit.BodySize > 1 ? 1 : 0);
             if (actor.Unit.Furry)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[45 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[45 + sprmod];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[27 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[27 + sprmod];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[39 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[39 + sprmod];
             }
             base.Configure(sprite, actor);
         }
@@ -2697,7 +2697,7 @@ class Jackals : DefaultRaceData
     {
         public LegRings3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.JackalJewel[48];
+            DiscardSprite = SpriteDictionary.JackalJewel[48];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(5, null, WhiteColored);
@@ -2712,28 +2712,28 @@ class Jackals : DefaultRaceData
             {
                 if (actor.Unit.BodySize > 1)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[42];
+                    clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[42];
                 }
                 else
                 {
                     if (actor.Unit.HasBreasts)
                     {
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[29];
+                        clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[29];
                     }
                     else
                     {
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[41];
+                        clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[41];
                     }
                 }
 
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[29 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[29 + sprmod];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.JackalJewel[41 + sprmod];
+                clothing1.GetSprite = (s) => SpriteDictionary.JackalJewel[41 + sprmod];
             }
             base.Configure(sprite, actor);
         }

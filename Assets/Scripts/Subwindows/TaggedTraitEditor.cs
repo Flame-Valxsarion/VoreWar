@@ -100,6 +100,10 @@ public class TaggedTraitEditor : MonoBehaviour
                 {
                     continue;
                 }
+                if (!State.TieredTraitsList.ContainsKey(t))
+                {
+                    continue;
+                }
                 TaggedTrait curr = State.TieredTraitsList[t];
                 if (curr.tierValue > tier)
                 {

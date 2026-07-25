@@ -7,7 +7,7 @@ TextureImporter:
     21300004: selicia_in_taurus_0
     21300006: selicia_in_taurus_1
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -139,5 +139,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: specialmerc
   assetBundleVariant: 

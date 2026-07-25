@@ -13,7 +13,7 @@ class Whisp : BlankSlate
     protected override Sprite BodySprite(Actor_Unit actor) // Body
     {
 
-        return State.GameManager.SpriteDictionary.Whisp[0];
+        return SpriteDictionary.Whisp[0];
 
     }
 

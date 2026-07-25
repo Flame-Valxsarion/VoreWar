@@ -3,8 +3,8 @@ using UnityEngine;
 
 class Ryan : BlankSlate // Sprite by Micadi Character by Legoshi
 {
-    readonly Sprite[] Sprites1 = State.GameManager.SpriteDictionary.Ryan;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.RyanVore;
+    readonly Sprite[] Sprites1 = SpriteDictionary.Ryan;
+    readonly Sprite[] Sprites2 = SpriteDictionary.RyanVore;
 
     internal Ryan()
     {
@@ -45,7 +45,7 @@ class Ryan : BlankSlate // Sprite by Micadi Character by Legoshi
         BodyAccent8 = new SpriteExtraInfo(14, BodyAccentSprite8, WhiteColored); // Gulp~
         Belly = new SpriteExtraInfo(9, null, WhiteColored); // Yup sure is~ 9 change to layer 13 when at 6-19 and Sel
         Weapon = new SpriteExtraInfo(3, WeaponSprite, WhiteColored); // Pokey Stick
-        Dick = new SpriteExtraInfo(8, DickSprite, WhiteColored); // Other pokey stick~
+        Dick = new SpriteExtraInfo(13, DickSprite, WhiteColored); // Other pokey stick~
         Balls = new SpriteExtraInfo(6, BallsSprite, WhiteColored); // Balls~
     }
 
@@ -67,9 +67,15 @@ class Ryan : BlankSlate // Sprite by Micadi Character by Legoshi
     {
         AddOffset(Belly, 0, 0 * .417f);
         if (actor.Unit.BodySize == 3)
+		{
             AddOffset(Balls, -1 * .417f, -1 * .417f);
+            AddOffset(Dick, -1 * .417f, -1 * .417f);
+		}
         else
+		{
             AddOffset(Balls, 0, 0 * .417f);
+            AddOffset(Dick, 0, 0 * .417f);
+		}
     }
 
 
@@ -174,7 +180,7 @@ class Ryan : BlankSlate // Sprite by Micadi Character by Legoshi
 
     protected override Sprite BodyAccentSprite8(Actor_Unit actor)
     {
-        if (actor.HasJustVored) // Handled uniquely for this unit to only work with ral vore successes check "actor.SetVoreSuccessMode();" in PredatorComponent.cs
+        if (actor.HasJustVored) // Handled uniquely for this unit to only work with oral vore successes. Check "actor.SetVoreSuccessMode();" in PredatorComponent.cs
             return Sprites1[72];
         else
             return null;
@@ -245,14 +251,14 @@ class Ryan : BlankSlate // Sprite by Micadi Character by Legoshi
         if (actor.PredatorComponent?.BallsFullness > 0)
         {
             int ballSize = actor.GetBallSize(18, 0.8f);
-            if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls))
+            if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) && ballSize >= 18)
             {
-                AddOffset(Balls, 10 * .417f, 0 * .417f);
+                AddOffset(Balls, 15 * .417f, 0 * .417f);
                 if (ballSize >= 18) return Sprites2[60];
             }
-            if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls))
+            if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) && ballSize >= 10)
             {
-                AddOffset(Balls, 10 * .417f, 0 * .417f);
+                AddOffset(Balls, 15 * .417f, 0 * .417f);
                 if (ballSize >= 18) return Sprites2[59];
                 if (ballSize >= 17) return Sprites2[58];
                 if (ballSize >= 16) return Sprites2[57];

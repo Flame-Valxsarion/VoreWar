@@ -3,7 +3,7 @@ using UnityEngine;
 
 class SpitterSlug : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.SpitterSlug;
+    readonly Sprite[] Sprites = SpriteDictionary.SpitterSlug;
 
     public SpitterSlug()
     {

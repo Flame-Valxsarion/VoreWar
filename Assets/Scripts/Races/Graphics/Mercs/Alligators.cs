@@ -38,12 +38,12 @@ class Alligators : BlankSlate
     internal override int DickSizes => 3;
     internal override int BreastSizes => 1;
 
-    protected override Sprite BodySprite(Actor_Unit actor) => actor.IsAttacking ? State.GameManager.SpriteDictionary.Alligators[1] : State.GameManager.SpriteDictionary.Alligators[0]; // Gets either normal body or the attack one.
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Alligators[8 + actor.Unit.EyeType]; // Slips eyes under the body.
-    protected override Sprite MouthSprite(Actor_Unit actor) => actor.Unit.MouthType == 0 ? null : State.GameManager.SpriteDictionary.Alligators[4 + actor.Unit.MouthType];
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Alligators[2];
-    protected override Sprite HairSprite(Actor_Unit actor) => actor.IsOralVoring ? State.GameManager.SpriteDictionary.Alligators[3] : null;
-    protected override Sprite HairSprite2(Actor_Unit actor) => actor.IsOralVoring ? State.GameManager.SpriteDictionary.Alligators[4] : null;
+    protected override Sprite BodySprite(Actor_Unit actor) => actor.IsAttacking ? SpriteDictionary.Alligators[1] : SpriteDictionary.Alligators[0]; // Gets either normal body or the attack one.
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Alligators[8 + actor.Unit.EyeType]; // Slips eyes under the body.
+    protected override Sprite MouthSprite(Actor_Unit actor) => actor.Unit.MouthType == 0 ? null : SpriteDictionary.Alligators[4 + actor.Unit.MouthType];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Alligators[2];
+    protected override Sprite HairSprite(Actor_Unit actor) => actor.IsOralVoring ? SpriteDictionary.Alligators[3] : null;
+    protected override Sprite HairSprite2(Actor_Unit actor) => actor.IsOralVoring ? SpriteDictionary.Alligators[4] : null;
 
     protected override Sprite WeaponSprite(Actor_Unit actor) // Gets the correct weapon sprite, or a lack of one.
     {
@@ -52,13 +52,13 @@ class Alligators : BlankSlate
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.Alligators[12];
+                return SpriteDictionary.Alligators[12];
             case 1:
-                return State.GameManager.SpriteDictionary.Alligators[14];
+                return SpriteDictionary.Alligators[14];
             case 2:
-                return State.GameManager.SpriteDictionary.Alligators[13];
+                return SpriteDictionary.Alligators[13];
             case 3:
-                return State.GameManager.SpriteDictionary.Alligators[15];
+                return SpriteDictionary.Alligators[15];
             default:
                 return null;
         }
@@ -68,35 +68,35 @@ class Alligators : BlankSlate
     {
         if (actor.Unit.HasWeapon == false)
         {
-            if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Alligators[48];
-            return State.GameManager.SpriteDictionary.Alligators[45];
+            if (actor.IsAttacking) return SpriteDictionary.Alligators[48];
+            return SpriteDictionary.Alligators[45];
         }
 
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.Alligators[46];
+                return SpriteDictionary.Alligators[46];
             case 1:
-                return State.GameManager.SpriteDictionary.Alligators[48];
+                return SpriteDictionary.Alligators[48];
             case 2:
-                return State.GameManager.SpriteDictionary.Alligators[47];
+                return SpriteDictionary.Alligators[47];
             case 3:
-                return State.GameManager.SpriteDictionary.Alligators[48];
+                return SpriteDictionary.Alligators[48];
             default:
-                return State.GameManager.SpriteDictionary.Alligators[45];
+                return SpriteDictionary.Alligators[45];
         }
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Either slaps the "Cloaca Be Gone!" patch on the 'gator's groin or slaps on the stretched open cloaca if the unit gets erect.
     {
-        if (actor.IsUnbirthing) return State.GameManager.SpriteDictionary.Alligators[23];
-        if (actor.IsAnalVoring) return State.GameManager.SpriteDictionary.Alligators[23];
+        if (actor.IsUnbirthing) return SpriteDictionary.Alligators[23];
+        if (actor.IsAnalVoring) return SpriteDictionary.Alligators[23];
 
-        if (Config.HideCocks) return State.GameManager.SpriteDictionary.Alligators[16];
+        if (Config.HideCocks) return SpriteDictionary.Alligators[16];
 
         if (actor.IsErect())
         {
-            return State.GameManager.SpriteDictionary.Alligators[17];
+            return SpriteDictionary.Alligators[17];
         }
         return null;
     }
@@ -107,24 +107,24 @@ class Alligators : BlankSlate
         if (actor.IsCockVoring)
         {
             if (actor.Unit.DickSize < 2)
-                return State.GameManager.SpriteDictionary.Alligators[21];
+                return SpriteDictionary.Alligators[21];
             else
-                return State.GameManager.SpriteDictionary.Alligators[22];
+                return SpriteDictionary.Alligators[22];
         }
         if (actor.IsUnbirthing)
         {
-            return State.GameManager.SpriteDictionary.Alligators[24];
+            return SpriteDictionary.Alligators[24];
         }
         if (actor.IsErect() && !Config.HideCocks)
         {
             switch (actor.Unit.DickSize)
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Alligators[18];
+                    return SpriteDictionary.Alligators[18];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Alligators[19];
+                    return SpriteDictionary.Alligators[19];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Alligators[20];
+                    return SpriteDictionary.Alligators[20];
             }
         }
         return null;
@@ -136,17 +136,17 @@ class Alligators : BlankSlate
         bellySize -= 1;
         if (bellySize == -1)
             return null;
-        return State.GameManager.SpriteDictionary.Alligators[25 + bellySize];
+        return SpriteDictionary.Alligators[25 + bellySize];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor) // Level bands. Checks from highest down, giving the first band that the unit has sufficient level for. If too low for everything, returns null.
     {
-        if (actor.Unit.Level > 19) return State.GameManager.SpriteDictionary.Alligators[44];
-        if (actor.Unit.Level > 17) return State.GameManager.SpriteDictionary.Alligators[43];
-        if (actor.Unit.Level > 14) return State.GameManager.SpriteDictionary.Alligators[42];
-        if (actor.Unit.Level > 11) return State.GameManager.SpriteDictionary.Alligators[41];
-        if (actor.Unit.Level > 8) return State.GameManager.SpriteDictionary.Alligators[40];
-        if (actor.Unit.Level > 4) return State.GameManager.SpriteDictionary.Alligators[39];
+        if (actor.Unit.Level > 19) return SpriteDictionary.Alligators[44];
+        if (actor.Unit.Level > 17) return SpriteDictionary.Alligators[43];
+        if (actor.Unit.Level > 14) return SpriteDictionary.Alligators[42];
+        if (actor.Unit.Level > 11) return SpriteDictionary.Alligators[41];
+        if (actor.Unit.Level > 8) return SpriteDictionary.Alligators[40];
+        if (actor.Unit.Level > 4) return SpriteDictionary.Alligators[39];
         return null;
     }
 
@@ -185,30 +185,30 @@ class Alligators : BlankSlate
         if (acc == null)
             return null;
         if (acc == State.World.ItemRepository.GetItem(ItemType.BodyArmor))
-            return State.GameManager.SpriteDictionary.Alligators[37];
+            return SpriteDictionary.Alligators[37];
         if (acc == State.World.ItemRepository.GetItem(ItemType.Helmet))
-            return State.GameManager.SpriteDictionary.Alligators[36];
+            return SpriteDictionary.Alligators[36];
         if (acc == State.World.ItemRepository.GetItem(ItemType.Shoes))
-            return State.GameManager.SpriteDictionary.Alligators[38];
+            return SpriteDictionary.Alligators[38];
         if (acc == State.World.ItemRepository.GetItem(ItemType.Gauntlet))
         {
             if (actor.Unit.HasWeapon == false)
             {
-                if (actor.IsAttacking) return State.GameManager.SpriteDictionary.Alligators[35];
-                return State.GameManager.SpriteDictionary.Alligators[33];
+                if (actor.IsAttacking) return SpriteDictionary.Alligators[35];
+                return SpriteDictionary.Alligators[33];
             }
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Alligators[34];
+                    return SpriteDictionary.Alligators[34];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Alligators[35];
+                    return SpriteDictionary.Alligators[35];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Alligators[34];
+                    return SpriteDictionary.Alligators[34];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Alligators[35];
+                    return SpriteDictionary.Alligators[35];
                 default:
-                    return State.GameManager.SpriteDictionary.Alligators[33];
+                    return SpriteDictionary.Alligators[33];
             }
         }
         return null;

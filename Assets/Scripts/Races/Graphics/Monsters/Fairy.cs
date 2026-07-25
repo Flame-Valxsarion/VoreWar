@@ -52,8 +52,8 @@ static class FairyUtil
 
 class Fairy : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Fairy;
-    readonly Sprite[] Sprites240 = State.GameManager.SpriteDictionary.Fairy240;
+    readonly Sprite[] Sprites = SpriteDictionary.Fairy;
+    readonly Sprite[] Sprites240 = SpriteDictionary.Fairy240;
 
     const float GeneralSizeMod = 0.8f;
 
@@ -186,7 +186,7 @@ class Fairy : BlankSlate
         if (actor.Unit.HairStyle < 3)
             return Sprites[2 * actor.Unit.HairStyle];
         if (actor.Unit.HairStyle > 3)
-            return State.GameManager.SpriteDictionary.FairyExtraHair[Math.Min(actor.Unit.HairStyle - 4, 3)];
+            return SpriteDictionary.FairyExtraHair[Math.Min(actor.Unit.HairStyle - 4, 3)];
         switch (Season)
         {
             case FairyType.Spring:
@@ -298,13 +298,13 @@ class Fairy : BlankSlate
             switch (Season)
             {
                 case FairyType.Spring:
-                    return State.GameManager.SpriteDictionary.Fairy[SpringWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[SpringWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
                 case FairyType.Summer:
-                    return State.GameManager.SpriteDictionary.Fairy[SummerWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[SummerWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
                 case FairyType.Fall:
-                    return State.GameManager.SpriteDictionary.Fairy[FallWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[FallWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
                 default:
-                    return State.GameManager.SpriteDictionary.Fairy[WinterWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[WinterWingsEnc.frames[actor.AnimationController.frameLists[0].currentFrame]];
             }
         }
         else
@@ -312,13 +312,13 @@ class Fairy : BlankSlate
             switch (Season)
             {
                 case FairyType.Spring:
-                    return State.GameManager.SpriteDictionary.Fairy[SpringWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[SpringWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
                 case FairyType.Summer:
-                    return State.GameManager.SpriteDictionary.Fairy[SummerWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[SummerWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
                 case FairyType.Fall:
-                    return State.GameManager.SpriteDictionary.Fairy[FallWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[FallWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
                 default:
-                    return State.GameManager.SpriteDictionary.Fairy[WinterWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
+                    return SpriteDictionary.Fairy[WinterWings.frames[actor.AnimationController.frameLists[0].currentFrame]];
             }
         }
     }
@@ -539,7 +539,7 @@ class Fairy : BlankSlate
             clothing1 = new SpriteExtraInfo(17, null, null);
             clothing2 = new SpriteExtraInfo(18, null, null);
             clothing3 = new SpriteExtraInfo(18, null, null);
-            DiscardSprite = State.GameManager.SpriteDictionary.Fairy[20];
+            DiscardSprite = SpriteDictionary.Fairy[20];
             clothing1.GetPalette = FairyUtil.GetClothesColor;
             clothing2.GetPalette = FairyUtil.GetClothesColor;
             clothing3.GetPalette = FairyUtil.GetClothesColor;
@@ -574,8 +574,8 @@ class Fairy : BlankSlate
                 }
                 int leftSprite = 14 + actor.Unit.BreastSize + encumMod;
                 int rightSprite = 21 + actor.Unit.BreastSize + encumMod;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[leftSprite];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[rightSprite];
+                clothing2.GetSprite = (s) => SpriteDictionary.Fairy[leftSprite];
+                clothing3.GetSprite = (s) => SpriteDictionary.Fairy[rightSprite];
             }
             else
             {
@@ -583,7 +583,7 @@ class Fairy : BlankSlate
                 clothing3.GetSprite = null;
             }
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[mainSprite];
+            clothing1.GetSprite = (s) => SpriteDictionary.Fairy[mainSprite];
             base.Configure(sprite, actor);
         }
     }
@@ -597,7 +597,7 @@ class Fairy : BlankSlate
             clothing1 = new SpriteExtraInfo(17, null, null);
             clothing2 = new SpriteExtraInfo(18, null, null);
             clothing3 = new SpriteExtraInfo(18, null, null);
-            DiscardSprite = State.GameManager.SpriteDictionary.Fairy[20];
+            DiscardSprite = SpriteDictionary.Fairy[20];
             clothing1.GetPalette = FairyUtil.GetClothesColor;
             clothing2.GetPalette = FairyUtil.GetClothesColor;
             clothing3.GetPalette = FairyUtil.GetClothesColor;
@@ -637,8 +637,8 @@ class Fairy : BlankSlate
                 if (actor.PredatorComponent?.RightBreastFullness > 0)
                     rightSprite = 43;
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[leftSprite];
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[rightSprite];
+                clothing2.GetSprite = (s) => SpriteDictionary.Fairy[leftSprite];
+                clothing3.GetSprite = (s) => SpriteDictionary.Fairy[rightSprite];
             }
             else
             {
@@ -646,7 +646,7 @@ class Fairy : BlankSlate
                 clothing3.GetSprite = null;
             }
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[mainSprite];
+            clothing1.GetSprite = (s) => SpriteDictionary.Fairy[mainSprite];
             base.Configure(sprite, actor);
         }
     }
@@ -660,7 +660,7 @@ class Fairy : BlankSlate
             clothing1 = new SpriteExtraInfo(17, null, null);
             clothing2 = new SpriteExtraInfo(18, null, null);
             clothing3 = new SpriteExtraInfo(18, null, null);
-            DiscardSprite = State.GameManager.SpriteDictionary.Fairy[20];
+            DiscardSprite = SpriteDictionary.Fairy[20];
             clothing1.GetPalette = FairyUtil.GetClothesColor;
             clothing2.GetPalette = FairyUtil.GetClothesColor;
             clothing3.GetPalette = FairyUtil.GetClothesColor;
@@ -681,7 +681,7 @@ class Fairy : BlankSlate
                 clothing2.layer = 18;
                 clothing3.layer = 18;
             }
-            if (actor.HasBelly == false) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[44];
+            if (actor.HasBelly == false) clothing1.GetSprite = (s) => SpriteDictionary.Fairy[44];
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts && (Math.Sqrt(actor.GetLeftBreastSize(21 * 21, GeneralSizeMod)) > 3 || Math.Sqrt(actor.GetRightBreastSize(21 * 21, GeneralSizeMod)) > 3) == false)
@@ -699,11 +699,11 @@ class Fairy : BlankSlate
                     rightSprite = 0;
                 }
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[leftSprite];
+                clothing2.GetSprite = (s) => SpriteDictionary.Fairy[leftSprite];
                 if (rightSprite == 0)
                     clothing3.GetSprite = null;
                 else
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[rightSprite];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Fairy[rightSprite];
             }
             else
             {
@@ -723,7 +723,7 @@ class Fairy : BlankSlate
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(17, null, null);
             clothing2 = new SpriteExtraInfo(18, null, null);
-            DiscardSprite = State.GameManager.SpriteDictionary.Fairy[20];
+            DiscardSprite = SpriteDictionary.Fairy[20];
             clothing1.GetPalette = FairyUtil.GetClothesColor;
             clothing2.GetPalette = FairyUtil.GetClothesColor;
         }
@@ -744,11 +744,11 @@ class Fairy : BlankSlate
 
 
             if (oversize)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[62];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[62];
             else if (actor.HasBelly)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[60 + Math.Min(actor.GetRootedStomachSize(19, GeneralSizeMod), 1)];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[60 + Math.Min(actor.GetRootedStomachSize(19, GeneralSizeMod), 1)];
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[59];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[59];
 
             if (actor.Unit.HasBreasts && (Math.Sqrt(actor.GetLeftBreastSize(21 * 21, GeneralSizeMod)) > 3 || Math.Sqrt(actor.GetRightBreastSize(21 * 21, GeneralSizeMod)) > 3) == false)
             {
@@ -757,7 +757,7 @@ class Fairy : BlankSlate
                 {
                     encumMod = 3;
                 }
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[65 + actor.Unit.BreastSize + encumMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Fairy[65 + actor.Unit.BreastSize + encumMod];
             }
             else
             {
@@ -777,7 +777,7 @@ class Fairy : BlankSlate
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, null);
             clothing2 = new SpriteExtraInfo(18, null, null);
-            DiscardSprite = State.GameManager.SpriteDictionary.Fairy[20];
+            DiscardSprite = SpriteDictionary.Fairy[20];
             clothing1.GetPalette = FairyUtil.GetClothesColor;
             clothing2.GetPalette = FairyUtil.GetClothesColor;
         }
@@ -794,7 +794,7 @@ class Fairy : BlankSlate
                 clothing1.layer = 17;
                 clothing2.layer = 18;
             }
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[63];
+            clothing1.GetSprite = (s) => SpriteDictionary.Fairy[63];
 
             if (actor.Unit.HasBreasts && (Math.Sqrt(actor.GetLeftBreastSize(21 * 21, GeneralSizeMod)) > 3 || Math.Sqrt(actor.GetRightBreastSize(21 * 21, GeneralSizeMod)) > 3) == false)
             {
@@ -803,7 +803,7 @@ class Fairy : BlankSlate
                 {
                     encumMod = 3;
                 }
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[65 + actor.Unit.BreastSize + encumMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Fairy[65 + actor.Unit.BreastSize + encumMod];
             }
             else
             {
@@ -830,18 +830,18 @@ class Fairy : BlankSlate
                 if (actor.IsAttacking)
                 {
                     clothing1.layer = 18;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[74];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Fairy[74];
                 }
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[72];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[72];
             }
             else
             {
                 if (actor.IsAttacking)
                 {
                     clothing1.layer = 18;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[73];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Fairy[73];
                 }
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[71];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[71];
             }
             base.Configure(sprite, actor);
         }
@@ -862,19 +862,19 @@ class Fairy : BlankSlate
                 if (actor.IsAttacking)
                 {
                     clothing1.layer = 18;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[77];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Fairy[77];
                 }
 
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[76];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[76];
             }
             else
             {
                 if (actor.IsAttacking)
                 {
                     clothing1.layer = 18;
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[77];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Fairy[77];
                 }
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[75];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[75];
             }
             base.Configure(sprite, actor);
         }
@@ -892,9 +892,9 @@ class Fairy : BlankSlate
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.PredatorComponent?.Fullness > 0)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[79];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[79];
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[78];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[78];
             base.Configure(sprite, actor);
         }
 
@@ -910,9 +910,9 @@ class Fairy : BlankSlate
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             if (actor.PredatorComponent?.Fullness > 0)
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[81];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[81];
             else
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Fairy[80];
+                clothing1.GetSprite = (s) => SpriteDictionary.Fairy[80];
             base.Configure(sprite, actor);
         }
 

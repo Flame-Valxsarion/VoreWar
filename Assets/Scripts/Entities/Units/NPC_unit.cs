@@ -3,11 +3,11 @@ public class NPC_unit : Unit
 
     public NPC_unit(int level, bool advancedWeapons, int type, int side, Race race, int startingXP, bool canVore) : base(side, race, startingXP, canVore, type: type == 3 ? UnitType.Leader : UnitType.Soldier)
     {
-        if (race == Race.Alligators || race == Race.Komodos)
+        if (race == Race.Alligators || race == Race.Komodos || race == Race.Badgers)
             GenMelee(level - 1, advancedWeapons);
         else if (race >= Race.Vagrants)
             GenMonster(level - 1);
-        else if (FixedGear || race == Race.Succubi)
+        else if (FixedGear || race == Race.Succubi || race == Race.Renamon)
             StrategicUtilities.CheatForceLevelUps(this, level - 1);
         else
         {

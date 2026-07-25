@@ -7,7 +7,7 @@ using UnityEngine;
 
 class Goodra : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Goodra;
+    readonly Sprite[] Sprites = SpriteDictionary.Goodra;
 
     public Goodra()
     {

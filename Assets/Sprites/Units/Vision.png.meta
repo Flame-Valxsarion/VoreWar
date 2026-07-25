@@ -23,7 +23,7 @@ TextureImporter:
     21300036: Vision_10
     21300038: Vision_11
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -355,5 +355,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: specialmerc
   assetBundleVariant: 

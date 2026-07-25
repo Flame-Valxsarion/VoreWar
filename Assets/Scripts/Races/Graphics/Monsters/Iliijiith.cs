@@ -96,17 +96,17 @@ protected override Sprite BodyAccentSprite(Actor_Unit actor)
         //    aggro = true;
         //else
         //    aggro = false;
-        return State.GameManager.SpriteDictionary.Iliijiith[0 + frameListLegs.frames[actor.AnimationController.frameLists[0].currentFrame]];
+        return SpriteDictionary.Iliijiith[0 + frameListLegs.frames[actor.AnimationController.frameLists[0].currentFrame]];
     }
 
     protected override Sprite BodySprite(Actor_Unit actor)
     {
         if (actor.HasBelly == true)
         {
-            return State.GameManager.SpriteDictionary.Iliijiith[5 + actor.GetStomachSize(18)];
+            return SpriteDictionary.Iliijiith[5 + actor.GetStomachSize(18)];
         }
         else
-            return State.GameManager.SpriteDictionary.Iliijiith[4];
+            return SpriteDictionary.Iliijiith[4];
     }
 
 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 class WoodDryad : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.DryadSprites1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.DryadSprites2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.DryadSprites3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.DryadSprites4;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.DryadSprites5;
-    readonly Sprite[] Sprites6 = State.GameManager.SpriteDictionary.HumansVoreSprites;
+    readonly Sprite[] Sprites = SpriteDictionary.DryadSprites1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.DryadSprites2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.DryadSprites3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.DryadSprites4;
+    readonly Sprite[] Sprites5 = SpriteDictionary.DryadSprites5;
+    readonly Sprite[] Sprites6 = SpriteDictionary.HumansVoreSprites;
 
     bool oversize = false;
 
@@ -119,33 +119,33 @@ class WoodDryad : DefaultRaceData
         {
             if (actor.Unit.BodySize > 1)
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[4];
+                return SpriteDictionary.HumansBodySprites2[4];
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[1];
+                return SpriteDictionary.HumansBodySprites2[1];
             }
         }
         else if (actor.IsAttacking)
         {
             if (actor.Unit.BodySize > 1)
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[5];
+                return SpriteDictionary.HumansBodySprites2[5];
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[2];
+                return SpriteDictionary.HumansBodySprites2[2];
             }
         }
         else
         {
             if (actor.Unit.BodySize > 1)
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[3];
+                return SpriteDictionary.HumansBodySprites2[3];
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[0];
+                return SpriteDictionary.HumansBodySprites2[0];
             }
         }
     }
@@ -186,7 +186,7 @@ class WoodDryad : DefaultRaceData
         if (actor.IsEating || actor.IsAttacking)
             return null;
         else
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[108 + actor.Unit.MouthType];
+            return SpriteDictionary.HumansBodySprites3[108 + actor.Unit.MouthType];
     }
 
     protected override Sprite HairSprite(Actor_Unit actor)
@@ -215,18 +215,18 @@ class WoodDryad : DefaultRaceData
 
     protected override Sprite HairSprite3(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.HumansBodySprites3[120 + actor.Unit.BodyAccentType3];
+        return SpriteDictionary.HumansBodySprites3[120 + actor.Unit.BodyAccentType3];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
         if (actor.Unit.IsDead && actor.Unit.Items != null)
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[69];
+            return SpriteDictionary.HumansBodySprites3[69];
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[24 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
+            return SpriteDictionary.HumansBodySprites3[24 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
         }
     }
 
@@ -238,7 +238,7 @@ class WoodDryad : DefaultRaceData
         }
         else
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[25 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
+            return SpriteDictionary.HumansBodySprites3[25 + 4 * actor.Unit.EyeType + ((actor.IsAttacking || actor.IsEating) ? 0 : 2)];
         }
     }
 

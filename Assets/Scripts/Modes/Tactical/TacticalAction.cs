@@ -125,6 +125,14 @@ static class TacticalActionList
             onExecute: (a, t) => a.PredatorComponent.TailVore(t)));
         TargetedDictionary[SpecialAction.TailVore] = TargetedActions.Last();
 
+        TargetedActions.Add(new TargetedTacticalAction(
+            name: "Bladder Vore",
+            requiresPred: true,
+            conditional: (a) => a.Unit.CanBladderVore && State.RaceSettings.GetVoreTypes(a.Unit.Race).Contains(VoreType.BladderVore),
+            onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.BladderVore),
+            onExecute: (a, t) => a.PredatorComponent.BladderVore(t)));
+        TargetedDictionary[SpecialAction.BladderVore] = TargetedActions.Last();
+
 
 
         //TargetedActions.Add(new TargetedTacticalAction(
@@ -213,6 +221,16 @@ static class TacticalActionList
         TargetedDictionary[SpecialAction.ShunGokuSatsu] = TargetedActions.Last();
 
         TargetedActions.Add(new TargetedTacticalAction(
+           name: "Stunning Strike",
+           requiresPred: false,
+           conditional: (a) => a.Unit.HasTrait(Traits.StunningStrike) && a.TurnUsedStunStrike + 2 <= State.GameManager.TacticalMode.currentTurn,
+           onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.StunningStrike),
+           manaCost: 10,
+           onExecute: (a, t) => a.StunningStrike(t),
+           minimumMp: 1));
+        TargetedDictionary[SpecialAction.StunningStrike] = TargetedActions.Last();
+
+        TargetedActions.Add(new TargetedTacticalAction(
             name: "Regurgitate",
             requiresPred: true,
             conditional: (a) => a.PredatorComponent?.AlivePrey > 0 && a.Unit.HasTrait(Traits.Greedy) == false,
@@ -234,7 +252,7 @@ static class TacticalActionList
         TargetedActions.Add(new TargetedTacticalAction(
           name: "Giant Sweep",
           requiresPred: false,
-          conditional: (a) => a.Unit.HasTrait(Traits.Legendary),
+          conditional: (a) => a.Unit.HasTrait(Traits.TheMatron),
           onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.GiantSweep),
           onExecute: (a, t) => a.SweepAttack(true),
           manaCost: 40,
@@ -243,8 +261,8 @@ static class TacticalActionList
 
         TargetedActions.Add(new TargetedTacticalAction(
           name: "SweepingSwallow",
-          requiresPred: false,
-          conditional: (a) => a.Unit.HasTrait(Traits.Legendary),
+          requiresPred: true,
+          conditional: (a) => a.Unit.HasTrait(Traits.TheMatron),
           onClicked: () => State.GameManager.TacticalMode.TrySetSpecialMode(SpecialAction.SweepingSwallow),
           onExecute: (a, t) => a.SweepAttack(false),
           manaCost: 40,

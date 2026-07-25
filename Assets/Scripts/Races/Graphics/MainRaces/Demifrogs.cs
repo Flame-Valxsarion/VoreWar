@@ -4,10 +4,10 @@ using UnityEngine;
 
 class Demifrogs : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Demifrogs1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Demifrogs2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Demifrogs3;
-    readonly Sprite[] Sprites3A = State.GameManager.SpriteDictionary.Demifrogs3alt;
+    readonly Sprite[] Sprites = SpriteDictionary.Demifrogs1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Demifrogs2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Demifrogs3;
+    readonly Sprite[] Sprites3A = SpriteDictionary.Demifrogs3alt;
 
     readonly DemifrogLeader LeaderClothes;
     readonly DemifrogRags Rags;
@@ -650,7 +650,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -663,11 +663,11 @@ class Demifrogs : DefaultRaceData
         {
             if (Races.Demifrogs.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[56];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[48 + actor.Unit.BreastSize];
             }
             else
             {
@@ -685,7 +685,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -698,11 +698,11 @@ class Demifrogs : DefaultRaceData
         {
             if (Races.Demifrogs.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[65];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[57 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[57 + actor.Unit.BreastSize];
             }
             else
             {
@@ -720,7 +720,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -733,11 +733,11 @@ class Demifrogs : DefaultRaceData
         {
             if (Races.Demifrogs.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[74];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[74];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[66 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[66 + actor.Unit.BreastSize];
             }
             else
             {
@@ -755,7 +755,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -769,11 +769,11 @@ class Demifrogs : DefaultRaceData
         {
             if (Races.Demifrogs.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[83];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[83];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[75 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[75 + actor.Unit.BreastSize];
             }
             else
             {
@@ -782,7 +782,7 @@ class Demifrogs : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[84];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[84];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -793,7 +793,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -807,13 +807,13 @@ class Demifrogs : DefaultRaceData
         {
             if (Races.Demifrogs.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[93];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[102];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[93];
+                clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[102];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[85 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[94 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[85 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[94 + actor.Unit.BreastSize];
             }
             else
             {
@@ -832,7 +832,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -849,7 +849,7 @@ class Demifrogs : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[107 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[107 + actor.Unit.BreastSize];
             }
             else
             {
@@ -867,7 +867,7 @@ class Demifrogs : DefaultRaceData
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -881,11 +881,11 @@ class Demifrogs : DefaultRaceData
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[119 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[119 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[115 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[115 + actor.Unit.BodySize];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
@@ -897,7 +897,7 @@ class Demifrogs : DefaultRaceData
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -908,7 +908,7 @@ class Demifrogs : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[103 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[103 + actor.Unit.BodySize];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -936,10 +936,10 @@ class Demifrogs : DefaultRaceData
             {
                 if (actor.Unit.SpecialAccessoryType == 6)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[12 + actor.Unit.BreastSize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[12 + actor.Unit.BreastSize];
                 }
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[2 + actor.Unit.BreastSize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[2 + actor.Unit.BreastSize];
             }
             else
             {
@@ -951,19 +951,19 @@ class Demifrogs : DefaultRaceData
             {
                 if (actor.Unit.SpecialAccessoryType == 6)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[11];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[11];
                 }
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[1];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[1];
             }
             else
             {
                 if (actor.Unit.SpecialAccessoryType == 6)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[10];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[10];
                 }
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[0];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[0];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemifrogSkin, actor.Unit.SkinColor);
@@ -977,7 +977,7 @@ class Demifrogs : DefaultRaceData
     {
         public Tribal()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Demifrogs4[143];
+            DiscardSprite = SpriteDictionary.Demifrogs4[143];
             coversBreasts = false;
             Type = 1176;
             OccupiesAllSlots = true;
@@ -990,11 +990,11 @@ class Demifrogs : DefaultRaceData
         {
             if (Races.Demifrogs.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[138];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[138];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[131 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[131 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1002,7 +1002,7 @@ class Demifrogs : DefaultRaceData
                 clothing1.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[139 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[139 + actor.Unit.BodySize];
 
             base.Configure(sprite, actor);
         }
@@ -1014,7 +1014,7 @@ class Demifrogs : DefaultRaceData
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -1028,18 +1028,18 @@ class Demifrogs : DefaultRaceData
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[127];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[127];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[128];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[128];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[129];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[129];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[130];
+                clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[130];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[123 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[123 + actor.Unit.BodySize];
 
             base.Configure(sprite, actor);
         }
@@ -1050,7 +1050,7 @@ class Demifrogs : DefaultRaceData
         public DemifrogLeader()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Demifrogs5[20];
+            DiscardSprite = SpriteDictionary.Demifrogs5[20];
             coversBreasts = false;
             OccupiesAllSlots = true;
             clothing1 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1065,11 +1065,11 @@ class Demifrogs : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs5[0 + actor.Unit.BodySize];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs5[4];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs5[10 + (actor.IsAttacking ? 1 : 0) + (2 * actor.Unit.BodySize)];
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs5[18];
-            clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs5[19];
+            clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs5[0 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs5[4];
+            clothing4.GetSprite = (s) => SpriteDictionary.Demifrogs5[10 + (actor.IsAttacking ? 1 : 0) + (2 * actor.Unit.BodySize)];
+            clothing5.GetSprite = (s) => SpriteDictionary.Demifrogs5[18];
+            clothing6.GetSprite = (s) => SpriteDictionary.Demifrogs5[19];
 
             if (actor.Unit.HasBreasts)
             {
@@ -1083,7 +1083,7 @@ class Demifrogs : DefaultRaceData
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs5[2 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Demifrogs5[2 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1099,7 +1099,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1112,15 +1112,15 @@ class Demifrogs : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[24];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[24];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[26];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[26];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[25];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[25];
             }
             else clothing1.GetSprite = null;
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[20 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[20 + actor.Unit.BodySize];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1132,7 +1132,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1146,15 +1146,15 @@ class Demifrogs : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[32];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[32];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[34];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[34];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[33];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[33];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[31];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[31];
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[27 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[27 + actor.Unit.BodySize];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -1165,7 +1165,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1175,8 +1175,8 @@ class Demifrogs : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[35];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[27 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[35];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[27 + actor.Unit.BodySize];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -1187,7 +1187,7 @@ class Demifrogs : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[14];
+            DiscardSprite = SpriteDictionary.Avians4[14];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1201,15 +1201,15 @@ class Demifrogs : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[45];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[45];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[47];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[47];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[46];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[46];
             }
             else clothing1.GetSprite = null;
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[41 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Demifrogs4[41 + actor.Unit.BodySize];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1221,7 +1221,7 @@ class Demifrogs : DefaultRaceData
     {
         public TribalBot()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Demifrogs4[40];
+            DiscardSprite = SpriteDictionary.Demifrogs4[40];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(12, null, WhiteColored);
             Type = 1178;
@@ -1231,7 +1231,7 @@ class Demifrogs : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Demifrogs4[36 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Demifrogs4[36 + actor.Unit.BodySize];
 
             base.Configure(sprite, actor);
         }

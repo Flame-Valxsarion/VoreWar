@@ -34,16 +34,16 @@ class Compy : BlankSlate
     {
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
-        if (actor.IsAttacking || actor.IsOralVoring) return State.GameManager.SpriteDictionary.Compy[1];
+        if (actor.IsAttacking || actor.IsOralVoring) return SpriteDictionary.Compy[1];
 
-        return State.GameManager.SpriteDictionary.Compy[0];
+        return SpriteDictionary.Compy[0];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
     {
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Compy[3];
+        if (actor.IsCockVoring) return SpriteDictionary.Compy[3];
 
-        if (actor.GetBallSize(30) > 0) return State.GameManager.SpriteDictionary.Compy[2];
+        if (actor.GetBallSize(30) > 0) return SpriteDictionary.Compy[2];
 
         return null;
 
@@ -51,29 +51,29 @@ class Compy : BlankSlate
 
     protected override Sprite BallsSprite(Actor_Unit actor)
     {
-        if (actor.GetBallSize(30) == 0) return State.GameManager.SpriteDictionary.Compy[4];
+        if (actor.GetBallSize(30) == 0) return SpriteDictionary.Compy[4];
 
         int size = actor.GetBallSize(30);
 
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false) && size >= 30)
-            return State.GameManager.SpriteDictionary.Compy[30];
+            return SpriteDictionary.Compy[30];
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false) && size >= 28)
-            return State.GameManager.SpriteDictionary.Compy[29];
+            return SpriteDictionary.Compy[29];
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false) && size >= 26)
-            return State.GameManager.SpriteDictionary.Compy[28];
+            return SpriteDictionary.Compy[28];
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false) && size >= 24)
-            return State.GameManager.SpriteDictionary.Compy[27];
+            return SpriteDictionary.Compy[27];
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false) && size >= 22)
-            return State.GameManager.SpriteDictionary.Compy[26];
+            return SpriteDictionary.Compy[26];
 
         if (size >= 21) size = 21;
 
-        return State.GameManager.SpriteDictionary.Compy[3 + size];
+        return SpriteDictionary.Compy[3 + size];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Compy[33];
+        if (!actor.Targetable) return SpriteDictionary.Compy[33];
 
         if (actor.AnimationController.frameLists[0].currentlyActive)
         {
@@ -90,7 +90,7 @@ class Compy : BlankSlate
                 }
             }
 
-            return State.GameManager.SpriteDictionary.Compy[31 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.Compy[31 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
         if (actor.GetBallSize(30) > 0)
@@ -106,6 +106,6 @@ class Compy : BlankSlate
             actor.AnimationController.frameLists[0].currentlyActive = true;
         }
 
-        return State.GameManager.SpriteDictionary.Compy[33];
+        return SpriteDictionary.Compy[33];
     }
 }

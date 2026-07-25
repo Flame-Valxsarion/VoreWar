@@ -84,6 +84,9 @@ public class TacticalData
     internal List<Actor_Unit> garrison;
 
     [OdinSerialize]
+    internal Dictionary<Traits,List<Actor_Unit>> linkedUnits;
+
+    [OdinSerialize]
     public double StartingAttackerPower;
 
     [OdinSerialize]

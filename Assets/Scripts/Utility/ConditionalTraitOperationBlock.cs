@@ -15,7 +15,7 @@ public class ConditionalTraitOperationBlock
     internal TraitConditionCompareOperator compareOp;
 
     [OdinSerialize]
-    internal int compareValue = -1;
+    internal float compareValue = -1;
 
     [OdinSerialize]
     internal bool filled = false;

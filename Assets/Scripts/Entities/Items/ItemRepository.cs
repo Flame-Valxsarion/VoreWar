@@ -106,10 +106,16 @@ public enum SpecialItems
     XelhildeWeapon,
     SkapaWeapon,
     TatltuaeWeapon,
-    FireflyMelee,
-    FireflyRange,
+    SevilleMelee,
+    SevilleArmor,
     NectarWeapon,
     RyanWeapon,
+    KonaneWeapon,
+    OoviKatWeapon,
+    CherubWeapon,
+    SeraphWeapon,
+    RenamonWeapon,
+    OliviaWeapon,
 }
 
 
@@ -252,7 +258,7 @@ public class ItemRepository
             new Weapon(name:"Voilin Jaws", description:"Jaws", cost:4, graphic:0, damage:3, range:1),
             new Weapon(name:"Bat Jaws", description:"Jaws", cost:4, graphic:0, damage:3, range:1),
             new Weapon(name:"Frog Tongue", description:"Tongue", cost:4, graphic:0, damage:6, range:1),
-            new Weapon(name:"Dragon Claws", description:"Claws", cost:4, graphic:0, damage:6, range:1),
+            new Weapon(name:"Dragon Claws", description:"Claws", cost:4, graphic:0, damage:8, range:1),
             new Weapon(name:"Dragonfly Mandibles", description:"Mandibles", cost:4, graphic:0, damage:3, range:1),
             new Weapon(name:"Plant Bite", description:"Bite", cost:4, graphic:0, damage:5, range:1),
             new Weapon(name:"Fairy Spark", description:"Magical Attack", cost:4, graphic:0, damage:5, range:5, omniWeapon: true, magicWeapon: true),
@@ -300,6 +306,9 @@ public class ItemRepository
             new Weapon(name:"Rex Jaws", description:"Chomp!", cost:4, graphic:0, damage:15, range:1),
             new Weapon(name:"Utahraptor Claws", description:"Utahraptor Claws", cost:4, graphic:0, damage:6, range:1),
             new Weapon(name:"Exomatter Pulse", description:"A destructive pulse of theoretical particles that sit on the border between being real and not. Harmless if you aren't the target... Very harmful if you are.", cost:4, graphic:0, damage:5, range:1),
+            new Weapon(name:"Pudding Jaws", description:"Slimy and Sweet", cost:4, graphic:0, damage:3, range:1),
+            new Weapon(name:"Soul Spark", description:"Magical energy drawn from the soul, capable of being fired at range in relatively weak bursts.", cost:4, graphic:0, damage:5, range:5, omniWeapon:true, magicWeapon: true, lockedItem:true),
+            new Weapon(name:"Venomous Fangs", description:"Carry a deadly venom", cost:4, graphic:0, damage:6, range:1),
         };
 
         specialItems = new List<Item>()
@@ -330,10 +339,16 @@ public class ItemRepository
             new Weapon(name:"Xelhilde's Zweihänder", description:"A cobalt zweihänder forged in Mondfeld. Its blade seems to shimmer like the moon.", cost:4, graphic:0, damage:9, range:1, accuracyModifier: 1.4f, lockedItem:true),
             new Weapon(name:"Skapa's Wingtalons", description:"Skapa go pounce.", cost:4, graphic:0, damage:8, range:1, lockedItem:true),
             new Weapon(name:"Entropic Chaos", description:"Cantrip Tatltuae learned some time ago that creates pockets of intense chaotic entropy, ripping the very matter of his foes apart.", cost:4, graphic:0, damage:7, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
-            new Weapon(name:"Pilot Knife", description:"Standard issue holdout weapon for Wanzer pilots; Firefly is rather skilled with this one.", cost:4, graphic:0, damage:8, range:1, accuracyModifier: 1.4f, lockedItem:true),
-            new Weapon(name:"HND15", description:"Firefly's faithful pistol.", cost:4, graphic:0, damage:5, range:7, accuracyModifier: 0.7f, lockedItem:true),
+            new Weapon(name:"Witch's fangs", description:"Imbued with malice, coursing with vile venom, would make for great daggers~", cost:4, graphic:0, damage:8, range:1, lockedItem:true),
+            new Accessory(name:"Pendant of vicious spirit", description:"Imbued with resentment, coursing with visceral curses bound over years of careful weaving and knotting.", cost:6, changedStat:(int)Stat.Voracity, statBonus:10 ),
             new Weapon(name:"Nectar's Claws", description:"Large razor sharp sphinx claws, more than capable of leaving deep gashes in most foes.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
             new Weapon(name:"Captain's Polearm", description:"A trusty polearm that has seen many battles, and slain many more.", cost:4, graphic:0, damage:10, range:1, accuracyModifier: 1.1f, lockedItem:true),
+            new Weapon(name:"Konane's Talons", description:"Strong enough to sunder armor.", cost:4, graphic:0, damage:6, range:1, accuracyModifier: 1.1f, lockedItem:true),
+            new Weapon(name:"Magic Blossom", description:"A magic seed that pops violently on impact.", cost:4, graphic:0, damage:4, range:3, omniWeapon:true, lockedItem:true),
+            new Weapon(name:"Cherubic Light", description:"The magical energy that forms Cherub's halo can be compressed into powerful beams of light.", cost:4, graphic:0, damage:7, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
+            new Weapon(name:"Seraphim Soulflame", description:"Seraph is capable of shaping magical energy into a flame that burns both body and soul.", cost:4, graphic:0, damage:9, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
+            new Weapon(name:"Digi-Palm", description:"Palms capable of delivering deadly strikes when empowered with spiritual energy.", cost:4, graphic:0, damage:4, range:1, lockedItem:true),
+            new Weapon(name:"Electro Saber", description:"An unique electricity weapon summoned by the user that scales off of mind instead of strength.", cost:4, graphic:0, damage:5, range:1, lockedItem:true),
         };
 
 
@@ -449,6 +464,26 @@ public class ItemRepository
         if (item is Weapon weapon)
         {
             if (weapon.Range > 1)
+                return true;
+        }
+        return false;
+    }
+
+    public bool ItemIsMeleeWeapon(int i)
+    {
+        if (items[i] is Weapon weapon)
+        {
+            if (weapon.Range == 1)
+                return true;
+        }
+        return false;
+    }
+
+    public bool ItemIsMeleeWeapon(Item item)
+    {
+        if (item is Weapon weapon)
+        {
+            if (weapon.Range == 1)
                 return true;
         }
         return false;

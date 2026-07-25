@@ -32,14 +32,18 @@ abstract class MainClothing
     internal bool OccupiesAllSlots = false;
     /// <summary>Discarded sprite uses palettes instead of the solid color</summary>
     internal bool DiscardUsesPalettes = false;
+    /// <summary>Discarded sprite uses non-standard palettes instead of the solid color. Check ClothingDiscards.cs </summary>
+    internal bool DiscardUsesAltPalettes = false;
+    /// <summary>Discarded sprite uses skin palettes instead of the solid color. Setup in the race's .cs</summary>
+    internal int AltPaletteColor = 0;
     /// <summary>Defaults to true, if true lowers breast layer to 8 so that it will be under clothing</summary>
     protected bool coversBreasts = true;
     /// <summary>Turns off the breast sprites entirely</summary>
     protected bool blocksBreasts;
     /// <summary>Turns off the dick sprites entirely</summary>
     protected bool blocksDick = true;
-    /// <summary>Doesn't turn off the dick, but is in front of it</summary>
-    protected bool inFrontOfDick = false;
+    /// <summary>Doesn't turn off the dick, but is in front of it. Set equal to the clothing with the lowest layer that blocks the dick</summary>
+    protected int inFrontOfDick = 0;
     /// <summary>Whether clothing applies a color to the belly</summary>
     protected bool colorsBelly = false;
     protected bool HidesFluff = false;
@@ -98,7 +102,7 @@ abstract class MainClothing
     /// </summary>
     public virtual void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        if ((blocksDick || inFrontOfDick) && Config.CockVoreHidesClothes && actor.PredatorComponent?.BallsFullness > 0)
+        if ((blocksDick || inFrontOfDick > 0) && Config.CockVoreHidesClothes && actor.PredatorComponent?.BallsFullness > 0)
             return;
         Apply(sprite, actor);
     }
@@ -191,6 +195,50 @@ abstract class MainClothing
             if (actor.Unit.Race == Race.Umbreon)
             {
                 sprite.HideSprite(SpriteType.BodyAccent2); //Used for Dick Ring colors
+            }
+        }
+        if (inFrontOfDick > 0)
+        {
+            switch (inFrontOfDick)
+            {
+                case 1:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing1.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing1.layer - 2));
+                    break;
+                case 2:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing2.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing2.layer - 2));
+                    break;
+                case 3:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing3.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing3.layer - 2));
+                    break;
+                case 4:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing4.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing4.layer - 2));
+                    break;
+                case 5:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing5.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing5.layer - 2));
+                    break;
+                case 6:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing6.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing6.layer - 2));
+                    break;
+                case 7:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing7.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing7.layer - 2));
+                    break;
+                case 8:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing8.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing8.layer - 2));
+                    break;
+                case 9:
+                    sprite.ChangeLayer(SpriteType.Dick, (clothing9.layer - 1));
+                    sprite.ChangeLayer(SpriteType.Balls, (clothing9.layer - 2));
+                    break;
+                default:
+                    break;
             }
         }
 

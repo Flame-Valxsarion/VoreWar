@@ -66,21 +66,21 @@ class ViraeUltimae : DefaultRaceData
         base.RandomCustom(unit);
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.ViraeUltimae[2 + (actor.IsAttacking ? 1 : 0)];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.ViraeUltimae[2 + (actor.IsAttacking ? 1 : 0)];
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
         if (actor.HasBelly == false)
             return null;
-        return actor.HasBelly ? State.GameManager.SpriteDictionary.ViraeUltimae[4 + actor.GetStomachSize(27)] : null;
+        return actor.HasBelly ? SpriteDictionary.ViraeUltimae[4 + actor.GetStomachSize(27)] : null;
     }
 
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.ViraeUltimae[0];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.ViraeUltimae[0];
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.ViraeUltimae[1];
+            return SpriteDictionary.ViraeUltimae[1];
         else return null;
     }
 

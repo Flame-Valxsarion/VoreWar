@@ -59,7 +59,7 @@ TextureImporter:
     21300108: Ki_46
     21300110: Ki_47
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -1111,5 +1111,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: specialmerc
   assetBundleVariant: 

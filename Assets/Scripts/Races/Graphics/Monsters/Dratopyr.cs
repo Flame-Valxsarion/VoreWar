@@ -64,13 +64,13 @@ class Dratopyr : BlankSlate
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
         if (actor.IsAttacking || actor.IsCockVoring || actor.IsUnbirthing)
-            return State.GameManager.SpriteDictionary.Dratopyr[22];
-        return State.GameManager.SpriteDictionary.Dratopyr[21];
+            return SpriteDictionary.Dratopyr[22];
+        return SpriteDictionary.Dratopyr[21];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Tail sprites.
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[28];
+        if (!actor.Targetable) return SpriteDictionary.Dratopyr[28];
 
         if (actor.AnimationController.frameLists[0].currentlyActive)
         {
@@ -87,7 +87,7 @@ class Dratopyr : BlankSlate
                 }
             }
 
-            return State.GameManager.SpriteDictionary.Dratopyr[26 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.Dratopyr[26 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
         if (State.Rand.Next(250) == 0)
@@ -95,12 +95,12 @@ class Dratopyr : BlankSlate
             actor.AnimationController.frameLists[0].currentlyActive = true;
         }
 
-        return State.GameManager.SpriteDictionary.Dratopyr[28];
+        return SpriteDictionary.Dratopyr[28];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Legs
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[17];
+        if (!actor.Targetable) return SpriteDictionary.Dratopyr[17];
 
         if (actor.IsAttacking || actor.IsOralVoring || actor.IsCockVoring || actor.IsUnbirthing)
         {
@@ -108,7 +108,7 @@ class Dratopyr : BlankSlate
             actor.AnimationController.frameLists[2].currentFrame = 0;
             actor.AnimationController.frameLists[2].currentTime = 0f;
 
-            return State.GameManager.SpriteDictionary.Dratopyr[20];
+            return SpriteDictionary.Dratopyr[20];
         }
 
         else if (actor.AnimationController.frameLists[2].currentlyActive)
@@ -126,7 +126,7 @@ class Dratopyr : BlankSlate
                 }
             }
 
-            return State.GameManager.SpriteDictionary.Dratopyr[17 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
+            return SpriteDictionary.Dratopyr[17 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
         }
 
         else
@@ -137,12 +137,12 @@ class Dratopyr : BlankSlate
             }
         }
 
-        return State.GameManager.SpriteDictionary.Dratopyr[17];
+        return SpriteDictionary.Dratopyr[17];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) // Wing membranes
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[8];
+        if (!actor.Targetable) return SpriteDictionary.Dratopyr[8];
 
         if (actor.AnimationController.frameLists[3].currentTime >= frameListWings.times[actor.AnimationController.frameLists[3].currentFrame])
         {
@@ -156,25 +156,25 @@ class Dratopyr : BlankSlate
             }
         }
 
-        return State.GameManager.SpriteDictionary.Dratopyr[8 + frameListWings.frames[actor.AnimationController.frameLists[3].currentFrame]];
+        return SpriteDictionary.Dratopyr[8 + frameListWings.frames[actor.AnimationController.frameLists[3].currentFrame]];
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Wing bones
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[11];
-        return State.GameManager.SpriteDictionary.Dratopyr[11 + frameListWings.frames[actor.AnimationController.frameLists[3].currentFrame]];
+        if (!actor.Targetable) return SpriteDictionary.Dratopyr[11];
+        return SpriteDictionary.Dratopyr[11 + frameListWings.frames[actor.AnimationController.frameLists[3].currentFrame]];
     }
 
     protected override Sprite BodyAccentSprite5(Actor_Unit actor) // Eyewhites
     {
-        return State.GameManager.SpriteDictionary.Dratopyr[25];
+        return SpriteDictionary.Dratopyr[25];
     }
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Dratopyr[2]; // Eyes
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Dratopyr[2]; // Eyes
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Eyelids
     {
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[4];
+        if (!actor.Targetable) return SpriteDictionary.Dratopyr[4];
 
         if (actor.AnimationController.frameLists[1].currentlyActive)
         {
@@ -193,7 +193,7 @@ class Dratopyr : BlankSlate
 
             if (frameListEyes.frames[actor.AnimationController.frameLists[1].currentFrame] == 0) return null;
 
-            return State.GameManager.SpriteDictionary.Dratopyr[2 + frameListEyes.frames[actor.AnimationController.frameLists[1].currentFrame]];
+            return SpriteDictionary.Dratopyr[2 + frameListEyes.frames[actor.AnimationController.frameLists[1].currentFrame]];
         }
 
         if (State.Rand.Next(400) == 0)
@@ -206,24 +206,24 @@ class Dratopyr : BlankSlate
 
     protected override Sprite HeadSprite(Actor_Unit actor) // The head.
     {
-        if (actor.IsOralVoring) return State.GameManager.SpriteDictionary.Dratopyr[5];
+        if (actor.IsOralVoring) return SpriteDictionary.Dratopyr[5];
 
-        if (actor.GetBallSize(22) > 0) return State.GameManager.SpriteDictionary.Dratopyr[1];
+        if (actor.GetBallSize(22) > 0) return SpriteDictionary.Dratopyr[1];
 
-        return State.GameManager.SpriteDictionary.Dratopyr[0];
+        return SpriteDictionary.Dratopyr[0];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Dratopyr[6];
+            return SpriteDictionary.Dratopyr[6];
         return null;
     }
 
     protected override Sprite BodyAccentSprite7(Actor_Unit actor) // Teeth
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Dratopyr[7];
+            return SpriteDictionary.Dratopyr[7];
         return null;
     }
 
@@ -231,7 +231,7 @@ class Dratopyr : BlankSlate
     {
         if (actor.IsOralVoring) return null;
 
-        if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[14];
+        if (!actor.Targetable) return SpriteDictionary.Dratopyr[14];
 
         if (actor.AnimationController.frameLists[4].currentTime >= frameListEars.times[actor.AnimationController.frameLists[4].currentFrame])
         {
@@ -245,7 +245,7 @@ class Dratopyr : BlankSlate
             }
         }
 
-        return State.GameManager.SpriteDictionary.Dratopyr[14 + frameListEars.frames[actor.AnimationController.frameLists[4].currentFrame]];
+        return SpriteDictionary.Dratopyr[14 + frameListEars.frames[actor.AnimationController.frameLists[4].currentFrame]];
     }
 
     protected override Sprite BallsSprite(Actor_Unit actor) // Balls
@@ -260,21 +260,21 @@ class Dratopyr : BlankSlate
 
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false)
         {
-            return State.GameManager.SpriteDictionary.Dratopyr[99 + shake];
+            return SpriteDictionary.Dratopyr[99 + shake];
         }
 
         else if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false)
         {
 
-            if (ballSize > 19) return State.GameManager.SpriteDictionary.Dratopyr[96 + shake];
-            if (ballSize > 17) return State.GameManager.SpriteDictionary.Dratopyr[93 + shake];
-            if (ballSize > 15) return State.GameManager.SpriteDictionary.Dratopyr[90 + shake];
-            if (ballSize > 13) return State.GameManager.SpriteDictionary.Dratopyr[87 + shake];
+            if (ballSize > 19) return SpriteDictionary.Dratopyr[96 + shake];
+            if (ballSize > 17) return SpriteDictionary.Dratopyr[93 + shake];
+            if (ballSize > 15) return SpriteDictionary.Dratopyr[90 + shake];
+            if (ballSize > 13) return SpriteDictionary.Dratopyr[87 + shake];
         }
 
         if (ballSize > 13) ballSize = 13;
 
-        return State.GameManager.SpriteDictionary.Dratopyr[45 + (ballSize * 3) + shake];
+        return SpriteDictionary.Dratopyr[45 + (ballSize * 3) + shake];
     }
 
     protected override Sprite BodyAccentSprite8(Actor_Unit actor) // Sheath
@@ -283,15 +283,15 @@ class Dratopyr : BlankSlate
         {
             if (actor.GetStomachSize(23, 0.7f) > 14)
             {
-                if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[34];
+                if (!actor.Targetable) return SpriteDictionary.Dratopyr[34];
 
-                return State.GameManager.SpriteDictionary.Dratopyr[34 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
+                return SpriteDictionary.Dratopyr[34 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
             }
             else
             {
-                if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[31];
+                if (!actor.Targetable) return SpriteDictionary.Dratopyr[31];
 
-                return State.GameManager.SpriteDictionary.Dratopyr[31 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
+                return SpriteDictionary.Dratopyr[31 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
             }
         }
         return null;
@@ -306,36 +306,36 @@ class Dratopyr : BlankSlate
             {
                 Dick.layer = 6;
 
-                if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Dratopyr[44];
+                if (actor.IsCockVoring) return SpriteDictionary.Dratopyr[44];
 
                 if (actor.IsErect())
                 {
-                    if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[41];
+                    if (!actor.Targetable) return SpriteDictionary.Dratopyr[41];
 
                     if (actor.AnimationController.frameLists[2].currentlyActive)
                     {
-                        return State.GameManager.SpriteDictionary.Dratopyr[41 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
+                        return SpriteDictionary.Dratopyr[41 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
                     }
 
-                    return State.GameManager.SpriteDictionary.Dratopyr[41];
+                    return SpriteDictionary.Dratopyr[41];
                 }
             }
             else
             {
                 Dick.layer = 10;
 
-                if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Dratopyr[40];
+                if (actor.IsCockVoring) return SpriteDictionary.Dratopyr[40];
 
                 if (actor.IsErect())
                 {
-                    if (!actor.Targetable) return State.GameManager.SpriteDictionary.Dratopyr[37];
+                    if (!actor.Targetable) return SpriteDictionary.Dratopyr[37];
 
                     if (actor.AnimationController.frameLists[2].currentlyActive)
                     {
-                        return State.GameManager.SpriteDictionary.Dratopyr[37 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
+                        return SpriteDictionary.Dratopyr[37 + frameListShake.frames[actor.AnimationController.frameLists[2].currentFrame]];
                     }
 
-                    return State.GameManager.SpriteDictionary.Dratopyr[37];
+                    return SpriteDictionary.Dratopyr[37];
                 }
             }
         }
@@ -343,8 +343,8 @@ class Dratopyr : BlankSlate
         if (actor.Unit.DickSize == -1)
         {
             Dick.layer = 6;
-            if (actor.IsUnbirthing) return State.GameManager.SpriteDictionary.Dratopyr[172];
-            else return State.GameManager.SpriteDictionary.Dratopyr[171];
+            if (actor.IsUnbirthing) return SpriteDictionary.Dratopyr[172];
+            else return SpriteDictionary.Dratopyr[171];
         }
 
         return null;
@@ -359,35 +359,35 @@ class Dratopyr : BlankSlate
 
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false)
         {
-            return State.GameManager.SpriteDictionary.Dratopyr[168 + shake];
+            return SpriteDictionary.Dratopyr[168 + shake];
         }
 
         else if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false)
         {
 
-            if (bellySize > 22) return State.GameManager.SpriteDictionary.Dratopyr[165 + shake];
-            if (bellySize > 21) return State.GameManager.SpriteDictionary.Dratopyr[162 + shake];
-            if (bellySize > 20) return State.GameManager.SpriteDictionary.Dratopyr[159 + shake];
-            if (bellySize > 19) return State.GameManager.SpriteDictionary.Dratopyr[156 + shake];
+            if (bellySize > 22) return SpriteDictionary.Dratopyr[165 + shake];
+            if (bellySize > 21) return SpriteDictionary.Dratopyr[162 + shake];
+            if (bellySize > 20) return SpriteDictionary.Dratopyr[159 + shake];
+            if (bellySize > 19) return SpriteDictionary.Dratopyr[156 + shake];
         }
 
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.womb) ?? false)
         {
-            return State.GameManager.SpriteDictionary.Dratopyr[168 + shake];
+            return SpriteDictionary.Dratopyr[168 + shake];
         }
 
         else if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.womb) ?? false)
         {
 
-            if (bellySize > 22) return State.GameManager.SpriteDictionary.Dratopyr[165 + shake];
-            if (bellySize > 21) return State.GameManager.SpriteDictionary.Dratopyr[162 + shake];
-            if (bellySize > 20) return State.GameManager.SpriteDictionary.Dratopyr[159 + shake];
-            if (bellySize > 19) return State.GameManager.SpriteDictionary.Dratopyr[156 + shake];
+            if (bellySize > 22) return SpriteDictionary.Dratopyr[165 + shake];
+            if (bellySize > 21) return SpriteDictionary.Dratopyr[162 + shake];
+            if (bellySize > 20) return SpriteDictionary.Dratopyr[159 + shake];
+            if (bellySize > 19) return SpriteDictionary.Dratopyr[156 + shake];
         }
 
         if (bellySize > 18) bellySize = 18;
 
-        return State.GameManager.SpriteDictionary.Dratopyr[102 + (bellySize * 3) + shake];
+        return SpriteDictionary.Dratopyr[102 + (bellySize * 3) + shake];
     }
 
     internal override void RandomCustom(Unit unit)

@@ -358,7 +358,7 @@ internal class EventList
 
                         var villages = State.World.Villages.Where(s => s.Side == empire.Side && s.Race != otherEmpire.ReplacedRace).OrderBy(s => s.Population).ToArray();
                         UI.MainText.text = $"The war between {otherEmpire.Name} and {otherEmpire2.Name} has intensified considerably. As such a number of {otherEmpire.Name} refugees have found their way to our border. The infirm and young make up the majority of this group. There are far too many to integrate easily into our communities. They are begging our border guards for entry into our nation. What shall be done?";
-                        UI.MainText.text += AddVillageInfo(villages[0]); UI.MainText.text += AddVillageInfo(villages[0]);
+                        UI.MainText.text += AddVillageInfo(villages[0]);
                         UI.FirstChoice.GetComponentInChildren<Text>().text = $"Though it will be difficult for us, we must accommodate those in need. Move the villagers from the town with lowest population to another town. We shall give the town to these people in need.";
                         UI.FirstChoice.onClick.AddListener(() =>
                         {
@@ -2057,8 +2057,8 @@ internal class EventList
                         {
                             village.VillagePopulation.RemoveHireable(unit);
                             village.SubtractPopulation(1);
-                            empire.AddGold(300);
                         }
+                        empire.AddGold(300);
                     });
                     UI.ThirdChoice.interactable = empire.CanVore;
                 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 class Komodos : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Komodos1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Komodos2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Komodos3;
+    readonly Sprite[] Sprites = SpriteDictionary.Komodos1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Komodos2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Komodos3;
 
     bool oversize = false;
 
@@ -512,7 +512,7 @@ class Komodos : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[48];
+            DiscardSprite = SpriteDictionary.Komodos4[48];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -525,11 +525,11 @@ class Komodos : DefaultRaceData
         {
             if (Races.Komodos.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[47];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[47];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[39 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[39 + actor.Unit.BreastSize];
             }
             else
             {
@@ -547,7 +547,7 @@ class Komodos : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[58];
+            DiscardSprite = SpriteDictionary.Komodos4[58];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -560,11 +560,11 @@ class Komodos : DefaultRaceData
         {
             if (Races.Komodos.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[57];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[57];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[49 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[49 + actor.Unit.BreastSize];
             }
             else
             {
@@ -582,7 +582,7 @@ class Komodos : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[68];
+            DiscardSprite = SpriteDictionary.Komodos4[68];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -596,11 +596,11 @@ class Komodos : DefaultRaceData
         {
             if (Races.Komodos.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[67];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[67];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[59 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[59 + actor.Unit.BreastSize];
             }
             else
             {
@@ -609,7 +609,7 @@ class Komodos : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[69];
+            clothing2.GetSprite = (s) => SpriteDictionary.Komodos4[69];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -620,7 +620,7 @@ class Komodos : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[79];
+            DiscardSprite = SpriteDictionary.Komodos4[79];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -634,12 +634,12 @@ class Komodos : DefaultRaceData
             if (Races.Komodos.oversize)
             {
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[78];
+                clothing2.GetSprite = (s) => SpriteDictionary.Komodos4[78];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[80 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[70 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[80 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Komodos4[70 + actor.Unit.BreastSize];
             }
             else
             {
@@ -658,7 +658,7 @@ class Komodos : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[97];
+            DiscardSprite = SpriteDictionary.Komodos4[97];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -671,11 +671,11 @@ class Komodos : DefaultRaceData
         {
             if (Races.Komodos.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[96];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[96];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[88 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[88 + actor.Unit.BreastSize];
             }
             else
             {
@@ -708,14 +708,14 @@ class Komodos : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[1 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[1 + actor.Unit.BreastSize];
             }
             else
             {
                 breastSprite = null;
                 clothing1.GetSprite = null;
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[0];
+            clothing2.GetSprite = (s) => SpriteDictionary.Komodos4[0];
 
             if (actor.Unit.SpecialAccessoryType == 4)
             {
@@ -736,7 +736,7 @@ class Komodos : DefaultRaceData
     {
         public Tribal()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[38];
+            DiscardSprite = SpriteDictionary.Komodos4[38];
             coversBreasts = false;
             Type = 61406;
             OccupiesAllSlots = true;
@@ -749,11 +749,11 @@ class Komodos : DefaultRaceData
         {
             if (Races.Komodos.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[37];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[37];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[29 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[29 + actor.Unit.BreastSize];
             }
             else
             {
@@ -761,7 +761,7 @@ class Komodos : DefaultRaceData
                 clothing1.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[25 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Komodos4[25 + actor.Unit.BodySize];
 
             base.Configure(sprite, actor);
         }
@@ -771,7 +771,7 @@ class Komodos : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[9];
+            DiscardSprite = SpriteDictionary.Komodos4[9];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -784,15 +784,15 @@ class Komodos : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[15];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[15];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[17];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[17];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[16];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[16];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[14];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[14];
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[10 + actor.Unit.BodySize];
+            clothing2.GetSprite = (s) => SpriteDictionary.Komodos4[10 + actor.Unit.BodySize];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -803,7 +803,7 @@ class Komodos : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[19];
+            DiscardSprite = SpriteDictionary.Komodos4[19];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -813,8 +813,8 @@ class Komodos : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[18];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[10 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[18];
+            clothing2.GetSprite = (s) => SpriteDictionary.Komodos4[10 + actor.Unit.BodySize];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
             base.Configure(sprite, actor);
@@ -825,7 +825,7 @@ class Komodos : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Komodos4[24];
+            DiscardSprite = SpriteDictionary.Komodos4[24];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(12, null, WhiteColored);
             Type = 61409;
@@ -835,7 +835,7 @@ class Komodos : DefaultRaceData
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Komodos4[20 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.Komodos4[20 + actor.Unit.BodySize];
 
             base.Configure(sprite, actor);
         }

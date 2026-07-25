@@ -36,6 +36,7 @@ public class PotionInv : MonoBehaviour
             currentPrefab.RemainingStock.text = empire.EmpirePotions[potion].ToString();
             currentPrefab.PositiveDescription.text = FormatPotionPositives(potion);
             currentPrefab.NegativeDescription.text = FormatPotionNegative(potion);
+            currentPrefab.PotionName.text = potion.potionname;
             currentPrefab.ApplyButton.onClick.AddListener(() =>
             {
                 empire.EmpirePotions[potion] = empire.EmpirePotions[potion] - 1;
@@ -60,6 +61,7 @@ public class PotionInv : MonoBehaviour
         foreach (Traits trait in potion.PositiveTraits)
         {
             unit.AddPermanentTrait(trait);
+            unit.AddPermanentTrait(Traits.Resourceful);
         }
         foreach (Traits trait in potion.NegativeTraits)
         {

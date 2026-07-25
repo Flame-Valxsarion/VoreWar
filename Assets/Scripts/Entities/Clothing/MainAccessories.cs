@@ -7,7 +7,7 @@
 
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Asura[40];
+        clothing1.GetSprite = (s) => SpriteDictionary.Asura[40];
         switch (actor.Unit.Race)
         {
             case Race.Imps:
@@ -35,7 +35,7 @@ class SantaHat : ClothingAccessory
 
     public override void Configure(CompleteSprite sprite, Actor_Unit actor)
     {
-        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.SantaHat;
+        clothing1.GetSprite = (s) => SpriteDictionary.SantaHat;
         switch (actor.Unit.Race)
         {
             case Race.Imps:
@@ -61,6 +61,9 @@ class SantaHat : ClothingAccessory
                 clothing1.YOffset = 26 * .625f;
                 break;
             case Race.Bears:
+                clothing1.YOffset = 12 * .625f;
+                break;
+            case Race.Ghosts:
                 clothing1.YOffset = 12 * .625f;
                 break;
             default:

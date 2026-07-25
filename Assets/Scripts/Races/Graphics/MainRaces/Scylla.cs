@@ -47,12 +47,12 @@ class Scylla : DefaultRaceData
 
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scylla[24 + (actor.IsAttacking ? 1 : 0) + (2 * actor.Unit.BodySize) + (actor.Unit.HasBreasts ? 0 : 8)]; //Torsos
-    protected override Sprite BodySizeSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scylla[3 + actor.Unit.BodySize + (actor.Unit.HasBreasts ? 0 : 7)]; //Fins
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scylla[2]; //Head Fins
-    protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scylla[8 + (actor.IsAttacking ? 1 : 0)]; //Arm Scales
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scylla[0]; //Front Tents
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scylla[1]; //Rear Tents
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Scylla[24 + (actor.IsAttacking ? 1 : 0) + (2 * actor.Unit.BodySize) + (actor.Unit.HasBreasts ? 0 : 8)]; //Torsos
+    protected override Sprite BodySizeSprite(Actor_Unit actor) => SpriteDictionary.Scylla[3 + actor.Unit.BodySize + (actor.Unit.HasBreasts ? 0 : 7)]; //Fins
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Scylla[2]; //Head Fins
+    protected override Sprite SecondaryAccessorySprite(Actor_Unit actor) => SpriteDictionary.Scylla[8 + (actor.IsAttacking ? 1 : 0)]; //Arm Scales
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Scylla[0]; //Front Tents
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Scylla[1]; //Rear Tents
     protected override Sprite WeaponSprite(Actor_Unit actor)
     {
         if (actor.Unit.HasWeapon && actor.Surrendered == false)
@@ -62,7 +62,7 @@ class Scylla : DefaultRaceData
                 return null;
             if (sprite > 5)
                 sprite--;
-            return State.GameManager.SpriteDictionary.Scylla[15 + sprite];
+            return SpriteDictionary.Scylla[15 + sprite];
         }
         else
         {

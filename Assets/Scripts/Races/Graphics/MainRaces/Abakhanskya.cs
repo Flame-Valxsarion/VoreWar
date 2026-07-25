@@ -7,7 +7,7 @@ class Abakhanskya : BlankSlate
     RaceFrameList AbaSwallowHead = new RaceFrameList(new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 7, 6 }, new float[10] { .15f, .15f, .15f, .15f, .2f, .3f, .3f, .3f, .3f, .4f });
     RaceFrameList AbaSwallowBelly = new RaceFrameList(new int[8] { 0, 0, 1, 2, 3, 4, 5, 6 }, new float[8] { 0.01f, 1.0f, .25f, .25f, .25f, .25f, .50f, .6f });
     
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Abakhanskya;
+    readonly Sprite[] Sprites = SpriteDictionary.Abakhanskya;
 
     public Abakhanskya()
     {

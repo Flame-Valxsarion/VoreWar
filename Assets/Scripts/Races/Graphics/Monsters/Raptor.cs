@@ -260,43 +260,43 @@ class Raptor : BlankSlate
     {
         if (actor.AnimationController.frameLists == null) SetUpAnimations(actor);
 
-        if (actor.IsAttacking || actor.IsOralVoring) return State.GameManager.SpriteDictionary.Raptor[1];
+        if (actor.IsAttacking || actor.IsOralVoring) return SpriteDictionary.Raptor[1];
 
-        if (actor.GetBallSize(16) > 0) return State.GameManager.SpriteDictionary.Raptor[3];
+        if (actor.GetBallSize(16) > 0) return SpriteDictionary.Raptor[3];
 
-        if (actor.HasBelly) return State.GameManager.SpriteDictionary.Raptor[2];
+        if (actor.HasBelly) return SpriteDictionary.Raptor[2];
 
-        return State.GameManager.SpriteDictionary.Raptor[0];
+        return SpriteDictionary.Raptor[0];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsOralVoring) return State.GameManager.SpriteDictionary.Raptor[7];
+        if (actor.IsAttacking || actor.IsOralVoring) return SpriteDictionary.Raptor[7];
 
-        if (actor.GetBallSize(16) > 0) return State.GameManager.SpriteDictionary.Raptor[9];
+        if (actor.GetBallSize(16) > 0) return SpriteDictionary.Raptor[9];
 
-        if (actor.HasBelly) return State.GameManager.SpriteDictionary.Raptor[8];
+        if (actor.HasBelly) return SpriteDictionary.Raptor[8];
 
-        return State.GameManager.SpriteDictionary.Raptor[6];
+        return SpriteDictionary.Raptor[6];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsOralVoring) return State.GameManager.SpriteDictionary.Raptor[48];
+        if (actor.IsAttacking || actor.IsOralVoring) return SpriteDictionary.Raptor[48];
 
-        return State.GameManager.SpriteDictionary.Raptor[4];
+        return SpriteDictionary.Raptor[4];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
     {
-        if (actor.IsAttacking || actor.IsOralVoring) return State.GameManager.SpriteDictionary.Raptor[49];
+        if (actor.IsAttacking || actor.IsOralVoring) return SpriteDictionary.Raptor[49];
 
-        return State.GameManager.SpriteDictionary.Raptor[10];
+        return SpriteDictionary.Raptor[10];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Raptor[11];
+        return SpriteDictionary.Raptor[11];
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor)
@@ -320,7 +320,7 @@ class Raptor : BlankSlate
 
             if (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame] == 0) return null;
 
-            return State.GameManager.SpriteDictionary.Raptor[11 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.Raptor[11 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
         if (actor.HasBelly || actor.GetBallSize(18) > 0)
@@ -347,7 +347,7 @@ class Raptor : BlankSlate
         {
             if (frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame] == 0) return null;
 
-            return State.GameManager.SpriteDictionary.Raptor[17 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
+            return SpriteDictionary.Raptor[17 + frameListTail.frames[actor.AnimationController.frameLists[0].currentFrame]];
         }
 
         return null;
@@ -355,40 +355,40 @@ class Raptor : BlankSlate
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Raptor[5];
+        return SpriteDictionary.Raptor[5];
     }
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Balls
     {
-        if (actor.GetBallSize(24, 2) == 0 && Config.HideCocks == false) return State.GameManager.SpriteDictionary.Raptor[52];
+        if (actor.GetBallSize(24, 2) == 0 && Config.HideCocks == false) return SpriteDictionary.Raptor[52];
 
         int size = actor.GetBallSize(24, 2);
 
         if (size == 24 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raptor[75];
+            return SpriteDictionary.Raptor[75];
         }
 
         else if (size >= 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raptor[74];
+            return SpriteDictionary.Raptor[74];
         }
 
         else if (size == 22 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raptor[73];
+            return SpriteDictionary.Raptor[73];
         }
 
         if (size > 21) size = 21;
 
-        return State.GameManager.SpriteDictionary.Raptor[51 + size];
+        return SpriteDictionary.Raptor[51 + size];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
     {
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.Raptor[51];
+        if (actor.IsCockVoring) return SpriteDictionary.Raptor[51];
 
-        if (actor.IsErect()) return State.GameManager.SpriteDictionary.Raptor[50];
+        if (actor.IsErect()) return SpriteDictionary.Raptor[50];
 
         return null;
     }
@@ -401,21 +401,21 @@ class Raptor : BlankSlate
 
         if (size == 24 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raptor[47];
+            return SpriteDictionary.Raptor[47];
         }
 
         else if (size >= 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raptor[46];
+            return SpriteDictionary.Raptor[46];
         }
 
         else if (size == 22 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach) ?? false))
         {
-            return State.GameManager.SpriteDictionary.Raptor[45];
+            return SpriteDictionary.Raptor[45];
         }
 
         if (size > 21) size = 21;
 
-        return State.GameManager.SpriteDictionary.Raptor[23 + size];
+        return SpriteDictionary.Raptor[23 + size];
     }
 }

@@ -62,28 +62,28 @@ class Puca : BlankSlate
     protected override Sprite BodySprite(Actor_Unit actor)
     {
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.Puca[1];
+            return SpriteDictionary.Puca[1];
         else if (actor.IsAnalVoring)
-            return State.GameManager.SpriteDictionary.Puca[2];
+            return SpriteDictionary.Puca[2];
         else
-            return State.GameManager.SpriteDictionary.Puca[0];
+            return SpriteDictionary.Puca[0];
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.Puca[4];
-        return State.GameManager.SpriteDictionary.Puca[3];
+            return SpriteDictionary.Puca[4];
+        return SpriteDictionary.Puca[3];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Puca[8 + actor.Unit.EyeType];
+        return SpriteDictionary.Puca[8 + actor.Unit.EyeType];
     }
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Puca[16 + actor.Unit.MouthType];
+        return SpriteDictionary.Puca[16 + actor.Unit.MouthType];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
@@ -95,17 +95,17 @@ class Puca : BlankSlate
             if (actor.PredatorComponent?.VisibleFullness < .75f)
             {
                 Dick.layer = 18;
-                return State.GameManager.SpriteDictionary.Puca[33 + actor.Unit.DickSize];
+                return SpriteDictionary.Puca[33 + actor.Unit.DickSize];
             }
             else
             {
                 Dick.layer = 12;
-                return State.GameManager.SpriteDictionary.Puca[30 + actor.Unit.DickSize];
+                return SpriteDictionary.Puca[30 + actor.Unit.DickSize];
             }
         }
 
         Dick.layer = 9;
-        return State.GameManager.SpriteDictionary.Puca[30 + actor.Unit.DickSize];
+        return SpriteDictionary.Puca[30 + actor.Unit.DickSize];
     }
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
@@ -118,12 +118,12 @@ class Puca : BlankSlate
                 pose = 2;
             if (actor.GetWeaponSprite() < 4)
             {
-                return State.GameManager.SpriteDictionary.Puca[5 + pose];
+                return SpriteDictionary.Puca[5 + pose];
             }
             else
             {
                 Weapon.layer = -1;
-                return State.GameManager.SpriteDictionary.Puca[13 + pose];
+                return SpriteDictionary.Puca[13 + pose];
             }
 
         }
@@ -143,12 +143,12 @@ class Puca : BlankSlate
             if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(9) == 9)
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.Puca[50];
+                return SpriteDictionary.Puca[50];
             }
             else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && actor.GetStomachSize(9) == 9)
             {
                 belly.transform.localScale = new Vector3(1, 1, 1);
-                return State.GameManager.SpriteDictionary.Puca[49];
+                return SpriteDictionary.Puca[49];
             }
 
             if (actor.PredatorComponent.VisibleFullness > 4)
@@ -160,7 +160,7 @@ class Puca : BlankSlate
             }
             else
                 belly.transform.localScale = new Vector3(1, 1, 1);
-            return State.GameManager.SpriteDictionary.Puca[37 + actor.GetStomachSize(9)];
+            return SpriteDictionary.Puca[37 + actor.GetStomachSize(9)];
         }
         else
         {
@@ -215,24 +215,24 @@ class Puca : BlankSlate
     protected override Sprite BreastsSprite(Actor_Unit actor)
     {
         if (actor.Unit.HasBreasts)
-            return State.GameManager.SpriteDictionary.Puca[26];
+            return SpriteDictionary.Puca[26];
         return null;
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Puca[23];
+        return SpriteDictionary.Puca[23];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor)
     {
-        return State.GameManager.SpriteDictionary.Puca[24];
+        return SpriteDictionary.Puca[24];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
     {
         if (actor.Unit.HasBreasts)
-            return State.GameManager.SpriteDictionary.Puca[27];
+            return SpriteDictionary.Puca[27];
         return null;
     }
 
@@ -262,7 +262,7 @@ class Puca : BlankSlate
                 spriteNum = 28 + femaleMod;
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Puca[spriteNum];
+            clothing1.GetSprite = (s) => SpriteDictionary.Puca[spriteNum];
             base.Configure(sprite, actor);
         }
     }
@@ -287,7 +287,7 @@ class Puca : BlankSlate
             else
                 spriteNum = 21;
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Puca[spriteNum];
+            clothing1.GetSprite = (s) => SpriteDictionary.Puca[spriteNum];
             base.Configure(sprite, actor);
         }
     }
@@ -310,7 +310,7 @@ class Puca : BlankSlate
             else
                 spriteNum = 36;
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ClothingStrict, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Puca[spriteNum];
+            clothing1.GetSprite = (s) => SpriteDictionary.Puca[spriteNum];
             base.Configure(sprite, actor);
         }
     }

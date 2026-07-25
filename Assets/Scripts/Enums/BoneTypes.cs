@@ -25,6 +25,7 @@
     WyvernBonesWithoutHead,
     VisionSkull,
     HoneyPuddle,
+    UrinePuddle,
 
 }
 

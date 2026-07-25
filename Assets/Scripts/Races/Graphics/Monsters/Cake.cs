@@ -23,20 +23,20 @@ class Cake : BlankSlate
     protected override Sprite BodySprite(Actor_Unit actor)
     {
         if (actor.IsEating || actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.Cake[1];
-        return State.GameManager.SpriteDictionary.Cake[0];
+            return SpriteDictionary.Cake[1];
+        return SpriteDictionary.Cake[0];
     }
 
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cake[4];
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cake[2];
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.Cake[3];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Cake[4];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.Cake[2];
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => SpriteDictionary.Cake[3];
 
     protected override Sprite MouthSprite(Actor_Unit actor)
     {
         if (actor.IsEating || actor.IsAttacking)
         {
-            if (Config.Bones || Config.ScatBones) return State.GameManager.SpriteDictionary.Cake[6];
-            else return State.GameManager.SpriteDictionary.Cake[5];
+            if (Config.Bones || Config.ScatBones) return SpriteDictionary.Cake[6];
+            else return SpriteDictionary.Cake[5];
         }
         return null;
     }
@@ -44,15 +44,15 @@ class Cake : BlankSlate
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
         if (actor.IsEating || actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.Cake[8];
-        return State.GameManager.SpriteDictionary.Cake[7];
+            return SpriteDictionary.Cake[8];
+        return SpriteDictionary.Cake[7];
     }
 
     protected override Sprite EyesSprite(Actor_Unit actor)
     {
         if (actor.HasBelly == false)
             return null;
-        return State.GameManager.SpriteDictionary.Cake[9 + actor.GetStomachSize(7)];
+        return SpriteDictionary.Cake[9 + actor.GetStomachSize(7)];
     }
 }
 

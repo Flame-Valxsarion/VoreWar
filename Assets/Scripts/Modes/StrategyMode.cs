@@ -588,6 +588,15 @@ public class StrategyMode : SceneBase
                             case StrategicDoodadType.SpawnerIliijiith:
                                 Spawners.Add(new MonsterSpawnerLocation(new Vec2i(i, j), Race.Iliijiith));
                                 break;
+                            case StrategicDoodadType.SpawnerPudding:
+                                Spawners.Add(new MonsterSpawnerLocation(new Vec2i(i, j), Race.Pudding));
+                                break;
+                            case StrategicDoodadType.SpawnerSoulSprite:
+                                Spawners.Add(new MonsterSpawnerLocation(new Vec2i(i, j), Race.SoulSprite));
+                                break;
+                            case StrategicDoodadType.SpawnerBlackWidow:
+                                Spawners.Add(new MonsterSpawnerLocation(new Vec2i(i, j), Race.BlackWidow));
+                                break;
                         }
                     }
                 }
@@ -733,7 +742,7 @@ public class StrategyMode : SceneBase
             Config.World.Toggles["FogOfWar"] = false;
             return;
         }
-        FogSystem.UpdateFog(LastHumanEmpire, State.World.Villages, StrategicUtilities.GetAllArmies(), currentVillageTiles, currentClaimableTiles);
+        FogSystem.UpdateFog(LastHumanEmpire, State.World.Villages, StrategicUtilities.GetAllArmies(), currentVillageTiles, currentClaimableTiles, currentBuildingTiles);
     }
 
     void UpdateVisibility()
@@ -937,7 +946,7 @@ public class StrategyMode : SceneBase
                         }
                         else
                         {
-                            TilemapLayers[3].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
+                            TilemapLayers[13].SetTile(new Vector3Int(i, j, 0), DoodadTypes[-1 + (int)doodads[i, j]]);
                         }
                     }
                 }

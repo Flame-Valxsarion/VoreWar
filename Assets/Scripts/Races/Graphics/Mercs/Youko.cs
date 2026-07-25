@@ -4,9 +4,9 @@ using System;
 
 class Youko : Humans, IVoreRestrictions
 {
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.HumansBodySprites2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.HumansBodySprites3;
-    readonly Sprite[] Tails = State.GameManager.SpriteDictionary.YoukoTails;
+    readonly Sprite[] Sprites2 = SpriteDictionary.HumansBodySprites2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.HumansBodySprites3;
+    readonly Sprite[] Tails = SpriteDictionary.YoukoTails;
 
     bool oversize = false;
 
@@ -167,7 +167,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[57];
+            DiscardSprite = SpriteDictionary.HumenFundertops[57];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -183,7 +183,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[56];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -191,26 +191,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[0 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -233,7 +233,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[58];
+            DiscardSprite = SpriteDictionary.HumenFundertops[58];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -256,26 +256,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[8 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[8 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -297,7 +297,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[60];
+            DiscardSprite = SpriteDictionary.HumenFundertops[60];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -313,7 +313,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[59];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[59];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -321,26 +321,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[16 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[16 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -363,7 +363,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[62];
+            DiscardSprite = SpriteDictionary.HumenFundertops[62];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -378,7 +378,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[61];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[61];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -386,26 +386,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[24 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[24 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -427,7 +427,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[64];
+            DiscardSprite = SpriteDictionary.HumenFundertops[64];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -443,7 +443,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[63];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[63];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -451,26 +451,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[32 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[32 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -493,7 +493,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[66];
+            DiscardSprite = SpriteDictionary.HumenFundertops[66];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -509,7 +509,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[65];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[65];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -517,26 +517,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[40 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[40 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -559,7 +559,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public GenericTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFundertops[68];
+            DiscardSprite = SpriteDictionary.HumenFundertops[68];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -574,7 +574,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[67];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[67];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -582,26 +582,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFundertops[48 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFundertops[48 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -624,7 +624,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[5];
+            DiscardSprite = SpriteDictionary.HumenMundertops[5];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -635,7 +635,7 @@ class Youko : Humans, IVoreRestrictions
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[0];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[0];
 
             base.Configure(sprite, actor);
         }
@@ -645,7 +645,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[5];
+            DiscardSprite = SpriteDictionary.HumenMundertops[5];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -659,11 +659,11 @@ class Youko : Humans, IVoreRestrictions
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[4];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[4];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[1 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[1 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);
@@ -674,7 +674,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public MaleTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[11];
+            DiscardSprite = SpriteDictionary.HumenMundertops[11];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -685,7 +685,7 @@ class Youko : Humans, IVoreRestrictions
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[6];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[6];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -696,7 +696,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public MaleTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[11];
+            DiscardSprite = SpriteDictionary.HumenMundertops[11];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -710,11 +710,11 @@ class Youko : Humans, IVoreRestrictions
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[10];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[7 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[7 + actor.Unit.BodySize];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
@@ -726,7 +726,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public MaleTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[14];
+            DiscardSprite = SpriteDictionary.HumenMundertops[14];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -740,11 +740,11 @@ class Youko : Humans, IVoreRestrictions
 
             if (actor.Unit.BodySize == 2)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[13];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[13];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[12];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[12];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
 
@@ -756,7 +756,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public MaleTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenMundertops[16];
+            DiscardSprite = SpriteDictionary.HumenMundertops[16];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -768,7 +768,7 @@ class Youko : Humans, IVoreRestrictions
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenMundertops[15];
+            clothing1.GetSprite = (s) => SpriteDictionary.HumenMundertops[15];
 
             base.Configure(sprite, actor);
         }
@@ -778,7 +778,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public Uniform1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenUniform1[42];
+            DiscardSprite = SpriteDictionary.HumenUniform1[42];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(18, null, null);
             clothing2 = new SpriteExtraInfo(15, null, null);
@@ -791,17 +791,17 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[6];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenUniform2[6];
             }
             else if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize > 5)
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[6];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUniform2[6];
                 }
                 else
                 {
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[0 + actor.Unit.BreastSize];
+                    clothing1.GetSprite = (s) => SpriteDictionary.HumenUniform2[0 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -814,50 +814,50 @@ class Youko : Humans, IVoreRestrictions
             {
                 if (actor.GetStomachSize(31, 0.7f) > 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[13 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumenUniform2[13 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[12 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumenUniform2[12 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 2)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[11 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumenUniform2[11 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 1)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[10 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumenUniform2[10 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
                 else if (actor.GetStomachSize(31, 0.7f) > 0)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[9 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumenUniform2[9 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[8 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumenUniform2[8 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform2[7 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing2.GetSprite = (s) => SpriteDictionary.HumenUniform2[7 + 7 * actor.Unit.BodySize + 21 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
 
             if (actor.Unit.HasWeapon == false)
             {
-                if (actor.IsAttacking) clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[3 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                else clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[0 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                if (actor.IsAttacking) clothing3.GetSprite = (s) => SpriteDictionary.HumenUniform1[3 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                else clothing3.GetSprite = (s) => SpriteDictionary.HumenUniform1[0 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
             else if (actor.GetWeaponSprite() == 0 || actor.GetWeaponSprite() == 4 || actor.GetWeaponSprite() == 6)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[2 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.HumenUniform1[2 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
             else if (actor.GetWeaponSprite() == 1 || actor.GetWeaponSprite() == 3)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[3 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.HumenUniform1[3 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenUniform1[1 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.HumenUniform1[1 + 4 * actor.Unit.BodySize + 12 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -872,7 +872,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public FemaleOnePiece1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[81];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[81];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -889,7 +889,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[51];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[51];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -897,26 +897,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[43 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[43 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -933,28 +933,28 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[42];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[42];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[41];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[41];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[40];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[40];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[39];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[39];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[38];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[38];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[37];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[37];
                 }
             }
             else
@@ -963,32 +963,32 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[21];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[21];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[20];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[20];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[19];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[19];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[18];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[18];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[17];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[17];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[16];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[16];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[15];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[15];
                 }
             }
 
@@ -1005,7 +1005,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public FemaleOnePiece2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[80];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[80];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1030,26 +1030,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[52 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[52 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1066,64 +1066,64 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[36];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[36];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[35];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[35];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[34];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[34];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[33];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[33];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[32];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[32];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[31];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[31];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[30];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[30];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[29];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[29];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[28];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[28];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[27];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[27];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[26];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[26];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[25];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[25];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[24];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[24];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[23];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[23];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[22];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[22];
                 }
             }
             else
@@ -1132,64 +1132,64 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[14];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[14];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[13];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[13];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[12];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[12];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[11];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[11];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[10];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[10];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[9];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[9];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[8];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[8];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[7];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[7];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[6];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[6];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[5];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[5];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[4];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[4];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[3];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[3];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[2];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[2];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[1];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[1];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[0];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[0];
                 }
             }
 
@@ -1206,7 +1206,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public FemaleOnePiece3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[79];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[79];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1223,7 +1223,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[69];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[69];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1231,26 +1231,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[61 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[61 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1267,64 +1267,64 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[36];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[36];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[35];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[35];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[34];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[34];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[33];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[33];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[32];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[32];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[31];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[31];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[30];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[30];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[29];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[29];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[28];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[28];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[27];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[27];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[26];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[26];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[25];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[25];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[24];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[24];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[23];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[23];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[22];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[22];
                 }
             }
             else
@@ -1333,64 +1333,64 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 12)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[14];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[14];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 11)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[13];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[13];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 10)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[12];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[12];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 9)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[11];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[11];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 8)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[10];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[10];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 7)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[9];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[9];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 6)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[8];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[8];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 5)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[7];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[7];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[6];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[6];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[5];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[5];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[4];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[4];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[3];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[3];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[2];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[2];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[1];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[1];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[0];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[0];
                 }
             }
 
@@ -1407,7 +1407,7 @@ class Youko : Humans, IVoreRestrictions
     {
         public FemaleOnePiece4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.HumenFOnePieces[82];
+            DiscardSprite = SpriteDictionary.HumenFOnePieces[82];
             blocksBreasts = true;
             coversBreasts = false;
             femaleOnly = true;
@@ -1424,7 +1424,7 @@ class Youko : Humans, IVoreRestrictions
         {
             if (Races.Youko.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[78];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[78];
                 blocksBreasts = false;
                 clothing2.GetSprite = null;
                 clothing3.GetSprite = null;
@@ -1432,26 +1432,26 @@ class Youko : Humans, IVoreRestrictions
             else if (actor.Unit.HasBreasts)
             {
                 blocksBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[70 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[70 + actor.Unit.BreastSize];
                 if (actor.Unit.BreastSize == 3)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[64];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[67];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[64];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[67];
                 }
                 else if (actor.Unit.BreastSize == 4)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[65];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[68];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[65];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[68];
                 }
                 else if (actor.Unit.BreastSize == 5)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[66];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[69];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[66];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[69];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[0 + actor.Unit.BreastSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.HumansVoreSprites[32 + actor.Unit.BreastSize];
                 }
             }
             else
@@ -1468,28 +1468,28 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[42];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[42];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[41];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[41];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[40];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[40];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[39];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[39];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[38];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[38];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[37];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[37];
                 }
             }
             else
@@ -1498,32 +1498,32 @@ class Youko : Humans, IVoreRestrictions
                 {
                     if (actor.GetStomachSize(31, 0.7f) > 4)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[21];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[21];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 3)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[20];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[20];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 2)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[19];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[19];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 1)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[18];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[18];
                     }
                     else if (actor.GetStomachSize(31, 0.7f) > 0)
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[17];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[17];
                     }
                     else
                     {
-                        clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[16];
+                        clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[16];
                     }
                 }
                 else
                 {
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.HumenFOnePieces[15];
+                    clothing4.GetSprite = (s) => SpriteDictionary.HumenFOnePieces[15];
                 }
             }
 

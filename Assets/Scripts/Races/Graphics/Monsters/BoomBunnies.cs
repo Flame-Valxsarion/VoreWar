@@ -3,7 +3,7 @@ using UnityEngine;
 
 class BoomBunnies : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.BoomBunnies;
+    readonly Sprite[] Sprites = SpriteDictionary.BoomBunnies;
     internal BoomBunnies()
     {
         CanBeGender = new List<Gender>() { Gender.Female, Gender.Male };

@@ -4,10 +4,10 @@ using UnityEngine;
 
 class Vipers : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Vipers1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Vipers2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.Vipers3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.Vipers4;
+    readonly Sprite[] Sprites = SpriteDictionary.Vipers1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Vipers2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.Vipers3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.Vipers4;
 
     readonly float xOffset = -7.5f; //12 pixels * 5/8
 
@@ -671,7 +671,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour1TypeFull()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[22];
+            DiscardSprite = SpriteDictionary.Vipers4[22];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -686,23 +686,23 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[10];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[11];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[11];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[17];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
+            clothing5.GetSprite = (s) => SpriteDictionary.Vipers3[17];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[13 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[13 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -717,7 +717,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour1TypeNoGloves()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[22];
+            DiscardSprite = SpriteDictionary.Vipers4[22];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -730,19 +730,19 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[10];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[11];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[11];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[17];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[17];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -756,7 +756,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour1TypeNoCap()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[22];
+            DiscardSprite = SpriteDictionary.Vipers4[22];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -770,22 +770,22 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[10];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[11];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[11];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[13 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[13 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -800,7 +800,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour1TypeBare()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[22];
+            DiscardSprite = SpriteDictionary.Vipers4[22];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -812,18 +812,18 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[10];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[2 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[11];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[11];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -837,7 +837,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour2TypeFull()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -852,23 +852,23 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[18];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[18];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[19];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[19];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[30];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
+            clothing5.GetSprite = (s) => SpriteDictionary.Vipers3[30];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[28 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[28 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -883,7 +883,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour2TypeNoGloves()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -896,19 +896,19 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[18];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[18];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[19];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[19];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[30];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[30];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -922,7 +922,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour2TypeNoCap()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -936,22 +936,22 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[18];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[18];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[19];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[19];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[28 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[28 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -966,7 +966,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour2TypeBare()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -978,18 +978,18 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[18];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[18];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[20 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[19];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[19];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1003,7 +1003,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour3TypeFull()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[23];
+            DiscardSprite = SpriteDictionary.Vipers4[23];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1018,23 +1018,23 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[40];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[40];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[41];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[41];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[39];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
+            clothing5.GetSprite = (s) => SpriteDictionary.Vipers3[39];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[42 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[42 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -1049,7 +1049,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour3TypeNoGloves()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[23];
+            DiscardSprite = SpriteDictionary.Vipers4[23];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1062,19 +1062,19 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[40];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[40];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[41];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[41];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[39];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[39];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1088,7 +1088,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour3TypeNoCap()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[23];
+            DiscardSprite = SpriteDictionary.Vipers4[23];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1102,22 +1102,22 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[40];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[40];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[41];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[41];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[42 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[42 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[15 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -1132,7 +1132,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour3TypeBare()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers4[23];
+            DiscardSprite = SpriteDictionary.Vipers4[23];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1144,18 +1144,18 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[40];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[40];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[31 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[41];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[41];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[12];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[12];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1169,7 +1169,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler1TypeFull()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[98];
+            DiscardSprite = SpriteDictionary.Vipers3[98];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1183,22 +1183,22 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[52];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[52];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[53];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[53];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[57];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[57];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[55 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[55 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1212,7 +1212,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler1TypeNoGloves()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[98];
+            DiscardSprite = SpriteDictionary.Vipers3[98];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1225,19 +1225,19 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[52];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[52];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[53];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[53];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[57];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[57];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1251,7 +1251,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler1TypeNoCap()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[98];
+            DiscardSprite = SpriteDictionary.Vipers3[98];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1264,21 +1264,21 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[52];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[52];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[53];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[53];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[55 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[55 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1292,7 +1292,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler1TypeBare()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[98];
+            DiscardSprite = SpriteDictionary.Vipers3[98];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1304,18 +1304,18 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[52];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[52];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[44 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[53];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[53];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1329,7 +1329,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour4TypeFull()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1345,26 +1345,26 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[68];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[78];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[68];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[78];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[69];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[79];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[69];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[79];
             }
 
-            clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[58];
-            clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[59];
+            clothing5.GetSprite = (s) => SpriteDictionary.Vipers3[58];
+            clothing6.GetSprite = (s) => SpriteDictionary.Vipers3[59];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[80 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[82 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[80 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[82 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -1380,7 +1380,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour4TypeNoGloves()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1394,22 +1394,22 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[68];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[78];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[68];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[78];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[69];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[79];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[69];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[79];
             }
 
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[58];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[59];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[58];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[59];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -1424,7 +1424,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour4TypeNoCap()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1438,23 +1438,23 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[68];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[78];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[68];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[78];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[69];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[79];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[69];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[79];
             }
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[80 + (attacking ? 1 : 0)];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[82 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[80 + (attacking ? 1 : 0)];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[82 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
             clothing4.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -1469,7 +1469,7 @@ class Vipers : DefaultRaceData
     {
         public ViperArmour4TypeBare()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[97];
+            DiscardSprite = SpriteDictionary.Vipers3[97];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1481,18 +1481,18 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[68];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[78];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[68];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[78];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[60 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[70 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[69];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[79];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[69];
+                clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[79];
             }
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
@@ -1507,7 +1507,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler2TypeFull()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[99];
+            DiscardSprite = SpriteDictionary.Vipers3[99];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1521,22 +1521,22 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[92];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[92];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[93];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[93];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[96];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
+            clothing4.GetSprite = (s) => SpriteDictionary.Vipers3[96];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[94 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[94 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1550,7 +1550,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler2TypeNoGloves()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[99];
+            DiscardSprite = SpriteDictionary.Vipers3[99];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1563,19 +1563,19 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[92];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[92];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[93];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[93];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[96];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[96];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1589,7 +1589,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler2TypeNoCap()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[99];
+            DiscardSprite = SpriteDictionary.Vipers3[99];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1602,21 +1602,21 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[92];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[92];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[93];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[93];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
 
             bool attacking = actor.IsAttacking;
-            clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[94 + (attacking ? 1 : 0)];
+            clothing3.GetSprite = (s) => SpriteDictionary.Vipers3[94 + (attacking ? 1 : 0)];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 
@@ -1630,7 +1630,7 @@ class Vipers : DefaultRaceData
     {
         public ViperRuler2TypeBare()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Vipers3[99];
+            DiscardSprite = SpriteDictionary.Vipers3[99];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -1642,18 +1642,18 @@ class Vipers : DefaultRaceData
         {
             if (Races.Vipers.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[92];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[92];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[84 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[93];
+                clothing1.GetSprite = (s) => SpriteDictionary.Vipers3[93];
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Vipers3[54];
+            clothing2.GetSprite = (s) => SpriteDictionary.Vipers3[54];
 
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.ViperSkin, actor.Unit.ClothingColor);
 

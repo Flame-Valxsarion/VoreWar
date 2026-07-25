@@ -29,41 +29,41 @@ class FeralSlime : BlankSlate
     {
         unit.SkinColor = State.Rand.Next(SkinColors);
     }
-    //protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralSlime[0];
+    //protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.FeralSlime[0];
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
         if (actor.HasBelly == false)
-            return State.GameManager.SpriteDictionary.FeralSlime[0];
+            return SpriteDictionary.FeralSlime[0];
 
         int size = actor.GetStomachSize(8);
 
         if (size >= 8 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[7];
+            return SpriteDictionary.FeralSlime[7];
         }
         if (size >= 7 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[6];
+            return SpriteDictionary.FeralSlime[6];
         }
-        return State.GameManager.SpriteDictionary.FeralSlime[0 + actor.GetStomachSize(6)];
+        return SpriteDictionary.FeralSlime[0 + actor.GetStomachSize(6)];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor)
     {
         if (actor.HasBelly == false)
-            return State.GameManager.SpriteDictionary.FeralSlime[8];
+            return SpriteDictionary.FeralSlime[8];
 
         int size = actor.GetStomachSize(8);
 
         if (size >= 8 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[15];
+            return SpriteDictionary.FeralSlime[15];
         }
         if (size >= 7 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[14];
+            return SpriteDictionary.FeralSlime[14];
         }
-        return State.GameManager.SpriteDictionary.FeralSlime[8 + actor.GetStomachSize(6)];
+        return SpriteDictionary.FeralSlime[8 + actor.GetStomachSize(6)];
     }
     protected override Sprite AccessorySprite(Actor_Unit actor)
     {
@@ -72,21 +72,21 @@ class FeralSlime : BlankSlate
         int size = actor.GetStomachSize(24, 0.7f);
         if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb) && size == 24)
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[39];
+            return SpriteDictionary.FeralSlime[39];
         }
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 24)
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[38];
+            return SpriteDictionary.FeralSlime[38];
         }
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 23)
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[37];
+            return SpriteDictionary.FeralSlime[37];
         }
         else if (actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.stomach, PreyLocation.womb) && size == 22)
         {
-            return State.GameManager.SpriteDictionary.FeralSlime[36];
+            return SpriteDictionary.FeralSlime[36];
         }
-        return State.GameManager.SpriteDictionary.FeralSlime[16 + actor.GetStomachSize(20, 0.7f)];
+        return SpriteDictionary.FeralSlime[16 + actor.GetStomachSize(20, 0.7f)];
     }
 }
 

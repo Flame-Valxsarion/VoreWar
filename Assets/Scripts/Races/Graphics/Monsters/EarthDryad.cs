@@ -4,12 +4,12 @@ using UnityEngine;
 
 class EarthDryad : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.DryadSprites1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.DryadSprites2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.DryadSprites3;
-    readonly Sprite[] Sprites4 = State.GameManager.SpriteDictionary.DryadSprites4;
-    readonly Sprite[] Sprites5 = State.GameManager.SpriteDictionary.DryadSprites5;
-    readonly Sprite[] Sprites6 = State.GameManager.SpriteDictionary.HumansVoreSprites;
+    readonly Sprite[] Sprites = SpriteDictionary.DryadSprites1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.DryadSprites2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.DryadSprites3;
+    readonly Sprite[] Sprites4 = SpriteDictionary.DryadSprites4;
+    readonly Sprite[] Sprites5 = SpriteDictionary.DryadSprites5;
+    readonly Sprite[] Sprites6 = SpriteDictionary.HumansVoreSprites;
 
     bool oversize = false;
 
@@ -114,33 +114,33 @@ class EarthDryad : DefaultRaceData
         {
             if (actor.Unit.BodySize > 1)
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[4];
+                return SpriteDictionary.HumansBodySprites2[4];
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[1];
+                return SpriteDictionary.HumansBodySprites2[1];
             }
         }
         else if (actor.IsAttacking)
         {
             if (actor.Unit.BodySize > 1)
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[5];
+                return SpriteDictionary.HumansBodySprites2[5];
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[2];
+                return SpriteDictionary.HumansBodySprites2[2];
             }
         }
         else
         {
             if (actor.Unit.BodySize > 1)
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[3];
+                return SpriteDictionary.HumansBodySprites2[3];
             }
             else
             {
-                return State.GameManager.SpriteDictionary.HumansBodySprites2[0];
+                return SpriteDictionary.HumansBodySprites2[0];
             }
         }
     }
@@ -201,7 +201,7 @@ class EarthDryad : DefaultRaceData
     {
         if (actor.Unit.IsDead && actor.Unit.Items != null)
         {
-            return State.GameManager.SpriteDictionary.HumansBodySprites3[69];
+            return SpriteDictionary.HumansBodySprites3[69];
         }
         else
         {

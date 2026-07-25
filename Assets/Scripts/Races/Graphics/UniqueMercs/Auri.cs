@@ -4,8 +4,8 @@ using UnityEngine;
 
 class Auri : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Auri;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.AuriVore;
+    readonly Sprite[] Sprites = SpriteDictionary.Auri;
+    readonly Sprite[] Sprites2 = SpriteDictionary.AuriVore;
 
     RaceFrameList EarAnimation = new RaceFrameList(new int[3] { 22, 23, 22 }, new float[3] { .2f, .2f, .2f });
     RaceFrameList FaceAnimation = new RaceFrameList(new int[3] { 18, 19, 18 }, new float[3] { .25f, .25f, .25f });
@@ -50,8 +50,8 @@ class Auri : DefaultRaceData
 
         AllowedWaistTypes = new List<MainClothing>() //Bottoms
         {
-            new GenericBottom(52, 52, 0, 56, 8, State.GameManager.SpriteDictionary.Auri, 840),
-            new GenericBottom(101, 101, 0, 101, 8, State.GameManager.SpriteDictionary.Auri, 841),
+            new GenericBottom(52, 52, 0, 56, 8, SpriteDictionary.Auri, 840),
+            new GenericBottom(101, 101, 0, 101, 8, SpriteDictionary.Auri, 841),
         };
 
         AllowedClothingHatTypes = new List<ClothingAccessory>();
@@ -67,12 +67,12 @@ class Auri : DefaultRaceData
 
         ExtraMainClothing2Types = new List<MainClothing>() //Stocking
         {
-            new Stocking(48, 0, 48, 3, State.GameManager.SpriteDictionary.Auri, 901),
+            new Stocking(48, 0, 48, 3, SpriteDictionary.Auri, 901),
         };
 
         ExtraMainClothing3Types = new List<MainClothing>() //Hat
         {
-            new Hat(50, 0, 50, 20, State.GameManager.SpriteDictionary.Auri, 903),
+            new Hat(50, 0, 50, 20, SpriteDictionary.Auri, 903),
         };
 
         AllClothing = new List<MainClothing>();
@@ -414,7 +414,7 @@ class Auri : DefaultRaceData
     {
         public AuriTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Auri[64];
+            DiscardSprite = SpriteDictionary.Auri[64];
             coversBreasts = false;
             blocksDick = false;
             clothing1 = new SpriteExtraInfo(17, null, WhiteColored);
@@ -425,16 +425,16 @@ class Auri : DefaultRaceData
         {
             if (Races.Aurilika.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[62];
+                clothing1.GetSprite = (s) => SpriteDictionary.Auri[62];
             }
             else if (actor.Unit.HasBreasts)
             {
                 actor.SquishedBreasts = true;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[56 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Auri[56 + actor.Unit.BreastSize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[56];
+                clothing1.GetSprite = (s) => SpriteDictionary.Auri[56];
             }
 
 
@@ -497,7 +497,7 @@ class Auri : DefaultRaceData
             clothing3 = new SpriteExtraInfo(11, null, WhiteColored);
             blocksDick = false;
             coversBreasts = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Auri[95];
+            DiscardSprite = SpriteDictionary.Auri[95];
             DiscardUsesPalettes = true;
             Type = 444;
             OccupiesAllSlots = true;
@@ -515,13 +515,13 @@ class Auri : DefaultRaceData
                 if (actor.Unit.BodySize > 0 || actor.Unit.BodyAccentType1 == 1)
                     skirtMod = 26;
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[86 + skirtMod];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Auri[86 + skirtMod];
                 else
                 {
                     if (actor.GetStomachSize(32, stomachMult) < 8)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[80 + skirtMod + actor.GetStomachSize(32, stomachMult)];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Auri[80 + skirtMod + actor.GetStomachSize(32, stomachMult)];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[88];
+                        clothing1.GetSprite = (s) => SpriteDictionary.Auri[88];
                 }
             }
             else
@@ -531,15 +531,15 @@ class Auri : DefaultRaceData
             int kimMod = Skirt ? 0 : 7;
             if (Races.Aurilika.oversize)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[93 + kimMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Auri[93 + kimMod];
             }
             else if (actor.Unit.BreastSize < 3)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[89 + kimMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Auri[89 + kimMod];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[89 + kimMod + actor.Unit.BreastSize - 2];
+                clothing2.GetSprite = (s) => SpriteDictionary.Auri[89 + kimMod + actor.Unit.BreastSize - 2];
             }
             int mod = actor.Unit.BodySize * 4;
             if (mod > 4)
@@ -547,9 +547,9 @@ class Auri : DefaultRaceData
             if (actor.Unit.BodyAccentType1 == 1)
                 mod += 8;
             if (actor.IsAttacking)
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[67 + mod];
+                clothing3.GetSprite = (s) => SpriteDictionary.Auri[67 + mod];
             else
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Auri[64 + mod];
+                clothing3.GetSprite = (s) => SpriteDictionary.Auri[64 + mod];
             base.Configure(sprite, actor);
         }
     }
@@ -567,7 +567,7 @@ class Auri : DefaultRaceData
             clothing5 = new SpriteExtraInfo(15, null, WhiteColored);
             blocksDick = false;
             coversBreasts = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Auri[95];
+            DiscardSprite = SpriteDictionary.Auri[95];
             DiscardUsesPalettes = true;
             Type = 444;
             ReqWinterHoliday = true;
@@ -586,13 +586,13 @@ class Auri : DefaultRaceData
                 if (actor.Unit.BodySize > 0 || actor.Unit.BodyAccentType1 == 1)
                     skirtMod = 2;
                 if (actor.IsUnbirthing || actor.IsAnalVoring)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[23 + skirtMod];
+                    clothing1.GetSprite = (s) => SpriteDictionary.AuriHoliday[23 + skirtMod];
                 else
                 {
                     if (actor.GetStomachSize(32, stomachMult) < 4 && actor.Unit.BodyAccentType1 == 0)
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[22 + skirtMod];
+                        clothing1.GetSprite = (s) => SpriteDictionary.AuriHoliday[22 + skirtMod];
                     else
-                        clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[26 + skirtMod];
+                        clothing1.GetSprite = (s) => SpriteDictionary.AuriHoliday[26 + skirtMod];
                 }
             }
             else
@@ -601,15 +601,15 @@ class Auri : DefaultRaceData
             }
             if (Races.Aurilika.oversize)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[20];
+                clothing2.GetSprite = (s) => SpriteDictionary.AuriHoliday[20];
             }
             else if (actor.Unit.BreastSize < 3)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[16];
+                clothing2.GetSprite = (s) => SpriteDictionary.AuriHoliday[16];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[16 + actor.Unit.BreastSize - 2];
+                clothing2.GetSprite = (s) => SpriteDictionary.AuriHoliday[16 + actor.Unit.BreastSize - 2];
             }
             int mod = actor.Unit.BodySize * 4;
             if (mod > 4)
@@ -617,12 +617,12 @@ class Auri : DefaultRaceData
             if (actor.Unit.BodyAccentType1 == 1)
                 mod += 8;
             if (actor.IsAttacking)
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[3 + mod];
+                clothing3.GetSprite = (s) => SpriteDictionary.AuriHoliday[3 + mod];
             else
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[0 + mod];
-            clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[21];
+                clothing3.GetSprite = (s) => SpriteDictionary.AuriHoliday[0 + mod];
+            clothing4.GetSprite = (s) => SpriteDictionary.AuriHoliday[21];
             if (actor.GetStomachSize(32, stomachMult) >= 4)
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.AuriHoliday[32];
+                clothing5.GetSprite = (s) => SpriteDictionary.AuriHoliday[32];
             else
                 clothing5.GetSprite = null;
             base.Configure(sprite, actor);
@@ -632,7 +632,7 @@ class Auri : DefaultRaceData
     {
         int sprM;
         int sprF;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.Auri;
+        Sprite[] sheet = SpriteDictionary.Auri;
 
         public Stocking(int femaleSprite, int maleSprite, int discard, int layer, Sprite[] sheet, int type)
         {
@@ -662,7 +662,7 @@ class Auri : DefaultRaceData
     {
         int sprM;
         int sprF;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.PantherHats;
+        Sprite[] sheet = SpriteDictionary.PantherHats;
 
         public Hat(int femaleSprite, int maleSprite, int discard, int layer, Sprite[] sheet, int type)
         {

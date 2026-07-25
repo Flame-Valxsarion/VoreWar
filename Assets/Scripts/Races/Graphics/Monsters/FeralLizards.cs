@@ -4,7 +4,7 @@ class FeralLizards : BlankSlate
 {
     RaceFrameList frameListTongue = new RaceFrameList(new int[3] { 0, 1, 2 }, new float[3] { 0.5f, 0.2f, 0.3f });
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.FeralLizards;
+    readonly Sprite[] Sprites = SpriteDictionary.FeralLizards;
 
     public FeralLizards()
     {

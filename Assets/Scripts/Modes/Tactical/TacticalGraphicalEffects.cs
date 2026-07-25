@@ -25,6 +25,12 @@ static class TacticalGraphicalEffects
             PantherSetup(arrow, actor);
         if (actor.Unit.Race == Race.Bears)
             BearSetup(arrow, actor);
+        if (actor.Unit.Race == Race.Cherub)
+            CherubSetup(arrow, actor);
+        if (actor.Unit.Race == Race.Seraph)
+            SeraphSetup(arrow, actor);
+        if (actor.Unit.Race == Race.SoulSprite)
+            SoulSpriteSetup(arrow, actor);
         if (sprite != null) arrow.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
         if (material != null) arrow.GetComponentInChildren<SpriteRenderer>().material = material;
         arrow.Setup(actor.Position, target.Position, target);
@@ -37,7 +43,7 @@ static class TacticalGraphicalEffects
         {
             var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
             anim.Repeat = true;
-            Sprite[] sprites = State.GameManager.SpriteDictionary.PantherBase;
+            Sprite[] sprites = SpriteDictionary.PantherBase;
             anim.Frame = new Sprite[]
             {
                 sprites[36],
@@ -51,7 +57,7 @@ static class TacticalGraphicalEffects
         {
             var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
             anim.Repeat = true;
-            Sprite[] sprites = State.GameManager.SpriteDictionary.PantherBase;
+            Sprite[] sprites = SpriteDictionary.PantherBase;
             anim.Frame = new Sprite[]
             {
                 sprites[42],
@@ -69,7 +75,7 @@ static class TacticalGraphicalEffects
         Weapon weapon = actor.BestRanged;
 //        if (weapon.Graphic == 4)
 //        {
-//            Sprite[] sprites = State.GameManager.SpriteDictionary.Bears ;
+//            Sprite[] sprites = SpriteDictionary.Bears ;
 //            anim.Frame = new Sprite[]
 //            {
 //                sprites[34],
@@ -80,13 +86,70 @@ static class TacticalGraphicalEffects
         {
             var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
             anim.Repeat = true;
-            Sprite[] sprites = State.GameManager.SpriteDictionary.Bears;
+            Sprite[] sprites = SpriteDictionary.Bears;
             anim.Frame = new Sprite[]
             {
                 sprites[36],
                 sprites[37],
             };
             anim.FrameTime = new float[] { .025f, .025f};
+        }
+
+    }
+    private static void CherubSetup(ArrowEffect obj, Actor_Unit actor)
+    {
+        Weapon weapon = actor.BestRanged;
+        {
+            var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
+            anim.Repeat = true;
+            Sprite[] sprites = SpriteDictionary.AngelProjectile;
+            anim.Frame = new Sprite[]
+            {
+                sprites[0],
+                sprites[1],
+                sprites[2],
+                sprites[3],
+            };
+            anim.FrameTime = new float[] { .1f, .1f, .1f, .1f};
+        }
+
+    }
+    private static void SeraphSetup(ArrowEffect obj, Actor_Unit actor)
+    {
+        Weapon weapon = actor.BestRanged;
+        {
+            var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
+            anim.Repeat = true;
+            Sprite[] sprites = SpriteDictionary.AngelProjectile;
+            anim.Frame = new Sprite[]
+            {
+                sprites[4],
+                sprites[5],
+                sprites[6],
+                sprites[7],
+            };
+            anim.FrameTime = new float[] { .1f, .1f, .1f, .1f};
+        }
+
+    }
+    private static void SoulSpriteSetup(ArrowEffect obj, Actor_Unit actor)
+    {
+        Weapon weapon = actor.BestRanged;
+        {
+            var anim = obj.gameObject.AddComponent<AnimationEffectComponent>();
+            anim.Repeat = true;
+            Sprite[] sprites = SpriteDictionary.AngelProjectile;
+            anim.Frame = new Sprite[]
+            {
+                sprites[8],
+                sprites[9],
+                sprites[10],
+                sprites[11],
+                sprites[12],
+                sprites[13],
+                sprites[14],
+            };
+            anim.FrameTime = new float[] { .1f, .1f, .1f, .1f, .1f, .1f, .1f};
         }
 
     }
@@ -97,107 +160,118 @@ static class TacticalGraphicalEffects
         if (actor.Unit.Race == Race.Harpies)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.Harpies[27];
+                return SpriteDictionary.Harpies[27];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Harpies[28];
+                return SpriteDictionary.Harpies[28];
         }
         else if (actor.Unit.Race == Race.Imps)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.NewimpBase[93];
+                return SpriteDictionary.NewimpBase[93];
         }
 
         else if (actor.Unit.Race == Race.Scylla)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.Scylla[22];
+                return SpriteDictionary.Scylla[22];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Scylla[23];
+                return SpriteDictionary.Scylla[23];
         }
         else if (actor.Unit.Race == Race.Slimes)
         {
             if (weapon.Graphic == 4)
             {
                 material = Races.Slimes.GetSlimeAccentMaterial(actor);
-                return State.GameManager.SpriteDictionary.Slimes[16];
+                return SpriteDictionary.Slimes[16];
             }
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Slimes[17];
+                return SpriteDictionary.Slimes[17];
         }
         else if (actor.Unit.Race == Race.Crypters)
         {
             if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Crypters[27];
+                return SpriteDictionary.Crypters[27];
         }
         else if (actor.Unit.Race == Race.Kangaroos)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.Kangaroos[125];
+                return SpriteDictionary.Kangaroos[125];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Kangaroos[126];
+                return SpriteDictionary.Kangaroos[126];
         }
         else if (actor.Unit.Race == Race.Tigers && actor.Unit.ClothingType == 1)
-            return State.GameManager.SpriteDictionary.Slimes[17];
+            return SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.Kobolds)
-            return State.GameManager.SpriteDictionary.Kobolds[20];
+            return SpriteDictionary.Kobolds[20];
         else if (actor.Unit.Race == Race.Equines && weapon.Graphic == 6)
-            return State.GameManager.SpriteDictionary.EquineClothes[48];
+            return SpriteDictionary.EquineClothes[48];
         else if (actor.Unit.Race == Race.Alraune && (weapon.Graphic == 4 || weapon.Graphic == 6))
-            return State.GameManager.SpriteDictionary.Slimes[17];
+            return SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.SpitterSlugs)
-            return State.GameManager.SpriteDictionary.SpitterSlug[10];
+            return SpriteDictionary.SpitterSlug[10];
         else if (actor.Unit.Race == Race.EarthDryad)
-            return State.GameManager.SpriteDictionary.DryadSprites3[17];
+            return SpriteDictionary.DryadSprites3[17];
         else if (actor.Unit.Race == Race.RiverDryad)
-            return State.GameManager.SpriteDictionary.DryadSprites5[17];
+            return SpriteDictionary.DryadSprites5[17];
         else if (actor.Unit.Race == Race.Bats)
-            return State.GameManager.SpriteDictionary.Demibats1[132];
+            return SpriteDictionary.Demibats1[132];
         else if (actor.Unit.Race == Race.RwuMercenaries && (weapon.Graphic == 4 || weapon.Graphic == 6))
-            return State.GameManager.SpriteDictionary.Slimes[17];
+            return SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.Tatltuae)
-            return State.GameManager.SpriteDictionary.Equaleon[37];// intentionally blank sprite
-        else if (actor.Unit.Race == Race.Firefly)
-            return State.GameManager.SpriteDictionary.Firefly[13];
+            return SpriteDictionary.Equaleon[37];// intentionally blank sprite
         else if (actor.Unit.Race == Race.Hamsters && (weapon.Graphic == 4 || weapon.Graphic == 6))
-            return State.GameManager.SpriteDictionary.Slimes[17];
+            return SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.Lupine && (weapon.Graphic == 4 || weapon.Graphic == 6))
-            return State.GameManager.SpriteDictionary.Slimes[17];
+            return SpriteDictionary.Slimes[17];
+        else if (actor.Unit.Race == Race.Cherub)
+            return SpriteDictionary.AngelProjectile[0];
+        else if (actor.Unit.Race == Race.Seraph)
+            return SpriteDictionary.AngelProjectile[4];
+        else if (actor.Unit.Race == Race.Seraph)
+            return SpriteDictionary.AngelProjectile[8];
         else if (actor.Unit.Race == Race.Bears)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.Bears[34];
+                return SpriteDictionary.Bears[34];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Bears[36];
+                return SpriteDictionary.Bears[36];
         }
         else if (actor.Unit.Race == Race.Panthers)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.PantherBase[36];
+                return SpriteDictionary.PantherBase[36];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.PantherBase[42];
+                return SpriteDictionary.PantherBase[42];
         }
         else if (actor.Unit.Race == Race.Bees)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.Bees1[89];
+                return SpriteDictionary.Bees1[89];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Bees1[89];
+                return SpriteDictionary.Bees1[89];
         }
         else if (actor.Unit.Race == Race.Merfolk && weapon.Graphic == 4 || weapon.Graphic == 6)
-            return State.GameManager.SpriteDictionary.Slimes[17];
+            return SpriteDictionary.Slimes[17];
         else if (actor.Unit.Race == Race.Vipers)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.Vipers1[20];
+                return SpriteDictionary.Vipers1[20];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Vipers1[20];
+                return SpriteDictionary.Vipers1[20];
         }
         else if (actor.Unit.Race == Race.Bears)
         {
             if (weapon.Graphic == 4)
-                return State.GameManager.SpriteDictionary.Bears[34];
+                return SpriteDictionary.Bears[34];
             else if (weapon.Graphic == 6)
-                return State.GameManager.SpriteDictionary.Bears[36];
+                return SpriteDictionary.Bears[36];
+        }
+        else if (actor.Unit.Race == Race.Yordles)
+        {
+            if (weapon.Graphic == 4)
+                return SpriteDictionary.YordlesCustomization2[189];
+            else if (weapon.Graphic == 6)
+                return SpriteDictionary.YordlesCustomization2[190];
         }
         return null;
     }
@@ -220,6 +294,17 @@ static class TacticalGraphicalEffects
         obj.transform.position = location;
         obj.transform.localScale = new Vector3(2, 2, 1);
         obj.AddComponent<Assets.Scripts.Entities.Animations.EntropicChaos>();
+
+    }
+
+    internal static void VenomBiteEffect(Vector2 location)
+    {
+        if (State.GameManager.TacticalMode.turboMode)
+            return;
+        var obj = Object.Instantiate(State.GameManager.SpriteRendererPrefab);
+        obj.transform.position = location;
+        obj.transform.localScale = new Vector3(3, 3, 1);
+        obj.AddComponent<Assets.Scripts.Entities.Animations.VenomBite>();
 
     }
 
@@ -294,6 +379,16 @@ static class TacticalGraphicalEffects
 
     }
 
+    internal static void CreateDiamondStorm(Vec2i startLocation, Vec2i endLocation, Actor_Unit target)
+    {
+        if (State.GameManager.TacticalMode.turboMode)
+            return;
+        var prefab = State.GameManager.TacticalEffectPrefabList.DiamondStorm;
+        var effect = Object.Instantiate(prefab, new Vector3(startLocation.x, startLocation.y, 0), new Quaternion()).GetComponent<ArrowEffect>();
+        effect.Setup(startLocation, endLocation, target, null, null);
+
+    }
+
     internal static void CreateCrossShock(Vec2 location)
     {
         if (State.GameManager.TacticalMode.turboMode)
@@ -355,7 +450,7 @@ static class TacticalGraphicalEffects
         if (State.GameManager.TacticalMode.turboMode)
             return;
         var arrow = Object.Instantiate(State.GameManager.TacticalMode.ArrowPrefab).GetComponent<ArrowEffect>();
-        var sprite = State.GameManager.SpriteDictionary.SpitterSlug[10];
+        var sprite = SpriteDictionary.SpitterSlug[10];
         if (sprite != null) arrow.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
         System.Action hitEffect = () =>
         {
@@ -406,6 +501,14 @@ static class TacticalGraphicalEffects
         var prefab = State.GameManager.TacticalEffectPrefabList.MagicExplosion;
         Object.Instantiate(prefab, new Vector3(location.x, location.y, 0), new Quaternion());
 
+    }
+
+    internal static void CreateDivineNova(Vec2 location)
+    {
+        if (State.GameManager.TacticalMode.turboMode)
+            return;
+        var prefab = State.GameManager.TacticalEffectPrefabList.DivineNovaBlast;
+        Object.Instantiate(prefab, new Vector3(location.x, location.y, 0), new Quaternion());
     }
 
     internal static void CreateGenericMagic(Vec2i startLocation, Vec2i endLocation, Actor_Unit target, SpellEffectIcon icon = SpellEffectIcon.None)

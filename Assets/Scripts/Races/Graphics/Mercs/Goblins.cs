@@ -8,17 +8,17 @@ using UnityEngine;
 
 class Goblins : DefaultRaceData
 {
-    Sprite[] SpritesBase = State.GameManager.SpriteDictionary.Gobbo;
-    Sprite[] SpritesVore = State.GameManager.SpriteDictionary.Gobbovore;
-    Sprite[] SpritesGloves = State.GameManager.SpriteDictionary.Gobbglove;
-    Sprite[] SpritesLegs = State.GameManager.SpriteDictionary.Gobleggo;
-    Sprite[] SpritesUBottoms = State.GameManager.SpriteDictionary.Gobbunderbottoms;
-    Sprite[] SpritesUTops = State.GameManager.SpriteDictionary.Gobundertops;
-    Sprite[] SpritesOBottoms = State.GameManager.SpriteDictionary.Gobboverbottoms;
-    Sprite[] SpritesOTops = State.GameManager.SpriteDictionary.Gobbovertops;
-    Sprite[] SpritesOnePieces = State.GameManager.SpriteDictionary.Gobbunderonepieces;
-    Sprite[] SpritesOverOnePieces = State.GameManager.SpriteDictionary.Gobboveronepieces;
-    Sprite[] SpritesHats = State.GameManager.SpriteDictionary.Gobbohat;
+    Sprite[] SpritesBase = SpriteDictionary.Gobbo;
+    Sprite[] SpritesVore = SpriteDictionary.Gobbovore;
+    Sprite[] SpritesGloves = SpriteDictionary.Gobbglove;
+    Sprite[] SpritesLegs = SpriteDictionary.Gobleggo;
+    Sprite[] SpritesUBottoms = SpriteDictionary.Gobbunderbottoms;
+    Sprite[] SpritesUTops = SpriteDictionary.Gobundertops;
+    Sprite[] SpritesOBottoms = SpriteDictionary.Gobboverbottoms;
+    Sprite[] SpritesOTops = SpriteDictionary.Gobbovertops;
+    Sprite[] SpritesOnePieces = SpriteDictionary.Gobbunderonepieces;
+    Sprite[] SpritesOverOnePieces = SpriteDictionary.Gobboveronepieces;
+    Sprite[] SpritesHats = SpriteDictionary.Gobbohat;
 
 
     internal List<MainClothing> AllClothing;
@@ -67,21 +67,21 @@ class Goblins : DefaultRaceData
 
         AllowedWaistTypes = new List<MainClothing>() //underbottoms
         {
-            new ImpUBottom(0, 2, 45, 8, 9, State.GameManager.SpriteDictionary.Gobbunderbottoms, 12045, true),
-            new ImpUBottom(9, 11, 45, 17, 9, State.GameManager.SpriteDictionary.Gobbunderbottoms, 12046, true),
-            new ImpUBottom(18, 20, 45, 26, 9, State.GameManager.SpriteDictionary.Gobbunderbottoms, 12047, false, black: true),
-            new ImpUBottom(27, 29, 45, 35, 9, State.GameManager.SpriteDictionary.Gobbunderbottoms, 12048, true),
-            new ImpUBottom(36, 38, 45, 44, 9, State.GameManager.SpriteDictionary.Gobbunderbottoms, 12049, true),
+            new ImpUBottom(0, 2, 45, 8, 9, SpriteDictionary.Gobbunderbottoms, 12045, true),
+            new ImpUBottom(9, 11, 45, 17, 9, SpriteDictionary.Gobbunderbottoms, 12046, true),
+            new ImpUBottom(18, 20, 45, 26, 9, SpriteDictionary.Gobbunderbottoms, 12047, false, black: true),
+            new ImpUBottom(27, 29, 45, 35, 9, SpriteDictionary.Gobbunderbottoms, 12048, true),
+            new ImpUBottom(36, 38, 45, 44, 9, SpriteDictionary.Gobbunderbottoms, 12049, true),
         };
 
         ExtraMainClothing1Types = new List<MainClothing>() //Overbottoms
         {
-            new ImpOBottom(0, 2, false, 45, 8, 14, State.GameManager.SpriteDictionary.Gobboverbottoms, 12050, true),
-            new ImpOBottom(9, 11, false, 45, 17, 14, State.GameManager.SpriteDictionary.Gobboverbottoms, 12051, true),
-            new ImpOBottom(18, 20, true, 45, 26, 14, State.GameManager.SpriteDictionary.Gobboverbottoms, 12052, true),
-            new ImpOBottom(27, 29, true, 49, 35, 14, State.GameManager.SpriteDictionary.Gobboverbottoms, 12053, true),
-            new ImpOBottomAlt(27, 29, true, 49, 35, 14, State.GameManager.SpriteDictionary.Gobboverbottoms, 12053, true),
-            new ImpOBottom(36, 38, false, 45, 44, 14, State.GameManager.SpriteDictionary.Gobboverbottoms, 12054, true),
+            new ImpOBottom(0, 2, false, 45, 8, 14, SpriteDictionary.Gobboverbottoms, 12050, true),
+            new ImpOBottom(9, 11, false, 45, 17, 14, SpriteDictionary.Gobboverbottoms, 12051, true),
+            new ImpOBottom(18, 20, true, 45, 26, 14, SpriteDictionary.Gobboverbottoms, 12052, true),
+            new ImpOBottom(27, 29, true, 49, 35, 14, SpriteDictionary.Gobboverbottoms, 12053, true),
+            new ImpOBottomAlt(27, 29, true, 49, 35, 14, SpriteDictionary.Gobboverbottoms, 12053, true),
+            new ImpOBottom(36, 38, false, 45, 44, 14, SpriteDictionary.Gobboverbottoms, 12054, true),
         };
 
         ExtraMainClothing2Types = new List<MainClothing>() //Special clothing
@@ -124,8 +124,8 @@ class Goblins : DefaultRaceData
 
         ExtraMainClothing5Types = new List<MainClothing>() //Hats
         {
-            new Hat(0, 0, State.GameManager.SpriteDictionary.Gobbohat, 12069),
-            new Hat(34, 0, State.GameManager.SpriteDictionary.Gobbohat, 12070),
+            new Hat(0, 0, SpriteDictionary.Gobbohat, 12069),
+            new Hat(34, 0, SpriteDictionary.Gobbohat, 12070),
             new HolidayHat(),
         };
 
@@ -545,7 +545,7 @@ class Goblins : DefaultRaceData
     class GenericGloves : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.Gobbglove;
+        Sprite[] sheet = SpriteDictionary.Gobbglove;
 
         public GenericGloves(int start, int discard, int type)//int type
         {
@@ -592,7 +592,7 @@ class Goblins : DefaultRaceData
     class GenericGlovesPlusSecond : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.Gobbglove;
+        Sprite[] sheet = SpriteDictionary.Gobbglove;
 
         public GenericGlovesPlusSecond(int start, int discard, int type) //int type
         {
@@ -641,7 +641,7 @@ class Goblins : DefaultRaceData
     class GenericGlovesPlusSecondAlt : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.Gobbglove;
+        Sprite[] sheet = SpriteDictionary.Gobbglove;
 
         public GenericGlovesPlusSecondAlt(int start, int discard, int type) //int type
         {
@@ -691,7 +691,7 @@ class Goblins : DefaultRaceData
         int start;
         int bulge;
         bool black;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.Gobleggo;
+        Sprite[] sheet = SpriteDictionary.Gobleggo;
 
         public GenericLegs(int start, int discard, int bulge, int type, bool maleOnly = false, bool femaleOnly = false, bool blocksDick = false, bool black = false)
         {
@@ -722,9 +722,9 @@ class Goblins : DefaultRaceData
                 if (blocksDick == true)
                 {
                     if (black == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
                     else
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                         clothing2.YOffset = 2 * .625f;
                     else
@@ -746,7 +746,7 @@ class Goblins : DefaultRaceData
         int start;
         int bulge;
         bool black;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.Gobleggo;
+        Sprite[] sheet = SpriteDictionary.Gobleggo;
 
         public GenericLegsAlt(int start, int discard, int bulge, int type, bool maleOnly = false, bool femaleOnly = false, bool blocksDick = false, bool black = false)
         {
@@ -777,9 +777,9 @@ class Goblins : DefaultRaceData
                 if (blocksDick == true)
                 {
                     if (black == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
                     else
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                         clothing2.YOffset = 2 * .625f;
                     else
@@ -833,9 +833,9 @@ class Goblins : DefaultRaceData
                     if (blocksDick == true)
                     {
                         if (black == true)
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
                         else
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                         if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                             clothing2.YOffset = 2 * .625f;
                         else
@@ -858,9 +858,9 @@ class Goblins : DefaultRaceData
                     if (blocksDick == true)
                     {
                         if (black == true)
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + 4 + actor.Unit.DickSize];
                         else
-                            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                            clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                         if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                             clothing2.YOffset = 2 * .625f;
                         else
@@ -884,7 +884,7 @@ class Goblins : DefaultRaceData
     {
         public GobboLeotard()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobbunderonepieces[74];
+            DiscardSprite = SpriteDictionary.Gobbunderonepieces[74];
             Type = 12071;
             colorsBelly = true;
             blocksDick = true;
@@ -909,7 +909,7 @@ class Goblins : DefaultRaceData
             {
                 if (actor.Unit.HasDick)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                         clothing3.YOffset = 2 * .625f;
                     else
@@ -920,8 +920,8 @@ class Goblins : DefaultRaceData
                 if (bobs == 7)
                     clothing2.GetSprite = null;
                 else
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderonepieces[33 + bobs];
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderonepieces[41 + size + 8 * weightMod];
+                    clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderonepieces[33 + bobs];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbunderonepieces[41 + size + 8 * weightMod];
 
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -934,13 +934,13 @@ class Goblins : DefaultRaceData
                 clothing1 = new SpriteExtraInfo(13, null, null);
                 clothing2 = new SpriteExtraInfo(20, null, null);
                 clothing3 = new SpriteExtraInfo(16, null, null);
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
                 if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                     clothing3.YOffset = 2 * .625f;
                 else
                     clothing3.YOffset = 0;
                 clothing2.GetSprite = null;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderonepieces[57 + size + 9 * weightMod];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbunderonepieces[57 + size + 9 * weightMod];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -954,7 +954,7 @@ class Goblins : DefaultRaceData
     {
         public GobboCasinoBunny()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobbunderonepieces[74];
+            DiscardSprite = SpriteDictionary.Gobbunderonepieces[74];
             Type = 12072;
             colorsBelly = true;
             blocksDick = true;
@@ -979,7 +979,7 @@ class Goblins : DefaultRaceData
             {
                 if (actor.Unit.HasDick)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
+                    clothing3.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                         clothing3.YOffset = 2 * .625f;
                     else
@@ -989,8 +989,8 @@ class Goblins : DefaultRaceData
 
 
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderonepieces[0 + bobs];
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderonepieces[8 + size + 6 * weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderonepieces[0 + bobs];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbunderonepieces[8 + size + 6 * weightMod];
 
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1003,13 +1003,13 @@ class Goblins : DefaultRaceData
                 clothing1 = new SpriteExtraInfo(13, null, null);
                 clothing2 = new SpriteExtraInfo(20, null, null);
                 clothing3 = new SpriteExtraInfo(16, null, null);
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
+                clothing3.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[45 + actor.Unit.DickSize];
                 if (actor.Unit.GetGender() == Gender.Hermaphrodite)
                     clothing3.YOffset = 2 * .625f;
                 else
                     clothing3.YOffset = 0;
                 clothing2.GetSprite = null;
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderonepieces[20 + size + 6 * weightMod];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbunderonepieces[20 + size + 6 * weightMod];
                 clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
                 clothing3.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1053,7 +1053,7 @@ class Goblins : DefaultRaceData
                 if (actor.Unit.HasDick && showbulge == true)
                 {
                     if (blocksDick == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                     else
                         clothing2.GetSprite = null;
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
@@ -1073,7 +1073,7 @@ class Goblins : DefaultRaceData
                 if (actor.Unit.HasDick)
                 {
                     if (blocksDick == true && showbulge == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                     else
                         clothing2.GetSprite = null;
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
@@ -1126,7 +1126,7 @@ class Goblins : DefaultRaceData
                 if (actor.Unit.HasDick && showbulge == true)
                 {
                     if (blocksDick == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                     else
                         clothing2.GetSprite = null;
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
@@ -1146,7 +1146,7 @@ class Goblins : DefaultRaceData
                 if (actor.Unit.HasDick)
                 {
                     if (blocksDick == true && showbulge == true)
-                        clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
+                        clothing2.GetSprite = (s) => SpriteDictionary.Gobbunderbottoms[bulge + actor.Unit.DickSize];
                     else
                         clothing2.GetSprite = null;
                     if (actor.Unit.GetGender() == Gender.Hermaphrodite)
@@ -1168,7 +1168,7 @@ class Goblins : DefaultRaceData
     class Hat : MainClothing
     {
         int start;
-        Sprite[] sheet = State.GameManager.SpriteDictionary.Gobbohat;
+        Sprite[] sheet = SpriteDictionary.Gobbohat;
 
         public Hat(int start, int discard, Sprite[] sheet, int type)
         {
@@ -1198,7 +1198,7 @@ class Goblins : DefaultRaceData
     {
         public GobboUndertop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobundertops[8];
+            DiscardSprite = SpriteDictionary.Gobundertops[8];
             Type = 12073;
             femaleOnly = true;
             coversBreasts = false;
@@ -1211,11 +1211,11 @@ class Goblins : DefaultRaceData
         {
             if (Races.Goblins.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[7];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[7];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[0 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[0 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1233,7 +1233,7 @@ class Goblins : DefaultRaceData
     {
         public GobboUndertop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobundertops[17];
+            DiscardSprite = SpriteDictionary.Gobundertops[17];
             Type = 12074;
             femaleOnly = true;
             coversBreasts = false;
@@ -1246,11 +1246,11 @@ class Goblins : DefaultRaceData
         {
             if (Races.Goblins.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[16];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[16];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[9 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[9 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1268,7 +1268,7 @@ class Goblins : DefaultRaceData
     {
         public GobboUndertop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobundertops[26];
+            DiscardSprite = SpriteDictionary.Gobundertops[26];
             Type = 12075;
             femaleOnly = true;
             coversBreasts = false;
@@ -1285,7 +1285,7 @@ class Goblins : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[18 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[18 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1303,7 +1303,7 @@ class Goblins : DefaultRaceData
     {
         public GobboUndertop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobundertops[35];
+            DiscardSprite = SpriteDictionary.Gobundertops[35];
             Type = 12076;
             femaleOnly = true;
             coversBreasts = false;
@@ -1316,11 +1316,11 @@ class Goblins : DefaultRaceData
         {
             if (Races.Goblins.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[34];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[34];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[27 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[27 + actor.Unit.BreastSize];
             }
             else
             {
@@ -1338,7 +1338,7 @@ class Goblins : DefaultRaceData
     {
         public GobboUndertop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobundertops[75];
+            DiscardSprite = SpriteDictionary.Gobundertops[75];
             Type = 12077;
             femaleOnly = false;
             coversBreasts = false;
@@ -1356,11 +1356,11 @@ class Goblins : DefaultRaceData
                 size = 5;
             if (Races.Goblins.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[48 + (13 * weightMod)];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[48 + (13 * weightMod)];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[42 + actor.Unit.BreastSize + (13 * weightMod)];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobundertops[42 + actor.Unit.BreastSize + (13 * weightMod)];
             }
             else
             {
@@ -1369,11 +1369,11 @@ class Goblins : DefaultRaceData
             }
             if (actor.Unit.HasBreasts)
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[36 + size + (13 * weightMod)];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobundertops[36 + size + (13 * weightMod)];
             }
             else
             {
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobundertops[62 + size + (6 * weightMod)];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobundertops[62 + size + (6 * weightMod)];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor2);
@@ -1385,7 +1385,7 @@ class Goblins : DefaultRaceData
     {
         public GobboOverOPFem()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobboveronepieces[23];
+            DiscardSprite = SpriteDictionary.Gobboveronepieces[23];
             Type = 12078;
             femaleOnly = true;
             coversBreasts = false;
@@ -1410,9 +1410,9 @@ class Goblins : DefaultRaceData
                     clothing1.GetSprite = (s) => null;
                 }
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobboveronepieces[0 + bobs];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Gobboveronepieces[0 + bobs];
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobboveronepieces[7 + size + (8 * weightMod)];
+            clothing2.GetSprite = (s) => SpriteDictionary.Gobboveronepieces[7 + size + (8 * weightMod)];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1423,7 +1423,7 @@ class Goblins : DefaultRaceData
     {
         public GobboOverOPM()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobboveronepieces[40];
+            DiscardSprite = SpriteDictionary.Gobboveronepieces[40];
             Type = 12079;
             maleOnly = true;
             coversBreasts = false;
@@ -1441,12 +1441,12 @@ class Goblins : DefaultRaceData
                 size = 6;
 
             if (actor.IsAttacking)
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobboveronepieces[25];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobboveronepieces[25];
             else
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobboveronepieces[24];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobboveronepieces[24];
 
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobboveronepieces[26 + size + (7 * weightMod)];
+            clothing1.GetSprite = (s) => SpriteDictionary.Gobboveronepieces[26 + size + (7 * weightMod)];
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
             clothing2.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1457,7 +1457,7 @@ class Goblins : DefaultRaceData
     {
         public GobboOverTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobbovertops[3];
+            DiscardSprite = SpriteDictionary.Gobbovertops[3];
             Type = 12080;
             coversBreasts = false;
             blocksDick = false;
@@ -1472,13 +1472,13 @@ class Goblins : DefaultRaceData
 
             if (actor.Unit.HasBreasts == true)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[0 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[2];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[0 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[2];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[16 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[18];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[16 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[18];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1490,7 +1490,7 @@ class Goblins : DefaultRaceData
     {
         public GobboOverTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobbovertops[7];
+            DiscardSprite = SpriteDictionary.Gobbovertops[7];
             Type = 12081;
             coversBreasts = false;
             blocksDick = false;
@@ -1505,13 +1505,13 @@ class Goblins : DefaultRaceData
 
             if (actor.Unit.HasBreasts == true)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[4 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[6];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[4 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[6];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[20 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[22];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[20 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[22];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1523,7 +1523,7 @@ class Goblins : DefaultRaceData
     {
         public GobboOverTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobbovertops[11];
+            DiscardSprite = SpriteDictionary.Gobbovertops[11];
             Type = 12082;
             coversBreasts = false;
             blocksDick = false;
@@ -1539,13 +1539,13 @@ class Goblins : DefaultRaceData
 
             if (actor.Unit.HasBreasts == true)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[8 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[10];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[8 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[10];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[24 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[26];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[24 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[26];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1557,7 +1557,7 @@ class Goblins : DefaultRaceData
     {
         public GobboOverTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Gobbovertops[15];
+            DiscardSprite = SpriteDictionary.Gobbovertops[15];
             Type = 12083;
             coversBreasts = false;
             blocksDick = false;
@@ -1572,13 +1572,13 @@ class Goblins : DefaultRaceData
 
             if (actor.Unit.HasBreasts == true)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[12 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[14];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[12 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[14];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[28 + weightMod];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Gobbovertops[30];
+                clothing1.GetSprite = (s) => SpriteDictionary.Gobbovertops[28 + weightMod];
+                clothing2.GetSprite = (s) => SpriteDictionary.Gobbovertops[30];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing50Spaced, actor.Unit.ClothingColor);
@@ -1601,7 +1601,7 @@ class Goblins : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.ImpGobHat[1];
+            clothing1.GetSprite = (s) => SpriteDictionary.ImpGobHat[1];
 
             base.Configure(sprite, actor);
         }

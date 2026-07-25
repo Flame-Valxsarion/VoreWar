@@ -3,7 +3,7 @@ using UnityEngine;
 
 class Plant : BlankSlate
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Plant;
+    readonly Sprite[] Sprites = SpriteDictionary.Plant;
     public Plant()
     {
         CanBeGender = new List<Gender>() { Gender.None };
@@ -50,7 +50,7 @@ class Plant : BlankSlate
         if (actor.HasBelly == false)
             return null;
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false) && actor.GetStomachSize(15, 1) == 15)
-            return State.GameManager.SpriteDictionary.Plant[32];
-        return State.GameManager.SpriteDictionary.Plant[22 + actor.GetStomachSize(8)];
+            return SpriteDictionary.Plant[32];
+        return SpriteDictionary.Plant[22 + actor.GetStomachSize(8)];
     }
 }

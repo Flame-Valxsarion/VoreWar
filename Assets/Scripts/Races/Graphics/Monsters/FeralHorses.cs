@@ -7,7 +7,7 @@ using UnityEngine;
 
 class FeralHorses : BlankSlate
 {
-    //readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.FeralHorses;
+    //readonly Sprite[] Sprites = SpriteDictionary.FeralHorses;
 
     public FeralHorses()
     {
@@ -43,17 +43,17 @@ class FeralHorses : BlankSlate
 
     protected override Sprite AccessorySprite(Actor_Unit actor) // Mane
     {
-        return State.GameManager.SpriteDictionary.FeralHorses[10 + actor.Unit.HairStyle + (actor.IsAttacking ? 6 : 0)];
+        return SpriteDictionary.FeralHorses[10 + actor.Unit.HairStyle + (actor.IsAttacking ? 6 : 0)];
     }
 
     protected override Sprite BodyAccentSprite5(Actor_Unit actor) // Left Hind leg
     {
-        return State.GameManager.SpriteDictionary.FeralHorses[5];
+        return SpriteDictionary.FeralHorses[5];
     }
 
     protected override Sprite BodyAccentSprite6(Actor_Unit actor) // Right Hind Hoof
     {
-        return State.GameManager.SpriteDictionary.FeralHorses[6];
+        return SpriteDictionary.FeralHorses[6];
     }
 
     protected override Sprite BodyAccentSprite4(Actor_Unit actor) // Belly Cover
@@ -61,7 +61,7 @@ class FeralHorses : BlankSlate
         if (actor.HasBelly)
             return null;
         else
-            return State.GameManager.SpriteDictionary.FeralHorses[8];
+            return SpriteDictionary.FeralHorses[8];
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor) //Sheath
@@ -69,42 +69,42 @@ class FeralHorses : BlankSlate
         if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 		
-		if (actor.IsErect()) return State.GameManager.SpriteDictionary.FeralHorses[28];
+		if (actor.IsErect()) return SpriteDictionary.FeralHorses[28];
 
-		else return State.GameManager.SpriteDictionary.FeralHorses[29];
+		else return SpriteDictionary.FeralHorses[29];
     }
 
     protected override Sprite BodyAccentSprite2(Actor_Unit actor) // Tail
     { 
-        return State.GameManager.SpriteDictionary.FeralHorses[22 + actor.Unit.TailType];
+        return SpriteDictionary.FeralHorses[22 + actor.Unit.TailType];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Right Hind Leg
     {
-        return State.GameManager.SpriteDictionary.FeralHorses[4];
+        return SpriteDictionary.FeralHorses[4];
     }
 
     protected override Sprite BodyAccentSprite7(Actor_Unit actor) // Left Hind Hoof
     {
-        return State.GameManager.SpriteDictionary.FeralHorses[7];
+        return SpriteDictionary.FeralHorses[7];
     }
     protected override Sprite BodySprite(Actor_Unit actor) // Body
     {
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.FeralHorses[1];
+            return SpriteDictionary.FeralHorses[1];
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.FeralHorses[1];
+            return SpriteDictionary.FeralHorses[1];
         else
-            return State.GameManager.SpriteDictionary.FeralHorses[0];
+            return SpriteDictionary.FeralHorses[0];
     }
 
     protected override Sprite BodyAccentSprite8(Actor_Unit actor) // Face
     {
         if (actor.IsAttacking)
-            return State.GameManager.SpriteDictionary.FeralHorses[3]; 
+            return SpriteDictionary.FeralHorses[3]; 
         if (actor.IsOralVoring)
-            return State.GameManager.SpriteDictionary.FeralHorses[3]; 
-        return State.GameManager.SpriteDictionary.FeralHorses[2]; 
+            return SpriteDictionary.FeralHorses[3]; 
+        return SpriteDictionary.FeralHorses[2]; 
     }
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
@@ -126,36 +126,36 @@ class FeralHorses : BlankSlate
         if ( size >= 31 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
         {
 			AddOffset(Belly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.FeralHorses[54];
+            return SpriteDictionary.FeralHorses[54];
         }
 
         if (size >= 29 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(Belly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.FeralHorses[53];
+            return SpriteDictionary.FeralHorses[53];
         }
 
         if (size >= 27 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(Belly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.FeralHorses[52];
+            return SpriteDictionary.FeralHorses[52];
         }
 
         if (size >= 25 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(Belly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.FeralHorses[51];
+            return SpriteDictionary.FeralHorses[51];
         }
 
         if (size >= 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false) ?? false))
         {
 			AddOffset(Belly, -23 * .625f, -7 * .625f);
-            return State.GameManager.SpriteDictionary.FeralHorses[50];
+            return SpriteDictionary.FeralHorses[50];
         }
 
         if (size > 19) size = 19;
 
-        return State.GameManager.SpriteDictionary.FeralHorses[30 + size];
+        return SpriteDictionary.FeralHorses[30 + size];
     }
 
     protected override Sprite DickSprite(Actor_Unit actor)
@@ -163,8 +163,8 @@ class FeralHorses : BlankSlate
         if (actor.Unit.DickSize < 0) return null;
         if (Config.HideCocks) return null;
 
-        if (actor.IsCockVoring) return State.GameManager.SpriteDictionary.FeralHorses[9];
-		if (actor.IsErect()) return State.GameManager.SpriteDictionary.FeralHorses[9];
+        if (actor.IsCockVoring) return SpriteDictionary.FeralHorses[9];
+		if (actor.IsErect()) return SpriteDictionary.FeralHorses[9];
 
         return null;
     }
@@ -181,35 +181,35 @@ class FeralHorses : BlankSlate
 
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.balls) ?? false)
         {
-            return State.GameManager.SpriteDictionary.FeralHorses[79];
+            return SpriteDictionary.FeralHorses[79];
         }
 
         else if (size >= 29 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralHorses[78];
+            return SpriteDictionary.FeralHorses[78];
         }
 
         else if (size >= 27 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralHorses[77];
+            return SpriteDictionary.FeralHorses[77];
         }
 
         else if (size >= 25 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralHorses[76];
+            return SpriteDictionary.FeralHorses[76];
         }
 
         else if (size >= 23 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralHorses[75];
+            return SpriteDictionary.FeralHorses[75];
         }
 
         else if (size >= 21 && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, false, PreyLocation.balls) ?? false))
         {
-            return State.GameManager.SpriteDictionary.FeralHorses[74];
+            return SpriteDictionary.FeralHorses[74];
         }
 
         if (size > 19) size = 19;
-        return State.GameManager.SpriteDictionary.FeralHorses[55 + size];
+        return SpriteDictionary.FeralHorses[55 + size];
     }
 }

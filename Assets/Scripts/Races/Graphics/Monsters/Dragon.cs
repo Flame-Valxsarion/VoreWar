@@ -9,7 +9,7 @@ class Dragon : BlankSlate
         StandingCrouch
     }
     Position position;
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Dragon;
+    readonly Sprite[] Sprites = SpriteDictionary.Dragon;
 
     public Dragon()
     {

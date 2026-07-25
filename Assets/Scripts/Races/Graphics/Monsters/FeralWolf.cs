@@ -23,21 +23,21 @@ class FeralWolf : BlankSlate
 
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[4];
-    protected override Sprite HairSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[6];
-    protected override Sprite HairSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[7];
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[5];
-    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[8];
-    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[9];
-    protected override Sprite HeadSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[(actor.IsAttacking || actor.IsEating) ? 1 : 0];
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.FeralWolf[(actor.IsAttacking || actor.IsEating) ? 3 : 2];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.FeralWolf[4];
+    protected override Sprite HairSprite(Actor_Unit actor) => SpriteDictionary.FeralWolf[6];
+    protected override Sprite HairSprite2(Actor_Unit actor) => SpriteDictionary.FeralWolf[7];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.FeralWolf[5];
+    protected override Sprite BodyAccentSprite2(Actor_Unit actor) => SpriteDictionary.FeralWolf[8];
+    protected override Sprite BodyAccentSprite3(Actor_Unit actor) => SpriteDictionary.FeralWolf[9];
+    protected override Sprite HeadSprite(Actor_Unit actor) => SpriteDictionary.FeralWolf[(actor.IsAttacking || actor.IsEating) ? 1 : 0];
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.FeralWolf[(actor.IsAttacking || actor.IsEating) ? 3 : 2];
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
         if (actor.HasBelly == false)
             return null;
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false) && actor.GetStomachSize(15, 1) == 15)
-            return State.GameManager.SpriteDictionary.FeralWolf[16];
-        return State.GameManager.SpriteDictionary.FeralWolf[10 + actor.GetStomachSize(4)];
+            return SpriteDictionary.FeralWolf[16];
+        return SpriteDictionary.FeralWolf[10 + actor.GetStomachSize(4)];
     }
 
     protected override Sprite AccessorySprite(Actor_Unit actor)
@@ -45,7 +45,7 @@ class FeralWolf : BlankSlate
         if ((actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach) ?? false) && actor.GetStomachSize(15, 1) == 15)
             return null;
         if (actor.GetStomachSize(4) == 4)
-            return State.GameManager.SpriteDictionary.FeralWolf[15];
+            return SpriteDictionary.FeralWolf[15];
         return null;
     }
 }

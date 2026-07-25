@@ -36,6 +36,8 @@ public class LaboratoryPotion
     public List<Traits> NegativeTraits;
     [OdinSerialize]
     public Dictionary<Stat, int> StatModifiers;
+    [OdinSerialize]
+    public string potionname;
 
     public LaboratoryPotion()
     {
@@ -50,6 +52,7 @@ public class LaboratoryPotion
         StatModifiers.Add(Stat.Agility, 0);
         StatModifiers.Add(Stat.Voracity, 0);
         StatModifiers.Add(Stat.Stomach, 0);
+        potionname = "simplicity";
     }
 
     internal void AddPositiveTrait(Traits trait)

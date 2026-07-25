@@ -12,8 +12,8 @@ namespace CruxClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[310];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[311];
+            clothing1.GetSprite = (s) => SpriteDictionary.Crux[310];
+            clothing2.GetSprite = (s) => SpriteDictionary.Crux[311];
             base.Configure(sprite, actor);
         }
     }
@@ -28,8 +28,8 @@ namespace CruxClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[312];
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[313];
+            clothing1.GetSprite = (s) => SpriteDictionary.Crux[312];
+            clothing2.GetSprite = (s) => SpriteDictionary.Crux[313];
             base.Configure(sprite, actor);
         }
     }
@@ -39,7 +39,7 @@ namespace CruxClothing
         public TShirt()
         {
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[389];
+            DiscardSprite = SpriteDictionary.Crux[389];
             Type = 102;
             OccupiesAllSlots = false;
             coversBreasts = true;
@@ -56,30 +56,30 @@ namespace CruxClothing
             {
                 if (actor.PredatorComponent?.VisibleFullness == 0)
                 {
-                    if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[315];
-                    else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[316];
-                    else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[317];
+                    if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => SpriteDictionary.Crux[315];
+                    else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => SpriteDictionary.Crux[316];
+                    else clothing1.GetSprite = (s) => SpriteDictionary.Crux[317];
                 }
                 else if (actor.GetStomachSize(23) <= 4)
                 {
-                    if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[319];
-                    else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[320];
-                    else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[321];
+                    if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => SpriteDictionary.Crux[319];
+                    else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => SpriteDictionary.Crux[320];
+                    else clothing1.GetSprite = (s) => SpriteDictionary.Crux[321];
                 }
                 else
                 {
-                    if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[323];
-                    else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[324];
-                    else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[325];
+                    if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => SpriteDictionary.Crux[323];
+                    else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => SpriteDictionary.Crux[324];
+                    else clothing1.GetSprite = (s) => SpriteDictionary.Crux[325];
                 }
             }
             else
             {
                 if (actor.PredatorComponent?.VisibleFullness == 0)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[314];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Crux[314];
                 else if (actor.GetStomachSize(23) <= 4)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[318];
-                else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[322];
+                    clothing1.GetSprite = (s) => SpriteDictionary.Crux[318];
+                else clothing1.GetSprite = (s) => SpriteDictionary.Crux[322];
             }
 
             base.Configure(sprite, actor);
@@ -92,7 +92,7 @@ namespace CruxClothing
         {
             maleOnly = true;
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[390];
+            DiscardSprite = SpriteDictionary.Crux[390];
             Type = 103;
             OccupiesAllSlots = false;
             blocksDick = false;
@@ -103,7 +103,7 @@ namespace CruxClothing
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetColor = (s) => ColorMap.GetClothingColor(actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[326];
+            clothing1.GetSprite = (s) => SpriteDictionary.Crux[326];
             base.Configure(sprite, actor);
         }
     }
@@ -114,7 +114,7 @@ namespace CruxClothing
         {
             femaleOnly = true;
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[391];
+            DiscardSprite = SpriteDictionary.Crux[391];
             Type = 104;
             OccupiesAllSlots = false;
             coversBreasts = false;
@@ -126,9 +126,9 @@ namespace CruxClothing
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetColor = (s) => ColorMap.GetClothingColor(actor.Unit.ClothingColor);
-            if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[327];
-            else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[328];
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[329];
+            if (actor.Unit.BreastSize <= 1) clothing1.GetSprite = (s) => SpriteDictionary.Crux[327];
+            else if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => SpriteDictionary.Crux[328];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Crux[329];
             base.Configure(sprite, actor);
         }
     }
@@ -138,7 +138,7 @@ namespace CruxClothing
         public LabCoat()
         {
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[397];
+            DiscardSprite = SpriteDictionary.Crux[397];
             Type = 105;
             OccupiesAllSlots = false;
             blocksDick = false;
@@ -154,22 +154,22 @@ namespace CruxClothing
             if (actor.GetStomachSize(23) <= 5)
             {
                 clothing1.layer = 14;
-                if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[341];
-                else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[344];
+                if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => SpriteDictionary.Crux[341];
+                else clothing1.GetSprite = (s) => SpriteDictionary.Crux[344];
             }
             else if (actor.GetStomachSize(23) <= 10)
             {
                 clothing1.layer = 14;
-                if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[342];
-                else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[345];
+                if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => SpriteDictionary.Crux[342];
+                else clothing1.GetSprite = (s) => SpriteDictionary.Crux[345];
             }
             else
             {
                 clothing1.layer = 11;
-                if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[343];
-                else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[346];
+                if (actor.Unit.BreastSize <= 3) clothing1.GetSprite = (s) => SpriteDictionary.Crux[343];
+                else clothing1.GetSprite = (s) => SpriteDictionary.Crux[346];
             }
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[347];
+            clothing2.GetSprite = (s) => SpriteDictionary.Crux[347];
 
             base.Configure(sprite, actor);
         }
@@ -180,7 +180,7 @@ namespace CruxClothing
         public Boxers1()
         {
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[392];
+            DiscardSprite = SpriteDictionary.Crux[392];
             Type = 106;
             OccupiesAllSlots = false;
             blocksDick = true;
@@ -192,10 +192,10 @@ namespace CruxClothing
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetColor = (s) => ColorMap.GetClothingColor(actor.Unit.ClothingColor2);
-            if (actor.Unit.DickSize == -1) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[330];
-            else if (actor.Unit.DickSize <= 2) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[331];
-            else if (actor.Unit.DickSize <= 5) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[332];
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[333];
+            if (actor.Unit.DickSize == -1) clothing1.GetSprite = (s) => SpriteDictionary.Crux[330];
+            else if (actor.Unit.DickSize <= 2) clothing1.GetSprite = (s) => SpriteDictionary.Crux[331];
+            else if (actor.Unit.DickSize <= 5) clothing1.GetSprite = (s) => SpriteDictionary.Crux[332];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Crux[333];
             base.Configure(sprite, actor);
         }
     }
@@ -205,7 +205,7 @@ namespace CruxClothing
         public Boxers2()
         {
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[393];
+            DiscardSprite = SpriteDictionary.Crux[393];
             Type = 107;
             OccupiesAllSlots = false;
             blocksDick = true;
@@ -217,10 +217,10 @@ namespace CruxClothing
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetColor = (s) => ColorMap.GetClothingColor(actor.Unit.ClothingColor2);
-            if (actor.Unit.DickSize == -1) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[334];
-            else if (actor.Unit.DickSize <= 2) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[335];
-            else if (actor.Unit.DickSize <= 5) clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[336];
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[337];
+            if (actor.Unit.DickSize == -1) clothing1.GetSprite = (s) => SpriteDictionary.Crux[334];
+            else if (actor.Unit.DickSize <= 2) clothing1.GetSprite = (s) => SpriteDictionary.Crux[335];
+            else if (actor.Unit.DickSize <= 5) clothing1.GetSprite = (s) => SpriteDictionary.Crux[336];
+            else clothing1.GetSprite = (s) => SpriteDictionary.Crux[337];
             base.Configure(sprite, actor);
         }
     }
@@ -230,7 +230,7 @@ namespace CruxClothing
         public CruxJeans()
         {
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[396];
+            DiscardSprite = SpriteDictionary.Crux[396];
             Type = 108;
             OccupiesAllSlots = false;
             blocksDick = true;
@@ -241,7 +241,7 @@ namespace CruxClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[340];
+            clothing1.GetSprite = (s) => SpriteDictionary.Crux[340];
             base.Configure(sprite, actor);
         }
     }
@@ -252,7 +252,7 @@ namespace CruxClothing
         {
             DiscardUsesPalettes = false;
             DiscardUsesColor2 = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[395];
+            DiscardSprite = SpriteDictionary.Crux[395];
             Type = 109;
             OccupiesAllSlots = false;
             blocksDick = false;
@@ -264,7 +264,7 @@ namespace CruxClothing
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetColor = (s) => ColorMap.GetClothingColor(actor.Unit.ClothingColor2);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[339];
+            clothing1.GetSprite = (s) => SpriteDictionary.Crux[339];
             base.Configure(sprite, actor);
         }
     }
@@ -275,7 +275,7 @@ namespace CruxClothing
         {
             DiscardUsesPalettes = false;
             DiscardUsesColor2 = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[394];
+            DiscardSprite = SpriteDictionary.Crux[394];
             Type = 110;
             OccupiesAllSlots = false;
             blocksDick = false;
@@ -287,7 +287,7 @@ namespace CruxClothing
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetColor = (s) => ColorMap.GetClothingColor(actor.Unit.ClothingColor2);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[338];
+            clothing1.GetSprite = (s) => SpriteDictionary.Crux[338];
             base.Configure(sprite, actor);
         }
     }
@@ -297,7 +297,7 @@ namespace CruxClothing
         public Rags()
         {
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[399];
+            DiscardSprite = SpriteDictionary.Crux[399];
             Type = 111;
             OccupiesAllSlots = true;
             blocksDick = true;
@@ -312,17 +312,17 @@ namespace CruxClothing
             if (actor.Unit.HasBreasts)
             {
                 clothing1.layer = 14;
-                DiscardSprite = State.GameManager.SpriteDictionary.Crux[398];
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[348];
+                DiscardSprite = SpriteDictionary.Crux[398];
+                clothing1.GetSprite = (s) => SpriteDictionary.Crux[348];
                 clothing2.GetSprite = null;
             }
             else
             {
                 clothing1.layer = 9;
                 clothing2.layer = 14;
-                DiscardSprite = State.GameManager.SpriteDictionary.Crux[399];
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[349];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[350];
+                DiscardSprite = SpriteDictionary.Crux[399];
+                clothing1.GetSprite = (s) => SpriteDictionary.Crux[349];
+                clothing2.GetSprite = (s) => SpriteDictionary.Crux[350];
             }
             base.Configure(sprite, actor);
         }
@@ -333,7 +333,7 @@ namespace CruxClothing
         public SlaveCollar()
         {
             DiscardUsesPalettes = false;
-            DiscardSprite = State.GameManager.SpriteDictionary.Crux[400];
+            DiscardSprite = SpriteDictionary.Crux[400];
             Type = 112;
             OccupiesAllSlots = true;
             blocksDick = false;
@@ -344,7 +344,7 @@ namespace CruxClothing
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Crux[350];
+            clothing1.GetSprite = (s) => SpriteDictionary.Crux[350];
             base.Configure(sprite, actor);
         }
     }

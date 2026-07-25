@@ -3,7 +3,7 @@
 class Terrorbird : BlankSlate
 {
 
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Terrorbird;
+    readonly Sprite[] Sprites = SpriteDictionary.Terrorbird;
 
     public Terrorbird()
     {

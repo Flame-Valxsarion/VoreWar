@@ -18,9 +18,9 @@ class Scorch : BlankSlate
         unit.Name = "Scorch";
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scorch[actor.IsAttacking || actor.IsOralVoring ? 1 : 0];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Scorch[actor.IsAttacking || actor.IsOralVoring ? 1 : 0];
 
-    protected override Sprite BodyAccentSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Scorch[2];
+    protected override Sprite BodyAccentSprite(Actor_Unit actor) => SpriteDictionary.Scorch[2];
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -29,10 +29,10 @@ class Scorch : BlankSlate
         if (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false)
         {
             if (actor.PredatorComponent.VisibleFullness > 4)
-                return State.GameManager.SpriteDictionary.Scorch[7];
+                return SpriteDictionary.Scorch[7];
         }
 
-        return actor.HasBelly ? State.GameManager.SpriteDictionary.Scorch[3 + actor.GetStomachSize(3)] : null;
+        return actor.HasBelly ? SpriteDictionary.Scorch[3 + actor.GetStomachSize(3)] : null;
     }
 }
 

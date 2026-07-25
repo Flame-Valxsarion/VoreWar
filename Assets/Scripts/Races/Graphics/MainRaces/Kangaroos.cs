@@ -93,11 +93,11 @@ class Kangaroos : DefaultRaceData
         }
     }
 
-    protected override Sprite BodySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Kangaroos[(actor.Unit.HasWeapon || actor.IsAttacking) ? 1 : 0];
+    protected override Sprite BodySprite(Actor_Unit actor) => SpriteDictionary.Kangaroos[(actor.Unit.HasWeapon || actor.IsAttacking) ? 1 : 0];
 
-    protected override Sprite MouthSprite(Actor_Unit actor) => actor.IsEating ? State.GameManager.SpriteDictionary.Kangaroos[2] : null;
+    protected override Sprite MouthSprite(Actor_Unit actor) => actor.IsEating ? SpriteDictionary.Kangaroos[2] : null;
 
-    protected override Sprite EyesSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Kangaroos[6 + actor.Unit.EyeType];
+    protected override Sprite EyesSprite(Actor_Unit actor) => SpriteDictionary.Kangaroos[6 + actor.Unit.EyeType];
 
     internal override Sprite BellySprite(Actor_Unit actor, GameObject belly)
     {
@@ -119,22 +119,22 @@ class Kangaroos : DefaultRaceData
             if (actor.Unit.HasBreasts)
             {
                 if (sprite == 19 && actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb))
-                    return State.GameManager.SpriteDictionary.Kangaroos[136];
+                    return SpriteDictionary.Kangaroos[136];
                 if (sprite <= 15)
-                    return State.GameManager.SpriteDictionary.Kangaroos[78 + sprite];
-                return State.GameManager.SpriteDictionary.Kangaroos[132 - 16 + sprite];
+                    return SpriteDictionary.Kangaroos[78 + sprite];
+                return SpriteDictionary.Kangaroos[132 - 16 + sprite];
             }
             if (sprite == 19 && actor.PredatorComponent.IsUnitOfSpecificationInPrey(Race.Selicia, true, PreyLocation.stomach, PreyLocation.womb))
-                return State.GameManager.SpriteDictionary.Kangaroos[131];
+                return SpriteDictionary.Kangaroos[131];
             if (sprite <= 15)
-                return State.GameManager.SpriteDictionary.Kangaroos[62 + sprite];
-            return State.GameManager.SpriteDictionary.Kangaroos[127 - 16 + sprite];
+                return SpriteDictionary.Kangaroos[62 + sprite];
+            return SpriteDictionary.Kangaroos[127 - 16 + sprite];
         }
         else
         {
             Belly.layer = 7;
             if (actor.Unit.HasBreasts)
-                return State.GameManager.SpriteDictionary.Kangaroos[3];
+                return SpriteDictionary.Kangaroos[3];
             return null;
         }
     }
@@ -149,15 +149,15 @@ class Kangaroos : DefaultRaceData
             {
                 if (actor.PredatorComponent.BallsFullness > 3)
                 {
-                    return State.GameManager.SpriteDictionary.Kangaroos[148];
+                    return SpriteDictionary.Kangaroos[148];
                 }
             }
 
             if (actor.PredatorComponent?.BallsFullness > 0)
             {
-                return State.GameManager.SpriteDictionary.Kangaroos[137 + actor.GetBallSize(10)];
+                return SpriteDictionary.Kangaroos[137 + actor.GetBallSize(10)];
             }
-            return State.GameManager.SpriteDictionary.Kangaroos[50 + actor.Unit.DickSize];
+            return SpriteDictionary.Kangaroos[50 + actor.Unit.DickSize];
         }
 
         return null;
@@ -166,13 +166,13 @@ class Kangaroos : DefaultRaceData
     protected override Sprite DickSprite(Actor_Unit actor)
     {
         if (actor.Unit.DickSize >= 0 && actor.IsErect())
-            return State.GameManager.SpriteDictionary.Kangaroos[56 + actor.Unit.DickSize];
+            return SpriteDictionary.Kangaroos[56 + actor.Unit.DickSize];
         return null;
     }
 
-    protected override Sprite HairSprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Kangaroos[41 + actor.Unit.HairStyle];
+    protected override Sprite HairSprite(Actor_Unit actor) => SpriteDictionary.Kangaroos[41 + actor.Unit.HairStyle];
 
-    protected override Sprite AccessorySprite(Actor_Unit actor) => State.GameManager.SpriteDictionary.Kangaroos[98 + actor.Unit.SpecialAccessoryType];
+    protected override Sprite AccessorySprite(Actor_Unit actor) => SpriteDictionary.Kangaroos[98 + actor.Unit.SpecialAccessoryType];
 
     protected override Sprite WeaponSprite(Actor_Unit actor)
     {
@@ -181,21 +181,21 @@ class Kangaroos : DefaultRaceData
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.Kangaroos[33];
+                return SpriteDictionary.Kangaroos[33];
             case 1:
-                return State.GameManager.SpriteDictionary.Kangaroos[35];
+                return SpriteDictionary.Kangaroos[35];
             case 2:
-                return State.GameManager.SpriteDictionary.Kangaroos[36];
+                return SpriteDictionary.Kangaroos[36];
             case 3:
-                return State.GameManager.SpriteDictionary.Kangaroos[37];
+                return SpriteDictionary.Kangaroos[37];
             case 4:
-                return State.GameManager.SpriteDictionary.Kangaroos[30];
+                return SpriteDictionary.Kangaroos[30];
             case 5:
                 return null;
             case 6:
-                return State.GameManager.SpriteDictionary.Kangaroos[38];
+                return SpriteDictionary.Kangaroos[38];
             case 7:
-                return State.GameManager.SpriteDictionary.Kangaroos[40];
+                return SpriteDictionary.Kangaroos[40];
             default:
                 return null;
         }
@@ -206,27 +206,27 @@ class Kangaroos : DefaultRaceData
         if (actor.Unit.HasWeapon == false)
         {
             if (actor.IsAttacking)
-                return State.GameManager.SpriteDictionary.Kangaroos[34];
+                return SpriteDictionary.Kangaroos[34];
             else return null;
         }
         switch (actor.GetWeaponSprite())
         {
             case 0:
-                return State.GameManager.SpriteDictionary.Kangaroos[32];
+                return SpriteDictionary.Kangaroos[32];
             case 1:
-                return State.GameManager.SpriteDictionary.Kangaroos[34];
+                return SpriteDictionary.Kangaroos[34];
             case 2:
-                return State.GameManager.SpriteDictionary.Kangaroos[29];
+                return SpriteDictionary.Kangaroos[29];
             case 3:
-                return State.GameManager.SpriteDictionary.Kangaroos[39];
+                return SpriteDictionary.Kangaroos[39];
             case 4:
-                return State.GameManager.SpriteDictionary.Kangaroos[29];
+                return SpriteDictionary.Kangaroos[29];
             case 5:
-                return State.GameManager.SpriteDictionary.Kangaroos[31];
+                return SpriteDictionary.Kangaroos[31];
             case 6:
-                return State.GameManager.SpriteDictionary.Kangaroos[29];
+                return SpriteDictionary.Kangaroos[29];
             case 7:
-                return State.GameManager.SpriteDictionary.Kangaroos[39];
+                return SpriteDictionary.Kangaroos[39];
             default:
                 return null;
         }
@@ -235,7 +235,7 @@ class Kangaroos : DefaultRaceData
     protected override Sprite BodySizeSprite(Actor_Unit actor)
     {
         if (actor.Unit.BodySize > 0)
-            return State.GameManager.SpriteDictionary.Kangaroos[103 + actor.Unit.BodySize];
+            return SpriteDictionary.Kangaroos[103 + actor.Unit.BodySize];
         return null;
     }
 
@@ -276,63 +276,63 @@ class Kangaroos : DefaultRaceData
         if (acc == State.World.ItemRepository.GetItem(ItemType.BodyArmor))
         {
             if (actor.Unit.EyeType % 2 == 0)
-                return State.GameManager.SpriteDictionary.Kangaroos[107];
-            return State.GameManager.SpriteDictionary.Kangaroos[108];
+                return SpriteDictionary.Kangaroos[107];
+            return SpriteDictionary.Kangaroos[108];
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Helmet))
-            return State.GameManager.SpriteDictionary.Kangaroos[109];
+            return SpriteDictionary.Kangaroos[109];
         if (acc == State.World.ItemRepository.GetItem(ItemType.Shoes))
-            return State.GameManager.SpriteDictionary.Kangaroos[116];
+            return SpriteDictionary.Kangaroos[116];
         if (acc == State.World.ItemRepository.GetItem(ItemType.Gloves))
         {
             if (actor.Unit.HasWeapon == false || actor.Surrendered)
-                return State.GameManager.SpriteDictionary.Kangaroos[117];
+                return SpriteDictionary.Kangaroos[117];
             switch (actor.GetWeaponSprite())
             {
                 case 0:
-                    return State.GameManager.SpriteDictionary.Kangaroos[120];
+                    return SpriteDictionary.Kangaroos[120];
                 case 1:
-                    return State.GameManager.SpriteDictionary.Kangaroos[121];
+                    return SpriteDictionary.Kangaroos[121];
                 case 2:
-                    return State.GameManager.SpriteDictionary.Kangaroos[118];
+                    return SpriteDictionary.Kangaroos[118];
                 case 3:
-                    return State.GameManager.SpriteDictionary.Kangaroos[122];
+                    return SpriteDictionary.Kangaroos[122];
                 case 4:
-                    return State.GameManager.SpriteDictionary.Kangaroos[118];
+                    return SpriteDictionary.Kangaroos[118];
                 case 5:
-                    return State.GameManager.SpriteDictionary.Kangaroos[119];
+                    return SpriteDictionary.Kangaroos[119];
                 case 6:
-                    return State.GameManager.SpriteDictionary.Kangaroos[118];
+                    return SpriteDictionary.Kangaroos[118];
                 case 7:
-                    return State.GameManager.SpriteDictionary.Kangaroos[122];
+                    return SpriteDictionary.Kangaroos[122];
                 default:
-                    return State.GameManager.SpriteDictionary.Kangaroos[117];
+                    return SpriteDictionary.Kangaroos[117];
             }
         }
         if (acc == State.World.ItemRepository.GetItem(ItemType.Gauntlet))
-            return State.GameManager.SpriteDictionary.Kangaroos[5];
+            return SpriteDictionary.Kangaroos[5];
         return null;
     }
 
     protected override Sprite BodyAccentSprite3(Actor_Unit actor)
     {
         if (actor.Unit.Type == UnitType.Leader)
-            return State.GameManager.SpriteDictionary.Kangaroos[115];
+            return SpriteDictionary.Kangaroos[115];
         return null;
     }
 
     protected override Sprite HeadSprite(Actor_Unit actor)
     {
         if (actor.Unit.Level > 15)
-            return State.GameManager.SpriteDictionary.Kangaroos[114];
+            return SpriteDictionary.Kangaroos[114];
         else if (actor.Unit.Level > 10)
-            return State.GameManager.SpriteDictionary.Kangaroos[113];
+            return SpriteDictionary.Kangaroos[113];
         else if (actor.Unit.Level > 7)
-            return State.GameManager.SpriteDictionary.Kangaroos[112];
+            return SpriteDictionary.Kangaroos[112];
         else if (actor.Unit.Level > 5)
-            return State.GameManager.SpriteDictionary.Kangaroos[111];
+            return SpriteDictionary.Kangaroos[111];
         else if (actor.Unit.Level > 3)
-            return State.GameManager.SpriteDictionary.Kangaroos[110];
+            return SpriteDictionary.Kangaroos[110];
         return null;
     }
 
@@ -347,14 +347,14 @@ namespace KangarooClothes
         {
             Type = 755;
             OccupiesAllSlots = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Kangaroos[123];
+            DiscardSprite = SpriteDictionary.Kangaroos[123];
             clothing1 = new SpriteExtraInfo(10, null, null);
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kangaroos[94];
+            clothing1.GetSprite = (s) => SpriteDictionary.Kangaroos[94];
             base.Configure(sprite, actor);
         }
     }
@@ -364,14 +364,14 @@ namespace KangarooClothes
         {
             Type = 756;
             OccupiesAllSlots = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Kangaroos[124];
+            DiscardSprite = SpriteDictionary.Kangaroos[124];
             clothing1 = new SpriteExtraInfo(10, null, null);
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kangaroos[95];
+            clothing1.GetSprite = (s) => SpriteDictionary.Kangaroos[95];
             base.Configure(sprite, actor);
         }
     }
@@ -381,14 +381,14 @@ namespace KangarooClothes
         {
             Type = 756;
             OccupiesAllSlots = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Kangaroos[124];
+            DiscardSprite = SpriteDictionary.Kangaroos[124];
             clothing1 = new SpriteExtraInfo(10, null, null);
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.Clothing, actor.Unit.ClothingColor);
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kangaroos[96];
+            clothing1.GetSprite = (s) => SpriteDictionary.Kangaroos[96];
             base.Configure(sprite, actor);
         }
     }
@@ -399,14 +399,14 @@ namespace KangarooClothes
             Type = 756;
             OccupiesAllSlots = true;
             FixedColor = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.Kangaroos[124];
+            DiscardSprite = SpriteDictionary.Kangaroos[124];
             clothing1 = new SpriteExtraInfo(10, null, null);
         }
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
 
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.Kangaroos[97];
+            clothing1.GetSprite = (s) => SpriteDictionary.Kangaroos[97];
             base.Configure(sprite, actor);
         }
     }

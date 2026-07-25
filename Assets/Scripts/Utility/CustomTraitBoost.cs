@@ -82,13 +82,13 @@ public class CustomTraitBoost
                             s.Outgoing.GrowthRate *= value;
                             break;
                         case CustomTraitComp.OutgoingCritRateShift:
-                            s.Outgoing.CritRateShift *= value;
+                            s.Outgoing.CritRateShift += value;
                             break;
                         case CustomTraitComp.OutgoingCritDamageMult:
                             s.Outgoing.CritDamageMult *= value;
                             break;
                         case CustomTraitComp.OutgoingGrazeRateShift:
-                            s.Outgoing.GrazeRateShift *= value;
+                            s.Outgoing.GrazeRateShift += value;
                             break;
                         case CustomTraitComp.OutgoingGrazeDamageMult:
                             s.Outgoing.GrazeDamageMult *= value;
@@ -196,7 +196,7 @@ public class CustomTraitBoost
                             s.DigestionImmunityTurns *= (int)value;
                             break;
                         case CustomTraitComp.HealthRegen:
-                            s.HealthRegen *= (int)value;
+                            s.HealthRegen += (int)value;
                             break;
                         case CustomTraitComp.ManaRegen:
                             s.ManaRegen *= (int)value;

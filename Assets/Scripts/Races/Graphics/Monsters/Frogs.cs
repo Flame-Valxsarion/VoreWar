@@ -10,7 +10,7 @@ class Frogs : BlankSlate
         Standing
     }
     Position position;
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Frogs;
+    readonly Sprite[] Sprites = SpriteDictionary.Frogs;
 
 
     public Frogs()

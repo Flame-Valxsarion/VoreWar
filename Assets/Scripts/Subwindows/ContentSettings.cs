@@ -59,6 +59,7 @@ public class ContentSettings : MonoBehaviour
     public Toggle BreastVore;
     public Toggle AnalVore;
     public Toggle TailVore;
+    public Toggle BladderVore;
     public Toggle AltVoreOralGain;
 
     public Toggle MultiRaceFlip;
@@ -147,6 +148,7 @@ public class ContentSettings : MonoBehaviour
     public Slider CockWeight;
     public Slider UnbirthWeight;
     public Slider TailWeight;
+    public Slider BladderWeight;
 
     public Toggle FurryGenitals;
 
@@ -330,6 +332,7 @@ public class ContentSettings : MonoBehaviour
             new ToggleObject(BreastVore, "BreastVore", false),
             new ToggleObject(AnalVore, "AnalVore", false),
             new ToggleObject(TailVore, "TailVore", false),
+            new ToggleObject(BladderVore, "BladderVore", false),
             new ToggleObject(CockVoreHidesClothes, "CockVoreHidesClothes", false),
             new ToggleObject(AltVoreOralGain, "AltVoreOralGain", false),
             new ToggleObject(AllowHugeBreasts, "AllowHugeBreasts", false),
@@ -441,6 +444,8 @@ public class ContentSettings : MonoBehaviour
                     spawner.AddonRace.GetComponent<DisplayTooltip>().value = 209;
                 else if (race == Race.Monitors)
                     spawner.AddonRace.GetComponent<DisplayTooltip>().value = 232;
+                else if (race == Race.SoulSprite)
+                    spawner.AddonRace.GetComponent<DisplayTooltip>().value = 351;
                 else
                     spawner.AddonRace.gameObject.SetActive(false);
             }
@@ -601,6 +606,15 @@ public class ContentSettings : MonoBehaviour
             case Race.Iliijiith:
                 tooltip.value = 346;
                 break;
+            case Race.Pudding:
+                tooltip.value = 347;
+                break;
+            case Race.SoulSprite:
+                tooltip.value = 350;
+                break;
+            case Race.BlackWidow:
+                tooltip.value = 350;
+                break;
         }
         return spawner;
     }
@@ -684,6 +698,7 @@ public class ContentSettings : MonoBehaviour
         Config.World.UnbirthWeight = PlayerPrefs.GetInt("UnbirthWeight", 40);
         Config.World.CockWeight = PlayerPrefs.GetInt("CockWeight", 40);
         Config.World.TailWeight = PlayerPrefs.GetInt("TailWeight", 40);
+        Config.World.BladderWeight = PlayerPrefs.GetInt("BladderWeight", 40);
         Config.World.MonsterConquest = (Config.MonsterConquestType)PlayerPrefs.GetInt("MonsterConquest", 0);
         Config.World.BurpFraction = PlayerPrefs.GetFloat("BurpFraction", .1f);
         Config.World.FartFraction = PlayerPrefs.GetFloat("FartFraction", .1f);
@@ -885,6 +900,7 @@ public class ContentSettings : MonoBehaviour
         CockWeight.value = Config.CockWeight;
         AnalWeight.value = Config.AnalWeight;
         TailWeight.value = Config.TailWeight;
+        BladderWeight.value = Config.BladderWeight;
         AutoSurrenderChance.value = Config.AutoSurrenderChance;
         AutoSurrenderDefectChance.value = Config.AutoSurrenderDefectChance;
         MonsterConquest.value = (int)Config.MonsterConquest + 1;
@@ -1179,6 +1195,7 @@ public class ContentSettings : MonoBehaviour
         Config.World.AnalWeight = (int)AnalWeight.value;
         Config.World.TailWeight = (int)TailWeight.value;
         Config.World.BreastWeight = (int)BreastWeight.value;
+        Config.World.BladderWeight = (int)BladderWeight.value;
         Config.World.FogDistance = (int)FogDistance.value;
         Config.World.DefualtTacticalSightRange = (int)DefualtTacticalSightRange.value;
         Config.World.NightStrategicSightReduction = (int)NightStrategicSightReduction.value;
@@ -1438,6 +1455,7 @@ public class ContentSettings : MonoBehaviour
         PlayerPrefs.SetInt("UnbirthWeight", (int)UnbirthWeight.value);
         PlayerPrefs.SetInt("CockWeight", (int)CockWeight.value);
         PlayerPrefs.SetInt("TailWeight", (int)TailWeight.value);
+        PlayerPrefs.SetInt("BladderWeight", (int)BladderWeight.value);
         PlayerPrefs.SetInt("FogDistance", (int)FogDistance.value);
         PlayerPrefs.SetInt("DefualtTacticalSightRange", (int)DefualtTacticalSightRange.value);
         PlayerPrefs.SetInt("NightStrategicSightReduction", (int)NightStrategicSightReduction.value);
@@ -1712,6 +1730,7 @@ public class ContentSettings : MonoBehaviour
         BreastWeight.interactable = BreastVore.isOn;
         UnbirthWeight.interactable = Unbirth.isOn;
         CockWeight.interactable = CockVore.isOn;
+        BladderWeight.interactable = BladderVore.isOn;
     }
 
     public void KuroTenkoChanged()

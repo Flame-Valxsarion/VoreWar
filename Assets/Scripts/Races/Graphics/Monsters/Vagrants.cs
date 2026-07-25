@@ -6,9 +6,9 @@ class Vagrants : BlankSlate
     Sprite[] Sprites;
     readonly Sprite[][] VagrantSprites =
     {
-        State.GameManager.SpriteDictionary.Vagrants,
-        State.GameManager.SpriteDictionary.Vagrants2,
-        State.GameManager.SpriteDictionary.Vagrants3
+        SpriteDictionary.Vagrants,
+        SpriteDictionary.Vagrants2,
+        SpriteDictionary.Vagrants3
     };
 
     public Vagrants()

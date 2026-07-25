@@ -32,7 +32,7 @@ TextureImporter:
     21300054: Collector_19
     21300056: Collector_20
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -544,5 +544,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: monster
   assetBundleVariant: 

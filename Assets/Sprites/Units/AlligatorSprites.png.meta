@@ -60,7 +60,7 @@ TextureImporter:
     21300110: AlligatorSprites_47
     21300112: AlligatorSprites_48
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 9
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -1132,5 +1132,5 @@ TextureImporter:
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: merc
   assetBundleVariant: 

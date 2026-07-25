@@ -4,9 +4,9 @@ using UnityEngine;
 
 class Lupine : DefaultRaceData
 {
-    readonly Sprite[] Sprites = State.GameManager.SpriteDictionary.Lupine1;
-    readonly Sprite[] Sprites2 = State.GameManager.SpriteDictionary.Lupine2;
-    readonly Sprite[] Sprites3 = State.GameManager.SpriteDictionary.LupineVoreSprites;
+    readonly Sprite[] Sprites = SpriteDictionary.Lupine1;
+    readonly Sprite[] Sprites2 = SpriteDictionary.Lupine2;
+    readonly Sprite[] Sprites3 = SpriteDictionary.LupineVoreSprites;
 
     bool oversize = false;
 
@@ -571,7 +571,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[24];
+            DiscardSprite = SpriteDictionary.Avians4[24];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -584,11 +584,11 @@ class Lupine : DefaultRaceData
         {
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[48];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[48];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[40 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[40 + actor.Unit.BreastSize];
             }
             else
             {
@@ -606,7 +606,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[34];
+            DiscardSprite = SpriteDictionary.Avians4[34];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -619,11 +619,11 @@ class Lupine : DefaultRaceData
         {
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[57];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[57];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[49 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[49 + actor.Unit.BreastSize];
             }
             else
             {
@@ -641,7 +641,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -654,11 +654,11 @@ class Lupine : DefaultRaceData
         {
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[66];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[66];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[58 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[58 + actor.Unit.BreastSize];
             }
             else
             {
@@ -676,7 +676,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[55];
+            DiscardSprite = SpriteDictionary.Avians4[55];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -690,11 +690,11 @@ class Lupine : DefaultRaceData
         {
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[75];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[75];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[67 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[67 + actor.Unit.BreastSize];
             }
             else
             {
@@ -703,7 +703,7 @@ class Lupine : DefaultRaceData
                 clothing2.GetSprite = null;
             }
 
-            clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[76];
+            clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[76];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -714,7 +714,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[74];
+            DiscardSprite = SpriteDictionary.Avians4[74];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -728,13 +728,13 @@ class Lupine : DefaultRaceData
         {
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[85];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[94];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[85];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[94];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[77 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[86 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[77 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[86 + actor.Unit.BreastSize];
             }
             else
             {
@@ -753,7 +753,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[88];
+            DiscardSprite = SpriteDictionary.Avians4[88];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -770,7 +770,7 @@ class Lupine : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[98 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[98 + actor.Unit.BreastSize];
             }
             else
             {
@@ -788,7 +788,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop7()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[44];
+            DiscardSprite = SpriteDictionary.Avians4[44];
             femaleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -801,11 +801,11 @@ class Lupine : DefaultRaceData
         {
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[130];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[130];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[122 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[122 + actor.Unit.BreastSize];
             }
             else
             {
@@ -823,7 +823,7 @@ class Lupine : DefaultRaceData
     {
         public GenericTop8()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.LupineClothes2[49];
+            DiscardSprite = SpriteDictionary.LupineClothes2[49];
             coversBreasts = false;
             blocksDick = false;
             Type = 47558;
@@ -837,20 +837,20 @@ class Lupine : DefaultRaceData
         {
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[32];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes2[32];
                 clothing2.GetSprite = null;
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[24 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes2[24 + actor.Unit.BreastSize];
 
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[12 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[12 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[6 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[6 + actor.Unit.BodySize];
                 }
             }
             else
@@ -860,30 +860,30 @@ class Lupine : DefaultRaceData
 
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[15 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[15 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[9 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[9 + actor.Unit.BodySize];
                 }
             }
 
             if (actor.Unit.HasWeapon == false)
             {
-                if (actor.IsAttacking) clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                else clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                if (actor.IsAttacking) clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                else clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
             else if (actor.GetWeaponSprite() == 1)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[20 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[20 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
             else if (actor.GetWeaponSprite() == 2 || actor.GetWeaponSprite() == 4 || actor.GetWeaponSprite() == 6)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
             }
 
             base.Configure(sprite, actor);
@@ -894,7 +894,7 @@ class Lupine : DefaultRaceData
     {
         public MaleTop()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -908,11 +908,11 @@ class Lupine : DefaultRaceData
 
             if (actor.HasBelly)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[109 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[109 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[106 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[106 + actor.Unit.BodySize];
             }
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
@@ -924,7 +924,7 @@ class Lupine : DefaultRaceData
     {
         public MaleTop2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[79];
+            DiscardSprite = SpriteDictionary.Avians4[79];
             maleOnly = true;
             coversBreasts = false;
             blocksDick = false;
@@ -935,7 +935,7 @@ class Lupine : DefaultRaceData
 
         public override void Configure(CompleteSprite sprite, Actor_Unit actor)
         {
-            clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[95 + actor.Unit.BodySize];
+            clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[95 + actor.Unit.BodySize];
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
 
             base.Configure(sprite, actor);
@@ -961,14 +961,14 @@ class Lupine : DefaultRaceData
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[2 + actor.Unit.BreastSize];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[1];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[2 + actor.Unit.BreastSize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[1];
             }
             else
             {
                 breastSprite = null;
                 clothing1.GetSprite = null;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[0];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[0];
             }
 
             if (actor.Unit.BodyAccentType1 == 1)
@@ -992,7 +992,7 @@ class Lupine : DefaultRaceData
         {
             DiscardSprite = State.GameManager.SpriteDictionary.Rags[23];
             blocksDick = false;
-            inFrontOfDick = true;
+            inFrontOfDick = 2;
             coversBreasts = false;
             Type = 207;
             OccupiesAllSlots = true;
@@ -1006,18 +1006,18 @@ class Lupine : DefaultRaceData
             if (actor.Unit.HasBreasts)
             {
                 if (actor.Unit.BreastSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[119];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[119];
                 else if (actor.Unit.BreastSize < 6)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[120];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[120];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[121];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[121];
 
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[112 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[112 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[118];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[115 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[118];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[115 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);
@@ -1029,7 +1029,7 @@ class Lupine : DefaultRaceData
         public LupineLeader()
         {
             leaderOnly = true;
-            DiscardSprite = State.GameManager.SpriteDictionary.LupineClothes2[50];
+            DiscardSprite = SpriteDictionary.LupineClothes2[50];
             coversBreasts = false;
             OccupiesAllSlots = true;
             clothing1 = new SpriteExtraInfo(18, null, WhiteColored);
@@ -1048,34 +1048,34 @@ class Lupine : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[33];
+                    clothing4.GetSprite = (s) => SpriteDictionary.LupineClothes2[33];
                 else if (actor.Unit.DickSize > 5)
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[35];
+                    clothing4.GetSprite = (s) => SpriteDictionary.LupineClothes2[35];
                 else
-                    clothing4.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[34];
+                    clothing4.GetSprite = (s) => SpriteDictionary.LupineClothes2[34];
             }
             else clothing4.GetSprite = null;
 
             if (Races.Lupine.oversize)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[32];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes2[32];
                 clothing2.GetSprite = null;
                 clothing4.YOffset = -1 * .625f;
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[0 + actor.Unit.BodySize];
+                clothing5.GetSprite = (s) => SpriteDictionary.LupineClothes2[0 + actor.Unit.BodySize];
             }
             else if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[24 + actor.Unit.BreastSize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes2[24 + actor.Unit.BreastSize];
                 clothing4.YOffset = -1 * .625f;
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[0 + actor.Unit.BodySize];
+                clothing5.GetSprite = (s) => SpriteDictionary.LupineClothes2[0 + actor.Unit.BodySize];
 
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[12 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[12 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[6 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[6 + actor.Unit.BodySize];
                 }
             }
             else
@@ -1083,15 +1083,15 @@ class Lupine : DefaultRaceData
                 breastSprite = null;
                 clothing1.GetSprite = null;
                 clothing4.YOffset = 0 * .625f;
-                clothing5.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[3 + actor.Unit.BodySize];
+                clothing5.GetSprite = (s) => SpriteDictionary.LupineClothes2[3 + actor.Unit.BodySize];
 
                 if (actor.HasBelly)
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[15 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[15 + actor.Unit.BodySize];
                 }
                 else
                 {
-                    clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[9 + actor.Unit.BodySize];
+                    clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[9 + actor.Unit.BodySize];
                 }
             }
 
@@ -1099,7 +1099,7 @@ class Lupine : DefaultRaceData
             {
                 if (actor.IsAttacking)
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
 
                     if ((actor.GetStomachSize(31) > 17) || (Races.Lupine.oversize))
                     {
@@ -1108,13 +1108,13 @@ class Lupine : DefaultRaceData
                     }
                     else
                     {
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[37 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[43 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                        clothing6.GetSprite = (s) => SpriteDictionary.LupineClothes2[37 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                        clothing7.GetSprite = (s) => SpriteDictionary.LupineClothes2[43 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
                     }
                 }
                 else
                 {
-                    clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
 
                     if ((actor.GetStomachSize(31) > 17) || (Races.Lupine.oversize))
                     {
@@ -1123,14 +1123,14 @@ class Lupine : DefaultRaceData
                     }
                     else
                     {
-                        clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[36 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                        clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[42 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                        clothing6.GetSprite = (s) => SpriteDictionary.LupineClothes2[36 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                        clothing7.GetSprite = (s) => SpriteDictionary.LupineClothes2[42 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
                     }
                 }
             }
             else if (actor.GetWeaponSprite() == 1)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[20 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[20 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
 
                 if ((actor.GetStomachSize(31) > 17) || (Races.Lupine.oversize))
                 {
@@ -1139,13 +1139,13 @@ class Lupine : DefaultRaceData
                 }
                 else
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[38 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[44 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing6.GetSprite = (s) => SpriteDictionary.LupineClothes2[38 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing7.GetSprite = (s) => SpriteDictionary.LupineClothes2[44 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
             }
             else if (actor.GetWeaponSprite() == 2 || actor.GetWeaponSprite() == 4 || actor.GetWeaponSprite() == 6)
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[18 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
 
                 if ((actor.GetStomachSize(31) > 17) || (Races.Lupine.oversize))
                 {
@@ -1154,13 +1154,13 @@ class Lupine : DefaultRaceData
                 }
                 else
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[36 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[42 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing6.GetSprite = (s) => SpriteDictionary.LupineClothes2[36 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing7.GetSprite = (s) => SpriteDictionary.LupineClothes2[42 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
             }
             else
             {
-                clothing3.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                clothing3.GetSprite = (s) => SpriteDictionary.LupineClothes2[19 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
 
                 if ((actor.GetStomachSize(31) > 17) || (Races.Lupine.oversize))
                 {
@@ -1169,8 +1169,8 @@ class Lupine : DefaultRaceData
                 }
                 else
                 {
-                    clothing6.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[37 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
-                    clothing7.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[43 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing6.GetSprite = (s) => SpriteDictionary.LupineClothes2[37 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
+                    clothing7.GetSprite = (s) => SpriteDictionary.LupineClothes2[43 + 3 * (!actor.Unit.HasBreasts ? 1 : 0)];
                 }
             }
 
@@ -1186,7 +1186,7 @@ class Lupine : DefaultRaceData
     {
         public GenericBot1()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[121];
+            DiscardSprite = SpriteDictionary.Avians3[121];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1199,23 +1199,23 @@ class Lupine : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[16];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[16];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[18];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[18];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[17];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[17];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
                 clothing1.YOffset = -1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[10 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[10 + actor.Unit.BodySize];
             }
             else
             {
                 clothing1.YOffset = 0 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[13 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[13 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1228,7 +1228,7 @@ class Lupine : DefaultRaceData
     {
         public GenericBot2()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[137];
+            DiscardSprite = SpriteDictionary.Avians3[137];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1242,23 +1242,23 @@ class Lupine : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[26];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[26];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[28];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[28];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[27];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[27];
             }
-            else clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[25];
+            else clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[25];
 
             if (actor.Unit.HasBreasts)
             {
                 clothing1.YOffset = -1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[19 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[19 + actor.Unit.BodySize];
             }
             else
             {
                 clothing1.YOffset = 0 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[22 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[22 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1270,7 +1270,7 @@ class Lupine : DefaultRaceData
     {
         public GenericBot3()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians3[140];
+            DiscardSprite = SpriteDictionary.Avians3[140];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1282,13 +1282,13 @@ class Lupine : DefaultRaceData
         {
             if (actor.Unit.HasBreasts)
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[29];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[19 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[29];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[19 + actor.Unit.BodySize];
             }
             else
             {
-                clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[30];
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[22 + actor.Unit.BodySize];
+                clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[30];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[22 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1300,7 +1300,7 @@ class Lupine : DefaultRaceData
     {
         public GenericBot4()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[14];
+            DiscardSprite = SpriteDictionary.Avians4[14];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1314,23 +1314,23 @@ class Lupine : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[37];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[37];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[39];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[39];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[38];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[38];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
                 clothing1.YOffset = -1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[31 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[31 + actor.Unit.BodySize];
             }
             else
             {
                 clothing1.YOffset = 0 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[34 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[34 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1343,7 +1343,7 @@ class Lupine : DefaultRaceData
     {
         public GenericBot5()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.Avians4[14];
+            DiscardSprite = SpriteDictionary.Avians4[14];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, null);
             clothing2 = new SpriteExtraInfo(12, null, null);
@@ -1357,23 +1357,23 @@ class Lupine : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[37];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[37];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[39];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[39];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[38];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes[38];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
                 clothing1.YOffset = -1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[131 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[131 + actor.Unit.BodySize];
             }
             else
             {
                 clothing1.YOffset = 0 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes[134 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes[134 + actor.Unit.BodySize];
             }
 
             clothing1.GetPalette = (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.AviansSkin, actor.Unit.ClothingColor);
@@ -1386,7 +1386,7 @@ class Lupine : DefaultRaceData
     {
         public GenericBot6()
         {
-            DiscardSprite = State.GameManager.SpriteDictionary.LupineClothes2[48];
+            DiscardSprite = SpriteDictionary.LupineClothes2[48];
             coversBreasts = false;
             clothing1 = new SpriteExtraInfo(13, null, WhiteColored);
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored);
@@ -1400,23 +1400,23 @@ class Lupine : DefaultRaceData
             if (actor.Unit.DickSize > 0)
             {
                 if (actor.Unit.DickSize < 3)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[33];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes2[33];
                 else if (actor.Unit.DickSize > 5)
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[35];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes2[35];
                 else
-                    clothing1.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[34];
+                    clothing1.GetSprite = (s) => SpriteDictionary.LupineClothes2[34];
             }
             else clothing1.GetSprite = null;
 
             if (actor.Unit.HasBreasts)
             {
                 clothing1.YOffset = -1 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[0 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[0 + actor.Unit.BodySize];
             }
             else
             {
                 clothing1.YOffset = 0 * .625f;
-                clothing2.GetSprite = (s) => State.GameManager.SpriteDictionary.LupineClothes2[3 + actor.Unit.BodySize];
+                clothing2.GetSprite = (s) => SpriteDictionary.LupineClothes2[3 + actor.Unit.BodySize];
             }
 
             base.Configure(sprite, actor);

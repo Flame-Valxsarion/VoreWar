@@ -247,6 +247,28 @@ public class UnitSprite : MonoBehaviour
             GraphicsFolder.localScale = new Vector3(newScale, newScale, newScale);
         }
 
+        float scaleoffset = actor.Unit.GetScale() * .275f;
+
+        if (actor.Unit.GetScale() > 2.0f)
+        {
+            GraphicsFolder.localPosition = new Vector3(0f, Mathf.Pow(scaleoffset, 1.3f), 0f);
+        }
+
+        else if (actor.Unit.GetScale() > 1.0f)
+        {
+            GraphicsFolder.localPosition = new Vector3(0f, Mathf.Pow(scaleoffset, 2f), 0f);
+        }
+
+        else if (actor.Unit.GetScale() < 1.0f)
+        {
+            GraphicsFolder.localPosition = new Vector3(0f, actor.Unit.GetScale() * -0.82f, 0f);
+        }
+
+        else if (actor.Unit.GetScale() == 1.0f)
+        {
+            GraphicsFolder.localPosition = new Vector3(0f, 0f, 0f);
+        }
+
         if (timeUntilHealthBarReset > 0)
         {
             timeUntilHealthBarReset -= Time.deltaTime;
