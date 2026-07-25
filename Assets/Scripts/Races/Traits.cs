@@ -300,6 +300,7 @@ static class TraitList
         [Traits.HealingBlood] = new Booster("Unit heals 2 HP per turn (and fully outside of battles), but is also worth a lot more healing to its predator", (s) => { s.HealthRegen += 2; s.Outgoing.Nutrition *= 3f; }),
         [Traits.ManaDynamo] = new Booster("Unit generates 3 mana per turn but units absorbing this unit will recover most of their mana", (s) => { s.ManaRegen += 3; s.Outgoing.ManaAbsorbHundreths += 70; }),
 
+        [Traits.Alacrity] = new Booster("Unit moves very fast, and can perform actions many times per turn. \n(Cheat Trait)", (s) => {s.MeleeAttacks += 3; s.VoreAttacks += 3; }),
         [Traits.LightningSpeed] = new Booster("Unit moves very fast, and can perform actions many times per turn. \n(Cheat Trait)", (s) => { s.SpeedBonus += 10; s.MeleeAttacks += 5; s.RangedAttacks += 5; s.VoreAttacks += 5; s.SpellAttacks += 5; }),
         [Traits.DivineBloodline] = new Booster("Descendent from supernatural beings, this individual is a force of nature. \n(Cheat Trait) - gives damage reduction, extra attacks, stat bonuses on level up)", (s) =>
         {
@@ -349,7 +350,15 @@ static class TraitList
         [Traits.ViralDigestion] = new ViralDigestion(),
         [Traits.ViralBiology] = new ViralBiology(),
         [Traits.AwkwardShape] = new Booster("This unit has a very strange body type, making them harder to swallow.", (s) => { s.Incoming.VoreOddsMult *= 0.75f; }),
-        [Traits.Legendary] = new Booster("<b>This unit is a legendary predator renowned throughout the realm, possessing a wide array of skills learned from generations upon generations of experiences.</b> \n<b>StrongGullet:</b> May attempt <b>2</b> vore attacks per turn, each using half of max AP. \n<b>BornToMove:</b> Total prey does not affect unit's movement speed. \n<b>IronGut:</b> It is much harder for prey to escape this unit's innards once devoured. \n<b>MagicResistance:</b> This unit is harder to hit with magic. \n<b>GreatlyTempered:</b>Recieves less damage from ranged attacks, but full damage from melee attacks. \n<b>WideRanged:</b>Grants GiantSweep and SweepingSwallow abilities. \nCheat Trait", (s) => { s.VoreAttacks += 1; s.SpeedLossFromWeightMultiplier = 0; s.DodgeLossFromWeightMultiplier = 0.2f; s.Outgoing.ChanceToEscape *= 0.5f; s.Incoming.MagicShift += 0.2f; s.Incoming.RangedDamage *= .7f; }),
+        [Traits.TheMatron] = new Booster("With generations of expertise and unmatched protection, Abakhanskya has a wide range of skills that empower her against weaker and ranged units.</b> \n-----\nMay attempt <b>2</b> vore attacks per turn, each using half of max AP. \nTotal prey does not affect unit's movement speed. \nIt is much harder for prey to escape her once devoured. (50% odds) \nAbakhanskya's thick plates are more resistant to magic (20% spell dodge). \nRanged attacks are much less effective against her armour. (70% damage) \n<b>WideRanged:</b>Grants GiantSweep and SweepingSwallow abilities. \n<i>(Unique to Abakhanskya)</i>", (s) => 
+        { 
+            s.VoreAttacks += 1; 
+            s.SpeedLossFromWeightMultiplier = 0; 
+            s.DodgeLossFromWeightMultiplier = 0.2f; 
+            s.Outgoing.ChanceToEscape *= 0.5f; 
+            s.Incoming.MagicShift += 0.2f; 
+            s.Incoming.RangedDamage *= .7f; 
+        }),
         [Traits.FireVulnerable] = new Booster("Unit takes extra damage from all sources of fire. (150%)", (s) => s.FireDamageTaken *= 1.5f),
         [Traits.IceVulnerable] = new Booster("Unit takes extra damage from all sources of ice. (150%)", (s) => s.IceDamageTaken *= 1.5f),
         [Traits.ElecVulnerable] = new Booster("Unit takes extra damage from all sources of electricity. (150%)", (s) => s.ElecDamageTaken *= 1.5f),
@@ -358,8 +367,29 @@ static class TraitList
         [Traits.FasterAbsorption] = new Booster("Unit absorbs dead prey even more quickly. (200%)", (s) => s.Outgoing.AbsorptionRate *= 2f),
         [Traits.SlowerAbsorption] = new Booster("Unit absorbs dead prey even more slowly. (25%)", (s) => s.Outgoing.AbsorptionRate *= 0.25f),
         [Traits.SlowerMetabolism] = new Booster("Unit digests and absorbs prey very slowly. (25%)", (s) => { s.Outgoing.AbsorptionRate *= 0.25f; s.Outgoing.DigestionRate *= 0.25f; }),
-        [Traits.QueenOfFrost] = new Booster("<b>This unit is a fierce dragon of ice, possessing abilities and traits reflecting that status.</b>\n\n\nTakes <b>20%</b> less damage from Ice attacks.\nMay attempt <b>2</b> Vore actions per turn.\nMay attempt <b>2</b> Normal attacks.\nCarries prey with no penalty to speed.\nPrey has a tough time escaping this predator's insides. (<b>50%</b> of normal odds)", (s) => { s.VoreAttacks += 1; s.MeleeAttacks += 1; s.Outgoing.ChanceToEscape *= 0.5f; s.SpeedLossFromWeightMultiplier = 0; s.DodgeLossFromWeightMultiplier = 0.2f; s.IceDamageTaken *= .8f; }),
+        [Traits.QueenOfFrost] = new Booster("On top of being a powerful dragon, this unit claims dominion over ice and doesn't hesitate to use that element to claim her prey.  Woe betide those who find themselves frozen by her breath attacks. \n-----\nTakes <b>20%</b> less damage from Ice attacks. \nMay attempt <b>2</b> Vore actions per turn.  \nMay attempt <b>2</b> Normal attacks. \nCarries prey with no penalty to speed. \nPrey has a tough time escaping this predator's insides. (<b>50%</b> of normal odds)\n<i>(Unique to Taraluxia)</i>", (s) => 
+        { 
+            s.VoreAttacks += 1; 
+            s.MeleeAttacks += 1; 
+            s.Outgoing.ChanceToEscape *= 0.5f; 
+            s.SpeedLossFromWeightMultiplier = 0; 
+            s.DodgeLossFromWeightMultiplier = 0.2f; 
+            s.IceDamageTaken *= .8f; 
+        }),
         [Traits.AcellularBody] = new Booster("This unit has a non-cellular makeup causing them to provide less sustenance as prey and be impossible to convert by races without the same trait. Also has a hard time converting other races to its race. (50% convert rate and can only switch the prey's side unless they have the same trait)", (s) => { s.Outgoing.Nutrition *= 0.25f; }),
+        [Traits.DestroyingAngel] = new Booster("This unit is an ancient, otherworldy being, who's magic permeates every aspect of their form. Their body processes and circulates magical energies perfectly, but has trouble handling physical matter. \n-----\nMay cast <b>2</b> spells per turn, with each spell being <b>20%</b> more accurate. \nAble to make <b>2</b> vore attempts per turn.  \nReceives no AP or dodge penalties for prey weight.  \nDrains MP from absorbing prey, sacrificing <b>50%</b> of absorption healing, as well as digesting and absorbing prey <b>5 times slower</b>. \nRequires <b>50%</b> more experience to level up. \n<i>(Unique to Seraph)</i>", (s) =>
+        {
+            s.SpellAttacks += 1; 
+            s.VoreAttacks +=1; 
+            s.Outgoing.MagicShift -= 0.2f;
+            s.Incoming.ManaAbsorbHundreths += 50; 
+            s.Incoming.Nutrition *= .5f;
+            s.Outgoing.AbsorptionRate *= 0.2f; 
+            s.Outgoing.DigestionRate *= 0.2f;
+            s.SpeedLossFromWeightMultiplier = 0; 
+            s.DodgeLossFromWeightMultiplier = 0.2f; 
+            s.ExpRequired *= 1.5f;
+        }),
     };
 }
 

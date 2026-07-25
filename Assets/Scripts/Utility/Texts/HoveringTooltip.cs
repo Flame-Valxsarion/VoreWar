@@ -117,8 +117,7 @@ public class HoveringTooltip : MonoBehaviour
         string WLLDef = $"Affects vore defense, escape rate, mana capacity, and magic defense\n{StatData(Stat.Will)}";
         string MNDDef = $"Affects spell damage, success odds, and duration with a minor amount of mana capacity\n{StatData(Stat.Mind)}";
         string ENDDef = $"Affects total health, also reduces damage from acid, has a minor role in escape chance.\n{StatData(Stat.Endurance)}";
-        string STMDef = $"Affects stomach capacity and digestion rate. Also helps keep prey from escaping.\n{StatData(Stat.Stomach)}\n" +
-                        (State.World?.ItemRepository == null ? $"" : $"{(!unit.Predator ? "" : $"Capacity: {(actor?.PredatorComponent != null ? $"{Math.Round(actor.PredatorComponent.GetBulkOfPrey(), 2)} / " : "")}{Math.Round(State.RaceSettings.GetStomachSize(unit.Race) * (unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult), 1)}")}");
+        string STMDef = $"Affects stomach capacity and digestion rate. Also helps keep prey from escaping.\n{StatData(Stat.Stomach)}\n" + (State.World?.ItemRepository == null ? $"" : $"{(!unit.Predator ? "" : $"Capacity: {(actor?.PredatorComponent != null ? $"{Math.Round(actor.PredatorComponent.GetBulkOfPrey(), 2)} / " : "")}{Math.Round(State.RaceSettings.GetStomachSize(unit.Race) * (unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult), 1)}")}");
         string LDRDef = $"Provides a stat boost for all friendly units\nStat value: {unit.GetStatBase(Stat.Leadership)}";
         if (Enum.TryParse(words[2], out Stat stat) && unit != null)
         {
@@ -169,9 +168,13 @@ public class HoveringTooltip : MonoBehaviour
             race = unit.Race;
             return UnitDesc();
         }
-        
+
         if (Enum.TryParse(words[2], out Traits trait))
         {
+            if (trait == Traits.Multifaceted)
+            {
+                return GetTraitDataWithActorData(trait, unit, actor);
+            }
             return GetTraitData(trait);
         }
         if (Enum.TryParse(words[2], out UnitType unitType))
@@ -266,8 +269,16 @@ public class HoveringTooltip : MonoBehaviour
                         return $"Unit's Str,Dex, and Agi are reduced by {(effect.Strength * effect.Duration / 50)*100}% \nTurns Remaining: {effect.Duration}";
                     case StatusEffectType.Agony:
                         return $"Unit takes an additional 35% weapon damage, which is dealt over the duration of the effect.\n Stored damage: {(int)Math.Round(effect.Strength)}\nIncoming damage: {(int)Math.Round(effect.Strength / effect.Duration)}\n Turns Remaining: {effect.Duration}";
+                    case StatusEffectType.Sharpness:
+                        return $"Unit deals {(effect.Duration) * 100}% increased damage on its next non-magic attack. This effect is halved after every attack.";
                     case StatusEffectType.Fractured:
                         return $"Unit takes 150% damage from all sources until the end of combat.";
+                    case StatusEffectType.Marked:
+                        return $"Unit has {(effect.Strength)}% added to weapon accuracy against them.";
+                    case StatusEffectType.Gorging:
+                        return $"Unit gains +{(int)(effect.Strength * 10)} effective stomach capacity. Unit will fall asleep for {(int)(effect.Strength)} turn(s) if this effect expires and they are overcapacity.";
+                    case StatusEffectType.Stunned:
+                        return $"Unit is unable to move for {(effect.Duration)} turn(s).";
                 }
             }
         }
@@ -712,7 +723,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.MetamorphicConversion:
                 return "Unit changes Race and side upon digestion";
             case Traits.Perseverance:
-                return "Unit heals after not taking damage for a 3 turns, scaling higer with each turn without damage thereafter.";
+                return "Unit heals after not taking damage for a 3 turns, scaling higher with each turn without damage thereafter.";
             case Traits.ManaAttuned:
                 return "Unit thrives on mana, uses 10% of their max mana every turn. Unit falls asleep for 2 turns if they don't have enough mana, but regenerate 50% max mana every turn they are asleep.";
             case Traits.NightEye:
@@ -738,7 +749,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.ManaBarrier:
                 return "Up to 50% of damage taken by unit instead spends mana, this trait loses 1% effectivity for every 1% missing mana percentage.";
             case Traits.Unflinching:
-                return "Unit's BladeDance, Tenacity, and Focus stack loss is reduced by 3 if stacks are below 10% current HP.";
+                return "Unit's BladeDance, Tenacity, and Focus stack loss is reduced if the stack's total is below 10% of the unit's current HP.";
             case Traits.Annihilation:
                 return "Every time digestion progresses, this unit digests one level from each prey inside them, gaining its experience value. If a unit hits level 0 this way, it dies if it was still alive and cannot be revived.\n(Cheat Trait)";
             case Traits.WeaponChanneler:
@@ -851,7 +862,83 @@ public class HoveringTooltip : MonoBehaviour
                 return "When unit is killed in melee or digested does has a 1/3 chance of hitting with a melee attack against the aggressor, 3/4 hit chance if vored.";
             case Traits.DimensionalAntilock:
                 return "This unit is not completely fixed to the space around it.\n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
-        }
+            case Traits.Hoarder:
+                return "Race increase the income of a village by 0.1% per population.";
+            case Traits.NaturalCaster:
+                return "Unit gains Icicle, Fireball, Lightning Bolt, PowerBolt, or Poison as an innate spell.";
+            case Traits.Multifaceted:
+                return "Units highest stat becomes its favored stat and gains the following effect based on their highest stat:\n" +
+                    "STR: Bonus damage on a 4 turn cooldown.\n" +
+                    "DEX: 1 additional attack per turn, lasting one turn per level.\n" +
+                    "VOR: Failed vore attempt grants predation\n" +
+                    "AGI: +2 mov above 50%hp +10% Dodge below.\n" +
+                    "WILL: Spells apply barrier on allies and mark on enemies.\n" +
+                    "MND: Dmg spells deal 20% of target's mnd.\n" +
+                    "END: damage over 10% current health, excess is reduced by by 50%.\n" +
+                    "STM: Inflicts Lethargy on consumed enemies.";
+            case Traits.InherentGlamour:
+                return "Unit becomes a copy of a random ally that does not own this trait. Unit has a chance to revert to its initial form once damaged. (Equal to double its missing HP percentage.)";
+            case Traits.Elementist:
+                return "Unit's weapon attacks use 3 mana to place a random effect tile effect under their target, lasting 3 turns";
+            case Traits.ManaBurn:
+                return "This Unit's spell damage also deals 50% of the damage to the target's mana. If the target has no mana, this damage is dealt to health instead.";
+            case Traits.KillingMomentum:
+                return "This Unit restores 50% of its MP when killing a unit with an attack.";
+            case Traits.SedativeStomach:
+                return "This Unit has a chance to inflict the sleep status on its prey for 1 to 4 turns, plus the units level difference.";
+            case Traits.MutualBiology:
+                return "At the start of battle, this Unit recives bonus health equal to the current health of every ally with this trait. All allies with this trait take damage and are healed when this unit is.";
+            case Traits.SerialSwallower:
+                return "Unit gains a stacking effect each time they swallow a unit. This effect increases their stomach capacity, but puts the unit to sleep if it expires and they are overcapacity.";
+            case Traits.SweepingStrikes:
+                return "Unit's melee attacks also make an attack on units adjacent to both this unit and its target at 33% damage.";
+            case Traits.InvigoratingEscape:
+                return "Unit does not suffer AP reduction when escaping.";
+            case Traits.WildFury:
+                return "Unarmed but not harmless! Unit can melee attack twice if they have no weapon equipped.";
+            case Traits.CloseCall:
+                return "Unit will flee combat upon fatal strikes from weapons or spells with 1 HP rather than dying. (unit will rejoin if the army wins, otherwise sets off for the closest town) ";
+            case Traits.Alacrity:
+                return "Unit gains +3 actions on melee attacks or vore attempts.";
+            case Traits.StunningStrike:
+                return "A special attack that deals normal damage and stuns its target based on Will. Damage and stun duration increases based on remaining MP percentage. Can be used once every 3 turns.";
+        }  
+        return "<b>This trait needs a tooltip!</b>";
+    }
+
+    // For traits that need more information to adjust their tooltip. 
+    public static string GetTraitDataWithActorData(Traits trait, Unit unit, Actor_Unit actor)
+    {
+        switch (trait)
+        {
+            case Traits.Multifaceted when unit == null || State.GameManager.CurrentScene == State.GameManager.Start_Mode: // Can't be too sure now can we?
+                return "Units highest stat becomes its favored stat and gains the following effect based on their highest stat:\n" +
+                    "STR: Bonus damage on a 4 turn cooldown.\n" +
+                    "DEX: 1 additional attack per turn, lasting one turn per level.\n" +
+                    "VOR: Failed vore attempt grants predation\n" +
+                    "AGI: +2 mov above 50%hp +10% Dodge below.\n" +
+                    "WILL: Spells apply barrier on allies and mark on enemies.\n" +
+                    "MND: Dmg spells deal 20% of target's mnd.\n" +
+                    "END: damage over 10% current health, excess is reduced by by 50%.\n" +
+                    "STM: Inflicts Lethargy on consumed enemies.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 0:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Violent(Str)</b>: Weapon attacks deal 5% of the target's Max HP once every 4 turns.\n" + (actor == null ? "" : $"Avalible in: {actor.MultifacetedCooldown} turn(s).");
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 1:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gans 1 additional attack per turn, lasting one turn per level.\n" + (actor == null ? "" : actor.Unit.Level - State.GameManager.TacticalMode.currentTurn >= 0 ? ($"Remaining Turns: {actor.Unit.Level - State.GameManager.TacticalMode.currentTurn}") : "<b>Inactive.</b>");
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 2:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Intrepid(Vor)</b>: A failed vore attempt grants predation to this unit.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 3:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Playful(Agi)</b>: Unit gains +2 mov while above 50%hp and +10% Dodge while below 50% HP.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 4:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Whimsical(Will)</b>: Unit's Spells that terget allies grant " + (unit.GetStat(Stat.Will) / 20) + " barrier to them.\n" + "Spells that target enemies applies marked for 2 turns.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 5:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Entropic(Mnd)</b>: This unit's damage spells also deal 10% of their target's mind stat as damage.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 6:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Valient(End)</b>: When this unit takes damage over 10% of its current health, the excess is reduced by by 50%.";
+            case Traits.Multifaceted when unit.GetHighestStatIndex() == 7:
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Gloomy(Stm)</b>: This unit inflicts stacking Lethargy on consumed enemies, reducing their offensive stats for 3 turns.";
+
+        } 
         return "<b>This trait needs a tooltip!</b>";
     }
 
@@ -883,7 +970,7 @@ public class HoveringTooltip : MonoBehaviour
         }
         return trait.ToString();
     }
-    
+
     public static string GetAIData(RaceAI ai)
     {
         switch (ai)

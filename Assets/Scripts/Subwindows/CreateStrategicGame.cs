@@ -591,73 +591,77 @@ public class CreateStrategicGame : MonoBehaviour
 
         StrategicCreationArgs args = new StrategicCreationArgs(Empires.Length);
         Config.CenteredEmpire = new bool[Config.NumberOfRaces];
+        for (int i = 0; i < Empires.Length; i++)
+        {
+            if (Empires[i].AIPlayer.isOn)
+            {
+                args.empireArgs[i].strategicAI = (StrategyAIType)Empires[i].StrategicAI.value + 1;
+                args.empireArgs[i].tacticalAI = (TacticalAIType)Empires[i].TacticalAI.value + 1;
+                Config.CenteredEmpire[i] = ((StrategyAIType)Empires[i].StrategicAI.value + 1) == StrategyAIType.Passive;
+            }
+            else
+            {
+                args.empireArgs[i].strategicAI = 0;
+                args.empireArgs[i].tacticalAI = 0;
+                Config.CenteredEmpire[i] = false;
+            }
+            args.CanVore[i] = Empires[i].CanVore.isOn;
+            args.empireArgs[i].team = Convert.ToInt32(Empires[i].Team.text);
+            args.Team[i] = args.empireArgs[i].team;
+            args.empireArgs[i].color = ColorFromIndex(Empires[i].PrimaryColor.value);
+            args.empireArgs[i].secColor = GetDarkerColor(ColorFromIndex(Empires[i].SecondaryColor.value));
+            args.TurnOrder[i] = Convert.ToInt32(Empires[i].TurnOrder.text);
+            args.empireArgs[i].maxArmySize = (int)Empires[i].MaxArmySize.value;
+            args.empireArgs[i].maxGarrisonSize = (int)Empires[i].MaxGarrisonSize.value;
+            args.empireArgs[i].side = i;
+            //args.empireArgs[i].bannerType = (i % 2 == 1) ? 1 : 3;
+
+        }
+        args.MercCamps = Convert.ToInt32(MercenaryHouses.text);
+        args.AncientTeleporters = Convert.ToInt32(AncientTeleporters.text);
+        args.GoldMines = Convert.ToInt32(GoldMines.text);
+        args.crazyBuildings = CrazyBuildings.isOn;
+
+        args.MapGen.UsingNewGenerator = MapGenType.value == 1;
+        args.MapGen.ExcessBridges = MapGenExcessBridges.isOn;
+        args.MapGen.Poles = MapGenPoles.isOn;
+        args.MapGen.Temperature = MapGenTemperature.value;
+        args.MapGen.WaterPct = MapGenWaterPct.value;
+        args.MapGen.Hilliness = MapGenHills.value;
+        args.MapGen.Swampiness = MapGenSwamps.value;
+        args.MapGen.ForestPct = MapGenForests.value;
+        args.MapGen.AbandonedVillages = Convert.ToInt32(AbandonedVillages.text);
+
+        Config.World.StartingPopulation = Convert.ToInt32(StartingVillagePopulation.text);
+        Config.World.LeaderLossExpPct = LeaderLossExpPct.value;
+        Config.World.LeaderLossLevels = Convert.ToInt32(LeaderLossLevels.text);
+        Config.World.GoldMineIncome = Convert.ToInt32(GoldMineIncome.text);
+        Config.World.StrategicWorldSizeX = Convert.ToInt32(StrategicX.text);
+        Config.World.StrategicWorldSizeY = Convert.ToInt32(StrategicY.text);
+        Config.World.TacticalSizeX = Convert.ToInt32(TacticalX.text);
+        Config.World.TacticalSizeY = Convert.ToInt32(TacticalY.text);
+        Config.World.FactionLeaders = FactionLeaders.isOn;
+        Config.World.VictoryCondition = (Config.VictoryType)VictoryCondition.value;
+        Config.World.VillageIncomePercent = Convert.ToInt32(VillageIncomeRate.text);
+        Config.World.VillagersPerFarm = Convert.ToInt32(VillagersPerFarm.text);
+        Config.World.VillagerDevourEXP = Convert.ToInt32(VillagerDevourEXP.text);
+        Config.World.ArmyUpkeep = Convert.ToInt32(ArmyUpkeep.text);
+        Config.World.CapMaxGarrisonIncrease = CapitalGarrisonCapped.isOn;
+        Config.World.Toggles["FirstTurnArmiesIdle"] = FirstTurnArmiesIdle.isOn;
+        Config.World.Toggles["LeaderSpawnFreeze"] = LeaderSpawnFreeze.isOn;
+        Config.World.Toggles["LeadersAutoGainLeadership"] = LeadersAutoGainLeadership.isOn;
+
+
+        Config.PutTeamsTogether = SpawnTeamsTogether.isOn;
+
         try
         {
-            for (int i = 0; i < Empires.Length; i++)
-            {
-                if (Empires[i].AIPlayer.isOn)
-                {
-                    args.empireArgs[i].strategicAI = (StrategyAIType)Empires[i].StrategicAI.value + 1;
-                    args.empireArgs[i].tacticalAI = (TacticalAIType)Empires[i].TacticalAI.value + 1;
-                    Config.CenteredEmpire[i] = ((StrategyAIType)Empires[i].StrategicAI.value + 1) == StrategyAIType.Passive;
-                }
-                else
-                {
-                    args.empireArgs[i].strategicAI = 0;
-                    args.empireArgs[i].tacticalAI = 0;
-                    Config.CenteredEmpire[i] = false;
-                }
-                args.CanVore[i] = Empires[i].CanVore.isOn;
-                args.empireArgs[i].team = Convert.ToInt32(Empires[i].Team.text);
-                args.Team[i] = args.empireArgs[i].team;
-                args.empireArgs[i].color = ColorFromIndex(Empires[i].PrimaryColor.value);
-                args.empireArgs[i].secColor = GetDarkerColor(ColorFromIndex(Empires[i].SecondaryColor.value));
-                args.TurnOrder[i] = Convert.ToInt32(Empires[i].TurnOrder.text);
-                args.empireArgs[i].maxArmySize = (int)Empires[i].MaxArmySize.value;
-                args.empireArgs[i].maxGarrisonSize = (int)Empires[i].MaxGarrisonSize.value;
-                args.empireArgs[i].side = i;
-                //args.empireArgs[i].bannerType = (i % 2 == 1) ? 1 : 3;
-            }
+            
 
-            args.MercCamps = Convert.ToInt32(MercenaryHouses.text);
-            args.AncientTeleporters = Convert.ToInt32(AncientTeleporters.text);
-            args.GoldMines = Convert.ToInt32(GoldMines.text);
-            args.crazyBuildings = CrazyBuildings.isOn;
-
-            args.MapGen.UsingNewGenerator = MapGenType.value == 1;
-            args.MapGen.ExcessBridges = MapGenExcessBridges.isOn;
-            args.MapGen.Poles = MapGenPoles.isOn;
-            args.MapGen.Temperature = MapGenTemperature.value;
-            args.MapGen.WaterPct = MapGenWaterPct.value;
-            args.MapGen.Hilliness = MapGenHills.value;
-            args.MapGen.Swampiness = MapGenSwamps.value;
-            args.MapGen.ForestPct = MapGenForests.value;
-            args.MapGen.AbandonedVillages = Convert.ToInt32(AbandonedVillages.text);
-
-            Config.World.StartingPopulation = Convert.ToInt32(StartingVillagePopulation.text);
-            Config.World.LeaderLossExpPct = LeaderLossExpPct.value;
-            Config.World.LeaderLossLevels = Convert.ToInt32(LeaderLossLevels.text);
-            Config.World.GoldMineIncome = Convert.ToInt32(GoldMineIncome.text);
-            Config.World.StrategicWorldSizeX = Convert.ToInt32(StrategicX.text);
-            Config.World.StrategicWorldSizeY = Convert.ToInt32(StrategicY.text);
-            Config.World.TacticalSizeX = Convert.ToInt32(TacticalX.text);
-            Config.World.TacticalSizeY = Convert.ToInt32(TacticalY.text);
-            Config.World.FactionLeaders = FactionLeaders.isOn;
-            Config.World.VictoryCondition = (Config.VictoryType)VictoryCondition.value;
-            Config.World.VillageIncomePercent = Convert.ToInt32(VillageIncomeRate.text);
-            Config.World.VillagersPerFarm = Convert.ToInt32(VillagersPerFarm.text);
-            Config.World.VillagerDevourEXP = Convert.ToInt32(VillagerDevourEXP.text);
-            Config.World.ArmyUpkeep = Convert.ToInt32(ArmyUpkeep.text);
-            Config.World.CapMaxGarrisonIncrease = CapitalGarrisonCapped.isOn;
-            Config.World.Toggles["FirstTurnArmiesIdle"] = FirstTurnArmiesIdle.isOn;
-            Config.World.Toggles["LeaderSpawnFreeze"] = LeaderSpawnFreeze.isOn;
-            Config.World.Toggles["LeadersAutoGainLeadership"] = LeadersAutoGainLeadership.isOn;
-
-            Config.PutTeamsTogether = SpawnTeamsTogether.isOn;
         }
-        catch
+        catch (Exception e)
         {
-            State.GameManager.CreateMessageBox("At least one of the textboxes is blank, and needs to be filled in\n*Could possibly be a maximum race issue.*\n*Check Config.cs NumberOfRaces and make sure its value is correct.*");
+            State.GameManager.CreateMessageBox("At least one of the textboxes is blank, and needs to be filled in\n*Could possibly be a maximum race issue.*\n*Check Config.cs NumberOfRaces and make sure its value is correct.*\n" + e);
             return;
         }
 
@@ -725,7 +729,7 @@ public class CreateStrategicGame : MonoBehaviour
             TextMeshProUGUI dcosttext = obj.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI upkeeptext = obj.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
             obj.GetComponentInChildren<UnitInfoPanel>().Unit = actor.Unit;
-            var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
+            RaceTraits racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
             text.text = $"{(Race)i}\nBody Size: {State.RaceSettings.GetBodySize(actor.Unit.Race)}\nBase Stomach Size: {State.RaceSettings.GetStomachSize(actor.Unit.Race)}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
             sprite.UpdateSprites(actor);
             dcosttext.text = (State.RaceSettings.GetDeployCost(actor.Unit.Race) * actor.Unit.TraitBoosts.DeployCostMult).ToString();

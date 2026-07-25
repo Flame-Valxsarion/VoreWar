@@ -132,7 +132,6 @@ public class RightClickMenu : MonoBehaviour
     public void CreateButtons(Actor_Unit actor, Actor_Unit target)
     {
         bool rubCreated = false;
-        //var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
         int currentButton = 0;
         const int ButtonCount = MaxButtons;
         if (Buttons == null)
@@ -390,6 +389,7 @@ public class RightClickMenu : MonoBehaviour
             currentButton = AltVore(actor, currentButton, SpecialAction.Unbirth, data);
             currentButton = AltVore(actor, currentButton, SpecialAction.AnalVore, data);
             currentButton = AltVore(actor, currentButton, SpecialAction.TailVore, data);
+            currentButton = AltVore(actor, currentButton, SpecialAction.BladderVore, data);
         }
 
         return currentButton;
@@ -405,6 +405,8 @@ public class RightClickMenu : MonoBehaviour
                 Buttons[currentButton].onClick.AddListener(FinishAction);
                 if (actionType == SpecialAction.TailVore && actor.Unit.Race == Race.Terrorbird)
                     Buttons[currentButton].GetComponentInChildren<Text>().text = $"Crop Vore {data.DevourChance}%";
+                else if (actionType == SpecialAction.TailVore && actor.Unit.Race == Race.Tatltuae)
+                    Buttons[currentButton].GetComponentInChildren<Text>().text = $"Hackle Vore {data.DevourChance}%";
                 else if (actionType == SpecialAction.BreastVore && actor.Unit.Race == Race.Kangaroos)
                     Buttons[currentButton].GetComponentInChildren<Text>().text = $"Pouch Vore {data.DevourChance}%";
                 else
@@ -546,6 +548,7 @@ public class RightClickMenu : MonoBehaviour
             currentButton = AltVorePounce(data, SpecialAction.AnalVore, currentButton);
             currentButton = AltVorePounce(data, SpecialAction.Unbirth, currentButton);
             currentButton = AltVorePounce(data, SpecialAction.TailVore, currentButton);
+            currentButton = AltVorePounce(data, SpecialAction.BladderVore, currentButton);
         }
         pounceNeedsRefresh = false;
         ActivatePounceButtons(currentButton);

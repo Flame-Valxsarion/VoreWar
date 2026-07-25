@@ -124,7 +124,7 @@ public class Unit
             if (!Config.StatBoostsAffectMaxHP)
             {
                 _maxHealth = Stats[(int)Stat.Endurance] * 2 + Stats[(int)Stat.Strength];
-                return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
+                return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
             }
 
             int oldMax = _maxHealth;
@@ -137,7 +137,7 @@ public class Unit
                 int healthChange = (int)Math.Round((_maxHealth - oldMax) * _healthPct);
                 Health = Math.Min(_maxHealth,Math.Max(lowestHP, Health + healthChange));
             }
-            return (int)(_maxHealth * TraitBoosts.HealthMultiplier);
+            return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
         }
         set => _maxHealth = value;
     }
@@ -323,6 +323,11 @@ public class Unit
     public List<Unit> ShifterShapes;
 
     [OdinSerialize]
+    internal Unit TacticalCopy;
+    [OdinSerialize]
+    internal Unit OriginalUnit;
+
+    [OdinSerialize]
     public Unit MorphUnit = null;
 
     public override string ToString() => Name;
@@ -446,6 +451,7 @@ public class Unit
     internal bool CanBreastVore => Config.BreastVore && HasBreasts;
     internal bool CanAnalVore => Config.AnalVore;
     internal bool CanTailVore => Config.TailVore;
+    internal bool CanBladderVore => Config.BladderVore && (HasVagina || HasDick);
 
     public bool CanVore(PreyLocation location)
     {
@@ -461,6 +467,8 @@ public class Unit
                 return CanAnalVore;
             case PreyLocation.tail:
                 return CanTailVore;
+            case PreyLocation.bladder:
+                return CanBladderVore;
             default:
                 return true;
         }
@@ -562,6 +570,8 @@ public class Unit
     internal int DamageBarrier(int amount)
     {
         int remaining = amount;
+        if (amount < 0)
+            remaining = 0;
         if (remaining > Barrier)
         {
             remaining = amount - Barrier;
@@ -623,7 +633,7 @@ public class Unit
 
         return size;
     }
-	
+
     public bool IsDead => (Health < 1);
     private PermanentBoosts _traitBoosts;
     internal PermanentBoosts TraitBoosts
@@ -635,6 +645,17 @@ public class Unit
             return _traitBoosts;
         }
         set => _traitBoosts = value;
+    }
+    private TempBoosts _tempBoosts;
+    internal TempBoosts TempBoosts
+    {
+        get
+        {
+            if (_tempBoosts == null)
+                _tempBoosts = new TempBoosts();
+            return _tempBoosts;
+        }
+        set => _tempBoosts = value;
     }
 
     [OdinSerialize]
@@ -747,6 +768,8 @@ public class Unit
 
         InnateSpells = new List<SpellTypes>();
         ShifterShapes = new List<Unit>();
+        TacticalCopy = null;
+        OriginalUnit = null;
 
         if (race == Race.Dragon)
         {
@@ -754,6 +777,16 @@ public class Unit
             if (rand == 0) InnateSpells.Add(SpellTypes.IceBlast);
             if (rand == 1) InnateSpells.Add(SpellTypes.Pyre);
             if (rand == 2) InnateSpells.Add(SpellTypes.LightningBolt);
+        }
+
+        if (HasTrait(Traits.NaturalCaster))
+        {
+            int rand = State.Rand.Next(5);
+            if (rand == 0) InnateSpells.Add(SpellTypes.Icicle);
+            if (rand == 1) InnateSpells.Add(SpellTypes.Fireball);
+            if (rand == 2) InnateSpells.Add(SpellTypes.LightningBolt);
+            if (rand == 3) InnateSpells.Add(SpellTypes.PowerBolt);
+            if (rand == 4) InnateSpells.Add(SpellTypes.Poison);
         }
         if (race == Race.Fairies)
         {
@@ -895,6 +928,10 @@ public class Unit
         {
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SuccubusWeapon);
         }
+        else if (race == Race.OoviKat)
+        {
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.OoviKatWeapon);
+        }
         else if (race == Race.Asura)
         {
             Items[0] = State.World.ItemRepository.GetItem(ItemType.Axe);
@@ -986,8 +1023,8 @@ public class Unit
         }
         else if (race == Race.Olivia)
         {
-            FixedGear = true;
-            Items[0] = null;
+            FixedGear = false;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.OliviaWeapon);
         }
         else if (race == Race.Skapa)
         {
@@ -999,13 +1036,13 @@ public class Unit
             FixedGear = false;
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.TatltuaeWeapon);
         }
-        else if (race == Race.Firefly)
+        else if (race == Race.Seville)
         {
             try
             {
                 FixedGear = true;
-                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.FireflyMelee);
-                Items[1] = State.World.ItemRepository.GetSpecialItem(SpecialItems.FireflyRange);
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SevilleMelee);
+                Items[1] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SevilleArmor);
             }
             catch { }
         }
@@ -1019,6 +1056,34 @@ public class Unit
             FixedGear = true;
             Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RyanWeapon);
         }
+        else if (race == Race.Konane)
+        {
+            FixedGear = true;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.KonaneWeapon);
+        }
+        else if (race == Race.Cherub || race == Race.SoulSprite)
+        {
+            try
+            {
+                FixedGear = false;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.CherubWeapon);
+            }
+            catch { }
+        }
+        else if (race == Race.Seraph)
+        {
+            try
+            {
+                FixedGear = false;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.SeraphWeapon);
+            }
+            catch { }
+        }
+        else if (race == Race.Renamon)
+        {
+            FixedGear = false;
+            Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.RenamonWeapon);
+        }
         else
         {
             FixedGear = false;
@@ -1027,7 +1092,7 @@ public class Unit
                 if (Items[i] != null && State.World.ItemRepository.ItemIsUnique(Items[i]))
                     Items[i] = null;
             }
-            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == false)
+            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == false && RaceParameters.GetRaceTraits(race).CanUseMeleeWeapons == true)
             {
                 for (int i = 0; i < Items.Length; i++)
                 {
@@ -1043,6 +1108,24 @@ public class Unit
                     }
                 }
             }
+            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == true && RaceParameters.GetRaceTraits(race).CanUseMeleeWeapons == false)
+            {
+                for (int i = 0; i < Items.Length; i++)
+                {
+                    if (Items[i] != null && State.World.ItemRepository.ItemIsMeleeWeapon(Items[i]))
+                    {
+                        if (Items[i] is Weapon weapon)
+                        {
+                            if (weapon.Damage > 4)
+                                Items[i] = State.World.ItemRepository.GetItem(ItemType.CompoundBow);
+                            else
+                                Items[i] = State.World.ItemRepository.GetItem(ItemType.Bow);
+                        }
+                    }
+                }
+            }
+            if (RaceParameters.GetRaceTraits(race).CanUseRangedWeapons == false && RaceParameters.GetRaceTraits(race).CanUseMeleeWeapons == false)
+            {}
             if (!skipTraitItems)
                 GiveTraitBooks();
         }
@@ -1397,6 +1480,8 @@ public class Unit
         TimesKilled++;
         if (SavedCopy != null)
             SavedCopy.TimesKilled++;
+        if (OriginalUnit != null)
+            RevertCopiedUnit();
     }
 
     public void DrainExp(float exp)
@@ -1484,7 +1569,7 @@ public class Unit
     {
         get
         {
-            _healthPct = (float)Health / MaxHealth;
+            _healthPct = (float) Health / MaxHealth;
             return _healthPct;
         }
     }
@@ -1498,7 +1583,7 @@ public class Unit
             return _manaPct;
         }
     }
-    private float _stamPct = 100f;
+    private float _stamPct = 1f;
     public float StamPct
     {
         get
@@ -1803,8 +1888,6 @@ public class Unit
     {
         if (tag == Traits.TheGreatEscape && Race == Race.Erin)
             return true;
-        if (tag == Traits.TheGreatEscape && Race == Race.Olivia)
-            return true;
         if (Tags != null)
             return Tags.Contains(tag) || (PermanentTraits?.Contains(tag) ?? false);
         return false;
@@ -1849,7 +1932,7 @@ public class Unit
         EquipmentFunctions.CheckEquipment(this, EquipmentActivator.OnHeal, new object[] { this, h, null });
     }
 
-    public int Heal(int amount)
+    public int Heal(int amount, bool mutual = false)
     {
         int diff = MaxHealth - Health;
         int modAmount = amount;
@@ -1866,6 +1949,10 @@ public class Unit
         int actualHeal = Math.Min(diff, modAmount);
         EquipmentFunctions.CheckEquipment(this, EquipmentActivator.OnHeal, new object[] { this, actualHeal, null });
         State.GameManager.TacticalMode?.TacticalStats?.RegisterHealing(actualHeal, Side);
+        if (State.GameManager.TacticalMode != null && HasTrait(Traits.MutualBiology) && !mutual)
+        {
+            TacticalUtilities.MutuallyHealUnits(this, amount);
+        }
         return actualHeal;
     }
 
@@ -1978,6 +2065,10 @@ public class Unit
 
         PermanentTraits.Add(traitIdToAdd);
         RecalculateStatBoosts();
+        if (traitIdToAdd == Traits.Resourceful)
+        {
+            SetMaxItems();
+        }
         return true;
     }
 
@@ -2308,6 +2399,7 @@ public class Unit
                     if (SharedTraits.Contains((Traits)id))
                         SharedTraits.Remove((Traits)id);
                 }
+                AllConditionalTraits.Remove(toRemove);
             }
             RecalculateStatBoosts();
             PreyCheck();
@@ -2581,7 +2673,10 @@ public class Unit
 
         if (favored != Stat.None)
             stats[(int)favored] = -1;
-
+        if (HasTrait(Traits.Multifaceted))
+        {
+            favored = (Stat)GetHighestStatIndex();
+        }
         stats = stats.Where(s => s >= 0).ToArray();
 
         for (int i = 0; i < stats.GetUpperBound(0); i++) //Randomize the order
@@ -2763,6 +2858,12 @@ public class Unit
         }
         return highestType;
     }
+
+    public bool IsHighestStat(Stat stat)
+    {
+        return (Stat)GetHighestStatIndex() == stat;
+    }
+
     public int GetLowestStatIndex()
     {
         int lowestType = 0;
@@ -3212,7 +3313,7 @@ public class Unit
         var ten = GetStatusEffect(StatusEffectType.Tenacious);
         if (ten != null)
         {
-            int reduction = 5 - (HasTrait(Traits.Unflinching) && Health * .1f > ten.Strength? 3 : 0);
+            int reduction = 5 - (HasTrait(Traits.Unflinching) && Health * .1f > ten.Strength? 5 : 0);
             ten.Duration -= reduction;
             ten.Strength -= reduction;
             if (ten.Duration <= 0)
@@ -3463,6 +3564,77 @@ public class Unit
 
         InitializeTraits();
         SetMaxItems();
+    }
+
+    internal void SetCopyUnit(Unit unit)
+    {
+        TacticalCopy = unit;
+    }
+
+    internal void CopyTacticalUnit()
+    {
+        if (TacticalCopy == null)
+        {
+            return;
+        }
+
+        Unit original = Clone();
+        original.TacticalCopy = null;
+        original.HardCopyUnit(this);
+        OriginalUnit = original;
+
+        HardCopyUnit(TacticalCopy);
+
+        TacticalCopy = null;
+    }
+
+    internal void RevertCopiedUnit()
+    {
+        if (OriginalUnit == null)
+        {
+            return;
+        }
+        HardCopyUnit(OriginalUnit);
+
+        Health = OriginalUnit.Health;
+
+        InitializeTraits();
+        SetMaxItems();
+        OriginalUnit = null;
+    }
+
+    internal void HardCopyUnit(Unit unit)
+    {
+        Race = unit.Race;
+        Name = unit.Name;
+        level = unit.level;
+        Stats = unit.Stats;
+        TempBoosts = unit.TempBoosts;
+        CopyAppearance(unit);
+        ClearAllTraits();
+        PermanentTraits.Clear();
+        RemovedTraits.Clear();
+        ReloadTraits();
+
+        Tags = new List<Traits>(unit.Tags);
+        PermanentTraits = new List<Traits>(unit.PermanentTraits);
+        RemovedTraits = new List<Traits>(unit.RemovedTraits);
+
+        InitializeTraits();
+        SetMaxItems();
+
+        Items = unit.Items;
+        ItemUses = unit.ItemUses;
+        ItemCooldowns = unit.ItemCooldowns;
+        EquippedPotions = new Dictionary<int, int[]>(unit.EquippedPotions);
+        Health = unit.Health;
+        Mana = unit.Mana;
+
+    }
+
+    internal bool IsACopy()
+    {
+        return OriginalUnit != null;
     }
 
     internal StatusEffect GetLongestStatusEffect(StatusEffectType type)

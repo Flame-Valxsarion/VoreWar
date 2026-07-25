@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 static class StrategicUtilities
 {
@@ -230,26 +231,78 @@ static class StrategicUtilities
         ConstructibleBuilding construct = GetConstructibleAt(location);
         if (construct != null)
         {
-            if (empire.Race >= Race.Vagrants)
+            if (construct.Owner != empire && (construct.CaptureTime <= 0 || construct.Owner == null))
             {
-                construct.Owner = null;
-            }
-            else
-            {
-                if (construct.Owner != null && RelationsManager.GetRelation(construct.Owner.Side, empire.Side).Type != RelationState.Enemies)
+                if (empire.Race >= Race.Vagrants)
                 {
-                    return;
+                    if (construct.Owner == null)
+                    {
+                        return;
+                    }
+                    switch (Config.BuildConfig.MonsterBuildingCapture)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            construct.Owner = null;
+                            break;
+                        case 2:
+                            construct.ruined = true;
+                            construct.CaptureTime = Config.BuildConfig.BuildingCaptureTurns;
+                            break;
+                        case 3:
+                            construct.Owner.Buildings.Remove(construct);
+                            construct.Owner.EmpireBuildingLimit[construct.buildingType] = construct.Owner.EmpireBuildingLimit[construct.buildingType] + 1;
+                            List<ConstructibleBuilding> bLis = State.World.Constructibles.ToList();
+                            bLis.Remove(construct);
+                            State.World.Constructibles = bLis.ToArray();
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                if (construct.Owner != empire && (construct.CaptureTime <= 0 || construct.Owner == null))
+                else
                 {
+                    if (construct.Owner == null)
+                    {
+                        empire.Buildings.Add(construct);
+                        construct.Owner = empire;
+                    }
+                    if (construct.Owner != null && RelationsManager.GetRelation(construct.Owner.Side, empire.Side).Type != RelationState.Enemies)
+                    {
+                        return;
+                    }
                     State.GameManager.StrategyMode.UndoMoves.Clear();
                     RelationsManager.GoldMineTaken(empire, construct.Owner);
-                    if (construct.Owner != null)
+                    switch (Config.BuildConfig.EmpireBuildingCapture)
                     {
-                        construct.Owner.Buildings.Remove(construct);
+                        case 0:
+                            break;
+                        case 1:
+                            State.GameManager.StrategyMode.UndoMoves.Clear();
+                            RelationsManager.GoldMineTaken(empire, construct.Owner);
+                            if (construct.Owner != null)
+                            {
+                                construct.Owner.Buildings.Remove(construct);
+                            }
+                            empire.Buildings.Add(construct);
+                            construct.Owner = empire;
+                            break;
+                        case 2:
+                            construct.ruined = true;
+                            construct.CaptureTime = Config.BuildConfig.BuildingCaptureTurns;
+                            break;
+                        case 3:
+                            construct.Owner.Buildings.Remove(construct);
+                            construct.Owner.EmpireBuildingLimit[construct.buildingType] = construct.Owner.EmpireBuildingLimit[construct.buildingType] + 1;
+                            List<ConstructibleBuilding> bLis = State.World.Constructibles.ToList();
+                            bLis.Remove(construct);
+                            State.World.Constructibles = bLis.ToArray();
+                            break;
+                        default:
+                            break;
                     }
-                    empire.Buildings.Add(construct);
-                    construct.Owner = empire;
+
                 }
             }
             State.GameManager.StrategyMode.RedrawVillages();
@@ -629,7 +682,7 @@ static class StrategicUtilities
             double effectiveLevelBoost = (army.LeaderIfInArmy()?.GetStatBase(Stat.Leadership) ?? 0) / 10 * .5;
             foreach (Unit unit in army.Units)
             {
-                var racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
+                RaceTraits racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
                     racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
@@ -656,7 +709,7 @@ static class StrategicUtilities
             double effectiveLevelBoost = (units.Where(s => s.GetStat(Stat.Leadership) > 0).FirstOrDefault()?.GetStatBase(Stat.Leadership) ?? 0) / 10 * .5f;
             foreach (Unit unit in units)
             {
-                var racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
+                RaceTraits racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
                     racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
@@ -683,7 +736,7 @@ static class StrategicUtilities
         {
             foreach (Unit unit in units)
             {
-                var racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
+                RaceTraits racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
                     racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
@@ -1167,7 +1220,7 @@ static class StrategicUtilities
             MercenaryContainer merc = new MercenaryContainer();
             merc.Unit = unit;
             merc.Title = $"{InfoPanel.RaceSingular(merc.Unit)} - Mercenary";
-            var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
+            RaceTraits power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
             if (power == 0)
             {
                 power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
@@ -1214,7 +1267,7 @@ static class StrategicUtilities
             MercenaryContainer merc = new MercenaryContainer();
             merc.Unit = unit;
             merc.Title = $"{InfoPanel.RaceSingular(merc.Unit)} - Mercenary";
-            var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
+            RaceTraits power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
             if (power == 0)
             {
                 power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
