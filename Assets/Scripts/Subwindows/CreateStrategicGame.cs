@@ -30,7 +30,6 @@ public enum StrategyAIType
     Cheating3,
     Monster = 100,
     Goblin,
-
 }
 
 public struct StrategicCreationArgs
@@ -58,7 +57,6 @@ public struct StrategicCreationArgs
         AncientTeleporters = 0;
 
         MapGen = new WorldGenerator.MapGenArgs();
-
     }
 }
 
@@ -124,7 +122,6 @@ public class CreateStrategicGame : MonoBehaviour
 
     public InputField AbandonedVillages;
 
-
     public RacePanel RaceUI;
 
     public Text TooltipText;
@@ -181,7 +178,6 @@ public class CreateStrategicGame : MonoBehaviour
                 VillageCount = Empires[i].VillageCount.text,
                 StrategicAI = Empires[i].StrategicAI.value,
                 TacticalAI = Empires[i].TacticalAI.value,
-
             };
 
             stored.Empires[i] = data;
@@ -397,7 +393,6 @@ public class CreateStrategicGame : MonoBehaviour
                 Empires[i].gameObject.SetActive(true);
                 //Empires[i].TurnOrder.text = "1";
             }
-
         }
         AllEmpires.VillageCount.interactable = false;
         StrategicX.interactable = false;
@@ -476,12 +471,10 @@ public class CreateStrategicGame : MonoBehaviour
             return "Not enough space to comfortably fit all the villages";
 
         return "";
-
     }
 
     string SetStrategicSizeAutomatically()
     {
-
         int villageCount = 0;
         int empireCount = 0;
         for (int i = 0; i < Empires.Length; i++)
@@ -524,12 +517,8 @@ public class CreateStrategicGame : MonoBehaviour
                     lastIndex--;
                 }
             }
-
         }
-
-
     }
-
 
     public void CreateWorld()
     {
@@ -672,7 +661,7 @@ public class CreateStrategicGame : MonoBehaviour
         }
         catch (Exception e)
         {
-            State.GameManager.CreateMessageBox("At least one of the textboxes is blank, and needs to be filled in \n *Could possibly be a maximum race issue.*  \n*Check Config.cs NumberOfRaces and make sure it's value is correct.*\n" + e);
+            State.GameManager.CreateMessageBox("At least one of the textboxes is blank, and needs to be filled in\n*Could possibly be a maximum race issue.*\n*Check Config.cs NumberOfRaces and make sure its value is correct.*\n" + e);
             return;
         }
 
@@ -718,11 +707,9 @@ public class CreateStrategicGame : MonoBehaviour
                 Empires[i].MaxGarrisonSize.value = AllEmpires.MaxGarrisonSize.value;
                 Empires[i].TurnOrder.text = "1";
             }
-
         }
         RaceUI.gameObject.SetActive(false);
     }
-
 
     public void BuildRaceDisplay()
     {
@@ -733,7 +720,6 @@ public class CreateStrategicGame : MonoBehaviour
         }
         for (int i = 0; i < Config.NumberOfRaces; i++)
         {
-
             if (Empires[i].gameObject.activeSelf)
                 continue;
             GameObject obj = Instantiate(RaceUI.RaceUnitPanel, RaceUI.RaceFolder);
@@ -743,7 +729,7 @@ public class CreateStrategicGame : MonoBehaviour
             TextMeshProUGUI dcosttext = obj.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI upkeeptext = obj.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
             obj.GetComponentInChildren<UnitInfoPanel>().Unit = actor.Unit;
-            var racePar = RaceParameters.GetTraitData(actor.Unit);
+            RaceTraits racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
             text.text = $"{(Race)i}\nBody Size: {State.RaceSettings.GetBodySize(actor.Unit.Race)}\nBase Stomach Size: {State.RaceSettings.GetStomachSize(actor.Unit.Race)}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
             sprite.UpdateSprites(actor);
             dcosttext.text = (State.RaceSettings.GetDeployCost(actor.Unit.Race) * actor.Unit.TraitBoosts.DeployCostMult).ToString();
@@ -766,9 +752,7 @@ public class CreateStrategicGame : MonoBehaviour
         Empires[race].MaxGarrisonSize.value = AllEmpires.MaxGarrisonSize.value;
         Empires[race].TurnOrder.text = "1";
         AssignUnusedTurnOrders();
-
     }
-
 
     internal static Color ColorFromIndex(int index)
     {
@@ -790,7 +774,6 @@ public class CreateStrategicGame : MonoBehaviour
         else if (index == 15) return new Color(.61f, .65f, 0);
         else if (index == 16) return new Color(.7f, .7f, .7f);
         return Color.black;
-
     }
 
     internal static int IndexFromColor(Color color)
@@ -813,7 +796,6 @@ public class CreateStrategicGame : MonoBehaviour
         else if (color == new Color(.61f, .65f, 0)) return 15;
         else if (color == new Color(.7f, .7f, .7f)) return 16;
         return 0;
-
     }
 
     public void ChangeToolTip(int type)
@@ -825,7 +807,4 @@ public class CreateStrategicGame : MonoBehaviour
     {
         LeaderLossExpPct.GetComponentInChildren<Text>().text = $"Leader Exp lost on Death: {Math.Round(LeaderLossExpPct.value * 100, 2)}%";
     }
-
-
 }
-
