@@ -682,7 +682,7 @@ static class StrategicUtilities
             double effectiveLevelBoost = (army.LeaderIfInArmy()?.GetStatBase(Stat.Leadership) ?? 0) / 10 * .5;
             foreach (Unit unit in army.Units)
             {
-                RaceTraits racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
+                float racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
                     racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
@@ -709,7 +709,7 @@ static class StrategicUtilities
             double effectiveLevelBoost = (units.Where(s => s.GetStat(Stat.Leadership) > 0).FirstOrDefault()?.GetStatBase(Stat.Leadership) ?? 0) / 10 * .5f;
             foreach (Unit unit in units)
             {
-                RaceTraits racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
+                float racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
                     racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
@@ -736,7 +736,7 @@ static class StrategicUtilities
         {
             foreach (Unit unit in units)
             {
-                RaceTraits racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
+                float racePower = State.RaceSettings.Get(unit.Race).PowerAdjustment;
                 if (racePower == 0)
                 {
                     racePower = RaceParameters.GetRaceTraits(unit.Race).PowerAdjustment;
@@ -1220,7 +1220,7 @@ static class StrategicUtilities
             MercenaryContainer merc = new MercenaryContainer();
             merc.Unit = unit;
             merc.Title = $"{InfoPanel.RaceSingular(merc.Unit)} - Mercenary";
-            RaceTraits power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
+            float power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
             if (power == 0)
             {
                 power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
@@ -1267,7 +1267,7 @@ static class StrategicUtilities
             MercenaryContainer merc = new MercenaryContainer();
             merc.Unit = unit;
             merc.Title = $"{InfoPanel.RaceSingular(merc.Unit)} - Mercenary";
-            RaceTraits power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
+            float power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
             if (power == 0)
             {
                 power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;

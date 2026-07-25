@@ -826,9 +826,13 @@ public class Actor_Unit
             return 1f;
     }
 
-    public float GetPureStatClashChance(int attackStat, int defenseStat, float shift) // generic AF
+    public float GetPureStatClashChance(float attackScore, float defenseScore, float shift)
     {
-        return (float)attackStat / (attackStat + (defenseStat * (1 + shift)));
+        if (shift > 0)
+            defenseScore *= 1 + shift;
+        else
+            attackScore *= 1 - shift;
+        return attackScore / (attackScore + defenseScore);
     }
 
     internal float GetMagicChance(Actor_Unit attacker, Spell currentSpell, float modifier = 0, Stat stat = Stat.Mind)
@@ -1022,73 +1026,51 @@ public class Actor_Unit
 
     public double WeaponDamageAgainstTarget(Actor_Unit target, bool ranged, double multiplier = 1, bool forceBite = false)
     {
-        int damage;
+        double damage;
+        double damageScalar = multiplier;
         if (ranged)
         {
-            float damageScalar = Unit.TraitBoosts.Outgoing.RangedDamage * target.Unit.TraitBoosts.Incoming.RangedDamage;
-			damageScalar *= multiplier;
+            damageScalar *= Unit.TraitBoosts.Outgoing.RangedDamage * target.Unit.TraitBoosts.Incoming.RangedDamage;
 			damageScalar *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.RangedDamageMult);
-            if (Unit.HasTrait(Traits.AllOutFirstStrike) && HasAttackedThisCombat == false)
-                damageScalar *= 5;
-            if ((target.Unit.GetStatusEffect(StatusEffectType.Petrify) != null) || (target.Unit.GetStatusEffect(StatusEffectType.Frozen) != null))
-                damageScalar /= 2;
-            if (Unit.HasTrait(Traits.Competitive) && Unit.Race == target.Unit.Race)
-            {
-                damageScalar *= 1.15f;
-            }
-            if (target.Unit.GetStatusEffect(StatusEffectType.Fractured) == null && target.Unit.HasTrait(Traits.Crystaline))
-            {
-                damageScalar *= 0.75f;
-            }
-            if (target.Unit.GetStatusEffect(StatusEffectType.Fractured) != null)
-            {
-                damageScalar *= 1.50f;
-            }
-            if (Unit.GetStatusEffect(StatusEffectType.Valor) != null)
-            {
-                damageScalar *= 1.25f;
-            }
-            if (Unit.HasTrait(Traits.WeaponChanneler) && Unit.Mana >= 6)
-            {
-                damageScalar *= 1.2f;
-            }
             if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
-            {
-                damageScalar *= 1.1f;
-            }
-            if (target.Unit.GetStatusEffect(StatusEffectType.Shielded) != null)
-            {
-                damageScalar *= 1 - target.Unit.GetStatusEffect(StatusEffectType.Shielded).Strength;
-            }
-            if (target.Unit.GetStatusEffect(StatusEffectType.DivineShield) != null)
-            {
-                damageScalar *= 1 - target.Unit.GetStatusEffect(StatusEffectType.DivineShield).Strength;
-            }
-            if (Unit.HasTrait(Traits.SenseWeakness))
-            {
-                damageScalar *= 1.4f - (target.Unit.HealthPct * .4f) + (0.1f * target.Unit.GetNegativeStatusEffects());
-            }
-            int statBoost = Unit.GetStat(Stat.Dexterity) + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2 : 0);
+                damageScalar *= 1.1;
+            double statBoost;
             if (Unit.HasTrait(Traits.BoundWeapon))
-            {statBoost = Unit.GetStat(Stat.Mind);}
-            if (Unit.HasTrait(Traits.Finesse))
-            { statBoost = (int)(Unit.GetStat(Stat.Strength) * .8f + Unit.GetStat(Stat.Dexterity) * .3f) + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2 : 0); }
-            damage = (int)(damageScalar * (BestRanged?.Damage ?? 2) * (60 + statBoost) / 60);
-            if (target.Unit.HasTrait(Traits.Resilient))
-                damage--;
-            if (target.Unit.GetStatusEffect(StatusEffectType.Staggering) != null)
-            {
-                damage += (int)(damage * 0.2f);
-            }
-
+                statBoost = Unit.GetStat(Stat.Mind);
+            else if (Unit.HasTrait(Traits.Finesse))
+                statBoost = Unit.GetStat(Stat.Strength) * .8 + Unit.GetStat(Stat.Dexterity) * .3 + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
+            else
+                statBoost = Unit.GetStat(Stat.Dexterity) + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
+            damage = (BestRanged?.Damage ?? 2) * (60 + statBoost) / 60;
         }
         else
         {
-
-            float damageScalar = Unit.TraitBoosts.Outgoing.MeleeDamage * target.Unit.TraitBoosts.Incoming.MeleeDamage;
+            damageScalar *= Unit.TraitBoosts.Outgoing.MeleeDamage * target.Unit.TraitBoosts.Incoming.MeleeDamage;
             damageScalar *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.MeleeDamageMult);
-
-        double damageScalar = multiplier;
+            if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
+                damageScalar *= 2.5;
+            if (target.Unit.GetStatusEffect(StatusEffectType.Erosion) != null)
+                damageScalar *= 1 + target.Unit.GetStatusEffect(StatusEffectType.Erosion).Strength / 5;
+            if (Unit.HasTrait(Traits.ForcefulBlow))
+                damageScalar = TacticalUtilities.CheckKnockBack(this.Position, this, target, damageScalar);
+            if (Unit.HasTrait(Traits.VenomShock) && target.Unit.GetStatusEffect(StatusEffectType.Poisoned) != null)
+                damageScalar *= 1.5;
+            double statBoost;
+            if (Unit.HasTrait(Traits.BoundWeapon))
+                statBoost = Unit.GetStat(Stat.Mind);
+            else if (Unit.HasTrait(Traits.Finesse))
+                statBoost = Unit.GetStat(Stat.Strength) * .8 + Unit.GetStat(Stat.Dexterity) * .3 + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
+            else
+                statBoost = Unit.GetStat(Stat.Dexterity) + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
+            if (forceBite)
+                damage = State.World.ItemRepository.Bite.Damage * (60.0 + Unit.GetStat(Stat.Strength)) / 60;
+            else
+            {
+                if (Unit.HasTrait(Traits.Feral) && Unit.GetBestMelee() == State.World.ItemRepository.Claws)
+                    damageScalar *= 3;
+                damage = damageScalar * BestMelee.Damage * (60.0 + statBoost) / 60;
+            }
+        }
         if (Unit.HasTrait(Traits.AllOutFirstStrike) && HasAttackedThisCombat == false)
             damageScalar *= 5;
         if ((target.Unit.GetStatusEffect(StatusEffectType.Petrify) != null) || (target.Unit.GetStatusEffect(StatusEffectType.Frozen) != null))
@@ -1107,11 +1089,12 @@ public class Actor_Unit
             damageScalar *= 1 - target.Unit.GetStatusEffect(StatusEffectType.Shielded).Strength;
         if (target.Unit.GetStatusEffect(StatusEffectType.DivineShield) != null)
             damageScalar *= 1 - target.Unit.GetStatusEffect(StatusEffectType.DivineShield).Strength;
+        if (Unit.HasTrait(Traits.SenseWeakness))
+            damageScalar *= 1.4f - (target.Unit.HealthPct * .4f) + (0.1f * target.Unit.GetNegativeStatusEffects());
         if (target.Unit.GetStatusEffect(StatusEffectType.Staggering) != null)
             damageScalar *= 1.2;
         if (TacticalUtilities.SneakAttackCheck(Unit, target.Unit))
             damageScalar *= 3;
-
         if (Unit.HasTrait(Traits.SwiftStrike))
         {
             int current_weapon_class = GetWeaponSprite();
@@ -1130,7 +1113,6 @@ public class Actor_Unit
             }
             damageScalar *= 1 + ss_bonus;
         }
-
         if (Unit.HasTrait(Traits.Duelist))
         {
             damageScalar *= 2;
@@ -1138,7 +1120,6 @@ public class Actor_Unit
             int adj = TacticalUtilities.UnitsWithinTiles(Position, 1).Where(u => u.Unit.IsEnemyOfSide(Unit.Side)).Count();
             damageScalar /= adj != 0 ? adj : 1;
         }
-
         if (Unit.HasTrait(Traits.Fervor))
         {
             damageScalar *= .25f;
@@ -1147,57 +1128,12 @@ public class Actor_Unit
             damageScalar *= adj != 0 ? adj : 1;
         }
 
-        if (ranged)
-        {
-            damageScalar *= Unit.TraitBoosts.Outgoing.RangedDamage * target.Unit.TraitBoosts.Incoming.RangedDamage;
-            damageScalar *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.RangedDamageMult);
-            if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
-                damageScalar *= 1.1;
-            if (Unit.HasTrait(Traits.SenseWeakness))
-                damageScalar *= 1.4 - (target.Unit.HealthPct * .4) + (0.1 * target.Unit.GetNegativeStatusEffects());
-            double statBoost = Unit.GetStat(Stat.Dexterity) + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
-            if (Unit.HasTrait(Traits.BoundWeapon))
-                statBoost = Unit.GetStat(Stat.Mind);
-            if (Unit.HasTrait(Traits.Finesse))
-                statBoost = Unit.GetStat(Stat.Strength) * .8 + Unit.GetStat(Stat.Dexterity) * .3 + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
-            damage = damageScalar * (BestRanged?.Damage ?? 2) * (60.0 + statBoost) / 60;
-        }
-        else
-        {
-            damageScalar *= Unit.TraitBoosts.Outgoing.MeleeDamage * target.Unit.TraitBoosts.Incoming.MeleeDamage;
-            damageScalar *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.MeleeDamageMult);
-
-            if (target.Unit.GetStatusEffect(StatusEffectType.Erosion) != null)
-                damageScalar += damageScalar * (target.Unit.GetStatusEffect(StatusEffectType.Erosion).Strength / 5);
-            if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
-                damageScalar *= 2.5;
-            if (Unit.HasTrait(Traits.ForcefulBlow))
-                damageScalar = TacticalUtilities.CheckKnockBack(this.Position, this, target, damageScalar);
-            if (Unit.HasTrait(Traits.SenseWeakness))
-                damageScalar *= 1.4 - (target.Unit.HealthPct * .4f) + (0.1f * target.Unit.GetNegativeStatusEffects());
-            if (Unit.HasTrait(Traits.VenomShock) && target.Unit.GetStatusEffect(StatusEffectType.Poisoned) != null)
-                damageScalar *= 1.5;
-
-            if (forceBite)
-                damage = damageScalar * State.World.ItemRepository.Bite.Damage * (60.0 + Unit.GetStat(Stat.Strength)) / 60;
-            else
-            {
-                if (Unit.HasTrait(Traits.Feral) && Unit.GetBestMelee() == State.World.ItemRepository.Claws)
-                    damageScalar *= 3;
-                double statBoost = Unit.GetStat(Stat.Strength) + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
-                if (Unit.HasTrait(Traits.BoundWeapon))
-                    statBoost = Unit.GetStat(Stat.Mind);
-                if (Unit.HasTrait(Traits.Finesse))
-                    statBoost = Unit.GetStat(Stat.Strength) * .8 + Unit.GetStat(Stat.Dexterity) * .3 + (Unit.HasTrait(Traits.SpellBlade) ? Unit.GetStat(Stat.Mind) / 2.0 : 0);
-                damage = damageScalar * BestMelee.Damage * (60.0 + statBoost) / 60;
-            }
-        }
-
         if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Strength) && MultifacetedCooldown == 0)
         {
             damage += Math.Round(target.Unit.MaxHealth * 0.05f);
         }
 
+        damage *= damageScalar;
         if (target.Unit.HasTrait(Traits.Resilient))
             damage--;
 
@@ -1245,11 +1181,11 @@ public class Actor_Unit
 
         if (target.Unit.HasTrait(Traits.Multifaceted) && target.Unit.IsHighestStat(Stat.Endurance))
         {
-            int tenP = (int)Math.Round(target.Unit.Health * 0.1f);
+            double tenP = target.Unit.Health * 0.1;
             if (damage > tenP) // Check if damage is over 10% current
             {
-                int mitigation = damage - tenP;
-                mitigation = (int)Math.Floor(mitigation * 0.5f);
+                double mitigation = damage - tenP;
+                mitigation = mitigation * 0.5;
                 damage -= mitigation;
             }
         }
@@ -1417,10 +1353,10 @@ public class Actor_Unit
         Mode = DisplayMode.SpecialAttack;
         animationUpdateTime = 1;
         float movementBonus = Movement / MaxMovement();
-        int damage = WeaponDamageAgainstTarget(target, false) + (int)Math.Round(WeaponDamageAgainstTarget(target, false) * movementBonus);
+        double damage = WeaponDamageAgainstTarget(target, false) * (1 + movementBonus);
         if (damage >= target.Unit.Health)
             damage = target.Unit.Health - 1;
-        if (target.Defend(this, ref damage, false, out float chance))
+        if (target.Defend(this, damage, false, out float chance))
         {
             if (State.GameManager.TacticalMode.TacticalSoundBlocked() == false)
             {
@@ -1917,7 +1853,7 @@ public class Actor_Unit
                     foreach (var sweepTarget in inrange)
                     {
                         Movement = 1; //Grant movement for each target
-                        Attack(sweepTarget, false, false, 0.33f, true, false);
+                        Attack(sweepTarget, false, false, 0.33f, DamageLethality.Lethal, false);
                     }
                     Movement = movementholder; //Reset AP
                 }
@@ -2217,11 +2153,11 @@ public class Actor_Unit
             damage = damage * attacker.Unit.TraitBoosts.Outgoing.MagicDamage * Unit.TraitBoosts.Incoming.MagicDamage * TagConditionChecker.ApplyTagEffect(attacker.Unit, Unit, UnitTagModifierEffect.MagicDamageMult);
             if (attacker.Unit.HasTrait(Traits.Multifaceted) && attacker.Unit.IsHighestStat(Stat.Mind))
             {
-                damage += (int)Math.Round(Unit.GetStat(Stat.Mind) * 0.1f);
+                damage += Unit.GetStat(Stat.Mind) * 0.1;
             }
             if (attacker.Unit.HasTrait(Traits.ManaBurn))
             {
-                if (!Unit.SpendMana(damage/2))
+                if (!Unit.SpendMana((int)(damage / 2)))
                 {
                     damage += damage / 2; 
                 }
@@ -2961,7 +2897,7 @@ public class Actor_Unit
         {
             StatusEffect eff = Unit.GetStatusEffect(StatusEffectType.Agony);
             int totalDamage = (int)Math.Round(eff.Strength / eff.Duration);
-            Damage(totalDamage, true, true);
+            Damage(totalDamage, true);
             eff.Strength -= totalDamage;
         }
     }
@@ -3196,15 +3132,15 @@ public class Actor_Unit
         switch (damageType)
         {
             case DamageTypes.Fire:
-                damage = Math.Round(damage * Unit.TraitBoosts.FireDamageTaken);
+                damage *= Unit.TraitBoosts.FireDamageTaken;
                 break;
             case DamageTypes.Ice:
-                damage = Math.Round(damage * Unit.TraitBoosts.IceDamageTaken);
+                damage *= Unit.TraitBoosts.IceDamageTaken;
                 break;
             case DamageTypes.Elec:
                 if (Unit.GetStatusEffect(StatusEffectType.Static) != null)
                     damage *= 1.5;
-                damage = Math.Round(damage * (Unit.TraitBoosts.ElecDamageTaken * elecboost));
+                damage *= Unit.TraitBoosts.ElecDamageTaken;
                 break;
             case DamageTypes.Poison:
                 if (Unit.HasTrait(Traits.PoisonSpit))
@@ -3269,7 +3205,7 @@ public class Actor_Unit
         }
         if (Unit.HasTrait(Traits.MutualBiology) && damageType != DamageTypes.Mutual)
         {
-            TacticalUtilities.MutuallyDamageUnits(this, damage);
+            TacticalUtilities.MutuallyDamageUnits(this, (int)damage);
         }
         if (Unit.HasTrait(Traits.Berserk) && GoneBerserk == false)
         {

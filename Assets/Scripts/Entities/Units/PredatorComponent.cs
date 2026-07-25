@@ -298,9 +298,6 @@ public class PredatorComponent
                 foreach (Prey unit in womb)
                     if (unit.Unit.IsDead != alive)
                         prey += 1;
-                foreach (Prey unit in anal)
-                    if (unit.Unit.IsDead != alive)
-                        prey += 1;
                 foreach (Prey unit in bladder)
                     if (unit.Unit.IsDead != alive)
                         prey += 1;
@@ -853,7 +850,7 @@ public class PredatorComponent
 
         c *= unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult;
 
-        //c *= unit.GetScale(3);  It may be more realistic, but having huge resulting in 81 times the base stomach capacity is just overkill
+        //c *= unit.GetScale(3); It may be more realistic, but having huge resulting in 81 times the base stomach capacity is just overkill
 
         return c;
     }
@@ -960,7 +957,6 @@ public class PredatorComponent
                 }
                 else
                     preyUnit.Actor.Movement = preyUnit.Actor.CurrentMaxMovement();
-
 
                 TacticalUtilities.UpdateActorLocations();
                 preyUnit.Actor.UnitSprite.DisplayEscape();
@@ -1730,7 +1726,7 @@ public class PredatorComponent
             preyUnit.TurnsSinceLastDamage = 0;
             if (preyUnit.Actor.Unit.HasTrait(Traits.MutualBiology))
             {
-                TacticalUtilities.MutuallyDamageUnits(preyUnit.Actor, preyDamage);
+                TacticalUtilities.MutuallyDamageUnits(preyUnit.Actor, (int)preyDamage);
             }
         }
 
@@ -1760,6 +1756,7 @@ public class PredatorComponent
                     Prey newPrey = new Prey(aliveSubUnits[i].Actor, actor, aliveSubUnits[i].SubPrey);
                     PreyLocation oldLocation = newPrey.Location;
                     AddPrey(newPrey, Location(preyUnit));
+                    unit.GiveScaledExp(4 * newPrey.Unit.ExpMultiplier, unit.Level - newPrey.Unit.Level, true);
                     preyUnit.SubPrey.Remove(aliveSubUnits[i]);
                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Sensing that <b>{preyUnit.Unit.Name}</b> is dead, <b>{newPrey.Unit.Name}</b> seizes the opportunity to claw {LogUtilities.GPPHis(newPrey.Unit)} way out of {LogUtilities.GPPHis(preyUnit.Unit)} {PreyLocStrings.ToSyn(oldLocation)}, only to find that now they are stuck in <b>{actor.Unit.Name}</b>'s {PreyLocStrings.ToSyn(newPrey.Location)}!");
                 }

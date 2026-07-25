@@ -1165,9 +1165,9 @@ public static class State
                 }
             }
 
-            if (version < 44 + 1)
+            if (version < 44 + 1 || World.SaveVersion.Equals("45A") || World.SaveVersion.Equals("45B") || World.SaveVersion.Equals("45C") || World.SaveVersion.Equals("45D"))
             {
-                // Herein are the updates specific to version 45.
+                // Herein are the updates specific to version 45E.
                 
                 // Since DefenseEncampment.AvailibleDefenders was renamed to AvailableDefenders, they will not have loaded correctly (if present).
                 bool defcampsfound = false;

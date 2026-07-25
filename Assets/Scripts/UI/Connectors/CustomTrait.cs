@@ -158,6 +158,7 @@ public class CustomTrait : MonoBehaviour
     {
         trait.name = name.text;
         trait.description = description.text;
+        trait.tier = (TraitTier)tier.value;
         List<string> seperatedTags = new List<string>();
         foreach (var item in tags.text.Split(','))
         {

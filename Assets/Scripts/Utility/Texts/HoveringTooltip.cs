@@ -48,6 +48,18 @@ public class HoveringTooltip : MonoBehaviour
         InfoUpdate(description);
     }
 
+    public void UpdateInformationTags(Unit unit)
+    {
+        string description = GetTagDescription(unit);
+        InfoUpdate(description);
+    }
+
+    public void UpdateInformationPotion(Unit unit)
+    {
+        string description = GetPotionDescription(unit);
+        InfoUpdate(description);
+    }
+
     public void UpdateInformation(Slider slider)
     {
         //rect.sizeDelta = new Vector2(350, 80);
@@ -59,6 +71,25 @@ public class HoveringTooltip : MonoBehaviour
     {
         string description = "Click to show the information for this consumed unit";
         InfoUpdate(description);
+    }
+
+    string GetTagDescription(Unit unit)
+    {
+        string desc = "";
+        var alltags = TagConditionChecker.GetCombinedUnitTags(unit);
+        foreach (var tag in alltags) {
+            desc += tag.name + "\n";
+        }
+        return desc;
+    }
+
+    string GetPotionDescription(Unit unit)
+    {
+        string desc = "";
+        foreach (var pot in unit.EquippedPotions) {
+            desc += State.World.ItemRepository.GetItem(pot.Key).Name + " x" + pot.Value[0] + "\n";
+        }
+        return desc;
     }
 
     string GetTraitDescription(string[] words)
