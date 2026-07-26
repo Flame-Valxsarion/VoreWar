@@ -1763,12 +1763,12 @@ static class RaceParameters
 
         OoviKat = new RaceTraits()
         {
-            BodySize = 15,
-            StomachSize = 20,
+            BodySize = 12,
+            StomachSize = 15,
             HasTail = true,
-            FavoredStat = Stat.Strength,
+            FavoredStat = Stat.Dexterity,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 10f,
             PowerAdjustment = 1.4f,
             RaceStats = new RaceStats()
             {
@@ -4823,7 +4823,7 @@ static class RaceParameters
             ExpMultiplier = 20f,
             PowerAdjustment = 100f,
             DeployCost = 8,
-            Upkeep = 150f,
+            Upkeep = 100f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(30, 35),

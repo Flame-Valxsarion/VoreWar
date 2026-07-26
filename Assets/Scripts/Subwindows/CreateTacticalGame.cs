@@ -520,20 +520,37 @@ public class CreateTacticalGame : MonoBehaviour
         else if (TerrainType.value == 3)
             tileType = StrategicTileType.snow;
         else if (TerrainType.value == 4)
-            village = new Village("", none, 0, DefenderRace(), false);
+            tileType = StrategicTileType.volcanic;
         else if (TerrainType.value == 5)
+            tileType = StrategicTileType.swamp;
+        else if (TerrainType.value == 6)
+            tileType = StrategicTileType.shallowWater;
+        else if (TerrainType.value == 7)
+            village = new Village("", none, 0, DefenderRace(), false);
+        else if (TerrainType.value == 8)
         {
             village = new Village("", none, 0, DefenderRace(), false);
             village.buildings.Add(VillageBuilding.wall);
         }
-        else if (TerrainType.value == 6)
+        else if (TerrainType.value == 9)
         {
             tileType = StrategicTileType.desert;
             village = new Village("", none, 0, DefenderRace(), false);
         }
-        else if (TerrainType.value == 7)
+        else if (TerrainType.value == 10)
         {
             tileType = StrategicTileType.desert;
+            village = new Village("", none, 0, DefenderRace(), false);
+            village.buildings.Add(VillageBuilding.wall);
+        }
+        else if (TerrainType.value == 11)
+        {
+            tileType = StrategicTileType.volcanic;
+            village = new Village("", none, 0, DefenderRace(), false);
+        }
+        else if (TerrainType.value == 12)
+        {
+            tileType = StrategicTileType.volcanic;
             village = new Village("", none, 0, DefenderRace(), false);
             village.buildings.Add(VillageBuilding.wall);
         }

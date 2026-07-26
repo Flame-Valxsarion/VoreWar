@@ -203,7 +203,6 @@ class TacticalMapGenerator
                                 TryToPlaceDecoration(i, j, decoration, decType);
                         }
                     }
-
                 }
             }
             if (village != null)

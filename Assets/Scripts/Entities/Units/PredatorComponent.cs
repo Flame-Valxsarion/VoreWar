@@ -167,7 +167,7 @@ public class PredatorComponent
     {
         get
         {
-            if(_voreRestrictions == null)
+            if (_voreRestrictions == null)
             {
                 _voreRestrictions = new List<IVoreRestrictions>();
                 if (Races.GetRace(unit.Race) is IVoreRestrictions restriction1)
@@ -182,7 +182,7 @@ public class PredatorComponent
         }
         set
         {
-            if(value == null)
+            if (value == null)
                 _voreRestrictions = null;
         }
     }
@@ -200,7 +200,7 @@ public class PredatorComponent
         if (!unit.CanUnbirth)
             return false;
         foreach (IVoreRestrictions callback in VoreRestrictions)
-            if (!callback.CheckVore(actor, preyTarget,PreyLocation.womb))
+            if (!callback.CheckVore(actor, preyTarget, PreyLocation.womb))
                 return false;
         return true;
     }
@@ -414,7 +414,7 @@ public class PredatorComponent
     }
     List<Prey> PreyRefInLocation(PreyLocation location)
     {
-        List <Prey> prey = new List<Prey>();
+        List<Prey> prey = new List<Prey>();
         switch (location)
         {
             case PreyLocation.balls:
@@ -787,30 +787,30 @@ public class PredatorComponent
         return false;
     }
 
-	 public int GetSpecialPreySize(Race race, int size, int maxNoSpecial, int maxSpecial, params PreyLocation[] locations)
+    public int GetSpecialPreySize(Race race, int size, int maxNoSpecial, int maxSpecial, params PreyLocation[] locations)
     {
         return GetSpecialPreySize(race, false, size, maxNoSpecial, maxSpecial, locations);
     }
 
-	///function to handle smoothly transitioning off of special prey graphics when multiple prey are present (prevents full belly forcing max-level special graphic, even if the special prey is nearly finished absorbing)
-	///
-	///example usage (20 non-special states, 8 special states):
-	///
-	///int size = actor.GetStomachSize(27);
-	///size = actor.PredatorComponent.GetSpecialPreySize(Race.Selicia, size, 19, 27, PreyLocation.stomach);
-	///
-	///return myBellySprites[size];
+    ///function to handle smoothly transitioning off of special prey graphics when multiple prey are present (prevents full belly forcing max-level special graphic, even if the special prey is nearly finished absorbing)
+    ///
+    ///example usage (20 non-special states, 8 special states):
+    ///
+    ///int size = actor.GetStomachSize(27);
+    ///size = actor.PredatorComponent.GetSpecialPreySize(Race.Selicia, size, 19, 27, PreyLocation.stomach);
+    ///
+    ///return myBellySprites[size];
     public int GetSpecialPreySize(Race race, bool forceTopSpriteIfAlive, int size, int maxNoSpecial, int maxSpecial, params PreyLocation[] locations)
     {
         bool anyLocation = locations.Length == 0;
         int sizeNoSpecial = Math.Min(maxNoSpecial, size);
 
-		if (Config.RaceSpecificVoreGraphicsDisabled)
+        if (Config.RaceSpecificVoreGraphicsDisabled)
             return sizeNoSpecial;
-        
+
         var Special = actor.PredatorComponent?.GetDirectPrey()
             .Where((s) => s.Unit.Race == race && (anyLocation || locations.Contains(actor.PredatorComponent.Location(s))))
-            .OrderBy((s) => 
+            .OrderBy((s) =>
             {
                 float health = 1;
                 if (s.Unit.IsDead)
@@ -930,7 +930,7 @@ public class PredatorComponent
         c *= unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult;
 
         //c *= unit.GetScale(3);  It may be more realistic, but having huge resulting in 81 times the base stomach capacity is just overkill
-        
+
         return c;
     }
 
@@ -1090,7 +1090,7 @@ public class PredatorComponent
     {
         unit.ResetSharedTraits();
         foreach (Prey preyUnit in prey)
-            foreach(Traits trait in preyUnit.SharedTraits)
+            foreach (Traits trait in preyUnit.SharedTraits)
                 if (!unit.HasTrait(trait))
                     unit.AddSharedTrait(trait);
     }
@@ -1098,10 +1098,10 @@ public class PredatorComponent
     internal void OnSwallowCallbacks(Prey preyUnit)
     {
         var location = preyUnit.Location;
-        foreach(IVoreCallback callback in PopulateCallbacks(preyUnit).OrderBy((vt) => vt.ProcessingPriority))
+        foreach (IVoreCallback callback in PopulateCallbacks(preyUnit).OrderBy((vt) => vt.ProcessingPriority))
         {
 
-            if(!callback.OnSwallow(preyUnit, actor, location))
+            if (!callback.OnSwallow(preyUnit, actor, location))
                 return;
         }
     }
@@ -1146,7 +1146,7 @@ public class PredatorComponent
         actor.UnitSprite.UpdateSprites(actor, true);
         UpdateAlivePrey();
     }
-    
+
     void AddPrey(Prey preyUnit)
     {
         OnSwallowCallbacks(preyUnit);
@@ -1199,7 +1199,7 @@ public class PredatorComponent
         if (prey.Contains(preyUnit))
         {
             var location = preyUnit.Location;
-            if(remove)
+            if (remove)
                 prey.Remove(preyUnit);
             foreach (IVoreCallback callback in PopulateCallbacks(preyUnit).OrderBy((vt) => vt.ProcessingPriority))
             {
@@ -1229,8 +1229,8 @@ public class PredatorComponent
         foreach (Traits trait in preyUnit.Unit.GetTraits.Where(t => (TraitList.GetTrait(t) != null) && TraitList.GetTrait(t) is INoAutoEscape))
         {
             INoAutoEscape callback = (INoAutoEscape)TraitList.GetTrait(trait);
-            if(!callback.CanEscape(preyUnit, actor))
-            return false;
+            if (!callback.CanEscape(preyUnit, actor))
+                return false;
         }
         return true;
     }
@@ -1466,10 +1466,10 @@ public class PredatorComponent
 
     public void CreateSpawn(Race race, int side, float experience, bool forced = false)
     {
-        Spawn spawnUnit = new Spawn(side,race,(int)(experience));
+        Spawn spawnUnit = new Spawn(side, race, (int)(experience));
         Actor_Unit spawnActor = State.GameManager.TacticalMode.AddUnitToBattle(spawnUnit, actor);
         State.GameManager.TacticalMode.DirtyPack = true;
-        if(forced)
+        if (forced)
             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{InfoPanel.RaceSingular(spawnUnit)} Spawn <b>{spawnUnit.Name}</b> bursts from <b>{actor.Unit.Name}</b>'s body");
         else
             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> has created a {InfoPanel.RaceSingular(spawnUnit)} Spawn <b>{spawnUnit.Name}</b>.");
@@ -1529,7 +1529,8 @@ public class PredatorComponent
     public bool ChangeRaceAuto(bool isDead, bool random)
     {
         Prey preyUnit = SelectPrey(isDead, random);
-        if (preyUnit != null){
+        if (preyUnit != null)
+        {
             return TryChangeRace(preyUnit);
         }
         else
@@ -1605,7 +1606,7 @@ public class PredatorComponent
                     unit.BodySize = Math.Min(unit.BodySize, State.RaceSettings.Get(unit.Race).MaxWeight);
             }
 
-            
+
         }
 
     }
@@ -1651,7 +1652,7 @@ public class PredatorComponent
                     actor.UnitSprite.DisplayDamage(5, false, true);
                 }
                 preyUnit.Unit.RemoveTrait(trait);
-            }            
+            }
         }
         if (unit.HasTrait(Traits.Annihilation) && !TacticalUtilities.IsPreyEndoTargetForUnit(preyUnit, unit))
         {
@@ -1734,7 +1735,7 @@ public class PredatorComponent
             {
                 //HandleShapeshifterRebirth(preyUnit);
                 Race conversionRace = unit.DetermineConversionRace();
-                if(unit.HasTrait(Traits.DigestionRebirth) && !unit.HasSharedTrait(Traits.DigestionRebirth))
+                if (unit.HasTrait(Traits.DigestionRebirth) && !unit.HasSharedTrait(Traits.DigestionRebirth))
                     conversionRace = unit.HiddenUnit.DetermineConversionRace();
                 // use source race IF changeling already had this ability before transforming
                 preyUnit.Unit.Health = preyUnit.Unit.MaxHealth / 2;
@@ -1802,15 +1803,15 @@ public class PredatorComponent
                 if (spawnLoc == null)
                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{preyUnit.Unit.Name} was unable to respawn!");
                 else
-                    TacticalUtilities.Resurrect((spawnLoc),preyUnit.Actor);
-                    TacticalGraphicalEffects.CreateGenericMagic(spawnLoc, spawnLoc, preyUnit.Actor, TacticalGraphicalEffects.SpellEffectIcon.Resurrect);
-                    preyUnit.Unit.Health = preyUnit.Unit.MaxHealth;
-                    preyUnit.Unit.RemoveRespawns();
-                    FreeUnit(preyUnit.Actor);
-                    if (preyUnit.Unit.Race != Race.RwuMercenaries)
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{preyUnit.Unit.Name} has respawned!");
-                    else
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Reinforcements have arrived!");
+                    TacticalUtilities.Resurrect((spawnLoc), preyUnit.Actor);
+                TacticalGraphicalEffects.CreateGenericMagic(spawnLoc, spawnLoc, preyUnit.Actor, TacticalGraphicalEffects.SpellEffectIcon.Resurrect);
+                preyUnit.Unit.Health = preyUnit.Unit.MaxHealth;
+                preyUnit.Unit.RemoveRespawns();
+                FreeUnit(preyUnit.Actor);
+                if (preyUnit.Unit.Race != Race.RwuMercenaries)
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{preyUnit.Unit.Name} has respawned!");
+                else
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Reinforcements have arrived!");
                 return 0;
             }
         }
@@ -1842,7 +1843,7 @@ public class PredatorComponent
                     return 0;
             }
         }
-            
+
 
         if (preyUnit.Unit.IsThisCloseToDeath(preyDamage))
         {
@@ -1881,7 +1882,7 @@ public class PredatorComponent
             if (healthReduction >= preyUnit.Unit.MaxHealth + preyUnit.Unit.Health)
                 healthReduction = preyUnit.Unit.MaxHealth + preyUnit.Unit.Health + 1;
             preyUnit.Actor.SubtractHealth(healthReduction);
-            
+
             totalHeal += Math.Max((int)(healthReduction / 2 * preyUnit.Unit.TraitBoosts.Outgoing.Nutrition * unit.TraitBoosts.Incoming.Nutrition), 1);
             totalHeal = (int)(totalHeal * TagConditionChecker.ApplyTagEffect(unit, preyUnit.Unit, UnitTagModifierEffect.NutritionMult));
             var baseManaGain = healthReduction * (preyUnit.Unit.TraitBoosts.Outgoing.ManaAbsorbHundreths + unit.TraitBoosts.Incoming.ManaAbsorbHundreths);
@@ -1920,7 +1921,7 @@ public class PredatorComponent
             }
 
             //(Ambi) Weight Gain at 80% Absorption
-            if (preyUnit.Unit.IsDeadAndOverkilledBy(preyUnit.Unit.MaxHealth - preyUnit.Unit.MaxHealth/5))
+            if (preyUnit.Unit.IsDeadAndOverkilledBy(preyUnit.Unit.MaxHealth - preyUnit.Unit.MaxHealth / 5))
             {
                 if (Config.WeightGain)
                 {
@@ -1935,7 +1936,7 @@ public class PredatorComponent
                 {
                     actor.Damage(totalHeal * 2);
                     totalHeal = 0;
-                    CreateSpawn(actor.InfectedRace, actor.InfectedSide, unit.Experience/2, true);
+                    CreateSpawn(actor.InfectedRace, actor.InfectedSide, unit.Experience / 2, true);
                 }
                 foreach (IVoreCallback callback in Callbacks)
                 {
@@ -1949,7 +1950,7 @@ public class PredatorComponent
                  !unit.HasTrait(Traits.PredGusher) && !(preyUnit.Unit.AtypicalBiology() && !unit.AtypicalBiology()) && !(!preyUnit.Unit.AtypicalBiology() && unit.AtypicalBiology() && State.Rand.Next(2) == 0))
                 {
                     Race conversionRace = unit.DetermineConversionRace();
-                    if(unit.HasTrait(Traits.PredRebirther) && !unit.HasSharedTrait(Traits.PredRebirther))
+                    if (unit.HasTrait(Traits.PredRebirther) && !unit.HasSharedTrait(Traits.PredRebirther))
                         conversionRace = unit.HiddenUnit.DetermineConversionRace();
                     // use source race IF changeling already had this ability before transforming
                     preyUnit.Unit.Health = preyUnit.Unit.MaxHealth / 2;
@@ -2153,9 +2154,9 @@ public class PredatorComponent
 
             foreach (Traits trait in possibleTraits)
             {
-                    unit.AddPermanentTrait(trait);
-                    preyUnit.Unit.RemoveTrait(trait);
-                    updated = true;
+                unit.AddPermanentTrait(trait);
+                preyUnit.Unit.RemoveTrait(trait);
+                updated = true;
             }
         }
         if (unit.HasTrait(Traits.InfiniteAssimilation) || unit.HasTrait(Traits.Assimilate))
@@ -2244,7 +2245,7 @@ public class PredatorComponent
                 if (State.Rand.NextDouble() < Config.BurpFraction)
                 {
                     if (actor.Unit.Race == Race.Taraluxia && (actor.PredatorComponent?.IsUnitOfSpecificationInPrey(Race.Selicia, true) ?? false))
-                    {State.GameManager.SoundManager.PlayDigest(Location(preyUnit), actor);}
+                    { State.GameManager.SoundManager.PlayDigest(Location(preyUnit), actor); }
                     else if (actor.Unit.Race == Race.Taraluxia)
                     {
                         actor.SetBurpMode();
@@ -2365,7 +2366,7 @@ public class PredatorComponent
                 State.GameManager.SoundManager.PlayFart(actor);
             }
 
-            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) { }
             else if (Config.Scat && preyUnit.ScatDisabled == false)
             {
                 State.GameManager.SoundManager.PlayAbsorb(location, actor);
@@ -2373,7 +2374,7 @@ public class PredatorComponent
                 {
                     State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.SlimePile, preyUnit.Unit.Name, preyUnit.Unit.AccessoryColor);
                 }
-                else if (Config.CleanDisposal == true && actor.Unit.Race == Race.Tatltuae) {}
+                else if (Config.CleanDisposal == true && actor.Unit.Race == Race.Tatltuae) { }
                 else
                     State.GameManager.TacticalMode.CreateScat(GetCurrentLocation(), new ScatInfo(unit, preyUnit));
             }
@@ -2385,21 +2386,21 @@ public class PredatorComponent
         else if (location == PreyLocation.balls)
         {
             State.GameManager.SoundManager.PlayAbsorb(location, actor);
-            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) { }
             else if (Config.Cumstains)
             {
                 if (unit.Race == Race.Selicia)
                     State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.CumPuddle, preyUnit.Unit.Name, 0);
                 else if (Config.CondomsForCV)
                     State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.DisposedCondom, preyUnit.Unit.Name);
-                else 
+                else
                     State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.CumPuddle, preyUnit.Unit.Name);
             }
         }
         else if (location == PreyLocation.womb || (location == PreyLocation.breasts && unit.Race != Race.Kangaroos) || location == PreyLocation.leftBreast || location == PreyLocation.rightBreast)
         {
             State.GameManager.SoundManager.PlayAbsorb(location, actor);
-            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) { }
             else if (Config.Cumstains)
             {
                 if (unit.Race == Race.Selicia)
@@ -2413,14 +2414,14 @@ public class PredatorComponent
         else if (location == PreyLocation.tail && unit.Race == Race.Bees && Config.Cumstains)
         {
             State.GameManager.SoundManager.PlayAbsorb(location, actor);
-            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) { }
             else
                 State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.HoneyPuddle, preyUnit.Unit.Name);
         }
         else if (location == PreyLocation.bladder && Config.Cumstains)
         {
             State.GameManager.SoundManager.PlayAbsorb(location, actor);
-            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) {}
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) { }
             else
                 State.GameManager.TacticalMode.CreateMiscDiscard(GetCurrentLocation(), BoneTypes.UrinePuddle, preyUnit.Unit.Name);
         }
@@ -3333,14 +3334,14 @@ public class PredatorComponent
         {
             if (preyUnit.Unit.IsDead == false)
             {
-            return preyUnit;
+                return preyUnit;
             }
         }
         foreach (Prey preyUnit in stomach2)
         {
             if (preyUnit.Unit.IsDead == false)
             {
-            return preyUnit;
+                return preyUnit;
             }
         }
         return null;
@@ -3352,14 +3353,14 @@ public class PredatorComponent
         {
             if (preyUnit.Unit.IsDead == false)
             {
-            return preyUnit.Actor.Bulk();
+                return preyUnit.Actor.Bulk();
             }
         }
         foreach (Prey preyUnit in stomach2)
         {
             if (preyUnit.Unit.IsDead == false)
             {
-            return preyUnit.Actor.Bulk();
+                return preyUnit.Actor.Bulk();
             }
         }
         return 0;
@@ -3657,7 +3658,7 @@ public class PredatorComponent
                     return preyUnit;
                 }
             }
-			
+
         }
         if (State.RaceSettings.GetVoreTypes(actor.Unit.Race).Contains(VoreType.Oral))
         {
@@ -3910,7 +3911,7 @@ public class PredatorComponent
         actor.DigestCheck("cumfeed");
         if (unit.HasTrait(Traits.Corruption))
         {
-            target.AddCorruption(unit.GetStatTotal()/10, unit.FixedSide);
+            target.AddCorruption(unit.GetStatTotal() / 10, unit.FixedSide);
         }
         int quarterMovement = 1 + actor.MaxMovement() / (4 + (actor.Unit.HasTrait(Traits.WetNurse) ? 1 : 0));
         if (actor.Movement > quarterMovement)
@@ -3996,10 +3997,10 @@ public class PredatorComponent
                 recipient.PredatorComponent.RemovePrey(preyUnit);
                 actor.PredatorComponent.RemovePrey(preyUnit); int pool = 6;
                 if (Config.CondomsForCV)
-                {pool = 11;}
+                { pool = 11; }
                 var friendlies = TacticalUtilities.Units.Where(s => s.Unit.Side == unit.Side && s.Unit != recipient.Unit && s.Unit != unit && s.Visible && s.Targetable && s.Unit.IsDead == false).ToArray();//Random unit picker, using modified unimplemented code from the LogUtilities
                 if (friendlies.Length == 0)
-                {friendlies = null;}
+                { friendlies = null; }
                 switch (State.Rand.Next(pool))//Great additional lines thanks to Tatltuae!
                 {
                     case 0:
@@ -4042,15 +4043,19 @@ public class PredatorComponent
                         if (friendlies == null)
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{actor.Unit.Name}</b> and <b>{recipient.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("have sex", "fuck")}, the liquid remains of <b>{preyUnit.Unit.Name}</b> shoot into <b>{LogUtilities.ApostrophizeWithOrWithoutS(recipient.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}, where what little remains of <b>{preyUnit.Unit.Name}</b> is simply absorbed into <b>{alreadyChild.Unit.Name}</b>.");
                         else
-                        {var i = friendlies[State.Rand.Next(friendlies.Length)].Unit;
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> slips on a condom and goes to have sex with <b>{recipient.Unit.Name}</b>. After they're done, <b>{actor.Unit.Name}</b> observes that former <b>{preyUnit.Unit.Name}</b> is leaking from 7 small holes in the condom. Knowing what happened, <b>{actor.Unit.Name}</b> shouts \"<b>{(i).Name}</b>! Not funny!\" Within <b>{LogUtilities.ApostrophizeWithOrWithoutS(recipient.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}, the trickling streams of \"<b>{preyUnit.Unit.Name}</b>\" are absorbed by <b>{alreadyChild.Unit.Name}</b>.");}
+                        {
+                            var i = friendlies[State.Rand.Next(friendlies.Length)].Unit;
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> slips on a condom and goes to have sex with <b>{recipient.Unit.Name}</b>. After they're done, <b>{actor.Unit.Name}</b> observes that former <b>{preyUnit.Unit.Name}</b> is leaking from 7 small holes in the condom. Knowing what happened, <b>{actor.Unit.Name}</b> shouts \"<b>{(i).Name}</b>! Not funny!\" Within <b>{LogUtilities.ApostrophizeWithOrWithoutS(recipient.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}, the trickling streams of \"<b>{preyUnit.Unit.Name}</b>\" are absorbed by <b>{alreadyChild.Unit.Name}</b>.");
+                        }
                         break;
                     case 9:
                         if (friendlies == null)
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{actor.Unit.Name}</b> and <b>{recipient.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("have sex", "fuck")}, the liquid remains of <b>{preyUnit.Unit.Name}</b> shoot into <b>{LogUtilities.ApostrophizeWithOrWithoutS(recipient.Unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}, where what little remains of <b>{preyUnit.Unit.Name}</b> is simply absorbed into <b>{alreadyChild.Unit.Name}</b>.");
                         else
-                        {var i = friendlies[State.Rand.Next(friendlies.Length)].Unit;
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Before having sex, <b>{actor.Unit.Name}</b> looks for {LogUtilities.GPPHis(actor.Unit)} condom, but can't find it. \"I think I left it with <b>{(i).Name}</b>. Want me to go get it?\" <b>{recipient.Unit.Name}</b> responds \"Nah, I got a {LogUtilities.GetRaceDescSingl(alreadyChild.Unit)} in my {PreyLocStrings.ToSyn(PreyLocation.womb)}, they'll absorb everything.\" True to {LogUtilities.GPPHis(recipient.Unit)} word, the remains of <b>{preyUnit.Unit.Name}</b> are absorbed by <b>{alreadyChild.Unit.Name}</b>.");}
+                        {
+                            var i = friendlies[State.Rand.Next(friendlies.Length)].Unit;
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Before having sex, <b>{actor.Unit.Name}</b> looks for {LogUtilities.GPPHis(actor.Unit)} condom, but can't find it. \"I think I left it with <b>{(i).Name}</b>. Want me to go get it?\" <b>{recipient.Unit.Name}</b> responds \"Nah, I got a {LogUtilities.GetRaceDescSingl(alreadyChild.Unit)} in my {PreyLocStrings.ToSyn(PreyLocation.womb)}, they'll absorb everything.\" True to {LogUtilities.GPPHis(recipient.Unit)} word, the remains of <b>{preyUnit.Unit.Name}</b> are absorbed by <b>{alreadyChild.Unit.Name}</b>.");
+                        }
                         break;
                     case 10:
                         if (!Config.LewdDialog)
@@ -4061,7 +4066,7 @@ public class PredatorComponent
                     default:
                         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{actor.Unit.Name}</b> pumps what remains of <b>{preyUnit.Unit.Name}</b> into <b>{LogUtilities.ApostrophizeWithOrWithoutS(recipient.Unit.Name)}</b> womb, providing nutrients to strengthen <b>{alreadyChild.Unit.Name}</b>.");
                         break;
-                    }
+                }
                 if (unit.HasTrait(Traits.Corruption) || preyUnit.Unit.HasTrait(Traits.Corruption))
                 {
                     alreadyChild.Unit.hiddenFixedSide = true;
@@ -4080,9 +4085,10 @@ public class PredatorComponent
         {
             recipient.PredatorComponent.AlivePrey++;
             actor.PredatorComponent.AlivePrey--;
-        } else if (unit.HasTrait(Traits.Corruption))
+        }
+        else if (unit.HasTrait(Traits.Corruption))
         {
-            recipient.AddCorruption(preyUnit.Unit.GetStatTotal()/2, unit.FixedSide);
+            recipient.AddCorruption(preyUnit.Unit.GetStatTotal() / 2, unit.FixedSide);
         }
         else if (preyUnit.Unit.HasTrait(Traits.Corruption))
             recipient.AddCorruption(preyUnit.Unit.GetStatTotal() / 2, preyUnit.Unit.FixedSide);
@@ -4110,16 +4116,17 @@ public class PredatorComponent
         UpdateFullness();
         return true;
     }
-	
+
     private bool KissTransferFinalize(Actor_Unit recipient, Prey preyUnit, Prey preyref, PreyLocation destination)
     {
         if (preyUnit.Unit.IsDead == false)
         {
             recipient.PredatorComponent.AlivePrey++;
             actor.PredatorComponent.AlivePrey--;
-        } else if (unit.HasTrait(Traits.Corruption))
+        }
+        else if (unit.HasTrait(Traits.Corruption))
         {
-            recipient.AddCorruption(preyUnit.Unit.GetStatTotal()/2, unit.FixedSide);
+            recipient.AddCorruption(preyUnit.Unit.GetStatTotal() / 2, unit.FixedSide);
         }
         else if (preyUnit.Unit.HasTrait(Traits.Corruption))
             recipient.AddCorruption(preyUnit.Unit.GetStatTotal() / 2, preyUnit.Unit.FixedSide);
@@ -4203,7 +4210,8 @@ public class PredatorComponent
             return false;
         }
         if (!KissTransfer(target, transfer))
-        {};
+        { }
+        ;
         int thirdMovement = (int)Math.Ceiling(actor.MaxMovement() / 3.0f);
         if (actor.Movement > thirdMovement)
             actor.Movement -= thirdMovement;
@@ -4459,85 +4467,103 @@ public class PredatorComponent
                     if (Config.FairyBVType == FairyBVType.Picked && State.GameManager.TacticalMode.IsPlayerInControl)
                     {
                         var box = State.GameManager.CreateDialogBox();
-                        box.SetData(() => { rightBreast.Add(preyref); UpdateFullness();
+                        box.SetData(() =>
+                        {
+                            rightBreast.Add(preyref); UpdateFullness();
                             switch (State.Rand.Next(5))
                             {
-                            case 0:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 1:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
-                                break;
-                            case 2:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 3:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            case 4:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            default:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            }}, "Right", "Left", "Which breast should the prey be put in? (from your pov)", () => { leftBreast.Add(preyref); UpdateFullness(); 
+                                case 0:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                                case 1:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
+                                    break;
+                                case 2:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                                case 3:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                    break;
+                                case 4:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                    break;
+                                default:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                            }
+                        }, "Right", "Left", "Which breast should the prey be put in? (from your pov)", () =>
+                        {
+                            leftBreast.Add(preyref); UpdateFullness();
                             switch (State.Rand.Next(5))
                             {
-                            case 0:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 1:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
-                                break;
-                            case 2:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 3:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            case 4:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            default:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            }});
+                                case 0:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                                case 1:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
+                                    break;
+                                case 2:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                                case 3:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                    break;
+                                case 4:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                    break;
+                                default:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                            }
+                        });
                         break;
                     }
                     int breastSide = 1;
                     if (LeftBreastFullness < RightBreastFullness || State.Rand.Next(2) == 0)
                         leftBreast.Add(preyref);
                     else
-                    {rightBreast.Add(preyref); breastSide = 2;}
+                    { rightBreast.Add(preyref); breastSide = 2; }
                     switch (State.Rand.Next(5))
                     {
                         case 0:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");}
+                            {
+                                int bS = breastSide;
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                            }
                             break;
                         case 1:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");}
+                            {
+                                int bS = breastSide;
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
+                            }
                             break;
                         case 2:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");}
+                            {
+                                int bS = breastSide;
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                            }
                             break;
                         case 3:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");}
+                            {
+                                int bS = breastSide;
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                            }
                             break;
                         case 4:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");}
+                            {
+                                int bS = breastSide;
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                            }
                             break;
                         default:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");}
+                            {
+                                int bS = breastSide;
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                            }
                             break;
                     }
                     break;
-                }                
+                }
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.breasts, actor);
                 breasts.Add(preyref);
                 switch (State.Rand.Next(6))
@@ -4590,77 +4616,77 @@ public class PredatorComponent
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.tail, actor);
                 tail.Add(preyref);
                 if (unit.Race == Race.Tatltuae)
-                switch (State.Rand.Next(3))
-                {
-                    case 0:
-                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. \"What the?!- Hey, get out of there!\" The raven glares at nothing in particular for a moment before letting out an annoyed sigh. \"Fine. Enjoy. Feel lucky I didn't swap the dimensions in time, or this would've ended <i>very</i> differently for you.\"");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. In response, the raven just chuckles. \"I saw you coming, you know. Hope you enjoy being absorbed into feathers.\"");
-                        break;
-                    case 1:
-                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the fuck! Could've just asked, jerk!\" The corvid grumbles as he pulls himself back up off the ground.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the hell? Do you <i>want</i> to be part of my plumage or something?\"");
-                        break;
-                    case 2:
-                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. I swear, if they mess with any of my stuff I'll figure out a spell to turn their blood into mercury or something...\"");
-                        else
+                    switch (State.Rand.Next(3))
+                    {
+                        case 0:
+                            if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. \"What the?!- Hey, get out of there!\" The raven glares at nothing in particular for a moment before letting out an annoyed sigh. \"Fine. Enjoy. Feel lucky I didn't swap the dimensions in time, or this would've ended <i>very</i> differently for you.\"");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. In response, the raven just chuckles. \"I saw you coming, you know. Hope you enjoy being absorbed into feathers.\"");
+                            break;
+                        case 1:
+                            if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the fuck! Could've just asked, jerk!\" The corvid grumbles as he pulls himself back up off the ground.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the hell? Do you <i>want</i> to be part of my plumage or something?\"");
+                            break;
+                        case 2:
+                            if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. I swear, if they mess with any of my stuff I'll figure out a spell to turn their blood into mercury or something...\"");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
+                            break;
+                        default:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
-                        break;
-                }
+                            break;
+                    }
                 else
-                switch (State.Rand.Next(4))
-                {
-                    case 0:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Quickly {LogUtilities.GPPHe(forcePrey.Unit)} vanish{LogUtilities.EsIfSingular(forcePrey.Unit)} into the ball of fluff; feeling quite comfy.");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> gullet appearing to be stopped on {LogUtilities.GPPHis(forcePrey.Unit)} way to the bird's stomach, finding {LogUtilities.GPPHimself(forcePrey.Unit)} rather stuck in the bird's crop instead.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> manages to knock <b>{unit.Name}</b> out of the sky. Before the bee has a chance to get airborne again, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("stinger", "honey chamber", "honey-filled tail")}.");
-                        else
+                    switch (State.Rand.Next(4))
+                    {
+                        case 0:
+                            if (unit.Race == Race.Youko)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Quickly {LogUtilities.GPPHe(forcePrey.Unit)} vanish{LogUtilities.EsIfSingular(forcePrey.Unit)} into the ball of fluff; feeling quite comfy.");
+                            else if (unit.Race == Race.Terrorbird)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> gullet appearing to be stopped on {LogUtilities.GPPHis(forcePrey.Unit)} way to the bird's stomach, finding {LogUtilities.GPPHimself(forcePrey.Unit)} rather stuck in the bird's crop instead.");
+                            else if (unit.Race == Race.Bees)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> manages to knock <b>{unit.Name}</b> out of the sky. Before the bee has a chance to get airborne again, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("stinger", "honey chamber", "honey-filled tail")}.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
+                            break;
+                        case 1:
+                            if (unit.Race == Race.Youko)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> rear, grabbing the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails and quickly wrapping {LogUtilities.GPPHimself(forcePrey.Unit)} up in them.");
+                            else if (unit.Race == Race.Terrorbird)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b>, pries {LogUtilities.GPPHis(unit)} beak open, and climbs in, stopping in the confused {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} crop.");
+                            else if (unit.Race == Race.Bees)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> gets under <b>{unit.Name}</b>, and pries open {LogUtilities.GPPHis(unit)} stinger, before crawling up into the honey filled chamber within{LogUtilities.GetRandomStringFrom(".", $", much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> displeasure.")}");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> throws {LogUtilities.GPPHimself(forcePrey.Unit)} at <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, pulling open the tip and pushing {LogUtilities.GPPHimself(forcePrey.Unit)} inside before the {LogUtilities.GetRaceDescSingl(unit)} can stop {LogUtilities.GPPHim(forcePrey.Unit)}.");
+                            break;
+                        case 2:
+                            if (unit.Race == Race.Youko)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{unit.Name}</b> stands there, minding {LogUtilities.GPPHis(unit)} own business, <b>{forcePrey.Unit.Name}</b> comes up behind {LogUtilities.GPPHim(unit)} and forcibly wraps the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails around {LogUtilities.GPPHimself(forcePrey.Unit)}{LogUtilities.GetRandomStringFrom(".", $", and when <b>{unit.Name}</b> tries to unfurl {LogUtilities.GPPHis(unit)} tails, <b>{forcePrey.Unit.Name}</b> simply holds on tighter.")}");
+                            else if (unit.Race == Race.Terrorbird)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} decent in the crop")}.");
+                            else if (unit.Race == Race.Bees)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> baits <b>{unit.Name}</b> into trying to sting {LogUtilities.GPPHim(forcePrey.Unit)}, and then, slightly painfully for the {LogUtilities.GetRaceDescSingl(unit)}, pulls the stinger open and goes inside.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> wrestles <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, before prying open the tip and slipping inside.");
+                            break;
+                        case 3:
+                            if (unit.Race == Race.Youko)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slowly sneaks into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Before <b>{unit.Name}</b> can react {LogUtilities.GPPHis(unit)} tails have already wrapped up the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} in their {LogUtilities.GetRandomStringFrom("comfy", "tight", "fluffly")} embrace, refusing to let go.");
+                            else if (unit.Race == Race.Terrorbird)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches <b>{unit.Name}</b> closely, and then, seeing an opportunity, jumps for the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} open beak, sliding in and coming to a stop in {LogUtilities.GPPHis(unit)} crop.");
+                            else if (unit.Race == Race.Bees)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sneaks up behind <b>{unit.Name}</b>, before shoving the {LogUtilities.GetRaceDescSingl(unit)} hard, knocking {LogUtilities.GPPHim(unit)} off balance. By the time {LogUtilities.GPPHe(unit)} {LogUtilities.HasHave(unit)} regained that balance, <b>{forcePrey.Unit.Name}</b> is mostly inside {LogUtilities.GPPHis(unit)} stinger.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel{LogUtilities.SIfSingular(unit)} something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
+                            break;
+                        default:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
-                        break;
-                    case 1:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> rear, grabbing the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails and quickly wrapping {LogUtilities.GPPHimself(forcePrey.Unit)} up in them.");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b>, pries {LogUtilities.GPPHis(unit)} beak open, and climbs in, stopping in the confused {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} crop.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> gets under <b>{unit.Name}</b>, and pries open {LogUtilities.GPPHis(unit)} stinger, before crawling up into the honey filled chamber within{LogUtilities.GetRandomStringFrom(".", $", much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> displeasure.")}");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> throws {LogUtilities.GPPHimself(forcePrey.Unit)} at <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, pulling open the tip and pushing {LogUtilities.GPPHimself(forcePrey.Unit)} inside before the {LogUtilities.GetRaceDescSingl(unit)} can stop {LogUtilities.GPPHim(forcePrey.Unit)}.");
-                        break;
-                    case 2:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{unit.Name}</b> stands there, minding {LogUtilities.GPPHis(unit)} own business, <b>{forcePrey.Unit.Name}</b> comes up behind {LogUtilities.GPPHim(unit)} and forcibly wraps the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails around {LogUtilities.GPPHimself(forcePrey.Unit)}{LogUtilities.GetRandomStringFrom(".", $", and when <b>{unit.Name}</b> tries to unfurl {LogUtilities.GPPHis(unit)} tails, <b>{forcePrey.Unit.Name}</b> simply holds on tighter.")}");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} decent in the crop")}.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> baits <b>{unit.Name}</b> into trying to sting {LogUtilities.GPPHim(forcePrey.Unit)}, and then, slightly painfully for the {LogUtilities.GetRaceDescSingl(unit)}, pulls the stinger open and goes inside.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> wrestles <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, before prying open the tip and slipping inside.");
-                        break;
-                    case 3:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slowly sneaks into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Before <b>{unit.Name}</b> can react {LogUtilities.GPPHis(unit)} tails have already wrapped up the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} in their {LogUtilities.GetRandomStringFrom("comfy", "tight", "fluffly")} embrace, refusing to let go.");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches <b>{unit.Name}</b> closely, and then, seeing an opportunity, jumps for the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} open beak, sliding in and coming to a stop in {LogUtilities.GPPHis(unit)} crop.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sneaks up behind <b>{unit.Name}</b>, before shoving the {LogUtilities.GetRaceDescSingl(unit)} hard, knocking {LogUtilities.GPPHim(unit)} off balance. By the time {LogUtilities.GPPHe(unit)} {LogUtilities.HasHave(unit)} regained that balance, <b>{forcePrey.Unit.Name}</b> is mostly inside {LogUtilities.GPPHis(unit)} stinger.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel{LogUtilities.SIfSingular(unit)} something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
-                        break;
-                }
+                            break;
+                    }
                 break;
             case PreyLocation.bladder:
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.bladder, actor);
@@ -4676,7 +4702,7 @@ public class PredatorComponent
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into, <b>{unit.Name}</b>, and, after a brief struggle, <b>{unit.Name}</b> finds {LogUtilities.GPPHimself(unit)} with a bloated bladder{(LogUtilities.ActorHumanoid(unit) ? $" \"Was that where you were aiming for?\" \"That's for me to know and you to not know.\"" : ".")}");
                         break;
                     case 1:
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into, <b>{unit.Name}</b>, and, after a brief struggle, <b>{unit.Name}</b> finds {LogUtilities.GPPHimself(unit)} with a bloated bladder{(LogUtilities.ActorHumanoid(unit) ? $" \"Was that where you were aiming for?\" \"That's for me to know and you to not know.\"" : ".")}");
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into, <b>{unit.Name}</b>, and, after a brief struggle, <b>{unit.Name}</b> finds {LogUtilities.GPPHimself(unit)} with a bloated bladder{(LogUtilities.ActorHumanoid(unit) ? $" \"Was that where you were aiming for?\" \"That's for me to know and you to not know.\"" : ".")}");
                         break;
                     default:
                         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> groin, forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} bladder.");
@@ -4687,57 +4713,57 @@ public class PredatorComponent
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.stomach, actor);
                 AddToStomach(preyref, 1f);
                 if (unit.Race == Race.Iliijiith)
-                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> runs up to <b>{unit.Name}</b> and leaps at it, vanishing into the crystalline entity, whose surface ripples like liquid for a moment before resolidifying.");
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> runs up to <b>{unit.Name}</b> and leaps at it, vanishing into the crystalline entity, whose surface ripples like liquid for a moment before resolidifying.");
                 else
-                switch (State.Rand.Next(12))
-                {
-                    case 0:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
-                        break;
-                    case 1:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and pries {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} open before manually crawling down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}, much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> confusion.");
-                        break;
-                    case 2:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Noticing that {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} is slightly ajar, <b>{forcePrey.Unit.Name}</b> makes a running leap into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}, sliding quickly down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}{LogUtilities.GetRandomStringFrom("!", ".")}");
-                        break;
-                    case 3:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Without so much as an \"excuse me,\" the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} unapologetically forces {LogUtilities.GPPHimself(forcePrey.Unit)} down the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}.");
-                        break;
-                    case 4:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> abruptly sticks {LogUtilities.GPPHis(forcePrey.Unit)} head in <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> mouth, looking around the inside for a few moments, before forcing {LogUtilities.GPPHis(forcePrey.Unit)} way down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(forcePrey.Unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
-                        break;
-                    case 5:
-                        if (LogUtilities.ActorHumanoid(forcePrey.Unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{forcePrey.Unit.Name}</b> walks over to <b>{unit.Name}</b>, {LogUtilities.GPPHe(forcePrey.Unit)} pick{LogUtilities.SIfSingular(forcePrey.Unit)} up a stick. Once at the {LogUtilities.GetRaceDescSingl(unit)}, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} the stick to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}. By the time that {LogUtilities.GPPHe(unit)} can spit the stick out, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} is already in {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
-                        else
+                    switch (State.Rand.Next(12))
+                    {
+                        case 0:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
-                        break;
+                            break;
+                        case 1:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and pries {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} open before manually crawling down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}, much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> confusion.");
+                            break;
+                        case 2:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Noticing that {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} is slightly ajar, <b>{forcePrey.Unit.Name}</b> makes a running leap into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}, sliding quickly down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}{LogUtilities.GetRandomStringFrom("!", ".")}");
+                            break;
+                        case 3:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Without so much as an \"excuse me,\" the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} unapologetically forces {LogUtilities.GPPHimself(forcePrey.Unit)} down the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}.");
+                            break;
+                        case 4:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> abruptly sticks {LogUtilities.GPPHis(forcePrey.Unit)} head in <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> mouth, looking around the inside for a few moments, before forcing {LogUtilities.GPPHis(forcePrey.Unit)} way down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(forcePrey.Unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
+                            break;
+                        case 5:
+                            if (LogUtilities.ActorHumanoid(forcePrey.Unit))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{forcePrey.Unit.Name}</b> walks over to <b>{unit.Name}</b>, {LogUtilities.GPPHe(forcePrey.Unit)} pick{LogUtilities.SIfSingular(forcePrey.Unit)} up a stick. Once at the {LogUtilities.GetRaceDescSingl(unit)}, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} the stick to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}. By the time that {LogUtilities.GPPHe(unit)} can spit the stick out, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} is already in {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
+                            break;
                         //Below logs are generalized for potential future force feed compatability
-                    case 6:
-                        if (LogUtilities.ActorHumanoid(unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After <b>{forcePrey.Unit.Name}</b> finished forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(preyLocation)}, <b>{unit.Name}</b> says simply; \"Rude. If you wanted in, you could've let me choose were to put you, or at least let me get some pleasure out of your journey in.\"");
-                        else
+                        case 6:
+                            if (LogUtilities.ActorHumanoid(unit))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After <b>{forcePrey.Unit.Name}</b> finished forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(preyLocation)}, <b>{unit.Name}</b> says simply; \"Rude. If you wanted in, you could've let me choose were to put you, or at least let me get some pleasure out of your journey in.\"");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"It all happened so fast. One moment, <b>{unit.Name}</b> was bracing {LogUtilities.GPPHimself(unit)} against a charging {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}. The next, {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(preyLocation)} was bulging out with <b>{forcePrey.Unit.Name}</b> stored inside.");
+                            break;
+                        case 7:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"It all happened so fast. One moment, <b>{unit.Name}</b> was bracing {LogUtilities.GPPHimself(unit)} against a charging {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}. The next, {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(preyLocation)} was bulging out with <b>{forcePrey.Unit.Name}</b> stored inside.");
-                        break;
-                    case 7:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"It all happened so fast. One moment, <b>{unit.Name}</b> was bracing {LogUtilities.GPPHimself(unit)} against a charging {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}. The next, {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(preyLocation)} was bulging out with <b>{forcePrey.Unit.Name}</b> stored inside.");
-                        break;
-                    case 8:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(preyLocation)}{LogUtilities.GetRandomStringFrom("!", ".")}");
-                        break;
-                    case 9:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was outside of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> body. The next, {LogUtilities.GPPHe(forcePrey.Unit)} {LogUtilities.WasWere(forcePrey.Unit)} inside. Notably, <b>{unit.Name}</b> was given no choice in this decision.");
-                        break;
-                    case 10:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and unceremoniously forces {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(preyLocation)}. <b>{unit.Name}</b>, for {LogUtilities.GPPHis(unit)} part stares at {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("bloated", "engorged", "enlarged", "bulging" )} {PreyLocStrings.ToSyn(preyLocation)} with utter confusion.");
-                        break;
-                    case 11:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> tackles <b>{unit.Name}</b>, and uses the moment of confusion to force {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(preyLocation)}.");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
-                        break;
-                }
+                            break;
+                        case 8:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(preyLocation)}{LogUtilities.GetRandomStringFrom("!", ".")}");
+                            break;
+                        case 9:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was outside of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> body. The next, {LogUtilities.GPPHe(forcePrey.Unit)} {LogUtilities.WasWere(forcePrey.Unit)} inside. Notably, <b>{unit.Name}</b> was given no choice in this decision.");
+                            break;
+                        case 10:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and unceremoniously forces {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(preyLocation)}. <b>{unit.Name}</b>, for {LogUtilities.GPPHis(unit)} part stares at {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("bloated", "engorged", "enlarged", "bulging")} {PreyLocStrings.ToSyn(preyLocation)} with utter confusion.");
+                            break;
+                        case 11:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> tackles <b>{unit.Name}</b>, and uses the moment of confusion to force {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(preyLocation)}.");
+                            break;
+                        default:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
+                            break;
+                    }
                 break;
         }
         AddPrey(preyref);
@@ -4749,7 +4775,7 @@ public class PredatorComponent
         UpdateFullness();
     }
 
-    internal void ForceConsumeAuto(Actor_Unit forcePrey)
+    internal void ForceConsumeAuto(Actor_Unit forcePrey, bool skiptext = false)
     {
         if (forcePrey.Unit.IsDead == false)
             AlivePrey++;
@@ -4798,100 +4824,103 @@ public class PredatorComponent
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.womb, actor);
                 loc = PreyLocation.womb;
                 AddToWomb(preyref, 1f);
-                switch (State.Rand.Next(6))
-                {
-                    case 0:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> pries apart <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> vulva using {LogUtilities.GPPHis(forcePrey.Unit)} face, grabbing onto any bodypart {LogUtilities.GPPHe(forcePrey.Unit)} can find to slip {LogUtilities.GPPHimself(forcePrey.Unit)} all the way in, aided by the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} contractions of sudden arousal.");
-                        break;
-                    case 1:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> runs over to <b>{unit.Name}</b> before getting on the ground under the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.womb)}. Before <b>{unit.Name}</b> can question this, <b>{forcePrey.Unit.Name}</b> bolts upright, forcing {LogUtilities.GPPHimself(forcePrey.Unit)} up into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}{LogUtilities.GetRandomStringFrom("!", ".")}");
-                        break;
-                    case 2:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Running over, <b>{forcePrey.Unit.Name}</b> rapidly pushes {LogUtilities.GPPHis(forcePrey.Unit)} way into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}.");
-                        break;
-                    case 3:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After being knocked to the ground by the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}, <b>{unit.Name}</b> finds {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.womb)} being aggressivly licked by <b>{forcePrey.Unit.Name}</b>. This carries on for a few moments, before <b>{forcePrey.Unit.Name}</b> suddenly and rapidly shoves {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} womb.");
-                        break;
-                    case 4:
-                        if (LogUtilities.ActorHumanoid(forcePrey.Unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slips behind <b>{unit.Name}</b> and kicks {LogUtilities.GPPHim(unit)} right in the {PreyLocStrings.ToSyn(PreyLocation.womb)}! Where most would assume this is an attack on the {LogUtilities.GetRaceDescSingl(unit)}, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> next action, knocking <b>{unit.Name}</b> over and forcing {LogUtilities.GPPHimself(forcePrey.Unit)} further into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)} proves the action had other motavations.");
-                        else
+                if (!skiptext)
+                    switch (State.Rand.Next(6))
+                    {
+                        case 0:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> pries apart <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> vulva using {LogUtilities.GPPHis(forcePrey.Unit)} face, grabbing onto any bodypart {LogUtilities.GPPHe(forcePrey.Unit)} can find to slip {LogUtilities.GPPHimself(forcePrey.Unit)} all the way in, aided by the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} contractions of sudden arousal.");
-                        break;
-                    case 5:
-                        if (LogUtilities.ActorHumanoid(forcePrey.Unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sticks a finger up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}. Then a hand. Then a whole arm. Then two hands. Then <b>{unit.Name}</b> pushes off the ground to force {LogUtilities.GPPHimself(forcePrey.Unit)} all the way up into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}.");
-                        else
+                            break;
+                        case 1:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> runs over to <b>{unit.Name}</b> before getting on the ground under the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.womb)}. Before <b>{unit.Name}</b> can question this, <b>{forcePrey.Unit.Name}</b> bolts upright, forcing {LogUtilities.GPPHimself(forcePrey.Unit)} up into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}{LogUtilities.GetRandomStringFrom("!", ".")}");
+                            break;
+                        case 2:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Running over, <b>{forcePrey.Unit.Name}</b> rapidly pushes {LogUtilities.GPPHis(forcePrey.Unit)} way into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}.");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> pries apart <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> vulva using {LogUtilities.GPPHis(forcePrey.Unit)} face, grabbing onto any bodypart {LogUtilities.GPPHe(forcePrey.Unit)} can find to slip {LogUtilities.GPPHimself(forcePrey.Unit)} all the way in, aided by the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} contractions of sudden arousal.");
-                        break;
-                }
+                            break;
+                        case 3:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After being knocked to the ground by the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}, <b>{unit.Name}</b> finds {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.womb)} being aggressivly licked by <b>{forcePrey.Unit.Name}</b>. This carries on for a few moments, before <b>{forcePrey.Unit.Name}</b> suddenly and rapidly shoves {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} womb.");
+                            break;
+                        case 4:
+                            if (LogUtilities.ActorHumanoid(forcePrey.Unit))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slips behind <b>{unit.Name}</b> and kicks {LogUtilities.GPPHim(unit)} right in the {PreyLocStrings.ToSyn(PreyLocation.womb)}! Where most would assume this is an attack on the {LogUtilities.GetRaceDescSingl(unit)}, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> next action, knocking <b>{unit.Name}</b> over and forcing {LogUtilities.GPPHimself(forcePrey.Unit)} further into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)} proves the action had other motavations.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> pries apart <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> vulva using {LogUtilities.GPPHis(forcePrey.Unit)} face, grabbing onto any bodypart {LogUtilities.GPPHe(forcePrey.Unit)} can find to slip {LogUtilities.GPPHimself(forcePrey.Unit)} all the way in, aided by the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} contractions of sudden arousal.");
+                            break;
+                        case 5:
+                            if (LogUtilities.ActorHumanoid(forcePrey.Unit))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sticks a finger up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}. Then a hand. Then a whole arm. Then two hands. Then <b>{unit.Name}</b> pushes off the ground to force {LogUtilities.GPPHimself(forcePrey.Unit)} all the way up into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Running over, <b>{forcePrey.Unit.Name}</b> rapidly pushes {LogUtilities.GPPHis(forcePrey.Unit)} way into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.womb)}.");
+                            break;
+                        default:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> pries apart <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> vulva using {LogUtilities.GPPHis(forcePrey.Unit)} face, grabbing onto any bodypart {LogUtilities.GPPHe(forcePrey.Unit)} can find to slip {LogUtilities.GPPHimself(forcePrey.Unit)} all the way in, aided by the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} contractions of sudden arousal.");
+                            break;
+                    }
                 break;
             case VoreType.CockVore:
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.balls, actor);
                 loc = PreyLocation.balls;
                 AddToBalls(preyref, 1f);
-                switch (State.Rand.Next(6))
-                {
-                    case 0:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tip. As soon as {LogUtilities.GPPHe(forcePrey.Unit)} start{LogUtilities.SIfSingular(forcePrey.Unit)} sticking {LogUtilities.GPPHis(forcePrey.Unit)} tongue inside, however, it's more like the {LogUtilities.ApostrophizeWithOrWithoutS(InfoPanel.RaceSingular(unit))} throbbing member is doing the sucking, allowing <b>{forcePrey.Unit.Name}</b> to wiggle all the way into {LogUtilities.GPPHis(unit)} sack.");
-                        break;
-                    case 1:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was just walking up to <b>{unit.Name}</b>, then, not even two seconds later, <b>{forcePrey.Unit.Name}</b> had already shoved half of {LogUtilities.GPPHis(forcePrey.Unit)} body down the shocked {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToCockSyn()}! Only three or so seconds after that, <b>{forcePrey.Unit.Name}</b> was fully in <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.balls)}.");
-                        break;
-                    case 2:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> strokes <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}, getting it nice and {LogUtilities.GetRandomStringFrom("hard", "erect")}, before shoving {LogUtilities.GPPHimself(forcePrey.Unit)} down into the unprepared {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.balls)}{LogUtilities.GetRandomStringFrom("!", ".")}");
-                        break;
-                    case 3:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> has spotted <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}. In that instant, <b>{forcePrey.Unit.Name}</b> knows exactly what {LogUtilities.GPPHe(forcePrey.Unit)} must do. Without any warning, <b>{forcePrey.Unit.Name}</b> is shoving {LogUtilities.GPPHimself(forcePrey.Unit)} down <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}, the lenth of the shaft bulging with the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(forcePrey.Unit))} every movement.");
-                        break;
-                    case 4:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> gives <b>{unit.Name}</b> a blowjob. As <b>{unit.Name}</b> nears ejaculation, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first down <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}.");
-                        break;
-                    case 5:
-                        if (LogUtilities.ActorHumanoid(forcePrey.Unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sticks {LogUtilities.GPPHis(forcePrey.Unit)} hand down <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.balls)}. Then the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} grabs some of the loose skin around the {PreyLocStrings.ToSyn(PreyLocation.balls)} from the inside, and uses it as a handhold to rapidly, and not particularaly pleasently, pull {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.balls)}.");
-                        else
+                if (!skiptext)
+                    switch (State.Rand.Next(6))
+                    {
+                        case 0:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tip. As soon as {LogUtilities.GPPHe(forcePrey.Unit)} start{LogUtilities.SIfSingular(forcePrey.Unit)} sticking {LogUtilities.GPPHis(forcePrey.Unit)} tongue inside, however, it's more like the {LogUtilities.ApostrophizeWithOrWithoutS(InfoPanel.RaceSingular(unit))} throbbing member is doing the sucking, allowing <b>{forcePrey.Unit.Name}</b> to wiggle all the way into {LogUtilities.GPPHis(unit)} sack.");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tip. As soon as {LogUtilities.GPPHe(forcePrey.Unit)} start{LogUtilities.SIfSingular(forcePrey.Unit)} sticking {LogUtilities.GPPHis(forcePrey.Unit)} tongue inside, however, it's more like the {LogUtilities.ApostrophizeWithOrWithoutS(InfoPanel.RaceSingular(unit))} throbbing member is doing the sucking, allowing <b>{forcePrey.Unit.Name}</b> to wiggle all the way into {LogUtilities.GPPHis(unit)} sack.");
-                        break;
-                }
+                            break;
+                        case 1:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was just walking up to <b>{unit.Name}</b>, then, not even two seconds later, <b>{forcePrey.Unit.Name}</b> had already shoved half of {LogUtilities.GPPHis(forcePrey.Unit)} body down the shocked {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToCockSyn()}! Only three or so seconds after that, <b>{forcePrey.Unit.Name}</b> was fully in <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.balls)}.");
+                            break;
+                        case 2:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> strokes <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}, getting it nice and {LogUtilities.GetRandomStringFrom("hard", "erect")}, before shoving {LogUtilities.GPPHimself(forcePrey.Unit)} down into the unprepared {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.balls)}{LogUtilities.GetRandomStringFrom("!", ".")}");
+                            break;
+                        case 3:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> has spotted <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}. In that instant, <b>{forcePrey.Unit.Name}</b> knows exactly what {LogUtilities.GPPHe(forcePrey.Unit)} must do. Without any warning, <b>{forcePrey.Unit.Name}</b> is shoving {LogUtilities.GPPHimself(forcePrey.Unit)} down <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}, the lenth of the shaft bulging with the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(forcePrey.Unit))} every movement.");
+                            break;
+                        case 4:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> gives <b>{unit.Name}</b> a blowjob. As <b>{unit.Name}</b> nears ejaculation, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first down <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToCockSyn()}.");
+                            break;
+                        case 5:
+                            if (LogUtilities.ActorHumanoid(forcePrey.Unit))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sticks {LogUtilities.GPPHis(forcePrey.Unit)} hand down <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.balls)}. Then the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} grabs some of the loose skin around the {PreyLocStrings.ToSyn(PreyLocation.balls)} from the inside, and uses it as a handhold to rapidly, and not particularaly pleasently, pull {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.balls)}.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tip. As soon as {LogUtilities.GPPHe(forcePrey.Unit)} start{LogUtilities.SIfSingular(forcePrey.Unit)} sticking {LogUtilities.GPPHis(forcePrey.Unit)} tongue inside, however, it's more like the {LogUtilities.ApostrophizeWithOrWithoutS(InfoPanel.RaceSingular(unit))} throbbing member is doing the sucking, allowing <b>{forcePrey.Unit.Name}</b> to wiggle all the way into {LogUtilities.GPPHis(unit)} sack.");
+                            break;
+                        default:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tip. As soon as {LogUtilities.GPPHe(forcePrey.Unit)} start{LogUtilities.SIfSingular(forcePrey.Unit)} sticking {LogUtilities.GPPHis(forcePrey.Unit)} tongue inside, however, it's more like the {LogUtilities.ApostrophizeWithOrWithoutS(InfoPanel.RaceSingular(unit))} throbbing member is doing the sucking, allowing <b>{forcePrey.Unit.Name}</b> to wiggle all the way into {LogUtilities.GPPHis(unit)} sack.");
+                            break;
+                    }
                 break;
             case VoreType.Anal:
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.anal, actor);
                 loc = PreyLocation.anal;
                 AddToStomach(preyref, 1f);
-                switch (State.Rand.Next(6))
-                {
-                    case 0:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> starts by shoving one {(LogUtilities.ActorHumanoid(forcePrey.Unit) ? "arm" : "forelimb")} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> ass, then another. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the anal depths.");
-                        break;
-                    case 1:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> jumps face-first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)}, yanking {LogUtilities.GPPHimself(forcePrey.Unit)} up and inside in a matter of moments.");
-                        break;
-                    case 2:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"When <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back is turned, <b>{forcePrey.Unit.Name}</b> takes {LogUtilities.GPPHis(forcePrey.Unit)} chance, jamming {LogUtilities.GPPHis(forcePrey.Unit)} whole body up the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.anal)}.");
-                        break;
-                    case 3:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Without so much as an \"excuse me,\" the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} unapologetically forces {LogUtilities.GPPHimself(forcePrey.Unit)} up the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.anal)}.");
-                        break;
-                    case 4:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Without giving the {LogUtilities.GetRaceDescSingl(unit)} any time to argue or protest, <b>{forcePrey.Unit.Name}</b> crawls up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)}.");
-                        break;
-                    case 5:
-                        if (LogUtilities.ActorHumanoid(forcePrey.Unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slips behind <b>{unit.Name}</b> and punches {LogUtilities.GPPHim(unit)} right in the {PreyLocStrings.ToSyn(PreyLocation.anal)}! Where most would assume this is an attack on the {LogUtilities.GetRaceDescSingl(unit)}, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> next action, forcing {LogUtilities.GPPHimself(forcePrey.Unit)} all the way inside <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)} proves the action had other motavations.");
-                        else
+                if (!skiptext)
+                    switch (State.Rand.Next(6))
+                    {
+                        case 0:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> starts by shoving one {(LogUtilities.ActorHumanoid(forcePrey.Unit) ? "arm" : "forelimb")} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> ass, then another. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the anal depths.");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> starts by shoving one {(LogUtilities.ActorHumanoid(forcePrey.Unit) ? "arm" : "forelimb")} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> ass, then another. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the anal depths.");
-                        break;
-                }
+                            break;
+                        case 1:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> jumps face-first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)}, yanking {LogUtilities.GPPHimself(forcePrey.Unit)} up and inside in a matter of moments.");
+                            break;
+                        case 2:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"When <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back is turned, <b>{forcePrey.Unit.Name}</b> takes {LogUtilities.GPPHis(forcePrey.Unit)} chance, jamming {LogUtilities.GPPHis(forcePrey.Unit)} whole body up the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.anal)}.");
+                            break;
+                        case 3:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Without so much as an \"excuse me,\" the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} unapologetically forces {LogUtilities.GPPHimself(forcePrey.Unit)} up the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.anal)}.");
+                            break;
+                        case 4:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Without giving the {LogUtilities.GetRaceDescSingl(unit)} any time to argue or protest, <b>{forcePrey.Unit.Name}</b> crawls up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)}.");
+                            break;
+                        case 5:
+                            if (LogUtilities.ActorHumanoid(forcePrey.Unit))
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slips behind <b>{unit.Name}</b> and punches {LogUtilities.GPPHim(unit)} right in the {PreyLocStrings.ToSyn(PreyLocation.anal)}! Where most would assume this is an attack on the {LogUtilities.GetRaceDescSingl(unit)}, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> next action, forcing {LogUtilities.GPPHimself(forcePrey.Unit)} all the way inside <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.anal)} proves the action had other motavations.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> starts by shoving one {(LogUtilities.ActorHumanoid(forcePrey.Unit) ? "arm" : "forelimb")} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> ass, then another. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the anal depths.");
+                            break;
+                        default:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> starts by shoving one {(LogUtilities.ActorHumanoid(forcePrey.Unit) ? "arm" : "forelimb")} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> ass, then another. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the anal depths.");
+                            break;
+                    }
                 break;
             case VoreType.BreastVore:
                 var data = Races.GetRace(unit.Race);
@@ -4902,288 +4931,315 @@ public class PredatorComponent
                     if (Config.FairyBVType == FairyBVType.Picked && State.GameManager.TacticalMode.IsPlayerInControl)
                     {
                         var box = State.GameManager.CreateDialogBox();
-                        box.SetData(() => { rightBreast.Add(preyref); UpdateFullness();
+                        box.SetData(() =>
+                        {
+                            rightBreast.Add(preyref); UpdateFullness();
+                            if (!skiptext)
+                                switch (State.Rand.Next(5))
+                                {
+                                    case 0:
+                                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                        break;
+                                    case 1:
+                                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
+                                        break;
+                                    case 2:
+                                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                        break;
+                                    case 3:
+                                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                        break;
+                                    case 4:
+                                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                        break;
+                                    default:
+                                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                        break;
+                                }
+                        }, "Right", "Left", "Which breast should the prey be put in? (from your pov)", () =>
+                        {
+                            leftBreast.Add(preyref); UpdateFullness();
                             switch (State.Rand.Next(5))
                             {
-                            case 0:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 1:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
-                                break;
-                            case 2:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 3:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            case 4:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            default:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> right {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            }}, "Right", "Left", "Which breast should the prey be put in? (from your pov)", () => { leftBreast.Add(preyref); UpdateFullness(); 
-                            switch (State.Rand.Next(5))
-                            {
-                            case 0:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 1:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
-                                break;
-                            case 2:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            case 3:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            case 4:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");
-                                break;
-                            default:
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
-                                break;
-                            }});
+                                case 0:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                                case 1:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
+                                    break;
+                                case 2:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                                case 3:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                    break;
+                                case 4:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                    break;
+                                default:
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> left {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                    break;
+                            }
+                        });
                         break;
                     }
                     int breastSide = 1;
                     if (LeftBreastFullness < RightBreastFullness || State.Rand.Next(2) == 0)
                         leftBreast.Add(preyref);
                     else
-                    {rightBreast.Add(preyref); breastSide = 2;}
-                    switch (State.Rand.Next(5))
-                    {
-                        case 0:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");}
-                            break;
-                        case 1:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");}
-                            break;
-                        case 2:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");}
-                            break;
-                        case 3:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");}
-                            break;
-                        case 4:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}.");}
-                            break;
-                        default:
-                            {int bS = breastSide;
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom( "breast", "mammary", "boob", "tit", "jug", "knocker" )}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");}
-                            break;
-                    }
+                    { rightBreast.Add(preyref); breastSide = 2; }
+                    if (!skiptext)
+                        switch (State.Rand.Next(5))
+                        {
+                            case 0:
+                                {
+                                    int bS = breastSide;
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")} and shoves it into {LogUtilities.GPPHis(forcePrey.Unit)} face. Then, with a wet *shlorp* sound, <b>{LogUtilities.ApostrophizeWithOrWithoutS(forcePrey.Unit.Name)}</b> head disappears into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                }
+                                break;
+                            case 1:
+                                {
+                                    int bS = breastSide;
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> latches onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, suckling for a moment or two, before forcing {LogUtilities.GPPHimself(forcePrey.Unit)} through the nipple, and vanishing into the boob beyond.");
+                                }
+                                break;
+                            case 2:
+                                {
+                                    int bS = breastSide;
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                }
+                                break;
+                            case 3:
+                                {
+                                    int bS = breastSide;
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sucks on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. As <b>{unit.Name}</b> relaxes to let it happen, <b>{forcePrey.Unit.Name}</b> pulls back and then dives head first into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                }
+                                break;
+                            case 4:
+                                {
+                                    int bS = breastSide;
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before plunging into the center of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}. Then {LogUtilities.GPPHe(forcePrey.Unit)} slowly feed{LogUtilities.SIfSingular(forcePrey.Unit)} the rest of {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}.");
+                                }
+                                break;
+                            default:
+                                {
+                                    int bS = breastSide;
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. With a motion resembling a headbutt, <b>{forcePrey.Unit.Name}</b> slips {LogUtilities.GPPHis(forcePrey.Unit)} head into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {(bS == 1 ? "left" : "right")} {LogUtilities.GetRandomStringFrom("breast", "mammary", "boob", "tit", "jug", "knocker")}, followed shortly by the rest of {LogUtilities.GPPHis(forcePrey.Unit)} body.");
+                                }
+                                break;
+                        }
                     break;
-                }                
+                }
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.breasts, actor);
                 loc = PreyLocation.breasts;
                 breasts.Add(preyref);
-                switch (State.Rand.Next(6))
-                {
-                    case 0:
-                        if (unit.Race == Race.Kangaroos)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> approaches <b>{unit.Name}</b> and abruptly yanks open {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}. Before the {LogUtilities.GetRaceDescSingl(unit)} can comment on how frankly rude this is, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"In just a few deft movements, <b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tits.");
-                        break;
-                    case 1:
-                        if (unit.Race == Race.Kangaroos)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"While <b>{unit.Name}</b> isn't paying attention, <b>{forcePrey.Unit.Name}</b> jumps into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} pouch. Somehow, <b>{unit.Name}</b> doesn't notice this, and carries on as {LogUtilities.GPPHe(unit)} {LogUtilities.WasWere(unit)}.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)}, breifly motorboating {LogUtilities.GPPHim(unit)} before pushing extra hard and vanishing into the space between the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.breasts)}.");
-                        break;
-                    case 2:
-                        if (unit.Race == Race.Kangaroos)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> has already decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} {LogUtilities.GetRaceDescSingl(unit)} food. The only questions left are who and how? For the who, <b>{forcePrey.Unit.Name}</b> selects <b>{unit.Name}</b>. After some thought, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} decides to see what the inside of a {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")} is like. Before <b>{unit.Name}</b> can attempt to stop {LogUtilities.GPPHim(forcePrey.Unit)}, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} is already fully within {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Using <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)} as handholds, <b>{forcePrey.Unit.Name}</b> pulls {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} cleavage.");
-                        break;
-                    case 3:
-                        if (unit.Race == Race.Kangaroos)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}, <b>{forcePrey.Unit.Name}</b> is a touch surprised by the way the {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}'s entrance seals above {LogUtilities.GPPHim(forcePrey.Unit)}. Unlike most force-feeders, <b>{forcePrey.Unit.Name}</b> doesn't necissarely want to be digested. So now, both <b>{unit.Name}</b> and <b>{forcePrey.Unit.Name}</b> get to be unhappy!");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> approaches <b>{unit.Name}</b> and abruptly pulls apart {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.breasts)}, before stuffing {LogUtilities.GPPHimself(forcePrey.Unit)} into the gap between.");
-                        break;
-                    case 4:
-                        if (unit.Race == Race.Kangaroos)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> smacks <b>{unit.Name}</b> across the face. While {LogUtilities.GPPHeIs(unit)} dazed, <b>{forcePrey.Unit.Name}</b> climbs into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}. When <b>{unit.Name}</b> regains {LogUtilities.GPPHis(unit)} senses, {LogUtilities.GPPHe(unit)} say{LogUtilities.SIfSingular(unit)} \"You could have just asked.\"");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)} and shoves {LogUtilities.GPPHimself(forcePrey.Unit)} between {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.breasts)}! Much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> surprise, {LogUtilities.GPPHe(forcePrey.Unit)} sink{LogUtilities.SIfSingular(forcePrey.Unit)} into the soft flesh at the bottom, becoming living fat on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)}.");
-                        break;
-                    case 5:
-                        if (unit.Race == Race.Kangaroos)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> smacks <b>{unit.Name}</b> across the face. While {LogUtilities.GPPHeIs(unit)} dazed, <b>{forcePrey.Unit.Name}</b> climbs into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before {LogUtilities.GetRandomStringFrom("jumping feet first", "diving head first")} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)}, dissapearing with one quick *shlump* noise.");
-                        break;
-                    default:
-                        if (unit.Race == Race.Kangaroos)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> approaches <b>{unit.Name}</b> and abruptly yanks open {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}. Before the {LogUtilities.GetRaceDescSingl(unit)} can comment on how frankly rude this is, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"In just a few deft movements, <b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tits.");
-                        break;
-                }
+                if (!skiptext)
+                    switch (State.Rand.Next(6))
+                    {
+                        case 0:
+                            if (unit.Race == Race.Kangaroos)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> approaches <b>{unit.Name}</b> and abruptly yanks open {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}. Before the {LogUtilities.GetRaceDescSingl(unit)} can comment on how frankly rude this is, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"In just a few deft movements, <b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tits.");
+                            break;
+                        case 1:
+                            if (unit.Race == Race.Kangaroos)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"While <b>{unit.Name}</b> isn't paying attention, <b>{forcePrey.Unit.Name}</b> jumps into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} pouch. Somehow, <b>{unit.Name}</b> doesn't notice this, and carries on as {LogUtilities.GPPHe(unit)} {LogUtilities.WasWere(unit)}.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)}, breifly motorboating {LogUtilities.GPPHim(unit)} before pushing extra hard and vanishing into the space between the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.breasts)}.");
+                            break;
+                        case 2:
+                            if (unit.Race == Race.Kangaroos)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> has already decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} {LogUtilities.GetRaceDescSingl(unit)} food. The only questions left are who and how? For the who, <b>{forcePrey.Unit.Name}</b> selects <b>{unit.Name}</b>. After some thought, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} decides to see what the inside of a {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")} is like. Before <b>{unit.Name}</b> can attempt to stop {LogUtilities.GPPHim(forcePrey.Unit)}, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} is already fully within {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Using <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)} as handholds, <b>{forcePrey.Unit.Name}</b> pulls {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} cleavage.");
+                            break;
+                        case 3:
+                            if (unit.Race == Race.Kangaroos)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}, <b>{forcePrey.Unit.Name}</b> is a touch surprised by the way the {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}'s entrance seals above {LogUtilities.GPPHim(forcePrey.Unit)}. Unlike most force-feeders, <b>{forcePrey.Unit.Name}</b> doesn't necissarely want to be digested. So now, both <b>{unit.Name}</b> and <b>{forcePrey.Unit.Name}</b> get to be unhappy!");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> approaches <b>{unit.Name}</b> and abruptly pulls apart {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.breasts)}, before stuffing {LogUtilities.GPPHimself(forcePrey.Unit)} into the gap between.");
+                            break;
+                        case 4:
+                            if (unit.Race == Race.Kangaroos)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> smacks <b>{unit.Name}</b> across the face. While {LogUtilities.GPPHeIs(unit)} dazed, <b>{forcePrey.Unit.Name}</b> climbs into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}. When <b>{unit.Name}</b> regains {LogUtilities.GPPHis(unit)} senses, {LogUtilities.GPPHe(unit)} say{LogUtilities.SIfSingular(unit)} \"You could have just asked.\"");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> grabs <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)} and shoves {LogUtilities.GPPHimself(forcePrey.Unit)} between {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.breasts)}! Much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> surprise, {LogUtilities.GPPHe(forcePrey.Unit)} sink{LogUtilities.SIfSingular(forcePrey.Unit)} into the soft flesh at the bottom, becoming living fat on <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)}.");
+                            break;
+                        case 5:
+                            if (unit.Race == Race.Kangaroos)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> smacks <b>{unit.Name}</b> across the face. While {LogUtilities.GPPHeIs(unit)} dazed, <b>{forcePrey.Unit.Name}</b> climbs into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> knocks <b>{unit.Name}</b> down onto {LogUtilities.GPPHis(unit)} back, before {LogUtilities.GetRandomStringFrom("jumping feet first", "diving head first")} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(PreyLocation.breasts)}, dissapearing with one quick *shlump* noise.");
+                            break;
+                        default:
+                            if (unit.Race == Race.Kangaroos)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> approaches <b>{unit.Name}</b> and abruptly yanks open {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("lower torso", "pouch", "marsupium")}. Before the {LogUtilities.GetRaceDescSingl(unit)} can comment on how frankly rude this is, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"In just a few deft movements, <b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tits.");
+                            break;
+                    }
                 break;
             case VoreType.TailVore:
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.tail, actor);
                 loc = PreyLocation.tail;
                 tail.Add(preyref);
-                if (unit.Race == Race.Tatltuae)
-                switch (State.Rand.Next(3))
+                if (!skiptext)
                 {
-                    case 0:
-                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. \"What the?!- Hey, get out of there!\" The raven glares at nothing in particular for a moment before letting out an annoyed sigh. \"Fine. Enjoy. Feel lucky I didn't swap the dimensions in time, or this would've ended <i>very</i> differently for you.\"");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. In response, the raven just chuckles. \"I saw you coming, you know. Hope you enjoy being absorbed into feathers.\"");
-                        break;
-                    case 1:
-                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the fuck! Could've just asked, jerk!\" The corvid grumbles as he pulls himself back up off the ground.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the hell? Do you <i>want</i> to be part of my plumage or something?\"");
-                        break;
-                    case 2:
-                        if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. I swear, if they mess with any of my stuff I'll figure out a spell to turn their blood into mercury or something...\"");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
-                        break;
-                }
-                else
-                switch (State.Rand.Next(4))
-                {
-                    case 0:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Quickly {LogUtilities.GPPHe(forcePrey.Unit)} vanish{LogUtilities.EsIfSingular(forcePrey.Unit)} into the ball of fluff; feeling quite comfy.");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> gullet appearing to be stopped on {LogUtilities.GPPHis(forcePrey.Unit)} way to the bird's stomach, finding {LogUtilities.GPPHimself(forcePrey.Unit)} rather stuck in the bird's crop instead.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> manages to knock <b>{unit.Name}</b> out of the sky. Before the bee has a chance to get airborne again, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("stinger", "honey chamber", "honey-filled tail")}.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
-                        break;
-                    case 1:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> rear, grabbing the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails and quickly wrapping {LogUtilities.GPPHimself(forcePrey.Unit)} up in them.");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b>, pries {LogUtilities.GPPHis(unit)} beak open, and climbs in, stopping in the confused {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} crop.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> gets under <b>{unit.Name}</b>, and pries open {LogUtilities.GPPHis(unit)} stinger, before crawling up into the honey filled chamber within{LogUtilities.GetRandomStringFrom(".", $", much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> displeasure.")}");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> throws {LogUtilities.GPPHimself(forcePrey.Unit)} at <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, pulling open the tip and pushing {LogUtilities.GPPHimself(forcePrey.Unit)} inside before the {LogUtilities.GetRaceDescSingl(unit)} can stop {LogUtilities.GPPHim(forcePrey.Unit)}.");
-                        break;
-                    case 2:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{unit.Name}</b> stands there, minding {LogUtilities.GPPHis(unit)} own business, <b>{forcePrey.Unit.Name}</b> comes up behind {LogUtilities.GPPHim(unit)} and forcibly wraps the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails around {LogUtilities.GPPHimself(forcePrey.Unit)}{LogUtilities.GetRandomStringFrom(".", $", and when <b>{unit.Name}</b> tries to unfurl {LogUtilities.GPPHis(unit)} tails, <b>{forcePrey.Unit.Name}</b> simply holds on tighter.")}");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} decent in the crop")}.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> baits <b>{unit.Name}</b> into trying to sting {LogUtilities.GPPHim(forcePrey.Unit)}, and then, slightly painfully for the {LogUtilities.GetRaceDescSingl(unit)}, pulls the stinger open and goes inside.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> wrestles <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, before prying open the tip and slipping inside.");
-                        break;
-                    case 3:
-                        if (unit.Race == Race.Youko)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slowly sneaks into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Before <b>{unit.Name}</b> can react {LogUtilities.GPPHis(unit)} tails have already wrapped up the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} in their {LogUtilities.GetRandomStringFrom("comfy", "tight", "fluffly")} embrace, refusing to let go.");
-                        else if (unit.Race == Race.Terrorbird)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches <b>{unit.Name}</b> closely, and then, seeing an opportunity, jumps for the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} open beak, sliding in and coming to a stop in {LogUtilities.GPPHis(unit)} crop.");
-                        else if (unit.Race == Race.Bees)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sneaks up behind <b>{unit.Name}</b>, before shoving the {LogUtilities.GetRaceDescSingl(unit)} hard, knocking {LogUtilities.GPPHim(unit)} off balance. By the time {LogUtilities.GPPHe(unit)} {LogUtilities.HasHave(unit)} regained that balance, <b>{forcePrey.Unit.Name}</b> is mostly inside {LogUtilities.GPPHis(unit)} stinger.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel{LogUtilities.SIfSingular(unit)} something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
-                        break;
+
+                    if (unit.Race == Race.Tatltuae)
+                        switch (State.Rand.Next(3))
+                        {
+                            case 0:
+                                if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. \"What the?!- Hey, get out of there!\" The raven glares at nothing in particular for a moment before letting out an annoyed sigh. \"Fine. Enjoy. Feel lucky I didn't swap the dimensions in time, or this would've ended <i>very</i> differently for you.\"");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches as <b>{unit.Name}</b> pulls {LogUtilities.GetRandomStringFrom("something", "a small notebook", "some sort of tool", "something shiny")} out of his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} and then puts it back in. Getting an idea, <b>{forcePrey.Unit.Name}</b> charges the bird before jumping headfirst into his fluffy black neck. In response, the raven just chuckles. \"I saw you coming, you know. Hope you enjoy being absorbed into feathers.\"");
+                                break;
+                            case 1:
+                                if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the fuck! Could've just asked, jerk!\" The corvid grumbles as he pulls himself back up off the ground.");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> feels himself get shoved to the ground, and as he looks up, he watches as <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("dives", "does a dive that would make a professional swimmer proud")} directly into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")}! \"What the hell? Do you <i>want</i> to be part of my plumage or something?\"");
+                                break;
+                            case 2:
+                                if ((unit.HasTrait(Traits.FriendlyStomach) && (forcePrey.Unit.FixedSide == unit.GetApparentSide(forcePrey.Unit))) || unit.HasTrait(Traits.Endosoma))
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. I swear, if they mess with any of my stuff I'll figure out a spell to turn their blood into mercury or something...\"");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
+                                break;
+                            default:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Casually walking up to <b>{unit.Name}</b>, <b>{forcePrey.Unit.Name}</b> reaches into his {LogUtilities.GetRandomStringFrom("neck feathers", "hackles")} without warning. \"What are you?-\" Before <b>{unit.Name}</b> can even finish his sentence, <b>{forcePrey.Unit.Name}</b> {LogUtilities.GetRandomStringFrom("wordlessly", "expressionlessly")} climbs into the bird's soft feathers. \"H-hey, get out!- And {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} gone. Well, none of my business if {LogUtilities.GPPHe(forcePrey.Unit)} want{LogUtilities.SIfSingular(forcePrey.Unit)} to be part of my feathers.\"");
+                                break;
+                        }
+                    else
+                        switch (State.Rand.Next(4))
+                        {
+                            case 0:
+                                if (unit.Race == Race.Youko)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Quickly {LogUtilities.GPPHe(forcePrey.Unit)} vanish{LogUtilities.EsIfSingular(forcePrey.Unit)} into the ball of fluff; feeling quite comfy.");
+                                else if (unit.Race == Race.Terrorbird)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> gullet appearing to be stopped on {LogUtilities.GPPHis(forcePrey.Unit)} way to the bird's stomach, finding {LogUtilities.GPPHimself(forcePrey.Unit)} rather stuck in the bird's crop instead.");
+                                else if (unit.Race == Race.Bees)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> manages to knock <b>{unit.Name}</b> out of the sky. Before the bee has a chance to get airborne again, <b>{forcePrey.Unit.Name}</b> has already forced {LogUtilities.GPPHis(forcePrey.Unit)} way into {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("stinger", "honey chamber", "honey-filled tail")}.");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
+                                break;
+                            case 1:
+                                if (unit.Race == Race.Youko)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> rear, grabbing the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails and quickly wrapping {LogUtilities.GPPHimself(forcePrey.Unit)} up in them.");
+                                else if (unit.Race == Race.Terrorbird)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b>, pries {LogUtilities.GPPHis(unit)} beak open, and climbs in, stopping in the confused {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} crop.");
+                                else if (unit.Race == Race.Bees)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> gets under <b>{unit.Name}</b>, and pries open {LogUtilities.GPPHis(unit)} stinger, before crawling up into the honey filled chamber within{LogUtilities.GetRandomStringFrom(".", $", much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> displeasure.")}");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> throws {LogUtilities.GPPHimself(forcePrey.Unit)} at <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, pulling open the tip and pushing {LogUtilities.GPPHimself(forcePrey.Unit)} inside before the {LogUtilities.GetRaceDescSingl(unit)} can stop {LogUtilities.GPPHim(forcePrey.Unit)}.");
+                                break;
+                            case 2:
+                                if (unit.Race == Race.Youko)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{unit.Name}</b> stands there, minding {LogUtilities.GPPHis(unit)} own business, <b>{forcePrey.Unit.Name}</b> comes up behind {LogUtilities.GPPHim(unit)} and forcibly wraps the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails around {LogUtilities.GPPHimself(forcePrey.Unit)}{LogUtilities.GetRandomStringFrom(".", $", and when <b>{unit.Name}</b> tries to unfurl {LogUtilities.GPPHis(unit)} tails, <b>{forcePrey.Unit.Name}</b> simply holds on tighter.")}");
+                                else if (unit.Race == Race.Terrorbird)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} decent in the crop")}.");
+                                else if (unit.Race == Race.Bees)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> baits <b>{unit.Name}</b> into trying to sting {LogUtilities.GPPHim(forcePrey.Unit)}, and then, slightly painfully for the {LogUtilities.GetRaceDescSingl(unit)}, pulls the stinger open and goes inside.");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> wrestles <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail, before prying open the tip and slipping inside.");
+                                break;
+                            case 3:
+                                if (unit.Race == Race.Youko)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> slowly sneaks into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> bundle of tails. Before <b>{unit.Name}</b> can react {LogUtilities.GPPHis(unit)} tails have already wrapped up the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} in their {LogUtilities.GetRandomStringFrom("comfy", "tight", "fluffly")} embrace, refusing to let go.");
+                                else if (unit.Race == Race.Terrorbird)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> watches <b>{unit.Name}</b> closely, and then, seeing an opportunity, jumps for the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} open beak, sliding in and coming to a stop in {LogUtilities.GPPHis(unit)} crop.");
+                                else if (unit.Race == Race.Bees)
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> sneaks up behind <b>{unit.Name}</b>, before shoving the {LogUtilities.GetRaceDescSingl(unit)} hard, knocking {LogUtilities.GPPHim(unit)} off balance. By the time {LogUtilities.GPPHe(unit)} {LogUtilities.HasHave(unit)} regained that balance, <b>{forcePrey.Unit.Name}</b> is mostly inside {LogUtilities.GPPHis(unit)} stinger.");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{unit.Name}</b> stops as {LogUtilities.GPPHe(unit)} feel{LogUtilities.SIfSingular(unit)} something at the tip of {LogUtilities.GPPHis(unit)} tail. Looking behind {LogUtilities.GPPHimself(unit)}, {LogUtilities.GPPHe(unit)} spot{LogUtilities.SIfSingular(unit)} <b>{forcePrey.Unit.Name}</b> messing with {LogUtilities.GPPHis(unit)} tail before- <i>shlorp</i> -forcing {LogUtilities.GPPHis(forcePrey.Unit)} way inside.");
+                                break;
+                            default:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> forces {LogUtilities.GPPHimself(forcePrey.Unit)} up <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> tail. Inch by inch {LogUtilities.GPPHe(forcePrey.Unit)} vigorously squeez{LogUtilities.EsIfSingular(forcePrey.Unit)} {LogUtilities.GPPHimself(forcePrey.Unit)} into the tail's depths.");
+                                break;
+                        }
                 }
                 break;
             case VoreType.BladderVore:
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.bladder, actor);
                 loc = PreyLocation.bladder;
                 bladder.Add(preyref);
-                switch (State.Rand.Next(2))
-                {
-                    case 0:
-                        if (unit.HasDick)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was just walking up to <b>{unit.Name}</b>, then, not even two seconds later, <b>{forcePrey.Unit.Name}</b> had already shoved half of {LogUtilities.GPPHis(forcePrey.Unit)} body down the shocked {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToCockSyn()}! Though, haste has downsides, as <b>{forcePrey.Unit.Name}</b> goes up into the bladder.");
-                        else if (unit.HasVagina)
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHe(forcePrey.Unit)} {LogUtilities.HasHave(forcePrey.Unit)} got to go inside. Running over, <b>{forcePrey.Unit.Name}</b> rapidly pushes {LogUtilities.GPPHis(forcePrey.Unit)} way into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("vagina", "slit", "pussy")}. Though, haste has downsides, as <b>{forcePrey.Unit.Name}</b> goes up into the bladder.");
-                        else
+                if (!skiptext)
+                    switch (State.Rand.Next(2))
+                    {
+                        case 0:
+                            if (unit.HasDick)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was just walking up to <b>{unit.Name}</b>, then, not even two seconds later, <b>{forcePrey.Unit.Name}</b> had already shoved half of {LogUtilities.GPPHis(forcePrey.Unit)} body down the shocked {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToCockSyn()}! Though, haste has downsides, as <b>{forcePrey.Unit.Name}</b> goes up into the bladder.");
+                            else if (unit.HasVagina)
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHe(forcePrey.Unit)} {LogUtilities.HasHave(forcePrey.Unit)} got to go inside. Running over, <b>{forcePrey.Unit.Name}</b> rapidly pushes {LogUtilities.GPPHis(forcePrey.Unit)} way into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("vagina", "slit", "pussy")}. Though, haste has downsides, as <b>{forcePrey.Unit.Name}</b> goes up into the bladder.");
+                            else
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into, <b>{unit.Name}</b>, and, after a brief struggle, <b>{unit.Name}</b> finds {LogUtilities.GPPHimself(unit)} with a bloated bladder{(LogUtilities.ActorHumanoid(unit) ? $" \"Was that where you were aiming for?\" \"That's for me to know and you to not know.\"" : ".")}");
+                            break;
+                        case 1:
                             State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into, <b>{unit.Name}</b>, and, after a brief struggle, <b>{unit.Name}</b> finds {LogUtilities.GPPHimself(unit)} with a bloated bladder{(LogUtilities.ActorHumanoid(unit) ? $" \"Was that where you were aiming for?\" \"That's for me to know and you to not know.\"" : ".")}");
-                        break;
-                    case 1:
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> charges into, <b>{unit.Name}</b>, and, after a brief struggle, <b>{unit.Name}</b> finds {LogUtilities.GPPHimself(unit)} with a bloated bladder{(LogUtilities.ActorHumanoid(unit) ? $" \"Was that where you were aiming for?\" \"That's for me to know and you to not know.\"" : ".")}");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> groin, forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} bladder.");
-                        break;
-                }
+                            break;
+                        default:
+                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> leaps into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> groin, forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} bladder.");
+                            break;
+                    }
                 break;
             default:
                 State.GameManager.SoundManager.PlaySwallow(PreyLocation.stomach, actor);
                 AddToStomach(preyref, 1f);
-                if (unit.Race == Race.Iliijiith)
-                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> runs up to <b>{unit.Name}</b> and leaps at it, vanishing into the crystalline entity, whose surface ripples like liquid for a moment before resolidifying.");
-                else
-                switch (State.Rand.Next(12))
-                {
-                    case 0:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
-                        break;
-                    case 1:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and pries {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} open before manually crawling down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}, much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> confusion.");
-                        break;
-                    case 2:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Noticing that {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} is slightly ajar, <b>{forcePrey.Unit.Name}</b> makes a running leap into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}, sliding quickly down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}{LogUtilities.GetRandomStringFrom("!", ".")}");
-                        break;
-                    case 3:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Without so much as an \"excuse me,\" the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} unapologetically forces {LogUtilities.GPPHimself(forcePrey.Unit)} down the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}.");
-                        break;
-                    case 4:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> abruptly sticks {LogUtilities.GPPHis(forcePrey.Unit)} head in <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> mouth, looking around the inside for a few moments, before forcing {LogUtilities.GPPHis(forcePrey.Unit)} way down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(forcePrey.Unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
-                        break;
-                    case 5:
-                        if (LogUtilities.ActorHumanoid(forcePrey.Unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{forcePrey.Unit.Name}</b> walks over to <b>{unit.Name}</b>, {LogUtilities.GPPHe(forcePrey.Unit)} pick{LogUtilities.SIfSingular(forcePrey.Unit)} up a stick. Once at the {LogUtilities.GetRaceDescSingl(unit)}, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} the stick to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}. By the time that {LogUtilities.GPPHe(unit)} can spit the stick out, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} is already in {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
-                        break;
-                        //Below logs are generalized for potential future force feed compatability
-                    case 6:
-                        if (LogUtilities.ActorHumanoid(unit))
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After <b>{forcePrey.Unit.Name}</b> finished forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}, <b>{unit.Name}</b> says simply; \"Rude. If you wanted in, you could've let me choose were to put you, or at least let me get some pleasure out of your journey in.\"");
-                        else
-                            State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"It all happened so fast. One moment, <b>{unit.Name}</b> was bracing {LogUtilities.GPPHimself(unit)} against a charging {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}. The next, {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)} was bulging out with <b>{forcePrey.Unit.Name}</b> stored inside.");
-                        break;
-                    case 7:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"It all happened so fast. One moment, <b>{unit.Name}</b> was bracing {LogUtilities.GPPHimself(unit)} against a charging {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}. The next, {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)} was bulging out with <b>{forcePrey.Unit.Name}</b> stored inside.");
-                        break;
-                    case 8:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}{LogUtilities.GetRandomStringFrom("!", ".")}");
-                        break;
-                    case 9:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was outside of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> body. The next, {LogUtilities.GPPHe(forcePrey.Unit)} {LogUtilities.WasWere(forcePrey.Unit)} inside. Notably, <b>{unit.Name}</b> was given no choice in this decision.");
-                        break;
-                    case 10:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and unceremoniously forces {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}. <b>{unit.Name}</b>, for {LogUtilities.GPPHis(unit)} part stares at {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("bloated", "engorged", "enlarged", "bulging" )} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)} with utter confusion.");
-                        break;
-                    case 11:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> tackles <b>{unit.Name}</b>, and uses the moment of confusion to force {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}.");
-                        break;
-                    default:
-                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
-                        break;
-                }
+                if (!skiptext)
+                    if (unit.Race == Race.Iliijiith)
+                        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> runs up to <b>{unit.Name}</b> and leaps at it, vanishing into the crystalline entity, whose surface ripples like liquid for a moment before resolidifying.");
+                    else
+                        switch (State.Rand.Next(12))
+                        {
+                            case 0:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
+                                break;
+                            case 1:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and pries {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} open before manually crawling down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}, much to <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> confusion.");
+                                break;
+                            case 2:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Noticing that {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")} is slightly ajar, <b>{forcePrey.Unit.Name}</b> makes a running leap into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}, sliding quickly down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}{LogUtilities.GetRandomStringFrom("!", ".")}");
+                                break;
+                            case 3:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> spots <b>{unit.Name}</b> and decided that {LogUtilities.GPPHeIsAbbr(forcePrey.Unit)} got to go inside. Without so much as an \"excuse me,\" the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} unapologetically forces {LogUtilities.GPPHimself(forcePrey.Unit)} down the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}.");
+                                break;
+                            case 4:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> abruptly sticks {LogUtilities.GPPHis(forcePrey.Unit)} head in <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> mouth, looking around the inside for a few moments, before forcing {LogUtilities.GPPHis(forcePrey.Unit)} way down into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(forcePrey.Unit))} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
+                                break;
+                            case 5:
+                                if (LogUtilities.ActorHumanoid(forcePrey.Unit))
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{forcePrey.Unit.Name}</b> walks over to <b>{unit.Name}</b>, {LogUtilities.GPPHe(forcePrey.Unit)} pick{LogUtilities.SIfSingular(forcePrey.Unit)} up a stick. Once at the {LogUtilities.GetRaceDescSingl(unit)}, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} the stick to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {LogUtilities.GetRandomStringFrom("jaws", "maw", "mouth", "muzzle", "gob")}. By the time that {LogUtilities.GPPHe(unit)} can spit the stick out, the {LogUtilities.GetRaceDescSingl(forcePrey.Unit)} is already in {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(PreyLocation.stomach)}.");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
+                                break;
+                            //Below logs are generalized for potential future force feed compatability
+                            case 6:
+                                if (LogUtilities.ActorHumanoid(unit))
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"After <b>{forcePrey.Unit.Name}</b> finished forcing {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}, <b>{unit.Name}</b> says simply; \"Rude. If you wanted in, you could've let me choose were to put you, or at least let me get some pleasure out of your journey in.\"");
+                                else
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"It all happened so fast. One moment, <b>{unit.Name}</b> was bracing {LogUtilities.GPPHimself(unit)} against a charging {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}. The next, {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)} was bulging out with <b>{forcePrey.Unit.Name}</b> stored inside.");
+                                break;
+                            case 7:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"It all happened so fast. One moment, <b>{unit.Name}</b> was bracing {LogUtilities.GPPHimself(unit)} against a charging {LogUtilities.GetRaceDescSingl(forcePrey.Unit)}. The next, {LogUtilities.GPPHis(unit)} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)} was bulging out with <b>{forcePrey.Unit.Name}</b> stored inside.");
+                                break;
+                            case 8:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> crams {LogUtilities.GPPHimself(forcePrey.Unit)} into <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}{LogUtilities.GetRandomStringFrom("!", ".")}");
+                                break;
+                            case 9:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"One moment, <b>{forcePrey.Unit.Name}</b> was outside of <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> body. The next, {LogUtilities.GPPHe(forcePrey.Unit)} {LogUtilities.WasWere(forcePrey.Unit)} inside. Notably, <b>{unit.Name}</b> was given no choice in this decision.");
+                                break;
+                            case 10:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> walks up to <b>{unit.Name}</b> and unceremoniously forces {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}. <b>{unit.Name}</b>, for {LogUtilities.GPPHis(unit)} part stares at {LogUtilities.GPPHis(unit)} {LogUtilities.GetRandomStringFrom("bloated", "engorged", "enlarged", "bulging")} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)} with utter confusion.");
+                                break;
+                            case 11:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> tackles <b>{unit.Name}</b>, and uses the moment of confusion to force {LogUtilities.GPPHimself(forcePrey.Unit)} into the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} {PreyLocStrings.ToSyn(forcePrey.SelfPrey.Location)}.");
+                                break;
+                            default:
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"At {LogUtilities.GPPHis(forcePrey.Unit)} first glimpse of the {(LogUtilities.ActorHumanoid(unit) ? "warrior's" : "beast's")} maw, <b>{forcePrey.Unit.Name}</b> dives right down {LogUtilities.GPPHis(unit)} gullet. One swallow reflex later, <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> belly has been filled.");
+                                break;
+                        }
                 break;
         }
         AddPrey(preyref);

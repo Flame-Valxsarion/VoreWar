@@ -3336,7 +3336,7 @@ public class Actor_Unit
                 {
                     if (unit_check.Unit.Predator)
                     {
-                        unit_check.PredatorComponent.ForceConsumeAuto(this);
+                        unit_check.PredatorComponent.ForceConsumeAuto(this, true);
                         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{Unit.Name} disappears. {unit_check.Unit.Name} is surprised as {Unit.Name} ends up inside of them.");
                     }
                 }

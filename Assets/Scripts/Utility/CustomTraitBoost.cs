@@ -199,7 +199,7 @@ public class CustomTraitBoost
                             s.HealthRegen += (int)value;
                             break;
                         case CustomTraitComp.ManaRegen:
-                            s.ManaRegen *= (int)value;
+                            s.ManaRegen += (int)value;
                             break;
                         case CustomTraitComp.OnLevelUpBonusToAllStats:
                             s.OnLevelUpBonusToAllStats *= (int)value;

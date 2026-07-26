@@ -35,8 +35,19 @@ public class TacticalMode : SceneBase
         Melee,
         Ranged
     }
+    enum TerrainType
+    {
+        Grass,
+        Snow,
+        Forest,
+        Desert,
+        Volcanic,
+        Beach,
+        Swamp,
+    }
 
     WallType wallType;
+    TerrainType terrainType;
 
     List<Actor_Unit> units;
     List<MiscDiscard> miscDiscards;
@@ -437,7 +448,46 @@ public class TacticalMode : SceneBase
         defenderSide = defender?.Side ?? village.Side;
         attackerSide = invader.Side;
 
-
+        switch (tiletype)
+        {
+            case StrategicTileType.grass:
+            case StrategicTileType.forest:
+            case StrategicTileType.mountain:
+            case StrategicTileType.field:
+            case StrategicTileType.hills:
+                terrainType = TerrainType.Grass;
+                break;
+            case StrategicTileType.desert:
+            case StrategicTileType.sandHills:
+            case StrategicTileType.fieldDesert:
+                terrainType = TerrainType.Desert;
+                break;
+            case StrategicTileType.snow:
+            case StrategicTileType.ice:
+            case StrategicTileType.snowHills:
+            case StrategicTileType.fieldSnow:
+            case StrategicTileType.snowTrees:
+                terrainType = TerrainType.Snow;
+                break;
+            case StrategicTileType.swamp:
+            case StrategicTileType.drySwamp:
+                terrainType = TerrainType.Swamp;
+                break;
+            case StrategicTileType.lava:
+            case StrategicTileType.volcanic:
+            case StrategicTileType.ashen:
+            case StrategicTileType.fieldAshen:
+            case StrategicTileType.ashenHills:
+                terrainType = TerrainType.Volcanic;
+                break;
+            case StrategicTileType.smallIslands:
+            case StrategicTileType.fieldSmallIslands:
+            case StrategicTileType.shallowWater:
+                terrainType = TerrainType.Beach;
+                break;
+            default:
+                break;
+        }
 
         DefectProcessor defectors = new DefectProcessor(armies[0], armies[1], village);
 
@@ -938,6 +988,7 @@ public class TacticalMode : SceneBase
                         Unit newUnit = new NPC_unit((int)Math.Max(Mathf.Floor((empire.Leader != null ? empire.Leader.Level : 3) * unitScale),1), advancedChance >= State.Rand.NextDouble(), 2, defenders.Concat(garrison).FirstOrDefault().Unit.Side, empire.Race, 0, empire.CanVore);
                         newUnit.Type = UnitType.Reinforcement;
                         Actor_Unit unit = new Actor_Unit(mapGen.RandomActorPosition(tiles, BlockedTile, units, TacticalMapGenerator.SpawnLocation.lower, newUnit.GetBestRanged() == null), newUnit);
+                        var bestranged = newUnit.GetBestRanged();
                         if (defenseEncampment.improveUpgrade.built)
                         {
                             switch (State.Rand.Next(5))
@@ -955,7 +1006,7 @@ public class TacticalMode : SceneBase
                                     newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Bolas);
                                     break;
                                 case 4:
-                                    if (newUnit.GetBestRanged().Range > 2)
+                                    if (bestranged != null)
                                     {
                                         newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Gloves);
                                     }
@@ -2005,9 +2056,9 @@ Turns: {currentTurn}
                                 FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.TileTypes[startIndex + 3]);
                             else
                                 FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.TileTypes[startIndex + State.Rand.Next(2)]);
-                            if ((tiles[i, j + 1] >= (TacticalTileType)500 && tiles[i, j + 1] < (TacticalTileType)600) || (tiles[i, j + 1] >= (TacticalTileType)2300 && tiles[i, j + 1] < (TacticalTileType)2400))
+                            if (terrainType == TerrainType.Volcanic)
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.VolcanicTileTypes[1]);
-                            else if ((tiles[i, j+1] >= (TacticalTileType)200 && tiles[i, j + 1] < (TacticalTileType)300) || (tiles[i, j + 1] >= (TacticalTileType)2000 && tiles[i, j + 1] < (TacticalTileType)2200))
+                            else if (terrainType == TerrainType.Desert)
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.DesertTileTypes[1]);
                             else
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassEnviroment[0]);
@@ -5791,7 +5842,7 @@ Turns: {currentTurn}
                         var possible_targets = units.Where(u => !u.Unit.IsEnemyOfSide(actor.Unit.Side) && u != actor && u.SelfPrey == null).ToList();
                         if (possible_targets.Any())
                         {
-                            actor.PredatorComponent.ForceConsumeAuto(possible_targets[State.Rand.Next(0, possible_targets.Count())]);
+                            actor.PredatorComponent.ForceConsumeAuto(possible_targets[State.Rand.Next(0, possible_targets.Count())], true);
                         }
                     }
 
@@ -5805,7 +5856,7 @@ Turns: {currentTurn}
                     var possible_targets = units.Where(u => u.Unit.Predator && u != actor && u.SelfPrey == null).ToList();
                     if (possible_targets.Any())
                     {
-                        possible_targets[State.Rand.Next(0, possible_targets.Count())].PredatorComponent.ForceConsumeAuto(actor);
+                        possible_targets[State.Rand.Next(0, possible_targets.Count())].PredatorComponent.ForceConsumeAuto(actor, true);
                     }
 
                 }
