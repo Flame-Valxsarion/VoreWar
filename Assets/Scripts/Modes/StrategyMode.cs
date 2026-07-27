@@ -1505,7 +1505,7 @@ public class StrategyMode : SceneBase
                 UIUnitSprite sprite = obj.GetComponentInChildren<UIUnitSprite>();
                 Actor_Unit actor = new Actor_Unit(new Vec2i(0, 0), new Unit(1, village.VillagePopulation.Population[i].Race, 0, true));
                 TextMeshProUGUI text = obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-                var racePar = RaceParameters.GetTraitData(actor.Unit);
+                var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
                 text.text = $"{village.VillagePopulation.Population[i].Race}\nTotal: {village.VillagePopulation.Population[i].Population} \nHireable: {village.VillagePopulation.Population[i].Hireables}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
                 sprite.UpdateSprites(actor);
                 Button button1 = obj.GetComponentsInChildren<Button>()[0];
@@ -2130,7 +2130,7 @@ public class StrategyMode : SceneBase
                         }
                     }
                     dismissOrder[k].Health = 0;
-                    income += (int)Math.Round(Config.World.ArmyUpkeep * RaceParameters.GetTraitData(dismissOrder[k]).Upkeep);
+                    income += (int)Math.Round(Config.World.ArmyUpkeep * RaceParameters.GetRaceTraits(dismissOrder[k].Race).Upkeep);
                 }
             }
 

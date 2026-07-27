@@ -63,9 +63,6 @@ public class TacticalMessageLog
         internal string Extra;
     }
 
-
-
-
     class SpellLog : EventLog
     {
         [OdinSerialize]
@@ -178,7 +175,6 @@ public class TacticalMessageLog
                 if (ShowPureFluff == false) return false; break;
             case MessageLogEvent.Hit:
                 if (ShowWeaponCombat == false) return false; break;
-
         }
         return true;
     }
@@ -188,8 +184,6 @@ public class TacticalMessageLog
         events.Clear();
         State.GameManager.TacticalMode.LogUI.Text.text = "";
     }
-
-
 
     void UpdateListing()
     {
@@ -517,6 +511,7 @@ public class TacticalMessageLog
                 return string.Empty;
         }
     }
+    
     private string GenerateBreastRubMessage(EventLog action)
     {
         if (SimpleText)
@@ -535,7 +530,6 @@ public class TacticalMessageLog
         }
         return GetStoredMessage(StoredLogTexts.MessageTypes.TailRubMessages, action);
     }
-
 
     private string GenerateBallMassageMessage(EventLog action)
     {
@@ -633,14 +627,12 @@ public class TacticalMessageLog
         return GetRandomStringFrom(possibleLines.ToArray());
     }
 
-    private string GenerateSwallowMessage(EventLog action)  // Oral vore devouring messages.
+    private string GenerateSwallowMessage(EventLog action) // Oral vore devouring messages.
     {
         if (SimpleText)
             return $"<b>{action.Unit.Name}</b> ate <b>{action.Target.Name}</b>.";
 
         return GetStoredMessage(StoredLogTexts.MessageTypes.SwallowMessages, action);
-
-
     }
 
     private string GenerateBVSwallowMessage(EventLog action)
@@ -688,7 +680,6 @@ public class TacticalMessageLog
                 $"<b>{action.Unit.Name}</b> had been eagerly waiting for {GPPHis(action.Unit)} tiny meal to revert to its regular size. When {GPPHis(action.Unit)} {PreyLocStrings.ToSyn(action.preyLocation)} finally expands, the air is filled with {GPPHis(action.Unit)} cries of pleasure and a great sloshing."
             );
         }
-
     }
 
     private string GenerateEscapeMessage(EventLog action, string odds)
@@ -716,7 +707,7 @@ public class TacticalMessageLog
                     $"<b>{action.Unit.Name}</b> relaxes and arrogantly pats {GPPHis(action.Unit)} swollen belly while taunting {GPPHis(action.Unit)} prey; {GPPHeIsAbbr(action.Unit)} taken by surprise as <b>{action.Target.Name}</b> uses the moment of relaxation to fight {GPPHis(action.Target)} way out.{odds}",
                     $"<b>{action.Unit.Name}</b> watches with concern as {GPPHis(action.Unit)} belly suddenly lets out an angry roar. <b>{action.Target.Name}</b> had kept a number of inedible herbs for just this occasion and as they break down they force the belly to expel its contents.{odds}"
                     );
-                else  // Pred Feral
+                else // Pred Feral
                 {
                     if (action.Unit.Race == Race.Iliijiith && action.Target.Race != Race.Iliijiith)
                     {
@@ -762,9 +753,9 @@ public class TacticalMessageLog
                     $"<b>{action.Target.Name}</b> becomes terrified as the acids begin to tear into {GPPHis(action.Target)} flesh and in a sudden bout of panic forces <b>{action.Unit.Name}</b> to throw {GPPHim(action.Target)} up.{odds}",
                     $"<b>{action.Unit.Name}</b> relaxes and arrogantly pats {GPPHis(action.Unit)} swollen belly while taunting {GPPHis(action.Unit)} prey; {GPPHeIsAbbr(action.Unit)} taken by surprise as <b>{action.Target.Name}</b> uses the moment of relaxation to fight {GPPHis(action.Target)} way out.{odds}",
                     $"<b>{action.Target.Name}</b>'s survival instincts take over, letting {GPPHim(action.Target)} channel a burst of near supernatural strength and setting {GPPHim(action.Target)} free.{odds}",
-                    $"<b>{action.Target.Name}</b>'s natural built-in weapons proove too much to leave {GPPHim(action.Target)} contained. The irritated gut soon sets {GPPHim(action.Target)} free.{odds}"
+                    $"<b>{action.Target.Name}</b>'s natural built-in weapons prove too much to leave {GPPHim(action.Target)} contained. The irritated gut soon sets {GPPHim(action.Target)} free.{odds}"
                     );
-                else  // Pred Feral
+                else // Pred Feral
                     if (action.Unit.Race == Race.Iliijiith && action.Target.Race == Race.Iliijiith)
                     return $"Suddenly, <b>{action.Unit.Name}</b> turns into <b>{action.Target.Name}</b>, and then back to <b>{action.Unit.Name}</b>, and back- It flashes between being the two Iliijiith faster and faster until both remain, standing next to one another.{odds}";
                     else
@@ -775,10 +766,9 @@ public class TacticalMessageLog
                     $"<b>{action.Target.Name}</b> claws {GPPHis(action.Target)} way up <b>{action.Unit.Name}</b>’s throat and is able to pull {GPPHimself(action.Target)} free.{odds}",
                     $"<b>{action.Target.Name}</b> becomes terrified as the acids begin to tear into {GPPHis(action.Target)} flesh and in a sudden bout of panic forces <b>{action.Unit.Name}</b> to throw {GPPHim(action.Target)} up.{odds}",
                     $"<b>{action.Target.Name}</b>'s survival instincts take over, letting {GPPHim(action.Target)} channel a burst of near supernatural strength and setting {GPPHim(action.Target)} free.{odds}",
-                    $"<b>{action.Target.Name}</b>'s natural built-in weapons proove too much to leave {GPPHim(action.Target)} contained. The irritated gut soon sets {GPPHim(action.Target)} free.{odds}"
+                    $"<b>{action.Target.Name}</b>'s natural built-in weapons prove too much to leave {GPPHim(action.Target)} contained. The irritated gut soon sets {GPPHim(action.Target)} free.{odds}"
                     );
             }
-
         }
         else
         {
@@ -880,7 +870,6 @@ public class TacticalMessageLog
             $"<b>{action.Target.Name}</b> tricks {GPPHis(action.Target)} would-be predator with a heartfelt sob story. <b>{action.Unit.Name}</b> believes it and naïvely lets the clever prey climb back out.{odds}"
             );
         }
-
     }
 
     private string GenerateRegurgitationMessage(EventLog action)
@@ -948,7 +937,7 @@ public class TacticalMessageLog
                     if (action.Unit.Race == Race.FeralEevee && action.Unit.Side == action.Target.Side && ( action.Unit.HasTrait(Traits.FriendlyStomach) || action.Unit.HasTrait(Traits.Endosoma)))
                     {
                         possibleLines.Add($"<b>{action.Unit.Name}</b> notices that <b>{action.Target.Name}</b> fell asleep. Not wanting to wake {GPPHim(action.Target)} with the battle, <b>{action.Unit.Name}</b> slowly slides <b>{action.Target.Name}</b> out {GPPHis(action.Unit)} anus.");
-                        possibleLines.Add($"<b>{action.Unit.Name}</b> decides to empty {GPPHis(action.Unit)} \"friend storage(rectum),\" and slides <b>{action.Target.Name}</b> back out into the  battlefield.");
+                        possibleLines.Add($"<b>{action.Unit.Name}</b> decides to empty {GPPHis(action.Unit)} \"friend storage(rectum),\" and slides <b>{action.Target.Name}</b> back out into the battlefield.");
                     }
                     break;
                 default:
@@ -1126,7 +1115,6 @@ public class TacticalMessageLog
     private string GenerateRandomDigestionMessage(EventLog action)
     {
         return GetStoredMessage(StoredLogTexts.MessageTypes.RandomDigestionMessages, action);
-
     }
 
     private string GenerateDigestionLowHealthMessage(EventLog action)
@@ -1245,7 +1233,6 @@ public class TacticalMessageLog
         if (SimpleText)
             return $"<b>{action.Unit.Name}</b> finished absorbing the leftover nutrients from <b>{action.Target.Name}</b>.";
         return GetStoredMessage(StoredLogTexts.MessageTypes.AbsorptionMessages, action);
-
     }
 
     string GetStoredMessage(StoredLogTexts.MessageTypes msgType, EventLog action)
@@ -1650,7 +1637,6 @@ public class TacticalMessageLog
         UpdateListing();
     }
 
-
     public void RegisterKill(Unit Attacker, Unit Defender, Weapon weapon)
     {
         events.Add(new EventLog
@@ -1852,5 +1838,4 @@ public class TacticalMessageLog
         });
         UpdateListing();
     }
-
 }

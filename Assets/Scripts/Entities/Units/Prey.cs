@@ -4,8 +4,6 @@ using UnityEngine;
 
 class Prey
 {
-
-
     [OdinSerialize]
     public Actor_Unit Predator { get; set; }
     [OdinSerialize]
@@ -28,6 +26,7 @@ class Prey
 
     [OdinSerialize]
     public bool ScatDisabled { get; set; }
+
 
 
     [OdinSerialize]
@@ -143,7 +142,6 @@ class Prey
         //if (Predator.Surrendered)
         //    combinedRatio /= 4;
         //EscapeRate = Math.Min(0.10f / combinedRatio, 1);
-
     }
 
     public Prey[] GetAliveSubPrey()
@@ -152,6 +150,18 @@ class Prey
         for (int i = 0; i < SubPrey.Count; i++)
         {
             if (SubPrey[i].Actor.Unit.IsDead == false)
+            {
+                units.Add(SubPrey[i]);
+            }
+        }
+        return units.ToArray();
+    }
+    public Prey[] GetDeadSubPrey()
+    {
+        List<Prey> units = new List<Prey>();
+        for (int i = 0; i < SubPrey.Count; i++)
+        {
+            if (SubPrey[i].Actor.Unit.IsDead == true)
             {
                 units.Add(SubPrey[i]);
             }
@@ -219,12 +229,10 @@ class Prey
 
     public void PredWeightGain()
     {
-        
         if (!HasGivenWeightToPred)
         {
             HasGivenWeightToPred = true;
             Predator.PredatorComponent.WeightGain(this);
-
         }
     }
 
@@ -274,6 +282,7 @@ class Prey
             case Race.SpitterSlugs:
             case Race.SpringSlugs:
             case Race.Aabayx:
+            case Race.Whisp:
             case Race.ViraeUltimae:
             case Race.Iliijiith:
                 // No bone
@@ -317,9 +326,7 @@ class Prey
                     }
                 }
                 break;
-
         }
         return rtn;
     }
-
 }

@@ -168,10 +168,7 @@ public class Recruit_Mode : SceneBase
                         break;
                     }
                 }
-
-
             }
-
         }
         if (army != null)
         {
@@ -179,7 +176,6 @@ public class Recruit_Mode : SceneBase
         }
         BannerType.gameObject.SetActive(army != null);
         InitializeBanners();
-
     }
 
     void InitializeBanners()
@@ -256,14 +252,13 @@ public class Recruit_Mode : SceneBase
         RecruitUI.RecruitSoldier.gameObject.SetActive(activatingEmpire < ActivatingEmpire.Observer);
         RecruitUI.StockWeapons.interactable = (activatingEmpire < ActivatingEmpire.Observer || failedToMakeFriendlyArmy) && village.Empire == empire;
         RecruitUI.CheapUpgrade.interactable = activatingEmpire == ActivatingEmpire.Self && army.Units.Count > 0;
-        RecruitUI.RecruitSoldier.interactable = activatingEmpire == ActivatingEmpire.Self && (village.GetTotalPop() > 3) && army.RemainnigSize - State.RaceSettings.GetDeployCost(village.Race) >= 0;
-        RecruitUI.HireSoldier.interactable = activatingEmpire == ActivatingEmpire.Self && village.GetRecruitables().Count > 0 && (village.GetTotalPop() > 3) && army.RemainnigSize > 0;
-        RecruitUI.HireVillageMerc.interactable = activatingEmpire == ActivatingEmpire.Self && (village.Mercenaries?.Count > 0 || village.Adventurers?.Count > 0) && army.RemainnigSize > 0;
+        RecruitUI.RecruitSoldier.interactable = activatingEmpire == ActivatingEmpire.Self && (village.GetTotalPop() > 3) && army.RemainingSize - State.RaceSettings.GetDeployCost(village.Race) >= 0;
+        RecruitUI.HireSoldier.interactable = activatingEmpire == ActivatingEmpire.Self && village.GetRecruitables().Count > 0 && (village.GetTotalPop() > 3) && army.RemainingSize > 0;
+        RecruitUI.HireVillageMerc.interactable = activatingEmpire == ActivatingEmpire.Self && (village.Mercenaries?.Count > 0 || village.Adventurers?.Count > 0) && army.RemainingSize > 0;
         RecruitUI.VillageView.interactable = (activatingEmpire < ActivatingEmpire.Observer || failedToMakeFriendlyArmy) && village.GetTotalPop() > 0 && village.Empire == empire;
 
         RecruitUI.ResurrectLeader.gameObject.SetActive(activatingEmpire != ActivatingEmpire.Observer && empire.Leader != null && empire.Leader.Health <= 0);
     }
-
 
     public override void CleanUp()
     {
@@ -328,7 +323,6 @@ public class Recruit_Mode : SceneBase
 
         if (village.GetTotalPop() > 0)
         {
-
             RecruitUI.Population.text = village.VillagePopulation.GetPopReport();
         }
         else
@@ -355,7 +349,6 @@ public class Recruit_Mode : SceneBase
             ArmyUI.LevelUp.interactable = false;
             ArmyUI.AutoLevelUp.interactable = false;
         }
-
     }
 
     public override void ReceiveInput()
@@ -375,7 +368,7 @@ public class Recruit_Mode : SceneBase
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (VillageUI.gameObject.activeSelf || CustomizerUI.gameObject.activeSelf || ShopUI.gameObject.activeSelf || potionInv.gameObject.activeSelf || PotionUI.gameObject.activeSelf || BulkBuyUI.gameObject.activeSelf ||
-                WeaponStockerUI.gameObject.activeSelf || ConfigAutoLevelUpUI.gameObject.activeSelf || HireUI.gameObject.activeSelf || RenameUI.gameObject.activeSelf)
+            WeaponStockerUI.gameObject.activeSelf || ConfigAutoLevelUpUI.gameObject.activeSelf || HireUI.gameObject.activeSelf || RenameUI.gameObject.activeSelf)
                 ButtonCallback(10);
             else if (MercenaryScreenUI.gameObject.activeSelf)
                 ButtonCallback(81);
@@ -384,21 +377,14 @@ public class Recruit_Mode : SceneBase
                 State.GameManager.SwitchToStrategyMode();
         }
 
-
-
         if (Input.GetKeyDown(KeyCode.Escape) && CheatMenu.gameObject.activeSelf)
         {
             ButtonCallback(86);
         }
-
     }
-
-
-
 
     public void ButtonCallback(int ID)
     {
-
         switch (ID)
         {
             case 1:
@@ -512,7 +498,7 @@ public class Recruit_Mode : SceneBase
                 if (Config.CheatPopulation && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
                 {
                     var box1 = State.GameManager.CreateInputBox();
-                    box1.SetData(SetPopulation, "Set new population", "Cancel change", "Cheat to set the village population?  (In multi-race villages, lowering kills randomly, and raising acts like breeding)", 5);
+                    box1.SetData(SetPopulation, "Set new population", "Cancel change", "Cheat to set the village population? (In multi-race villages, lowering kills randomly, and raising acts like breeding)", 5);
 
                     break;
                 }
@@ -539,10 +525,9 @@ public class Recruit_Mode : SceneBase
             case 50:
                 UpdateUnitInfoPanel();
                 break;
-
             case 60:
                 DialogBox box = GameObject.Instantiate(State.GameManager.DialogBoxPrefab).GetComponent<DialogBox>();
-                box.SetData(AutoLevelUp, "Spend them!", "Cancel", "This will spend all remaining level ups for this army.   It may not do as good a job as manually picking, and it may not pick exactly what you want, but it is fast.");
+                box.SetData(AutoLevelUp, "Spend them!", "Cancel", "This will spend all remaining level ups for this army. It may not do as good a job as manually picking, and it may not pick exactly what you want, but it is fast.");
                 break;
             case 80:
                 BuildMercenaryView(false);
@@ -613,8 +598,6 @@ public class Recruit_Mode : SceneBase
             case 4001:
                 CheatAddUnit();
                 break;
-
-
         }
         if (ID > 19 && ID < 30)
         {
@@ -636,7 +619,7 @@ public class Recruit_Mode : SceneBase
         {
             if (army == null)
                 return;
-            if (army.RemainnigSize <= 0)
+            if (army.RemainingSize <= 0)
             {
                 State.GameManager.CreateMessageBox("Army is already maximum size");
                 return;
@@ -659,7 +642,6 @@ public class Recruit_Mode : SceneBase
     }
     private void SetUpPopUI()
     {
-
         int children = PopUI.ActorFolder.transform.childCount;
         for (int i = children - 1; i >= 0; i--)
         {
@@ -673,16 +655,13 @@ public class Recruit_Mode : SceneBase
                 UIUnitSprite sprite = obj.GetComponentInChildren<UIUnitSprite>();
                 Actor_Unit actor = new Actor_Unit(new Vec2i(0, 0), new Unit(1, village.VillagePopulation.Population[i].Race, 0, true));
                 TextMeshProUGUI text = obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-                var racePar = RaceParameters.GetTraitData(actor.Unit);
+                var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
                 text.text = $"{village.VillagePopulation.Population[i].Race}\nTotal: {village.VillagePopulation.Population[i].Population}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
                 sprite.UpdateSprites(actor);
             }
-
         }
 
         PopUI.gameObject.SetActive(true);
-
-
     }
 
     internal void RenameVillage(string name)
@@ -711,7 +690,7 @@ public class Recruit_Mode : SceneBase
 
         if (unit.SavedCopy != null)
         {
-            previous = $"Previous imprint --  Level: {unit.SavedCopy.Level}  Exp: {unit.SavedCopy.Experience}";
+            previous = $"Previous imprint -- Level: {unit.SavedCopy.Level} Exp: {unit.SavedCopy.Experience}";
         }
         else
         {
@@ -721,7 +700,6 @@ public class Recruit_Mode : SceneBase
         var box = State.GameManager.CreateDialogBox();
         box.SetData(() => MakeClone(unit, cost), "Imprint", "Cancel", $"Imprint this soul? (Costs {cost})\nAllows unit to respawn with saved stats at this location if it dies." +
             $"\nCost is based on experience of other active imprint, total experience, and is reduced by the innate exp for this town\n{previous}");
-
     }
 
     void MakeClone(Unit unit, int cost)
@@ -828,8 +806,6 @@ public class Recruit_Mode : SceneBase
             }
         }
 
-
-
         void ApplyTo(Unit unit)
         {
             if (ConfigAutoLevelUpUI.Custom)
@@ -838,16 +814,16 @@ public class Recruit_Mode : SceneBase
                 unit.StatWeights = new StatWeights()
                 {
                     Weight = new float[(int)Stat.None]
-                {
-                ConfigAutoLevelUpUI.Sliders[0].value,
-                ConfigAutoLevelUpUI.Sliders[1].value,
-                ConfigAutoLevelUpUI.Sliders[2].value,
-                ConfigAutoLevelUpUI.Sliders[3].value,
-                ConfigAutoLevelUpUI.Sliders[4].value,
-                ConfigAutoLevelUpUI.Sliders[5].value,
-                ConfigAutoLevelUpUI.Sliders[6].value,
-                ConfigAutoLevelUpUI.Sliders[7].value,
-                ConfigAutoLevelUpUI.Sliders[8].value,
+                    {
+                        ConfigAutoLevelUpUI.Sliders[0].value,
+                        ConfigAutoLevelUpUI.Sliders[1].value,
+                        ConfigAutoLevelUpUI.Sliders[2].value,
+                        ConfigAutoLevelUpUI.Sliders[3].value,
+                        ConfigAutoLevelUpUI.Sliders[4].value,
+                        ConfigAutoLevelUpUI.Sliders[5].value,
+                        ConfigAutoLevelUpUI.Sliders[6].value,
+                        ConfigAutoLevelUpUI.Sliders[7].value,
+                        ConfigAutoLevelUpUI.Sliders[8].value,
                     }
                 };
             }
@@ -871,14 +847,12 @@ public class Recruit_Mode : SceneBase
                 LevelUpUI.gameObject.SetActive(true);
                 BuildLvlButtons();
             }
-
         }
         else
         {
             BlockerUI.SetActive(false);
             return;
         }
-
     }
 
     void BuildLvlButtons()
@@ -908,8 +882,6 @@ public class Recruit_Mode : SceneBase
                     LevelUpUI.gameObject.SetActive(false);
             });
         }
-
-
     }
 
     public void RefreshBulkBuy()
@@ -936,8 +908,6 @@ public class Recruit_Mode : SceneBase
         UpdateUnitInfoPanel();
         UpdateDrawnActors();
     }
-
-
 
     int CheapFitCost()
     {
@@ -1012,7 +982,6 @@ public class Recruit_Mode : SceneBase
                         cost += State.World.ItemRepository.GetItem(ItemType.CompoundBow).Cost;
                     }
                 }
-
             }
         }
         return cost;
@@ -1098,7 +1067,6 @@ public class Recruit_Mode : SceneBase
                         Shop.BuyItem(empire, actor.Unit, State.World.ItemRepository.GetItem(ItemType.Gloves));
                     else
                         Shop.BuyItem(empire, actor.Unit, State.World.ItemRepository.GetItem(ItemType.Shoes));
-
                 }
                 else if (actor.Unit.GetBestMelee().Damage != 2)
                 {
@@ -1311,13 +1279,11 @@ public class Recruit_Mode : SceneBase
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             var box = Instantiate(State.GameManager.DialogBoxPrefab).GetComponent<DialogBox>();
-            box.SetData(() => { shop.BuyForAll(type); State.GameManager.Recruit_Mode.SetUpDisplay(); }, "Buy", "Cancel", $"Buy item for all units in army? Cost : {shop.BuyForAllCost(type)}  (you were holding shift)");
+            box.SetData(() => { shop.BuyForAll(type); State.GameManager.Recruit_Mode.SetUpDisplay(); }, "Buy", "Cancel", $"Buy item for all units in army? Cost : {shop.BuyForAllCost(type)} (you were holding shift)");
         }
         else
             shop.BuyItem(type);
     }
-
-
 
     internal void PotionShopSellItem(int slot) => potionShop.SellItem(slot);
     internal void PotionShopTransferToInventory(int slot) => potionShop.TransferItemToInventory(slot);
@@ -1331,7 +1297,7 @@ public class Recruit_Mode : SceneBase
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             var box = Instantiate(State.GameManager.DialogBoxPrefab).GetComponent<DialogBox>();
-            box.SetData(() => { potionShop.BuyItem(type, 5); State.GameManager.Recruit_Mode.SetUpDisplay(); }, "Buy", "Cancel", $"Buy five of this potion? Cost : {potionShop.MultCost(type, 5)}  (you were holding shift)");
+            box.SetData(() => { potionShop.BuyItem(type, 5); State.GameManager.Recruit_Mode.SetUpDisplay(); }, "Buy", "Cancel", $"Buy five of this potion? Cost : {potionShop.MultCost(type, 5)} (you were holding shift)");
         }
         else
             potionShop.BuyItem(type, 1);
@@ -1341,12 +1307,11 @@ public class Recruit_Mode : SceneBase
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             var box = Instantiate(State.GameManager.DialogBoxPrefab).GetComponent<DialogBox>();
-            box.SetData(() => { potionShop.BuyItem(type, 50); State.GameManager.Recruit_Mode.SetUpDisplay(); }, "Buy", "Cancel", $"Buy fifty of this potion? Cost : {potionShop.MultCost(type, 50)}  (you were holding shift)");
+            box.SetData(() => { potionShop.BuyItem(type, 50); State.GameManager.Recruit_Mode.SetUpDisplay(); }, "Buy", "Cancel", $"Buy fifty of this potion? Cost : {potionShop.MultCost(type, 50)} (you were holding shift)");
         }
         else
             potionShop.BuyItem(type, 10);
     }
-
 
     void BuildMercenaryView(bool special)
     {
@@ -1466,7 +1431,6 @@ public class Recruit_Mode : SceneBase
                 {
                     army.RemainingMP = Config.ArmyMP;
                 }
-
             }
         }
     }
@@ -1483,7 +1447,6 @@ public class Recruit_Mode : SceneBase
                 army.RemainingMP = Config.ArmyMP;
             }
         }
-
     }
 
     void BuildVillageMercenaryView()
@@ -1593,7 +1556,6 @@ public class Recruit_Mode : SceneBase
 
     void BuildHiringView(string sorting = "")
     {
-
         int children = HireUI.ActorFolder.transform.childCount;
         for (int i = children - 1; i >= 0; i--)
         {
@@ -1691,10 +1653,7 @@ public class Recruit_Mode : SceneBase
         }
         HireUI.ActorFolder.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 300 * (1 + (village.VillagePopulation.GetRecruitables().Count) / 3));
         HireUI.gameObject.SetActive(true);
-
     }
-
-
 
     void Hire(Unit unit)
     {
@@ -1863,7 +1822,6 @@ public class Recruit_Mode : SceneBase
         ShowBanner.gameObject.SetActive(true);
         RecruitUI.AddUnit.gameObject.SetActive(Config.CheatAddUnitButton);
         RefreshUnitPanelButtons();
-
     }
 
     public void UpdateActorList()
@@ -1949,7 +1907,6 @@ public class Recruit_Mode : SceneBase
             ArmyUI.UnitInfoArea[x].UpdateSprites(displayUnits[x]);
             ArmyUI.UnitInfoArea[x].Name.text = army.Units[x].Name;
         }
-
     }
 
     public void BuildRaceDisplay()
@@ -1967,20 +1924,17 @@ public class Recruit_Mode : SceneBase
                 UIUnitSprite sprite = obj.GetComponentInChildren<UIUnitSprite>();
                 Actor_Unit actor = new Actor_Unit(new Vec2i(0, 0), new Unit(1, village.VillagePopulation.Population[i].Race, 0, true));
                 TextMeshProUGUI text = obj.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
-                var racePar = RaceParameters.GetTraitData(actor.Unit);
+                var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
                 text.text = $"{village.VillagePopulation.Population[i].Race}\nAvailable: {village.VillagePopulation.Population[i].Population - village.VillagePopulation.Population[i].Hireables}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
                 sprite.UpdateSprites(actor);
                 Button button = obj.GetComponentInChildren<Button>();
                 Race tempRace = village.VillagePopulation.Population[i].Race;
                 button.onClick.AddListener(() => Recruit(tempRace));
                 button.onClick.AddListener(() => BuildRaceDisplay());
-
             }
-
         }
 
         RaceUI.gameObject.SetActive(true);
-
     }
 
     private void Recruit(Race race)
@@ -2033,7 +1987,6 @@ public class Recruit_Mode : SceneBase
                 }
             }
         }
-
     }
 
     private void CheckButtonStatus()
@@ -2050,5 +2003,4 @@ public class Recruit_Mode : SceneBase
                 item.Key.interactable = false;
         }
     }
-
 }

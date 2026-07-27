@@ -12,7 +12,7 @@ public class CustomTraitComponentMenu : MonoBehaviour
     public Transform SelectedFolder;
     public Transform AvailFolder;
     internal Dictionary<CustomTraitComp,Button> SelectedComps;
-    internal Dictionary<CustomTraitComp, Button> AvailibleComps;
+    internal Dictionary<CustomTraitComp, Button> AvailableComps;
     internal Button AddBtnInstance;
     public Button CompBtn;
 
@@ -21,7 +21,7 @@ public class CustomTraitComponentMenu : MonoBehaviour
         gameObject.SetActive(true);
         CustomTrait.gameObject.SetActive(false);
         SelectedComps = new Dictionary<CustomTraitComp, Button>();
-        AvailibleComps = new Dictionary<CustomTraitComp, Button>();
+        AvailableComps = new Dictionary<CustomTraitComp, Button>();
         trait = trait = State.CustomTraitList.Where(x => x.id == id).FirstOrDefault();
         int children = SelectedFolder.childCount;
         for (int i = children - 1; i >= 0; i--)
@@ -38,21 +38,21 @@ public class CustomTraitComponentMenu : MonoBehaviour
         for (int j = 0; maxvalue - 1 >= j; j++)
         {
             SelectedComps.Add((CustomTraitComp)j, CreateSelectedButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
-            AvailibleComps.Add((CustomTraitComp)j, CreateAvaildButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
+            AvailableComps.Add((CustomTraitComp)j, CreateAvaildButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
         }
 
         maxvalue = (int)CustomTraitComp.outgoingcounter;
         for (int j = 1000; maxvalue - 1 >= j; j++)
         {
             SelectedComps.Add((CustomTraitComp)j, CreateSelectedButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
-            AvailibleComps.Add((CustomTraitComp)j, CreateAvaildButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
+            AvailableComps.Add((CustomTraitComp)j, CreateAvaildButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
         }
 
         maxvalue = (int)CustomTraitComp.incomingcounter;
         for (int j = 2000; maxvalue - 1 >= j; j++)
         {
             SelectedComps.Add((CustomTraitComp)j, CreateSelectedButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
-            AvailibleComps.Add((CustomTraitComp)j, CreateAvaildButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
+            AvailableComps.Add((CustomTraitComp)j, CreateAvaildButton(((CustomTraitComp)j).ToString(), (CustomTraitComp)j));
         }
         CheckVis();
     }
@@ -91,11 +91,11 @@ public class CustomTraitComponentMenu : MonoBehaviour
             if (trait.comps.Keys.Contains(comp))
             {
                 SelectedComps[comp].gameObject.SetActive(true);
-                AvailibleComps[comp].gameObject.SetActive(false);
+                AvailableComps[comp].gameObject.SetActive(false);
             }
             else
             {
-                AvailibleComps[comp].gameObject.SetActive(true);
+                AvailableComps[comp].gameObject.SetActive(true);
                 SelectedComps[comp].gameObject.SetActive(false);
             }
         }

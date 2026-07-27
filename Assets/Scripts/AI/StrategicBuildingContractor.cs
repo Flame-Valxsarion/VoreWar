@@ -269,11 +269,12 @@ class StrategicBuildingContractor
             }
         }
     }
+    
     internal void RunLumberSite()
     {
         LumberSite lumberSite = activeBuilding as LumberSite;
         int availWorker = Config.BuildConfig.LumberSiteWorkerCap * (lumberSite.lodgeUpgrade.built ? 2 : 1);
-        //set an even spread for each availible worker
+        //set an even spread for each available worker
         if (lumberSite.greenHouseUpgrade.built)
         {
             lumberSite.natureWorkers = availWorker/3;
@@ -285,6 +286,7 @@ class StrategicBuildingContractor
         lumberSite.woodWorkers = availWorker/3;
 
     }
+    
     internal void RunQuarry()
     {
         Quarry quarry = activeBuilding as Quarry;
@@ -299,10 +301,12 @@ class StrategicBuildingContractor
         }
         quarry.ActionPlan = plan;
     }
+    
     internal void RunCasterTower()
     {
         CasterTower casterTower = activeBuilding as CasterTower;       
     }
+    
     internal void RunBarrierTower()
     {
         BarrierTower barrierTower = activeBuilding as BarrierTower;       
@@ -310,10 +314,12 @@ class StrategicBuildingContractor
         barrierTower.EmpowerMagnitude = barrierTower.buffUpgrade.built ? State.Rand.Next(6) : 0;
         barrierTower.MendingMagnitude = barrierTower.healUpgrade.built ? State.Rand.Next(6) :0;
     }
+    
     internal void RunDefEncampment()
     {
         DefenseEncampment defenseEncampment = activeBuilding as DefenseEncampment;       
     }
+    
     internal void RunAcademy()
     {
         Academy academy = activeBuilding as Academy;
@@ -375,6 +381,7 @@ class StrategicBuildingContractor
             empire.AcademyUpgradeEXPCost = (int)(empire.AcademyUpgradeEXPCost * Config.BuildConfig.AcademyCostIncreaseMultPerUpgrade);
         }
     }
+    
     internal void RunDarkMagicTower()
     {
         BlackMagicTower darkMagicTower = activeBuilding as BlackMagicTower;
@@ -388,13 +395,14 @@ class StrategicBuildingContractor
         }
         else if (darkMagicTower.PactLevel >= 3 && State.Rand.Next(3) == 0)
         {
-            darkMagicTower.Affliction = StatusEffectType.Errosion;        
+            darkMagicTower.Affliction = StatusEffectType.Erosion;        
         }
         else
         {
             darkMagicTower.Affliction = StatusEffectType.Necrosis;
         }
     }
+    
     internal void RunLaboratory()
     {
         Laboratory laboratory = activeBuilding as Laboratory;
@@ -402,13 +410,13 @@ class StrategicBuildingContractor
         {
             int budget = goldBank + empire.Gold / 2;
             int potionCost = Config.BuildConfig.LaboratoryBaseUnitPrice;
-            int ramainingPicks = State.Rand.Next(Config.BuildConfig.LaboratoryBaseRollCount * (laboratory.improveUpgrade.built ? 2 : 1)) + 1;
+            int remainingPicks = State.Rand.Next(Config.BuildConfig.LaboratoryBaseRollCount * (laboratory.improveUpgrade.built ? 2 : 1)) + 1;
             double TraitChanceValue = Config.BuildConfig.LaboratoryBaseTraitChance;
             int baselineCost = Config.BuildConfig.LaboratoryBaseUnitPrice;
             LaboratoryPotion newPotion = new LaboratoryPotion();
             int[] PotionRollStats = new int[9];        
             
-            while (ramainingPicks > 0)
+            while (remainingPicks > 0)
             {
                 int roll1 = State.Rand.Next(laboratory.ingredientUpgrade.built ? (int)PotionIngredient.PotionIngredientCounter : (int)PotionIngredient.Powerful);
                 int roll2 = State.Rand.Next(laboratory.ingredientUpgrade.built ? (int)PotionIngredient.PotionIngredientCounter : (int)PotionIngredient.Powerful);
@@ -541,7 +549,7 @@ class StrategicBuildingContractor
                         break;
                     case PotionIngredient.Coagulate:
                         potionCost += (int)Math.Round(baselineCost * .5);
-                        ramainingPicks += 2;
+                        remainingPicks += 2;
                         break;
                     default:
                         break;
@@ -550,7 +558,7 @@ class StrategicBuildingContractor
                 {
                     break;
                 }
-                ramainingPicks--;
+                remainingPicks--;
             }
 
             for (int i = 0; i < PotionRollStats.Count(); i++)
@@ -666,8 +674,8 @@ class StrategicBuildingContractor
                 PotionRollStats[id] = 0;
             }
         }
-        
     }
+    
     internal void RunTeleporter()
     {
         Teleporter teleporter = activeBuilding as Teleporter;
@@ -686,7 +694,6 @@ class StrategicBuildingContractor
                 army.teleportCoolDown = 3;
             }
         }
-        
     }
 
     /// <summary>
@@ -723,6 +730,7 @@ class StrategicBuildingContractor
             GetNewProject();
         }
     }
+    
     /// <summary>
     /// Switches the desired project if it gets stuck.
     /// </summary>
@@ -761,6 +769,7 @@ class StrategicBuildingContractor
             DecideBuilding();          
         }
     }
+    
     /// <summary>
     /// Performs all required generation calculations
     /// </summary>
@@ -829,6 +838,7 @@ class StrategicBuildingContractor
         }
         return perTurnGen;
     }
+    
     void ConstructBuilding(Vec2i position, ConstructibleType SelectedConstruction)
     {
         // If not enough resource, don't build

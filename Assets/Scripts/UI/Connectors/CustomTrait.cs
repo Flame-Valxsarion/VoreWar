@@ -313,7 +313,7 @@ public class CustomTrait : MonoBehaviour
                 break;
             case CustomTraitComp.OutgoingGrowthRate:
                 ToolTipName.text = "Growth Rate Multiplier (Outgoing)";
-                ToolTipDesc.text = "The amount of growth a unit provides, assuming it's predator can grow.";
+                ToolTipDesc.text = "The amount of growth a unit provides, assuming its predator can grow.";
                 break;
             case CustomTraitComp.OutgoingCritRateShift:
                 ToolTipName.text = "Critical Rate Addition (Outgoing)";

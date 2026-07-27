@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 abstract class Trait
 {
@@ -12,37 +13,37 @@ abstract class VoreTrait : Trait, IVoreCallback
 
     public abstract bool IsPredTrait { get; }
 
-    public virtual bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
+    public virtual bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey, double healingToPred) => true;
 
-    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
+    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey) => true;
 
     public virtual bool OnDigestionKill(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
     public virtual bool OnFinishAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
-    public virtual bool OnFinishDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
+    public virtual bool OnFinishDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true; // Returning false here will prevent the digestion kill, as well as precluding any IVoreCallback of later ProcessingPriority.
 
     public virtual bool OnRemove(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
     public virtual bool OnSwallow(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 }
 
-/* 
+/*
  * Note to anyone adding to PermanentBoosts, if you would like to add your variable to the Custom Trait menu, follow these steps:
- * 1. Add you variable to PermanantBoosts
+ * 1. Add your variable to PermanantBoosts
  * 2. Navigate to UI/Connectors/CustomTrait.cs
  * 3. Add your variable to he CustomTraitComp Enum
  *      3a. If you added to DirectionalStat, add both an Outgoing and an Incoming version instead.
  * 4. Add your variable's Name and Description to ChangeToolTip(), following the current implementation.
  * 5. If your variable is a bool, like OnLevelUpAllowAnyStat, add it to IsToggle, so the prefab becomes a toggle instead of an InputField
- * 5. Navigate to Utility/CustomTraitBoost.cs and add your variable to the ToBooster() functinon with the proper modifier.
+ * 6. Navigate to Utility/CustomTraitBoost.cs and add your variable to the ToBooster() functinon with the proper modifier.
  * 
  * I apologize for the extra work, but this WAS a 9 step guide with a lot of moving parts before I spent two days making it as developer friendly as possible, 
  * so I don't want to hear any belly aching. Enjoy.
  * ~CaneSugarCat
  */
 
-class PermanentBoosts
+public class PermanentBoosts
 {
     internal float ExpRequired = 1.0f;
     internal float ExpGain = 1.0f;
@@ -96,7 +97,7 @@ class PermanentBoosts
     internal float UpkeepMult = 1f;
 }
 
-class DirectionalStat
+public class DirectionalStat
 {
     internal float ChanceToEscape = 1;
     internal float MeleeDamage = 1;
@@ -119,7 +120,6 @@ class DirectionalStat
     internal float GrazeDamageMult = 1;
 }
 
-
 interface IStatBoost
 {
     int StatBoost(Unit unit, Stat stat);
@@ -127,7 +127,7 @@ interface IStatBoost
 
 interface IAttackStatusEffect
 {
-    void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, int damage);
+    void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, double damage);
 }
 
 interface IVoreDefenseOdds
@@ -180,9 +180,9 @@ abstract class VoreTraitBooster : AbstractBooster, IVoreCallback
 
     public abstract bool IsPredTrait { get; }
 
-    public virtual bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
+    public virtual bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey, double healingToPred) => true;
 
-    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
+    public virtual bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey) => true;
 
     public virtual bool OnDigestionKill(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 
@@ -195,10 +195,8 @@ abstract class VoreTraitBooster : AbstractBooster, IVoreCallback
     public virtual bool OnSwallow(Prey preyUnit, Actor_Unit predUnit, PreyLocation location) => true;
 }
 
-
 static class TraitList
 {
-
     static internal Trait GetTrait(Traits trait)
     {
         traits.TryGetValue(trait, out Trait retTrait);
@@ -239,6 +237,7 @@ static class TraitList
         [Traits.SpiritPossession] = new SpiritPossession(),
         [Traits.ForcedMetamorphosis] = new ForcedMetamorphosis(),
         [Traits.MetamorphicConversion] = new MetamorphicConversion(),
+        [Traits.Growth] = new Growth(),
         [Traits.Tempered] = new Booster("Reduces damage taken from ranged attacks.\nIncreases damage taken from melee attacks", (s) => { s.Incoming.RangedDamage *= .7f; s.Incoming.MeleeDamage *= 1.3f; s.VirtualDexMult *= 1.1f; }),
         [Traits.GelatinousBody] = new Booster("Takes less damage from attacks, but is easier to vore", (s) => { s.Incoming.RangedDamage *= .75f; s.Incoming.MeleeDamage *= 0.8f; s.Incoming.VoreOddsMult *= 1.15f; }),
         [Traits.MetalBody] = new Booster("Provides vore resistance, and their remains are only worth half as much healing", (s) => { s.Incoming.VoreOddsMult *= .7f; s.Outgoing.Nutrition *= .5f; }),
@@ -268,7 +267,7 @@ static class TraitList
         [Traits.StrongGullet] = new Booster("Allows unit to do 2 vore attempts.\nEach vore uses half of max AP", (s) => s.VoreAttacks += 1),
         [Traits.AdeptLearner] = new Booster("Allows picking of any stat on level up and gives +1 to 2 random stats on level up", (s) => { s.OnLevelUpBonusToGiveToTwoRandomStats += 1; s.OnLevelUpAllowAnyStat = true; }),
         [Traits.Lethargic] = new Booster("Unit is significantly less likely to escape from predators", (s) => s.Incoming.ChanceToEscape *= 0.5f),
-        [Traits.AcidImmunity] = new Booster("Unit is immune to acid damage.  To avoid never ending battles, the immunity only lasts for 20 turns in the same belly", (s) => s.DigestionImmunityTurns += 20),
+        [Traits.AcidImmunity] = new Booster("Unit is immune to acid damage. To avoid never ending battles, the immunity only lasts for 20 turns in the same belly", (s) => s.DigestionImmunityTurns += 20),
         [Traits.Large] = new Booster("Unit is larger than normal", (s) => s.Scale *= 1.5f),
         [Traits.Small] = new Booster("Unit is smaller than normal", (s) => s.Scale *= 2.0f / 3.0f),
         [Traits.MagicResistance] = new Booster("Unit is harder to hit with magic", (s) => s.Incoming.MagicShift += 0.2f),
@@ -312,7 +311,7 @@ static class TraitList
         [Traits.GeneEater] = new Booster("Capable of absorbing the best genes from devoured prey. Gains significant bonus experience from absorbing prey. \n(Cheat Trait)", (s) => { s.ExpGainFromVore *= 5.0f; s.ExpGainFromAbsorption *= 50.0f; }),
         [Traits.InstantDigestion] = new Booster("Instantly digests non-acid-immune prey. \n(Cheat Trait)", (s) => s.Outgoing.DigestionRate *= 1000000f),
         [Traits.InstantAbsorption] = new Booster("Instantly absorbs dead prey. \n(Cheat Trait)", (s) => s.Outgoing.AbsorptionRate *= 1000000f),
-        [Traits.Inescapable] = new Booster("Prey can never escape. \n(Cheat Trait)", (s) => s.Outgoing.ChanceToEscape /= 1000f), //Handled seperately now.  
+        [Traits.Inescapable] = new Booster("Prey can never escape. \n(Cheat Trait)", (s) => s.Outgoing.ChanceToEscape /= 1000f), // Handled seperately now.
         [Traits.Irresistable] = new Booster("Prey is always devoured. \n(Cheat Trait)", (s) => s.Outgoing.VoreOddsMult *= 1000000f),
         [Traits.Titanic] = new Booster("Unit is practically a giant. (Size × 3). \n(Cheat Trait)", (s) => s.Scale *= 3f),
         [Traits.Colossal] = new Booster("Unit is far larger than normal (Size × 2.5). \n(Cheat Trait)", (s) => s.Scale *= 2.5f),
@@ -320,7 +319,7 @@ static class TraitList
         [Traits.Tiny] = new Booster("Unit is far smaller than normal. \n(Cheat Trait)", (s) => s.Scale /= 3.0f),
         [Traits.AdaptiveTactics] = new Booster("Unit earns double the normal amount of experience from actions.\n(Cheat Trait)", (s) => s.ExpGain *= 2),
         [Traits.SlowMetabolism] = new Booster("Unit digests and absorbs prey very slowly (50%)", (s) => { s.Outgoing.AbsorptionRate *= 0.5f; s.Outgoing.DigestionRate *= 0.5f; }),
-        [Traits.LightFrame] = new Booster("Unit can melee attack twice in a turn, though it loses this ability while it contains any prey.  Unit also takes 25% more damage from all sources", (s) => { s.Incoming.MeleeDamage *= 1.25f; s.Incoming.RangedDamage *= 1.25f; s.Incoming.MagicDamage *= 1.25f; s.VirtualStrMult *= 1.7f; }),
+        [Traits.LightFrame] = new Booster("Unit can melee attack twice in a turn, though it loses this ability while it contains any prey. Unit also takes 25% more damage from all sources", (s) => { s.Incoming.MeleeDamage *= 1.25f; s.Incoming.RangedDamage *= 1.25f; s.Incoming.MagicDamage *= 1.25f; s.VirtualStrMult *= 1.7f; }),
         [Traits.Featherweight] = new Booster("Unit moves slightly faster (+1 AP) and gets a melee/vore dodge bonus, but takes extra damage from melee.", (s) => { s.SpeedBonus += 1; s.Incoming.MeleeShift += .75f; s.Incoming.VoreOddsMult *= 0.75f; s.Incoming.MeleeDamage *= 1.2f; }),
         [Traits.Elite] = new Booster("Unit is skilled and trained in advanced tactics but requires more Exp to level ( All stats +120% but 2x Exp required)", (s) => { s.StatMult *= 2.2f; s.ExpRequired *= 2.0f; }),
         [Traits.Juggernaut] = new Booster("Unit's stats are increased by 100%, but MP regeneration is delayed by one turn after it regenerates MP.", (s) => { s.StatMult *= 2f; }),
@@ -341,6 +340,7 @@ static class TraitList
         [Traits.SlowedGrowth] = new Booster("Unit grows 20% less from absorbing prey (Requires the Growth trait)", (s) => { s.Incoming.GrowthRate *= 0.8f; }),
         [Traits.FleetingGrowth] = new Booster("Unit loses its gained growth more quickly (Requires the Growth trait)", (s) => { s.GrowthDecayRate *= 2f; }),
         [Traits.PersistentGrowth] = new Booster("Unit loses its gained growth less quickly (Requires the Growth trait)", (s) => { s.GrowthDecayRate *= 0.5f; }),
+        [Traits.PermanentGrowth] = new Booster("Unit does not lose its gained growth (Requires the Growth trait)", (s) => { s.GrowthDecayRate *= 0f; }),
         [Traits.ProteinRich] = new Booster("Absorbing this unit yields more (2×) healing and (with the growth trait) more growth than usual (1.5×)", (s) => { s.Outgoing.GrowthRate *= 1.5f; s.Outgoing.Nutrition *= 2f; }),
         [Traits.EfficientGuts] = new Booster("Unit receives 50% more healing from absorbing prey", (s) => { s.Incoming.Nutrition *= 1.5f; }),
         [Traits.WastefulProcessing] = new Booster("Unit can't get as much healing out of prey, but they are done with it quicker. (Absorption rate × 1.5, Nutrition received × 0.5 )", (s) => { s.Incoming.Nutrition *= 0.5f; s.Outgoing.AbsorptionRate *= 1.5f; }),
@@ -392,7 +392,6 @@ static class TraitList
             s.ExpRequired *= 1.5f;
         }),
     };
-
 }
 
 internal class Frenzy : Trait, IStatBoost
@@ -466,7 +465,7 @@ internal class Paralyzer : Trait, IAttackStatusEffect
 {
     public Paralyzer() => Description = "Unit has a small chance to stun an enemy for 1 turn when it attacks";
 
-    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, int damage)
+    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, double damage)
     {
         if (State.Rand.Next(10 + 3 * target.TimesParalyzed) == 0)
             target.Paralyzed = true;
@@ -477,7 +476,7 @@ internal class BoggingSlime : Trait, IAttackStatusEffect
 {
     public BoggingSlime() => Description = "Attacks from this unit have a chance to slime enemy units for 1 turn.\n(effect lowers AP to 50% of max)\nDoes not stack.";
 
-    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, int damage)
+    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, double damage)
     {
         if (State.Rand.Next(10) < 4)
             target.Slimed = true;
@@ -488,14 +487,13 @@ internal class Vampirism : Trait, IAttackStatusEffect
 {
     public Vampirism() => Description = "Melee attacks from this unit will heal the attacker by a small amount (12% of damage done, to a minimum of 1).";
 
-    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, int damage)
+    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, double damage)
     {
         if (ranged == false)
         {
-            int heal = Math.Max((int)(damage * .12f), 1);
+            int heal = (int)Math.Max(damage * .12, 1);
             actor.Unit.Heal(heal);
         }
-
     }
 }
 
@@ -503,14 +501,14 @@ internal class Stinger : Trait, IAttackStatusEffect
 {
     public Stinger() => Description = "Melee attacks from this unit have a chance to poison enemy units. Poison deals damage over time but doesn't kill enemy units.\nDoes not stack with itself or the poison spell.";
 
-    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, int damage)
+    public void ApplyStatusEffect(Actor_Unit actor, Actor_Unit target, bool ranged, double damage)
     {
         if (ranged)
             return;
         if (State.Rand.Next(10) < 2)
         {
-            damage = Math.Max(damage / 2, 3);
-            target.Unit.ApplyStatusEffect(StatusEffectType.Poisoned, damage, 3);
+            damage = Math.Max(damage / 2.0, 3);
+            target.Unit.ApplyStatusEffect(StatusEffectType.Poisoned, (int)damage, 3);
         }
     }
 }
@@ -558,6 +556,32 @@ internal class EasilySatisfied : Trait, IVoreAttackOdds
     }
 }
 
+internal class Growth : VoreTrait
+{
+    public Growth()
+    {
+        Description = "Each absorption makes this unit grow in size, but the effect slowly degrades outside battle.\n(Cheat Trait)";
+    }
+
+    public override int ProcessingPriority => 50;
+    public override bool IsPredTrait => true;
+
+    public override bool OnAbsorption(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey, double healingToPred)
+    {
+        double predMass = predUnit.Unit.TraitBoosts.BulkMultiplier * State.RaceSettings.GetBodySize(predUnit.Unit.Race) * predUnit.Unit.GetScale(2);
+        double predBaseMass = predMass / Math.Pow((double)predUnit.Unit.BaseScale, 2); // Pred's mass, without Growth factored in.
+        double preyMass = preyUnit.Unit.TraitBoosts.BulkMultiplier * State.RaceSettings.GetBodySize(preyUnit.Unit.Race) * preyUnit.Unit.GetScale(2);
+        double increment = 0.1 * damageToPrey / preyUnit.Unit.MaxHealth;
+        increment *= preyMass;
+        increment *= preyUnit.Unit.TraitBoosts.Outgoing.GrowthRate * predUnit.Unit.TraitBoosts.Incoming.GrowthRate * Config.GrowthMod;
+        double newMass = predMass + increment;
+        double newScale = Math.Sqrt(newMass / predBaseMass);
+        predUnit.Unit.BaseScale = newScale;
+
+        return true;
+    }
+}
+
 internal class UnpleasantDigestion : VoreTrait
 {
     public UnpleasantDigestion()
@@ -567,9 +591,9 @@ internal class UnpleasantDigestion : VoreTrait
 
     public override bool IsPredTrait => false;
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey)
     {
-        predUnit.Damage(1);
+        DamageAccumulator.AddDamage(1);
         return true;
     }
 }
@@ -582,7 +606,7 @@ internal class PleasantDigestion : VoreTrait
 
     public override bool IsPredTrait => false;
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey)
     {
         predUnit.Unit.Heal(1);
         return true;
@@ -600,7 +624,7 @@ internal class Whispers : VoreTrait, IProvidesSingleSpell
 
     public List<SpellTypes> GetSingleSpells(Unit unit) => new List<SpellTypes> { SpellList.Whispers.SpellType };
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey)
     {
         if(predUnit.Unit.FixedSide != preyUnit.Unit.FixedSide)
             preyUnit.Actor.CastStatusSpell(SpellList.Whispers, predUnit);
@@ -707,7 +731,7 @@ internal class Possession : VoreTraitBooster, INoAutoEscape
         return true;
     }
 
-    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    public override bool OnDigestion(Prey preyUnit, Actor_Unit predUnit, PreyLocation location, double damageToPrey)
     {
         predUnit.CheckPossession(preyUnit.Actor);
         return true;
@@ -884,12 +908,12 @@ internal class SpiritPossession : Possession
     {
         var possessed = predUnit.CheckPossession(preyUnit.Actor);
         predUnit.RemovePossession(preyUnit.Actor);
-        if(possessed)
+        if (possessed)
         {
             if (predUnit.Unit.Side != preyUnit.Unit.Side)
                 State.GameManager.TacticalMode.SwitchAlignment(predUnit);
-            //TODO: This game needs some form of true fusion mechanic. 
-            //this is an approximation of fusion with the result taking the appearance of the pred, and the side of the prey
+            // TODO: This game needs some form of true fusion mechanic.
+            // this is an approximation of fusion with the result taking the appearance of the pred, and the side of the prey
             if (predUnit.Unit.Side == preyUnit.Unit.Side)
                 predUnit.Unit.FixedSide = -1;
             predUnit.Unit.Name = preyUnit.Unit.Name;
@@ -918,7 +942,7 @@ internal class ForcedMetamorphosis : VoreTraitBooster, INoAutoEscape
     public override bool OnDigestionKill(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
     {
         //TODO: Make this a status effect instead
-        if((predUnit.Unit.FixedSide == preyUnit.Unit.FixedSide) && (predUnit.Unit.FixedSide == predUnit.Unit.Side))
+        if ((predUnit.Unit.FixedSide == preyUnit.Unit.FixedSide) && (predUnit.Unit.FixedSide == predUnit.Unit.Side))
             predUnit.Unit.AddPermanentTrait(Traits.Metamorphosis);
         else predUnit.Unit.AddPermanentTrait(Traits.MetamorphicConversion);
         predUnit.Unit.SpawnRace = preyUnit.Unit.HiddenUnit.DetermineSpawnRace();

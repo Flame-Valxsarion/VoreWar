@@ -52,7 +52,7 @@ public class ArmyExchanger : MonoBehaviour
         }
         else
             Select(0);
-        fullArmies = left.RemainnigSize <= 0 && right.RemainnigSize <= 0;
+        fullArmies = left.RemainingSize <= 0 && right.RemainingSize <= 0;
         if (fullArmies)
         {
             MoveToLeft.GetComponentInChildren<Text>().text = "Exchange Selected Units";

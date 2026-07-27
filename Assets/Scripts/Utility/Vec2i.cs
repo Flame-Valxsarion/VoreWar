@@ -2,7 +2,7 @@ using OdinSerializer;
 using System;
 using UnityEngine;
 
-public class Vec2i
+public class Vec2i : IEquatable<Vec2i>
 {
 
     [OdinSerialize]
@@ -26,6 +26,11 @@ public class Vec2i
         return (float)Math.Sqrt(xe + ye);
     }
 
+    public static Vec2i operator +(Vec2i a, Vec2i b)
+    {
+        return new Vec2i(a.x + b.x, a.y + b.y);
+    }
+
     public int GetNumberOfMovesDistance(Vec2i p) => Math.Max(Math.Abs(p.x - x), Math.Abs(p.y - y));
 
     internal int GetNumberOfMovesDistance(Vec2 p) => Math.Max(Math.Abs(p.x - x), Math.Abs(p.y - y));
@@ -46,4 +51,9 @@ public class Vec2i
     {
         return new Vector2(v.x, v.y);
     }
+    
+    public bool Equals(Vec2i that) => this.x == that?.x && this.y == that?.y;
+    
+    public override int GetHashCode() => 1000 * x + y; // Hash duplication can occur when the range of y is greater than 1000; overflows can occur when x > 2000000.
+    public override string ToString() => "(" + this.x + ", " + this.y + ")";
 }

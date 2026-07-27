@@ -17,8 +17,6 @@ public class ExceptionHandler : MonoBehaviour
             path = Path.Combine(Application.persistentDataPath, "recentexceptions.txt");
         else
             path = Path.Combine(Application.dataPath, "recentexceptions.txt");
-
-
     }
 
     private void HandleException(string condition, string stackTrace, LogType type)
@@ -62,7 +60,5 @@ public class ExceptionHandler : MonoBehaviour
         {
             Debug.Log("Failed to write exception... just eating it rather than throw another exception");
         }
-
-
     }
 }

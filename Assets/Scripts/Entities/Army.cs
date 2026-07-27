@@ -5,18 +5,16 @@ using System.Linq;
 using UnityEngine;
 using static UnityEngine.UI.CanvasScaler;
 
-
 public class Army
 {
     [OdinSerialize]
-    internal List<StrategicTileType> impassables = new List<StrategicTileType>() 
+    internal List<StrategicTileType> impassables = new List<StrategicTileType>()
     { StrategicTileType.mountain, StrategicTileType.snowMountain, StrategicTileType.water, StrategicTileType.lava, StrategicTileType.ocean, StrategicTileType.brokenCliffs};
     internal enum MovementMode
     {
         Standard,
         Flight,
         Aquatic
-
     }
 
     internal enum TileAction
@@ -26,8 +24,8 @@ public class Army
         TwoMP,
         Attack,
         AttackTwoMP
-
     }
+    
     [OdinSerialize]
     Empire empire;
     [OdinSerialize]
@@ -55,8 +53,6 @@ public class Army
     internal float SCooldown;
     [OdinSerialize]
     internal float SCooldownOffset;
-
-
 
     [OdinSerialize]
     public int InVillageIndex { get; private set; } = -1;
@@ -100,9 +96,9 @@ public class Army
 
     [OdinSerialize]
     public float UsedSize;
-    public float RemainnigSize => MaxSize - UsedSize;
+    public float RemainingSize => MaxSize - UsedSize;
     public float PercentFull => UsedSize / MaxSize;
-    public bool MostlyFull => RemainnigSize - Empire.GetAvgDeployCost() <= 0; //Checks if army can fit any more units on average
+    public bool MostlyFull => RemainingSize - Empire.GetAvgDeployCost() <= 0; //Checks if army can fit any more units on average
 
     [OdinSerialize]
     private ItemStock itemStock;
@@ -115,7 +111,6 @@ public class Army
         get { if (itemStock == null) itemStock = new ItemStock(); return itemStock; }
         set { itemStock = value; }
     }
-
 
     internal double ArmyPower => StrategicUtilities.ArmyPower(this);
     internal int MaxSize => empire.MaxArmySize;
@@ -138,7 +133,6 @@ public class Army
         Position = new Vec2i(pos.x, pos.y);
     }
 
-
     public Army(Empire empire, Vec2i p, int side)
     {
         this.empire = empire;
@@ -157,7 +151,6 @@ public class Army
             RemainingMP = 0;
         if (JustSpawnedLeader && Config.LeaderSpawnFreeze)
             RemainingMP = 0;
-
     }
 
     internal void NameArmy(Empire empire)
@@ -189,19 +182,17 @@ public class Army
                     unit.SetDefaultBreastSize(unit.DefaultBreastSize - 1);
                 if (unit.DickSize > 0 && State.Rand.NextDouble() < Config.WeightLossFractionDick)
                     unit.DickSize--;
-
             }
-            if (unit.HasTrait(Traits.Growth) && unit.BaseScale > 1 && !unit.HasTrait(Traits.PermanentGrowth))
+            if (unit.HasTrait(Traits.Growth))
             {
-                float extremum = -(Config.GrowthDecayOffset - Config.GrowthDecayIncreaseRate - 1 / 2 * Config.GrowthDecayIncreaseRate);
-                if (unit.BaseScale > extremum)
-                    unit.BaseScale -= extremum - (extremum * ((1 - Config.GrowthDecayOffset) - Config.GrowthDecayIncreaseRate * (extremum - 1)));     // force the decay function to be monotonous
-                else
-                    unit.BaseScale = Math.Max(1, unit.BaseScale * ((1 - Config.GrowthDecayOffset) - Config.GrowthDecayIncreaseRate * (unit.BaseScale - 1)));  // default decayIncreaseRate = 0.04f
+                double bulkMultiplier = Math.Pow(unit.BaseScale, 2);
+                double decrement = Config.GrowthDecayOffset + Config.GrowthDecayIncreaseRate * (bulkMultiplier - 1);
+                decrement *= unit.TraitBoosts.GrowthDecayRate;
+                bulkMultiplier -= decrement;
+                unit.BaseScale = Math.Sqrt(bulkMultiplier);
             }
             EquipmentFunctions.TickCoolDown(unit, EquipmentType.RechargeStrategy);
             EquipmentFunctions.CheckEquipment(unit, EquipmentActivator.OnStrategicTurnStart, new object[] { unit, this, null });
-
         }
         RefreshMovementMode();
 
@@ -268,7 +259,7 @@ public class Army
                             movement = 1;
                             break;
                         }
-                        else 
+                        else
                         {
                             movement -= 1;
                         }
@@ -276,7 +267,6 @@ public class Army
                     else if (tower.tuneUpgrade.built)
                     {
                         movement -= 1;
-
                     }
                 }
                 else if (tower.improveUpgrade.built)
@@ -311,12 +301,11 @@ public class Army
                 {
                     unit.TriggerEeveelution();
                 }
-
             }
         }
 
         if (movement < 0)
-            { movement = 0; }
+            movement = 0;
 
         return movement + (int)Math.Floor(AcademyResearch.GetValueFromEmpire(empire, AcademyResearchType.ArmyMP) * 0.5f);
     }
@@ -345,7 +334,7 @@ public class Army
                 cartography++;
             if (unit.HasTrait(Traits.HillImpedence))
                 noHill++;
-            if (unit.HasTrait(Traits.LavaWalker)) 
+            if (unit.HasTrait(Traits.LavaWalker))
                 yesLava++;
             if (unit.HasTrait(Traits.SnowImpedence))
                 noSnow++;
@@ -391,7 +380,6 @@ public class Army
             impassables.Remove(StrategicTileType.hills);
             impassables.Remove(StrategicTileType.snowHills);
             impassables.Remove(StrategicTileType.sandHills);
-
         }
 
         if (noSnow > 0 && noSnow > Units.Count / 2)
@@ -422,12 +410,12 @@ public class Army
             impassables.Remove(StrategicTileType.snowMountain);
             impassables.Remove(StrategicTileType.brokenCliffs);
         }
-        else 
-        {  
+        else
+        {
             if (!impassables.Contains(StrategicTileType.snowMountain))
                 impassables.Add(StrategicTileType.snowMountain);
             if (!impassables.Contains(StrategicTileType.mountain))
-                 impassables.Add(StrategicTileType.mountain);
+                impassables.Add(StrategicTileType.mountain);
             if (!impassables.Contains(StrategicTileType.brokenCliffs))
                 impassables.Add(StrategicTileType.brokenCliffs);
         }
@@ -509,7 +497,6 @@ public class Army
                 impassables.Add(StrategicTileType.grass);
         }
         else impassables.Remove(StrategicTileType.grass);
-
 
         if (flying > 0 && flying >= Units.Count / 2)
             movementMode = MovementMode.Flight;
@@ -654,10 +641,10 @@ public class Army
         {
             if (State.GameManager.StrategyMode.IsPlayerTurn)
                 State.GameManager.StrategyMode.UndoMoves.Add(new StrategicMoveUndo(this, RemainingMP, (int)SCooldown, new Vec2i(Position.x, Position.y)));
-                if (Units.Count <= Config.ScoutMax)
-                {
-                    SCooldown += 1f;
-                }
+            if (Units.Count <= Config.ScoutMax)
+            {
+                SCooldown += 1f;
+            }
             RemainingMP -= 1;
             if (Banner != null && Banner.gameObject.activeSelf)
                 State.GameManager.StrategyMode.Translator?.SetTranslator(Banner.transform, Position, pos, Config.StrategicAIMoveDelay, State.GameManager.StrategyMode.IsPlayerTurn);
@@ -795,9 +782,7 @@ public class Army
             target.Feed();
             remainingPrey--;
         }
-
     }
-
 
     internal int TrainingGetCost(int level)
     {
@@ -832,7 +817,6 @@ public class Army
             empire.SpendGold(cost);
             State.World.Stats.SpentGoldOnArmyTraining(cost, Side);
         }
-
     }
 
     internal void SortSpells()
@@ -869,8 +853,6 @@ public class Army
 
         var magicUsers = Units.Where(s => s.FixedGear == false && s.AIClass == AIClass.MagicMelee || s.AIClass == AIClass.MagicRanged).OrderByDescending(s => s.GetStatBase(Stat.Mind));
 
-
-
         foreach (Unit unit in magicUsers)
         {
             if (books.Count == 0)
@@ -904,12 +886,10 @@ public class Army
                             unit.SetItem(books[0], 1);
                             books.RemoveAt(0);
                         }
-
                     }
                 }
             }
         }
-
     }
 
     internal void RecalculateSizeValue()
@@ -937,7 +917,7 @@ public class Army
     private enum eeveeConversion
     {
         Equaleon,
-        Umbreon,        
+        Umbreon,
     }
     internal void AttuneEeveelution(Unit unit, Dictionary<Race,int> races)
     {

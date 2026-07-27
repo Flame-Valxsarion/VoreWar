@@ -73,7 +73,7 @@
     /// <summary>Healing on unit is reduced based on effect strength</summary>
     Necrosis = 37,
     /// <summary>Unit takes increased damage based on effect strength</summary>
-    Errosion = 38,
+    Erosion = 38,
     /// <summary>Unit takes part of the damage it took after this effect expires</summary>
     Agony = 39,
     /// <summary>Strength, Dexterity, and Agility are reduced based on remaining duration</summary>
