@@ -1165,6 +1165,7 @@ static class RaceParameters
                 Traits.Cruel,
                 Traits.SlowAbsorption,
                 Traits.Ravenous,
+                Traits.VerySlowMovement,
         },
             RaceDescription = "Abakhanskya is an ancient dragoness hailing from another realm.  Despite this fact, she has been here for generations upon generations and has quite the body to show for it, absolutely brimming with the nutrients stolen from countless prey throughout the years.  \n<b>She is an unstoppable force of predatory nature, it is unwise to face her on fair terms.</b>",
         };
