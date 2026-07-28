@@ -557,15 +557,6 @@ static class RaceParameters
             Upkeep = 21f,
 			PowerAdjustment = 2f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.BladderVore },
-            RacialTraits = new List<Traits>()
-            {
-                Traits.Charmer,
-                Traits.Temptation,
-                Traits.Possession,
-                Traits.ForceFeeder,
-                Traits.ManaDrain,
-                Traits.CreateSpawn,
-            },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 14),
@@ -704,12 +695,6 @@ static class RaceParameters
             FavoredStat = Stat.Will,
             DeployCost = 1,
             Upkeep = 3f,
-            RacialTraits = new List<Traits>()
-        {
-            Traits.PackStomach,
-            Traits.MagicResistance,
-            Traits.AstralCall,
-        },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 14),
@@ -1377,14 +1362,6 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 4f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.CockVore, VoreType.BladderVore },
-            RacialTraits = new List<Traits>()
-            {
-                Traits.Dazzle,
-                Traits.Flight,
-                Traits.EnthrallingDepths,
-                Traits.PleasurableTouch,
-                Traits.Charmer
-            },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(8, 12),
@@ -1417,11 +1394,6 @@ static class RaceParameters
             PowerAdjustment = 1.5f,
             DeployCost = 1,
             Upkeep = 11f,
-            RacialTraits = new List<Traits>()
-        {
-            Traits.Maul,
-            Traits.Frenzy,
-        },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(16, 24),

@@ -147,6 +147,9 @@ public class CustomTraitBoost
                         case CustomTraitComp.FlatHitReduction:
                             s.FlatHitReduction *= value;
                             break;
+                        case CustomTraitComp.FlatDamageReduction:
+                            s.FlatHitReduction += value;
+                            break;
                         case CustomTraitComp.SpeedLossFromWeightMultiplier:
                             s.SpeedLossFromWeightMultiplier *= value;
                             break;

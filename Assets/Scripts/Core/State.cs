@@ -1165,7 +1165,7 @@ public static class State
                 }
             }
 
-            if (version < 44 + 1)
+            if (version < 45 + 1)
             {
                 // Herein are the updates specific to version 45.
                 

@@ -26,7 +26,7 @@ public class DefenseEncampmentPanel : MonoBehaviour
         else
             level = building.Owner.Leader.Level;
         CurrentLevel.text = ((int)Mathf.Max(Mathf.Floor(level * unitScale), 1)).ToString();
-        CurrentDefenders.text = DefenseEncampment.AvailibleDefenders.ToString();
+        CurrentDefenders.text = DefenseEncampment.AvailableDefenders.ToString();
         MaxDefenders.text = DefenseEncampment.maxDefenders.ToString();
         CurrentTrainTime.text = DefenseEncampment.TrainTimer.ToString();
     }

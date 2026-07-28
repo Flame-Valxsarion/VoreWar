@@ -54,6 +54,7 @@ public class PermanentBoosts
     internal DirectionalStat Incoming = new DirectionalStat();
     internal DirectionalStat Outgoing = new DirectionalStat();
     internal float FlatHitReduction = 1.0f;
+    internal float FlatDamageReduction = 0f;
     internal float SpeedLossFromWeightMultiplier = 1.0f;
     internal float DodgeLossFromWeightMultiplier = 1.0f;
     internal float BulkMultiplier = 1.0f;
@@ -242,6 +243,7 @@ static class TraitList
         [Traits.GelatinousBody] = new Booster("Takes less damage from attacks, but is easier to vore", (s) => { s.Incoming.RangedDamage *= .75f; s.Incoming.MeleeDamage *= 0.8f; s.Incoming.VoreOddsMult *= 1.15f; }),
         [Traits.MetalBody] = new Booster("Provides vore resistance, and their remains are only worth half as much healing", (s) => { s.Incoming.VoreOddsMult *= .7f; s.Outgoing.Nutrition *= .5f; }),
         [Traits.EasyToVore] = new Booster("Unit is easier to vore than normal", (s) => s.Incoming.VoreOddsMult *= 1.25f),
+        [Traits.Resilient] = new Booster("Unit takes 1 less damage from weapon attacks.", (s) => s.FlatDamageReduction += 1),
         [Traits.Defenseless] = new Booster("Unit is incredibly easy to vore", (s) => s.Incoming.VoreOddsMult *= 1000),
         [Traits.BornToMove] = new Booster("Experienced at carrying extra weight.\nUnit suffers a smaller defense penalty and no movement penalty from units it is carrying.", (s) => { s.SpeedLossFromWeightMultiplier = 0; s.DodgeLossFromWeightMultiplier = 0.2f; }),
         [Traits.Maul] = new Booster("Allows unit to attack twice in melee.\nEach attack uses half of max AP", (s) => { s.MeleeAttacks += 1; s.VirtualStrMult *= 1.8f; }),

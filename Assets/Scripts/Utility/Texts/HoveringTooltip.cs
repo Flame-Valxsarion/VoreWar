@@ -530,19 +530,19 @@ public class HoveringTooltip : MonoBehaviour
         switch (trait)
         {
             case Traits.Resilient:
-                return "Takes less damage from attacks";
+                return "Unit takes 1 less damage from weapon attacks.";
             case Traits.FastDigestion:
-                return "Unit digests prey faster than normal";
+                return "Unit digests prey 50% faster than normal";
             case Traits.SlowDigestion:
-                return "Unit digests prey slower than normal";
+                return "Unit digests prey 50% slower than normal";
             case Traits.Intimidating:
                 return "Enemies within 1 tile get a penalty to accuracy against all targets";
             case Traits.AdeptLearner:
                 return "All stats are favored, randomly get 1 point in 2 different stats with level up";
             case Traits.SlowBreeder:
-                return "Race produces new population at a slower rate than normal";
+                return "Race produces new population at a rate 30% slower than normal";
             case Traits.ProlificBreeder:
-                return "Race produces new population at a faster rate than normal";
+                return "Race produces new population at a rate 75% faster than normal";
             case Traits.Flight:
                 return "Unit can pass through obstacles and other units in tactical mode.\nMust end turn on solid ground\nIf you try to take an action or end your turn in an invalid place, it will automatically undo your movement";
             case Traits.Pounce:

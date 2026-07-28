@@ -626,7 +626,7 @@ static class TacticalUtilities
         return;
     }
 
-    static public void MutuallyDamageUnits(Actor_Unit source, int damage)
+    static public void MutuallyDamageUnits(Actor_Unit source, double damage)
     {
         if (linkedUnits == null)
             return;
