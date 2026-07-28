@@ -1165,6 +1165,7 @@ static class RaceParameters
                 Traits.Cruel,
                 Traits.SlowAbsorption,
                 Traits.Ravenous,
+                Traits.VerySlowMovement,
         },
             RaceDescription = "Abakhanskya is an ancient dragoness hailing from another realm.  Despite this fact, she has been here for generations upon generations and has quite the body to show for it, absolutely brimming with the nutrients stolen from countless prey throughout the years.  \n<b>She is an unstoppable force of predatory nature, it is unwise to face her on fair terms.</b>",
         };
@@ -1335,7 +1336,7 @@ static class RaceParameters
             HasTail = true,
             FavoredStat = Stat.Mind,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 8f,
             RacialTraits = new List<Traits>()
         {
                 Traits.Flight,
@@ -1763,12 +1764,12 @@ static class RaceParameters
 
         OoviKat = new RaceTraits()
         {
-            BodySize = 15,
-            StomachSize = 20,
+            BodySize = 12,
+            StomachSize = 15,
             HasTail = true,
             FavoredStat = Stat.Strength,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 10f,
             PowerAdjustment = 1.4f,
             RaceStats = new RaceStats()
             {
@@ -1785,6 +1786,7 @@ static class RaceParameters
         {
             Traits.InherentGlamour,
             Traits.EvasiveBattler,
+            Traits.Infiltrator,
         },
             RaceDescription = "OoviKat have the unique ability to touch the soul, the true nature, of living beings. Once identified, they can transform into those they interact with, tapping into their tap into their inner feelings and memorie. Due to this, it is uncertain when the came to this world or how long the've been around in secret.",
         };
@@ -1829,10 +1831,11 @@ static class RaceParameters
             StomachSize = 20,
             HasTail = true,
             FavoredStat = Stat.Endurance,
+            ExpMultiplier = 1.75f,
             CanUseRangedWeapons = false,
             PowerAdjustment = 1.4f,
             DeployCost = 1,
-            Upkeep = 8f,
+            Upkeep = 11f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(16, 24),
@@ -3191,7 +3194,7 @@ static class RaceParameters
             ExpMultiplier = 1.6f,
             PowerAdjustment = 1.3f,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 6f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(11, 15),
@@ -3199,7 +3202,7 @@ static class RaceParameters
                 Endurance = new RaceStats.StatRange(18, 24),
                 Mind = new RaceStats.StatRange(7, 11),
                 Will = new RaceStats.StatRange(12, 18),
-                Agility = new RaceStats.StatRange(13, 19),
+                Agility = new RaceStats.StatRange(7, 10),
                 Voracity = new RaceStats.StatRange(19, 27),
                 Stomach = new RaceStats.StatRange(21, 29),
             },
@@ -3553,7 +3556,7 @@ static class RaceParameters
             ExpMultiplier = 1.2f,
             PowerAdjustment = 1.5f,
             DeployCost = 1,
-            Upkeep = 4f,
+            Upkeep = 8f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(10, 14),
@@ -3649,7 +3652,7 @@ static class RaceParameters
             ExpMultiplier = 1.2f,
             PowerAdjustment = 1.5f,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 9f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(18, 24),
@@ -3940,7 +3943,7 @@ static class RaceParameters
         SoulSprite = new RaceTraits()
         {
             BodySize = 8,
-            StomachSize = 12,
+            StomachSize = 20,
             FavoredStat = Stat.Mind,
             HasTail = true,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
@@ -3955,7 +3958,7 @@ static class RaceParameters
                 Will = new RaceStats.StatRange(10, 15),
                 Agility = new RaceStats.StatRange(6, 8),
                 Voracity = new RaceStats.StatRange(6, 10),
-                Stomach = new RaceStats.StatRange(10, 16),
+                Stomach = new RaceStats.StatRange(12, 16),
             },
             RacialTraits = new List<Traits>()
         {
@@ -4449,10 +4452,10 @@ static class RaceParameters
             StomachSize = 25,
             FavoredStat = Stat.Agility,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
-            ExpMultiplier = 4f,
-            PowerAdjustment = 4f,
-            DeployCost = 3,
-            Upkeep = 25f,
+            ExpMultiplier = 7f,
+            PowerAdjustment = 7f,
+            DeployCost = 4,
+            Upkeep = 50f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(15, 22),
@@ -4658,11 +4661,11 @@ static class RaceParameters
             {
                 Strength = new RaceStats.StatRange(24, 28),
                 Dexterity = new RaceStats.StatRange(8, 11),
-                Endurance = new RaceStats.StatRange(24, 30),
+                Endurance = new RaceStats.StatRange(38, 42),
                 Mind = new RaceStats.StatRange(18, 23),
                 Will = new RaceStats.StatRange(10, 14),
                 Agility = new RaceStats.StatRange(8, 12),
-                Voracity = new RaceStats.StatRange(21, 25),
+                Voracity = new RaceStats.StatRange(31, 35),
                 Stomach = new RaceStats.StatRange(17, 21),
             },
             RacialTraits = new List<Traits>()
@@ -4683,8 +4686,8 @@ static class RaceParameters
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal, VoreType.BreastVore, VoreType.Unbirth },
             ExpMultiplier = 7f,
             PowerAdjustment = 15f,
-            DeployCost = 4,
-            Upkeep = 36f,
+            DeployCost = 5,
+            Upkeep = 55f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(22, 30),
@@ -4737,6 +4740,7 @@ static class RaceParameters
                 Traits.DoubleAttack,
                 Traits.Growth,
                 Traits.GiantSlayer,
+                Traits.MinorGrowth,
         },
             RaceDescription = "A skilled warrior captain from the same world as the other Sergals. Strangely enough, not only does he look physically different from them, but he seems to hold some sort of resentment for them as well. He's an incredibly deadly frontline fighter, almost like he has been fighting in wars since birth. Many warriors, even whole companies have already fallen to either his polearm, or his voracious appetite. Needless to say: He seems to feel perfectly in his element here.",
         };
@@ -4791,7 +4795,7 @@ static class RaceParameters
                 Strength = new RaceStats.StatRange(4, 10),
                 Dexterity = new RaceStats.StatRange(4, 10),
                 Endurance = new RaceStats.StatRange(10, 15),
-                Mind = new RaceStats.StatRange(18, 25),
+                Mind = new RaceStats.StatRange(24, 30),
                 Will = new RaceStats.StatRange(18, 25),
                 Agility = new RaceStats.StatRange(8, 11),
                 Voracity = new RaceStats.StatRange(15, 20),
@@ -4823,7 +4827,7 @@ static class RaceParameters
             ExpMultiplier = 20f,
             PowerAdjustment = 100f,
             DeployCost = 8,
-            Upkeep = 150f,
+            Upkeep = 100f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(30, 35),

@@ -337,7 +337,7 @@ static class TraitList
         [Traits.IdealSustenance] = new Booster("This unit's body gets absorbed efficiently and very fast.(+50% nutrition, +100% absorb speed)", (s) => { s.Outgoing.Nutrition *= 1.5f; s.Incoming.AbsorptionRate = 2.0f; }),
         [Traits.DoubleGrowth] = new Booster("Unit grows twice as much from absorbing prey (Requires the Growth trait)", (s) => { s.Incoming.GrowthRate *= 2f; }),
         [Traits.IncreasedGrowth] = new Booster("Unit grows 50% more from absorbing prey (Requires the Growth trait)", (s) => { s.Incoming.GrowthRate *= 1.5f; }),
-        [Traits.MinorGrowth] = new Booster("Unit grows 50% less from absorbing prey (Requires the Growth trait)", (s) => { s.Incoming.GrowthRate *= 0.5f; }),
+        [Traits.MinorGrowth] = new Booster("Unit grows 80% less from absorbing prey (Requires the Growth trait)", (s) => { s.Incoming.GrowthRate *= 0.2f; }),
         [Traits.SlowedGrowth] = new Booster("Unit grows 20% less from absorbing prey (Requires the Growth trait)", (s) => { s.Incoming.GrowthRate *= 0.8f; }),
         [Traits.FleetingGrowth] = new Booster("Unit loses its gained growth more quickly (Requires the Growth trait)", (s) => { s.GrowthDecayRate *= 2f; }),
         [Traits.PersistentGrowth] = new Booster("Unit loses its gained growth less quickly (Requires the Growth trait)", (s) => { s.GrowthDecayRate *= 0.5f; }),
