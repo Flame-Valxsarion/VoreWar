@@ -59,7 +59,7 @@ class DemiDragons : DefaultRaceData
         BodyAccent2 = new SpriteExtraInfo(4, BodyAccentSprite2, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.AccessoryColor)); // Teeth/Nose
         BodyAccent3 = new SpriteExtraInfo(6, BodyAccentSprite3, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.ExtraColor4)); // Body Pattern
         BodyAccent4 = new SpriteExtraInfo(22, BodyAccentSprite4, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.ExtraColor4)); // Head Patten
-        BodyAccent5 = new SpriteExtraInfo(25, BodyAccentSprite5, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.AccessoryColor)); // Ear Inner
+        BodyAccent5 = new SpriteExtraInfo(25, BodyAccentSprite5, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.ExtraColor1)); // Ear Inner
         BodyAccent6 = new SpriteExtraInfo(24, BodyAccentSprite6, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.AccessoryColor)); // Ear Outer
         BodyAccent7 = new SpriteExtraInfo(23, BodyAccentSprite7, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.ExtraColor2)); // Lower Horns
         BodyAccent8 = new SpriteExtraInfo(27, BodyAccentSprite8, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.DemidragonSkin, s.Unit.ExtraColor2)); // Upper Horns
@@ -2741,10 +2741,10 @@ class DemiDragons : DefaultRaceData
             clothing1 = new SpriteExtraInfo(5, null, WhiteColored); // Shoes
             clothing2 = new SpriteExtraInfo(12, null, WhiteColored); // Robe low
             clothing3 = new SpriteExtraInfo(19, null, WhiteColored); // Robe high
-            clothing4 = new SpriteExtraInfo(21, null, WhiteColored); // Robe Breast
+            clothing4 = new SpriteExtraInfo(20, null, WhiteColored); // Robe Breast
             clothing5 = new SpriteExtraInfo(13, null, WhiteColored); // Robe Waist
             clothing6 = new SpriteExtraInfo(12, null, WhiteColored); // Robe Arm
-            clothing7 = new SpriteExtraInfo(20, null, WhiteColored); // Mantle
+            clothing7 = new SpriteExtraInfo(21, null, WhiteColored); // Mantle
             clothing8 = new SpriteExtraInfo(30, null, WhiteColored); // Headwear
             clothing9 = new SpriteExtraInfo(5, null, WhiteColored); // Ring
         }

@@ -557,15 +557,6 @@ static class RaceParameters
             Upkeep = 21f,
             PowerAdjustment = 2f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.BladderVore },
-            RacialTraits = new List<Traits>()
-            {
-                Traits.Charmer,
-                Traits.Temptation,
-                Traits.Possession,
-                Traits.ForceFeeder,
-                Traits.ManaDrain,
-                Traits.CreateSpawn,
-            },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 14),
@@ -1735,12 +1726,12 @@ static class RaceParameters
 
         OoviKat = new RaceTraits()
         {
-            BodySize = 15,
-            StomachSize = 20,
+            BodySize = 12,
+            StomachSize = 15,
             HasTail = true,
-            FavoredStat = Stat.Strength,
+            FavoredStat = Stat.Dexterity,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 10f,
             PowerAdjustment = 1.4f,
             RaceStats = new RaceStats()
             {
@@ -3819,7 +3810,6 @@ static class RaceParameters
                 Traits.Pounce,
                 Traits.Biter,
                 Traits.BornToMove,
-            },
             RaceDescription = "Utahraptors are much faster and more powerful than the usual raptors you see here and there.  More hungry too."
         };
 
@@ -4765,7 +4755,7 @@ static class RaceParameters
             ExpMultiplier = 20f,
             PowerAdjustment = 100f,
             DeployCost = 8,
-            Upkeep = 150f,
+            Upkeep = 100f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(30, 35),

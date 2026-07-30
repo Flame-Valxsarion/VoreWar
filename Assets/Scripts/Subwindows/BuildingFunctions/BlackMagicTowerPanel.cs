@@ -84,17 +84,17 @@ public class BlackMagicTowerPanel : MonoBehaviour
     public void UpdateButtonInteract()
     {
         NecrosisButton.interactable = true;
-        if (BlackMagicTower.PactLevel > 3)
+        if (BlackMagicTower.PactLevel >= 3)
             ErosionButton.interactable = true;
         else
             ErosionButton.interactable = false;
 
-        if (BlackMagicTower.PactLevel > 9)
+        if (BlackMagicTower.PactLevel >= 9)
             AgonyButton.interactable = true;
         else
             AgonyButton.interactable = false;
 
-        if (BlackMagicTower.PactLevel > 6)
+        if (BlackMagicTower.PactLevel >= 6)
             LethargyButton.interactable = true;
         else
             LethargyButton.interactable = false;

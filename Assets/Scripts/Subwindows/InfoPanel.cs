@@ -895,8 +895,6 @@ public class InfoPanel
                     UnitInfoPanel.UnitTagHoverImage.gameObject.SetActive(true);
                 else
                     UnitInfoPanel.UnitTagHoverImage.gameObject.SetActive(false);
-                //if (Config.CheatUnitEditorEnabled)
-                    //sb.AppendLine("<color=#AB5200ff>UnitEditor</color>");
             }
             else
             {

@@ -1031,7 +1031,7 @@ public class Actor_Unit
         if (ranged)
         {
             damageScalar *= Unit.TraitBoosts.Outgoing.RangedDamage * target.Unit.TraitBoosts.Incoming.RangedDamage;
-			damageScalar *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.RangedDamageMult);
+            damageScalar *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.RangedDamageMult);
             if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
                 damageScalar *= 1.1;
             double statBoost;
@@ -1101,7 +1101,7 @@ public class Actor_Unit
             if (current_weapon_class == 0 || current_weapon_class == 1 || current_weapon_class == 4 || current_weapon_class == 5)
                 current_weapon_class = 0;
             int stat_diff = Unit.GetStat(Stat.Agility) - target.Unit.GetStat(Stat.Agility);
-            
+
             double ss_bonus = 0;
             if (stat_diff >= 25)
             {
@@ -1134,8 +1134,6 @@ public class Actor_Unit
         }
 
         damage *= damageScalar;
-        if (target.Unit.HasTrait(Traits.Resilient))
-            damage--;
 
         double sizeDiff = Math.Abs(BodySize() - target.BodySize());
         if (Config.SizeDamageMod > 0 && Config.SizeDamageInterval > 0)
@@ -1178,6 +1176,8 @@ public class Actor_Unit
         {
             damage *= 1 + (.01f * Math.Min(sizeDiff, 25));
         }
+
+        damage -= target.Unit.TraitBoosts.FlatDamageReduction;
 
         if (target.Unit.HasTrait(Traits.Multifaceted) && target.Unit.IsHighestStat(Stat.Endurance))
         {
@@ -3177,6 +3177,8 @@ public class Actor_Unit
         if (damageType != DamageTypes.Mutual)//Prevents damage from flashing every unit.
             UnitSprite.DisplayDamage(finalDamage, spellDamage);
         finalDamage = Unit.DamageBarrier(finalDamage);
+        if (damageType != DamageTypes.Mutual)//Prevents damage from flashing every unit.
+            UnitSprite.DisplayDamage(finalDamage, spellDamage);
         SubtractHealth(finalDamage);
         if (Unit.IsDead && lethality == DamageLethality.NonLethal)
             Unit.Health = 1;
@@ -3232,7 +3234,7 @@ public class Actor_Unit
                 {
                     if (unit_check.Unit.Predator)
                     {
-                        unit_check.PredatorComponent.ForceConsumeAuto(this);
+                        unit_check.PredatorComponent.ForceConsumeAuto(this, true);
                         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{Unit.Name} disappears. {unit_check.Unit.Name} is surprised as {Unit.Name} ends up inside of them.");
                     }
                 }

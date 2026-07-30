@@ -591,36 +591,38 @@ public class CreateStrategicGame : MonoBehaviour
 
         StrategicCreationArgs args = new StrategicCreationArgs(Empires.Length);
         Config.CenteredEmpire = new bool[Config.NumberOfRaces];
-        for (int i = 0; i < Empires.Length; i++)
+        try
         {
-            if (Empires[i].AIPlayer.isOn)
+            for (int i = 0; i < Empires.Length; i++)
             {
-                args.empireArgs[i].strategicAI = (StrategyAIType)Empires[i].StrategicAI.value + 1;
-                args.empireArgs[i].tacticalAI = (TacticalAIType)Empires[i].TacticalAI.value + 1;
-                Config.CenteredEmpire[i] = ((StrategyAIType)Empires[i].StrategicAI.value + 1) == StrategyAIType.Passive;
+                if (Empires[i].AIPlayer.isOn)
+                {
+                    args.empireArgs[i].strategicAI = (StrategyAIType)Empires[i].StrategicAI.value + 1;
+                    args.empireArgs[i].tacticalAI = (TacticalAIType)Empires[i].TacticalAI.value + 1;
+                    Config.CenteredEmpire[i] = ((StrategyAIType)Empires[i].StrategicAI.value + 1) == StrategyAIType.Passive;
+                }
+                else
+                {
+                    args.empireArgs[i].strategicAI = 0;
+                    args.empireArgs[i].tacticalAI = 0;
+                    Config.CenteredEmpire[i] = false;
+                }
+                args.CanVore[i] = Empires[i].CanVore.isOn;
+                args.empireArgs[i].team = Convert.ToInt32(Empires[i].Team.text);
+                args.Team[i] = args.empireArgs[i].team;
+                args.empireArgs[i].color = ColorFromIndex(Empires[i].PrimaryColor.value);
+                args.empireArgs[i].secColor = GetDarkerColor(ColorFromIndex(Empires[i].SecondaryColor.value));
+                args.TurnOrder[i] = Convert.ToInt32(Empires[i].TurnOrder.text);
+                args.empireArgs[i].maxArmySize = (int)Empires[i].MaxArmySize.value;
+                args.empireArgs[i].maxGarrisonSize = (int)Empires[i].MaxGarrisonSize.value;
+                args.empireArgs[i].side = i;
+                //args.empireArgs[i].bannerType = (i % 2 == 1) ? 1 : 3;
             }
-            else
-            {
-                args.empireArgs[i].strategicAI = 0;
-                args.empireArgs[i].tacticalAI = 0;
-                Config.CenteredEmpire[i] = false;
-            }
-            args.CanVore[i] = Empires[i].CanVore.isOn;
-            args.empireArgs[i].team = Convert.ToInt32(Empires[i].Team.text);
-            args.Team[i] = args.empireArgs[i].team;
-            args.empireArgs[i].color = ColorFromIndex(Empires[i].PrimaryColor.value);
-            args.empireArgs[i].secColor = GetDarkerColor(ColorFromIndex(Empires[i].SecondaryColor.value));
-            args.TurnOrder[i] = Convert.ToInt32(Empires[i].TurnOrder.text);
-            args.empireArgs[i].maxArmySize = (int)Empires[i].MaxArmySize.value;
-            args.empireArgs[i].maxGarrisonSize = (int)Empires[i].MaxGarrisonSize.value;
-            args.empireArgs[i].side = i;
-            //args.empireArgs[i].bannerType = (i % 2 == 1) ? 1 : 3;
 
-        }
-        args.MercCamps = Convert.ToInt32(MercenaryHouses.text);
-        args.AncientTeleporters = Convert.ToInt32(AncientTeleporters.text);
-        args.GoldMines = Convert.ToInt32(GoldMines.text);
-        args.crazyBuildings = CrazyBuildings.isOn;
+            args.MercCamps = Convert.ToInt32(MercenaryHouses.text);
+            args.AncientTeleporters = Convert.ToInt32(AncientTeleporters.text);
+            args.GoldMines = Convert.ToInt32(GoldMines.text);
+            args.crazyBuildings = CrazyBuildings.isOn;
 
         args.MapGen.UsingNewGenerator = MapGenType.value == 1;
         args.MapGen.ExcessBridges = MapGenExcessBridges.isOn;
@@ -651,17 +653,11 @@ public class CreateStrategicGame : MonoBehaviour
         Config.World.Toggles["LeaderSpawnFreeze"] = LeaderSpawnFreeze.isOn;
         Config.World.Toggles["LeadersAutoGainLeadership"] = LeadersAutoGainLeadership.isOn;
 
-
-        Config.PutTeamsTogether = SpawnTeamsTogether.isOn;
-
-        try
-        {
-            
-
+            Config.PutTeamsTogether = SpawnTeamsTogether.isOn;
         }
         catch (Exception e)
         {
-            State.GameManager.CreateMessageBox("At least one of the textboxes is blank, and needs to be filled in\n*Could possibly be a maximum race issue.*\n*Check Config.cs NumberOfRaces and make sure its value is correct.*\n" + e);
+            State.GameManager.CreateMessageBox("At least one of the textboxes is blank, and needs to be filled in\n*Could possibly be a maximum race issue.*\n*Check Config.cs NumberOfRaces and make sure its value is correct.*");
             return;
         }
 
