@@ -32,7 +32,7 @@ public class ExceptionHandler : MonoBehaviour
                         State.GameManager.CreateFullScreenMessageBox($"The first Exception of this session was just logged to recentexceptions.txt, you'll probably want to notify a dev on the VoreWar Discord or GitHub with the contents of that file so it can be fixed.  As this is a mac and mac exception logs don't seem to be writing correctly at the moment, you can take a screenshot of this screen and send it instead.  \nFull Details: {type}: {condition}\nVersion :{State.Version}\n{stackTrace}");
                     else
                         State.GameManager.CreateMessageBox("The first Exception of this session was just logged to VoreWar_Data/recentexceptions.txt, you'll probably want to notify a dev on the VoreWar Discord or GitHub with the contents of that file so it can be fixed.\nPlease note that the game is now in an unstable state due to this error. Any other errors following this message may not be reliable as they could be symptoms of the original error.");
-                    
+
                     using (StreamWriter writer = new StreamWriter(path))
                     {
                         writer.WriteLine($"{type}: {condition}\nVersion :{State.Version}\n{stackTrace}\n\n");
@@ -48,7 +48,7 @@ public class ExceptionHandler : MonoBehaviour
                 {
                     return;
                 }
-                
+
                 using (StreamWriter writer = new StreamWriter(path, true))
                 {
                     writer.WriteLine($"{type}: {condition}\nVersion :{State.Version}\n{stackTrace}\n\n");

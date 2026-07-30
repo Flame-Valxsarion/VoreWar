@@ -147,6 +147,9 @@ public class CustomTraitBoost
                         case CustomTraitComp.FlatHitReduction:
                             s.FlatHitReduction *= value;
                             break;
+                        case CustomTraitComp.FlatDamageReduction:
+                            s.FlatHitReduction += value;
+                            break;
                         case CustomTraitComp.SpeedLossFromWeightMultiplier:
                             s.SpeedLossFromWeightMultiplier *= value;
                             break;
@@ -199,7 +202,7 @@ public class CustomTraitBoost
                             s.HealthRegen += (int)value;
                             break;
                         case CustomTraitComp.ManaRegen:
-                            s.ManaRegen *= (int)value;
+                            s.ManaRegen += (int)value;
                             break;
                         case CustomTraitComp.OnLevelUpBonusToAllStats:
                             s.OnLevelUpBonusToAllStats *= (int)value;

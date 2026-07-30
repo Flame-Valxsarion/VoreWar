@@ -626,7 +626,7 @@ static class TacticalUtilities
         return;
     }
 
-    static public void MutuallyDamageUnits(Actor_Unit source, int damage)
+    static public void MutuallyDamageUnits(Actor_Unit source, double damage)
     {
         if (linkedUnits == null)
             return;
@@ -1391,7 +1391,7 @@ static class TacticalUtilities
             {
                 preyLocation = possibilities.Values.ToList()[State.Rand.Next(possibilities.Count)];
                 actor.Movement = 0;
-                targetPred.PredatorComponent.ForceConsumeAuto(actor);
+                targetPred.PredatorComponent.ForceConsumeAuto(actor, false);
             }
         }
         else

@@ -307,7 +307,7 @@ public class HoveringTooltip : MonoBehaviour
                     case StatusEffectType.Marked:
                         return $"Unit has {(effect.Strength)}% added to weapon accuracy against them.";
                     case StatusEffectType.Gorging:
-                        return $"Unit gains +{(int)(effect.Strength * 10)} effective stomach capacity. Unit will fall asleep for {(int)(effect.Strength)} turn(s) if this effect expires and they are overcapacity.";
+                        return $"Unit gains +{(int)(effect.Strength * 10)} to their base stomach capacity. Unit will fall asleep for {(int)(effect.Strength)} turn(s) if this effect expires and they are overcapacity.";
                     case StatusEffectType.Stunned:
                         return $"Unit is unable to move for {(effect.Duration)} turn(s).";
                 }
@@ -530,19 +530,19 @@ public class HoveringTooltip : MonoBehaviour
         switch (trait)
         {
             case Traits.Resilient:
-                return "Takes less damage from attacks";
+                return "Unit takes 1 less damage from weapon attacks.";
             case Traits.FastDigestion:
-                return "Unit digests prey faster than normal";
+                return "Unit digests prey 50% faster than normal";
             case Traits.SlowDigestion:
-                return "Unit digests prey slower than normal";
+                return "Unit digests prey 50% slower than normal";
             case Traits.Intimidating:
                 return "Enemies within 1 tile get a penalty to accuracy against all targets";
             case Traits.AdeptLearner:
                 return "All stats are favored, randomly get 1 point in 2 different stats with level up";
             case Traits.SlowBreeder:
-                return "Race produces new population at a slower rate than normal";
+                return "Race produces new population at a rate 30% slower than normal";
             case Traits.ProlificBreeder:
-                return "Race produces new population at a faster rate than normal";
+                return "Race produces new population at a rate 75% faster than normal";
             case Traits.Flight:
                 return "Unit can pass through obstacles and other units in tactical mode.\nMust end turn on solid ground\nIf you try to take an action or end your turn in an invalid place, it will automatically undo your movement";
             case Traits.Pounce:
@@ -780,7 +780,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.ManaBarrier:
                 return "Up to 50% of damage taken by unit instead spends mana, this trait loses 1% effectivity for every 1% missing mana percentage.";
             case Traits.Unflinching:
-                return "Unit's BladeDance, Tenacity, and Focus stack loss is reduced if the stack's total is below 10% of the unit's current HP.";
+                return "Unit's BladeDance, Tenacity, and Focus stack loss is reduced by 3 if stacks are below 10% current HP.";
             case Traits.Annihilation:
                 return "Every time digestion progresses, this unit digests one level from each prey inside them, gaining its experience value. If a unit hits level 0 this way, it dies if it was still alive and cannot be revived.\n(Cheat Trait)";
             case Traits.WeaponChanneler:

@@ -267,6 +267,7 @@ static class StrategicUtilities
                     {
                         empire.Buildings.Add(construct);
                         construct.Owner = empire;
+                        State.GameManager.StrategyMode.UndoMoves.Clear();
                     }
                     if (construct.Owner != null && RelationsManager.GetRelation(construct.Owner.Side, empire.Side).Type != RelationState.Enemies)
                     {

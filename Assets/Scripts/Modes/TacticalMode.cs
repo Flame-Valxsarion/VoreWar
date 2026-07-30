@@ -35,8 +35,19 @@ public class TacticalMode : SceneBase
         Melee,
         Ranged
     }
+    enum TerrainType
+    {
+        Grass,
+        Snow,
+        Forest,
+        Desert,
+        Volcanic,
+        Beach,
+        Swamp,
+    }
 
     WallType wallType;
+    TerrainType terrainType;
 
     List<Actor_Unit> units;
     List<MiscDiscard> miscDiscards;
@@ -433,6 +444,47 @@ public class TacticalMode : SceneBase
         defenderSide = defender?.Side ?? village.Side;
         attackerSide = invader.Side;
 
+        switch (tiletype)
+        {
+            case StrategicTileType.grass:
+            case StrategicTileType.forest:
+            case StrategicTileType.mountain:
+            case StrategicTileType.field:
+            case StrategicTileType.hills:
+                terrainType = TerrainType.Grass;
+                break;
+            case StrategicTileType.desert:
+            case StrategicTileType.sandHills:
+            case StrategicTileType.fieldDesert:
+                terrainType = TerrainType.Desert;
+                break;
+            case StrategicTileType.snow:
+            case StrategicTileType.ice:
+            case StrategicTileType.snowHills:
+            case StrategicTileType.fieldSnow:
+            case StrategicTileType.snowTrees:
+                terrainType = TerrainType.Snow;
+                break;
+            case StrategicTileType.swamp:
+            case StrategicTileType.drySwamp:
+                terrainType = TerrainType.Swamp;
+                break;
+            case StrategicTileType.lava:
+            case StrategicTileType.volcanic:
+            case StrategicTileType.ashen:
+            case StrategicTileType.fieldAshen:
+            case StrategicTileType.ashenHills:
+                terrainType = TerrainType.Volcanic;
+                break;
+            case StrategicTileType.smallIslands:
+            case StrategicTileType.fieldSmallIslands:
+            case StrategicTileType.shallowWater:
+                terrainType = TerrainType.Beach;
+                break;
+            default:
+                break;
+        }
+
         DefectProcessor defectors = new DefectProcessor(armies[0], armies[1], village);
 
         // convert armies
@@ -631,6 +683,36 @@ public class TacticalMode : SceneBase
             skip = true;
         if (units.Any(actor => State.World.AllActiveEmpires != null && State.World.GetEmpireOfSide(actor.Unit.FixedSide)?.StrategicAI == null))
             skip = false;
+
+        ActivatePreBattleTraits();
+
+        if (!State.GameManager.PureTactical) // Apply Empire Traits to units that don't have them at the start of combat
+        {
+            foreach (Actor_Unit actor in attackers)
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+            foreach (Actor_Unit actor in defenders)
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+            foreach (Actor_Unit actor in garrison.ToList())
+            {
+                if (State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits != null)
+                    foreach (Traits trait in State.World.GetEmpireOfSide(actor.Unit.HiddenUnit.Side).EmpTraits)
+                    {
+                        actor.Unit.AddPermanentTrait(trait);
+                    }
+            }
+        }
 
         if (!State.GameManager.PureTactical)
         {
@@ -920,9 +1002,10 @@ public class TacticalMode : SceneBase
                         Empire empire = defender?.Empire ?? village.Empire;
                         float advancedChance = 0.2f * (defenseEncampment.improveUpgrade.built ? 4f : 1);
                         float unitScale = Config.BuildConfig.DefenseEncampmentUnitScale * (defenseEncampment.levelUpgrade.built ? 1.5f : 1);
-                        Unit newUnit = new NPC_unit((int)Math.Max(Mathf.Floor((empire.Leader != null ? empire.Leader.Level : 3) * unitScale),1), advancedChance >= State.Rand.NextDouble(), 2, defenders.Concat(garrison).FirstOrDefault().Unit.Side, empire.Race, 0, empire.CanVore);
+                        Unit newUnit = new NPC_unit((int)Math.Max(Mathf.Floor((empire.Leader != null ? empire.Leader.Level : 3) * unitScale), 1), advancedChance >= State.Rand.NextDouble(), 2, defenders.Concat(garrison).FirstOrDefault().Unit.Side, empire.Race, 0, empire.CanVore);
                         newUnit.Type = UnitType.Reinforcement;
                         Actor_Unit unit = new Actor_Unit(newUnit);
+                        var bestranged = unit.Unit.GetBestRanged();
                         if (defenseEncampment.improveUpgrade.built)
                         {
                             switch (State.Rand.Next(5))
@@ -940,7 +1023,7 @@ public class TacticalMode : SceneBase
                                     newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Bolas);
                                     break;
                                 case 4:
-                                    if (newUnit.GetBestRanged().Range > 2)
+                                    if (bestranged != null)
                                     {
                                         newUnit.Items[1] = State.World.ItemRepository.GetItem(ItemType.Gloves);
                                     }
@@ -1960,9 +2043,9 @@ public class TacticalMode : SceneBase
                                 FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.TileTypes[startIndex + 3]);
                             else
                                 FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.TileTypes[startIndex + State.Rand.Next(2)]);
-                            if ((tiles[i, j + 1] >= (TacticalTileType)500 && tiles[i, j + 1] < (TacticalTileType)600) || (tiles[i, j + 1] >= (TacticalTileType)2300 && tiles[i, j + 1] < (TacticalTileType)2400))
+                            if (terrainType == TerrainType.Volcanic)
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.VolcanicTileTypes[1]);
-                            else if ((tiles[i, j+1] >= (TacticalTileType)200 && tiles[i, j + 1] < (TacticalTileType)300) || (tiles[i, j + 1] >= (TacticalTileType)2000 && tiles[i, j + 1] < (TacticalTileType)2200))
+                            else if (terrainType == TerrainType.Desert)
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.DesertTileTypes[1]);
                             else
                                 Tilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassEnviroment[0]);
@@ -2279,11 +2362,11 @@ public class TacticalMode : SceneBase
             int spriteNum;
             int offset;
             if (scatInfo.predRace == Race.Slimes)
-            {offset = 2;}
+            { offset = 2; }
             else if (scatInfo.predRace == Race.Aabayx || scatInfo.predRace == Race.ViraeUltimae)
-            {offset = 4;}
+            { offset = 4; }
             else
-            {offset = 0;}
+            { offset = 0; }
 
             if (Config.ScatBones == false)
             {
@@ -2337,7 +2420,7 @@ public class TacticalMode : SceneBase
             target.UnitSprite.HitPercentagesDisplayed(true);
             if (actor.PredatorComponent.FreeCap() < target.Bulk() || (actor.BodySize() < target.BodySize() * 3 && actor.Unit.HasTrait(Traits.TightNethers) && PreyLocationMethods.IsGenital(location)))
                 target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true), Color.yellow);
-            else if (actor.Unit.CanVore(location) != actor.PredatorComponent.CanVore(location,target))
+            else if (actor.Unit.CanVore(location) != actor.PredatorComponent.CanVore(location, target))
                 target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true), Color.yellow);
             else if (actor.Position.GetNumberOfMovesDistance(target.Position) < 2)
                 target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true), Color.red);
@@ -2366,7 +2449,7 @@ public class TacticalMode : SceneBase
             target.UnitSprite.HitPercentagesDisplayed(true);
             if (actor.PredatorComponent.FreeCap() < target.Bulk() || (actor.BodySize() < target.BodySize() * 3 && actor.Unit.HasTrait(Traits.TightNethers) && PreyLocationMethods.IsGenital(location)))
                 target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true, skillBoost), Color.yellow);
-            else if (actor.Unit.CanVore(location) != actor.PredatorComponent.CanVore(location,target))
+            else if (actor.Unit.CanVore(location) != actor.PredatorComponent.CanVore(location, target))
                 target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true, skillBoost), Color.yellow);
             else if (actor.Position.GetNumberOfMovesDistance(target.Position) < 2)
                 target.UnitSprite.DisplayHitPercentage(target.GetDevourChance(actor, true, skillBoost), Color.red);
@@ -2743,7 +2826,7 @@ public class TacticalMode : SceneBase
                     spellDamage += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.1f);
                 }
             }
-             
+
             float magicChance = CurrentSpell.Resistable ? target.GetMagicChance(actor, CurrentSpell) : 1;
 
             if (CurrentSpell == SpellList.Maw || CurrentSpell == SpellList.GateMaw)
@@ -2961,7 +3044,7 @@ public class TacticalMode : SceneBase
                         IgnorePseudo = true;
                     }
                     else
-                    RunningFriendlyAI = true;
+                        RunningFriendlyAI = true;
                     break;
                 case 4:
                     PromptEndTurn();
@@ -3759,14 +3842,9 @@ public class TacticalMode : SceneBase
         {
             double damMod = damage;
             if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, target.Unit)) // sneakAttack
-            {
                 damMod *= 3;
-            }
             if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) // For correct display of damage
-            {
                 damMod += target.Unit.GetStat(Stat.Mind) * 0.1f;
-            }
-            return damMod;
         }
     }
 
@@ -4178,7 +4256,7 @@ public class TacticalMode : SceneBase
         Summon,
         Neutral
     }
-    
+
     class DropZones
     {
         List<Vec2i> MeleePrimary;
@@ -4189,7 +4267,7 @@ public class TacticalMode : SceneBase
         List<Vec2i> SummonSecondary;
         List<Vec2i> Tertiary;
         List<Vec2i> Final;
-        
+
         public DropZones(bool[,] tilenetwork, bool attacker)
         {
             MeleePrimary = new List<Vec2i>();
@@ -4200,12 +4278,12 @@ public class TacticalMode : SceneBase
             SummonSecondary = new List<Vec2i>();
             Tertiary = new List<Vec2i>();
             Final = new List<Vec2i>();
-            
+
             List<Vec2i> visitedtiles = new List<Vec2i>();
-            
+
             int y;
             int yinc;
-            
+
             if (attacker)
             {
                 y = Config.TacticalSizeY - 1;
@@ -4216,7 +4294,7 @@ public class TacticalMode : SceneBase
                 y = 0;
                 yinc = 1;
             }
-            
+
             void XTraverse(List<Vec2i> outerZone, List<Vec2i> midZone, List<Vec2i> innerZone)
             {
                 Vec2i pos;
@@ -4229,7 +4307,7 @@ public class TacticalMode : SceneBase
                     pos = new Vec2i(Config.TacticalSizeX - 1 - x, y);
                     if (tilenetwork[pos.x, pos.y])
                         outerZone.Add(pos);
-                    
+
                     ++x;
                 }
                 while (x < Config.TacticalSizeX / 4)
@@ -4240,7 +4318,7 @@ public class TacticalMode : SceneBase
                     pos = new Vec2i(Config.TacticalSizeX - 1 - x, y);
                     if (tilenetwork[pos.x, pos.y])
                         midZone.Add(pos);
-                    
+
                     ++x;
                 }
                 while (x < Config.TacticalSizeX / 2)
@@ -4251,7 +4329,7 @@ public class TacticalMode : SceneBase
                     pos = new Vec2i(Config.TacticalSizeX - 1 - x, y);
                     if (tilenetwork[pos.x, pos.y])
                         innerZone.Add(pos);
-                    
+
                     ++x;
                 }
                 if (2 * x + 1 == Config.TacticalSizeX) // This conditional will resolve to TRUE if and only if the width of the tactical board is odd, and x is the coordinate of the middle-most column.
@@ -4261,7 +4339,7 @@ public class TacticalMode : SceneBase
                         innerZone.Add(pos);
                 }
             }
-            
+
             int yloopcount = 0;
             while (yloopcount < Config.TacticalSizeY / 8)
             {
@@ -4288,12 +4366,12 @@ public class TacticalMode : SceneBase
                 ++yloopcount;
             }
         }
-        
+
         public void Drop(Actor_Unit actor, DropType type)
         {
             // If this is called during a battle, ignore actors that are already prey.
             if (actor.SelfPrey?.Predator != null) return;
-            
+
             List<List<Vec2i>> droporder;
             switch (type)
             {
@@ -4311,7 +4389,7 @@ public class TacticalMode : SceneBase
                     droporder = new List<List<Vec2i>>() { Final, SummonSecondary, SummonPrimary, Tertiary, RangedSecondary, MeleeSecondary, RangedPrimary, MeleePrimary };
                     break;
             }
-            
+
             foreach (List<Vec2i> dropzone in droporder)
             {
                 int count = dropzone.Count();
@@ -4323,7 +4401,7 @@ public class TacticalMode : SceneBase
                     return;
                 }
             }
-            
+
             // Failsafe. Kill it, and place it in the corner.
             State.GameManager.TacticalMode.Log.RegisterMiscellaneous("Killing actor " + actor.Unit.Name + " because there is no place to drop him.");
             actor.SetPos(new Vec2i(0, 0));
@@ -4336,21 +4414,21 @@ public class TacticalMode : SceneBase
             return;
         }
     }
-    
+
     public void DropAllUnits()
     {
         // Drops (places in appropriate drop zones) all the units in the battle.
-        
+
         bool[,] bestnetwork = new bool[Config.TacticalSizeX, Config.TacticalSizeY];
         int bestnetworksize = 0;
         bool[,] visitedtiles = new bool[Config.TacticalSizeX, Config.TacticalSizeY];
         int visitedtilescount = 0;
-        
+
         bool CanWalkInto(Vec2i tile)
         {
             return TacticalTileInfo.CanWalkInto(tiles[tile.x, tile.y], null) && !BlockedTile[tile.x, tile.y];
         }
-        
+
         for (int x = 0; x < Config.TacticalSizeX; ++x)
         {
             for (int y = 0; y < Config.TacticalSizeY; ++y)
@@ -4367,7 +4445,7 @@ public class TacticalMode : SceneBase
                     currentnetwork[pos.x, pos.y] = true;
                     int currentnetworksize = 1;
                     Stack<Vec2i> tilestack = new Stack<Vec2i>();
-                    
+
                     void AddTileToStack(Vec2i tile)
                     {
                         if (tile.x < 0) return;
@@ -4379,19 +4457,19 @@ public class TacticalMode : SceneBase
                         visitedtiles[tile.x, tile.y] = true; // Not literally visited at this time, but queued for an inevitable visit (and we don't want this tile on the stack again).
                         ++visitedtilescount;
                     }
-                    
+
                     void AddAdjacentTilesToStack()
                     {
-                        AddTileToStack (new Vec2i(pos.x - 1, pos.y - 1));
-                        AddTileToStack (new Vec2i(pos.x - 1, pos.y));
-                        AddTileToStack (new Vec2i(pos.x - 1, pos.y + 1));
-                        AddTileToStack (new Vec2i(pos.x, pos.y - 1));
-                        AddTileToStack (new Vec2i(pos.x, pos.y + 1));
-                        AddTileToStack (new Vec2i(pos.x + 1, pos.y - 1));
-                        AddTileToStack (new Vec2i(pos.x + 1, pos.y));
-                        AddTileToStack (new Vec2i(pos.x + 1, pos.y + 1));
+                        AddTileToStack(new Vec2i(pos.x - 1, pos.y - 1));
+                        AddTileToStack(new Vec2i(pos.x - 1, pos.y));
+                        AddTileToStack(new Vec2i(pos.x - 1, pos.y + 1));
+                        AddTileToStack(new Vec2i(pos.x, pos.y - 1));
+                        AddTileToStack(new Vec2i(pos.x, pos.y + 1));
+                        AddTileToStack(new Vec2i(pos.x + 1, pos.y - 1));
+                        AddTileToStack(new Vec2i(pos.x + 1, pos.y));
+                        AddTileToStack(new Vec2i(pos.x + 1, pos.y + 1));
                     }
-                    
+
                     AddAdjacentTilesToStack();
                     while (tilestack.Count > 0)
                     {
@@ -4403,7 +4481,7 @@ public class TacticalMode : SceneBase
                             AddAdjacentTilesToStack();
                         }
                     }
-                    
+
                     if (currentnetworksize > bestnetworksize)
                     {
                         for (int tmpx = 0; tmpx < Config.TacticalSizeX; ++tmpx)
@@ -4412,19 +4490,19 @@ public class TacticalMode : SceneBase
                         bestnetworksize = currentnetworksize;
                     }
                 }
-                
+
                 // If there are not enough tiles remaining unvisited to potentially form a better network than the current best network, then we are done.
                 if (bestnetworksize > Config.TacticalSizeX * Config.TacticalSizeY - visitedtilescount)
                     break;
             }
-            
+
             // If there are not enough tiles remaining unvisited to potentially form a better network than the current best network, then we are done.
             if (bestnetworksize > Config.TacticalSizeX * Config.TacticalSizeY - visitedtilescount)
                 break;
         }
-        
-        DropZones attackerdropper = new DropZones (bestnetwork, true);
-        DropZones defenderdropper = new DropZones (bestnetwork, false);
+
+        DropZones attackerdropper = new DropZones(bestnetwork, true);
+        DropZones defenderdropper = new DropZones(bestnetwork, false);
         foreach (Actor_Unit actor in units)
         {
             if (actor.Unit.GetApparentSide() == attackerSide)
@@ -4902,7 +4980,7 @@ public class TacticalMode : SceneBase
                 actor.Unit.StatusEffects.Clear();
 
                 actor.Unit.SetBarrier(0);
-                
+
                 EquipmentFunctions.CheckEquipment(actor.Unit, EquipmentActivator.OnTacticalBattleEnd, new object[] { actor, armies[actor.Unit.Side == attackerSide ? 0 : 1], null });
 
                 // Refill used potions
@@ -5575,7 +5653,7 @@ public class TacticalMode : SceneBase
             }
         }
     }
-    
+
     public void RefreshTileEffects()
     {
         EffectTileMap.ClearAllTiles();
@@ -5863,7 +5941,7 @@ public class TacticalMode : SceneBase
                         var possible_targets = units.Where(u => !u.Unit.IsEnemyOfSide(actor.Unit.Side) && u != actor && u.SelfPrey == null).ToList();
                         if (possible_targets.Any())
                         {
-                            actor.PredatorComponent.ForceConsumeAuto(possible_targets[State.Rand.Next(0, possible_targets.Count())]);
+                            actor.PredatorComponent.ForceConsumeAuto(possible_targets[State.Rand.Next(0, possible_targets.Count())], true);
                         }
                     }
                 }
@@ -5874,15 +5952,12 @@ public class TacticalMode : SceneBase
                 if (State.Rand.Next(4) == 0)
                 {
                     var possible_targets = units.Where(u => u.Unit.Predator && u != actor && u.SelfPrey == null).ToList();
-                    if (possible_targets.Any())
-                    {
-                        possible_targets[State.Rand.Next(0, possible_targets.Count())].PredatorComponent.ForceConsumeAuto(actor);
-                    }
+                    possible_targets[State.Rand.Next(0, possible_targets.Count())].PredatorComponent.ForceConsumeAuto(actor, true);
                 }
+
             }
         }
     }
-
     internal void HandlePostBattleTraits()
     {
         foreach (var actor in units)
@@ -5894,10 +5969,10 @@ public class TacticalMode : SceneBase
                 {
                     actor.Unit.RevertCopiedUnit(); // Return unit to initial state
                 }
+
             }
         }
     }
-
     private IEnumerator WaitForBuildingInput()
     {
         paused = true;
