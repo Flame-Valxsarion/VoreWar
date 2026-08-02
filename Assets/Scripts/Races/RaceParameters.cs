@@ -3810,7 +3810,6 @@ static class RaceParameters
                 Traits.Pounce,
                 Traits.Biter,
                 Traits.BornToMove,
-            },
             RaceDescription = "Utahraptors are much faster and more powerful than the usual raptors you see here and there.  More hungry too."
         };
 

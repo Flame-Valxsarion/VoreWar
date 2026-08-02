@@ -3836,15 +3836,20 @@ public class TacticalMode : SceneBase
                     }
                 }
             }
-        }
 
-        double SpellDamageMod(Actor_Unit attacker, Actor_Unit target, double damage)
-        {
-            double damMod = damage;
-            if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, target.Unit)) // sneakAttack
-                damMod *= 3;
-            if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) // For correct display of damage
-                damMod += target.Unit.GetStat(Stat.Mind) * 0.1f;
+            double SpellDamageMod(Actor_Unit attacker, Actor_Unit target, double damage)
+            {
+                double damMod = damage;
+                if (TacticalUtilities.SneakAttackCheck(SelectedUnit.Unit, target.Unit)) // sneakAttack
+                {
+                    damMod *= 3;
+                }
+                if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) // For correct display of damage
+                {
+                    damMod += target.Unit.GetStat(Stat.Mind) * 0.1;
+                }
+                return damMod;
+            }
         }
     }
 
