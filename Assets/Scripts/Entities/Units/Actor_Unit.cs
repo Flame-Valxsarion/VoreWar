@@ -2874,7 +2874,7 @@ public class Actor_Unit
         TurnsSinceLastParalysis++;
         if (Targetable && Visible && Surrendered == false && Fled == false)
             RestoreMP();
-        
+
         DamageAccumulator.Activate(this);
         TickTacticalStatusEffects();
         DamageAccumulator.AddDamage(-Unit.TraitBoosts.HealthRegen);

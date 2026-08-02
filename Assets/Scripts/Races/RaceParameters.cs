@@ -555,7 +555,7 @@ static class RaceParameters
             FavoredStat = Stat.Mind,
             DeployCost = 1,
             Upkeep = 21f,
-			PowerAdjustment = 2f,
+            PowerAdjustment = 2f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.BladderVore },
             RaceStats = new RaceStats()
             {
@@ -567,6 +567,15 @@ static class RaceParameters
                 Agility = new RaceStats.StatRange(8, 18),
                 Voracity = new RaceStats.StatRange(12, 18),
                 Stomach = new RaceStats.StatRange(12, 18),
+            },
+            RacialTraits = new List<Traits>()
+            {
+                Traits.Charmer,
+                Traits.Temptation,
+                Traits.Possession,
+                Traits.ForceFeeder,
+                Traits.ManaDrain,
+                Traits.CreateSpawn,
             },
             SpawnRace = Race.Whisp,
             ConversionRace = Race.Foxes,
@@ -3810,7 +3819,8 @@ static class RaceParameters
                 Traits.Pounce,
                 Traits.Biter,
                 Traits.BornToMove,
-            RaceDescription = "Utahraptors are much faster and more powerful than the usual raptors you see here and there.  More hungry too."
+            },
+            RaceDescription = "Utahraptors are much faster and more powerful than the usual raptors you see here and there. More hungry too."
         };
 
         Pudding = new RaceTraits()
