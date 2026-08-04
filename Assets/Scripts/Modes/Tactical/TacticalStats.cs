@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 
-
 public class TacticalStats
 {
     class RaceStats
@@ -95,7 +94,6 @@ public class TacticalStats
             else
                 survivorRatio = "Marginal";
             return $"{lossRatio}{survivorRatio} Attacker Victory";
-
         }
         else
         {
@@ -113,7 +111,6 @@ public class TacticalStats
                 survivorRatio = "Marginal";
             return $"{lossRatio}{survivorRatio} Defender Victory";
         }
-
     }
 
     public string AttackerSummary(int remAttackers)
@@ -184,7 +181,6 @@ public class TacticalStats
 
     internal void RegisterKill(Spell spell, int attackerSide)
     {
-
         if (attackerSide == AttackerSide)
         {
             if (AttackerStats.KillsWithSpell == null)
@@ -225,7 +221,7 @@ public class TacticalStats
         }
     }
 
-    internal void RegisterHit(Spell spell, int damage, int attackerSide)
+    public void RegisterHit(Spell spell, int damage, int attackerSide)
     {
         if (attackerSide == AttackerSide)
         {
@@ -313,4 +309,3 @@ public class TacticalStats
             DefenderStats.TargetsDigested++;
     }
 }
-

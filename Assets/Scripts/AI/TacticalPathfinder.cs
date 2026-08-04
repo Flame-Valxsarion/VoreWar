@@ -2,12 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-
 public static class TacticalPathfinder
 {
-
-
     internal static List<PathNode> GetPath(Vec2i origin, Vec2i destination, int howClose, Actor_Unit actor, int maxDistance = 999)
     {
         if (origin.GetNumberOfMovesDistance(destination) > maxDistance) //Can't possibly get it in under this distance
@@ -40,7 +36,6 @@ public static class TacticalPathfinder
             if (TacticalUtilities.IsUnitControlledByPlayer(actor.Unit) == false && (actor.Unit.HasTrait(Traits.Blitz) || actor.Unit.HasTrait(Traits.SpectralStep) || actor.Unit.HasTrait(Traits.PassThrough)) && current.G != target.G && CheckTile(current.X, current.Y, actor) == false)
             {
                 openList.Remove(current);
-//                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"WORK darn it!"); //Testing line
                 continue;
             }
 
@@ -66,8 +61,6 @@ public static class TacticalPathfinder
                 }
             }
 
-
-
             // add the current square to the closed list
             closedList.Add(current);
 
@@ -84,7 +77,7 @@ public static class TacticalPathfinder
 
             foreach (var adjacentSquare in adjacentSquares)
             {
-                int additionalCost = flight ? 0 : (TacticalTileInfo.TileCost(new Vec2(adjacentSquare.X, adjacentSquare.Y)) - 1);
+                int additionalCost = flight ? 0 : (TacticalTileInfo.TileCost(new Vec2i(adjacentSquare.X, adjacentSquare.Y)) - 1);
                 // if this adjacent square is already in the closed list, ignore it
                 if (closedList.FirstOrDefault(l => l.X == adjacentSquare.X && l.Y == adjacentSquare.Y) != null)
                     continue;
@@ -101,7 +94,6 @@ public static class TacticalPathfinder
                     // and add it to the open list
                     openList.Insert(0, adjacentSquare);
                 }
-
             }
         }
 
@@ -119,7 +111,6 @@ public static class TacticalPathfinder
                         closedList.Remove(current);
                         continue;
                     }
-
                 }
                 if (CheckTile(current.X, current.Y, actor))
                 {
@@ -129,8 +120,6 @@ public static class TacticalPathfinder
                 else
                     closedList.Remove(current);
             }
-
-
         }
 
         if (goodPath == false)
@@ -149,12 +138,10 @@ public static class TacticalPathfinder
         path.RemoveAt(0);//Get rid of the node where it is currently located
 
         return path;
-
     }
 
     internal static List<PathNode> GetPathToY(Vec2i origin, bool flight, int y, Actor_Unit actor)
     {
-
         bool goodPath = false;
         PathNode current = null;
         var start = new PathNode { X = origin.x, Y = origin.y };
@@ -171,7 +158,6 @@ public static class TacticalPathfinder
             // get the square with the lowest F score
             var lowest = openList.Min(l => l.F);
             current = openList.OrderBy(l => TotalManhattan(l.X, l.Y, l.X, y)).First(l => l.F == lowest); //The total manhattan is to have it favor normal looking paths
-
 
             if (current.Y == y && CheckTile(current.X, current.Y, actor))
             {
@@ -193,7 +179,7 @@ public static class TacticalPathfinder
 
             foreach (var adjacentSquare in adjacentSquares)
             {
-                int additionalCost = flight ? 0 : (TacticalTileInfo.TileCost(new Vec2(adjacentSquare.X, adjacentSquare.Y)) - 1);
+                int additionalCost = flight ? 0 : (TacticalTileInfo.TileCost(new Vec2i(adjacentSquare.X, adjacentSquare.Y)) - 1);
                 // if this adjacent square is already in the closed list, ignore it
                 if (closedList.FirstOrDefault(l => l.X == adjacentSquare.X && l.Y == adjacentSquare.Y) != null)
                     continue;
@@ -210,7 +196,6 @@ public static class TacticalPathfinder
                     // and add it to the open list
                     openList.Insert(0, adjacentSquare);
                 }
-
             }
         }
 
@@ -236,7 +221,6 @@ public static class TacticalPathfinder
         path.RemoveAt(0);//Get rid of the node where it is currently located
 
         return path;
-
     }
 
     internal static bool[,] GetGrid(Vec2i origin, bool flight, int moveDistance, Actor_Unit actor)
@@ -253,7 +237,6 @@ public static class TacticalPathfinder
 
         while (openList.Count > 0)
         {
-
             var lowest = openList.Min(l => l.G);
             current = openList.First(l => l.G == lowest); //The total manhattan is to have it favor normal looking paths
 
@@ -293,27 +276,25 @@ public static class TacticalPathfinder
                     if (adjacentSquare.G <= moveDistance)
                         openList.Insert(0, adjacentSquare);
                 }
-
             }
         }
 
         return walkable;
-
     }
 
     static List<PathNode> GetWalkableAdjacentSquares(int x, int y, Actor_Unit actor)
     {
         var proposedLocations = new List<PathNode>()
-            {
-                new PathNode { X = x, Y = y - 1 },
-                new PathNode { X = x, Y = y + 1 },
-                new PathNode { X = x - 1, Y = y },
-                new PathNode { X = x + 1, Y = y },
-                new PathNode { X = x + 1, Y = y + 1 },
-                new PathNode { X = x + 1, Y = y - 1 },
-                new PathNode { X = x - 1, Y = y + 1 },
-                new PathNode { X = x - 1, Y = y - 1 },
-            };
+        {
+            new PathNode { X = x, Y = y - 1 },
+            new PathNode { X = x, Y = y + 1 },
+            new PathNode { X = x - 1, Y = y },
+            new PathNode { X = x + 1, Y = y },
+            new PathNode { X = x + 1, Y = y + 1 },
+            new PathNode { X = x + 1, Y = y - 1 },
+            new PathNode { X = x - 1, Y = y + 1 },
+            new PathNode { X = x - 1, Y = y - 1 },
+        };
 
         return proposedLocations.Where(l => CheckPassableTile(l.X, l.Y, actor) == true).ToList();
     }
@@ -321,16 +302,16 @@ public static class TacticalPathfinder
     static List<PathNode> GetFlyableAdjacentSquares(int x, int y)
     {
         var proposedLocations = new List<PathNode>()
-            {
-                new PathNode { X = x, Y = y - 1 },
-                new PathNode { X = x, Y = y + 1 },
-                new PathNode { X = x - 1, Y = y },
-                new PathNode { X = x + 1, Y = y },
-                new PathNode { X = x + 1, Y = y + 1 },
-                new PathNode { X = x + 1, Y = y - 1 },
-                new PathNode { X = x - 1, Y = y + 1 },
-                new PathNode { X = x - 1, Y = y - 1 },
-            };
+        {
+            new PathNode { X = x, Y = y - 1 },
+            new PathNode { X = x, Y = y + 1 },
+            new PathNode { X = x - 1, Y = y },
+            new PathNode { X = x + 1, Y = y },
+            new PathNode { X = x + 1, Y = y + 1 },
+            new PathNode { X = x + 1, Y = y - 1 },
+            new PathNode { X = x - 1, Y = y + 1 },
+            new PathNode { X = x - 1, Y = y - 1 },
+        };
 
         return proposedLocations.Where(l => CheckTileFlight(l.X, l.Y) == true).ToList();
     }
@@ -369,5 +350,4 @@ public static class TacticalPathfinder
             return true;
         return false;
     }
-
 }

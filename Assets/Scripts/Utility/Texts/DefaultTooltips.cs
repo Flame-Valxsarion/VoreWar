@@ -636,14 +636,15 @@ Does not retroactively affect already created units.";
             case 251:
                 return "How many tiles armies and villages can see if fog of war is enabled.  The game uses a simple system where line of sight isn't blocked by obstacles.\n Also affects night time sight range";
             case 252:
-                return "Every amount of growth gained is multiplied by this percentage (requires Growth trait)";
+                return "Every amount of growth gained is multiplied by this percentage (requires Growth trait)\n" + 
+					"100% Growth results in preds gaining 10% of their preys' Bulk over the course of absorbing them (before other modifiers)";
             case 253:
                 return "How much percent of its original size a unit can grow using the Growth trait (other means of size increase are unaffected – they stack on top)";
             case 254:
-                return "A percentual reduction in the size of growth units that's applied each strategic turn (but they won't lose more than they've grown)";
+                return "A reduction in the bulk of Growth units that's applied each strategic turn, as a percentage of original bulk (but they won't lose more than they've grown)";
             case 255:
-                return "Makes more grown units decay at a different pace. This value is how much extra decay 1 factors of growth adds in ‰.\n" +
-                    "For example, default is 40‰ (4%), which would be +2% decay at 1.5x growth, or +4% at 2x growth.";
+                return "A reduction in the bulk of Growth units that's applied each strategic turn, as a permillage (‰) of bulk more than original bulk.\n" +
+                    "For example, default is 40‰ (4%), which would reduce 100 units of gained bulk by 4.";
             case 256:
                 return "Modifies how mighty the game thinks the Race is (Affects power calculations).\n" +
                     "A way to make your balance changes known to the AI, or deliberately make it misjudge. " +
@@ -699,9 +700,9 @@ Does not retroactively affect already created units.";
             case 280:
                 return "Affects how likely a Unit will gain weight during absorption. 1 = 100% chance.";
             case 281:
-                return "A modifier how much MP an army will have on it's creation. 1 = 100% \nValues below 0% will reduce MP; Values above 0% will increase MP. \nA value of 0% disables this option.";
+                return "A modifier how much MP an army will have on its creation. 1 = 100% \nValues below 0% will reduce MP; Values above 0% will increase MP. \nA value of 0% disables this option.";
             case 282:
-                return "Modifies how fast an army returns to it's standard MP generation. \nA mod value of -100% with a curve of 50% will cause an army to have 0 MP for it's first turn and half of it's MP on it's next turn.";
+                return "Modifies how fast an army returns to its standard MP generation. \nA mod value of -100% with a curve of 50% will cause an army to have 0 MP for its first turn and half of its MP on its next turn.";
             case 283:
                 return "Replaces scat with diapers for absorbed units and diaper-related tactical log messages will be displayed.";
             case 284:
@@ -711,13 +712,13 @@ Does not retroactively affect already created units.";
             case 286:
                 return "A multiplier for all digestion damage. \nA value of 1 means no change.";
             case 287:
-                return "A multiplier for speed of absorbtion. \nA value of 1 means no change.";
+                return "A multiplier for speed of absorption. \nA value of 1 means no change.";
             case 288:
                 return "Damage caused by a belly rub will be modified by this amount. 1 means no change.";
             case 289:
                 return "The amount of belly rubs a single unit can recieve in a single turn. \nKeep in mind that belly rub does NOT take a full turn. \nSet to -1 to allow for unlimited.";
             case 290:
-                return "Adjusts how much digestion damage is increased each time a ramp turn is reached and a unit is full. This modifier stacks. A value of 0 disables this and it's associated settings.";
+                return "Adjusts how much digestion damage is increased each time a ramp turn is reached and a unit is full. This modifier stacks. A value of 0 disables this and its associated settings.";
             case 291:
                 return "The percent from the above setting will be added for every X turn a pred is full of any living prey.";
             case 292:
@@ -725,13 +726,13 @@ Does not retroactively affect already created units.";
             case 293:
                 return "How many ramp stacks are lost per turn a pred is NOT full of any living prey. A value of 0.5 means 1 stack lost every other turn \nA negative value will add stacks every turn a unit is empty and cause stacks to be removed while a unit is full instead, allowing for units to start with high damage, then lose it.";
             case 294:
-                return "Adjusts how much Absorbtion speed is changed each time a ramp turn is reached and a unit is full. This modifier stacks. A value of 0 disables this and it's associated settings.";
+                return "Adjusts how much Absorption speed is changed each time a ramp turn is reached and a unit is full. This modifier stacks. A value of 0 disables this and its associated settings.";
             case 295:
-                return "Modifies how much health and mana is gained from absorbtion.";          
+                return "Modifies how much health and mana is gained from absorption.";          
             case 296:
                 return "If on, stacks will begin to fall (or begin to rise again) once there is no more alive prey.";
             case 297:
-                return "If on, stacks will be applied to absorbtion if there no more alive prey.";
+                return "If on, stacks will be applied to absorption if there no more alive prey.";
             case 298:
                 return "Digestion will never do more than this amount of a unit's Max HP in one instance. A value of 0 disables this setting.";
             case 299:
@@ -741,11 +742,11 @@ Does not retroactively affect already created units.";
             case 301:
                 return "Damage taken by a unit will be divided by the amount of living prey in the same location.";
             case 302:
-                return "Absorbtion rate will be divided by the amount of prey being absrbed in the same location.";
+                return "Absorption rate will be divided by the amount of prey being absrbed in the same location.";
             case 303:
                 return "Prey within a surrendered predator will have their escape chanced multiplied by this amount. A value of 1 disables this setting.";
             case 304:
-                return "When a full predetor surrenders, it has this chance to release it's prey.";
+                return "When a full predetor surrenders, it has this chance to release its prey.";
             case 305:
                 return "Enables wandering hauntings of Wisps";
             case 306:
@@ -757,7 +758,7 @@ Does not retroactively affect already created units.";
             case 309: 
                 return "Enables wandering pods of Feral Orcas";
             case 310:
-                return "Decides if and how the resource gain percentage setting is linked to ramp stacks. Can be used with settings that change stacks during absorbtion. \nMultiplicative: Multiplies resource gain by the bonus, will bottom out at zero health/mana per turn when a unit reaches zero stacks \nAdditive: Adds bonus onto the resourse gain, will bottom out at the normal value when stacks are zero.";
+                return "Decides if and how the resource gain percentage setting is linked to ramp stacks. Can be used with settings that change stacks during absorption. \nMultiplicative: Multiplies resource gain by the bonus, will bottom out at zero health/mana per turn when a unit reaches zero stacks \nAdditive: Adds bonus onto the resourse gain, will bottom out at the normal value when stacks are zero.";
             case 311:
                 return "If on, this monster is able to receive the scout MP bonus.";
             case 312:

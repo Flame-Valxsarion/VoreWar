@@ -79,6 +79,11 @@ public class StandardTacticalAI : TacticalAI
             else
                 RunMelee(actor);
         }
+		else
+		{
+			if (actor.BellyRub(actor)) // Something for VoreObsession characters to do when full.
+				didAction = true;
+		}
         if (foundPath || didAction) return;
         //Search for surrendered targets outside of vore range
         //If no path to any targets, will sit out its turn

@@ -569,32 +569,37 @@ public class RaceEditorPanel : MonoBehaviour
     public static List<Traits> TextToTraitList(string text)
     {
         List<Traits> traits = new List<Traits>();
-        foreach (RandomizeList rl in State.RandomizeLists)
+        List<string> textlist = text.Split(',').ToList();
+        foreach (var splittrait in textlist)
         {
-            if (text.ToLower().Contains(rl.name.ToString().ToLower()))
+            string trimmedtrait = splittrait.Trim();
+             foreach (RandomizeList rl in State.RandomizeLists)
             {
-                traits.Add((Traits)rl.id);
+                if (trimmedtrait.ToLower().Equals(rl.name.ToString().ToLower()))
+                {
+                    traits.Add((Traits)rl.id);
+                }
             }
-        }
-        foreach (CustomTraitBoost ct in State.CustomTraitList)
-        {
-            if (text.ToLower().Contains(ct.name.ToString().ToLower()))
+            foreach (CustomTraitBoost ct in State.CustomTraitList)
             {
-                traits.Add((Traits)ct.id);
+                if (trimmedtrait.ToLower().Equals(ct.name.ToString().ToLower()))
+                {
+                    traits.Add((Traits)ct.id);
+                }
             }
-        }
-        foreach (ConditionalTraitContainer ct in State.ConditionalTraitList)
-        {
-            if (text.ToLower().Contains(ct.name.ToString().ToLower()))
+            foreach (ConditionalTraitContainer ct in State.ConditionalTraitList)
             {
-                traits.Add((Traits)ct.id);
+                if (trimmedtrait.ToLower().Equals(ct.name.ToString().ToLower()))
+                {
+                    traits.Add((Traits)ct.id);
+                }
             }
-        }
-        foreach (Traits trait in (Stat[])Enum.GetValues(typeof(Traits)))
-        {
-            if (text.ToLower().Contains(trait.ToString().ToLower()))
+            foreach (Traits trait in (Stat[])Enum.GetValues(typeof(Traits)))
             {
-                traits.Add(trait);
+                if (trimmedtrait.ToLower().Equals(trait.ToString().ToLower()))
+                {
+                    traits.Add(trait);
+                }
             }
         }
         traits = traits.Distinct().ToList();
@@ -611,7 +616,7 @@ public class RaceEditorPanel : MonoBehaviour
         bool first = true;
         foreach (var trait in traits)
         {
-            if (hideSecret && Unit.secretTags.Contains(trait)) continue; // We even hide secret traits if they would be shown once purchased, otherwise if you read "Infiltrator" you already know it's safe.
+            if (hideSecret && Unit.secretTags.Contains(trait)) continue; // We even hide secret traits if they would be shown once purchased, otherwise if you read "Infiltrator" you already know its safe.
             if (first)
                 first = false;
             else

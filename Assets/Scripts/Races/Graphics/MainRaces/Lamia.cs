@@ -37,7 +37,7 @@ class Lamia : DefaultRaceData
         Hair = new SpriteExtraInfo(6, HairSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.NormalHair, s.Unit.HairColor));
         Hair2 = new SpriteExtraInfo(1, HairSprite2, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.NormalHair, s.Unit.HairColor));
         Hair3 = new SpriteExtraInfo(9, HairSprite3, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.NormalHair, s.Unit.HairColor));
-        Eyes = new SpriteExtraInfo(6, EyesSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EyeColor, s.Unit.EyeColor));
+        Eyes = new SpriteExtraInfo(5, EyesSprite, null, (s) => ColorPaletteMap.GetPalette(ColorPaletteMap.SwapType.EyeColor, s.Unit.EyeColor));
         SecondaryEyes = new SpriteExtraInfo(6, EyesSecondarySprite, WhiteColored);
         SecondaryAccessory = new SpriteExtraInfo(3, SecondaryAccessorySprite, WhiteColored);
         Belly = new SpriteExtraInfo(15, null, null, (s) => FurryColorInner(s));

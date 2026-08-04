@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 public class MercenaryHouse
 {
     [OdinSerialize]
@@ -13,8 +12,6 @@ public class MercenaryHouse
 
     [OdinSerialize]
     internal Vec2i Position;
-
-
 
     static List<Race> AvailableRaces;
     static int TurnRefreshed;
@@ -77,7 +74,8 @@ public class MercenaryHouse
         {
             List<Unit> units = Mercenaries.ConvertAll(merc => merc.Unit);
             Mercenaries.RemoveRange(0, Mercenaries.Count - (maxStock - minimumReplacedPerTurn));
-            foreach (Unit u in units) {
+            foreach (Unit u in units)
+            {
                 if (!Mercenaries.Any(mer => mer.Unit == u) && u.OnDiscard != null)
                 {
                     u.OnDiscard();
@@ -95,13 +93,11 @@ public class MercenaryHouse
         }
     }
 
-
     internal MercenaryContainer CreateMercenary(int highestExp)
     {
         MercenaryContainer merc = new MercenaryContainer();
         Race race;
         race = AvailableRaces[State.Rand.Next(AvailableRaces.Count())];
-
 
         int exp = (int)(highestExp * .8f) + State.Rand.Next(10);
         merc.Unit = new Unit((int)race, race, exp, true, UnitType.Mercenary, true);
@@ -121,22 +117,18 @@ public class MercenaryHouse
                 case 0:
                     merc.Unit.SetItem(State.World.ItemRepository.GetItem(ItemType.Shoes), 1);
                     break;
-
                 case 1:
                     merc.Unit.SetItem(State.World.ItemRepository.GetItem(ItemType.Helmet), 1);
                     break;
-
                 case 2:
                     merc.Unit.SetItem(State.World.ItemRepository.GetItem(ItemType.BodyArmor), 1);
                     break;
-
                 case 3:
                     if (merc.Unit.BestSuitedForRanged())
                         merc.Unit.SetItem(State.World.ItemRepository.GetItem(ItemType.Gloves), 1);
                     else
                         merc.Unit.SetItem(State.World.ItemRepository.GetItem(ItemType.Gauntlet), 1);
                     break;
-
             }
 
             if (State.Rand.Next(10) == 0)
@@ -149,7 +141,7 @@ public class MercenaryHouse
         var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
         if (power == 0)
         {
-            power = RaceParameters.GetTraitData(merc.Unit).PowerAdjustment;
+            power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
         }
         StrategicUtilities.SetAIClass(merc.Unit);
         StrategicUtilities.SpendLevelUps(merc.Unit);
@@ -172,15 +164,11 @@ public class MercenaryHouse
         var power = State.RaceSettings.Get(merc.Unit.Race).PowerAdjustment;
         if (power == 0)
         {
-            power = RaceParameters.GetTraitData(merc.Unit).PowerAdjustment;
+            power = RaceParameters.GetRaceTraits(merc.Unit.Race).PowerAdjustment;
         }
         StrategicUtilities.SetAIClass(merc.Unit);
         StrategicUtilities.SpendLevelUps(merc.Unit);
         merc.Cost = (int)((20 + State.Rand.Next(15) + (.12 * exp)) * power);
         return merc;
     }
-
-
-
 }
-

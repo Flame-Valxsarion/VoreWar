@@ -3,9 +3,7 @@ using System.Linq;
 
 public class RaceServantTacticalAI : HedonistTacticalAI
 {
-    public RaceServantTacticalAI(List<Actor_Unit> actors, TacticalTileType[,] tiles, int AISide, bool defendingVillage = false) : base(actors, tiles, AISide, defendingVillage)
-    {
-    }
+    public RaceServantTacticalAI(List<Actor_Unit> actors, TacticalTileType[,] tiles, int AISide, bool defendingVillage = false) : base(actors, tiles, AISide, defendingVillage) { }
 
     protected override List<PotentialTarget> GetListOfPotentialRubTargets(Actor_Unit actor, Vec2i position, int moves)
     {
@@ -27,7 +25,6 @@ public class RaceServantTacticalAI : HedonistTacticalAI
                         continue;
                     targets.Add(new PotentialTarget(unit, 100, distance, 4, 100 - (unit == actor ? 100 - unit.Unit.HealthPct + 10 : 100 - unit.Unit.HealthPct)));
                 }
-
             }
         }
         return targets.OrderByDescending(t => t.utility).ToList();
@@ -35,6 +32,6 @@ public class RaceServantTacticalAI : HedonistTacticalAI
 
     private Race GetStrongestFriendlyRaceOnBattlefield(Actor_Unit unit)
     {
-        return actors.Where(a => !TacticalUtilities.TreatAsHostile(unit, a)).OrderByDescending(a => State.RaceSettings.Get(a.Unit.Race).PowerAdjustment == 0 ? RaceParameters.GetTraitData(a.Unit).PowerAdjustment : State.RaceSettings.Get(a.Unit.Race).PowerAdjustment).First().Unit.Race;
+        return actors.Where(a => !TacticalUtilities.TreatAsHostile(unit, a)).OrderByDescending(a => State.RaceSettings.Get(a.Unit.Race).PowerAdjustment == 0 ? RaceParameters.GetRaceTraits(a.Unit.Race).PowerAdjustment : State.RaceSettings.Get(a.Unit.Race).PowerAdjustment).First().Unit.Race;
     }
 }

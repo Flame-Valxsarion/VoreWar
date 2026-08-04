@@ -17,6 +17,7 @@ public enum CustomTraitComp
     PassiveHeal,
     CapacityMult,
     FlatHitReduction,
+    FlatDamageReduction,
     SpeedLossFromWeightMultiplier,
     DodgeLossFromWeightMultiplier,
     BulkMultiplier,
@@ -158,6 +159,7 @@ public class CustomTrait : MonoBehaviour
     {
         trait.name = name.text;
         trait.description = description.text;
+        trait.tier = (TraitTier)tier.value;
         List<string> seperatedTags = new List<string>();
         foreach (var item in tags.text.Split(','))
         {
@@ -313,7 +315,7 @@ public class CustomTrait : MonoBehaviour
                 break;
             case CustomTraitComp.OutgoingGrowthRate:
                 ToolTipName.text = "Growth Rate Multiplier (Outgoing)";
-                ToolTipDesc.text = "The amount of growth a unit provides, assuming it's predator can grow.";
+                ToolTipDesc.text = "The amount of growth a unit provides, assuming its predator can grow.";
                 break;
             case CustomTraitComp.OutgoingCritRateShift:
                 ToolTipName.text = "Critical Rate Addition (Outgoing)";
@@ -402,6 +404,10 @@ public class CustomTrait : MonoBehaviour
             case CustomTraitComp.FlatHitReduction:
                 ToolTipName.text = "Flat Hit Reduction";
                 ToolTipDesc.text = "The chance a unit is hit by anything. \n Note: A value of 0.9 is 10% reduction.";
+                break;
+            case CustomTraitComp.FlatDamageReduction:
+                ToolTipName.text = "Flat Damage Reduction";
+                ToolTipDesc.text = "The amount of weapon damage a unit takes will be reduced by this value, after modifiers. \n Note: A negative value will increase damage.";
                 break;
             case CustomTraitComp.SpeedLossFromWeightMultiplier:
                 ToolTipName.text = "Speed Loss From Weight Multiplier";

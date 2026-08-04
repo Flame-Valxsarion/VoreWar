@@ -16,7 +16,7 @@ class CasterTower : ConstructibleBuilding
     public CasterTower(Vec2i location) : base(location)
     {
         Name = "Caster Tower";
-        Desc = "The caster tower uses mana to launch a barrage of spells on the first turn of combat that starts in it's range.";
+        Desc = "The caster tower uses mana to launch a barrage of spells on the first turn of combat that starts in its range.";
         spriteID = 24;
         buildingType = ConstructibleType.CasterTower;
 

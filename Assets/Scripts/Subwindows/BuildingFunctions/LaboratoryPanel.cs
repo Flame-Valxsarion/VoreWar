@@ -45,7 +45,6 @@ public class LaboratoryPanel : MonoBehaviour
 
     int TotalCostValue => (int)Math.Round(UnitPriceValue * BrewCountValue * DiscountValue);
 
-
     public void Open(ConstructibleBuilding building)
     {
         Laboratory = (Laboratory)building;
@@ -163,82 +162,91 @@ public class LaboratoryPanel : MonoBehaviour
 
     void GenerateOptions(int id)
     {
-        PotionIngredient ingRoll = (PotionIngredient)State.Rand.Next(Laboratory.ingredientUpgrade.built ? (int)PotionIngredient.PotionIngredientCounter : (int)PotionIngredient.Powerful);
-        OptionIngredients[id] = ingRoll;
-        OptionTitle[id].text = $"{ingRoll.ToString()} Ingredient";
         int baselineCost = Config.BuildConfig.LaboratoryBaseUnitPrice;
-        int CostAdd = 0;
-        switch (ingRoll)
+        int costAdd;
+        WeightedList<PotionIngredient> lottery = new WeightedList<PotionIngredient>();
+        for (PotionIngredient entry = PotionIngredient.Grievous; entry < (Laboratory.ingredientUpgrade.built ? PotionIngredient.PotionIngredientCounter : PotionIngredient.Powerful); ++entry)
+            lottery.Add(entry);
+
+        for (int slot = 0; slot < 4; ++slot)
         {
-            case PotionIngredient.Grievous:
-                OptionStats[id].text = $"Harmful Effect:50%\nNegative Effect:25%\nNeutral Effect:25%";
-                CostAdd = baselineCost / -2;
-                break;
-            case PotionIngredient.Dangerous:
-                OptionStats[id].text = $"Harmful Effect:25%\nNegative Effect:50%\nNeutral Effect:25%";
-                CostAdd = (int)Math.Round(baselineCost / -1.5);
-                break;
-            case PotionIngredient.Experimental:
-                OptionStats[id].text = $"Negative Effect:25%\n Neutral Effect:25%\n Common Effect:25%\n Uncommon Effect:25%";
-                break;
-            case PotionIngredient.Unstable:
-                OptionStats[id].text = $"Negative Effect:10%\n Neutral Effect:10%\n Common Effect:40%\n Uncommon Effect:40%";
-                CostAdd = (int)Math.Round(baselineCost * .15);
-                break;
-            case PotionIngredient.Stable:
-                OptionStats[id].text = $"Neutral Effect:10%\n Common Effect:20%\n Uncommon Effect:40%\n Rare Effect:30%";
-                CostAdd = (int)Math.Round(baselineCost * .3);
-                break;
-            case PotionIngredient.Simple:
-                OptionStats[id].text = $"Common Effect:30%\n Uncommon Effect:30%\n Rare Effect:40%";
-                CostAdd = (int)Math.Round(baselineCost * .5);
-                break;
-            case PotionIngredient.Standard:
-                OptionStats[id].text = $"Uncommon Effect:30%\n Rare Effect:40%\n Epic Effect:20%\n Elite Effect:10%";
-                CostAdd = (int)Math.Round(baselineCost * .75);
-                break;
-            case PotionIngredient.Premium:
-                OptionStats[id].text = $"Rare Effect:20%\n Epic Effect:40%\n Elite Effect:30%\n Legendary Effect:10%";
-                CostAdd = baselineCost;
-                break;
-            case PotionIngredient.Superior:
-                OptionStats[id].text = $"Epic Effect:40%\n Elite Effect:30%\n Legendary Effect:30%";
-                CostAdd = (int)Math.Round(baselineCost * 1.5);
-                break;
-            case PotionIngredient.Powerful:
-                OptionStats[id].text = $"Elite Effect:50%\n Legendary Effect:50%";
-                CostAdd = baselineCost * 2;
-                break;
-            case PotionIngredient.Legendary:
-                OptionStats[id].text = $"Elite Effect:30%\n Legendary Effect:70%";
-                CostAdd = baselineCost * 2;
-                break;
-            case PotionIngredient.Sterilizing:
-                OptionStats[id].text = $"Removes all negative effects";
-                CostAdd = (int)Math.Round(baselineCost * 0.5);
-                break;
-            case PotionIngredient.Purifying:
-                OptionStats[id].text = $"Removes all current negative and harmful effects";
-                CostAdd = (int)Math.Round(baselineCost * 1.5);
-                break;
-            case PotionIngredient.Solute:
-                OptionStats[id].text = $"Increases chance effects become a trait.\nDoes not consume roll";
-                CostAdd = (int)Math.Round(baselineCost * .25);
-                break;
-            case PotionIngredient.Solvent:
-                OptionStats[id].text = $"Improves chance effects become a stat modifier.\nDoes not consume roll";
-                CostAdd = (int)Math.Round(baselineCost * .05);
-                break;
-            case PotionIngredient.Coagulate:
-                OptionStats[id].text = $"Grants +1 roll";
-                CostAdd = (int)Math.Round(baselineCost * .5);
-                break;
-            default:
-                break;
+            PotionIngredient ingredient = lottery.DrawResultAndSetAside();
+            OptionIngredients[slot] = ingredient;
+            OptionTitle[slot].text = $"{ingredient.ToString()} Ingredient";
+            switch (ingredient)
+            {
+                case PotionIngredient.Grievous:
+                    OptionStats[slot].text = $"Harmful Effect:50%\nNegative Effect:25%\nNeutral Effect:25%";
+                    costAdd = baselineCost * -1;
+                    break;
+                case PotionIngredient.Dangerous:
+                    OptionStats[slot].text = $"Harmful Effect:25%\nNegative Effect:50%\nNeutral Effect:25%";
+                    costAdd = baselineCost * -2 / 3;
+                    break;
+                case PotionIngredient.Experimental:
+                    OptionStats[slot].text = $"Negative Effect:25%\n Neutral Effect:25%\n Common Effect:25%\n Uncommon Effect:25%";
+                    costAdd = 0;
+                    break;
+                case PotionIngredient.Unstable:
+                    OptionStats[slot].text = $"Negative Effect:10%\n Neutral Effect:10%\n Common Effect:40%\n Uncommon Effect:40%";
+                    costAdd = baselineCost * 3 / 20;
+                    break;
+                case PotionIngredient.Stable:
+                    OptionStats[slot].text = $"Neutral Effect:10%\n Common Effect:20%\n Uncommon Effect:40%\n Rare Effect:30%";
+                    costAdd = baselineCost * 3 / 10;
+                    break;
+                case PotionIngredient.Simple:
+                    OptionStats[slot].text = $"Common Effect:30%\n Uncommon Effect:30%\n Rare Effect:40%";
+                    costAdd = baselineCost * 1 / 2;
+                    break;
+                case PotionIngredient.Standard:
+                    OptionStats[slot].text = $"Uncommon Effect:30%\n Rare Effect:40%\n Epic Effect:20%\n Elite Effect:10%";
+                    costAdd = baselineCost * 3 / 4;
+                    break;
+                case PotionIngredient.Premium:
+                    OptionStats[slot].text = $"Rare Effect:20%\n Epic Effect:40%\n Elite Effect:30%\n Legendary Effect:10%";
+                    costAdd = baselineCost;
+                    break;
+                case PotionIngredient.Superior:
+                    OptionStats[slot].text = $"Epic Effect:40%\n Elite Effect:30%\n Legendary Effect:30%";
+                    costAdd = baselineCost * 3 / 2;
+                    break;
+                case PotionIngredient.Powerful:
+                    OptionStats[slot].text = $"Elite Effect:50%\n Legendary Effect:50%";
+                    costAdd = baselineCost * 2;
+                    break;
+                case PotionIngredient.Legendary:
+                    OptionStats[slot].text = $"Elite Effect:30%\n Legendary Effect:70%";
+                    costAdd = baselineCost * 5 / 2;
+                    break;
+                case PotionIngredient.Sterilizing:
+                    OptionStats[slot].text = $"Removes all negative effects";
+                    costAdd = baselineCost * 1 / 2;
+                    break;
+                case PotionIngredient.Purifying:
+                    OptionStats[slot].text = $"Removes all current negative and harmful effects";
+                    costAdd = baselineCost * 3 / 2;
+                    break;
+                case PotionIngredient.Solute:
+                    OptionStats[slot].text = $"Increases chance effects become a trait.\nDoes not consume roll";
+                    costAdd = baselineCost * 1 / 4;
+                    break;
+                case PotionIngredient.Solvent:
+                    OptionStats[slot].text = $"Improves chance effects become a stat modifier.\nDoes not consume roll";
+                    costAdd = baselineCost * 1 / 20;
+                    break;
+                case PotionIngredient.Coagulate:
+                    OptionStats[slot].text = $"Grants +1 roll";
+                    costAdd = baselineCost * 1 / 2;
+                    break;
+                default:
+                    costAdd = 0;
+                    break;
+            }
+            UnitCostList[slot] = costAdd;
+            OptionSelect[slot].interactable = (RemainingRolls > 0 || ingredient == PotionIngredient.Coagulate) && Laboratory.Owner.Gold > UnitPriceValue + costAdd;
+            OptionStats[slot].text += $"\nUnit Cost {(costAdd > 0 ? '+' : '-')} {costAdd}";
         }
-        UnitCostList[id] = CostAdd;
-        OptionSelect[id].interactable = (RemainingRolls > 0 || ingRoll == PotionIngredient.Coagulate) && Laboratory.Owner.Gold > UnitPriceValue + CostAdd;
-        OptionStats[id].text += $"\nUnit Cost {(CostAdd > 0 ? '+' : '-')} {CostAdd}";
     }
 
     void UseOptions(int id)
@@ -252,16 +260,16 @@ public class LaboratoryPanel : MonoBehaviour
             case PotionIngredient.Grievous:
                 if (randRoll <= .5)
                     IncRollValue(0);
-                else if (randRoll <= .25)
+                else if (randRoll <= .75)
                     IncRollValue(1);
                 else
                     IncRollValue(2);
                 break;
             case PotionIngredient.Dangerous:
-                if (randRoll <= .5)
-                    IncRollValue(1);
-                else if (randRoll <= .25)
+                if (randRoll <= .25)
                     IncRollValue(0);
+                else if (randRoll <= .75)
+                    IncRollValue(1);
                 else
                     IncRollValue(2);
                 break;
@@ -419,55 +427,55 @@ public class LaboratoryPanel : MonoBehaviour
         }
         for (int i = 0; i < PotionRollStats.Count(); i++)
         {
-            int ingQuality = i;
-            int trait_count = PotionRollStats[ingQuality];
+            int trait_count = PotionRollStats[i];
             for (int j = 0; j < trait_count; j++)
             {
+                int rollQuality = i;
                 if (Laboratory.boostUpgrade.built)
                 {
-                    if (State.Rand.Next(4) == 0 && ingQuality <= 4)
+                    if (rollQuality <= 4 && State.Rand.Next(4) == 0)
                     {
-                        ingQuality += 2;
+                        rollQuality += 2;
                     }
                 }
                 if (State.Rand.NextDouble() > TraitChanceValue)
                 {
-                    int value = State.Rand.Next(5, 10);
-                    if (ingQuality <= 1)
+                    double value = 5 + State.Rand.NextDouble() * 5;
+                    if (rollQuality <= 1)
                     {
-                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += ingQuality == 0 ? value * -2 : -value;
+                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += (int)(value * (-2 + rollQuality));
                     }
-                    else if (ingQuality == 2)
+                    else if (rollQuality == 2)
                     {
-                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += value;
-                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] -= value;
+                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += (int)value;
+                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] -= (int)value;
                     }
                     else
                     {
-                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += value * ingQuality;
+                        newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += (int)(value * rollQuality);
                     }
                 }
                 else
                 {
-                    Traits incTrait = TaggedTraitUtilities.GetRandomTraitInTier((TraitTier)ingQuality);
+                    Traits incTrait = TaggedTraitUtilities.GetRandomTraitInTier((TraitTier)rollQuality);
                     if (incTrait <= 0 || newPotion.NegativeTraits.Contains(incTrait) || newPotion.PositiveTraits.Contains(incTrait))
                     {
                         int value = State.Rand.Next(5, 10);
-                        if (ingQuality <= 1)
+                        if (rollQuality <= 1)
                         {
-                            newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += ingQuality == 0 ? value * -2 : -value;
+                            newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += rollQuality == 0 ? value * -2 : -value;
                         }
-                        else if (ingQuality == 2)
+                        else if (rollQuality == 2)
                         {
                             newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += value;
                             newPotion.StatModifiers[(Stat)State.Rand.Next(8)] -= value;
                         }
                         else
                         {
-                            newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += value * ingQuality;
+                            newPotion.StatModifiers[(Stat)State.Rand.Next(8)] += value * rollQuality;
                         }
                     }
-                    if (ingQuality <= 2)
+                    if (rollQuality <= 2)
                     {
                         newPotion.NegativeTraits.Add(incTrait);
                     }

@@ -67,7 +67,7 @@ class FogSystemTactical
 
         }
 
-        // Removes fog from tile if it's not suppose to be there.
+        // Removes fog from tile if it's not supposed to be there.
         for (int i = 0; i <= FoggedTile.GetUpperBound(0); i++)
         {
             for (int j = 0; j <= FoggedTile.GetUpperBound(1); j++)

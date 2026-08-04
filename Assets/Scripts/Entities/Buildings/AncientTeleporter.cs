@@ -7,7 +7,7 @@ using UnityEngine;
 public class AncientTeleporter
 {
 
-    static internal List<AncientTeleporter> availibleTeleporters;
+    static internal List<AncientTeleporter> availableTeleporters;
 
     [OdinSerialize]
     internal Vec2i Position;

@@ -34,7 +34,7 @@ public enum ItemType
     IchorOfDilution, //Tier 2 Equip End
     EnlargementPotion, //Tier 3 Equip Start
     PotionOfPotential,
-    IchorOfErrosion, //Tier 3 Equip End
+    IchorOfErosion, //Tier 3 Equip End
     PotionOfPower, //Tier 4 Equip Start
     OmniPotion, //Tier 4 Equip End
 
@@ -197,7 +197,7 @@ public class ItemRepository
             new Potion(name:"Ichor Of Dilution", description:"Reduces Digestion damage of target for 4 turns.", cost:10, tier:2, negative:true ,func: (x,y) => ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Diluted,0.2f,4)),
             new Potion(name:"Enlargement Elixir", description:"Grants Enlarged for 3 turns, causes Lethargy for 3 turns after the effect ends.", cost:10, tier:3, negative:false ,func: (x,y) => ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Enlarged, 1, 3, null, new StatusEffect(StatusEffectType.Lethargy, 4, 3))),
             new Potion(name:"Potion Of Potential", description:"Race changes to 'Morph Race' for 3 turns.", cost:15, tier:3, negative:false ,func: (x,y) => ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Morphed, 1, 3)),
-            new Potion(name:"Ichor Of Errosion", description:"Inflicts Errosion for 3 turns, increasing damage taken.", cost:15, tier:3, negative:true,func: (x,y) => ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Errosion, 2, 3)),
+            new Potion(name:"Ichor Of Erosion", description:"Inflicts Erosion for 3 turns, increasing damage taken.", cost:15, tier:3, negative:true,func: (x,y) => ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Erosion, 2, 3)),
             new Potion(name:"Potion Of Power", description:"Target becomes Empowered for 5 turns, causes Sleep for 1 turn after the effect ends", cost:25, tier:4, negative:false ,func: (x,y) => ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Empowered, 0.5f, 5, null, new StatusEffect(StatusEffectType.Sleeping, 1, 1))),
             new Potion(name:"OmniPotion", description:"Grants Shield, Mending, Fast, Valor, and Predation for 5 turns.", cost:25, tier:4, negative:false ,func: (x,y) =>  
             { ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Shielded, .25f, 5); ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Mending, 24, 5); ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Fast, 0.3f, 5); ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Valor, .25f, 5); ((Actor_Unit)x).Unit.ApplyStatusEffect(StatusEffectType.Predation, 25, 5);}), 
@@ -333,10 +333,10 @@ public class ItemRepository
             new Accessory(name:"Comfy Sweater", description:"Singularity's favorite sweater.", cost:0, changedStat:(int)Stat.Endurance, statBonus:10 ),
             new Weapon(name:"Feit's Claws", description:"The deadly claws upon Feit's forelimbs synergize well with the wing-like feathers, allowing her to effectively glide and pin down her enemies.", cost:4, graphic:0, damage:8, range:1),
             new Accessory(name:"Feit's Talons", description:"A Draco-Raptor's talons are quite powerful, enabling these predators to quickly pounce upon distant prey.", cost:6, changedStat:(int)Stat.Endurance, statBonus:10 ),
-            new Weapon(name:"Omni Buster", description:"A melee weapon made from a semi-morphic material that takes on a form best suited to it's wielder. (Dissapates upon separation from it's wielder.)", cost:4, graphic:2, damage:9, range:1, accuracyModifier:1.35f),
-            new Weapon(name:"Omni Launcher", description:"A ranged weapon made from a semi-morphic material that takes on a form best suited to it's wielder. (Dissapates upon separation from it's wielder.)", cost:4, graphic:6, damage:8, range:6, accuracyModifier:.75f),
+            new Weapon(name:"Omni Buster", description:"A melee weapon made from a semi-morphic material that takes on a form best suited to its wielder. (Dissipates upon separation from its wielder.)", cost:4, graphic:2, damage:9, range:1, accuracyModifier:1.35f),
+            new Weapon(name:"Omni Launcher", description:"A ranged weapon made from a semi-morphic material that takes on a form best suited to its wielder. (Dissipates upon separation from its wielder.)", cost:4, graphic:6, damage:8, range:6, accuracyModifier:.75f),
             new Weapon(name:"Tara's Claws", description:"A fearsome set of claws attatched to an equally fearsome dragon.", cost:4, graphic:0, damage:8, range:1, lockedItem:true),
-            new Weapon(name:"Xelhilde's Zweihänder", description:"A cobalt zweihänder forged in Mondfeld. It's blade seems to shimer like the moon.", cost:4, graphic:0, damage:9, range:1, accuracyModifier: 1.4f, lockedItem:true),
+            new Weapon(name:"Xelhilde's Zweihänder", description:"A cobalt zweihänder forged in Mondfeld. Its blade seems to shimmer like the moon.", cost:4, graphic:0, damage:9, range:1, accuracyModifier: 1.4f, lockedItem:true),
             new Weapon(name:"Skapa's Wingtalons", description:"Skapa go pounce.", cost:4, graphic:0, damage:8, range:1, lockedItem:true),
             new Weapon(name:"Entropic Chaos", description:"Cantrip Tatltuae learned some time ago that creates pockets of intense chaotic entropy, ripping the very matter of his foes apart.", cost:4, graphic:0, damage:7, range:8, accuracyModifier: 1f, omniWeapon:true, magicWeapon: true, lockedItem:true),
             new Weapon(name:"Witch's fangs", description:"Imbued with malice, coursing with vile venom, would make for great daggers~", cost:4, graphic:0, damage:8, range:1, lockedItem:true),
@@ -437,7 +437,7 @@ public class ItemRepository
         if (minTier == 3) min = (int)ItemType.RejuvinationElixer;
         if (minTier == 4) min = (int)ItemType.IchorOfDilution;
         if (maxTier == 1) max = (int)ItemType.EnlargementPotion;
-        if (maxTier == 2) max = (int)ItemType.IchorOfErrosion;
+        if (maxTier == 2) max = (int)ItemType.IchorOfErosion;
         if (maxTier == 3) max = (int)ItemType.PotionOfPower;
         if (maxTier >= 4) max = (int)ItemType.OmniPotion;
 

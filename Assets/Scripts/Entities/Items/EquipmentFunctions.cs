@@ -64,7 +64,7 @@
             return true;
         }
         return false;
-    }   
+    }
     internal static bool UseEquipmentManaPotion(Unit unit)
     {
         if (unit.ManaPct <= 0.5f)
@@ -74,7 +74,6 @@
             return true;
         }
         return false;
-
     }
     internal static bool UseEquipmentBarrierRing(Unit unit)
     {
@@ -92,11 +91,10 @@
     }
     internal static bool UseEquipmentBrambleBand(Unit unit, Actor_Unit attacker)
     {
-        int damage = unit.GetStat(Stat.Endurance) / 10;
-        attacker.Damage(damage, false, false);
+        double damage = unit.GetStat(Stat.Endurance) / 10.0;
+        attacker.Damage(damage, false, DamageLethality.NonLethal);
         State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{attacker.Unit.Name}</b> took <color=red>{damage}</color> damage from {unit.Name}'s Bramble Band.");
         return true;
-
     }
     internal static bool UseEquipmentWarpStone(Unit unit)
     {
