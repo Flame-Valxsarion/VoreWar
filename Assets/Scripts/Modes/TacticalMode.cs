@@ -4916,7 +4916,7 @@ public class TacticalMode : SceneBase
         {
             foreach (Actor_Unit actor in units.ToList())
             {
-                if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && (actor.TurnsSinceLastDamage < 2 & !actor.Unit.HasTrait(Traits.CurseOfImmolation))) return false;
+                if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && (actor.TurnsSinceLastDamage < 2 && !actor.Unit.HasTrait(Traits.CurseOfImmolation) && !TacticalUtilities.UnitsWithinTiles(actor.Position, 1).Where(u => u.Unit.HasTrait(Traits.CurseOfImmolation)).Any())) return false;
                 if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && !actor.Unit.hiddenFixedSide && units.Any(u => u.Targetable && !u.Fled && u.Visible && TacticalUtilities.TreatAsHostile(actor, u))) return false;
                 if (actor.Unit.Predator == false)
                     continue;

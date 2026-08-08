@@ -35,7 +35,17 @@ public class WorkCamp : ConstructibleBuilding
         if (postUpgrade.built || merchantUpgrade.built) 
         {
             currentGold += Config.BuildConfig.WorkCampGoldPerTurn;
-            inStockItems.SetResources(Config.BuildConfig.WorkCampTurnStock);
+            if (improveUpgrade.built)
+                inStockItems.SetResources(Config.BuildConfig.WorkCampTurnStock);
+            else
+                inStockItems.SetResources(
+                    Config.BuildConfig.WorkCampTurnStock.Wood*3,
+                    Config.BuildConfig.WorkCampTurnStock.Stone * 3,
+                    Config.BuildConfig.WorkCampTurnStock.NaturalMaterials * 3,
+                    Config.BuildConfig.WorkCampTurnStock.Ores * 3,
+                    Config.BuildConfig.WorkCampTurnStock.Prefabs* 3,
+                    Config.BuildConfig.WorkCampTurnStock.ManaStones* 3
+                    );
         }
 
         if (improveUpgrade.built)

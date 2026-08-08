@@ -593,18 +593,18 @@ public class Empire
     {
         EmpireBuildingLimit = new Dictionary<ConstructibleType, int>
         {
-            [ConstructibleType.WorkCamp] = Config.BuildConfig.WorkCamp.BuildLimit,
-            [ConstructibleType.LumberSite] = Config.BuildConfig.LumberSite.BuildLimit,
-            [ConstructibleType.Quarry] = Config.BuildConfig.Quarry.BuildLimit,
-            [ConstructibleType.CasterTower] = Config.BuildConfig.CasterTower.BuildLimit,
-            [ConstructibleType.BarrierTower] = Config.BuildConfig.BarrierTower.BuildLimit,
-            [ConstructibleType.DefEncampment] = Config.BuildConfig.DefenseEncampment.BuildLimit,
-            [ConstructibleType.Academy] = Config.BuildConfig.Academy.BuildLimit,
-            [ConstructibleType.DarkMagicTower] = Config.BuildConfig.DarkMagicTower.BuildLimit,
-            [ConstructibleType.TemporalTower] = Config.BuildConfig.TemporalTower.BuildLimit,
-            [ConstructibleType.Teleporter] = Config.BuildConfig.Teleporter.BuildLimit,
-            [ConstructibleType.Laboratory] = Config.BuildConfig.Laboratory.BuildLimit,
-            [ConstructibleType.TownHall] = Config.BuildConfig.TownHall.BuildLimit,
+            [ConstructibleType.WorkCamp] = 0,
+            [ConstructibleType.LumberSite] = 0,
+            [ConstructibleType.Quarry] = 0,
+            [ConstructibleType.CasterTower] = 0,
+            [ConstructibleType.BarrierTower] = 0,
+            [ConstructibleType.DefEncampment] = 0,
+            [ConstructibleType.Academy] = 0,
+            [ConstructibleType.DarkMagicTower] = 0,
+            [ConstructibleType.TemporalTower] = 0,
+            [ConstructibleType.Teleporter] = 0,
+            [ConstructibleType.Laboratory] = 0,
+            [ConstructibleType.TownHall] = 0,
         };
     }
 

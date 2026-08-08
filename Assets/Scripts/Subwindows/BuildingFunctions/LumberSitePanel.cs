@@ -63,14 +63,14 @@ public class LumberSitePanel : MonoBehaviour
 
     public void AddPrefabWorkerButton()
     {
-        LumberSite.carpenterWorkers += 2;
+        LumberSite.carpenterWorkers += 1;
         LumberSite.IdleWorkers -= 2;
         UpdateVisibility();
     }
 
     public void RemovPrefabWorkerButton()
     {
-        LumberSite.carpenterWorkers -= 2;
+        LumberSite.carpenterWorkers -= 1;
         LumberSite.IdleWorkers += 2;
         UpdateVisibility();
     }
@@ -87,7 +87,7 @@ public class LumberSitePanel : MonoBehaviour
         IdleWorkers.text = LumberSite.IdleWorkers.ToString();
         WoodWorkers.text = LumberSite.woodWorkers.ToString();
         NMWorkers.text = LumberSite.natureWorkers.ToString();
-        PrefabWorkers.text = LumberSite.carpenterWorkers.ToString();
+        PrefabWorkers.text = (LumberSite.carpenterWorkers * 2).ToString();
 
     }
 

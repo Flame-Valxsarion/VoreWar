@@ -842,6 +842,9 @@ public class StrategyMode : SceneBase
                         case StrategicTileType.smallIslands:
                             TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.SmallIslandsFloat[(int)overTiles[i, j] - 2000]);
                             break;
+                        case StrategicTileType.fieldSmallIslands:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.SmallIslandsFloat[(int)overTiles[i, j] - 2000]);
+                            break;
                         default:
                             TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), TileDictionary.LavaFloat[(int)overTiles[i, j] - 2000]);
                             break;
@@ -1000,6 +1003,10 @@ public class StrategyMode : SceneBase
                             TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.SavannahFloat[tiletype.Key]);
                         break;
                     case StrategicTileType.smallIslands:
+                        if (type <= StrategicTileType.smallIslands || liquid_tile)
+                            TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.SmallIslandsFloat[tiletype.Key]);
+                        break;
+                    case StrategicTileType.fieldSmallIslands:
                         if (type <= StrategicTileType.smallIslands || liquid_tile)
                             TilemapLayers[counter].SetTile(new Vector3Int(x, y, 0), TileDictionary.SmallIslandsFloat[tiletype.Key]);
                         break;

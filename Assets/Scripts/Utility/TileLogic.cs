@@ -721,6 +721,8 @@ class StrategicTileLogic
 
         return conat_list;
 
+        // Checks what directions have tiles of different types.
+        // Makes modifications on type based on what side is the same type
         Dictionary<int, StrategicTileType> GetOverlayTypes(int direction)
         {
             Dictionary<int, StrategicTileType> true_types = new Dictionary<int, StrategicTileType>();
@@ -866,7 +868,8 @@ class StrategicTileLogic
                     true_types.Add(8, GetTileType(temp_vec1));
                     break;
                 case 9:
-                    //true_types.Add(State.World.Tiles[x,y]); // This is an empty space on the sprite sheet
+                    // This is an empty space on the sprite sheet
+                    // All further cases will be one higher than on the unity slices as unity does not slice empty sprites
                     break;
                 case 10:
                     temp_vec1 = GetPos(pos, Neighbor.East);

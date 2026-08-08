@@ -2867,6 +2867,13 @@ public class Actor_Unit
                         }
                     }
                 }
+                if (eff.Type == StatusEffectType.Gorging)
+                {
+                    if (PredatorComponent?.GetBulkOfPrey() > (Unit.GetStat(Stat.Stomach) / 12f * Unit.TraitBoosts.CapacityMult))
+                    {
+                        Unit.ApplyStatusEffect(StatusEffectType.Sleeping, eff.Strength, (int)eff.Strength);
+                    }
+                }
                 if (eff.Type == StatusEffectType.WillingPrey)
                 {
                     StatusEffect still = Unit.GetStatusEffect(StatusEffectType.WillingPrey);
@@ -2878,6 +2885,7 @@ public class Actor_Unit
                         }
                     }
                 }
+
                 if (eff.Type == StatusEffectType.Warping)
                 {
                     StatusEffect still = Unit.GetStatusEffect(StatusEffectType.WillingPrey);

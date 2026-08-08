@@ -1010,6 +1010,9 @@ public class MapEditor : SceneBase
                         case StrategicTileType.shallowWater:
                             TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.ShallowWaterFloat[(int)overTiles[i, j] - 2000]);
                             break;
+                        case StrategicTileType.fieldSmallIslands:
+                            TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.ShallowWaterFloat[(int)overTiles[i, j] - 2000]);
+                            break;
                         case StrategicTileType.smallIslands:
                             TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.SmallIslandsFloat[(int)overTiles[i, j] - 2000]);
                             break;
@@ -1045,9 +1048,7 @@ public class MapEditor : SceneBase
                                     TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.IceLiquidFloat[tiletype.Key]);
                                 break;
                             case StrategicTileType.shallowWater:
-                                if (StrategicTileType.shallowWater > State.World.Tiles[i, j])
-                                    TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.ShallowWaterLiquidFloat[tiletype.Key]);
-                                break;
+                            case StrategicTileType.fieldSmallIslands:
                             case StrategicTileType.smallIslands:
                                 if (StrategicTileType.shallowWater > State.World.Tiles[i, j])
                                     TilemapLayers[current_layer].SetTile(new Vector3Int(i, j, 0), State.GameManager.StrategyMode.TileDictionary.ShallowWaterLiquidFloat[tiletype.Key]);
