@@ -124,7 +124,7 @@ public class Unit
             if (!Config.StatBoostsAffectMaxHP)
             {
                 _maxHealth = Stats[(int)Stat.Endurance] * 2 + Stats[(int)Stat.Strength];
-                 return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
+                return (int)(_maxHealth * TraitBoosts.HealthMultiplier) + TempBoosts.HealthBoost;
             }
 
             int oldMax = _maxHealth;
@@ -633,7 +633,7 @@ public class Unit
 
         return size;
     }
-	
+
     public bool IsDead => (Health < 1);
     private PermanentBoosts _traitBoosts;
     internal PermanentBoosts TraitBoosts
@@ -1481,7 +1481,7 @@ public class Unit
         if (SavedCopy != null)
             SavedCopy.TimesKilled++;
         if (OriginalUnit != null)
-            RevertCopiedUnit();          
+            RevertCopiedUnit();
     }
 
     public void DrainExp(float exp)
@@ -1569,7 +1569,7 @@ public class Unit
     {
         get
         {
-            _healthPct = (float)Health / MaxHealth;
+            _healthPct = (float) Health / MaxHealth;
             return _healthPct;
         }
     }

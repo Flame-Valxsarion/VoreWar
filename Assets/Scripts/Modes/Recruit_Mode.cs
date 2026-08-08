@@ -521,7 +521,6 @@ public class Recruit_Mode : SceneBase
                 potionShop = null;
                 BuildShop();
                 break;
-
             case 50:
                 UpdateUnitInfoPanel();
                 break;
@@ -655,7 +654,7 @@ public class Recruit_Mode : SceneBase
                 UIUnitSprite sprite = obj.GetComponentInChildren<UIUnitSprite>();
                 Actor_Unit actor = new Actor_Unit(new Vec2i(0, 0), new Unit(1, village.VillagePopulation.Population[i].Race, 0, true));
                 TextMeshProUGUI text = obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-                var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
+                RaceTraits racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
                 text.text = $"{village.VillagePopulation.Population[i].Race}\nTotal: {village.VillagePopulation.Population[i].Population}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
                 sprite.UpdateSprites(actor);
             }
@@ -1924,7 +1923,7 @@ public class Recruit_Mode : SceneBase
                 UIUnitSprite sprite = obj.GetComponentInChildren<UIUnitSprite>();
                 Actor_Unit actor = new Actor_Unit(new Vec2i(0, 0), new Unit(1, village.VillagePopulation.Population[i].Race, 0, true));
                 TextMeshProUGUI text = obj.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
-                var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
+                RaceTraits racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
                 text.text = $"{village.VillagePopulation.Population[i].Race}\nAvailable: {village.VillagePopulation.Population[i].Population - village.VillagePopulation.Population[i].Hireables}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
                 sprite.UpdateSprites(actor);
                 Button button = obj.GetComponentInChildren<Button>();

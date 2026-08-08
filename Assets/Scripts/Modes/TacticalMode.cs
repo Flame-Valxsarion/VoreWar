@@ -487,7 +487,7 @@ public class TacticalMode : SceneBase
 
         DefectProcessor defectors = new DefectProcessor(armies[0], armies[1], village);
 
-        //convert armies
+        // convert armies
 
         List<Actor_Unit> attackers = new List<Actor_Unit>();
         List<Actor_Unit> defenders = new List<Actor_Unit>();
@@ -602,7 +602,7 @@ public class TacticalMode : SceneBase
 
         IsPlayerTurn = !AIAttacker;
 
-        if (!State.GameManager.PureTactical)//Apply Empire Traits to units that don't have them at the start of combat
+        if (!State.GameManager.PureTactical) // Apply Empire Traits to units that don't have them at the start of combat
         {
             foreach (Actor_Unit actor in attackers)
             {
@@ -686,7 +686,7 @@ public class TacticalMode : SceneBase
 
         ActivatePreBattleTraits();
 
-        if (!State.GameManager.PureTactical)//Apply Empire Traits to units that don't have them at the start of combat
+        if (!State.GameManager.PureTactical) // Apply Empire Traits to units that don't have them at the start of combat
         {
             foreach (Actor_Unit actor in attackers)
             {
@@ -2218,33 +2218,6 @@ public class TacticalMode : SceneBase
                     }
                 }
             }
-
-            //int decNum = Decorations[i, j];
-            //if (decNum >= 200)
-            //{
-
-            //}
-            //else if (Decorations[i, j] >= 100)
-            //{
-            //    if (DecorationTypes.)
-            //    {
-            //        FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassEnviroment[Decorations[i, j] - 100]);
-            //    }
-            //    else
-            //    {
-            //        var obj = Instantiate(State.GameManager.SpriteRendererPrefab, TerrainFolder).GetComponent<SpriteRenderer>();
-            //        obj.sprite = TileDictionary.GrassEnviromentSprites[Decorations[i, j] - 100];
-            //        obj.sortingOrder = 20000 - (30 * (i + (j * 3)));
-            //        obj.transform.position = new Vector3(i, j, 0);
-            //        if (Decorations[i, j] == 105 || Decorations[i, j] == 111)
-            //            obj.sortingOrder += 30;
-            //    }
-
-            //    //if (Decorations[i, j] == 105 || Decorations[i, j] == 111)
-            //    //    FrontSpriteTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassEnviroment[Decorations[i, j] - 100]);
-            //    //else
-            //    //    FrontTilemap.SetTile(new Vector3Int(i, j, 0), TileDictionary.GrassEnviroment[Decorations[i, j] - 100]);
-            //}
         }
 
         if (Buildings != null)
@@ -3828,8 +3801,8 @@ public class TacticalMode : SceneBase
                             {
                                 double spellDamage = spell.Damage(SelectedUnit, actor);
                                 spellDamage = SpellDamageMod(SelectedUnit, actor, spellDamage);
-                                actor.UnitSprite.ShowDamagedHealthBar(actor, spellDamage);
-                                string str = System.Math.Round(actor.GetMagicChance(SelectedUnit, CurrentSpell) * 100, 1) + "%\n-" + spellDamage;
+                                actor.UnitSprite.ShowDamagedHealthBar(actor, (int)spellDamage);
+                                string str = System.Math.Round(actor.GetMagicChance(SelectedUnit, CurrentSpell) * 100, 1) + "%\n-" + (int)spellDamage;
                                 StatusUI.HitRate.text = str;
                             }
                         }
@@ -3841,7 +3814,7 @@ public class TacticalMode : SceneBase
                     {
                         double spellDamage = spell.Damage(SelectedUnit, splashTarget);
                         spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
-                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
+                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, (int)spellDamage);
                     }
                 }
                 else if (spell.AOEType == AreaOfEffectType.RotatablePattern)
@@ -3850,7 +3823,7 @@ public class TacticalMode : SceneBase
                     {
                         double spellDamage = spell.Damage(SelectedUnit, splashTarget);
                         spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
-                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
+                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, (int)spellDamage);
                     }
                 }
                 else if (mouseLocation != null)
@@ -3859,7 +3832,7 @@ public class TacticalMode : SceneBase
                     {
                         double spellDamage = spell.Damage(SelectedUnit, splashTarget);
                         spellDamage = SpellDamageMod(SelectedUnit, splashTarget, spellDamage);
-                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, spellDamage);
+                        splashTarget.UnitSprite.ShowDamagedHealthBar(splashTarget, (int)spellDamage);
                     }
                 }
             }
@@ -3871,11 +3844,9 @@ public class TacticalMode : SceneBase
                 {
                     damMod *= 3;
                 }
-                if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) //For correct display of damage
+                if (SelectedUnit.Unit.HasTrait(Traits.Multifaceted) && SelectedUnit.Unit.IsHighestStat(Stat.Mind)) // For correct display of damage
                 {
-                    damMod += (int)Math.Round(target.Unit.GetStat(Stat.Mind) * 0.1f);
-
-
+                    damMod += target.Unit.GetStat(Stat.Mind) * 0.1;
                 }
                 return damMod;
             }
@@ -4584,35 +4555,6 @@ public class TacticalMode : SceneBase
         return actor.Unit.Side == defenderSide;
     }
 
-    //public void CheckAlignment(Actor_Unit childUnit, Actor_Unit parentUnit)
-    //{
-    //    if (parentUnit.Unit.Side == defenderSide)
-    //        DefenderConvert(childUnit);
-    //    else
-    //        AttackerConvert(childUnit);
-    //}
-
-    //void CheckAlignment(Actor_Unit childUnit, Actor_Unit parentUnit)
-    //{
-    //    if (!units.Contains(childUnit))
-    //    {
-    //        units.Add(childUnit);
-    //    }
-    //    if (childUnit.Unit.Side != parentUnit.Unit.Side && !childUnit.Unit.ImmuneToDefections)
-    //    {
-    //        childUnit.Unit.Side = parentUnit.Unit.Side;
-    //    }
-    //    if (armies[0].Units.Contains(parentUnit.Unit))
-    //    {
-    //        AttackerConvert(childUnit);
-    //    }
-    //    else
-    //    {
-    //        DefenderConvert(childUnit);
-    //    }
-    //    childUnit.UnitSprite.BlueColored = parentUnit.UnitSprite.BlueColored;
-    //}
-
     internal void DefenderConvert(Actor_Unit actor)
     {
         if (armies[1]?.Units.Contains(actor.Unit) ?? false || extraDefenders.Contains(actor))
@@ -5099,95 +5041,78 @@ public class TacticalMode : SceneBase
                 actor.Unit.SetSizeToDefault();
                 actor.Unit.TempBoosts.ResetAll();
                 actor.Unit.EnemiesKilledThisBattle = 0;
-                if (actor.Unit.IsDead && actor.Unit.Type != UnitType.Summon &&
-                    (actor.Unit.HasTrait(Traits.Eternal) || (actor.Unit.HasTrait(Traits.LuckySurvival) && State.Rand.Next(5) != 0) ||
-                    (actor.Unit.HasTrait(Traits.Reformer) && actor.KilledByDigestion) ||
-                    (actor.Unit.HasTrait(Traits.Revenant) && actor.KilledByDigestion == false) ||
-                    (actor.Unit.HasTrait(Traits.DeathCheater) && actor.Unit.TimesKilled <= 9 && (State.Rand.Next(10) >= (actor.Unit.TimesKilled - 1))) ||
-                    (actor.Unit.HasTrait(Traits.DeathCheater) && actor.Unit.TimesKilled >= 10 && (State.Rand.Next(10) == 0))
-                    ))
+                
+                if (actor.Unit.IsDead && actor.Unit.Type != UnitType.Summon)
                 {
-                    actor.Surrendered = false;
-                    actor.Unit.Health = actor.Unit.MaxHealth;
-                    if (actor.Unit.Side == defenderSide)
+                    bool reviveWithFullHealth =
+                    (
+                        actor.Unit.HasTrait(Traits.Eternal) ||
+                        (actor.Unit.HasTrait(Traits.LuckySurvival) && State.Rand.Next(5) != 0) ||
+                        (actor.Unit.HasTrait(Traits.Reformer) && actor.KilledByDigestion) ||
+                        (actor.Unit.HasTrait(Traits.Revenant) && actor.KilledByDigestion == false) ||
+                        (actor.Unit.HasTrait(Traits.DeathCheater) && actor.Unit.TimesKilled <= 9 && (State.Rand.Next(10) >= (actor.Unit.TimesKilled - 1))) ||
+                        (actor.Unit.HasTrait(Traits.DeathCheater) && actor.Unit.TimesKilled >= 10 && (State.Rand.Next(10) == 0))
+                    );
+                    bool reviveWithOneHealth = actor.Unit.HasTrait(Traits.CloseCall) && actor.KilledByDigestion == false;
+                    bool transmigrate = actor.Unit.Type != UnitType.Leader && actor.Unit.Type != UnitType.SpecialMercenary && (actor.Unit.HasTrait(Traits.Transmigration) || actor.Unit.HasTrait(Traits.InfiniteTransmigration)) && actor.KilledByDigestion;
+                    bool reincarnate = actor.Unit.Type != UnitType.Leader && actor.Unit.Type != UnitType.SpecialMercenary && (actor.Unit.HasTrait(Traits.Reincarnation) || actor.Unit.HasTrait(Traits.InfiniteReincarnation));
+                    
+                    if (reviveWithFullHealth || reviveWithOneHealth)
                     {
-                        if (garrison.Contains(actor) && remainingDefenders > 0)
-                        {
+                        actor.Surrendered = false;
+                        if (reviveWithFullHealth)
                             actor.Unit.Health = actor.Unit.MaxHealth;
-                        }
                         else
-                        {
-                            retreatedDefenders.Add(actor.Unit);
-                            armies[1]?.Units.Remove(actor.Unit);
-                            village?.GetRecruitables().Remove(actor.Unit);
-                        }
-                    }
-                    else
-                    {
-                        retreatedAttackers.Add(actor.Unit);
-                        armies[0].Units.Remove(actor.Unit);
-                    }
-                    actor.PredatorComponent?.PurgePrey();
-                    units.Remove(actor);
-                }
-                else if (actor.Unit.IsDead && actor.Unit.Type != UnitType.Summon && (actor.Unit.HasTrait(Traits.CloseCall)) && actor.KilledByDigestion == false)
-                {
-                    actor.Surrendered = false;
-                    actor.Unit.Health = 1;
-                    if (actor.Unit.Side == defenderSide)
-                    {
-                        if (garrison.Contains(actor) && remainingDefenders > 0)
-                        {
                             actor.Unit.Health = 1;
+                        if (actor.Unit.Side == defenderSide)
+                        {
+                            if (!garrison.Contains(actor) && remainingDefenders == 0)
+                            {
+                                retreatedDefenders.Add(actor.Unit);
+                                armies[1]?.Units.Remove(actor.Unit);
+                                village?.GetRecruitables().Remove(actor.Unit);
+                            }
                         }
                         else
                         {
-                            retreatedDefenders.Add(actor.Unit);
-                            armies[1]?.Units.Remove(actor.Unit);
-                            village?.GetRecruitables().Remove(actor.Unit);
+                            retreatedAttackers.Add(actor.Unit);
+                            armies[0].Units.Remove(actor.Unit);
                         }
-
+                        actor.PredatorComponent?.PurgePrey();
+                        units.Remove(actor);
                     }
-                    else
+                    else if (transmigrate)
                     {
-                        retreatedAttackers.Add(actor.Unit);
-                        armies[0].Units.Remove(actor.Unit);
-                    }
-                    actor.PredatorComponent?.PurgePrey();
-                    units.Remove(actor);
-                }
-                else if ((actor.Unit.HasTrait(Traits.Transmigration) || actor.Unit.HasTrait(Traits.InfiniteTransmigration)) && actor.KilledByDigestion && actor.Unit.IsDead
-                    && actor.Unit.Type != UnitType.Summon && actor.Unit.Type != UnitType.Leader && actor.Unit.Type != UnitType.SpecialMercenary)
-                {
-                    if (State.World.MainEmpires != null)
-                    {
-                        Race race = actor.Unit.KilledBy.Race;
-                        if (State.World.Reincarnators == null)
-                            State.World.Reincarnators = new List<Reincarnator>();
-                        if (!State.World.Reincarnators.Any(rc => rc.PastLife == actor.Unit))
+                        if (State.World.MainEmpires != null)
                         {
-                            actor.Unit.RemoveTrait(Traits.Transmigration);
-                            State.World.Reincarnators.Add(new Reincarnator(actor.Unit, race, true));
-                            State.World.GetEmpireOfSide(actor.Unit.Side)?.Reports.Add(new StrategicReport($"{actor.Unit.Name} will reincarnate as a {InfoPanel.RaceSingular(actor.Unit.KilledBy)}.", new Vec2(0, 0)));
-                        }
-                    }
-                }
-                else if ((actor.Unit.HasTrait(Traits.Reincarnation) || actor.Unit.HasTrait(Traits.InfiniteReincarnation)) && actor.Unit.IsDead
-                    && actor.Unit.Type != UnitType.Summon && actor.Unit.Type != UnitType.Leader && actor.Unit.Type != UnitType.SpecialMercenary)
-                {
-                    if (State.World.MainEmpires != null)
-                    {
-                        List<Race> activeRaces = StrategicUtilities.GetAllUnits(false).ConvertAll(u => u.Race).Distinct().ToList();
-                        if (activeRaces.Any())
-                        {
-                            Race race = activeRaces[State.Rand.Next(activeRaces.Count)];
+                            Race race = actor.Unit.KilledBy.Race;
                             if (State.World.Reincarnators == null)
                                 State.World.Reincarnators = new List<Reincarnator>();
                             if (!State.World.Reincarnators.Any(rc => rc.PastLife == actor.Unit))
                             {
-                                actor.Unit.RemoveTrait(Traits.Reincarnation);
-                                State.World.Reincarnators.Add(new Reincarnator(actor.Unit, race));
-                                State.World.GetEmpireOfSide(actor.Unit.Side)?.Reports.Add(new StrategicReport($"{actor.Unit.Name} will reincarnate as a random race.", new Vec2(0, 0)));
+                                actor.Unit.RemoveTrait(Traits.Transmigration);
+                                State.World.Reincarnators.Add(new Reincarnator(actor.Unit, race, true));
+                                State.World.GetEmpireOfSide(actor.Unit.Side)?.Reports.Add(new StrategicReport($"{actor.Unit.Name} will reincarnate as a {InfoPanel.RaceSingular(actor.Unit.KilledBy)}.", new Vec2(0, 0)));
+                            }
+                        }
+                    }
+                    else if (reincarnate)
+                    {
+                        if (State.World.MainEmpires != null)
+                        {
+                            List<Race> activeRaces = StrategicUtilities.GetAllUnits(false).ConvertAll(u => u.Race).Distinct()
+                                .ToList();
+                            if (activeRaces.Any())
+                            {
+                                Race race = activeRaces[State.Rand.Next(activeRaces.Count)];
+                                if (State.World.Reincarnators == null)
+                                    State.World.Reincarnators = new List<Reincarnator>();
+                                if (!State.World.Reincarnators.Any(rc => rc.PastLife == actor.Unit))
+                                {
+                                    actor.Unit.RemoveTrait(Traits.Reincarnation);
+                                    State.World.Reincarnators.Add(new Reincarnator(actor.Unit, race));
+                                    State.World.GetEmpireOfSide(actor.Unit.Side)?.Reports.Add(new StrategicReport($"{actor.Unit.Name} will reincarnate as a random race.", new Vec2(0, 0)));
+                                }
                             }
                         }
                     }

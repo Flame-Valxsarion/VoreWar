@@ -655,7 +655,8 @@ public class UnitCustomizer
                 buttons[(int)ButtonTypes.BodyAccentTypes1].Label.text = "Wing Type";
                 buttons[(int)ButtonTypes.BodyAccentTypes2].Label.text = "Horn Type";
                 buttons[(int)ButtonTypes.BeardStyle].Label.text = "Inner Wing Color";
-                buttons[(int)ButtonTypes.MouthType].gameObject.SetActive(false);
+                buttons[(int)ButtonTypes.Furry].Label.text = "Anthro/Demi Toggle";
+                buttons[(int)ButtonTypes.MouthType].gameObject.SetActive(true);
                 buttons[(int)ButtonTypes.HatType].gameObject.SetActive(false);
                 buttons[(int)ButtonTypes.BodyAccentTypes3].gameObject.SetActive(false);
                 buttons[(int)ButtonTypes.BodyAccentTypes4].gameObject.SetActive(false);

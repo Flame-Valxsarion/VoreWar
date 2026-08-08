@@ -91,6 +91,7 @@ public class HoveringTooltip : MonoBehaviour
         }
         return desc;
     }
+
     string GetTraitDescription(string[] words)
     {
         if (Enum.TryParse(words[2], out Traits trait))
@@ -147,8 +148,7 @@ public class HoveringTooltip : MonoBehaviour
         string WLLDef = $"Affects vore defense, escape rate, mana capacity, and magic defense\n{StatData(Stat.Will)}";
         string MNDDef = $"Affects spell damage, success odds, and duration with a minor amount of mana capacity\n{StatData(Stat.Mind)}";
         string ENDDef = $"Affects total health, also reduces damage from acid, has a minor role in escape chance.\n{StatData(Stat.Endurance)}";
-        string STMDef = $"Affects stomach capacity and digestion rate. Also helps keep prey from escaping.\n{StatData(Stat.Stomach)}\n" +
-                        (State.World?.ItemRepository == null ? $"" : $"{(!unit.Predator ? "" : $"Capacity: {(actor?.PredatorComponent != null ? $"{Math.Round(actor.PredatorComponent.GetBulkOfPrey(), 2)} / " : "")}{Math.Round(State.RaceSettings.GetStomachSize(unit.Race) * (unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult), 1)}")}");
+        string STMDef = $"Affects stomach capacity and digestion rate. Also helps keep prey from escaping.\n{StatData(Stat.Stomach)}\n" + (State.World?.ItemRepository == null ? $"" : $"{(!unit.Predator ? "" : $"Capacity: {(actor?.PredatorComponent != null ? $"{Math.Round(actor.PredatorComponent.GetBulkOfPrey(), 2)} / " : "")}{Math.Round(State.RaceSettings.GetStomachSize(unit.Race) * (unit.GetStat(Stat.Stomach) / 12f * unit.TraitBoosts.CapacityMult), 1)}")}");
         string LDRDef = $"Provides a stat boost for all friendly units\nStat value: {unit.GetStatBase(Stat.Leadership)}";
         if (Enum.TryParse(words[2], out Stat stat) && unit != null)
         {
@@ -199,9 +199,9 @@ public class HoveringTooltip : MonoBehaviour
             race = unit.Race;
             return UnitDesc();
         }
-        
+
         if (Enum.TryParse(words[2], out Traits trait))
-        {            
+        {
             if (trait == Traits.Multifaceted)
             {
                 return GetTraitDataWithActorData(trait, unit, actor);
@@ -892,7 +892,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.DyingStrike:
                 return "When unit is killed in melee or digested does has a 1/3 chance of hitting with a melee attack against the aggressor, 3/4 hit chance if vored.";
             case Traits.DimensionalAntilock:
-                return "This unit is not completely fixed to the space around it. \n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
+                return "This unit is not completely fixed to the space around it.\n(Allows using the Dimension Shift ability once per battle, which attempts to teleport the User to a random open tile within 20 tiles.)";
             case Traits.Hoarder:
                 return "Race increase the income of a village by 0.1% per population.";
             case Traits.NaturalCaster:
@@ -937,7 +937,7 @@ public class HoveringTooltip : MonoBehaviour
         return "<b>This trait needs a tooltip!</b>";
     }
 
-    // For traits that need more informaiton to adjust their tooltip. 
+    // For traits that need more information to adjust their tooltip. 
     public static string GetTraitDataWithActorData(Traits trait, Unit unit, Actor_Unit actor)
     {
         switch (trait)
@@ -1001,7 +1001,7 @@ public class HoveringTooltip : MonoBehaviour
         }
         return trait.ToString();
     }
-    
+
     public static string GetAIData(RaceAI ai)
     {
         switch (ai)

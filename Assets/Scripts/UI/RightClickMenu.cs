@@ -132,7 +132,6 @@ public class RightClickMenu : MonoBehaviour
     public void CreateButtons(Actor_Unit actor, Actor_Unit target)
     {
         bool rubCreated = false;
-        //var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
         int currentButton = 0;
         const int ButtonCount = MaxButtons;
         if (Buttons == null)
@@ -391,7 +390,6 @@ public class RightClickMenu : MonoBehaviour
             currentButton = AltVore(actor, currentButton, SpecialAction.AnalVore, data);
             currentButton = AltVore(actor, currentButton, SpecialAction.TailVore, data);
             currentButton = AltVore(actor, currentButton, SpecialAction.BladderVore, data);
-
         }
 
         return currentButton;
@@ -551,7 +549,6 @@ public class RightClickMenu : MonoBehaviour
             currentButton = AltVorePounce(data, SpecialAction.Unbirth, currentButton);
             currentButton = AltVorePounce(data, SpecialAction.TailVore, currentButton);
             currentButton = AltVorePounce(data, SpecialAction.BladderVore, currentButton);
-
         }
         pounceNeedsRefresh = false;
         ActivatePounceButtons(currentButton);

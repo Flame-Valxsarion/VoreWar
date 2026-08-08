@@ -725,7 +725,7 @@ public class CreateStrategicGame : MonoBehaviour
             TextMeshProUGUI dcosttext = obj.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI upkeeptext = obj.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
             obj.GetComponentInChildren<UnitInfoPanel>().Unit = actor.Unit;
-            var racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
+            RaceTraits racePar = RaceParameters.GetRaceTraits(actor.Unit.Race);
             text.text = $"{(Race)i}\nBody Size: {State.RaceSettings.GetBodySize(actor.Unit.Race)}\nBase Stomach Size: {State.RaceSettings.GetStomachSize(actor.Unit.Race)}\nFavored Stat: {State.RaceSettings.GetFavoredStat(actor.Unit.Race)}\nDefault Traits:\n{State.RaceSettings.ListTraits(actor.Unit.Race)}";
             sprite.UpdateSprites(actor);
             dcosttext.text = (State.RaceSettings.GetDeployCost(actor.Unit.Race) * actor.Unit.TraitBoosts.DeployCostMult).ToString();

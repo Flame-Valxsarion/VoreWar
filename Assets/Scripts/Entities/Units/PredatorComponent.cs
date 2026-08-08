@@ -354,10 +354,8 @@ public class PredatorComponent
                 break;
             case PreyLocation.bladder:
                 foreach (Prey unit in bladder)
-                {
                     if (unit.Unit.IsDead != alive)
                         prey += 1;
-                }
                 break;
             case PreyLocation.leftBreast:
                 foreach (Prey unit in leftBreast)
@@ -577,21 +575,6 @@ public class PredatorComponent
 
         return false;
     }
-
-    /// <summary>
-    /// Used to check for whether a unit of specified race is present in eaten prey.
-    /// </summary>
-    /// <param name="race">The race which is being looked for.</param>
-    /// <returns></returns>
-    //public bool IsUnitOfSpecificationInPrey(Race race)
-    //{
-    //    foreach (Prey p in prey)
-    //    {
-    //        if (p.Unit.Race == race)
-    //            return true;
-    //    }
-    //    return false;
-    //}
 
     /// <summary>
     /// Used to check for whether a unit of specified race is present in eaten prey and either alive or dead depending on the boolean given.
@@ -909,7 +892,7 @@ public class PredatorComponent
         return target;
     }
 
-    public void FreeRandomPreyNow()//Code for prey's hex spell. Selects a random living prey that a pred has consumed and releases them, prioritses hostiles units to the pred.
+    public void FreeRandomPreyNow() // Code for prey's hex spell. Selects a random living prey that a pred has consumed and releases them, prioritizes units hostile to the pred.
     {
         List<Prey> preyUnits = new List<Prey>();
         preyUnits.AddRange(prey);
@@ -1023,11 +1006,8 @@ public class PredatorComponent
     {
         var location = preyUnit.Location;
         foreach (IVoreCallback callback in PopulateCallbacks(preyUnit).OrderBy((vt) => vt.ProcessingPriority))
-        {
-
             if (!callback.OnSwallow(preyUnit, actor, location))
                 return;
-        }
     }
 
     void AddPrey(Prey preyUnit, PreyLocation location)
@@ -1307,7 +1287,7 @@ public class PredatorComponent
                 actor.Damage(finalDamage, false, DamageAccumulator.Lethality);
             }
         }
-        DamageAccumulator.Deactivate(); // Executed (with custom Tactical log messages) below.
+        DamageAccumulator.Deactivate(); // Executed (with custom Tactical log messages) above.
         UpdateFullness();
     }
 
@@ -1524,7 +1504,7 @@ public class PredatorComponent
             preyUnit.TurnsSinceLastDamage = 0;
             if (preyUnit.Actor.Unit.HasTrait(Traits.MutualBiology))
             {
-                TacticalUtilities.MutuallyDamageUnits(preyUnit.Actor, preyDamage);
+                TacticalUtilities.MutuallyDamageUnits(preyUnit.Actor, (int)preyDamage);
             }
         }
 
@@ -1554,6 +1534,7 @@ public class PredatorComponent
                     Prey newPrey = new Prey(aliveSubUnits[i].Actor, actor, aliveSubUnits[i].SubPrey);
                     PreyLocation oldLocation = newPrey.Location;
                     AddPrey(newPrey, Location(preyUnit));
+                    unit.GiveScaledExp(4 * newPrey.Unit.ExpMultiplier, unit.Level - newPrey.Unit.Level, true);
                     preyUnit.SubPrey.Remove(aliveSubUnits[i]);
                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Sensing that <b>{preyUnit.Unit.Name}</b> is dead, <b>{newPrey.Unit.Name}</b> seizes the opportunity to claw {LogUtilities.GPPHis(newPrey.Unit)} way out of {LogUtilities.GPPHis(preyUnit.Unit)} {PreyLocStrings.ToSyn(oldLocation)}, only to find that now they are stuck in <b>{actor.Unit.Name}</b>'s {PreyLocStrings.ToSyn(newPrey.Location)}!");
                 }
@@ -1840,7 +1821,7 @@ public class PredatorComponent
 
     public void CreateSpawn(Race race, int side, float experience, bool forced = false)
     {
-        Spawn spawnUnit = new Spawn(side, race, (int)(experience));
+        Spawn spawnUnit = new Spawn(side,race,(int)(experience));
         Actor_Unit spawnActor = State.GameManager.TacticalMode.AddUnitToBattle(spawnUnit, actor);
         State.GameManager.TacticalMode.DirtyPack = true;
         if (forced)
@@ -2059,6 +2040,7 @@ public class PredatorComponent
     void CheckPredTraitAbsorption(Prey preyUnit)
     {
         bool updated = false;
+        bool raceUpdated = true;
         if (unit.HasTrait(Traits.Extraction))
         {
             var possibleTraits = preyUnit.Unit.GetTraits.Where(s => unit.GetTraits.Contains(s) == false && State.AssimilateList.CanGet(s)).ToArray();
@@ -2291,7 +2273,9 @@ public class PredatorComponent
                 State.GameManager.SoundManager.PlayFart(actor);
             }
 
-            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith) { }
+            if (actor.Unit.HasTrait(Traits.TotalAbsorption) || preyUnit.Unit.Race == Race.Iliijiith)
+            {
+            }
             else if (Config.Scat && preyUnit.ScatDisabled == false)
             {
                 State.GameManager.SoundManager.PlayAbsorb(location, actor);
@@ -2473,9 +2457,7 @@ public class PredatorComponent
         Fullness = fullnessFactor * fullness / stomachSize;
         TailFullness = fullnessFactor * tailFullness / stomachSize;
         WombFullness = fullnessFactor * wombFullness / stomachSize;
-
         BladderFullness = fullnessFactor * bladderFullness / stomachSize;
-
         ExclusiveStomachFullness = fullnessFactor * exclusiveStomachFullness / stomachSize;
         Stomach2ndFullness = fullnessFactor * stomach2ndFullness / stomachSize;
         CombinedStomachFullness = fullnessFactor * (stomach2ndFullness + stomachFullness) / stomachSize;
@@ -2872,7 +2854,7 @@ public class PredatorComponent
             float v = target.GetDevourChance(actor, skillBoost: boost);
             if (r < v)
             {
-                target = PreformNearbyTraitCheck(target);
+                target = PerformNearbyTraitCheck(target);
                 PerformConsume(target, action, preyType, v, delay);
                 if (actor.Unit.FixedSide == TacticalUtilities.GetMindControlSide(target.Unit))
                 {
@@ -2934,7 +2916,6 @@ public class PredatorComponent
                         actor.Unit.ApplyStatusEffect(StatusEffectType.Predation, 0.2f, 2);
                     }
                 }
-
             }
 
             if (bit == false && (target.Surrendered || ((unit.HasTrait(Traits.FriendlyStomach) || unit.HasTrait(Traits.Endosoma)) && (target.Unit.FixedSide == unit.GetApparentSide(target.Unit))) || target.Unit.GetStatusEffect(StatusEffectType.Hypnotized)?.Strength == actor.Unit.FixedSide))
@@ -2963,7 +2944,7 @@ public class PredatorComponent
             actor.Movement = 0;
     }
 
-    private Actor_Unit PreformNearbyTraitCheck(Actor_Unit target)
+    private Actor_Unit PerformNearbyTraitCheck(Actor_Unit target)
     {
         Actor_Unit ret = target;
         foreach (Actor_Unit checkedunit in TacticalUtilities.UnitsWithinTiles(actor.Position, 3))
@@ -3574,7 +3555,6 @@ public class PredatorComponent
                     return preyUnit;
                 }
             }
-
         }
         if (State.RaceSettings.GetVoreTypes(actor.Unit.Race).Contains(VoreType.Oral))
         {
@@ -4582,7 +4562,7 @@ public class PredatorComponent
                             if (unit.Race == Race.Youko)
                                 State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{unit.Name}</b> stands there, minding {LogUtilities.GPPHis(unit)} own business, <b>{forcePrey.Unit.Name}</b> comes up behind {LogUtilities.GPPHim(unit)} and forcibly wraps the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails around {LogUtilities.GPPHimself(forcePrey.Unit)}{LogUtilities.GetRandomStringFrom(".", $", and when <b>{unit.Name}</b> tries to unfurl {LogUtilities.GPPHis(unit)} tails, <b>{forcePrey.Unit.Name}</b> simply holds on tighter.")}");
                             else if (unit.Race == Race.Terrorbird)
-                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} decent in the crop")}.");
+                                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} descent in the crop")}.");
                             else if (unit.Race == Race.Bees)
                                 State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> baits <b>{unit.Name}</b> into trying to sting {LogUtilities.GPPHim(forcePrey.Unit)}, and then, slightly painfully for the {LogUtilities.GetRaceDescSingl(unit)}, pulls the stinger open and goes inside.");
                             else
@@ -5056,7 +5036,7 @@ public class PredatorComponent
                                 if (unit.Race == Race.Youko)
                                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"As <b>{unit.Name}</b> stands there, minding {LogUtilities.GPPHis(unit)} own business, <b>{forcePrey.Unit.Name}</b> comes up behind {LogUtilities.GPPHim(unit)} and forcibly wraps the {LogUtilities.ApostrophizeWithOrWithoutS(LogUtilities.GetRaceDescSingl(unit))} tails around {LogUtilities.GPPHimself(forcePrey.Unit)}{LogUtilities.GetRandomStringFrom(".", $", and when <b>{unit.Name}</b> tries to unfurl {LogUtilities.GPPHis(unit)} tails, <b>{forcePrey.Unit.Name}</b> simply holds on tighter.")}");
                                 else if (unit.Race == Race.Terrorbird)
-                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} decent in the crop")}.");
+                                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> climbs up onto <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> back, as though to ride the {LogUtilities.GetRaceDescSingl(unit)}, but instead, {LogUtilities.GPPHe(forcePrey.Unit)} use{LogUtilities.SIfSingular(forcePrey.Unit)} {LogUtilities.GPPHis(forcePrey.Unit)} position to force open <b>{LogUtilities.ApostrophizeWithOrWithoutS(unit.Name)}</b> beak, before quickly flipping {LogUtilities.GPPHimself(forcePrey.Unit)} over and into it, sliding down before {LogUtilities.GetRandomStringFrom($"suddenly finding {LogUtilities.GPPHimself(forcePrey.Unit)} stuck in the bird's crop, rather than the stomach", $"splaying out to stop {LogUtilities.GPPHis(forcePrey.Unit)} descent in the crop")}.");
                                 else if (unit.Race == Race.Bees)
                                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{forcePrey.Unit.Name}</b> baits <b>{unit.Name}</b> into trying to sting {LogUtilities.GPPHim(forcePrey.Unit)}, and then, slightly painfully for the {LogUtilities.GetRaceDescSingl(unit)}, pulls the stinger open and goes inside.");
                                 else

@@ -828,7 +828,7 @@ Does not retroactively affect already created units.";
             case 344:
                 return "Sets the leader's army to 0 MP upon respawning. (Helps the AI not run it down when an enemy army is nearby)";
             case 345:
-                return "Disables the potion system. (Frees up a lot of AI income)";
+                return "Enables the potion system and shop. (Takes up a lot of AI income)";
             case 346:
                 return "Enables wandering clusters of Iliijiith.";
             case 347:

@@ -27,8 +27,6 @@ class Prey
     [OdinSerialize]
     public bool ScatDisabled { get; set; }
 
-
-
     [OdinSerialize]
     public List<Traits> SharedTraits;
 

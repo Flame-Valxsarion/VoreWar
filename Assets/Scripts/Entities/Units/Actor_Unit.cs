@@ -59,7 +59,7 @@ public class Actor_Unit
     public Unit Unit { get; private set; }
     [OdinSerialize]
     private Vec2i _position;
-	public Vec2i Position { get => SelfPrey?.Predator?.Position ?? _position; private set => _position = value; }
+    public Vec2i Position { get => SelfPrey?.Predator?.Position ?? _position; private set => _position = value; }
     [OdinSerialize]
     public int Movement;
     [OdinSerialize]
@@ -224,14 +224,14 @@ public class Actor_Unit
             Movement = 0;
             Slimed = false;
         }
-        else if (Unit.GetStatusEffect(StatusEffectType.Glued) != null)
-        {
-            Movement = 2;
-            Slimed = false;
-        }
         else if ((Unit.GetStatusEffect(StatusEffectType.Webbed) != null) || (Unit.GetStatusEffect(StatusEffectType.Snared) != null))
         {
             Movement = 1;
+            Slimed = false;
+        }
+        else if (Unit.GetStatusEffect(StatusEffectType.Glued) != null)
+        {
+            Movement = 2;
             Slimed = false;
         }
         else if (Unit.GetStatusEffect(StatusEffectType.Staggering) != null)
@@ -244,7 +244,7 @@ public class Actor_Unit
             Movement = CurrentMaxMovement() / 2;
             Slimed = false;
         }
-        else if (TurnsSlacking >= 1)
+        else if (TurnsSlacking >= 1) 
         {
             Movement = 0;
             TurnsSlacking--;
@@ -826,9 +826,13 @@ public class Actor_Unit
             return 1f;
     }
 
-    public float GetPureStatClashChance(int attackStat, int defenseStat, float shift) // generic AF
+    public float GetPureStatClashChance(float attackScore, float defenseScore, float shift)
     {
-        return (float)attackStat / (attackStat + (defenseStat * (1 + shift)));
+        if (shift > 0)
+            defenseScore *= 1 + shift;
+        else
+            attackScore *= 1 - shift;
+        return attackScore / (attackScore + defenseScore);
     }
 
     internal float GetMagicChance(Actor_Unit attacker, Spell currentSpell, float modifier = 0, Stat stat = Stat.Mind)
@@ -847,36 +851,6 @@ public class Actor_Unit
         float shift = Unit.TraitBoosts.Incoming.MagicShift + attacker.Unit.TraitBoosts.Outgoing.MagicShift + modifier + TagConditionChecker.ApplyTagEffect(Unit, attacker.Unit, UnitTagModifierEffect.MagicShift);
         return (float)attackStat / (attackStat + (defenseStat * (1 + shift)));
     }
-
-    //public float GetMeleeChance(Actor_Unit attacker, bool includeSecondaries = false)
-    //{
-    //    float attackerScore = 2 * attacker.Unit.GetStat(Stat.Strength) + attacker.Unit.GetStat(Stat.Dexterity);
-    //    float defenderScore = 2 * Unit.GetStat(Stat.Agility) * (15 / (BodySize() + 5) / (1 + (PredatorComponent?.Fullness ?? 0) * Unit.TraitBoosts.DodgeLossFromWeightMultiplier * 5 / Unit.GetStat(Stat.Strength)));
-    //    if (Unit.GetStatusEffect(StatusEffectType.Clumsiness) != null)
-    //    {
-    //        defenderScore *= Unit.GetStatusEffect(StatusEffectType.Clumsiness).Strength;
-    //    }
-    //    if (attacker.Intimidated)
-    //        attackerScore *= .8f;
-    //    foreach (IPhysicalDefenseOdds trait in Unit.PhysicalDefenseOdds)
-    //    {
-    //        trait.PhysicalDefense(this, ref defenderScore);
-    //    }
-    //    float odds = attackerScore / (attackerScore + defenderScore);
-    //    odds *= Unit.TraitBoosts.FlatHitReduction;
-    //    if (odds < 20)
-    //        odds = 20;
-    //    if (Config.BoostedAccuracy)
-    //        odds = 100 - ((100 - odds) * .5f);
-    //    if (includeSecondaries)
-    //    {
-    //        if (Unit.HasTrait(Traits.Dazzle))
-    //        {
-    //            odds *= 1 - WillCheckOdds(attacker, this);
-    //        }
-    //    }
-    //    return odds / 100;
-    //}
 
     public float GetAttackChance(Actor_Unit attacker, bool ranged, bool includeSecondaries = false, float mod = 0)
     {
@@ -1221,23 +1195,6 @@ public class Actor_Unit
         return damage;
     }
 
-    ///// <summary>
-    ///// Tells if the unit is able to move at all. Attackers should use TacticalUtilities.FreeSpaceAroundTaget
-    ///// </summary>
-    //public bool Surrounded()
-    //{
-    //    Vec2i p = new Vec2i(0, 0);
-    //    for (int i = 0; i < 8; i++)
-    //    {
-    //        p = GetPos(i);
-    //        if (TacticalUtilities.OpenTile(p.x, p.y, this))
-    //        {
-    //            return false;
-    //        }
-    //    }
-    //    return true;
-    //}
-
     public Vec2i PounceAt(Actor_Unit target)
     {
         if (Movement < 2 || (!target.UnitSprite.isActiveAndEnabled && State.World.IsNight))
@@ -1396,7 +1353,7 @@ public class Actor_Unit
         Mode = DisplayMode.SpecialAttack;
         animationUpdateTime = 1;
         float movementBonus = Movement / MaxMovement();
-        double damage = WeaponDamageAgainstTarget(target, false) + (int)Math.Round(WeaponDamageAgainstTarget(target, false) * movementBonus);
+        double damage = WeaponDamageAgainstTarget(target, false) * (1 + movementBonus);
         if (damage >= target.Unit.Health)
             damage = target.Unit.Health - 1;
         if (target.Defend(this, damage, false, out float chance))
@@ -1702,7 +1659,7 @@ public class Actor_Unit
                 grazechance = GrazeCheck(this, target);
             }
             grazechance += Unit.TraitBoosts.Outgoing.GrazeRateShift - target.Unit.TraitBoosts.Incoming.GrazeRateShift;
-            grazechance *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.GrazeRateShift);
+            grazechance += TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.GrazeRateShift);
 
             if (State.Rand.NextDouble() < grazechance)
             {
@@ -1719,7 +1676,7 @@ public class Actor_Unit
                 critchance = CritCheck(this, target);
             }
             critchance += Unit.TraitBoosts.Outgoing.CritRateShift - target.Unit.TraitBoosts.Incoming.CritRateShift;
-            critchance *= TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.CritRateShift);
+            critchance += TagConditionChecker.ApplyTagEffect(Unit, target.Unit, UnitTagModifierEffect.CritRateShift);
             if (State.Rand.NextDouble() < critchance)
             {
                 float calculatedCritDamage = Unit.TraitBoosts.Outgoing.CritDamageMult * target.Unit.TraitBoosts.Incoming.CritDamageMult;
@@ -1802,7 +1759,7 @@ public class Actor_Unit
                             target.Unit.RevertCopiedUnit();
                         }
                     }
-                    if (Unit.GetStatusEffect(StatusEffectType.Sharpness) != null)                  
+                    if (Unit.GetStatusEffect(StatusEffectType.Sharpness) != null)
                         Unit.RemoveStackStatus(StatusEffectType.Sharpness, Unit.GetStatusEffect(StatusEffectType.Sharpness).Duration / 2);
 
                     TacticalGraphicalEffects.CreateProjectile(this, target);
@@ -2193,14 +2150,14 @@ public class Actor_Unit
             {
                 Unit.TraitBoosts.Incoming.MagicDamage *= 1.50f;
             }
-            damage = (damage * attacker.Unit.TraitBoosts.Outgoing.MagicDamage * Unit.TraitBoosts.Incoming.MagicDamage * TagConditionChecker.ApplyTagEffect(attacker.Unit, Unit, UnitTagModifierEffect.MagicDamageMult));
+            damage *= 1 + attacker.Unit.TraitBoosts.Outgoing.MagicDamage * Unit.TraitBoosts.Incoming.MagicDamage * TagConditionChecker.ApplyTagEffect(attacker.Unit, Unit, UnitTagModifierEffect.MagicDamageMult);
             if (attacker.Unit.HasTrait(Traits.Multifaceted) && attacker.Unit.IsHighestStat(Stat.Mind))
             {
-                damage += Math.Round(Unit.GetStat(Stat.Mind) * 0.1f);
+                damage += Unit.GetStat(Stat.Mind) * 0.1;
             }
             if (attacker.Unit.HasTrait(Traits.ManaBurn))
             {
-                if (!Unit.SpendMana( (int)damage / 2))
+                if (!Unit.SpendMana((int)(damage / 2)))
                 {
                     damage += damage / 2; 
                 }
@@ -2909,9 +2866,6 @@ public class Actor_Unit
 
     public void NewTurn()
     {
-        RubCount = 0;
-        TurnsSinceLastDamage++;
-        
         AIAvoidEat--;
 
         EquipmentFunctions.TickCoolDown(Unit, EquipmentType.RechargeTactical);
@@ -2923,13 +2877,12 @@ public class Actor_Unit
         if (SelfPrey == null) // Restore stamina and proc regen if the unit isn't vored
         {
             Unit.RestoreStamPct(0.1f);
-            Unit.Heal(Unit.TraitBoosts.HealthRegen);
         }
         UnitSprite.UpdateHealthBar(this);
         TurnsSinceLastParalysis++;
         if (Targetable && Visible && Surrendered == false && Fled == false)
             RestoreMP();
-        
+
         DamageAccumulator.Activate(this);
         TickTacticalStatusEffects();
         DamageAccumulator.AddDamage(-Unit.TraitBoosts.HealthRegen);
@@ -2947,12 +2900,19 @@ public class Actor_Unit
             RampStacks += (Config.DigestionRampLoss >= 0 ? 1 : -1) / (Config.DigestionRampTurn == 0 ? 1 : Config.DigestionRampTurn);
 
         NewTurnPostMPTraits();
+
+        if (Unit.GetStatusEffect(StatusEffectType.Agony) != null)
+        {
+            StatusEffect eff = Unit.GetStatusEffect(StatusEffectType.Agony);
+            int totalDamage = (int)Math.Round(eff.Strength / eff.Duration);
+            Damage(totalDamage, true);
+            eff.Strength -= totalDamage;
+        }
     }
 
     //Traits that should be applied before MP is refreshed.
     public void NewTurnPreMPTraits()
     {
-
         if (Surrendered && Unit.HasTrait(Traits.Fearless))
         {
             Surrendered = false;
@@ -2970,7 +2930,6 @@ public class Actor_Unit
                 MultifacetedCooldown--;
             }
         }
-
 
         if (Unit.HasTrait(Traits.ManaAttuned))
         {
@@ -3181,16 +3140,15 @@ public class Actor_Unit
         switch (damageType)
         {
             case DamageTypes.Fire:
-                damage = Math.Round(damage * Unit.TraitBoosts.FireDamageTaken);
+                damage *= Unit.TraitBoosts.FireDamageTaken;
                 break;
             case DamageTypes.Ice:
-                damage = Math.Round(damage * Unit.TraitBoosts.IceDamageTaken);
+                damage *= Unit.TraitBoosts.IceDamageTaken;
                 break;
             case DamageTypes.Elec:
-                double elecboost = 1;
                 if (Unit.GetStatusEffect(StatusEffectType.Static) != null)
-                    elecboost = 1.5;
-                damage = Math.Round(damage * (Unit.TraitBoosts.ElecDamageTaken * elecboost));
+                    damage *= 1.5;
+                damage *= Unit.TraitBoosts.ElecDamageTaken;
                 break;
             case DamageTypes.Poison:
                 if (Unit.HasTrait(Traits.PoisonSpit))
@@ -3214,7 +3172,6 @@ public class Actor_Unit
             return false;
         }
         double modifiedDamage = CalculateDamageWithResistance(damage, damageType);
-        
         int finalDamage = (int)modifiedDamage;
         if (finalDamage == 0)
             return true;
@@ -3225,7 +3182,8 @@ public class Actor_Unit
             if (Unit.SpendMana(reduc_dmg))
                 finalDamage -= reduc_dmg;
         }
-        UnitSprite.DisplayDamage(finalDamage, spellDamage);
+        if (damageType != DamageTypes.Mutual)//Prevents damage from flashing every unit.
+            UnitSprite.DisplayDamage(finalDamage, spellDamage);
         finalDamage = Unit.DamageBarrier(finalDamage);
         if (damageType != DamageTypes.Mutual)//Prevents damage from flashing every unit.
             UnitSprite.DisplayDamage(finalDamage, spellDamage);
@@ -3257,7 +3215,7 @@ public class Actor_Unit
         }
         if (Unit.HasTrait(Traits.MutualBiology) && damageType != DamageTypes.Mutual)
         {
-            TacticalUtilities.MutuallyDamageUnits(this, damage);
+            TacticalUtilities.MutuallyDamageUnits(this, (int)damage);
         }
         if (Unit.HasTrait(Traits.Berserk) && GoneBerserk == false)
         {
@@ -3350,7 +3308,7 @@ public class Actor_Unit
             {
                 Visible = false;
                 if (Unit.HasTrait(Traits.CloseCall))
-                State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Barely hanging on, {Unit.Name} quickly {LogUtilities.GetRandomStringFrom("flees", "bolts", "retreats")} out of combat with {LogUtilities.GPPHis(Unit)} life barely intact");
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"Barely hanging on, {Unit.Name} quickly {LogUtilities.GetRandomStringFrom("flees", "bolts", "retreats")} out of combat with {LogUtilities.GPPHis(Unit)} life barely intact");
             }
 
             PredatorComponent?.FreeAnyAlivePrey();

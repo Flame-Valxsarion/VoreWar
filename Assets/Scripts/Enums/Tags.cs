@@ -459,7 +459,7 @@ public enum Traits
     DexterousDefense = 530,
     /// <summary>Unit gains increased dodge. This bonus is disabled for 3 turns after taking damage.</summary>
     FocusedDodge = 531,
-    /// <summary>This unit heals any unit that buffs it, equal to 5% of Endurance every turn while the buff persists. This unit gives 'Mendinig' to an ally within 2 spaces every 4th turn, duration scaling with level.</summary>
+    /// <summary>This unit heals any unit that buffs it, equal to 5% of Endurance every turn while the buff persists. This unit gives 'Mending' to an ally within 2 spaces every 4th turn, duration scaling with level.</summary>
     BlessingOfNature = 532,
     /// <summary>This unit grants barrier to any unit that buffs it, equal to 10% of Will every turn while the buff persists. This unit gives 'Shield' to an ally within 2 spaces every other turn, duration scaling with level.</summary>
     BlessingOfEarth = 533,
