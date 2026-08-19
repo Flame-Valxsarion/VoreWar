@@ -68,9 +68,51 @@ public abstract class ConstructibleBuilding
         Owner.Buildings.Add(this);
         turnsToCompletion = baseBuildTurns;
         Owner.constructionResources.SpendProvidedResources(ResourceToBuild);
-        if (Owner.EmpireBuildingLimit[buildingType] > 0)
+        int max_of_type = -1;
+        switch (buildingType)
         {
-            Owner.EmpireBuildingLimit[buildingType] = Owner.EmpireBuildingLimit[buildingType] - 1;
+            case ConstructibleType.WorkCamp:
+                max_of_type = Config.BuildConfig.WorkCamp.BuildLimit;
+                break;
+            case ConstructibleType.LumberSite:
+                max_of_type = Config.BuildConfig.LumberSite.BuildLimit;
+                break;
+            case ConstructibleType.Quarry:
+                max_of_type = Config.BuildConfig.Quarry.BuildLimit;
+                break;
+            case ConstructibleType.CasterTower:
+                max_of_type = Config.BuildConfig.CasterTower.BuildLimit;
+                break;
+            case ConstructibleType.BarrierTower:
+                max_of_type = Config.BuildConfig.BarrierTower.BuildLimit;
+                break;
+            case ConstructibleType.DefEncampment:
+                max_of_type = Config.BuildConfig.DefenseEncampment.BuildLimit;
+                break;
+            case ConstructibleType.Academy:
+                max_of_type = Config.BuildConfig.Academy.BuildLimit;
+                break;
+            case ConstructibleType.DarkMagicTower:
+                max_of_type = Config.BuildConfig.DarkMagicTower.BuildLimit;
+                break;
+            case ConstructibleType.TemporalTower:
+                max_of_type = Config.BuildConfig.TemporalTower.BuildLimit;
+                break;
+            case ConstructibleType.Laboratory:
+                max_of_type = Config.BuildConfig.Laboratory.BuildLimit;
+                break;
+            case ConstructibleType.Teleporter:
+                max_of_type = Config.BuildConfig.Teleporter.BuildLimit;
+                break;
+            case ConstructibleType.TownHall:
+                max_of_type = Config.BuildConfig.TownHall.BuildLimit;
+                break;
+            default:
+                break;
+        }
+        if (max_of_type > Owner.EmpireBuildingLimit[buildingType])
+        {
+            Owner.EmpireBuildingLimit[buildingType] = Owner.EmpireBuildingLimit[buildingType] + 1;
         }
         Owner.SpendGold(GoldCost);
         var contstruct = State.World.Constructibles.ToList();
@@ -103,7 +145,7 @@ public abstract class ConstructibleBuilding
                             break;
                         case 3:
                             Owner.Buildings.Remove(this);
-                            Owner.EmpireBuildingLimit[buildingType] = Owner.EmpireBuildingLimit[buildingType] + 1;
+                            Owner.EmpireBuildingLimit[buildingType] = Owner.EmpireBuildingLimit[buildingType] - 1;
                             List<ConstructibleBuilding> bLis = State.World.Constructibles.ToList();
                             bLis.Remove(this);
                             State.World.Constructibles = bLis.ToArray();
@@ -127,7 +169,7 @@ public abstract class ConstructibleBuilding
                             break;
                         case 3:
                             Owner.Buildings.Remove(this);
-                            Owner.EmpireBuildingLimit[buildingType] = Owner.EmpireBuildingLimit[buildingType] + 1;
+                            Owner.EmpireBuildingLimit[buildingType] = Owner.EmpireBuildingLimit[buildingType] - 1;
                             List<ConstructibleBuilding> bLis = State.World.Constructibles.ToList();
                             bLis.Remove(this);
                             State.World.Constructibles = bLis.ToArray();

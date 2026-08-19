@@ -4672,8 +4672,11 @@ public class PredatorComponent
 
     internal void ForceConsumeAuto(Actor_Unit forcePrey, bool skiptext = false)
     {
+        if (forcePrey == null || forcePrey.Unit == null)
+            return;
+
         if (forcePrey.Unit.IsDead == false)
-            AlivePrey++;
+            AlivePrey++;        
         State.GameManager.TacticalMode.TacticalStats.RegisterVore(unit.Side);
 
         if (forcePrey.Unit.Side == unit.Side)

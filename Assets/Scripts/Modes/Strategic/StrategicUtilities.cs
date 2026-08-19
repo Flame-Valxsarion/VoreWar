@@ -252,7 +252,7 @@ static class StrategicUtilities
                             break;
                         case 3:
                             construct.Owner.Buildings.Remove(construct);
-                            construct.Owner.EmpireBuildingLimit[construct.buildingType] = construct.Owner.EmpireBuildingLimit[construct.buildingType] + 1;
+                            construct.Owner.EmpireBuildingLimit[construct.buildingType] = construct.Owner.EmpireBuildingLimit[construct.buildingType] - 1;
                             List<ConstructibleBuilding> bLis = State.World.Constructibles.ToList();
                             bLis.Remove(construct);
                             State.World.Constructibles = bLis.ToArray();
@@ -295,7 +295,7 @@ static class StrategicUtilities
                             break;
                         case 3:
                             construct.Owner.Buildings.Remove(construct);
-                            construct.Owner.EmpireBuildingLimit[construct.buildingType] = construct.Owner.EmpireBuildingLimit[construct.buildingType] + 1;
+                            construct.Owner.EmpireBuildingLimit[construct.buildingType] = construct.Owner.EmpireBuildingLimit[construct.buildingType] - 1;
                             List<ConstructibleBuilding> bLis = State.World.Constructibles.ToList();
                             bLis.Remove(construct);
                             State.World.Constructibles = bLis.ToArray();

@@ -11,7 +11,7 @@ using UnityEngine;
 public static class State
 {
     static int saveErrors = 0;
-    public const string Version = "45D";
+    public const string Version = "45E";
     public static World World;
     public static Rand Rand = new Rand();
     public static NameGenerator NameGen;
@@ -1171,6 +1171,7 @@ public static class State
                 
                 // Since DefenseEncampment.AvailibleDefenders was renamed to AvailableDefenders, they will not have loaded correctly (if present).
                 bool defcampsfound = false;
+                bool lumsitefound = false;
                 foreach (ConstructibleBuilding constructible in World.Constructibles)
                 {
                     if (constructible is DefenseEncampment defcamp)
@@ -1178,12 +1179,45 @@ public static class State
                         defcampsfound = true;
                         defcamp.AvailableDefenders = defcamp.maxDefenders / 2;
                     }
+                    if (constructible is LumberSite lumsite)
+                    {
+                        // Corrects an issue where workers were being double allocated to creating prefabs
+                        if (((LumberSite)constructible).carpenterUpgrade.built)
+                        {
+                            lumsitefound = true;
+                            lumsite.carpenterWorkers /= 2;
+                        }
+                    }
                 }
                 if (defcampsfound)
                 {
                     versionUpdateMessage += "Version 45: Changes to DefenseEncampments lost data for their available defenders. All DefenseEncampments have been assigned an arbitrary number of available defenders (half of their maxima).\n";
                 }
-                
+                if (lumsitefound)
+                {
+                    versionUpdateMessage += "Version 45: A fix to the Lumber Site's carpentry workers has been applied. Double check your Lumber Sites are set correctly.\n";
+                }
+
+                // Switches EmpireBuildingLimit to count up instead of down, allowing the build limit to be changed mid game and not break
+                foreach (Empire empire in World.Empires)
+                {
+                    empire.EmpireBuildingLimit = new Dictionary<ConstructibleType, int>
+                    {
+                        [ConstructibleType.WorkCamp] = Config.BuildConfig.WorkCamp.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.WorkCamp],
+                        [ConstructibleType.LumberSite] = Config.BuildConfig.LumberSite.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.LumberSite],
+                        [ConstructibleType.Quarry] = Config.BuildConfig.Quarry.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.Quarry],
+                        [ConstructibleType.CasterTower] = Config.BuildConfig.CasterTower.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.CasterTower],
+                        [ConstructibleType.BarrierTower] = Config.BuildConfig.BarrierTower.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.BarrierTower],
+                        [ConstructibleType.DefEncampment] = Config.BuildConfig.DefenseEncampment.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.DefEncampment],
+                        [ConstructibleType.Academy] = Config.BuildConfig.Academy.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.Academy],
+                        [ConstructibleType.DarkMagicTower] = Config.BuildConfig.DarkMagicTower.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.DarkMagicTower],
+                        [ConstructibleType.TemporalTower] = Config.BuildConfig.TemporalTower.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.TemporalTower],
+                        [ConstructibleType.Teleporter] = Config.BuildConfig.Teleporter.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.Teleporter],
+                        [ConstructibleType.Laboratory] = Config.BuildConfig.Laboratory.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.Laboratory],
+                        [ConstructibleType.TownHall] = Config.BuildConfig.TownHall.BuildLimit - empire.EmpireBuildingLimit[ConstructibleType.TownHall],
+                    };
+                }
+
                 // The tutorial needs a special fix for its Units (in addition to fixing their _position values, like in the else block below).
                 if (tutorial == true)
                 {
