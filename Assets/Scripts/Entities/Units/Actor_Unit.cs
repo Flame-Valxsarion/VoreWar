@@ -1077,7 +1077,7 @@ public class Actor_Unit
             damageScalar /= 2;
         if (Unit.HasTrait(Traits.Competitive) && Unit.Race == target.Unit.Race)
             damageScalar *= 1.15;
-        if (target.Unit.HasTrait(Traits.Crystalline))
+        if (target.Unit.HasTrait(Traits.Crystaline))
             damageScalar *= 0.75;
         if (target.Unit.GetStatusEffect(StatusEffectType.Fractured) != null)
             damageScalar *= 2.0;
@@ -1750,7 +1750,7 @@ public class Actor_Unit
                         target.Unit.AddTenacious();
                     if (target.Unit.GetStatusEffect(StatusEffectType.Focus) != null)
                         target.Unit.RemoveFocus();
-                    if (target.Unit.HasTrait(Traits.Crystalline) && State.Rand.Next(4) == 0)
+                    if (target.Unit.HasTrait(Traits.Crystaline) && State.Rand.Next(4) == 0)
                         target.Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
                     if (target.Unit.IsACopy())
                     {
@@ -1884,7 +1884,7 @@ public class Actor_Unit
                         target.Unit.RemoveFocus();
                     if (target.Unit.HasTrait(Traits.Toxic) && State.Rand.Next(8) == 0)
                         Unit.ApplyStatusEffect(StatusEffectType.Poisoned, 2 + target.Unit.GetStat(Stat.Endurance) / 20, 3);
-                    if (target.Unit.HasTrait(Traits.Crystalline) && State.Rand.Next(4) == 0)
+                    if (target.Unit.HasTrait(Traits.Crystaline) && State.Rand.Next(4) == 0)
                         target.Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
                     if (Unit.HasTrait(Traits.ForcefulBlow))
                         TacticalUtilities.KnockBack(this.Position, this, target);
@@ -2142,7 +2142,7 @@ public class Actor_Unit
 
         if (DefendSpellCheck(spell, attacker, out float chance))
         {
-            if (Unit.GetStatusEffect(StatusEffectType.Fractured) == null && Unit.HasTrait(Traits.Crystalline))
+            if (Unit.GetStatusEffect(StatusEffectType.Fractured) == null && Unit.HasTrait(Traits.Crystaline))
             {
                 Unit.TraitBoosts.Incoming.MagicDamage *= 0.75f;
             }
@@ -2174,7 +2174,7 @@ public class Actor_Unit
                     Unit.StatusEffects.Remove(charm); // betrayal dispels charm
                 }
             }
-            if (Unit.HasTrait(Traits.Crystalline) && State.Rand.Next(4) == 0)
+            if (Unit.HasTrait(Traits.Crystaline) && State.Rand.Next(4) == 0)
                 Unit.ApplyStatusEffect(StatusEffectType.Fractured, 1, 1);
             if (attacker.Unit.HasTrait(Traits.ArcaneMagistrate))
             {
