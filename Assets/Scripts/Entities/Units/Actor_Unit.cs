@@ -3447,7 +3447,7 @@ public class Actor_Unit
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return false;
         Unit.GiveExp(1);
-        OnSpellCast(spell, target);
+        OnSpellCast(spell, target.Position);
         //if (target != null && target.DefendSpellCheck(spell, this, out float chance) == false)
         //    return false;
 
@@ -3495,7 +3495,7 @@ public class Actor_Unit
             return;
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return;
-        OnSpellCast(spell, target);
+        OnSpellCast(spell, target.Position);
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
         if (target != null)
         {
@@ -3543,7 +3543,7 @@ public class Actor_Unit
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return;
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
-        OnSpellCast(spell, target);
+        OnSpellCast(spell, target.Position);
 
         if (target != null)
         {
@@ -3634,7 +3634,7 @@ public class Actor_Unit
     {
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return false;
-        OnSpellCast(spell, target);
+        OnSpellCast(spell, target.Position);
         bool hit = false;
 
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
@@ -3895,21 +3895,59 @@ public class Actor_Unit
         return false;
     }
 
-    public void OnSpellCast(Spell spell, Actor_Unit target)
+    public void OnSpellCast(Spell spell, Vec2i position)
     {
-        EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnSpellCast, new object[] { this, target, spell });
+        EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnSpellCast, new object[] { this, position, spell });
 
         if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Will))
         {
-            if (Unit.IsEnemyOfSide(target.Unit.Side))
+            if (spell.AOEType == AreaOfEffectType.FixedPattern || spell.AOEType == AreaOfEffectType.RotatablePattern || spell.AreaOfEffect > 0)
             {
-                target.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
+                foreach (Actor_Unit unit in GetAOETargets(spell, position))
+                {
+                    if (Unit.IsEnemyOfSide(unit.Unit.Side))
+                    {
+                        unit.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
+                    }
+                    else
+                    {
+                        unit.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
+                    }
+                }
             }
             else
             {
-                target.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
+                Actor_Unit target = TacticalUtilities.UnitsWithinTiles(position,0).First();
+                if (target != null)
+                {
+                    if (Unit.IsEnemyOfSide(target.Unit.Side))
+                    {
+                        target.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
+                    }
+                    else
+                    {
+                        target.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
+                    }
+                }
             }
         }
+    }
+
+    public List<Actor_Unit> GetAOETargets(Spell spell, Vec2i position)
+    {
+        List<Actor_Unit> targets = new List<Actor_Unit>();
+        switch (spell.AOEType)
+        {
+            case AreaOfEffectType.Full:
+                return TacticalUtilities.UnitsWithinTiles(position, spell.AreaOfEffect);
+            case AreaOfEffectType.FixedPattern:
+                return TacticalUtilities.UnitsWithinPattern(position, spell.Pattern);
+            case AreaOfEffectType.RotatablePattern:
+                return TacticalUtilities.UnitsWithinRotatingPattern(position, spell.Pattern, TacticalUtilities.GetRotatingOctant(Position, position));
+            default:
+                break;
+        }
+        return targets;
     }
 
     public void ChangeRacePrey()

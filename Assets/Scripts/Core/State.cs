@@ -1199,7 +1199,7 @@ public static class State
                 }
 
                 // Switches EmpireBuildingLimit to count up instead of down, allowing the build limit to be changed mid game and not break
-                foreach (Empire empire in World.Empires)
+                foreach (Empire empire in World.AllActiveEmpires)
                 {
                     empire.EmpireBuildingLimit = new Dictionary<ConstructibleType, int>
                     {
