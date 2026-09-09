@@ -3262,7 +3262,7 @@ static class RaceParameters
                 Traits.Brainless,
                 Traits.Fearless,
                 Traits.Replaceable,
-                Traits.Crystaline,
+                Traits.Crystalline,
                 Traits.DimensionalAntilock,
                 Traits.DyingStrike,
                 Traits.TotalAbsorption,

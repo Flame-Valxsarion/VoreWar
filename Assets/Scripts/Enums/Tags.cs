@@ -631,7 +631,7 @@ public enum Traits
     /// <summary>Unit doesn't produce any post-vore discards for digested units.</summary>
     TotalAbsorption  = 314,
     /// <summary>Unit takes 25% reduced damage from all sources, has a chance to gain the 'Fractured' status effect when attacked; greatly increasing damage from all sources. 'Fractured' lasts until the battle is over.</summary>
-    Crystaline  = 315,
+    Crystalline  = 315,
     /// <summary>When unit is killed in melee or digested does has a 1/3 chance of hitting with a melee attack against the aggressor, 3/4 hit chance if vored.</summary>
     DyingStrike  = 316,
     /// <summary>Provides 1 use of Dimension Shift spell.</summary>
