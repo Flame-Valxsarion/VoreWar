@@ -895,6 +895,11 @@ public class Actor_Unit
         else
             defenderBonusShift += Unit.TraitBoosts.Incoming.MeleeShift + attacker.Unit.TraitBoosts.Outgoing.MeleeShift + mod + TagConditionChecker.ApplyTagEffect(Unit, attacker.Unit, UnitTagModifierEffect.MeleeShift);
 
+        if (attacker.Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Dexterity))
+        {
+            defenderBonusShift += 0.1f;
+        }
+
         if (Unit.HasTrait(Traits.AllOutFirstStrike))
         {
             if (HasAttackedThisCombat)
@@ -3447,7 +3452,7 @@ public class Actor_Unit
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return false;
         Unit.GiveExp(1);
-        OnSpellCast(spell, target.Position);
+        OnSpellCast(spell, target?.Position);
         //if (target != null && target.DefendSpellCheck(spell, this, out float chance) == false)
         //    return false;
 
@@ -3495,7 +3500,7 @@ public class Actor_Unit
             return;
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return;
-        OnSpellCast(spell, target.Position);
+        OnSpellCast(spell, target?.Position);
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
         if (target != null)
         {
@@ -3543,7 +3548,7 @@ public class Actor_Unit
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return;
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
-        OnSpellCast(spell, target.Position);
+        OnSpellCast(spell, target == null ? targetArea : target.Position);
 
         if (target != null)
         {
@@ -3634,7 +3639,7 @@ public class Actor_Unit
     {
         if (Unit.SpendMana(spell.ManaCost) == false && spell.IsFree != true)
             return false;
-        OnSpellCast(spell, target.Position);
+        OnSpellCast(spell, target == null ? targetArea : target.Position);
         bool hit = false;
 
         State.GameManager.SoundManager.PlaySpellCast(spell, this);
@@ -3899,38 +3904,39 @@ public class Actor_Unit
     {
         EquipmentFunctions.CheckEquipment(Unit, EquipmentActivator.OnSpellCast, new object[] { this, position, spell });
 
-        if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Will))
-        {
-            if (spell.AOEType == AreaOfEffectType.FixedPattern || spell.AOEType == AreaOfEffectType.RotatablePattern || spell.AreaOfEffect > 0)
+        if (position != null)
+            if (Unit.HasTrait(Traits.Multifaceted) && Unit.IsHighestStat(Stat.Will))
             {
-                foreach (Actor_Unit unit in GetAOETargets(spell, position))
+                if (spell.AOEType == AreaOfEffectType.FixedPattern || spell.AOEType == AreaOfEffectType.RotatablePattern || spell.AreaOfEffect > 0)
                 {
-                    if (Unit.IsEnemyOfSide(unit.Unit.Side))
+                    foreach (Actor_Unit unit in GetAOETargets(spell, position))
                     {
-                        unit.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
+                        if (Unit.IsEnemyOfSide(unit.Unit.Side))
+                        {
+                            unit.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
+                        }
+                        else
+                        {
+                            unit.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
+                        }
                     }
-                    else
+                }
+                else
+                {
+                    Actor_Unit target = TacticalUtilities.UnitsWithinTiles(position,0).First();
+                    if (target != null)
                     {
-                        unit.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
+                        if (Unit.IsEnemyOfSide(target.Unit.Side))
+                        {
+                            target.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
+                        }
+                        else
+                        {
+                            target.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
+                        }
                     }
                 }
             }
-            else
-            {
-                Actor_Unit target = TacticalUtilities.UnitsWithinTiles(position,0).First();
-                if (target != null)
-                {
-                    if (Unit.IsEnemyOfSide(target.Unit.Side))
-                    {
-                        target.Unit.ApplyStatusEffect(StatusEffectType.Marked, Unit.GetStat(Stat.Will) / 10, 2);
-                    }
-                    else
-                    {
-                        target.Unit.RestoreBarrier(Unit.GetStat(Stat.Will) / 10);
-                    }
-                }
-            }
-        }
     }
 
     public List<Actor_Unit> GetAOETargets(Spell spell, Vec2i position)

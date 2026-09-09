@@ -945,7 +945,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.Multifaceted when unit == null || State.GameManager.CurrentScene == State.GameManager.Start_Mode: // Can't be too sure now can we?
                 return "Units highest stat becomes its favored stat and gains the following effect based on their highest stat:\n" +
                     "STR: Bonus damage on a 4 turn cooldown.\n" +
-                    "DEX: 1 additional attack per turn, lasting one turn per level.\n" +
+                    "DEX: 1 additional attack per turn, +10% accuracy, lasting one turn per level.\n" +
                     "VOR: Failed vore attempt grants predation\n" +
                     "AGI: +2 mov above 50%hp +10% Dodge below.\n" +
                     "WILL: Spells apply barrier on allies and mark on enemies.\n" +
@@ -955,7 +955,7 @@ public class HoveringTooltip : MonoBehaviour
             case Traits.Multifaceted when unit.GetHighestStatIndex() == 0:
                 return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Violent(Str)</b>: Weapon attacks deal 5% of the target's Max HP once every 4 turns.\n" + (actor == null ? "" : $"Avalible in: {actor.MultifacetedCooldown} turn(s).");
             case Traits.Multifaceted when unit.GetHighestStatIndex() == 1:
-                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gans 1 additional attack per turn, lasting one turn per level.\n" + (actor == null ? "" : actor.Unit.Level - State.GameManager.TacticalMode.currentTurn >= 0 ? ($"Remaining Turns: {actor.Unit.Level - State.GameManager.TacticalMode.currentTurn}") : "<b>Inactive.</b>");
+                return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Excitable(Dex)</b>: Unit gans 1 additional attack per turn and +10% accuracy, lasting one turn per level.\n" + (actor == null ? "" : actor.Unit.Level - State.GameManager.TacticalMode.currentTurn >= 0 ? ($"Remaining Turns: {actor.Unit.Level - State.GameManager.TacticalMode.currentTurn}") : "<b>Inactive.</b>");
             case Traits.Multifaceted when unit.GetHighestStatIndex() == 2:
                 return "Units highest stat becomes its favored stat and gains the following effect:\n" + "<b>Intrepid(Vor)</b>: A failed vore attempt grants predation to this unit.";
             case Traits.Multifaceted when unit.GetHighestStatIndex() == 3:

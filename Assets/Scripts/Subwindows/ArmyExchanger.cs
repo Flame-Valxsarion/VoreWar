@@ -332,7 +332,7 @@ public class ArmyExchanger : MonoBehaviour
         if (rightSelected >= RightArmy.Units.Count || leftSelected >= LeftArmy.Units.Count)
             return;
 
-        if (LeftArmy.Units[rightSelected] == LeftArmy.Empire.Leader && LeftArmy.Side != RightArmy.Side)
+        if (LeftArmy.Units[leftSelected] == LeftArmy.Empire.Leader && LeftArmy.Side != RightArmy.Side)
         {
             State.GameManager.CreateMessageBox("Can't trade heroes between races");
             return;

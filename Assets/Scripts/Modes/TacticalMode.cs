@@ -4858,10 +4858,14 @@ public class TacticalMode : SceneBase
         {
             foreach (Actor_Unit actor in units.ToList())
             {
-                if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && (actor.TurnsSinceLastDamage < 2 && !actor.Unit.HasTrait(Traits.CurseOfImmolation) && !TacticalUtilities.UnitsWithinTiles(actor.Position, 1).Where(u => u.Unit.HasTrait(Traits.CurseOfImmolation)).Any())) return false;
+                Debug.Log("Immocheck");
+                if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && (actor.TurnsSinceLastDamage < 2 && actor.Unit.HasTrait(Traits.CurseOfImmolation) && TacticalUtilities.UnitsWithinTiles(actor.Position, 1).Where(u => u.Unit.HasTrait(Traits.CurseOfImmolation)).Any())) return false;
+                Debug.Log("HostileCheck");
                 if (actor.Targetable && actor.Visible && !actor.Fled && !actor.Surrendered && !actor.Unit.hiddenFixedSide && units.Any(u => u.Targetable && !u.Fled && u.Visible && TacticalUtilities.TreatAsHostile(actor, u))) return false;
+                Debug.Log("PredCheck");
                 if (actor.Unit.Predator == false)
                     continue;
+                Debug.Log("Great Excape Check");
                 foreach (var prey in actor.PredatorComponent.GetDirectPrey().Where(s => s.Unit.HasTrait(Traits.TheGreatEscape)).ToList())
                 {
                     actor.PredatorComponent.FreeGreatEscapePrey(prey);
@@ -4869,6 +4873,7 @@ public class TacticalMode : SceneBase
                 }
                 if (actor.Unit.HasTrait(Traits.Endosoma))
                 {
+                    Debug.Log("Endo Check");
                     foreach (var prey in actor.PredatorComponent.GetDirectPrey().Where(s => s.Unit.Stamina <= 0).ToList())
                     {
                         actor.PredatorComponent.FreeEndoPrey(prey);
@@ -4914,6 +4919,7 @@ public class TacticalMode : SceneBase
             }
             remainingAttackers = 0;
             remainingDefenders = 0;
+            Debug.Log("Calculating Remaining");
             CalculateRemaining(ref remainingAttackers, ref remainingDefenders);
             if (units.Where(s => s.Unit.IsDead == false && s.PredatorComponent?.DigestingUnitCount > 0).FirstOrDefault() != null)
             {
@@ -4972,7 +4978,7 @@ public class TacticalMode : SceneBase
             }
             HandlePostBattleTraits();
             ProcessReplaceable(remainingAttackers);
-
+            Debug.Log("reached post battle traits");
             foreach (Actor_Unit actor in units)
             {
                 actor.Unit.GiveExp(4);
@@ -5004,6 +5010,7 @@ public class TacticalMode : SceneBase
                 }
             }
             BattleReviewText.SetActive(false);
+            Debug.Log("Removing Review Text");
             foreach (Actor_Unit actor in units.ToList())
             {
                 if (actor.Unit.IsDead)
@@ -5180,7 +5187,7 @@ public class TacticalMode : SceneBase
             {
                 AssignLeftoverTroops(armies[1], extraDefenders);
             }
-
+            Debug.Log("Fleeing Units");
             ProcessFledUnits();
             remainingAttackers = 0;
             remainingDefenders = 0;
@@ -5217,9 +5224,8 @@ public class TacticalMode : SceneBase
                 }
                 Wins.y++;
             }
-
+            Debug.Log("Looting Items");
             LootItems(remainingDefenders, ref attackerReceives, ref defenderReceives);
-
             if (skipStats == false && (turboMode == false || Config.ShowStatsForSkippedBattles || manualSkip || (Config.BattleReport && State.GameManager.CurrentPreviewSkip == GameManager.PreviewSkip.SkipWithStats)))
             {
                 int remainingGarrison = 0;
