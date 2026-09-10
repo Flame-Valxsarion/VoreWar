@@ -112,7 +112,7 @@ public class UpgradeMenu : MonoBehaviour
     public void DeconstructBuilding(ConstructibleBuilding building)
     {
         building.Owner.Buildings.Remove(building);
-        building.Owner.EmpireBuildingLimit[building.buildingType] = building.Owner.EmpireBuildingLimit[building.buildingType] + 1;
+        building.Owner.EmpireBuildingLimit[building.buildingType] = building.Owner.EmpireBuildingLimit[building.buildingType] - 1;
         List<ConstructibleBuilding> bLis = State.World.Constructibles.ToList();
         bLis.Remove(building);
         State.World.Constructibles = bLis.ToArray();

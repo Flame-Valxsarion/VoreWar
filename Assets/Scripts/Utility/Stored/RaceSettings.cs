@@ -179,14 +179,14 @@ class RaceSettings
     {
         if (Races.ContainsKey(race))
             return Get(race).SpawnTraits;
-        return RaceParameters.GetRaceTraits(race).SpawnTraits;
+        return null;
     }
 
     internal List<Traits> GetLeaderRaceTraits(Race race)
     {
         if (Races.ContainsKey(race))
             return Get(race).LeaderTraits;
-        return RaceParameters.GetRaceTraits(race).LeaderTraits;
+        return null;
     }
 
     internal Stat GetFavoredStat(Race race)

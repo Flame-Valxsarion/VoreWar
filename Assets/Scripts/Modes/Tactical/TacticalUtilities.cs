@@ -106,8 +106,6 @@ static class TacticalUtilities
                     StrategicUtilities.CreateInvisibleTravelingArmy(travelingUnits.Where(s => s.HasTrait(Traits.Pathfinder) == false || s.HasTrait(Traits.Cartography) == false).ToList(), StrategicUtilities.GetVillageAt(destination), turns);
                 }
             }
-
-
         }
         else if (travelingUnits[0].Side > 500)
         {
@@ -117,10 +115,7 @@ static class TacticalUtilities
         {
             GenerateFleeingArmy(travelingUnits);
         }
-
     }
-
-
 
     static void GenerateFleeingArmy(List<Unit> fleeingUnits)
     {
@@ -240,12 +235,8 @@ static class TacticalUtilities
                     else
                         State.GameManager.StrategyMode.Devour(armies[0], village.GetTotalPop() / Config.MonsterConquestTurns);
                 }
-
             }
-
-
         }
-
     }
     internal static bool IsUnitControlledByPlayer(Unit unit)
     {
@@ -306,39 +297,27 @@ static class TacticalUtilities
                 switch (RelationsManager.GetRelation(effectiveActorSide, sideB).Type)
                 {
                     case RelationState.Allied:
-                        {
-                            enemySideHostility = 1;
-                            break;
-                        }
+                        enemySideHostility = 1;
+                        break;
                     case RelationState.Neutral:
-                        {
-                            enemySideHostility = 2;
-                            break;
-                        }
+                        enemySideHostility = 2;
+                        break;
                     case RelationState.Enemies:
-                        {
-                            enemySideHostility = 3;
-                            break;
-                        }
+                        enemySideHostility = 3;
+                        break;
                 }
             }
             switch (RelationsManager.GetRelation(effectiveActorSide, sideA).Type)
             {
                 case RelationState.Allied:
-                    {
-                        aISideHostility = 1;
-                        break;
-                    }
+                    aISideHostility = 1;
+                    break;
                 case RelationState.Neutral:
-                    {
-                        aISideHostility = 2;
-                        break;
-                    }
+                    aISideHostility = 2;
+                    break;
                 case RelationState.Enemies:
-                    {
-                        aISideHostility = 3;
-                        break;
-                    }
+                    aISideHostility = 3;
+                    break;
             }
             return enemySideHostility >= aISideHostility ? sideA : sideB;
         }
@@ -377,39 +356,27 @@ static class TacticalUtilities
                 switch (RelationsManager.GetRelation(effectiveActorSide, opponentSide).Type)
                 {
                     case RelationState.Allied:
-                        {
-                            enemySideHostility = 1;
-                            break;
-                        }
+                        enemySideHostility = 1;
+                        break;
                     case RelationState.Neutral:
-                        {
-                            enemySideHostility = 2;
-                            break;
-                        }
+                        enemySideHostility = 2;
+                        break;
                     case RelationState.Enemies:
-                        {
-                            enemySideHostility = 3;
-                            break;
-                        }
+                        enemySideHostility = 3;
+                        break;
                 }
             }
             switch (RelationsManager.GetRelation(effectiveActorSide, friendlySide).Type)
             {
                 case RelationState.Allied:
-                    {
-                        aISideHostility = 1;
-                        break;
-                    }
+                    aISideHostility = 1;
+                    break;
                 case RelationState.Neutral:
-                    {
-                        aISideHostility = 2;
-                        break;
-                    }
+                    aISideHostility = 2;
+                    break;
                 case RelationState.Enemies:
-                    {
-                        aISideHostility = 3;
-                        break;
-                    }
+                    aISideHostility = 3;
+                    break;
             }
             preferredSide = enemySideHostility >= aISideHostility ? friendlySide : opponentSide;
             unpreferredSide = preferredSide == friendlySide ? opponentSide : friendlySide;
@@ -427,44 +394,30 @@ static class TacticalUtilities
             switch (RelationsManager.GetRelation(preferredSide, effectiveTargetSide).Type)
             {
                 case RelationState.Allied:
-                    {
-                        targetSideHostilityP = 1;
-                        break;
-                    }
+                    targetSideHostilityP = 1;
+                    break;
                 case RelationState.Neutral:
-                    {
-                        targetSideHostilityP = 2;
-                        break;
-                    }
+                    targetSideHostilityP = 2;
+                    break;
                 case RelationState.Enemies:
-                    {
-                        targetSideHostilityP = 3;
-                        break;
-                    }
+                    targetSideHostilityP = 3;
+                    break;
             }
-
         }
         if (unpreferredSide != effectiveTargetSide)
         {
             switch (RelationsManager.GetRelation(unpreferredSide, effectiveTargetSide).Type)
             {
                 case RelationState.Allied:
-                    {
-                        targetSideHostilityUP = 1;
-                        break;
-                    }
+                    targetSideHostilityUP = 1;
+                    break;
                 case RelationState.Neutral:
-                    {
-                        targetSideHostilityUP = 2;
-                        break;
-                    }
+                    targetSideHostilityUP = 2;
+                    break;
                 case RelationState.Enemies:
-                    {
-                        targetSideHostilityUP = 3;
-                        break;
-                    }
+                    targetSideHostilityUP = 3;
+                    break;
             }
-
         }
         return targetSideHostilityP >= targetSideHostilityUP || (target.sidesAttackedThisBattle?.Contains(preferredSide) ?? false) || (target.sidesAttackedThisBattle?.Contains(actor.Unit.FixedSide) ?? false);
     }
@@ -525,7 +478,6 @@ static class TacticalUtilities
                         return false;
                 }
             }
-
         }
 
         if (TacticalTileInfo.CanWalkInto(tiles[x, y], actor))
@@ -586,7 +538,6 @@ static class TacticalUtilities
                         return false;
                 }
             }
-
         }
 
         if (TacticalTileInfo.CanWalkInto(tiles[x, y], actor))
@@ -630,12 +581,10 @@ static class TacticalUtilities
         return count > 1;
     }
 
-
     static public bool IsWalkable(int x, int y, Actor_Unit actor)
     {
         return TacticalTileInfo.CanWalkInto(tiles[x, y], actor);
     }
-
 
     static public bool FlyableTile(int x, int y)
     {
@@ -644,26 +593,25 @@ static class TacticalUtilities
         return true;
     }
 
-
-    static internal void CheckKnockBack(Actor_Unit Attacker, Actor_Unit Target, ref float damage)
+    static internal double CheckKnockBack(Vec2i Epicenter, Actor_Unit Attacker, Actor_Unit Target, double damage)
     {
-        int xDiff = Target.Position.x - Attacker.Position.x;
-        int yDiff = Target.Position.y - Attacker.Position.y;
+        int xDiff = Target.Position.x - Epicenter.x;
+        int yDiff = Target.Position.y - Epicenter.y;
         int direction = Attacker.DiffToDirection(xDiff, yDiff);
         if (OpenTile(Attacker.GetTile(Target.Position, direction), Target))
-            return;
+            return damage;
         if (OpenTile(Attacker.GetTile(Target.Position, (direction + 1) % 8), Target))
-            return;
+            return damage;
         if (OpenTile(Attacker.GetTile(Target.Position, (direction + 7) % 8), Target))
-            return;
-        damage *= 1.2f;
-        return;
+            return damage;
+
+        return damage * 1.2;
     }
 
-    static internal void KnockBack(Actor_Unit Attacker, Actor_Unit Target)
+    static internal void KnockBack(Vec2i Epicenter, Actor_Unit Attacker, Actor_Unit Target)
     {
-        int xDiff = Target.Position.x - Attacker.Position.x;
-        int yDiff = Target.Position.y - Attacker.Position.y;
+        int xDiff = Target.Position.x - Epicenter.x;
+        int yDiff = Target.Position.y - Epicenter.y;
         int direction = Attacker.DiffToDirection(xDiff, yDiff);
 
         Target.Movement += 1;
@@ -678,41 +626,7 @@ static class TacticalUtilities
         return;
     }
 
-    static internal void CheckSpellKnockBack(Vec2i Knocker, Actor_Unit Attacker, Actor_Unit Target, ref float damage)
-    {
-        int xDiff = Target.Position.x - Knocker.x;
-        int yDiff = Target.Position.y - Knocker.y;
-        int direction = Attacker.DiffToDirection(xDiff, yDiff);
-        if (OpenTile(Attacker.GetTile(Target.Position, direction), Target))
-            return;
-        if (OpenTile(Attacker.GetTile(Target.Position, (direction + 1) % 8), Target))
-            return;
-        if (OpenTile(Attacker.GetTile(Target.Position, (direction + 7) % 8), Target))
-            return;
-        Target.Unit.TraitBoosts.Incoming.MagicDamage += ((int)(damage));
-
-        return;
-    }
-
-    static internal void SpellKnockBack(Vec2i Knocker, Actor_Unit Attacker, Actor_Unit Target)
-    {
-        int xDiff = Target.Position.x - Knocker.x;
-        int yDiff = Target.Position.y - Knocker.y;
-        int direction = Attacker.DiffToDirection(xDiff, yDiff);
-
-        Target.Movement += 1;
-        if (Target.Move(direction, tiles))
-            return;
-        else if (Target.Move((direction + 1) % 8, tiles))
-            return;
-        else if (Target.Move((direction + 7) % 8, tiles))
-            return;
-        Target.Movement -= 1;
-
-        return;
-    }
-
-    static public void MutuallyDamageUnits(Actor_Unit source, int damage)
+    static public void MutuallyDamageUnits(Actor_Unit source, double damage)
     {
         if (linkedUnits == null)
             return;
@@ -764,7 +678,6 @@ static class TacticalUtilities
         }
     }
 
-
     static internal void RefreshUnitGraphicType()
     {
         if (Units == null)
@@ -791,7 +704,6 @@ static class TacticalUtilities
         List<Actor_Unit> unitList = new List<Actor_Unit>();
         foreach (Actor_Unit actor in Units)
         {
-            
             if (actor.Visible && actor.Targetable)
             {
                 if (actor.Position.GetNumberOfMovesDistance(target) <= tiles)
@@ -880,7 +792,6 @@ static class TacticalUtilities
             }
             return 5;
         }
-        
     }
     static internal Vec2i RoundIndexToPoint(int index, int radius)
     {
@@ -1066,7 +977,6 @@ static class TacticalUtilities
         return pruned_unitList;
     }
 
-
     static internal Actor_Unit FindUnitToResurrect(Actor_Unit caster)
     {
         Actor_Unit actor = Units.Where(s => s.Unit.Side == caster.Unit.Side && s.Unit.IsDead && s.Unit.Type != UnitType.Summon && s.Unit.Level > 0).OrderByDescending(s => s.Unit.Experience).FirstOrDefault();
@@ -1078,7 +988,6 @@ static class TacticalUtilities
         Actor_Unit actor = Units.Where(s => s.Unit.IsDead && s.Unit.Level > 0).OrderByDescending(s => s.Unit.Experience).FirstOrDefault();
         return actor;
     }
-
 
     internal static void CreateResurrectionPanel(Vec2i loc, int side)
     {
@@ -1181,12 +1090,12 @@ static class TacticalUtilities
             Text HireButton = obj.transform.GetChild(2).GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
 
             string gender;
-                if (actor.Unit.GetGender() == Gender.Hermaphrodite)
-                    gender = "Herm";
+            if (actor.Unit.GetGender() == Gender.Hermaphrodite)
+                gender = "Herm";
 
-                else
-                    gender = actor.Unit.GetGender().ToString();
-                GenderText.text = $"{gender}";
+            else
+                gender = actor.Unit.GetGender().ToString();
+            GenderText.text = $"{gender}";
             TraitList.text = RaceEditorPanel.TraitListToText(actor.Unit.GetTraits, true).Replace(", ","\n");
             EXPText.text = $"Level {actor.Unit.Level} ({(int)actor.Unit.Experience} EXP)";
             if (actor.Unit.HasTrait(Traits.Resourceful))
@@ -1251,12 +1160,12 @@ static class TacticalUtilities
         return tile_positions;
     }
 
- static internal Vec2i GetRandomTileForActor(Actor_Unit actor)
- {
-     Vec2i[] tile_positions = TilesWithinRange(actor.Position, 6).Where(tile => OpenTile(tile, actor)).ToArray();
-     if (tile_positions.Length == 0) { return null; }
-     return tile_positions[UnityEngine.Random.Range(0, tile_positions.Length - 1)];
- }
+    static internal Vec2i GetRandomTileForActor(Actor_Unit actor)
+    {
+        Vec2i[] tile_positions = TilesWithinRange(actor.Position, 6).Where(tile => OpenTile(tile, actor)).ToArray();
+        if (tile_positions.Length == 0) { return null; }
+        return tile_positions[UnityEngine.Random.Range(0, tile_positions.Length - 1)];
+    }
 
     internal static void Resurrect(Vec2i loc, Actor_Unit target)
     {
@@ -1327,10 +1236,9 @@ static class TacticalUtilities
         if (targets.Contains(AbilityTargets.Self) && actor.Unit == target.Unit)
             return true;
         return false;
-
     }
 
-    static internal Actor_Unit GetActorAt(Vec2 location)
+    static internal Actor_Unit GetActorAt(Vec2i location)
     {
         foreach (Actor_Unit actor in Units)
         {
@@ -1355,7 +1263,7 @@ static class TacticalUtilities
             {
                 if (x < 0 || y < 0 || x > tiles.GetUpperBound(0) || y > tiles.GetUpperBound(1))
                     continue;
-                Vec2 position = new Vec2(x, y);
+                Vec2i position = new Vec2i(x, y);
                 TileEffect effect = new TileEffect(duration, strength, type);
                 State.GameManager.TacticalMode.ActiveEffects[position] = effect;
                 switch (type)
@@ -1369,7 +1277,6 @@ static class TacticalUtilities
                 }
             }
         }
-
     }
 
     static internal void CreateEffectWithPattern(Vec2i location, Vec2i unit, TileEffectType type, float strength, int duration, int[,] pattern, AreaOfEffectType aoeType)
@@ -1396,8 +1303,6 @@ static class TacticalUtilities
                     break;
             }
         }
-        
-
     }
 
     static public bool IsUnitControlledBySide(Unit unit, int side)
@@ -1423,8 +1328,6 @@ static class TacticalUtilities
 
         if (StrategicUtilities.GetAllHumanSides().Count > 1) return false;
         if (StrategicUtilities.GetAllHumanSides().Count < 1) return true;
-
-
 
         if (State.GameManager.StrategyMode.LastHumanEmpire?.Side == unit.FixedSide)
             return true;
@@ -1488,7 +1391,7 @@ static class TacticalUtilities
             {
                 preyLocation = possibilities.Values.ToList()[State.Rand.Next(possibilities.Count)];
                 actor.Movement = 0;
-                targetPred.PredatorComponent.ForceConsumeAuto(actor);
+                targetPred.PredatorComponent.ForceConsumeAuto(actor, false);
             }
         }
         else
@@ -1603,4 +1506,3 @@ static class TacticalUtilities
         return (unit.HasTrait(Traits.FriendlyStomach) && (preyUnit.Unit.FixedSide == unit.GetApparentSide(preyUnit.Unit))) || unit.HasTrait(Traits.Endosoma) && preyUnit.Unit.IsDead == false;
     }
 }
-

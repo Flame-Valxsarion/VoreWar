@@ -13,7 +13,7 @@ public class BlackMagicTowerPanel : MonoBehaviour
     public GameObject AfflictionHolder;
 
     public Button NecrosisButton;
-    public Button ErrosionButton;
+    public Button ErosionButton;
     public Button AgonyButton;
     public Button LethargyButton;
     public TextMeshProUGUI AfflictionDescription;
@@ -39,11 +39,11 @@ public class BlackMagicTowerPanel : MonoBehaviour
             NecrosisButton.interactable = false;
             BlackMagicTower.Affliction = StatusEffectType.Necrosis;
         });
-        ErrosionButton.onClick.AddListenerOnce(() =>
+        ErosionButton.onClick.AddListenerOnce(() =>
         {
             UpdateButtonInteract();
-            ErrosionButton.interactable = false;
-            BlackMagicTower.Affliction = StatusEffectType.Errosion;
+            ErosionButton.interactable = false;
+            BlackMagicTower.Affliction = StatusEffectType.Erosion;
         });
         AgonyButton.onClick.AddListenerOnce(() =>
         {
@@ -64,9 +64,9 @@ public class BlackMagicTowerPanel : MonoBehaviour
                 NecrosisButton.interactable = false;
                 AfflictionDescription.text = "Necrosis reduces healing of enemy units. Can cause healing to deal damage if the effect is strong enough.";
                 break;
-            case StatusEffectType.Errosion:
-                ErrosionButton.interactable = false;
-                AfflictionDescription.text = "Errosion greatly increases the damage enemy units take during it's duration.";
+            case StatusEffectType.Erosion:
+                ErosionButton.interactable = false;
+                AfflictionDescription.text = "Erosion greatly increases the damage enemy units take during its duration.";
                 break;
             case StatusEffectType.Agony:
                 AgonyButton.interactable = false;
@@ -84,20 +84,19 @@ public class BlackMagicTowerPanel : MonoBehaviour
     public void UpdateButtonInteract()
     {
         NecrosisButton.interactable = true;
-        if (BlackMagicTower.PactLevel > 3)
-            ErrosionButton.interactable = true;
+        if (BlackMagicTower.PactLevel >= 3)
+            ErosionButton.interactable = true;
         else
-            ErrosionButton.interactable = false;
+            ErosionButton.interactable = false;
 
-        if (BlackMagicTower.PactLevel > 9)
+        if (BlackMagicTower.PactLevel >= 9)
             AgonyButton.interactable = true;
         else
             AgonyButton.interactable = false;
 
-        if (BlackMagicTower.PactLevel > 6)
+        if (BlackMagicTower.PactLevel >= 6)
             LethargyButton.interactable = true;
         else
             LethargyButton.interactable = false;
-
     }
 }

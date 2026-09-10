@@ -144,7 +144,7 @@ class Konane : BlankSlate
         }
         if (size > 19)
             size = 19;
-        return Sprites[18 + size];
+        return Sprites[24 + size];
     }
 
     protected override Sprite BodyAccentSprite(Actor_Unit actor) // Right WIng

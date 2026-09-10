@@ -593,24 +593,66 @@ public class Empire
     {
         EmpireBuildingLimit = new Dictionary<ConstructibleType, int>
         {
-            [ConstructibleType.WorkCamp] = Config.BuildConfig.WorkCamp.BuildLimit,
-            [ConstructibleType.LumberSite] = Config.BuildConfig.LumberSite.BuildLimit,
-            [ConstructibleType.Quarry] = Config.BuildConfig.Quarry.BuildLimit,
-            [ConstructibleType.CasterTower] = Config.BuildConfig.CasterTower.BuildLimit,
-            [ConstructibleType.BarrierTower] = Config.BuildConfig.BarrierTower.BuildLimit,
-            [ConstructibleType.DefEncampment] = Config.BuildConfig.DefenseEncampment.BuildLimit,
-            [ConstructibleType.Academy] = Config.BuildConfig.Academy.BuildLimit,
-            [ConstructibleType.DarkMagicTower] = Config.BuildConfig.DarkMagicTower.BuildLimit,
-            [ConstructibleType.TemporalTower] = Config.BuildConfig.TemporalTower.BuildLimit,
-            [ConstructibleType.Teleporter] = Config.BuildConfig.Teleporter.BuildLimit,
-            [ConstructibleType.Laboratory] = Config.BuildConfig.Laboratory.BuildLimit,
-            [ConstructibleType.TownHall] = Config.BuildConfig.TownHall.BuildLimit,
+            [ConstructibleType.WorkCamp] = 0,
+            [ConstructibleType.LumberSite] = 0,
+            [ConstructibleType.Quarry] = 0,
+            [ConstructibleType.CasterTower] = 0,
+            [ConstructibleType.BarrierTower] = 0,
+            [ConstructibleType.DefEncampment] = 0,
+            [ConstructibleType.Academy] = 0,
+            [ConstructibleType.DarkMagicTower] = 0,
+            [ConstructibleType.TemporalTower] = 0,
+            [ConstructibleType.Teleporter] = 0,
+            [ConstructibleType.Laboratory] = 0,
+            [ConstructibleType.TownHall] = 0,
         };
     }
 
     internal bool WithinBuildLimit(ConstructibleType type)
     {
-        if (EmpireBuildingLimit[type] == 0)
+        int max_of_type = -1;
+        switch (type)
+        {
+            case ConstructibleType.WorkCamp:
+                max_of_type = Config.BuildConfig.WorkCamp.BuildLimit;
+                break;
+            case ConstructibleType.LumberSite:
+                max_of_type = Config.BuildConfig.LumberSite.BuildLimit;
+                break;
+            case ConstructibleType.Quarry:
+                max_of_type = Config.BuildConfig.Quarry.BuildLimit;
+                break;
+            case ConstructibleType.CasterTower:
+                max_of_type = Config.BuildConfig.CasterTower.BuildLimit;
+                break;
+            case ConstructibleType.BarrierTower:
+                max_of_type = Config.BuildConfig.BarrierTower.BuildLimit;
+                break;
+            case ConstructibleType.DefEncampment:
+                max_of_type = Config.BuildConfig.DefenseEncampment.BuildLimit;
+                break;
+            case ConstructibleType.Academy:
+                max_of_type = Config.BuildConfig.Academy.BuildLimit;
+                break;
+            case ConstructibleType.DarkMagicTower:
+                max_of_type = Config.BuildConfig.DarkMagicTower.BuildLimit;
+                break;
+            case ConstructibleType.TemporalTower:
+                max_of_type = Config.BuildConfig.TemporalTower.BuildLimit;
+                break;
+            case ConstructibleType.Laboratory:
+                max_of_type = Config.BuildConfig.Laboratory.BuildLimit;
+                break;
+            case ConstructibleType.Teleporter:
+                max_of_type = Config.BuildConfig.Teleporter.BuildLimit;
+                break;
+            case ConstructibleType.TownHall:
+                max_of_type = Config.BuildConfig.TownHall.BuildLimit;
+                break;
+            default:
+                break;
+        }
+        if (EmpireBuildingLimit[type] >= max_of_type)
         {
             return false;
         }

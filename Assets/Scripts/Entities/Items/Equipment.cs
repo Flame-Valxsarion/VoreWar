@@ -22,7 +22,7 @@ public enum EquipmentActivator
     WhenRangedAttacked, // ActorUnit, attacker, damage
     WhenRangedHit, // ActorUnit, attacker, damage
     WhenRangedMissed, // ActorUnit, attacker, damage
-    OnSpellCast, // ActorUnit, Target (Can be Null), damage
+    OnSpellCast, // ActorUnit, Position, damage
     WhenTargetedBySpellDamage, // ActorUnit, attacker, damage
     WhenMissedBySpellDamage,  // ActorUnit, attacker, damage
     WhenHitBySpellDamage,  // ActorUnit, attacker, damage

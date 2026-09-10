@@ -752,6 +752,11 @@ public class ContentSettings : MonoBehaviour
         Config.World.OverallMonsterCapModifier = PlayerPrefs.GetFloat("OverallMonsterCapModifier", 1);
         Config.World.OverallMonsterSpawnRateModifier = PlayerPrefs.GetFloat("OverallMonsterSpawnRateModifier", 1);
         Config.World.RevealTurn = PlayerPrefs.GetInt("RevealTurn", 50);
+        Config.World.NightRounds = PlayerPrefs.GetInt("NightRounds", 1);
+        Config.World.BaseNightChance = PlayerPrefs.GetFloat("BaseNightChance", 0);
+        Config.World.NightChanceIncrease = PlayerPrefs.GetFloat("NightChanceIncrease", 0.1f);
+        Config.World.NightStrategicSightReduction = PlayerPrefs.GetInt("NightStrategicSightReduction", 1);
+        Config.World.DefualtTacticalSightRange = PlayerPrefs.GetInt("DefualtTacticalSightRange", 1);
         Config.World.TacticalMovementSoftCap = PlayerPrefs.GetInt("TacticalMovementSoftCap", -1);
         Config.World.TacticalMovementHardCap = PlayerPrefs.GetInt("TacticalMovementHardCap", -1);
         Config.World.SizeAccuracyMod = PlayerPrefs.GetFloat("SizeAccuracyMod", 0.01f);

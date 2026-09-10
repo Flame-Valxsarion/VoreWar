@@ -8,7 +8,7 @@ class DefenseEncampment : ConstructibleBuilding
     public BuildingUpgrade levelUpgrade;
 
     [OdinSerialize]
-    internal int AvailibleDefenders;
+    internal int AvailableDefenders;
     [OdinSerialize]
     internal int TrainTimer;
 
@@ -26,24 +26,24 @@ class DefenseEncampment : ConstructibleBuilding
         unitUpgrade = AddUpgrade(unitUpgrade, Config.BuildConfig.DefenseEncampmentUnitsUpgrade);
         levelUpgrade = AddUpgrade(levelUpgrade, Config.BuildConfig.DefenseEncampmentLevelUpgrade);
 
-        AvailibleDefenders = 0;
+        AvailableDefenders = 0;
         TrainTimer = 0;
     }
     internal override void RunBuildingFunction()
     {
-        if (maxDefenders > AvailibleDefenders)
+        if (maxDefenders > AvailableDefenders)
         {
             TrainTimer--;
             if (TrainTimer < 0)
             {
-                AvailibleDefenders++;
+                AvailableDefenders++;
                 TrainTimer = (int)Math.Ceiling(Config.BuildConfig.DefenseEncampmentTrainTime * (levelUpgrade.built ? 0.5 : 1));
             }
         }
 
-        if (AvailibleDefenders > maxDefenders)
+        if (AvailableDefenders > maxDefenders)
         {
-            AvailibleDefenders = maxDefenders;
+            AvailableDefenders = maxDefenders;
         }
     }
 }

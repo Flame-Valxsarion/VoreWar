@@ -73,7 +73,7 @@
     /// <summary>Healing on unit is reduced based on effect strength</summary>
     Necrosis = 37,
     /// <summary>Unit takes increased damage based on effect strength</summary>
-    Errosion = 38,
+    Erosion = 38,
     /// <summary>Unit takes part of the damage it took after this effect expires</summary>
     Agony = 39,
     /// <summary>Strength, Dexterity, and Agility are reduced based on remaining duration</summary>
@@ -94,7 +94,7 @@
     Fractured = 47,
     /// <summary>Unit is more likey to be hit by weapons and spells by 1% multiplied by effect strength.</summary>
     Marked = 48,
-    /// <summary>Unit gains +10 effective stomach capacity. Unit will fall asleep for every turn they have this effect if this effect expires.</summary>
+    /// <summary>Unit gains +10 base stomach capacity. Unit will fall asleep for every turn they have this effect if this effect expires.</summary>
     Gorging = 49,
     /// <summary>Prevents movement.</summary>
     Stunned = 50,

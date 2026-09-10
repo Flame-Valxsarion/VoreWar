@@ -1,4 +1,5 @@
-﻿public enum TacticalTileType
+﻿
+public enum TacticalTileType
 {
     grass,
     tree1,
@@ -33,12 +34,11 @@
     grassFlower,
     grassMediumRock,
     grassSmallRock,
-
 }
 
 static class TacticalTileInfo
 {
-    static internal int TileCost(Vec2 location)
+    static internal int TileCost(Vec2i location)
     {
         var effects = State.GameManager.TacticalMode.ActiveEffects;
         if (effects != null)
@@ -106,4 +106,3 @@ static class TacticalTileInfo
         }
     }
 }
-

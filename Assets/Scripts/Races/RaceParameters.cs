@@ -159,29 +159,13 @@ static class RaceParameters
     static readonly RaceTraits Seraph;
     static readonly RaceTraits SoulSprite;
 
-    static Unit tempUnit;
-
-
-    /// <summary>
-    /// Mostly used as a helper function, for the village race population growth
-    /// </summary>
-    /// <param name="race"></param>
-    /// <returns></returns>
     internal static RaceTraits GetRaceTraits(Race race)
-    {
-        if (tempUnit == null)
-            tempUnit = new Unit(race);
-        tempUnit.Race = race;
-        return GetTraitData(tempUnit);
-    }
-
-    internal static RaceTraits GetTraitData(Unit unit)
     {
         if (Config.RaceTraitsEnabled == false)
         {
             return Default;
         }
-        switch (unit.Race)
+        switch (race)
         {
             case Race.Cats:
                 return Cats;
@@ -539,11 +523,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.PackWill,
-            Traits.PackDefense,
-            Traits.Intimidating,
-        },
+            {
+                Traits.PackWill,
+                Traits.PackDefense,
+                Traits.Intimidating,
+            },
             RaceDescription = "Natives to the realm, the Dogs embody the principle of standing together. Ranked up, they guard each other's backs, making it harder for any enemy to land a strike at them or succeed at eating them.",
         };
 
@@ -556,10 +540,10 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.ArtfulDodge,
-            Traits.ThrillSeeker
-        },
+            {
+                Traits.ArtfulDodge,
+                Traits.ThrillSeeker
+            },
             RaceDescription = "Natives of this realm, the Foxes seem incapable of taking danger seriously. They dodge attacks at the last second and only seem to grow ever bolder as death approaches them. Entire armies have fallen exhausted as a group of foxes dances among them, ready to be devoured once the time is right.",
         };
 
@@ -571,17 +555,8 @@ static class RaceParameters
             FavoredStat = Stat.Mind,
             DeployCost = 1,
             Upkeep = 21f,
-			PowerAdjustment = 2f,
+            PowerAdjustment = 2f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.BladderVore },
-            RacialTraits = new List<Traits>()
-            {
-                Traits.Charmer,
-                Traits.Temptation,
-                Traits.Possession,
-                Traits.ForceFeeder,
-                Traits.ManaDrain,
-                Traits.CreateSpawn,
-            },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 14),
@@ -592,6 +567,15 @@ static class RaceParameters
                 Agility = new RaceStats.StatRange(8, 18),
                 Voracity = new RaceStats.StatRange(12, 18),
                 Stomach = new RaceStats.StatRange(12, 18),
+            },
+            RacialTraits = new List<Traits>()
+            {
+                Traits.Charmer,
+                Traits.Temptation,
+                Traits.Possession,
+                Traits.ForceFeeder,
+                Traits.ManaDrain,
+                Traits.CreateSpawn,
             },
             SpawnRace = Race.Whisp,
             ConversionRace = Race.Foxes,
@@ -607,14 +591,13 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.PackStrength,
-            Traits.PackVoracity,
-            Traits.Tenacious,
-        },
+            {
+                Traits.PackStrength,
+                Traits.PackVoracity,
+                Traits.Tenacious,
+            },
             RaceDescription = "Natives of this realm, the Wolves have a history of hunting in packs extending beyond the crafting of their first weapons. While a lone Wolf can still be a worthy adversary, their true strength comes from working with their kin.",
         };
-
 
         Bunnies = new RaceTraits()
         {
@@ -625,16 +608,14 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 2f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.ProlificBreeder,
-            Traits.EasyToVore,
-            Traits.ArtfulDodge,
-            Traits.EvasiveBattler
-        },
+            {
+                Traits.ProlificBreeder,
+                Traits.EasyToVore,
+                Traits.ArtfulDodge,
+                Traits.EvasiveBattler
+            },
             RaceDescription = "Among the weaker but more numerous of the native sapient species, the Bunnies are on the verge of turning predators themselves. While lacking in sheer strength they make up for it with agility and numbers, having much fun ensuring the latter.",
         };
-
-
 
         Lizards = new RaceTraits()
         {
@@ -643,19 +624,16 @@ static class RaceParameters
             HasTail = true,
             FavoredStat = Stat.Voracity,
             DeployCost = 1,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             Upkeep = 4f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.Resilient,
-            Traits.Intimidating,
-            Traits.GiantSlayer,
-        },
-
+            {
+                Traits.Resilient,
+                Traits.Intimidating,
+                Traits.GiantSlayer,
+            },
             RaceDescription = "Emerging from dense jungles, the Lizards are eager to expand their presence in the world. Their hard scales offered them great protection from the thorns and insects of their former home, and still offer natural resistance from harm.",
         };
-
-
 
         Slimes = new RaceTraits()
         {
@@ -666,14 +644,13 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.BoggingSlime,
-            Traits.GelatinousBody,
-            Traits.SoftBody,
-        },
+            {
+                Traits.BoggingSlime,
+                Traits.GelatinousBody,
+                Traits.SoftBody,
+            },
             RaceDescription = "A puddle of goo given form by the power of their core, the Slimes have a need to act as if they had solid bodies. Their true form is still almost liquid though, lacking organs or other features of note, and thus very hard to damage by normal means.",
         };
-
 
         Scylla = new RaceTraits()
         {
@@ -684,15 +661,14 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            //Traits.Aquatic,
-            Traits.TentacleHarassment,
-            Traits.KeenReflexes,
-            Traits.AwkwardShape,
-        },
+            {
+                //Traits.Aquatic,
+                Traits.TentacleHarassment,
+                Traits.KeenReflexes,
+                Traits.AwkwardShape,
+            },
             RaceDescription = "Trapped under the surface at their old world, the Scylla surged forth when the appearance of mystical portals gave them passage to lands above water. Their many tentacles seem to act as if having minds of their own, hindering and harassing their enemies.",
         };
-
 
         Harpies = new RaceTraits()
         {
@@ -703,14 +679,13 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 2f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.Flight,
-            Traits.Pathfinder,
-            Traits.KeenReflexes
-        },
+            {
+                Traits.Flight,
+                Traits.Pathfinder,
+                Traits.KeenReflexes
+            },
             RaceDescription = "Emerging from a portal high in the sky, the Harpyia saw a whole new land beneath them and descended looking for fresh prey. While unable to fly and hold weapons at their claws at the same time, the harpy are quite adept at fighting with their strong talons, as well as at dropping things from high above instead of using more prevalent ranged weapons.",
         };
-
 
         Imps = new RaceTraits()
         {
@@ -720,12 +695,6 @@ static class RaceParameters
             FavoredStat = Stat.Will,
             DeployCost = 1,
             Upkeep = 3f,
-            RacialTraits = new List<Traits>()
-        {
-            Traits.PackStomach,
-            Traits.MagicResistance,
-            Traits.AstralCall,
-        },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 14),
@@ -737,9 +706,14 @@ static class RaceParameters
                 Voracity = new RaceStats.StatRange(12, 18),
                 Stomach = new RaceStats.StatRange(20, 30),
             },
+            RacialTraits = new List<Traits>()
+            {
+                Traits.PackStomach,
+                Traits.MagicResistance,
+                Traits.AstralCall,
+            },
             RaceDescription = "Following the scent of new lands to torment, these beings erupted forth from the underworld. So eager are they that at the promise of battle some of the Imps still in the infernal realm may manifest just for a chance at carnage.",
         };
-
 
         Humans = new RaceTraits()
         {
@@ -750,13 +724,12 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.AdeptLearner,
-            Traits.Clever
-        },
+            {
+                Traits.AdeptLearner,
+                Traits.Clever
+            },
             RaceDescription = "These nearly hairless, soft skinned creatures suffer from a lack in the way of physical abilities, but have proven capable of improving their skills at a great speed.",
         };
-
 
         Crypters = new RaceTraits()
         {
@@ -767,14 +740,13 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.SlowBreeder,
-            Traits.MetalBody,
-            Traits.Resilient
-        },
+            {
+                Traits.SlowBreeder,
+                Traits.MetalBody,
+                Traits.Resilient
+            },
             RaceDescription = "Arriving from a realm long dead, the Crypters shambled forth when the smell of the living beckoned them from their ancient tombs. Cold, hard metal resists both damage and attempts to eat it, but the strange powers of this realm provide no aid in crafting new automatons for the ancient spirits to inhabit.",
         };
-
 
         Lamia = new RaceTraits()
         {
@@ -786,12 +758,12 @@ static class RaceParameters
             Upkeep = 7f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.BladderVore },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Ravenous,
-            Traits.Biter,
-            Traits.DualStomach,
-            Traits.StrongGullet
-        },
+            {
+                Traits.Ravenous,
+                Traits.Biter,
+                Traits.DualStomach,
+                Traits.StrongGullet
+            },
             RaceDescription = "Natives to this realm, these legless beings were once the strongest and largest hunters of the land. The sudden emergence of many new species left the Lamia uncertain at first, but soon their dual stomachs won and they focused on testing the taste of the new arrivals.",
         };
 
@@ -804,10 +776,10 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.BornToMove,
-            Traits.Resourceful,
-        },
+            {
+                Traits.BornToMove,
+                Traits.Resourceful,
+            },
             RaceDescription = "Their old home turning ever drier and hotter, the Kangaroo tribes did not hesitate when mysterious portals opened and granted them passage to greener lands. Nomadic by nature, the Kangaroos are very adept at carrying plenty of gear with them and aren't unused to traveling with a full belly either.",
         };
 
@@ -820,11 +792,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.StrongMelee,
                 Traits.ForcefulBlow,
                 Traits.StretchyInsides,
-        },
+            },
             RaceDescription = "Once mere cattle, a drop of minotaur blood slumbered in their veins. Rising and butchering their \"masters\", the Taurus took what they could from their old ranches and fled through mysterious portals that had heralded their rise. While intelligent, the Taurus trust in their physical might and great size, tossing their enemies aside as they trample on.",
         };
 
@@ -837,11 +809,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.KeenReflexes,
                 Traits.EscapeArtist,
                 Traits.MadScience
-        },
+            },
             RaceDescription = "Their own world having risen and fallen, the Crux arrived to this one almost by accident. While they initially thought it rather a boring place, they soon realised its potential and were eager to try and shape it according to their own ever shifting ideals.",
         };
 
@@ -854,11 +826,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 4f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Charge,
                 Traits.StrongMelee,
                 Traits.RangedIneptitude,
-        },
+            },
             RaceDescription = "Mighty horsefolk from another world, the Equines are a proud people, and while from the outside they can seem to move and act with remarkable unity, within their ranks is a game of constant power struggles and jockeying for position and influence.",
         };
 
@@ -870,14 +842,14 @@ static class RaceParameters
             FavoredStat = Stat.Agility,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.KeenReflexes,
                 Traits.StrongMelee,
                 Traits.EscapeArtist
-        },
-            RaceDescription = "When the portal appeared over Lake ColVilous in the year RC102, the city of Gold Ring quickly fell into a panic.  Nothing hostile came from the rift, however, and that initial panic changed into curiosity.  After the progressive minds determined that it was a gateway to another world, and a world full of green plants at that, the only thing to do was form a Scouting Regiment to secure a foothold and see what might be gained from this mysterious place.  But just as that first settlement was established, the portal blinked out of existence, cutting off passage between Tal and this new world.  The changes began a mere week into isolation: People became more violent and sexually aggressive, with physical changes to match the mental ones shortly afterward.  And then... Then the hunger set in.",
+            },
+            RaceDescription = "When the portal appeared over Lake ColVilous in the year RC102, the city of Gold Ring quickly fell into a panic. Nothing hostile came from the rift, however, and that initial panic changed into curiosity. After the progressive minds determined that it was a gateway to another world, and a world full of green plants at that, the only thing to do was form a Scouting Regiment to secure a foothold and see what might be gained from this mysterious place. But just as that first settlement was established, the portal blinked out of existence, cutting off passage between Tal and this new world. The changes began a mere week into isolation: People became more violent and sexually aggressive, with physical changes to match the mental ones shortly afterward. And then... Then the hunger set in.",
         };
 
         Bees = new RaceTraits()
@@ -888,15 +860,15 @@ static class RaceParameters
             FavoredStat = Stat.Agility,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.CockVore, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.BladderVore },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.KeenReflexes,
                 Traits.PackDefense,
                 Traits.Stinger
-        },
+            },
             RaceDescription = "The Bees exist in a sort of loose hive mind, and tend to care little for the loss of individual members of their kind. They tend to be ruthless when it comes to the defence of what they already own, though they tend to only strike outwards when they feel that there is something to be gained by doing so. Or when they're hungry. At their size, the typical diet of smaller bees, pollen, nectar, and honey, just doesn't quite cut it.",
         };
 
@@ -908,8 +880,8 @@ static class RaceParameters
             FavoredStat = Stat.Strength,
             DeployCost = 1,
             Upkeep = 7f,
-			PowerAdjustment = 1.5f,
-			RaceStats = new RaceStats()
+            PowerAdjustment = 1.5f,
+            RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(10, 16),
                 Dexterity = new RaceStats.StatRange(10, 16),
@@ -921,11 +893,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(15, 18),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.StrongMelee,
                 Traits.NimbleClimber,
                 Traits.Webber,
-        },
+            },
             RaceDescription = "The Driders are a mysterious folk, with lots of conflicting information on what they are, where they came from, and what they want. This actually seems to be deliberate on their part, as Driders often spread misinformation on themselves to confuse their potential future prey and trick them into making mistakes. This has actually worked too well, as the Driders have actually forgotten their true history. Without a solid account on them, almost all stories and rumors of the Driders can be considered equally untrue, and therefore equally true.",
         };
 
@@ -938,11 +910,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Tempered,
                 Traits.SlowAbsorption,
                 Traits.PollenProjector
-        },
+            },
             RaceDescription = "The Alraunes are a deeply spiritual people, with a deep connection to nature, especially plants. Unfortunately, they tend to take an overprotective stance towards plants and will ruthlessly attack and devour any who dare harm plant life at all. That includes walking on grass, by the way. Tread lightly!",
         };
 
@@ -955,11 +927,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.ArtfulDodge,
                 Traits.Vampirism
-        },
+            },
             RaceDescription = "Winged half-humans, the Bats generally prefer to live in caves, or, failing that, stick to being mostly active at night. Of the so called \"civilized\" races, the bats are one of the more aggressive towards outsiders, their habit of near constant flight while landing less than they should demanding lots of nutrients to support, resulting in them being far more eager to devour their foes than most.",
         };
 
@@ -971,13 +943,13 @@ static class RaceParameters
             FavoredStat = Stat.Strength,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.TasteForBlood,
                 Traits.Pounce,
                 Traits.Frenzy,
-        },
+            },
             RaceDescription = "Long before \"elder races\" walked among the stars, the Panthers thrived. Long before first words of power were uttered, they have carved their homes into the lightning-struck bark, feeding off its power. And long after the last bastion of so-called civilization will fall to onslaught of wings, claws and fangs, they will thrive in the darkness, pouncing on unsuspecting prey.",
         };
 
@@ -990,12 +962,12 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.MagicResistance,
                 Traits.HealingBlood,
                 Traits.Slippery,
                 Traits.WaterWalker,
-        },
+            },
             RaceDescription = "The Merfolk are a tricky people, as they combine magic and deception to lure and manipulate their foes, often directing them to monster threats. Whoever wins at that point, the Merfolk come in to eat up the remaining threats.",
         };
 
@@ -1007,13 +979,13 @@ static class RaceParameters
             FavoredStat = Stat.Agility,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.KeenShot,
                 Traits.Featherweight,
                 Traits.Flight,
-        },
+            },
             RaceDescription = "A highly eclectic people, large amounts of \"Avian\" culture are actually derived from other peoples and races. This can largely be credited to their having started late. By the time the Avians properly entered the civilizational stage, most other races had already entered. Now, the Avians are eager to continue adding others to themselves. And if the Avians can't merge your culture into their own, they may instead opt to merge your body into their body fat.",
         };
 
@@ -1025,13 +997,13 @@ static class RaceParameters
             FavoredStat = Stat.Strength,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.PackStrength,
                 Traits.RangedIneptitude,
                 Traits.AntPheromones
-        },
+            },
             RaceDescription = "The Ants exist in a sort of loose hive mind, and tend to care little for the loss of individual members of their swarms. Ants have an innate and insatiable drive to expand their territory and conquer all there is. Ants often control lesser ant species through complex pheromones, which are also generally used for ant-to-ant communication.",
         };
 
@@ -1044,12 +1016,12 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Pounce,
                 Traits.HeavyPounce,
                 Traits.RangedVore,
                 Traits.Clumsy,
-        },
+            },
             RaceDescription = "Native to the marshlands of this world, Frogs are well known for their highly territorial behavior, with Frog chiefdoms going to war with each other over perceived slights just as often as they go to war with others. Their wide mouths and big bellies aren't just for show, and many an unfortunate soul have found themselves on the wrong side of a Frog's flesh. Namely, the inside.",
         };
 
@@ -1061,14 +1033,14 @@ static class RaceParameters
             FavoredStat = Stat.Voracity,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Biter,
                 Traits.SenseWeakness,
                 Traits.StrongGullet,
                 Traits.WaterWalker,
-        },
+            },
             RaceDescription = "The Sharks are not natives of this world. In their own world, they are the only sapient people, and had a wide variety of cultures and lifestyles. However, all Sharks in this world came through when a pirate ship in their realm accidently went through a portal to this one. Even today, most Sharks are pirates, and a majority of pirates are Sharks.",
         };
 
@@ -1081,11 +1053,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.EvasiveBattler,
                 Traits.ArtfulDodge,
                 Traits.PackDefense,
-        },
+            },
             RaceDescription = "The deer are one of the Realm's native peoples, and one with a long history of being labeled as \"prey.\" Whether historical Deer couldn't vore or simply didn't know how to vore is largely unknown, but in recent times anyone who calls a Deer prey in front of them often gets a personal tour of the cervid digestive system.",
         };
 
@@ -1110,12 +1082,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ViralBiology,
                 Traits.SlowBreeder,
                 Traits.FastDigestion,
-        },
-            RaceDescription = "The Aabayx are a species of virosapiens who recently revealed themselves to the world and were quick to commit to the stage of war.  Strangely enough, they are not new arrivals to the realm, but rather have been in extreme isolation in an unknown location and were waiting for the exact right time to resurface and conquer the masses.  That time is now.",
+            },
+            RaceDescription = "The Aabayx are a species of virosapiens who recently revealed themselves to the world and were quick to commit to the stage of war. Strangely enough, they are not new arrivals to the realm, but rather have been in extreme isolation in an unknown location and were waiting for the exact right time to resurface and conquer the masses. That time is now.",
         };
 
         Mice = new RaceTraits()
@@ -1127,12 +1099,12 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 2f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ProlificBreeder,
                 Traits.Timid,
                 Traits.SwiftStrike,
                 Traits.Clever,
-        },
+            },
             RaceDescription = "Originally ordinary lab mice, tucked away in a secret laboratory, the gift of sentience and a heightened sense of intellect was suddenly bestowed upon them. No mouse knows the identity of this mysterious actor or the reason they were given such a boon, but all are grateful for their improved status.",
         };
 
@@ -1159,14 +1131,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(40, 50),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.TheMatron,
                 Traits.ForcefulBlow,
                 Traits.Cruel,
                 Traits.SlowAbsorption,
                 Traits.Ravenous,
-        },
-            RaceDescription = "Abakhanskya is an ancient dragoness hailing from another realm.  Despite this fact, she has been here for generations upon generations and has quite the body to show for it, absolutely brimming with the nutrients stolen from countless prey throughout the years.  \n<b>She is an unstoppable force of predatory nature, it is unwise to face her on fair terms.</b>",
+            },
+            RaceDescription = "Abakhanskya is an ancient dragoness hailing from another realm. Despite this fact, she has been here for generations upon generations and has quite the body to show for it, absolutely brimming with the nutrients stolen from countless prey throughout the years.\n<b>She is an unstoppable force of predatory nature, it is unwise to face her on fair terms.</b>",
         };
 
         MatronsMinions = new RaceTraits()
@@ -1177,7 +1149,7 @@ static class RaceParameters
             FavoredStat = Stat.Agility,
             DeployCost = 1,
             Upkeep = 2f,
-			PowerAdjustment = 0.9f,
+            PowerAdjustment = 0.9f,
             RacialTraits = new List<Traits>()
             {
                 Traits.ProlificBreeder,
@@ -1196,7 +1168,7 @@ static class RaceParameters
             FavoredStat = Stat.Voracity,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
             {
                 Traits.PackVoracity,
@@ -1204,7 +1176,7 @@ static class RaceParameters
                 Traits.Biter,
                 Traits.TasteForBlood,
             },
-            RaceDescription = "A race of brutish and cunning beings hailing from the mountainous regions of the east.  Normally tribal, these hyena-like mammals are prone to in-fighting and cannibalism over petty disputes-- such as whose shadow is larger.  The Gnolls were most often seen around mercenary camps in small packs.  Much to the dismay of the other nations of this world, however, a powerful leader has appeared and managed to amass them into a warlike nation of their own.",
+            RaceDescription = "A race of brutish and cunning beings hailing from the mountainous regions of the east. Normally tribal, these hyena-like mammals are prone to in-fighting and cannibalism over petty disputes-- such as whose shadow is larger. The Gnolls were most often seen around mercenary camps in small packs. Much to the dismay of the other nations of this world, however, a powerful leader has appeared and managed to amass them into a warlike nation of their own.",
         };
 
         MainlandElves = new RaceTraits()
@@ -1216,11 +1188,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.AdeptLearner,
-            Traits.MagicProwess,
-            Traits.GiantSlayer,
-        },
+            {
+                Traits.AdeptLearner,
+                Traits.MagicProwess,
+                Traits.GiantSlayer,
+            },
             RaceDescription = "A mix of many races of elves from various regions. Due to their strong diversity, their ideologies are rather similar to the humans instead of any specific elven race.",
         };
 
@@ -1232,13 +1204,13 @@ static class RaceParameters
             FavoredStat = Stat.Endurance,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.Intimidating,
-            Traits.HardSkin,
-            Traits.Berserk,
-        },
+            {
+                Traits.Intimidating,
+                Traits.HardSkin,
+                Traits.Berserk,
+            },
             RaceDescription = "When Fimbulwinter decended upon Bjornheim, the home realm of the Bears, many thought they were doomed. But then, a gateway formed in the snow coated landscape, and a band of raiders was able to escape the end times of one world by simply moving to another. Now in this realm, they raid and pillage, taking the valuables of other peoples for themselves, while devouring any who fail to fight well enough to ward these ursine vikings away.",
         };
 
@@ -1250,11 +1222,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.AdeptLearner,
-            Traits.PackWill,
-            Traits.Eeveeolutionist,
-        },
+            {
+                Traits.AdeptLearner,
+                Traits.PackWill,
+                Traits.Eeveeolutionist,
+            },
             RaceDescription = "Not too long ago, a portal opened up to a universe inhabited by various anthro pokémon species. Of the many inhabitants, the Eeveelutions were one of the only groups who came through. While very few Eevee's were brought through directly, all Eeveelutions are born as Eevees, building a local population. After their initial entry into the Realm, the Eeveelutions founded first the \"Eeveelution Empire,\" a police state which quickly collapsed into several smaller groups built around the different Eeveelutions, but Eevees, inherently, make up a significant portion of all Eeveelution nations.",
         };
 
@@ -1266,11 +1238,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.Intimidating,
-            Traits.PackStrength,
-            Traits.EscapeArtist,
-        },
+            {
+                Traits.Intimidating,
+                Traits.PackStrength,
+                Traits.EscapeArtist,
+            },
             ConversionRace = Race.Eevee,
             RaceDescription = "After the fall of the \"Eeveelution Empire\", The Umbreons took the first opportunity they had to attack the Sylveons, Before eventually running off. Unlike most Eeveelutions, They got away with very little resources due to the fact they were too busy filling their bellies with Sylveons to gather anything. So they resorted to taking the weapons and armor from those they defeated and melted it down to form their weapons and armor. Also unlike most Eeveelutions, They deny any resemblance to their feral counter parts. They are also quite intelligent... When they aren't drunk having discovered various forms of alcohol.",
         };
@@ -1283,13 +1255,13 @@ static class RaceParameters
             FavoredStat = Stat.Strength,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.PackStrength,
-            Traits.Pounce,
-            Traits.Biter,
-        },
+            {
+                Traits.PackStrength,
+                Traits.Pounce,
+                Traits.Biter,
+            },
             RaceDescription = "Canine people from another world, the Lupines are a curious people, with unique views on vore and the realm they find themselves trapped within. On the whole, they view vore as highly taboo, but they're also seemingly more prone to becoming addicted to it, resulting in a very strange society.",
         };
 
@@ -1301,13 +1273,13 @@ static class RaceParameters
             FavoredStat = Stat.Endurance,
             DeployCost = 1,
             Upkeep = 4f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.PackMind,
-            Traits.DexterousDefense,
-            Traits.Finesse,
-        },
+            {
+                Traits.PackMind,
+                Traits.DexterousDefense,
+                Traits.Finesse,
+            },
             RaceDescription = "A race of desert dwelling canine, in recent times, the constant warfare of the realm has brought them out of their isolation. Where they traditionally stood guard against any fools who sought to plunder their sacred pyramids, now they venture out to practice a doctrine of \"Defense by Offense.\".",
         };
 
@@ -1320,11 +1292,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 4f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.FocusedDodge,
-            Traits.ArtfulDodge,
-            Traits.LightFrame,
-        },
+            {
+                Traits.FocusedDodge,
+                Traits.ArtfulDodge,
+                Traits.LightFrame,
+            },
             RaceDescription = "The spooky spirits of the dead, come back in new incorporeal forms to haunt and feast upon the living. Formed when a soul takes five or more years to cross to the other side, these poltergeists, being dead, have no need for nutrition, and hunt for the fun of it and to spite the living.",
         };
 
@@ -1371,7 +1343,7 @@ static class RaceParameters
             FavoredStat = Stat.Endurance,
             DeployCost = 1,
             Upkeep = 5f,
-			PowerAdjustment = 1.2f,
+            PowerAdjustment = 1.2f,
             RacialTraits = new List<Traits>()
             {
                 Traits.DualStomach,
@@ -1390,14 +1362,6 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 4f,
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.BreastVore, VoreType.Anal, VoreType.TailVore, VoreType.CockVore, VoreType.BladderVore },
-            RacialTraits = new List<Traits>()
-            {
-                Traits.Dazzle,
-                Traits.Flight,
-                Traits.EnthrallingDepths,
-                Traits.PleasurableTouch,
-                Traits.Charmer
-            },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(8, 12),
@@ -1409,7 +1373,15 @@ static class RaceParameters
                 Voracity = new RaceStats.StatRange(8, 14),
                 Stomach = new RaceStats.StatRange(8, 14),
             },
-            RaceDescription = "You know what she is.  A demon from Hell who will suck the life force right out of you.  But, nobody ever said they got their fix exclusively through sex...  There are much more conventional ways to steal life force on this world and the succubi had no trouble adapting to those methods.  Be careful you don't mistake them for their less-hungry/more-lusty siblings from biblical lore lest you end up dissolving away within their bellies or tails...",
+            RacialTraits = new List<Traits>()
+            {
+                Traits.Dazzle,
+                Traits.Flight,
+                Traits.EnthrallingDepths,
+                Traits.PleasurableTouch,
+                Traits.Charmer
+            },
+            RaceDescription = "You know what she is. A demon from Hell who will suck the life force right out of you. But, nobody ever said they got their fix exclusively through sex... There are much more conventional ways to steal life force on this world and the succubi had no trouble adapting to those methods. Be careful you don't mistake them for their less-hungry/more-lusty siblings from biblical lore lest you end up dissolving away within their bellies or tails...",
             RaceAI = RaceAI.Hedonist,
         };
 
@@ -1422,11 +1394,6 @@ static class RaceParameters
             PowerAdjustment = 1.5f,
             DeployCost = 1,
             Upkeep = 11f,
-            RacialTraits = new List<Traits>()
-        {
-            Traits.Maul,
-            Traits.Frenzy,
-        },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(16, 24),
@@ -1437,6 +1404,11 @@ static class RaceParameters
                 Agility = new RaceStats.StatRange(18, 28),
                 Voracity = new RaceStats.StatRange(12, 20),
                 Stomach = new RaceStats.StatRange(12, 18),
+            },
+            RacialTraits = new List<Traits>()
+            {
+                Traits.Maul,
+                Traits.Frenzy,
             },
             RaceDescription = "Somewhat enigmatic, it is uncertain if the Tigers are native to this realm or came from elsewhere. They do not seem interested in settling down though, joining armies to test their considerable skills in battle instead.",
         };
@@ -1449,13 +1421,6 @@ static class RaceParameters
             FavoredStat = Stat.Mind,
             DeployCost = 1,
             Upkeep = 3f,
-            RacialTraits = new List<Traits>()
-        {
-            Traits.Clever,
-            Traits.Tempered,
-            Traits.ArtfulDodge,
-            Traits.EscapeArtist,
-        },
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(6, 14),
@@ -1466,6 +1431,13 @@ static class RaceParameters
                 Agility = new RaceStats.StatRange(10, 16),
                 Voracity = new RaceStats.StatRange(8, 16),
                 Stomach = new RaceStats.StatRange(10, 15),
+            },
+            RacialTraits = new List<Traits>()
+            {
+                Traits.Clever,
+                Traits.Tempered,
+                Traits.ArtfulDodge,
+                Traits.EscapeArtist,
             },
             RaceDescription = "Small and physically unintimidating, the Goblins came from a realm far ahead in technology. Were it not for the lack of materials to replicate their greatest inventions and the small size of their weapons, the Goblins might have claimed the entire land. As it is, they learned to be good at dodging and escaping the maws and guts of predators, through one end or another.",
         };
@@ -1496,10 +1468,10 @@ static class RaceParameters
             },
             RacialTraits = new List<Traits>() // Alligator = Lizard+
             {
-                Traits.Ravenous, // Bonus to voracity before eating
-                Traits.Resilient, // Damage decrease
-                Traits.Intimidating, // Penalty to enemies in melee range
-				Traits.Crusher,
+                Traits.Ravenous,
+                Traits.Resilient,
+                Traits.Intimidating,
+                Traits.Crusher,
             },
             RaceDescription = "Natives to great swamps on another dimension, the Alligators emerge sporadically from portals across the land. Either unwilling or unable to settle this realm, they instead work as mercenaries for hire. Large, tough and intimidating, they make great bruisers, but seem totally unable to understand the principle of ranged weapons.",
         };
@@ -1513,10 +1485,10 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 2f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.ArtfulDodge,
-            Traits.Pounce,
-        },
+            {
+                Traits.ArtfulDodge,
+                Traits.Pounce,
+            },
             RaceDescription = "A race of burrowers very true to their heritage, the Puca trust their shovels and feet above advanced technology. Many a foe has found themselves swallowed up by their deep dark tunnels.",
         };
 
@@ -1529,12 +1501,12 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
-            Traits.ArtfulDodge,
-            Traits.AdeptLearner,
-            Traits.PackWill,
-            Traits.FastDigestion,
-        },
+            {
+                Traits.ArtfulDodge,
+                Traits.AdeptLearner,
+                Traits.PackWill,
+                Traits.FastDigestion,
+            },
             ConversionRace = Race.Eevee,
             RaceDescription = "After the arrival of the anthro Eeveelutions into this Realm, they have begun to experience a number of new Eeveelutions, seemingly some odd effect this Realm has on how Eevees evolve. Equaleons are one of these new forms, essentially a larger, more powerful Eevee that seemingly is the result of evolving without meeting the criteria for the other Eeveelutions. Given their somewhat smaller population, rather than host a nation of their own, most Equaleons prefer to sell their strength as mercenaries.",
         };
@@ -1547,7 +1519,7 @@ static class RaceParameters
             FavoredStat = Stat.Agility,
             DeployCost = 1,
             Upkeep = 2f,
-			PowerAdjustment = 0.9f,
+            PowerAdjustment = 0.9f,
             RacialTraits = new List<Traits>()
             {
                 Traits.ProlificBreeder,
@@ -1567,11 +1539,11 @@ static class RaceParameters
             DeployCost = 1,
             Upkeep = 3f,
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Resilient,
                 Traits.IronGut,
                 Traits.EnthrallingDepths
-        },
+            },
             RaceDescription = "Dew Sprites are extremely odd, with most believing them to be some form of corrupted Fairies made of dew, though no one has ever had a long enough conversation to verify this. Obviously, there's the issue of them trying to eat you, but even friendly Dew Sprites are rather unintelligent, and speaking with them can feel like speaking to someone with a concussion.",
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Unbirth, VoreType.BreastVore, VoreType.Anal, VoreType.BladderVore },
         };
@@ -1752,23 +1724,23 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 18),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.StrongMelee,
-            Traits.PackStrength,
-            Traits.Resilient,
-            Traits.Biter,
-        },
+           {
+             Traits.StrongMelee,
+             Traits.PackStrength,
+             Traits.Resilient,
+                Traits.Biter,
+            },
             RaceDescription = "A race renowned for their excellent smithing and startling strength despite their stature. Their settlements have rarely been seen above ground however, they are known to have ginormous kingdoms underground that dwarf most other faction's capitals.",
         };
 
         OoviKat = new RaceTraits()
         {
-            BodySize = 15,
-            StomachSize = 20,
+            BodySize = 12,
+            StomachSize = 15,
             HasTail = true,
-            FavoredStat = Stat.Strength,
+            FavoredStat = Stat.Dexterity,
             DeployCost = 1,
-            Upkeep = 5f,
+            Upkeep = 10f,
             PowerAdjustment = 1.4f,
             RaceStats = new RaceStats()
             {
@@ -1810,14 +1782,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 15),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.QuickShooter,
-            Traits.ForcefulBlow,
-            Traits.PackWill,
-            Traits.PackDefense,
-            Traits.Respawner,
-            Traits.Competitive,
-        },
+            {
+                Traits.QuickShooter,
+                Traits.ForcefulBlow,
+                Traits.PackWill,
+                Traits.PackDefense,
+                Traits.Respawner,
+                Traits.Competitive,
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.FireBomb },
             RaceDescription = "A highly trained soldier of the Red Wolf United Mercenary Company. It is unknown which faction or race first started this company due to the technology they boast and open recruitment policy. However, one thing is certain; these soldiers are no slouches when it comes to combat and are quite a formidable force on the battlefield.",
         };
@@ -1908,10 +1880,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(20, 30),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.DoubleAttack,
-            Traits.Paralyzer
-        },
+            {
+                Traits.DoubleAttack,
+                Traits.Paralyzer
+            },
             RaceDescription = "It is a matter of argument whether these beings emerged from the ocean or fell from the skies, or are even a mix of both, but they are among the first and oldest native threats the people who settled this realm faced. Their many tentacles paralyze those they touch and their rubbery bodies easily expand to engulf their prey.",
         };
 
@@ -1943,7 +1915,7 @@ static class RaceParameters
                 Traits.Biter,
                 Traits.Ravenous,
                 Traits.StrongGullet,
-				Traits.Resilient,
+                Traits.Resilient,
             },
             RaceDescription = "When the lizard folk emerged from their portal to this land, some young snakes from their old world managed to slip along. Growing fast under the effect of this new realm, the Serpents soon emerged as a ravenous horde.",
         };
@@ -1971,12 +1943,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
-				Traits.Biter,
-				Traits.Berserk,
-				Traits.Resilient,
-        },
+                Traits.Biter,
+                Traits.Berserk,
+                Traits.Resilient,
+            },
             RaceDescription = "Fast, winged, and ravenous. These lesser cousins of dragons do not have the magical abilities of true dragons, but they are still a dangerous force. They are often seen following a larger \"Wyvern Matron\". While you would assume they act as leaders to the Wyverns, it's more a case that, without a force to keep some amount of order, Wyverns often try to snack on the weakest of their ranks.",
 
         };
@@ -2003,12 +1975,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(28, 39),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
-				Traits.Biter,
-				Traits.Berserk,
-				Traits.Resilient,
-        },
+                Traits.Biter,
+                Traits.Berserk,
+                Traits.Resilient,
+            },
             RaceDescription = "The beings called Wyvern Matrons are a rare, larger, hermaphroditic variant of the wyvern. Why exactly some wyverns turn into such is unknown, but the resulting being is an even greater threat than average wyverns are.",
         };
 
@@ -2035,11 +2007,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 20),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ArtfulDodge,
-        },
+            },
             RaceDescription = "No-one is certain where these tiny beings appeared from, but everyone agrees that they aren't much of a threat, though not for a lack of trying from their part. All travelers should be aware though, a small dinosaur humping your leg likely means there are more nearby.",
-
         };
 
         Sharks = new RaceTraits()
@@ -2065,14 +2036,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(6, 12),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.Biter,
                 Traits.Berserk,
                 Traits.TasteForBlood,
-        },
+            },
             RaceDescription = "When the Scylla left their old realm the creatures that used to hunt them were left hungry. The Sharks, with their strong sense of smell, were able to track down the portals the Scylla used and followed close behind.",
-
         };
 
         FeralWolves = new RaceTraits()
@@ -2098,11 +2068,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(21, 29),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Biter,
                 Traits.PackTactics,
                 Traits.Pounce,
-        },
+            },
             RaceDescription = "Natives of this realm, the wolves were more than happy for a chance to welcome the newcomers to their bellies. While likely related to their bipedal cousins, the ferals only consider them as familiar smelling food.",
         };
 
@@ -2133,7 +2103,6 @@ static class RaceParameters
                 Traits.Ravenous
             },
             RaceDescription = "As the Scylla arrived in the new lands they brought some of their pets along. Not a year later the strange properties of the new realm had caused the fish to breed out of control, soon escaping and going wild.",
-
         };
 
         Cake = new RaceTraits()
@@ -2164,10 +2133,8 @@ static class RaceParameters
                 Traits.Tasty,
                 Traits.SoftBody,
                 Traits.SlowDigestion
-
             },
             RaceDescription = "A wizard baking a cake cut his hand and a drop of blood fell in the batter. His guests arrived while the cake was in the oven, eagerly waiting for their treat. But having got a taste of him, the Cake, once baked, ate the wizard and his guests instead.",
-
         };
 
         Harvesters = new RaceTraits()
@@ -2193,15 +2160,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(10, 14),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.SlowDigestion,
                 Traits.Intimidating,
                 Traits.BornToMove,
                 Traits.NimbleClimber,
                 Traits.Crusher,
-        },
+            },
             RaceDescription = "A lifeform from far beyond the stars, the Harvesters saw the empty lands fill and felt rising hunger. How they made their way here is unknown, but their mission is readily understood. They are here to feed until the land is empty once more.",
-
         };
 
         Collectors = new RaceTraits()
@@ -2227,14 +2193,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(16, 24),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.SlowDigestion,
                 Traits.SlowAbsorption,
                 Traits.BornToMove,
                 Traits.NimbleClimber,
-        },
+            },
             RaceDescription = "These large, long limbed creatures seem to be pets or beasts of burden for the Harvesters. While very capable of hunting on their own, they mostly collect the prey the Harvesters have already brought low, filling their low hanging saggy bellies with dozens of prey.",
-
         };
 
         Voilin = new RaceTraits()
@@ -2260,10 +2225,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 12),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Resilient,
                 Traits.Disgusting
-        },
+            },
             RaceDescription = "This small creature is the basic grunt of the Mass, a disposable, nearly mindless slave to throw at potential prey to tire them down for worthier beings to devour.",
         };
 
@@ -2290,13 +2255,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 12),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.EvasiveBattler
-        },
+            },
             RaceDescription = "A species with large difference in size between genders, the male bats being barely half the female's size. This has led many to believe that the tendency of the females to hunt both for sustenance and pleasure is due to the males being unable to satisfy some of the female's needs.",
         };
-
 
         Frogs = new RaceTraits()
         {
@@ -2321,12 +2285,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 12),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.RangedVore,
                 Traits.Pounce,
                 Traits.HeavyPounce,
                 Traits.Clumsy,
-        },
+            },
             RaceDescription = "You know those stories about kissing a frog to turn it into a prince? A long time ago, a witch grew frustrated that her frog-kissing had failed to produce a prince for her, so she brewed a special potion. After pouring most of it on an innocent little frog and then downing the rest herself, she kissed the frog. In an instant, they became the first Feral Frog, a mindless creature of infinite hunger and lust. If the universe were kind, this would've been the only Feral Frog ever, but Feral Frogs actually possess the ability to reproduce through parthenogenesis."
         };
 
@@ -2353,15 +2317,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 24),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.Maul,
                 Traits.StrongGullet,
                 Traits.Greedy,
                 Traits.Cruel,
                 Traits.AdeptLearner,
-
-        },
+            },
             RaceDescription = "Among the most feared things in this world, Dragons are creatures of immense power and cruelty, who often delight in tormenting their prey before devouring them. To summarize: Avoid."
         };
 
@@ -2388,13 +2351,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 10),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.Tempered
-        },
+            },
             RaceDescription = "The ambient energies that abound in this world sometimes cause normal creatures to grow to abnormal sizes. These dragonflies have adapted their diet to suit their new size and abilities, and are a terror to face unprepared.",
         };
-
 
         Plants = new RaceTraits()
         {
@@ -2419,10 +2381,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 13),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Tempered,
                 Traits.SlowDigestion
-        },
+            },
             RaceDescription = "Strange and enigmatic, the Twisted Vines are, unsurprisingly, not natives of this world, instead emerging during a particularly harsh period where innumerable portals connecting to realms of chaos opened and closed at random. The Twisted Vines are the native people of one of these chaotic planes. Despite what some think, they are sapient, they just generally prefer to live as nomadic bandits, swallowing any unlucky travelers they come across, and then coughing up or passing their valuables."
         };
 
@@ -2449,13 +2411,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(5, 10),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ArtfulDodge,
                 Traits.Flight,
                 Traits.EscapeArtist,
                 Traits.KeenReflexes,
                 Traits.EasyToVore
-        },
+            },
             RaceDescription = "Fairies are small nature spirits. They spend most of their time \"correcting\" disruptions to the natural order(normally by eating them). Fairies typically spend their down time having sex. Lots of sex. It's part of how they burn off all the extra calories from eating so many people."
         };
 
@@ -2504,11 +2466,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 10),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.AcidResistant,
                 Traits.BornToMove,
                 Traits.SlowDigestion
-        },
+            },
             RaceDescription = "Tiny insects grown to a slightly larger size, the Ants still wouldn't be considered dangerous were it not for their ability to swallow and carry things hundred times their own size.",
         };
 
@@ -2535,13 +2497,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 14),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.Intimidating,
                 Traits.Charge,
                 Traits.Greedy,
                 Traits.Pathfinder,
-        },
+            },
             RaceDescription = "Originally the hybrid offspring of the Avians and Feral Lions, Gryphons are a proud and shockingly intelligent race, who could easily found an empire of their own if they were able to work together in larger groups. Instead, they prefer to spend most of their time hunting travelers, raiding small settlements, and stalking mountain passes. If you ever find yourself at a mountain pass with a Gryphon telling you to do something before they let you pass, don't bother. They just want something, and will most likely eat you after you're done to avoid the embarrassment of admitting they needed help."
         };
 
@@ -2602,13 +2564,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.BoggingSlime,
-            Traits.GelatinousBody, // or resilient
-            Traits.SoftBody,
-            Traits.SlowMovement,
-            Traits.GlueBomb
-        },
+            {
+                Traits.BoggingSlime,
+                Traits.GelatinousBody, // or resilient
+                Traits.SoftBody,
+                Traits.SlowMovement,
+                Traits.GlueBomb
+            },
             RaceDescription = "One of the four species of giant slug that can be found in the Realm, the Spitter Slugs are named for their tendency to spew, or spit, a goopy glue-like mucus to trap their prey. While, like all giant slugs, they aren't especially quick, they are noticeably quicker than their cousins, and this should be kept in mind when facing them, since even if you think you're safe, one miscalculation will lead to them glueing you in place, and then swallowing you down."
         };
 
@@ -2635,14 +2597,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.BoggingSlime,
-            Traits.EasyToVore,
-            Traits.Replaceable,
-            Traits.Pounce,
-            Traits.SoftBody,
-            Traits.SlowMovement
-        },
+            {
+                Traits.BoggingSlime,
+                Traits.EasyToVore,
+                Traits.Replaceable,
+                Traits.Pounce,
+                Traits.SoftBody,
+                Traits.SlowMovement
+            },
             RaceDescription = "One of the four species of giant slug that can be found in the Realm, the Spring Slugs are rather weak compared to the other giant slugs, though they do have one noteworthy trick; by building up tension in a special organ inside their body and then releasing, the Spring Slugs can fling, or spring(hence the name), themselves across a battlefield. If you notice one arching its \"back,\" get ready to dodge."
         };
 
@@ -2669,12 +2631,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 24),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Resilient,
-            Traits.SoftBody,
-            Traits.VerySlowMovement,
-            Traits.HardSkin
-        },
+            {
+                Traits.Resilient,
+                Traits.SoftBody,
+                Traits.VerySlowMovement,
+                Traits.HardSkin
+            },
             RaceDescription = "One of the four species of giant slug that can be found in the Realm, the Rock Slugs are known for their high resilience, being able to withstand some of the strongest beasts in the Realm. They would be far more difficult to deal with were it not for their speed, which makes the other already slow species of giant slug look like speed demons in comparison."
         };
 
@@ -2701,14 +2663,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Paralyzer,
-            Traits.Stinger,
-            Traits.GelatinousBody, // or resilient
-            Traits.SoftBody,
-            Traits.SlowMovement,
-            Traits.Toxic
-        },
+            {
+                Traits.Paralyzer,
+                Traits.Stinger,
+                Traits.GelatinousBody, // or resilient
+                Traits.SoftBody,
+                Traits.SlowMovement,
+                Traits.Toxic
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.Poison },
             RaceDescription = "One of the four species of giant slug that can be found in the Realm, the Coral Slugs are mostly known for their unique appearance compared to the other slugs and their highly toxic bodies and stingers. Like all giant slugs, they are rather slow, but that makes them no less dangerous."
         };
@@ -2736,10 +2698,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(10, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Biter,
-            Traits.HotBlooded
-        },
+            {
+                Traits.Biter,
+                Traits.HotBlooded
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.Fireball },
             RaceDescription = "The fire on the tail isn't for show. Despite being dumber than most plants, Salamanders are shockingly good at claiming prey. Avoid if you don't want to become fat on a creature that can't tell its own reflection from another Salamander."
         };
@@ -2767,12 +2729,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(6, 10),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Pounce,
-            Traits.SenseWeakness,
-            Traits.BladeDance,
-            Traits.LightFrame
-        },
+            {
+                Traits.Pounce,
+                Traits.SenseWeakness,
+                Traits.BladeDance,
+                Traits.LightFrame
+            },
             RaceDescription = "Despite being native to the warmer, wetter regions of this world, the Mantises can be seen virtually anywhere, and they are not a good sight. In battle, they tend to leap around unpredictably, and those scythe arms aren't just for show. While it's best to avoid them, if battle is inevitable, it's imperative that you maintain as much distance as possible."
         };
 
@@ -2799,16 +2761,15 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(32, 40),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.Ravenous,
                 Traits.AdeptLearner,
                 Traits.StrongGullet,
                 Traits.Maul,
-        },
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.Fireball },
             RaceDescription = "A variety of dragons especially attuned to magic, the Eastern Dragons, or Lung Dragons as they are also known as, are able to fly without wings. Reminiscent of snakes, the Eastern Dragons are readily able to prove that the resemblance is more than skin deep, devouring large prey with ease.",
-
         };
 
         Catfish = new RaceTraits()
@@ -2834,12 +2795,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 20),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Slippery,
-            Traits.Ravenous,
-            Traits.Nauseous,
-            Traits.SlowDigestion
-        },
+            {
+                Traits.Slippery,
+                Traits.Ravenous,
+                Traits.Nauseous,
+                Traits.SlowDigestion
+            },
             RaceDescription = "These large and incredibly stupid fish long ago figured out that much larger and tastier \"food\"(people) exists on land, and so they figured out how to haphazardly leap, slide, and slither on land, adapting their gills into pseudo-lungs capable of breathing air. With the much larger meals available on land, they've been able to get much larger, though this has only increased their appetite."
         };
 
@@ -2866,13 +2827,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 20),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ArtfulDodge,
                 Traits.Pounce,
                 Traits.SlowDigestion
-        },
+            },
             RaceDescription = "Bigger cousins of the Compy, these rarer creatures often appear in smaller numbers among their lesser kin. While still relatively harmless compared to most monsters, the Raptors are at the edge of being a real danger to unprepared travelers, not least because they are at times known to be clever.",
-
         };
 
         WarriorAnts = new RaceTraits()
@@ -2898,11 +2858,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 12),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.AcidResistant,
                 Traits.PackStrength,
                 Traits.SlowDigestion
-        },
+            },
             RaceDescription = "The Warrior Ants are specialized members of the Feral Ant species, whose pheromones control and coordinate their lesser kin. When in the presence of the larger Ants, they are overwhelmed by the much stronger pheromones they exude, and join them without second thought."
         };
 
@@ -2929,10 +2889,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(10, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Charge,
-            Traits.ForcefulBlow,
-        },
+            {
+                Traits.Charge,
+                Traits.ForcefulBlow,
+            },
             RaceDescription = "Gazelles are native to the same universe as the Feral Lions. Despite first impressions, Gazelles are sapient, and actually have a rich storytelling tradition. They came through the portals, hoping to be free of the Feral Lions, only to get trapped in a world with things far worse than the Feral Lions and where the Gazelles' lack of hands is very important. Also, the Feral Lions followed them in, rendering it a moot point anyway."
         };
 
@@ -2959,11 +2919,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(16, 24),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.EasyToVore,
-            Traits.SteadyStomach,
-            Traits.AllOutFirstStrike
-        },
+            {
+                Traits.EasyToVore,
+                Traits.SteadyStomach,
+                Traits.AllOutFirstStrike
+            },
             RaceDescription = "Long slimy invertebrates, the giant Earthworms of this world dig and burrow through the upper layers of soil, following the vibrations of those aboveground. Once they are close enough, they burst from the ground in an attempt to disable their prey before they can act. While this is no false strike, and can definitely wound or even kill, if it's survived, the Earthworm has few means to truly threaten people beyond this. When an Earthworm is sufficiently sated, they typically dig back down to rest until they need food once more."
         };
 
@@ -2990,11 +2950,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Intimidating,
-            Traits.Biter,
-            Traits.Resilient
-        },
+            {
+                Traits.Intimidating,
+                Traits.Biter,
+                Traits.Resilient
+            },
             RaceDescription = "Hailing from the wetter, warmer parts of this world, the Feral Lizards are common predators. It is widely understood that the Lizards evolved from the Feral Lizards. Despite no actual relation, their reptilian nature makes them vaguely resemble dragons, and as such many cultures view Feral Lizards as a bad omen."
         };
 
@@ -3051,11 +3011,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(20, 24),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Resilient,
                 Traits.Disgusting,
                 Traits.Ravenous,
-        },
+            },
             RaceDescription = "A tough, twisted creature. Hunts for pleasure rather than sustenance.",
         };
 
@@ -3082,11 +3042,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Intimidating,
                 Traits.ArtfulDodge,
                 Traits.Tenacious
-        },
+            },
             RaceDescription = "Terrorbirds are highly aggressive, and possess high strength. While they aren't particularly clever, they are able to use brute force to great effect."
         };
 
@@ -3113,11 +3073,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 16),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ArtfulDodge,
                 Traits.Flight,
                 Traits.Cruel
-        },
+            },
             RaceDescription = "With an appearance reminiscent of a reptilian bat, the Dratopyr are likely a hybrid race. Smaller than most monsters but just as fierce, the Dratopyr specialize in weakening their prey while avoiding attempts to fend them off. Dratopyr are very fast breeders and would thus be a major threat to everyone, were it not for their tendency toward cannibalism.",
         };
 
@@ -3144,13 +3104,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(10, 16),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Charge,
-            Traits.ForcefulBlow,
-            Traits.BornToMove,
-
-        },
-            RaceDescription = "It's a horse!  Go ahead, try to ride one.  We dare you!",
+            {
+                Traits.Charge,
+                Traits.ForcefulBlow,
+                Traits.BornToMove,
+            },
+            RaceDescription = "It's a horse! Go ahead, try to ride one. We dare you!",
         };
 
         FeralFox = new RaceTraits()
@@ -3175,10 +3134,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(21, 29),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Pounce,
-            Traits.Ravenous,
-        },
+            {
+                Traits.Pounce,
+                Traits.Ravenous,
+            },
             RaceDescription = "Abnormally large foxes with a voracious appetite.",
         };
 
@@ -3204,13 +3163,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(21, 29),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Disgusting,
-            Traits.Pounce,
-            Traits.FireVulnerable,
-			Traits.Frenzy,
-        },
-            RaceDescription = "A vicious and territorial race of voracious insects prized for their ability to produce an element known as E-710, though some say it's just oil.  They are very dangerous, especially so in larger numbers and will often attempt to swarm their prey.  No known portal signified their arrival in the realm so how they ended up here is anybody's guess, though a few conspiracy rumors claim they were brought here by someone else.  There is a curious phenomenon surrounding these insects: When struck by them in combat, there is a high likelyhood that the wounded will shout \"No pain, no freedom!\"",
+            {
+                Traits.Disgusting,
+                Traits.Pounce,
+                Traits.FireVulnerable,
+                Traits.Frenzy,
+            },
+            RaceDescription = "A vicious and territorial race of voracious insects prized for their ability to produce an element known as E-710, though some say it's just oil. They are very dangerous, especially so in larger numbers and will often attempt to swarm their prey. No known portal signified their arrival in the realm so how they ended up here is anybody's guess, though a few conspiracy rumors claim they were brought here by someone else. There is a curious phenomenon surrounding these insects: When struck by them in combat, there is a high likelyhood that the wounded will shout \"No pain, no freedom!\"",
         };
 
         FeralOrcas = new RaceTraits()
@@ -3235,14 +3194,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(19, 27),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.WaterWalker,
                 Traits.PackTactics,
                 Traits.StrongGullet,
                 Traits.BornToMove,
-        },
-            RaceDescription = "Orcas that have mutated to fly and breathe air on their homewrold. They've also developed a ravenous appetite.  The Skysharks followed the Scylla to this world, and the Orcas followed the Skysharks.",
+            },
+            RaceDescription = "Orcas that have mutated to fly and breathe air on their homewrold. They've also developed a ravenous appetite. The Skysharks followed the Scylla to this world, and the Orcas followed the Skysharks.",
         };
 
         ViraeUltimae = new RaceTraits()
@@ -3266,14 +3225,14 @@ static class RaceParameters
             },
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ViralBiology,
                 Traits.Fearless,
                 Traits.Stinger,
                 Traits.InfectiousReproduction,
                 Traits.DireInfection,
                 Traits.Brainless,
-        },
+            },
             RaceDescription = "How the Virae Ultimae are able to function at all with no brain is an enigma. Hearing and perpetual humming are their only ways of interacting with the world minus attacking and attempting to reproduce more of themselves by infecting hosts with their viral injectors. These things operate as brainless biological automata, and their sheer refusal to cease their attack under any conditions can be quite scary.",
         };
 
@@ -3298,17 +3257,17 @@ static class RaceParameters
             },
             AllowedVoreTypes = new List<VoreType> { VoreType.Oral },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.AcellularBody,
                 Traits.Brainless,
                 Traits.Fearless,
                 Traits.Replaceable,
-                Traits.Crystaline,
+                Traits.Crystalline,
                 Traits.DimensionalAntilock,
                 Traits.DyingStrike,
                 Traits.TotalAbsorption,
                 Traits.Greedy,
-        },
+            },
             RaceDescription = "Iliijiith function as the immune system of reality, appearing where violations occur to \"sterilize the wound\". The constant portals to this realm make the whole realm and all its inhabitants essentially one giant violation for the Iliijiith to delete and expunge from existence.",
         };
 
@@ -3335,12 +3294,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ArtfulDodge,
                 Traits.StretchyInsides,
                 Traits.Ravenous,
                 Traits.EasyToVore,
-        },
+            },
             RaceDescription = "The Viisels, after first arriving in this world, used to live in burrows and only hunted those who got too close. But after one of their own, Ki, proved himself a capable battler, they've been forced onto the offensive as the people of the world are no longer willing to leave them be, though as the Viisels have gained a taste for other people, the small sapients grow increasingly bold... And hungry.",
         };
 
@@ -3367,14 +3326,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(36, 46),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.BoggingSlime,
-            Traits.FriendlyStomach,
-            Traits.Resilient,
-            Traits.SoftBody,
-            Traits.VerySlowMovement,
-            Traits.HardSkin
-        },
+            {
+                Traits.BoggingSlime,
+                Traits.FriendlyStomach,
+                Traits.Resilient,
+                Traits.SoftBody,
+                Traits.VerySlowMovement,
+                Traits.HardSkin
+            },
             RaceDescription = "Goodra, the Slug Dragon Pokemon. Goodra are large soft dragon type pokemon coated in slime. They love to give hugs and often confuse friends from food.",
         };
 
@@ -3401,15 +3360,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.AdeptLearner,
                 Traits.ArtfulDodge,
                 Traits.PackWill,
                 Traits.Timid,
                 Traits.Eeveeolutionist,
-        },
+            },
             RaceDescription = "Eevee, the Evolution Pokémon. Small, generally friendly and eager to play, though they can often get over eager in their playing, especially if they're hungry. While their cute, fluffy appearance may suggest a slightly less resilient creature, they are quite adaptable, and under the right conditions can evolve into a number of more specialized forms.",
-
         };
 
         FeralUmbreon = new RaceTraits()
@@ -3435,15 +3393,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Intimidating,
                 Traits.NightEye,
                 Traits.Pounce,
                 Traits.PackStrength,
-        },
+            },
             ConversionRace = Race.FeralEevee,
             RaceDescription = "Umbreon, the Moonlight Pokémon. A medium sized canine, Feral Umbreons also seemed to come from the same place as Feral Eevees, Also gaining the same hunger Feral Eevees acquired. They will mostly live in packs with other Feral Umbreons and some Feral Eevees. Some claim they have even seen them adopting the Feral Eevees anthro counter part, mistaking it as one of their own. But this has yet to be proven true. Feral Umbreons, like their anthro counter part, share their hatred for Sylveons. Fights between Feral Umbreons and Feral Sylveons have been recorded several times.",
-
         };
 
         FeralEqualeon = new RaceTraits()
@@ -3469,21 +3426,20 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.AdeptLearner,
                 Traits.ArtfulDodge,
                 Traits.PackWill,
-        },
+            },
             ConversionRace = Race.FeralEevee,
             RaceDescription = "Equaleon, the Equalized Pokémon. Evolving from Eevee under unique conditions, Equaleon represents a unique form of eeveelution that retains for more of the traits of Eevee than normal, simply scaled up to a larger size and power. They are often just as friendly as Eevees, but a lot better at not accidentally eating those they're playing with. Instead, they mostly consume anything they deem a threat to themselves or the ones they care about. But so long as you aren't either of those, they're actually quite playful and nice to be around. They're seemingly unique to this Realm.",
-
         };
 
         FeralSlime = new RaceTraits()
         {
             BodySize = 7,
             StomachSize = 15,
-			ExpMultiplier = 1f,
+            ExpMultiplier = 1f,
             PowerAdjustment = .75f,
             DeployCost = 1,
             Upkeep = 2f,
@@ -3505,7 +3461,6 @@ static class RaceParameters
                 Traits.BoggingSlime,
                 Traits.SoftBody,
                 Traits.GelatinousBody,
-
             },
             RaceDescription = "One of the most basic monsters. The humble slime pursues anything that moves. They may or may not taste like assorted friuts.",
         };
@@ -3533,14 +3488,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Replaceable,
                 Traits.ProlificBreeder,
                 Traits.Pounce,
-        },
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.ExplosiveHug },
             RaceDescription = "Exploding rabbits of unknown origin. Many believe that Boom Bunnies are the result of some science experiment left unchecked. Despite their tendency of exploding they are exceedingly friendly and benign once tamed.",
-
         };
 
         WoodDryad = new RaceTraits()
@@ -3566,12 +3520,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 20),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Resilient,
-            Traits.VerySlowMovement,
-            Traits.SlowDigestion,
-            Traits.BlessingOfNature,
-        },
+            {
+                Traits.Resilient,
+                Traits.VerySlowMovement,
+                Traits.SlowDigestion,
+                Traits.BlessingOfNature,
+            },
             RaceDescription = "Devoted protectors of plants and trees, these Dryads are living incarnations of the plants all around them. They prefer to remain rooted in place, their natural magics healing and soothing the natural world around them, but they often move from place to place to find those who defile nature, and turn them to mulch.\r\n"
         };
 
@@ -3598,12 +3552,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 20),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.BoggingSlime,
-            Traits.WeaponChanneler,
-            Traits.BlessingOfEarth,
-            Traits.SlowMovement
-        },
+            {
+                Traits.BoggingSlime,
+                Traits.WeaponChanneler,
+                Traits.BlessingOfEarth,
+                Traits.SlowMovement
+            },
             RaceDescription = "Living incarnations of the land itself, Earth Dryads are both gentle and hardy, showing mercy to those who respect the soil, and adding those don't to the soil. They often employ stone spikes to attack those they deem a threat to the natural world. Touching one is generally not a good idea."
         };
 
@@ -3630,12 +3584,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 20),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Slippery,
-            Traits.BlessingOfWater,
-            Traits.ManaRich,
-            Traits.WeaponChanneler,
-        },
+            {
+                Traits.Slippery,
+                Traits.BlessingOfWater,
+                Traits.ManaRich,
+                Traits.WeaponChanneler,
+            },
             RaceDescription = "Playful and curious, River Dryads are the living incarnations of clear water. They spend much of their time guiding rivers and streams, helping to keep nature watered. While they can seem friendly, be warned, they possess the same power of the rushing rapids."
         };
 
@@ -3662,12 +3616,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 20),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.StrongMelee,
-            Traits.Frenzy,
-            Traits.MetabolicSurge,
-            Traits.BlessingOfFerocity
-        },
+            {
+                Traits.StrongMelee,
+                Traits.Frenzy,
+                Traits.MetabolicSurge,
+                Traits.BlessingOfFerocity
+            },
             RaceDescription = "When a Wood Dryad dies, sometimes their spirit fails to leave, and they are reborn in a new, fungal form. Any mercy they may once have had is gone, their deceptively sharp claws cutting through any that dare try to stand up to the mushroom menace. These erratic Dryads are always eager to showing those they find their favorite part of the life cycle.\r\n"
         };
 
@@ -3693,12 +3647,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(30, 40),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.TailStrike,
-            Traits.Flight,
-            Traits.HealingBlood,
-            Traits.PoisonSpit,
-        },
+            {
+                Traits.TailStrike,
+                Traits.Flight,
+                Traits.HealingBlood,
+                Traits.PoisonSpit,
+            },
             //InnateSpells = new List<SpellTypes>() { SpellTypes.Poison },
             RaceDescription = "Somehow a Kaiju, with poison!",
         };
@@ -3725,13 +3679,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(30, 40),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Intimidating,
-            Traits.Resilient,
-            Traits.Grounded,
-            Traits.MetabolicSurge,
-            Traits.Biter,
-        },
+            {
+                Traits.Intimidating,
+                Traits.Resilient,
+                Traits.Grounded,
+                Traits.MetabolicSurge,
+                Traits.Biter,
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.LightningBolt, SpellTypes.CrossShock },
             RaceDescription = "Somehow another Kaiju, but lightning this time!",
         };
@@ -3767,7 +3721,7 @@ static class RaceParameters
                 Traits.ExtraNutritious,
                 Traits.Tasty,
             },
-            RaceDescription = "A race of slug-like beings from somewhere beyond the portals.  Their friendly and soft shape is but a ploy to lure in the more gullible prey of our world, and those that aren't fooled by it will discover that they are no pushovers in a struggle either.  Those who find themselves as prey to these creatures will find they don't wish to leave their insides, though if a predator can manage to devour one they will find a delectable meal as their bodies are incredibly nutritious.",
+            RaceDescription = "A race of slug-like beings from somewhere beyond the portals. Their friendly and soft shape is but a ploy to lure in the more gullible prey of our world, and those that aren't fooled by it will discover that they are no pushovers in a struggle either. Those who find themselves as prey to these creatures will find they don't wish to leave their insides, though if a predator can manage to devour one they will find a delectable meal as their bodies are incredibly nutritious.",
         };
 
         SpaceCroach = new RaceTraits()
@@ -3793,14 +3747,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 20),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.SenseWeakness,
-            Traits.LightFrame,
-            Traits.BoggingSlime,
-            Traits.Ravenous,
-            Traits.Pounce,
-            Traits.NimbleClimber,
-        },
+            {
+                Traits.SenseWeakness,
+                Traits.LightFrame,
+                Traits.BoggingSlime,
+                Traits.Ravenous,
+                Traits.Pounce,
+                Traits.NimbleClimber,
+            },
             RaceDescription = "A mysterious race of roach-like beings from another universe."
         };
 
@@ -3827,14 +3781,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(24, 32),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Berserk,
-            Traits.Biter,
-            Traits.Ravenous,
-            Traits.IronGut,
-			Traits.Resilient,
-        },
-            RaceDescription = "They're big, they're scaled, they're hungry, and they got little arms.  Woe betide those who find themselves trapped behind their powerful jaws, for this is the ultimate predator whose iconic roar is known far and wide and strikes fear in all those who hear it."
+            {
+                Traits.Berserk,
+                Traits.Biter,
+                Traits.Ravenous,
+                Traits.IronGut,
+                Traits.Resilient,
+            },
+            RaceDescription = "They're big, they're scaled, they're hungry, and they got little arms. Woe betide those who find themselves trapped behind their powerful jaws, for this is the ultimate predator whose iconic roar is known far and wide and strikes fear in all those who hear it."
         };
 
         Utahraptor = new RaceTraits()
@@ -3860,13 +3814,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(14, 20),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.Charge,
-            Traits.Pounce,
-            Traits.Biter,
-            Traits.BornToMove,
-        },
-            RaceDescription = "Utahraptors are much faster and more powerful than the usual raptors you see here and there.  More hungry too."
+            {
+                Traits.Charge,
+                Traits.Pounce,
+                Traits.Biter,
+                Traits.BornToMove,
+            },
+            RaceDescription = "Utahraptors are much faster and more powerful than the usual raptors you see here and there. More hungry too."
         };
 
         Pudding = new RaceTraits()
@@ -3897,8 +3851,6 @@ static class RaceParameters
                 Traits.ExtraNutritious,
                 Traits.SoftBody,
                 Traits.GelatinousBody,
-        
-
             },
             RaceDescription = "After reciving news about a massacre involving oversized bake goods, a wizard decided to create a way to inform the populace of the dangers of voracious food monsters. What better way than to better prepare than to make more voracious, albeit weaker, food monsters?"
         };
@@ -3930,12 +3882,10 @@ static class RaceParameters
                 Traits.Biter,
                 Traits.VenomousBite,
                 Traits.VenomShock,
-                Traits.Webber,    
-
+                Traits.Webber,
             },
             RaceDescription = "Giant Spiders. Of course they had to be widows..."
         };
-
 
         SoulSprite = new RaceTraits()
         {
@@ -3958,20 +3908,19 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(10, 16),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.SlowMetabolism,
                 Traits.Flight,
                 Traits.ManaRich,
                 Traits.ExtraNutritious,
                 Traits.Charmer,
                 Traits.Temptation,
-        },
-        InnateSpells = new List<SpellTypes>()
-            { SpellTypes.Trance, },
+            },
+            InnateSpells = new List<SpellTypes>()
+                { SpellTypes.Trance, },
             RaceAI = RaceAI.ServantRace,
             RaceDescription = "A relatively weak angelic being, created from the soul of a living creature purified by the higher-ranking angels. Soul Sprites act as the main workforce for the angels, and those who gain enough favor among their peers may ascend to higher ranks or even gain a chance to reincarnate to a new life... And it seems as of late, devouring their opponents on the battlefield is a lucrative means to gather said favor.",
         };
-
 
         Selicia = new RaceTraits()
         {
@@ -4003,8 +3952,7 @@ static class RaceParameters
                 Traits.ColdTolerance,
             },
             InnateSpells = new List<SpellTypes>() { SpellTypes.IceBlast },
-            RaceDescription = "A hybrid between a dragon and salamander whom excels in climbing and swimming but lacks any wings for flight.",
-
+            RaceDescription = "A hybrid between a dragon and salamander who excels in climbing and swimming but lacks any wings for flight.",
         };
 
         Vision = new RaceTraits()
@@ -4034,10 +3982,9 @@ static class RaceParameters
                 Traits.Ravenous,
                 Traits.StrongGullet,
                 Traits.Intimidating,
-				Traits.ArtfulDodge,
+                Traits.ArtfulDodge,
             },
             RaceDescription = "A Xeno-Spinosaurid about the size of a small horse or large dog. They eat about half or even double their body weight at minimum a day, but have been known to eat things larger than themselves. Because of their huge appetite, their digestive tract is mostly stomach, what they can't digest they regurgitate as an owl-like pellet",
-
         };
 
         Ki = new RaceTraits()
@@ -4063,11 +4010,11 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(18, 22),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ArtfulDodge,
                 Traits.KeenReflexes,
                 Traits.StrongGullet,
-        },
+            },
             RaceDescription = "A member of a race that uses its small size and unthreathening appearance to lure in potential prey, Ki decided that becoming a mercenary suited him fine. After all, he'd be paid for getting free meals!",
         };
 
@@ -4094,17 +4041,16 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(24, 40),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.Biter,
                 Traits.StrongGullet,
                 Traits.Cruel,
                 Traits.FastAbsorption,
-        },
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.Pyre },
             RaceDescription = "A cruel, gluttonous red wyvern",
         };
-
 
         Asura = new RaceTraits()
         {
@@ -4129,12 +4075,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(8, 12),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Maul,
                 Traits.Frenzy,
                 Traits.ShunGokuSatsu
-        },
-            RaceDescription = "A wandering warrior who seeks to further her strength by engaging in mortal combat with the incredibly strong creatures of this realm.  Not even dragons are safe from the gluttonous embrace and the earth-shattering blows from her Musaboriken fighting style.",
+            },
+            RaceDescription = "A wandering warrior who seeks to further her strength by engaging in mortal combat with the incredibly strong creatures of this realm. Not even dragons are safe from the gluttonous embrace and the earth-shattering blows from her Musaboriken fighting style.",
             CanUseRangedWeapons = false,
         };
 
@@ -4161,13 +4107,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(18, 26),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.MetalBody,
                 Traits.Resilient,
                 Traits.KeenReflexes,
                 Traits.BornToMove,
                 Traits.Intimidating,
-        },
+            },
             RaceDescription = "A corrupted D.r.a.c.o unit. Unlike other units from his line 008 has tampered with his coding and removed the safety on his stomach allowing him to digest his prisoners.",
         };
 
@@ -4194,15 +4140,15 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(14, 18),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Maul,
                 Traits.StrongGullet,
                 Traits.Biter,
                 Traits.Greedy,
                 Traits.BornToMove,
                 Traits.TailStrike,
-        },
-            RaceDescription = "An anthropomorphic tiger shark from another world.  Zoey is typically a lazy girl who loves watching movies and being a general couch-potato.  However, upon realizing she'd been isekai'd into the realm, her gluttony left her interested in trying to stomach the local warriors and monsters with some basic martial arts, joining whichever side would pay her first.",
+            },
+            RaceDescription = "An anthropomorphic tiger shark from another world. Zoey is typically a lazy girl who loves watching movies and being a general couch-potato. However, upon realizing she'd been isekai'd into the realm, her gluttony left her interested in trying to stomach the local warriors and monsters with some basic martial arts, joining whichever side would pay her first.",
         };
 
         Cierihaka = new RaceTraits()
@@ -4228,12 +4174,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(24, 28),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.ForcefulBlow,
                 Traits.StrongGullet,
                 Traits.Pounce,
                 Traits.HeavyPounce,
-        },
+            },
             RaceDescription = "This girthy dragoness hails from a far away arid land, and excels at pressing the attack, with a great pair of skewers in place of where most dragons would have wings. With considerable grace despite her size, she exercises vigilance on the battlefield. ",
         };
 
@@ -4260,14 +4206,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(16, 24),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.StrongGullet,
                 Traits.ArtfulDodge,
                 Traits.NimbleClimber,
                 Traits.BornToMove,
                 Traits.TailStrike,
                 Traits.GiantSlayer,
-        },
+            },
             RaceDescription = "A devious and voracious wyvern. Known for his agility and cunning, don't ever turn your back to him or you might find yourself in trouble.",
         };
 
@@ -4335,10 +4281,8 @@ static class RaceParameters
             },
             InnateSpells = new List<SpellTypes>()
             { SpellTypes.DivinitysEmbrace },
-            RaceDescription = "Erin belongs to a very rare species known as a Nyangel, the lovechild of an angel and a catgirl.  Thanks to this divine heritage they aremostly all incredible healers... But they're also incredibly tasty.  Every Nyangel has a unique trait to set them apart from eachother, and Erin is no exception to this rule.  Her quirk is total acid resistance, the perfect defense against the raveous predators of this realm.  That doesn't stop her from being devoured, however, and that is unfortunately an all-too-common outcome for the girl.  Regardless of how many times she ends up eaten, the loveable Nyangel still tries her best to heal those she can.",
+            RaceDescription = "Erin belongs to a very rare species known as a Nyangel, the lovechild of an angel and a catgirl. Thanks to this divine heritage they are mostly all incredible healers... But they're also incredibly tasty. Every Nyangel has a unique trait to set them apart from eachother, and Erin is no exception to this rule. Her quirk is total acid resistance, the perfect defense against the raveous predators of this realm. That doesn't stop her from being devoured, however, and that is unfortunately an all-too-common outcome for the girl. Regardless of how many times she ends up eaten, the loveable Nyangel still tries her best to heal those she can.",
         };
-
-
 
         Salix = new RaceTraits()
         {
@@ -4373,7 +4317,6 @@ static class RaceParameters
             { SpellTypes.AmplifyMagic, SpellTypes.Evocation, SpellTypes.ManaFlux, SpellTypes.UnstableMana},
             RaceDescription = "A demi-mouse mage from a different, mana rich dimension. Has had trouble adapting to the absence of mana here, but makes do.",
         };
-
 
         Bella = new RaceTraits()
         {
@@ -4434,12 +4377,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(16, 21),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.DualStomach,
                 Traits.Ravenous,
                 Traits.AwkwardShape,
                 Traits.StrongGullet,
-        },
+            },
             RaceDescription = "A ravenous species seemingly mirrored from the deer, this herbivore enjoys showing just how quickly she can gobble a warrior down.",
         };
 
@@ -4465,14 +4408,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(16, 21),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.StrongGullet,
                 Traits.Pounce,
                 Traits.KeenReflexes,
                 Traits.Growth,
                 Traits.MinorGrowth,
                 Traits.Tasty,
-        },
+            },
             RaceDescription = "A strange, almost draconic looking raptor. She seems to grow larger and stronger with each victim consumed. Despite having wings, they seem to only allow her to leap great distances instead of fly.",
         };
 
@@ -4506,7 +4449,6 @@ static class RaceParameters
             },
             InnateSpells = new List<SpellTypes>() { SpellTypes.IceBlast, SpellTypes.Icicle },
             RaceDescription = "An ice dragoness claiming to hail from a distant city. She seems a bit nicer than the wild dragons, but even hungrier. Her deep experience with her element let's her frequently cast ice breath attacks, and chills the air around nearby foes.",
-
         };
 
         Xelhilde = new RaceTraits()
@@ -4532,12 +4474,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(10, 13),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.DoubleAttack,
                 Traits.DefensiveStance,
                 Traits.KeenReflexes,
                 Traits.AdeptLearner,
-        },
+            },
             RaceDescription = "A canine knight from the Kingdom of Mondfeld that wields a cobalt zweihänder. She roams the realm in search of battle to bring glory to Mondfeld!",
         };
 
@@ -4563,10 +4505,10 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(16, 21),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Biter,
                 Traits.Pounce,
-        },
+            },
             RaceDescription = "A seductive herm barioth",
         };
 
@@ -4593,7 +4535,7 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.FriendlyStomach,
                 Traits.Pounce,
                 Traits.Timid,
@@ -4601,7 +4543,7 @@ static class RaceParameters
                 Traits.BoundWeapon,
                 Traits.TheGreatEscape,
                 Traits.CloseCall,
-        },
+            },
             InnateSpells = new List<SpellTypes>() { SpellTypes.CrossShock, SpellTypes.ArcBolt },
             RaceDescription = "A small fox with surprisingly strong lightning magic.",
             CanUseRangedWeapons = false,
@@ -4631,7 +4573,7 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Cartography,
                 Traits.BoundWeapon,
                 Traits.BookEater,
@@ -4639,7 +4581,7 @@ static class RaceParameters
                 Traits.Flight,
                 Traits.ManaDynamo,
                 Traits.PleasurableTouch,
-        },
+            },
             RaceDescription = "Tatltuae is a curious raven. While he seemingly is one of the many who entered this world through a portal, he's taken quite well to his new home, becoming known as a mage, pred, cartographer, and selling his skills as a mercenary. While his hollow bones and spellcasting generally put him in the backlines, he is always eager to add people to his waistline, when given the chance. His main spell seems to be based on chaotic magic, and he definitely seems to enjoy causing chaos where he can. Tatltuae learned some time ago to create pockets of intense chaotic entropy. Interestingly, the spell began as a healing spell, but the raven learned it wrong to the point it harms instead of heals.",
         };
 
@@ -4666,12 +4608,12 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(17, 21),
             },
             RacialTraits = new List<Traits>()
-        {
-            Traits.HardSkin,
-            Traits.PoisonSpit,
-            Traits.StrongGullet,
-            Traits.Toxic,
-        },
+            {
+                Traits.HardSkin,
+                Traits.PoisonSpit,
+                Traits.StrongGullet,
+                Traits.Toxic,
+            },
             RaceDescription = "The turmoil of wars have stirred many lingering threats from slumber or stillness, former allies turn foes and neutral forces turn voracious and violent. Under the shade of stones unturned rises a rumour shared in hisses and secrecy among snakes and lamias. From the mud of swamps wafts a poison queerly potent choking all life in its creeping embrace. \n\n A great witch has chosen to divest from her most passive schemes and mischief to take part in your conflict, whether with or against you to means undisclosed. Her slithers shall be met with fear and rapacity until she is slain or the battlefields of the land lay quiet and her endless gut cacophonous with churning death.",
         };
 
@@ -4697,14 +4639,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(30, 45),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.Tenacious,
                 Traits.FastCaster,
                 Traits.BookEater,
                 Traits.MagicProwess,
                 Traits.RangedVore,
-        },
+            },
             RaceDescription = "Nectar, one of the eleven sphinxes who created her world, was exiled after consuming too many of the inhabitants. Now, she roams the multiverse, searching for the tastiest snacks and shiniest treasures. Whenever she dies to a stronger foe, you can bet that she'll be back for revenge, sometimes decades or even centuries later. After all, cats are spiteful creatures, and Nectar has far more than 9 lives....",
         };
 
@@ -4731,13 +4673,13 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(24, 32),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.StrongMelee,
                 Traits.Pounce,
                 Traits.DoubleAttack,
                 Traits.Growth,
                 Traits.GiantSlayer,
-        },
+            },
             RaceDescription = "A skilled warrior captain from the same world as the other Sergals. Strangely enough, not only does he look physically different from them, but he seems to hold some sort of resentment for them as well. He's an incredibly deadly frontline fighter, almost like he has been fighting in wars since birth. Many warriors, even whole companies have already fallen to either his polearm, or his voracious appetite. Needless to say: He seems to feel perfectly in his element here.",
         };
 
@@ -4764,7 +4706,7 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(16, 24),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.Flight,
                 Traits.BornToMove,
                 Traits.IronGut,
@@ -4772,8 +4714,8 @@ static class RaceParameters
                 Traits.Alacrity,
                 Traits.StunningStrike,
                 ///Traits., Special move trait goes here. Add two actions to this trait
-        },
-            RaceDescription = "A tall, purple, intense looking griffin. He seems to be a falcon and snow leopard mix. According to himself, Konane is a monk, having trained for years with a vore martial art monastery. After learning all he could he would duel everyone at said monastery, eventually consuming them all. Now he is a terrifyingly fast anthro griffin with immense capacity and powerful stunning punches. Now he is available to hire for a price, as long as there are numerous or large prey for Konane to match himself against. He seems to get uncomfortable and his stomach growls around draconic critters.  The author of these notes would also like to convey how attractive he is, in no uncertain terms!",
+            },
+            RaceDescription = "A tall, purple, intense looking griffin. He seems to be a falcon and snow leopard mix. According to himself, Konane is a monk, having trained for years with a vore martial art monastery. After learning all he could he would duel everyone at said monastery, eventually consuming them all. Now he is a terrifyingly fast anthro griffin with immense capacity and powerful stunning punches. Now he is available to hire for a price, as long as there are numerous or large prey for Konane to match himself against. He seems to get uncomfortable and his stomach growls around draconic critters. The author of these notes would also like to convey how attractive he is, in no uncertain terms!",
         };
         Cherub = new RaceTraits()
         {
@@ -4798,14 +4740,14 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(12, 15),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.SlowMetabolism,
                 Traits.BoundWeapon,
                 Traits.Flight,
                 Traits.PleasurableTouch,
                 Traits.ManaDrain,
                 Traits.ManaDynamo,
-        },
+            },
             SpawnRace = Race.SoulSprite,
             InnateSpells = new List<SpellTypes>()
             { SpellTypes.DivinitysEmbrace, SpellTypes.ForcePulse, },
@@ -4823,7 +4765,7 @@ static class RaceParameters
             ExpMultiplier = 20f,
             PowerAdjustment = 100f,
             DeployCost = 8,
-            Upkeep = 150f,
+            Upkeep = 100f,
             RaceStats = new RaceStats()
             {
                 Strength = new RaceStats.StatRange(30, 35),
@@ -4836,23 +4778,20 @@ static class RaceParameters
                 Stomach = new RaceStats.StatRange(20, 25),
             },
             RacialTraits = new List<Traits>()
-        {
+            {
                 Traits.DestroyingAngel,
                 Traits.ManaAttuned,
                 Traits.ManaBarrier,
                 Traits.Flight,
                 Traits.CreateSpawn,
-        },
+            },
             SpawnRace = Race.SoulSprite,
             InnateSpells = new List<SpellTypes>()
             { SpellTypes.DivinitysEmbrace, SpellTypes.DivineNova, },
             RaceDescription = "The leader of the angelic beings that descended onto this world. Seraph has existed before recorded history and does not take lightly to troublemakers that disrupt the karmic balance of the world. Their arrival usually precedes a grand shift in the dynamics of a region, usually ending up with them leaving much fatter than they came.",
         };
     }
-
 }
-
-
 
 internal class RaceTraits
 {
@@ -4903,7 +4842,6 @@ internal class RaceTraits
     internal bool CanUseRangedWeapons = true;
     internal bool CanUseMeleeWeapons = true;
     internal string RaceDescription = "";
-
 }
 
 internal enum VoreType
@@ -4916,8 +4854,6 @@ internal enum VoreType
     TailVore,
     Anal,
     BladderVore,
-
-
 }
 
 internal class RaceStats

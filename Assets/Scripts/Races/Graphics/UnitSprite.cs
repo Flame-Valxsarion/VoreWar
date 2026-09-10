@@ -71,7 +71,7 @@ public class UnitSprite : MonoBehaviour
         lastHealth = unit.Unit.Health;
     }
 
-    public void ShowDamagedHealthBar(Actor_Unit unit, int damage)
+    public void ShowDamagedHealthBar(Actor_Unit unit, double damage)
     {
         timeUntilHealthBarReset = .1f;
         HealthBarOrange.gameObject.SetActive(true);

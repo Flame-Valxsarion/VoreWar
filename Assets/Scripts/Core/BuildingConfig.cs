@@ -196,7 +196,7 @@ public class BuildingConfig
     [OdinSerialize]
     internal BuildingUpgrade LaboratoryImproveUpgrade = new BuildingUpgrade(250, 2, new ConstructionResources(10, 10, 15, 35, 0, 0), "Improve Equipment", "Increases max rolls per potion.");
     [OdinSerialize]
-    internal BuildingUpgrade LaboratoryIngredientUpgrade = new BuildingUpgrade(300, 3, new ConstructionResources(10, 30, 0, 15, 25, 0), "Potent Potions", "Expands types of availible ingredients.");
+    internal BuildingUpgrade LaboratoryIngredientUpgrade = new BuildingUpgrade(300, 3, new ConstructionResources(10, 30, 0, 15, 25, 0), "Potent Potions", "Expands types of available ingredients.");
     [OdinSerialize]
     internal BuildingUpgrade LaboratoryBoostUpgrade = new BuildingUpgrade(350, 2, new ConstructionResources(10, 10, 0, 15, 15, 10), "Synthetic Solvents", "Chance of boosting effect of low quality ingredients.");
 

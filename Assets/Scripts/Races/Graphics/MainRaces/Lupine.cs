@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 class Lupine : DefaultRaceData
@@ -28,7 +29,7 @@ class Lupine : DefaultRaceData
         BodyAccentTypes2 = 5; // arm patterns
         BodyAccentTypes3 = 5; // leg patterns
         BodyAccentTypes4 = 10; // head patterns
-        TailTypes = 12;
+        TailTypes = 11;
         ExtendedBreastSprites = true;
 
         Body = new SpriteExtraInfo(3, BodySprite, null, (s) => LupineColor(s));
@@ -121,6 +122,7 @@ class Lupine : DefaultRaceData
         unit.BodyAccentType2 = State.Rand.Next(BodyAccentTypes2);
         unit.BodyAccentType3 = State.Rand.Next(BodyAccentTypes3);
         unit.BodyAccentType4 = State.Rand.Next(BodyAccentTypes4);
+        unit.TailType = State.Rand.Next(TailTypes);
 
         if (Config.RagsForSlaves && State.World?.MainEmpires != null && (State.World.GetEmpireOfRace(unit.Race)?.IsEnemy(State.World.GetEmpireOfSide(unit.Side)) ?? false) && unit.ImmuneToDefections == false)
         {
